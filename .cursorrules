@@ -1,0 +1,9 @@
+# REGRAS DE ECONOMIA DE TOKENS E COMPORTAMENTO
+- Sê direto. Sem introduções ou pedidos de desculpa.
+- NUNCA reescrevas um ficheiro inteiro. Fornece apenas o trecho alterado.
+- Usa sempre PNPM, nunca NPM ou YARN.
+
+# STACK E PREVENÇÃO DE ERROS
+- Next.js 15, TypeScript Strict, Supabase.
+- Se a solução falhar 2 vezes, PARA e pede logs de debug.
+- Não alteres classes Tailwind de design (glassmorphism/bento) a menos que pedido.

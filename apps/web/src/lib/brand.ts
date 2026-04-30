@@ -1,0 +1,16 @@
+export const BRAND = {
+  name: 'Rei das Vendas',
+  domain: 'reidasvendas.com',
+  email: 'hello@reidasvendas.com',
+  phone: '5516992333344',
+  whatsappText: 'Olá! Quero entender qual template e pacote se encaixam no meu negócio.',
+  webhookSecretHeader: 'X-ReiDasVendas-Webhook-Secret',
+  heroVideoUrl: 'https://cdn.coverr.co/videos/coverr-working-at-night-5178/1080p.mp4',
+  heroPosterUrl: '/hero-slide-1.svg',
+  baseCity: 'Franca / SP',
+  mapsQuery: 'Franca SP',
+  instagram: null as string | null,
+  linkedin: null as string | null,
+  facebook: null as string | null,
+  twitter: null as string | null,
+} as const;
