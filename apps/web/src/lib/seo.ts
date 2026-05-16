@@ -35,40 +35,7 @@ export function applySeo(input: SeoInput) {
   document.title = input.title;
   setMetaBy('name', 'description', input.description);
 
-  // Default JSON-LD for LocalBusiness and DigitalMarketingAgency (GEO optimized)
-  const defaultJsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": ["LocalBusiness", "DigitalMarketingAgency"],
-        "@id": `https://${BRAND.domain}/#organization`,
-        "name": BRAND.name,
-        "url": `https://${BRAND.domain}/`,
-        "logo": `https://${BRAND.domain}/favicon.svg`,
-        "email": BRAND.email,
-        "description": "Rei das Vendas | Engenharia de Crescimento e IA para Negócios Locais. Democratizando a Inteligência Artificial com tecnologia e design das maiores empresas do mundo.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Franca",
-          "addressRegion": "SP",
-          "addressCountry": "BR"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": "-20.5383",
-          "longitude": "-47.4008"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "Brazil"
-        },
-        "priceRange": "$$",
-        "telephone": "+5516999999999"
-      }
-    ]
-  };
-
-  applyJsonLd('page', input.jsonLd || defaultJsonLd);
+  applyJsonLd('page', input.jsonLd ?? buildOrganizationJsonLd());
 
   if (input.robots) {
     setMetaBy('name', 'robots', input.robots);
