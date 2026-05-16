@@ -5,7 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
   build: {
-    outDir: '../../public',
+    outDir: 'dist',
     emptyOutDir: true,
     sourcemap: 'hidden',
     rollupOptions: {
@@ -21,7 +21,6 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react({
       babel: {
-        // Only load react-dev-locator in development
         plugins: mode === 'development' ? ['react-dev-locator'] : [],
       },
     }),
