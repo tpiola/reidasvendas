@@ -21,6 +21,9 @@ test-results/
 !.env.example
 !**/.env.example
 
+# Build estático legado na raiz (fonte em apps/web/public)
+/public/
+
 .vercel/
 .vercelignore
 
