@@ -12,7 +12,7 @@
     "a11y": "turbo run a11y",
     "storybook": "turbo run storybook",
     "format": "prettier -w .",
-    "ci": "pnpm lint && pnpm test && pnpm build"
+    "ci": "pnpm check && pnpm lint && pnpm test && pnpm build:web && pnpm -C apps/web e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",

@@ -10,6 +10,7 @@ export function AnalyticsProvider() {
 
   useEffect(() => {
     const pagePath = location.pathname + location.search;
+    void pagePath;
     
     // [MVO Rei das Vendas] PageView Tracking
     // console.log(`[Analytics] PageView: ${pagePath}`);
@@ -43,6 +44,9 @@ export function AnalyticsProvider() {
  * Dispara eventos de conversão padronizados para todas as plataformas de Ad-Tech.
  */
 export function trackConversion(eventName: string, payload?: Record<string, unknown>) {
+  void eventName;
+  void payload;
+
   // console.log(`[Analytics] Conversion: ${eventName}`, payload);
 
   // 1. Google Ads / GA4
