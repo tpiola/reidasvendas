@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
     "lint": "turbo run lint",
     "check": "turbo run check",
     "test": "turbo run test",
