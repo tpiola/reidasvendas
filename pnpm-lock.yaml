@@ -118,8 +118,8 @@ importers:
         specifier: ^6.3.5
         version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)
       vite-tsconfig-paths:
-        specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
+        specifier: ^6.1.1
+        version: 6.1.1(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
       vitest:
         specifier: ^3.2.0
         version: 3.2.4(@types/node@22.19.17)(jiti@1.21.7)(jsdom@26.1.0)
@@ -224,8 +224,8 @@ importers:
         specifier: ^6.3.5
         version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)
       vite-tsconfig-paths:
-        specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
+        specifier: ^6.1.1
+        version: 6.1.1(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
       vitest:
         specifier: ^3.2.0
         version: 3.2.4(@types/node@22.19.17)(jiti@1.21.7)(jsdom@26.1.0)
@@ -330,8 +330,8 @@ importers:
         specifier: ^6.3.5
         version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)
       vite-tsconfig-paths:
-        specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
+        specifier: ^6.1.1
+        version: 6.1.1(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7))
       vitest:
         specifier: ^3.2.0
         version: 3.2.4(@types/node@22.19.17)(jiti@1.21.7)(jsdom@26.1.0)
@@ -2602,6 +2602,7 @@ packages:
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   vite-node@3.2.4:
@@ -2609,13 +2610,10 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
-  vite-tsconfig-paths@5.1.4:
-    resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==}
+  vite-tsconfig-paths@6.1.1:
+    resolution: {integrity: sha512-2cihq7zliibCCZ8P9cKJrQBkfgdvcFkOOc3Y02o3GWUDLgqjWsZudaoiuOwO/gzTzy17cS5F7ZPo4bsnS4DGkg==}
     peerDependencies:
       vite: '*'
-    peerDependenciesMeta:
-      vite:
-        optional: true
 
   vite@6.4.2:
     resolution: {integrity: sha512-2N/55r4JDJ4gdrCvGgINMy+HH3iRpNIz8K6SFwVsA+JbQScLiC+clmAxBgwiSPgcG9U15QmvqCGWzMbqda5zGQ==}
@@ -4968,12 +4966,11 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)):
+  vite-tsconfig-paths@6.1.1(typescript@5.8.3)(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)):
     dependencies:
       debug: 4.4.3
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.8.3)
-    optionalDependencies:
       vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)
     transitivePeerDependencies:
       - supports-color
