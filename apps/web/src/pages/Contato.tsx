@@ -19,10 +19,10 @@ export default function Contato() {
             Contato
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Vamos construir sua próxima estrutura digital.
+            Receba seu diagnóstico gratuito em até 24 horas.
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Este formulário é a porta de entrada premium. Envie contexto, objetivo e prazo. A Rei das Vendas retorna com diagnóstico estratégico e próximos passos.
+            Conte seu objetivo, mercado e prazo. Você recebe rota recomendada, escopo claro e próximos passos — sem compromisso e sem enrolação comercial.
           </p>
         </div>
       </section>

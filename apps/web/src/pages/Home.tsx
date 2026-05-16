@@ -22,16 +22,19 @@ const STATS = [
   { value: '100%', label: 'Sem contrato de fidelidade' },
 ] as const;
 
+const IMG = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=900&q=90&fm=webp`;
+
 const NICHES = [
-  { title: 'Saúde & Estética', img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=85' },
-  { title: 'Advocacia', img: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=85' },
-  { title: 'Imobiliário', img: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=85' },
-  { title: 'E-commerce', img: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=800&q=85' },
-  { title: 'Consultoria', img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=85' },
-  { title: 'Educação', img: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=85' },
+  { title: 'Saúde & Estética', img: IMG('photo-1576091160550-2173dba999ef'), to: '/saude' },
+  { title: 'Negócios & B2B', img: IMG('photo-1552664730-d307ca884978'), to: '/negocios' },
+  { title: 'Imobiliário', img: IMG('photo-1560518883-ce09059eeffa'), to: '/projetos' },
+  { title: 'E-commerce', img: IMG('photo-1555421689-491a97ff2040'), to: '/projetos' },
+  { title: 'Governança', img: '/hero-slide-2.svg', to: '/governanca' },
+  { title: 'Soluções Digitais', img: '/hero-slide-3.svg', to: '/solucoes' },
 ] as const;
 
-function NicheCard({ title, img, i }: { title: string; img: string; i: number }) {
+function NicheCard({ title, img, to, i }: { title: string; img: string; to: string; i: number }) {
   const reduce = useReducedMotion();
   return (
     <motion.article
@@ -41,10 +44,22 @@ function NicheCard({ title, img, i }: { title: string; img: string; i: number })
       viewport={{ once: true, margin: '-40px' }}
       transition={{ ...SPRING, delay: i * 0.08 }}
     >
-      <img src={img} alt={title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />
+      <img
+        src={img}
+        alt={`${title} — Rei das Vendas`}
+        width={1200}
+        height={900}
+        className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        loading={i < 2 ? 'eager' : 'lazy'}
+        decoding="async"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       <div className="absolute inset-0 bg-[#0057FF]/0 group-hover:bg-[#0057FF]/10 transition-colors duration-500" />
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
+        <h3 className="text-sm font-semibold tracking-widest uppercase text-white/90">{title}</h3>
+        <Link to={to} className="mt-3 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 hover:text-white">
+          Ver solução →
+        </Link>
         <h3 className="text-sm font-semibold tracking-widest uppercase text-white/90">{title}</h3>
       </div>
     </motion.article>
@@ -85,8 +100,8 @@ export default function Home() {
 
   useEffect(() => {
     applySeo({
-      title: 'Rei das Vendas — A Ciência da Performance para o Crescimento do seu Negócio',
-      description: 'Infraestrutura digital de elite. Entregamos tecnologia das maiores empresas do mundo com foco em resultado real para líderes e instituições.',
+      title: 'Rei das Vendas — Infraestrutura Digital que Converte | Franca-SP',
+      description: 'Transforme visitantes em clientes com site, funil e automação n8n. Diagnóstico gratuito, entrega em 48h e ROI mensurável.',
       canonicalPath: '/',
     });
   }, []);
@@ -105,19 +120,19 @@ export default function Home() {
         >
           <Reveal>
             <span className="mb-8 inline-block border border-white/10 bg-white/5 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 backdrop-blur-sm">
-              Engenharia de Resultados · Franca, SP
+              Diagnóstico gratuito · Resposta em 24h · Franca, SP
             </span>
           </Reveal>
           <Reveal delay={0.05}>
             <h1 className="text-display font-semibold text-white max-w-4xl">
-              <span className="text-gradient-titanium">A Solução Completa Digital</span>
+              <span className="text-gradient-titanium">Mais leads qualificados.</span>
               <br />
-              para Líderes e Instituições.
+              Menos desperdício em marketing.
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/60 md:text-xl">
-              Instalamos infraestrutura inabalável. A mesma tecnologia das maiores empresas do mundo — agora acessível para o seu negócio.
+              Site, funil, WhatsApp e mensuração em um sistema só — com engenharia de nível enterprise, sem contrato de fidelidade.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
@@ -126,7 +141,7 @@ export default function Home() {
                 to="/contato"
                 className="btn-glow inline-flex h-14 items-center justify-center rounded-none px-12 text-[11px] font-bold uppercase tracking-[0.25em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Comece Agora
+                Agendar diagnóstico gratuito
               </Link>
               <Link
                 to="/projetos"
@@ -198,10 +213,7 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={0.12}>
-            <InlineVideo
-              src="https://cdn.coverr.co/videos/coverr-working-at-night-5178/1080p.mp4"
-              caption="Infraestrutura em operação · 24/7"
-            />
+<InlineVideo src="/hero.mp4" poster="/hero-slide-1.svg" caption="Infraestrutura em operação · 24/7" />
           </Reveal>
         </div>
       </section>
@@ -241,10 +253,7 @@ export default function Home() {
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <InlineVideo
-              src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-at-night-7780/1080p.mp4"
-              caption="Automação e inteligência artificial · Ativos 24h"
-            />
+<InlineVideo src="/hero.mp4" poster="/hero-slide-2.svg" caption="Automação e IA · ativos 24h" />
           </Reveal>
           <div className="mt-16 grid md:grid-cols-3 gap-8">
             {[
@@ -276,7 +285,7 @@ export default function Home() {
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {NICHES.map((n, i) => (
-              <NicheCard key={n.title} title={n.title} img={n.img} i={i} />
+              <NicheCard key={n.title} title={n.title} img={n.img} to={n.to} i={i} />
             ))}
           </div>
           <Reveal delay={0.3} className="mt-14 flex justify-center">
@@ -318,7 +327,7 @@ export default function Home() {
                 source="hero"
                 title="Relatório de Inteligência Estratégica"
                 description="Dados, análises e insights de infraestrutura digital para líderes e tomadores de decisão."
-                ctaLabel="Quero Meu Diagnóstico"
+                ctaLabel="Quero meu diagnóstico gratuito"
                 context={{ intent: 'diagnostico' }}
               />
             </div>

@@ -1,4 +1,5 @@
 import { BRAND } from './brand';
+import { buildOrganizationJsonLd } from './seo-schema';
 
 type SeoInput = {
   title: string;

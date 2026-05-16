@@ -60,14 +60,8 @@
       />
     </noscript>
 
-    <!-- Preload hero video CDN (fetchpriority melhora LCP no Chrome) -->
-    <link
-      rel="preload"
-      as="fetch"
-      href="https://cdn.coverr.co/videos/coverr-working-at-night-5178/1080p.mp4"
-      type="video/mp4"
-      crossorigin
-    />
+    <link rel="preload" href="/hero-slide-1.svg" as="image" type="image/svg+xml" />
+    <link rel="preload" href="/hero.mp4" as="video" type="video/mp4" />
 
     <!-- Critical CSS inline: previne FOUC e melhora LCP -->
     <style>
