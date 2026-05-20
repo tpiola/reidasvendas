@@ -35,7 +35,7 @@ const NICHES = [
   { title: 'Soluções Digitais', img: '/hero-slide-3.svg', to: '/solucoes' },
 ] as const;
 
-const TECH_STACK = ['GOOGLE CLOUD', 'VERCEL', 'OPENAI', 'STRIPE', 'N8N', 'CLOUDFLARE', 'SUPABASE', 'FIREBASE', 'TAILWIND', 'REACT', 'TYPESCRIPT'];
+const TECH_STACK = ['STRIPE', 'VERCEL', 'GOOGLE CLOUD', 'CLOUDFLARE', 'HUBSPOT', 'MAILCHIMP', 'HOTJAR', 'META ADS', 'GOOGLE ADS', 'ANALYTICS'];
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ value, delay = 0 }: { value: string; delay?: number }) {
@@ -90,12 +90,12 @@ function NicheCard({ title, img, to, i }: { title: string; img: string; to: stri
         decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-      <div className="absolute inset-0 bg-[#0057FF]/0 group-hover:bg-[#0057FF]/8 transition-colors duration-500" />
+      <div className="absolute inset-0 bg-[#C9A84C]/0 group-hover:bg-[#C9A84C]/8 transition-colors duration-500" />
       {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#0057FF] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
         <h3 className="text-sm font-bold tracking-widest uppercase text-white/90 group-hover:text-white transition-colors">{title}</h3>
-        <Link to={to} className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-[#0057FF] transition-colors duration-300">
+        <Link to={to} className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-[#C9A84C] transition-colors duration-300">
           Ver solução
           <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
         </Link>
