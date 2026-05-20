@@ -197,6 +197,37 @@ img, video { max-width: 100%; height: auto; display: block; }
   transform: translateY(-1px);
 }
 
+/* ─── Gold Luxury CTA ─── */
+.btn-gold {
+  background: linear-gradient(135deg, #B8903C 0%, #C9A84C 30%, #F0D080 60%, #C9A84C 100%);
+  box-shadow: 
+    0 0 0 1px rgba(201,168,76,0.4),
+    0 4px 24px rgba(201,168,76,0.5), 
+    0 0 80px rgba(201,168,76,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: box-shadow 0.35s cubic-bezier(0.16,1,0.3,1), transform 0.25s cubic-bezier(0.16,1,0.3,1), background 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-gold:hover {
+  box-shadow: 
+    0 0 0 1px rgba(201,168,76,0.6),
+    0 8px 48px rgba(201,168,76,0.7), 
+    0 0 120px rgba(201,168,76,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+.btn-gold:hover::before { opacity: 1; }
+.btn-gold:active { transform: translateY(0); }
+
 /* ═══════════════════════════════════════════
    BORDER GLOW EFFECTS
 ═══════════════════════════════════════════ */

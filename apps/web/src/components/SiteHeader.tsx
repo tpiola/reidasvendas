@@ -47,10 +47,14 @@ export function SiteHeader() {
                                     aria-label="Ir para a home"
                                   >
                                   <img 
-                                    src="/logo.png" 
+                                    src="/logo-transparent.png" 
                                     alt="Logo Rei das Vendas" 
-                                    className="h-10 w-auto object-contain"
+                                    className="h-9 w-auto object-contain"
                                   />
+                                  <span className="hidden sm:flex flex-col -space-y-1">
+                                    <span className="text-sm font-bold tracking-tight text-gradient-gold">REI DAS VENDAS</span>
+                                    <span className="text-[8px] font-medium uppercase tracking-[0.2em] text-white/40">Hub de Soluções Digitais</span>
+                                  </span>
                         </Link>
                 
                   {/* Nav desktop */}

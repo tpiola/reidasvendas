@@ -27,7 +27,7 @@ export function HeroVideo({ className, poster }: HeroVideoProps) {
     if (reduceMotion) return;
     timerRef.current = setTimeout(() => {
       setActiveIndex((i) => (i + 1) % VIDEOS.length);
-    }, 6000);
+    }, 8000);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
@@ -62,14 +62,15 @@ export function HeroVideo({ className, poster }: HeroVideoProps) {
             playsInline
             preload={i === 0 ? 'auto' : 'metadata'}
             onCanPlayThrough={() => markLoaded(i)}
+            crossOrigin="anonymous"
           >
             <source src={src} type="video/mp4" />
           </video>
         ))}
       <div className="absolute inset-0 hero-noise" />
-      <div className="absolute inset-0 bg-[#030303]/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,rgba(0,112,243,0.15)_0%,transparent_65%)]" />
+      <div className="absolute inset-0 bg-[#030303]/65" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/85" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,rgba(201,168,76,0.12)_0%,transparent_65%)]" />
     </div>
   );
 }

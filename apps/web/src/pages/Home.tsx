@@ -10,17 +10,17 @@ const SPRING = { type: 'spring' as const, stiffness: 80, damping: 20 };
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
 
 const PILLARS = [
-  { num: '01', title: 'Diagnose', desc: 'Análise cirúrgica da operação. Identificamos gargalos antes de tocar em uma linha de código.' },
-  { num: '02', title: 'Arquitetura', desc: 'Estrutura de páginas, funis e mensuração desenhados para conversão.' },
-  { num: '03', title: 'Construção', desc: 'Implementação modular com performance e UX de nível enterprise.' },
-  { num: '04', title: 'Ativação', desc: 'n8n, WhatsApp, CRM e e-mail em harmonia. Seu lead qualificado, 24/7.' },
+  { num: '01', title: 'Diagnose', desc: 'Análise cirúrgica. Gargalos identificados.' },
+  { num: '02', title: 'Arquitetura', desc: 'Funis desenhados para converter.' },
+  { num: '03', title: 'Construção', desc: 'UX enterprise. Performance máxima.' },
+  { num: '04', title: 'Ativação', desc: 'Automação 24/7. Lead qualificado.' },
 ] as const;
 
 const STATS = [
-  { value: '97%', label: 'Taxa de retenção de clientes' },
-  { value: '4.8×', label: 'ROI médio em 6 meses' },
-  { value: '48h', label: 'Primeira entrega em produção' },
-  { value: '100%', label: 'Sem contrato de fidelidade' },
+  { value: 'R$50M+', label: 'Vendas geradas' },
+  { value: '500+', label: 'Clientes satisfeitos' },
+  { value: '48h', label: 'Primeira entrega' },
+  { value: '4.8x', label: 'ROI médio' },
 ] as const;
 
 const IMG = (id: string) =>
@@ -118,13 +118,14 @@ function InlineVideo({ src, poster, caption }: { src: string; poster?: string; c
         playsInline
         preload="metadata"
         poster={poster}
+        crossOrigin="anonymous"
       >
         <source src={src} type="video/mp4" />
       </video>
       <div className="video-overlay-gradient" />
       {caption && (
         <div className="absolute bottom-4 left-6 right-6 flex items-center gap-3">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#0057FF] animate-pulse" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-white/50">{caption}</p>
         </div>
       )}
@@ -140,19 +141,19 @@ function AmbientOrbs() {
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       <motion.div
         className="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full opacity-20 blur-[120px]"
-        style={{ background: 'radial-gradient(circle, #0057FF, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #C9A84C, transparent 70%)' }}
         animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
         className="absolute top-[40%] -right-[5%] w-[400px] h-[400px] rounded-full opacity-12 blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #C9A84C, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #F0D080, transparent 70%)' }}
         animate={{ x: [0, -20, 0], y: [0, 15, 0] }}
         transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
       />
       <motion.div
         className="absolute -bottom-[10%] left-[30%] w-[500px] h-[300px] rounded-full opacity-10 blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #0057FF, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #C9A84C, transparent 70%)' }}
         animate={{ x: [0, 40, 0], y: [0, 20, 0] }}
         transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut', delay: 8 }}
       />
@@ -219,13 +220,13 @@ export default function Home() {
           {/* Badge */}
           <Reveal>
             <motion.div
-              className="mb-10 inline-flex items-center gap-3 border border-white/8 bg-white/[0.03] px-5 py-2.5 backdrop-blur-sm"
-              whileHover={{ borderColor: 'rgba(0,87,255,0.3)', backgroundColor: 'rgba(0,87,255,0.05)' }}
+              className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/20 bg-[#C9A84C]/[0.05] px-5 py-2.5 backdrop-blur-sm"
+              whileHover={{ borderColor: 'rgba(201,168,76,0.4)', backgroundColor: 'rgba(201,168,76,0.08)' }}
               transition={{ duration: 0.3 }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0057FF] animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/55">
-                Diagnóstico gratuito · Resposta em 24h · Franca, SP
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">
+                Diagnóstico gratuito · Resposta em 24h
               </span>
             </motion.div>
           </Reveal>
@@ -235,28 +236,28 @@ export default function Home() {
             <Reveal delay={0.06}>
               <h1 className="text-display font-semibold text-white">
                 <motion.span
-                  className="block text-gradient-titanium"
+                  className="block text-gradient-gold"
                   initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.15 }}
                 >
-                  Mais leads qualificados.
+                  Venda mais.
+                </motion.span>
+                <motion.span
+                  className="block text-gradient-titanium"
+                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
+                >
+                  Cresça mais.
                 </motion.span>
                 <motion.span
                   className="block"
                   initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
-                >
-                  Menos desperdício
-                </motion.span>
-                <motion.span
-                  className="block text-gradient-gold"
-                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.4 }}
                 >
-                  em marketing.
+                  Viva melhor.
                 </motion.span>
               </h1>
             </Reveal>
@@ -264,8 +265,7 @@ export default function Home() {
 
           <Reveal delay={0.18}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/55 md:text-xl">
-              Site, funil, WhatsApp e mensuração em um sistema só — com
-              engenharia de nível enterprise, sem contrato de fidelidade.
+              Infraestrutura digital de elite para quem quer dominar o mercado.
             </p>
           </Reveal>
 
@@ -274,29 +274,29 @@ export default function Home() {
             <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
               <Link
                 to="/contato"
-                className="btn-glow group inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="btn-gold group inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]"
               >
-                Agendar diagnóstico gratuito
+                Quero vender mais
               </Link>
               <Link
                 to="/projetos"
                 className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75 hover:text-white"
               >
-                Ver Projetos
+                Ver Cases
               </Link>
             </div>
           </Reveal>
 
           {/* Trust indicators */}
           <Reveal delay={0.35}>
-            <div className="mt-14 flex items-center gap-6 text-center">
+            <div className="mt-14 flex items-center gap-8 text-center">
               {[
-                { value: '97%', label: 'Retenção' },
-                { value: '48h', label: '1ª entrega' },
-                { value: '4.8×', label: 'ROI médio' },
+                { value: 'R$50M+', label: 'Vendas geradas' },
+                { value: '500+', label: 'Clientes ativos' },
+                { value: '4.8x', label: 'ROI médio' },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col items-center gap-1">
-                  <span className="text-xl font-bold text-white/90 tracking-tight">{item.value}</span>
+                  <span className="text-xl font-bold text-gradient-gold tracking-tight">{item.value}</span>
                   <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35">{item.label}</span>
                 </div>
               ))}
@@ -359,25 +359,24 @@ export default function Home() {
         <AmbientOrbs />
         <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16 md:gap-28 items-center">
           <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Manifesto</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Manifesto</span>
             <h2 className="mt-5 text-heading font-semibold text-white">
-              Não somos uma agência.<br />
-              <span className="text-gradient-titanium">Somos engenheiros</span><br />
-              de crescimento.
+              Não vendemos sites.<br />
+              <span className="text-gradient-gold">Vendemos resultados.</span>
             </h2>
-            <div className="mt-6 h-[1px] w-full max-w-sm bg-gradient-to-r from-[#0057FF]/40 to-transparent" />
+            <div className="mt-6 h-[1px] w-full max-w-sm bg-gradient-to-r from-[#C9A84C]/40 to-transparent" />
             <p className="mt-6 text-base leading-relaxed text-white/45 max-w-md">
-              Enquanto agências entregam sites bonitos, nós construímos sistemas que pensam, automatizam e convertem. A diferença está na governança.
+              Máquinas de vendas que trabalham 24/7. Enquanto você dorme, seu negócio cresce.
             </p>
             <div className="mt-10 flex items-center gap-4">
-              <div className="h-px w-12 bg-[#0057FF]/60" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0057FF]/70">Ciência da Performance</span>
+              <div className="h-px w-12 bg-[#C9A84C]/60" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#C9A84C]/70">Sucesso Garantido</span>
             </div>
           </Reveal>
           <Reveal delay={0.14}>
             <div className="relative">
-              <div className="absolute -inset-4 bg-[#0057FF]/5 blur-2xl rounded-3xl" />
-              <InlineVideo src="/hero.mp4" poster="/hero-slide-1.svg" caption="Infraestrutura em operação · 24/7" />
+              <div className="absolute -inset-4 bg-[#C9A84C]/5 blur-2xl rounded-3xl" />
+              <InlineVideo src="https://videos.pexels.com/video-files/7640912/7640912-uhd_2732_1440_25fps.mp4" caption="Sucesso em ação · 24/7" />
             </div>
           </Reveal>
         </div>
@@ -412,23 +411,23 @@ export default function Home() {
         <AmbientOrbs />
         <div className="relative mx-auto max-w-6xl px-6">
           <Reveal className="text-center mb-16">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/22">Performance em tempo real</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/50">Performance em tempo real</span>
             <h2 className="mt-4 text-heading font-semibold text-white">
-              Tecnologia que{' '}
-              <span className="text-gradient-titanium">trabalha enquanto você dorme.</span>
+              Riqueza é{' '}
+              <span className="text-gradient-gold">consequência.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="relative">
-              <div className="absolute -inset-8 bg-[#0057FF]/4 blur-3xl rounded-3xl" />
-              <InlineVideo src="/hero.mp4" poster="/hero-slide-2.svg" caption="Automação e IA · ativos 24h" />
+              <div className="absolute -inset-8 bg-[#C9A84C]/4 blur-3xl rounded-3xl" />
+              <InlineVideo src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" caption="Luxo e prosperidade · sempre" />
             </div>
           </Reveal>
           <div className="mt-16 grid md:grid-cols-3 gap-6">
             {[
-              { icon: '⚡', title: 'Deploy em Horas', desc: 'Não semanas. Seu site no ar e convertendo dentro de 48 horas da assinatura.' },
-              { icon: '🔗', title: 'Integração Total', desc: 'WhatsApp, CRM, e-mail e analytics em um ecossistema unificado e auditável.' },
-              { icon: '📊', title: 'Dados em Tempo Real', desc: 'Dashboards com clareza cirúrgica sobre o que converte — sem suposições.' },
+              { icon: '⚡', title: 'Velocidade', desc: 'Resultados em semanas, não meses.' },
+              { icon: '🎯', title: 'Precisão', desc: 'Cada real investido rastreado.' },
+              { icon: '💎', title: 'Excelência', desc: 'Padrão elite em cada entrega.' },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.09}>
                 <div className="card-dark group p-8">
@@ -471,30 +470,30 @@ export default function Home() {
       {/* ═══ FINAL CTA / LEAD ═══ */}
       <section className="relative bg-[#030305] py-32 md:py-48 overflow-hidden">
         {/* Background radial */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_65%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(201,168,76,0.05)_0%,transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(201,168,76,0.14)_0%,transparent_65%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(201,168,76,0.08)_0%,transparent_50%)]" />
         <AmbientOrbs />
 
         <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-12 gap-16 items-start">
           <div className="md:col-span-5">
             <Reveal>
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0057FF]/60">Diagnóstico gratuito</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Comece agora</span>
               <h2 className="mt-5 text-heading font-semibold text-white">
-                Pronto para o<br />
-                <span className="text-gradient-titanium">próximo nível?</span>
+                Pronto para<br />
+                <span className="text-gradient-gold">reinar?</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/40">
-                Envie seus dados. Receba proposta, próximos passos e um plano orientado por métricas — sem compromisso.
+                Sua jornada para o topo começa aqui.
               </p>
             </Reveal>
 
             <Reveal delay={0.1} className="mt-10">
               <div className="space-y-4">
                 {[
-                  'Diagnóstico em 24h',
-                  'Proposta personalizada',
-                  'Sem compromisso',
-                  'Sem contrato de fidelidade',
+                  'Análise gratuita',
+                  'Estratégia personalizada',
+                  'Resultados garantidos',
+                  'Suporte elite',
                 ].map((item, i) => (
                   <motion.div
                     key={item}
@@ -504,8 +503,8 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.1 + i * 0.06, duration: 0.5, ease: EASE_LUXURY }}
                   >
-                    <div className="w-5 h-5 rounded-full bg-[#0057FF]/15 border border-[#0057FF]/30 flex items-center justify-center flex-shrink-0">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#0057FF]" />
+                    <div className="w-5 h-5 rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/30 flex items-center justify-center flex-shrink-0">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]" />
                     </div>
                     <span className="text-sm text-white/50">{item}</span>
                   </motion.div>
@@ -515,8 +514,8 @@ export default function Home() {
 
             <Reveal delay={0.2} className="mt-8 hidden md:block">
               <div className="flex items-center gap-3">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#0057FF]/25 to-[#0057FF]/50" />
-                <span className="altiq-serif text-2xl text-[#0057FF]/50">→</span>
+                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-[#C9A84C]/25 to-[#C9A84C]/50" />
+                <span className="altiq-serif text-2xl text-[#C9A84C]/50">→</span>
               </div>
             </Reveal>
           </div>
@@ -524,12 +523,12 @@ export default function Home() {
           <Reveal delay={0.15} className="md:col-span-7">
             <div className="glass-card rounded-2xl p-8 md:p-10 relative overflow-hidden">
               {/* Card top accent */}
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#0057FF]/40 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
               <LeadForm
                 source="hero"
-                title="Relatório de Inteligência Estratégica"
-                description="Dados, análises e insights de infraestrutura digital para líderes e tomadores de decisão."
-                ctaLabel="Quero meu diagnóstico gratuito"
+                title="Conquiste o Topo"
+                description="Preencha e receba sua estratégia personalizada."
+                ctaLabel="Quero vender mais"
                 context={{ intent: 'diagnostico' }}
               />
             </div>
