@@ -79,14 +79,16 @@ export function SiteHeader() {
                                       to="/contato"
                                       className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/80 hover:text-white transition-colors"
                                     >
-                                      Contacto
+                                      Contato
                                     </Link>
-                                    <Link
-                                                  to="/contato"
-                                                  className="inline-flex h-10 items-center justify-center bg-white px-6 text-[10px] font-bold uppercase tracking-[0.24em] text-black transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                                    <a
+                                                  href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2TqG8F1P_H7GvVQ2OzjYXmFQxoQrGw3ZqKjKXVG8qMJyKxXqKfVG8qMJyKxXqKf"
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+                                                  className="btn-gold inline-flex h-10 items-center justify-center px-6 text-[10px] font-bold uppercase tracking-[0.24em] text-black transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                                                 >
-                                                Comece
-                                    </Link>
+                                                Agendar Mentoria
+                                    </a>
                                   </div>
                         </nav>
                 
@@ -125,12 +127,14 @@ export function SiteHeader() {
                                       {link.label}
                                     </NavLink>
                                   ))}
-                                                      <Link
-                                                                        to="/contato"
-                                                                        className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-white px-6 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90"
+                                                      <a
+                                                                        href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2TqG8F1P_H7GvVQ2OzjYXmFQxoQrGw3ZqKjKXVG8qMJyKxXqKfVG8qMJyKxXqKf"
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="mt-2 btn-gold inline-flex h-12 items-center justify-center rounded-xl px-6 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors"
                                                                       >
-                                                                      Comecar agora
-                                                      </Link>
+                                                                      Agendar mentoria grátis
+                                                      </a>
                                         </div>
                             </nav>
                   </div>

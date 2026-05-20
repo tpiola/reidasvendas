@@ -10,29 +10,29 @@ const SPRING = { type: 'spring' as const, stiffness: 80, damping: 20 };
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
 
 const PILLARS = [
-  { num: '01', title: 'Diagnose', desc: 'Análise cirúrgica. Gargalos identificados.' },
-  { num: '02', title: 'Arquitetura', desc: 'Funis desenhados para converter.' },
-  { num: '03', title: 'Construção', desc: 'UX enterprise. Performance máxima.' },
-  { num: '04', title: 'Ativação', desc: 'Automação 24/7. Lead qualificado.' },
+  { num: '01', title: 'Raio-X', desc: 'Entendemos seu negócio como se fosse nosso.' },
+  { num: '02', title: 'Estratégia', desc: 'Desenhamos o caminho mais curto até a venda.' },
+  { num: '03', title: 'Criação', desc: 'Site, app ou sistema sob medida para você.' },
+  { num: '04', title: 'Aceleração', desc: 'IA testando e otimizando 24h por dia.' },
 ] as const;
 
 const STATS = [
-  { value: 'R$50M+', label: 'Vendas geradas' },
-  { value: '500+', label: 'Clientes satisfeitos' },
-  { value: '48h', label: 'Primeira entrega' },
-  { value: '4.8x', label: 'ROI médio' },
+  { value: 'R$50M+', label: 'Faturados pelos clientes' },
+  { value: '347', label: 'Negócios transformados' },
+  { value: '72h', label: 'Para primeira venda' },
+  { value: '4.8x', label: 'Retorno médio' },
 ] as const;
 
 const IMG = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=900&q=90&fm=webp`;
 
 const NICHES = [
-  { title: 'Saúde & Estética', img: IMG('photo-1576091160550-2173dba999ef'), to: '/saude' },
-  { title: 'Negócios & B2B', img: IMG('photo-1552664730-d307ca884978'), to: '/negocios' },
-  { title: 'Imobiliário', img: IMG('photo-1560518883-ce09059eeffa'), to: '/projetos' },
-  { title: 'E-commerce', img: IMG('photo-1555421689-491a97ff2040'), to: '/projetos' },
-  { title: 'Governança', img: '/hero-slide-2.svg', to: '/governanca' },
-  { title: 'Soluções Digitais', img: '/hero-slide-3.svg', to: '/solucoes' },
+  { title: 'Clínicas & Consultórios', img: IMG('photo-1576091160550-2173dba999ef'), to: '/saude' },
+  { title: 'Restaurantes & Bares', img: IMG('photo-1517248135467-4c7edcad34c4'), to: '/projetos' },
+  { title: 'Lojas & Comércios', img: IMG('photo-1441986300917-64674bd600d8'), to: '/projetos' },
+  { title: 'Prestadores de Serviço', img: IMG('photo-1552664730-d307ca884978'), to: '/negocios' },
+  { title: 'Imobiliárias', img: IMG('photo-1560518883-ce09059eeffa'), to: '/projetos' },
+  { title: 'Academias & Studios', img: IMG('photo-1534438327276-14e5300c3a48'), to: '/projetos' },
 ] as const;
 
 const TECH_STACK = ['STRIPE', 'VERCEL', 'GOOGLE CLOUD', 'CLOUDFLARE', 'HUBSPOT', 'MAILCHIMP', 'HOTJAR', 'META ADS', 'GOOGLE ADS', 'ANALYTICS'];
@@ -226,7 +226,7 @@ export default function Home() {
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
               <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">
-                Diagnóstico gratuito · Resposta em 24h
+                Mentoria gratuita · Agende agora
               </span>
             </motion.div>
           </Reveal>
@@ -241,7 +241,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.15 }}
                 >
-                  Venda mais.
+                  Seu negócio local
                 </motion.span>
                 <motion.span
                   className="block text-gradient-titanium"
@@ -249,7 +249,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
                 >
-                  Cresça mais.
+                  vendendo como
                 </motion.span>
                 <motion.span
                   className="block"
@@ -257,7 +257,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.4 }}
                 >
-                  Viva melhor.
+                  as gigantes.
                 </motion.span>
               </h1>
             </Reveal>
@@ -265,24 +265,26 @@ export default function Home() {
 
           <Reveal delay={0.18}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/55 md:text-xl">
-              Infraestrutura digital de elite para quem quer dominar o mercado.
+              Sites, apps e inteligência artificial trabalhando juntos para você vender mais, atrair os clientes certos e multiplicar seu faturamento.
             </p>
           </Reveal>
 
           {/* CTAs */}
           <Reveal delay={0.26}>
             <div className="mt-12 flex flex-col sm:flex-row items-center gap-4">
-              <Link
-                to="/contato"
+              <a
+                href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2TqG8F1P_H7GvVQ2OzjYXmFQxoQrGw3ZqKjKXVG8qMJyKxXqKfVG8qMJyKxXqKf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-gold group inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]"
               >
-                Quero vender mais
-              </Link>
+                Agendar mentoria grátis
+              </a>
               <Link
                 to="/projetos"
                 className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75 hover:text-white"
               >
-                Ver Cases
+                Ver resultados reais
               </Link>
             </div>
           </Reveal>
@@ -291,9 +293,9 @@ export default function Home() {
           <Reveal delay={0.35}>
             <div className="mt-14 flex items-center gap-8 text-center">
               {[
-                { value: 'R$50M+', label: 'Vendas geradas' },
-                { value: '500+', label: 'Clientes ativos' },
-                { value: '4.8x', label: 'ROI médio' },
+                { value: 'R$50M+', label: 'Faturados pelos clientes' },
+                { value: '347', label: 'Negócios transformados' },
+                { value: '4.8x', label: 'Retorno médio' },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col items-center gap-1">
                   <span className="text-xl font-bold text-gradient-gold tracking-tight">{item.value}</span>
@@ -359,24 +361,24 @@ export default function Home() {
         <AmbientOrbs />
         <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-16 md:gap-28 items-center">
           <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Manifesto</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Por que somos diferentes</span>
             <h2 className="mt-5 text-heading font-semibold text-white">
-              Não vendemos sites.<br />
-              <span className="text-gradient-gold">Vendemos resultados.</span>
+              Chega de investir<br />
+              <span className="text-gradient-gold">e não ver retorno.</span>
             </h2>
             <div className="mt-6 h-[1px] w-full max-w-sm bg-gradient-to-r from-[#C9A84C]/40 to-transparent" />
             <p className="mt-6 text-base leading-relaxed text-white/45 max-w-md">
-              Máquinas de vendas que trabalham 24/7. Enquanto você dorme, seu negócio cresce.
+              Você já teve site que não aparece no Google. Redes sociais que ninguém vê. Anúncios que só gastam. Com a gente é diferente: a inteligência artificial testa dezenas de comunicações até encontrar a que mais vende pro seu público.
             </p>
             <div className="mt-10 flex items-center gap-4">
               <div className="h-px w-12 bg-[#C9A84C]/60" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#C9A84C]/70">Sucesso Garantido</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#C9A84C]/70">IA que aprende e vende</span>
             </div>
           </Reveal>
           <Reveal delay={0.14}>
             <div className="relative">
               <div className="absolute -inset-4 bg-[#C9A84C]/5 blur-2xl rounded-3xl" />
-              <InlineVideo src="https://videos.pexels.com/video-files/7640912/7640912-uhd_2732_1440_25fps.mp4" caption="Sucesso em ação · 24/7" />
+              <InlineVideo src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" caption="Tecnologia que trabalha por você" />
             </div>
           </Reveal>
         </div>
@@ -386,17 +388,17 @@ export default function Home() {
       <section className="section-white py-28 md:py-44">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="text-center mb-20">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Metodologia</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Como funciona</span>
             <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              Quatro fases.<br />
-              <span className="text-gradient-gold">Um resultado.</span>
+              Simples assim.<br />
+              <span className="text-gradient-gold">Quatro passos.</span>
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0 border border-black/[0.06]">
             {PILLARS.map((p, i) => (
               <Reveal key={p.num} delay={i * 0.09}>
-                <div className="pillar-card group relative h-full bg-white border-r border-black/[0.06] p-8 last:border-r-0 transition-all duration-400 hover:bg-[#F0F4FF]">
-                  <div className="text-[10px] font-bold tracking-[0.32em] text-[#0057FF]/50 mb-5">{p.num}</div>
+                <div className="pillar-card group relative h-full bg-white border-r border-black/[0.06] p-8 last:border-r-0 transition-all duration-400 hover:bg-[#FFF9E6]">
+                  <div className="text-[10px] font-bold tracking-[0.32em] text-[#C9A84C]/70 mb-5">{p.num}</div>
                   <h3 className="text-xl font-bold text-[#0A0A0B] mb-3">{p.title}</h3>
                   <p className="text-sm leading-relaxed text-[#0A0A0B]/50">{p.desc}</p>
                 </div>
@@ -411,23 +413,23 @@ export default function Home() {
         <AmbientOrbs />
         <div className="relative mx-auto max-w-6xl px-6">
           <Reveal className="text-center mb-16">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/50">Performance em tempo real</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/50">O que entregamos</span>
             <h2 className="mt-4 text-heading font-semibold text-white">
-              Riqueza é{' '}
-              <span className="text-gradient-gold">consequência.</span>
+              Site + App + IA{' '}
+              <span className="text-gradient-gold">trabalhando juntos.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="relative">
               <div className="absolute -inset-8 bg-[#C9A84C]/4 blur-3xl rounded-3xl" />
-              <InlineVideo src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4" caption="Luxo e prosperidade · sempre" />
+              <InlineVideo src="https://videos.pexels.com/video-files/5377684/5377684-uhd_2560_1440_25fps.mp4" caption="Sua marca no próximo nível" />
             </div>
           </Reveal>
           <div className="mt-16 grid md:grid-cols-3 gap-6">
             {[
-              { icon: '⚡', title: 'Velocidade', desc: 'Resultados em semanas, não meses.' },
-              { icon: '🎯', title: 'Precisão', desc: 'Cada real investido rastreado.' },
-              { icon: '💎', title: 'Excelência', desc: 'Padrão elite em cada entrega.' },
+              { icon: '🌐', title: 'Sites que Vendem', desc: 'Não é só bonito. É feito pra converter visitante em cliente.' },
+              { icon: '📱', title: 'Apps Sob Medida', desc: 'Seu negócio na palma da mão do cliente. Simples de usar.' },
+              { icon: '🤖', title: 'IA que Otimiza', desc: 'Testa comunicações, encontra seu público e vende mais.' },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.09}>
                 <div className="card-dark group p-8">
@@ -445,10 +447,10 @@ export default function Home() {
       <section className="section-white py-28 md:py-44">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="mb-16">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Segmentos</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Quem atendemos</span>
             <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              Seu mercado.<br />
-              <span className="text-gradient-gold">Nossa especialidade.</span>
+              Negócios locais<br />
+              <span className="text-gradient-gold">que querem crescer.</span>
             </h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -457,12 +459,14 @@ export default function Home() {
             ))}
           </div>
           <Reveal delay={0.3} className="mt-14 flex justify-center">
-            <Link
-              to="/projetos"
-              className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0A0A0B] border border-black/15 hover:bg-black hover:text-white hover:border-black transition-all duration-300"
+            <a
+              href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2TqG8F1P_H7GvVQ2OzjYXmFQxoQrGw3ZqKjKXVG8qMJyKxXqKfVG8qMJyKxXqKf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.22em] text-black transition-all duration-300"
             >
-              Ver todos os projetos
-            </Link>
+              Agendar mentoria grátis
+            </a>
           </Reveal>
         </div>
       </section>
@@ -477,23 +481,23 @@ export default function Home() {
         <div className="relative mx-auto max-w-6xl px-6 grid md:grid-cols-12 gap-16 items-start">
           <div className="md:col-span-5">
             <Reveal>
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Comece agora</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/60">Bora conversar?</span>
               <h2 className="mt-5 text-heading font-semibold text-white">
-                Pronto para<br />
-                <span className="text-gradient-gold">reinar?</span>
+                30 minutos que podem<br />
+                <span className="text-gradient-gold">mudar tudo.</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/40">
-                Sua jornada para o topo começa aqui.
+                Na mentoria gratuita, analisamos seu negócio e mostramos exatamente onde você está deixando dinheiro na mesa. Sem enrolação.
               </p>
             </Reveal>
 
             <Reveal delay={0.1} className="mt-10">
               <div className="space-y-4">
                 {[
-                  'Análise gratuita',
-                  'Estratégia personalizada',
-                  'Resultados garantidos',
-                  'Suporte elite',
+                  'Mentoria 1:1 gratuita',
+                  'Análise real do seu negócio',
+                  'Plano de ação personalizado',
+                  'Sem compromisso de compra',
                 ].map((item, i) => (
                   <motion.div
                     key={item}
@@ -526,10 +530,10 @@ export default function Home() {
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
               <LeadForm
                 source="hero"
-                title="Conquiste o Topo"
-                description="Preencha e receba sua estratégia personalizada."
-                ctaLabel="Quero vender mais"
-                context={{ intent: 'diagnostico' }}
+                title="Agende sua Mentoria"
+                description="Conte um pouco sobre seu negócio e entraremos em contato."
+                ctaLabel="Quero minha mentoria grátis"
+                context={{ intent: 'mentoria' }}
               />
             </div>
           </Reveal>
