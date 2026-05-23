@@ -102,12 +102,15 @@ export default function Home() {
           className="relative flex min-h-screen flex-col items-center justify-center px-6 pb-24 pt-36 text-center"
         >
           <Reveal>
-            <div className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] px-5 py-2.5 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C9A84C]" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/85">
-                Franca-SP · Resposta em 24h
+            <Link
+              to="/contato"
+              className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] px-5 py-2.5 backdrop-blur-sm transition-colors duration-300 hover:border-[#C9A84C]/45 hover:bg-[#C9A84C]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C9A84C]" aria-hidden />
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/85">
+                Agende agora uma reunião
               </span>
-            </div>
+            </Link>
           </Reveal>
 
           <div className="max-w-5xl">
