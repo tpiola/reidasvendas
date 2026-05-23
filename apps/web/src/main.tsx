@@ -4,6 +4,24 @@ import App from './App'
 import './index.css'
 import { initTracking } from './lib/analytics'
 
+function initThemeClass() {
+  const root = document.documentElement
+  root.classList.remove('light', 'dark')
+  try {
+    const saved = localStorage.getItem('theme')
+    if (saved === 'light' || saved === 'dark') {
+      root.classList.add(saved)
+      return
+    }
+  } catch {
+    /* localStorage indisponível */
+  }
+  root.classList.add(
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  )
+}
+
+initThemeClass()
 initTracking()
 
 if ('serviceWorker' in navigator) {

@@ -32,7 +32,7 @@ function buildOrganizationNode() {
     name: BRAND.name,
     url: `${BASE}/`,
     logo: `${BASE}/favicon.svg`,
-    image: [`${BASE}/og-image.svg`, `${BASE}/logo.png`],
+    image: [`${BASE}/og-image.svg`, `${BASE}/logo.svg`],
     email: BRAND.email,
     ...(tel ? { telephone: tel } : {}),
     description:

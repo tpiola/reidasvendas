@@ -2,135 +2,140 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { cn } from '@altiq/ui';
 import { Menu, X } from 'lucide-react';
+import { BrandLogo } from '@/components/BrandLogo';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
 
 const NAV_LINKS = [
   { to: '/solucoes', label: 'Soluções' },
   { to: '/projetos', label: 'Projetos' },
   { to: '/negocios', label: 'Negócios' },
-];
+] as const;
 
 export function SiteHeader() {
-    const location = useLocation();
-    const [menuOpen, setMenuOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const { isDark } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-        setMenuOpen(false);
+    setMenuOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 12);
-        onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const overlay = location.pathname === '/' && !scrolled;
+  const heroOverlay = location.pathname === '/' && !scrolled && isDark;
 
-  const headerClassName = cn(
-        'fixed inset-x-0 top-0 z-50 border-b backdrop-blur-glass-md transition-all duration-500',
-        overlay
-          ? 'border-white/[0.05] bg-background/20'
-          : 'border-white/[0.07] bg-background/90',
-      );
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    cn(
+      'py-2 text-[10px] font-semibold uppercase tracking-[0.22em] transition-colors',
+      isActive
+        ? 'text-[color:var(--header-fg)]'
+        : 'text-[color:var(--header-fg-muted)] hover:text-[color:var(--header-fg)]',
+    );
 
   return (
-        <header className={headerClassName}>
-                <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-                  {/* Logo */}
-                        <Link
-                                    to="/"
-                                    className={cn(
-                                                  'flex items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                                                  'focus-visible:ring-white focus-visible:ring-offset-black',
-                                                )}
-                                    aria-label="Ir para a home"
-                                  >
-                                  <img 
-                                    src="/logo.png" 
-                                    alt="Logo Rei das Vendas" 
-                                    className="h-10 w-auto object-contain"
-                                  />
-                        </Link>
-                
-                  {/* Nav desktop */}
-                        <nav className="hidden items-center gap-8 md:flex" aria-label="Navegacao principal">
-                          {NAV_LINKS.map((link) => (
-                      <NavLink
-                                      key={link.to}
-                                      to={link.to}
-                                      end={link.to === '/'}
-                                      className={({ isActive }) =>
-                                                        cn(
-                                                                            'py-2 text-[10px] font-semibold uppercase tracking-[0.24em] transition-colors',
-                                                                            isActive ? 'text-white' : 'text-white/60 hover:text-white',
-                                                                          )
-                                      }
-                                    >
-                        {link.label}
-                      </NavLink>
-                    ))}
-                                  <div className="flex items-center gap-4 ml-4">
-                                    <Link
-                                      to="/contato"
-                                      className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/80 hover:text-white transition-colors"
-                                    >
-                                      Contacto
-                                    </Link>
-                                    <Link
-                                                  to="/contato"
-                                                  className="inline-flex h-10 items-center justify-center bg-white px-6 text-[10px] font-bold uppercase tracking-[0.24em] text-black transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                                                >
-                                                Comece
-                                    </Link>
-                                  </div>
-                        </nav>
-                
-                  {/* Menu mobile toggle */}
-                        <button
-                                    type="button"
-                                    className={cn(
-                                                  'inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors md:hidden',
-                                                  'text-white/85 hover:bg-white/10 focus-visible:ring-white focus-visible:ring-offset-black',
-                                                )}
-                                    aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
-                                    aria-expanded={menuOpen}
-                                    onClick={() => setMenuOpen((o) => !o)}
-                                  >
-                          {menuOpen ? <X size={20} /> : <Menu size={20} />}
-                        </button>
-                </div>
-        
-          {/* Menu mobile */}
-          {menuOpen && (
-                  <div className="border-t border-white/10 bg-black/90 md:hidden">
-                            <nav className="mx-auto max-w-6xl px-6 py-5" aria-label="Navegacao mobile">
-                                        <div className="grid gap-5">
-                                          {NAV_LINKS.map((link) => (
-                                    <NavLink
-                                                        key={link.to}
-                                                        to={link.to}
-                                                        end={link.to === '/'}
-                                                        className={({ isActive }) =>
-                                                                              cn(
-                                                                                                      'text-sm font-semibold',
-                                                                                                      isActive ? 'text-white' : 'text-white/70 hover:text-white',
-                                                                                                    )
-                                                        }
-                                                      >
-                                      {link.label}
-                                    </NavLink>
-                                  ))}
-                                                      <Link
-                                                                        to="/contato"
-                                                                        className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-white px-6 text-xs font-semibold uppercase tracking-[0.18em] text-black transition-colors hover:bg-white/90"
-                                                                      >
-                                                                      Comecar agora
-                                                      </Link>
-                                        </div>
-                            </nav>
-                  </div>
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 border-b backdrop-blur-glass-md transition-all duration-500',
+        heroOverlay
+          ? 'border-[color:var(--header-border)] bg-[color:var(--header-surface-overlay)]'
+          : 'border-[color:var(--header-border)] bg-[color:var(--header-surface)]',
+      )}
+    >
+      <div className="mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-3 px-4 sm:h-[4.5rem] sm:px-6">
+        <Link
+          to="/"
+          className="min-w-0 shrink rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--rdv-blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--page-bg)]"
+          aria-label="Ir para a home — Rei das Vendas"
+        >
+          <BrandLogo layout="horizontal" size="md" className="inline-flex xs:hidden" />
+          <BrandLogo layout="horizontal" size="lg" className="hidden xs:inline-flex md:hidden" />
+          <BrandLogo layout="horizontal" size="xl" className="hidden md:inline-flex" />
+        </Link>
+
+        <nav className="hidden items-center gap-6 lg:gap-8 md:flex" aria-label="Navegação principal">
+          {NAV_LINKS.map((link) => (
+            <NavLink key={link.to} to={link.to} className={navLinkClass}>
+              {link.label}
+            </NavLink>
+          ))}
+          <div className="ml-2 flex items-center gap-3 border-l border-[color:var(--header-border)] pl-5">
+            <ThemeToggle />
+            <Link to="/contato" className={navLinkClass({ isActive: false })}>
+              Contato
+            </Link>
+            <Link
+              to="/contato"
+              className={cn(
+                'inline-flex h-10 items-center justify-center px-5 text-[10px] font-bold uppercase tracking-[0.2em] transition-transform hover:scale-[1.02]',
+                isDark
+                  ? 'bg-white text-black hover:bg-white/90'
+                  : 'bg-[#0A0A0B] text-white hover:bg-[#1a1a1c]',
               )}
-        </header>
-      );
+            >
+              Começar
+            </Link>
+          </div>
+        </nav>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className={cn(
+              'inline-flex h-10 w-10 items-center justify-center rounded-xl transition-colors',
+              'text-[color:var(--header-fg)] hover:bg-[color:var(--header-hover)]',
+            )}
+            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <div
+          className="border-t border-[color:var(--header-border)] bg-[color:var(--header-surface)] md:hidden"
+          role="dialog"
+          aria-label="Menu de navegação"
+        >
+          <nav className="mx-auto max-w-6xl px-4 py-5 sm:px-6" aria-label="Navegação mobile">
+            <div className="mb-6 flex justify-center border-b border-[color:var(--header-border)] pb-6">
+              <BrandLogo layout="stacked" size="lg" />
+            </div>
+            <div className="grid gap-4">
+              {NAV_LINKS.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    cn('text-base font-semibold', isActive ? 'text-[color:var(--header-fg)]' : 'text-[color:var(--header-fg-muted)]')
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+              <Link
+                to="/contato"
+                className={cn(
+                  'mt-2 inline-flex h-12 items-center justify-center text-xs font-bold uppercase tracking-[0.18em]',
+                  isDark ? 'bg-white text-black' : 'bg-[#0A0A0B] text-white',
+                )}
+              >
+                Quero diagnóstico com IA
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
 }
