@@ -113,10 +113,9 @@ type LeadFormProps = {
 
 export function LeadForm({
   source,
-  title = 'Diagnóstico gratuito (2 minutos)',
-  description =
-    'Você recebe um plano de ação com 3 alavancas de conversão e um roteiro de automação personalizado para o seu negócio.',
-  ctaLabel = 'Quero meu diagnóstico grátis',
+  title = 'Diagnóstico estratégico',
+  description = 'Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo para o seu negócio.',
+  ctaLabel = 'Quero meu diagnóstico',
   formVariant = 'compact',
   context,
   onSuccess,

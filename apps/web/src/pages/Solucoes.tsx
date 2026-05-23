@@ -23,7 +23,7 @@ export default function Solucoes() {
         
         <Reveal delay={0.1}>
           <p className="mt-8 text-lg leading-relaxed text-white/60 md:text-xl max-w-3xl mx-auto">
-            Site, funil e integrações para o seu segmento. Diagnóstico gratuito em 24h.
+            Site, funil e integrações para o seu segmento. Diagnóstico em 24h.
           </p>
         </Reveal>
       </div>

@@ -1,53 +1,49 @@
 import { useEffect } from 'react';
 import { applySeo } from '@/lib/seo';
+import { BRAND } from '@/lib/brand';
 import { LeadForm } from '@/components/LeadForm';
 
 export default function Contato() {
   useEffect(() => {
     applySeo({
       title: 'Contato — Rei das Vendas',
-      description: 'Entre em contato e receba proposta e próximos passos.',
+      description: 'Agende diagnóstico: nome, e-mail e WhatsApp. Resposta em até 24h com rota e próximos passos.',
       canonicalPath: '/contato',
     });
   }, []);
 
   return (
-    <main className="bg-white">
-      <section className="border-b border-black/10">
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
-            Contato
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Receba seu diagnóstico gratuito em até 24 horas.
+    <main className="bg-[#030305] text-white">
+      <section className="relative overflow-hidden border-b border-white/[0.06]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.15)_0%,transparent_55%)]" />
+        <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-20">
+          <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/80">Contato</p>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+            Diagnóstico em até 24 horas
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Conte seu objetivo, mercado e prazo. Você recebe rota recomendada, escopo claro e próximos passos — sem compromisso e sem enrolação comercial.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 md:text-base">
+            Preencha nome, e-mail e WhatsApp. Devolvemos rota, escopo e próximo passo — linguagem direta, sem
+            enrolação.
+          </p>
+          <p className="mt-4 text-sm text-white/40">
+            E-mail:{' '}
+            <a href={`mailto:${BRAND.email}`} className="text-[#C9A84C]/90 underline-offset-2 hover:underline">
+              {BRAND.email}
+            </a>
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-6">
-            <div className="rounded-2xl border border-black/10 bg-[#fafafa] p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">Como funciona</p>
-              <h2 className="mt-2 text-xl font-semibold tracking-tight">Lead → webhook → automações</h2>
-              <p className="mt-3 text-sm leading-relaxed text-black/65">
-                As solicitações de proposta direcionam para captura. Em seguida, o webhook encaminha o payload para automações e roteamento do lead.
-              </p>
-            </div>
-          </div>
-          <div className="md:col-span-6">
-            <LeadForm
-              source="footer"
-              formVariant="full"
-              title="Solicitar diagnóstico estratégico"
-              description="Envie seus dados e contexto. Resposta em até 1 dia útil com rota recomendada, escopo e próximos passos."
-              ctaLabel="Enviar diagnóstico"
-              context={{ intent: 'contact' }}
-            />
-          </div>
+        <div className="glass-card rounded-2xl p-8 md:p-10">
+          <LeadForm
+            source="footer"
+            formVariant="minimal"
+            title="Agendar diagnóstico"
+            description="Somente nome, e-mail e WhatsApp."
+            ctaLabel="Enviar e receber retorno"
+            context={{ intent: 'contact' }}
+          />
         </div>
       </section>
     </main>

@@ -7,6 +7,7 @@ import { HOME_SEO } from '@/lib/seo-meta';
 import { BRAND } from '@/lib/brand';
 import {
   DELIVERY_PILLARS,
+  PILLARS_SECTION,
   HOME_FAQ,
   HOME_NICHES,
   HOME_STATS,
@@ -157,7 +158,7 @@ export default function Home() {
                 to="/contato"
                 className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Agendar diagnóstico gratuito
+                Agendar diagnóstico
               </Link>
               <Link
                 to="/projetos"
@@ -255,7 +256,7 @@ export default function Home() {
 
       <section className="border-y border-white/[0.04] bg-[#08080B] py-20 md:py-28" aria-labelledby="pain-heading">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="max-w-xl">
+          <Reveal emphasis className="max-w-xl">
             <h2 id="pain-heading" className="text-heading font-semibold text-white">
               Onde a venda trava
             </h2>
@@ -275,15 +276,21 @@ export default function Home() {
 
       <section className="section-white py-28 md:py-40" aria-labelledby="pillars-heading">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mb-16 text-center">
-            <h2 id="pillars-heading" className="text-heading font-semibold text-[#0A0A0B]">
-              Quatro passos.
-              <span className="text-gradient-gold"> Sem enrolação.</span>
+          <Reveal emphasis className="mb-16 text-center">
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0057FF]/50">
+              {PILLARS_SECTION.eyebrow}
+            </span>
+            <h2 id="pillars-heading" className="mt-4 text-heading font-semibold text-[#0A0A0B]">
+              {PILLARS_SECTION.title}
+              <span className="text-gradient-gold"> {PILLARS_SECTION.titleAccent}</span>
             </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#0A0A0B]/50 md:text-base">
+              {PILLARS_SECTION.subtitle}
+            </p>
           </Reveal>
           <div className="grid gap-0 border border-black/[0.06] md:grid-cols-2 lg:grid-cols-4">
             {DELIVERY_PILLARS.map((p, i) => (
-              <Reveal key={p.num} delay={i * 0.08}>
+              <Reveal key={p.num} delay={i * 0.08} emphasis>
                 <div className="pillar-card h-full border-r border-black/[0.06] bg-white p-8 last:border-r-0 hover:bg-[#F0F4FF]">
                   <div className="mb-5 text-[10px] font-bold tracking-[0.32em] text-[#0057FF]/50">{p.num}</div>
                   <h3 className="mb-3 text-xl font-bold text-[#0A0A0B]">{p.title}</h3>
@@ -396,9 +403,9 @@ export default function Home() {
               <LeadForm
                 source="hero"
                 formVariant="minimal"
-                title="Diagnóstico gratuito"
-                description="Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo inicial."
-                ctaLabel="Quero meu diagnóstico gratuito"
+                title="Diagnóstico estratégico"
+                description="Apenas nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo inicial."
+                ctaLabel="Quero meu diagnóstico"
                 context={{ intent: 'diagnostico' }}
               />
             </div>

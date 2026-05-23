@@ -174,7 +174,7 @@ export function SiteHeader() {
               to="/contato"
               className="btn-glow mt-10 inline-flex h-14 items-center justify-center text-[11px] font-bold uppercase tracking-[0.28em] text-white"
             >
-              Agendar diagnóstico gratuito
+              Agendar diagnóstico
             </Link>
           </nav>
         </div>

@@ -7,25 +7,44 @@ type RevealProps = {
   className?: string;
   delay?: number;
   y?: number;
+  /** Mais dramático no scroll (blur + leve escala) */
+  emphasis?: boolean;
 };
 
-// Spring physics: stiffness 100, damping 20 — heavy, luxurious movement
 const SPRING = {
   type: 'spring' as const,
-  stiffness: 100,
-  damping: 20,
+  stiffness: 88,
+  damping: 22,
 };
 
-export function Reveal({ children, className, delay = 0, y = 24 }: RevealProps) {
+const SPRING_SOFT = {
+  type: 'spring' as const,
+  stiffness: 70,
+  damping: 24,
+};
+
+export function Reveal({ children, className, delay = 0, y = 28, emphasis = false }: RevealProps) {
   const reduce = useReducedMotion();
+
+  if (reduce) {
+    return <div className={cn(className)}>{children}</div>;
+  }
 
   return (
     <motion.div
       className={cn(className)}
-      initial={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px 0px -10px 0px' }}
-      transition={{ ...SPRING, delay }}
+      initial={
+        emphasis
+          ? { opacity: 0, y: y + 8, scale: 0.98, filter: 'blur(10px)' }
+          : { opacity: 0, y, filter: 'blur(6px)' }
+      }
+      whileInView={
+        emphasis
+          ? { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }
+          : { opacity: 1, y: 0, filter: 'blur(0px)' }
+      }
+      viewport={{ once: true, margin: '-72px 0px -48px 0px' }}
+      transition={{ ...(emphasis ? SPRING_SOFT : SPRING), delay }}
     >
       {children}
     </motion.div>

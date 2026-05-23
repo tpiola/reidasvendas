@@ -52,26 +52,34 @@ export const PAIN_POINTS = [
   },
 ] as const;
 
+export const PILLARS_SECTION = {
+  eyebrow: 'Funil de execução',
+  title: 'Quatro passos.',
+  titleAccent: 'Vantagem antes do concorrente.',
+  subtitle:
+    'Raio-X, rota, obra e ritmo — com stack moderna e automação. Para quem quer operar na frente, sem promessa vazia.',
+} as const;
+
 export const DELIVERY_PILLARS = [
   {
     num: '01',
     title: 'Raio-X',
-    desc: 'Entramos na operação como sócio — não como fornecedor distante.',
+    desc: 'Mapeamos onde a receita escapa: funil, tempo de resposta e posicionamento. Você enxerga o que o mercado já faz e onde ainda dá para ultrapassar — com clareza de dono.',
   },
   {
     num: '02',
     title: 'Rota',
-    desc: 'Funil, mensagem e canal para o cliente que você quer.',
+    desc: 'Definimos mensagem, canal e oferta para o cliente que paga melhor. Menos clique perdido, mais conversa qualificada — o funil alinhado à sua meta de faturamento.',
   },
   {
     num: '03',
     title: 'Obra',
-    desc: 'Site rápido, integração limpa, experiência que passa confiança.',
+    desc: 'Site e integrações em tecnologia de ponta: rápido no celular, rastreável no Google, pronto para anúncio. Presença que transmite autoridade antes do primeiro contato.',
   },
   {
     num: '04',
     title: 'Ritmo',
-    desc: 'Automação no follow-up. Você cuida do negócio, o sistema não esquece lead.',
+    desc: 'Automação no follow-up enquanto você atende o balcão ou a consulta. Lead não esfria; o sistema sustenta o ritmo comercial que seus concorrentes ainda fazem na mão.',
   },
 ] as const;
 
