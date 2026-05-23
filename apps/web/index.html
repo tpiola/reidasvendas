@@ -42,6 +42,8 @@
     <!-- Core Web Vitals: font preconnect antes do preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://videos.pexels.com" crossorigin />
     <link
       rel="preload"
       as="style"
@@ -60,8 +62,13 @@
       />
     </noscript>
 
-    <link rel="preload" href="/hero-slide-1.svg" as="image" type="image/svg+xml" />
-    <link rel="preload" href="/hero.mp4" as="video" type="video/mp4" />
+    <link
+      rel="preload"
+      href="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1920&q=92&fm=webp"
+      as="image"
+      type="image/webp"
+      crossorigin
+    />
 
     <!-- Critical CSS inline: previne FOUC e melhora LCP -->
     <style>
