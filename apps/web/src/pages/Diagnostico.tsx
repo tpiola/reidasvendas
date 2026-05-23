@@ -10,7 +10,7 @@ const FAQ = [
   },
   {
     q: 'O que eu preciso enviar?',
-    a: 'Objetivo, nicho, oferta atual, links existentes e qualquer restrição de prazo/recursos.',
+    a: 'Apenas nome, e-mail e WhatsApp. No retorno pedimos contexto do negócio se faltar algo.',
   },
   {
     q: 'Vocês ajudam com automação e mensuração?',

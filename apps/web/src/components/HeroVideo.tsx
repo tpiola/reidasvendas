@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
 
 type HeroVideoProps = {
   className?: string;
   poster?: string;
+  /** Vídeo único (páginas internas); omitir na Home para rotação */
   src?: string;
 };
 
@@ -12,26 +13,47 @@ function getReducedMotion(): boolean {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-export function HeroVideo({ className, poster }: HeroVideoProps) {
+function preferHdHero(): boolean {
+  if (typeof window === 'undefined') return true;
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
+    .connection;
+  if (conn?.saveData) return true;
+  if (window.matchMedia('(max-width: 768px)').matches) return true;
+  if (conn?.effectiveType && /(?:2g|slow-2g)/i.test(conn.effectiveType)) return true;
+  return false;
+}
+
+export function HeroVideo({ className, poster, src }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
+  const [useHd, setUseHd] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loaded, setLoaded] = useState<boolean[]>(
-    () => BRAND.heroVideos.map(() => false)
-  );
+  const videos = useMemo(() => {
+    if (src) return [src];
+    return useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
+  }, [src, useHd]);
+  const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const VIDEOS = BRAND.heroVideos;
   const posterUrl = poster ?? BRAND.heroPosterUrl;
+
+  useEffect(() => {
+    setUseHd(preferHdHero());
+  }, []);
+
+  useEffect(() => {
+    setLoaded(videos.map(() => false));
+    setActiveIndex(0);
+  }, [videos]);
 
   useEffect(() => {
     if (reduceMotion) return;
     timerRef.current = setTimeout(() => {
-      setActiveIndex((i) => (i + 1) % VIDEOS.length);
+      setActiveIndex((i) => (i + 1) % videos.length);
     }, 9000);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeIndex, reduceMotion, VIDEOS.length]);
+  }, [activeIndex, reduceMotion, videos.length]);
 
   const markLoaded = (i: number) =>
     setLoaded((prev) => {
@@ -49,18 +71,20 @@ export function HeroVideo({ className, poster }: HeroVideoProps) {
         loading="eager"
         fetchPriority="high"
         decoding="async"
+        width={1920}
+        height={1080}
       />
       {!reduceMotion &&
-        VIDEOS.map((src, i) => (
+        videos.map((src, i) => (
           <video
-            key={src}
+            key={`${src}-${i}`}
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[2000ms] ease-in-out"
             style={{ opacity: activeIndex === i && loaded[i] ? 1 : 0 }}
             autoPlay
             muted
             loop
             playsInline
-            preload={i === 0 ? 'auto' : 'metadata'}
+            preload={i <= 1 ? 'auto' : 'metadata'}
             crossOrigin="anonymous"
             onCanPlayThrough={() => markLoaded(i)}
           >

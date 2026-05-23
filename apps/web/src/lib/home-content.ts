@@ -69,14 +69,66 @@ export const DELIVERY_PILLARS = [
   },
 ] as const;
 
+export const TECH_STACK = [
+  'GOOGLE ADS',
+  'META ADS',
+  'GA4',
+  'N8N',
+  'VERCEL',
+  'WHATSAPP API',
+  'SUPABASE',
+  'SEARCH CONSOLE',
+] as const;
+
+export const HOME_STATS = [
+  { value: '347+', label: 'Operações que já passaram por nós' },
+  { value: '72h', label: 'Para primeira versão no ar' },
+  { value: '4.8×', label: 'Retorno médio reportado' },
+  { value: '0', label: 'Meses de fidelidade obrigatória' },
+] as const;
+
+export const PERFORMANCE_CARDS = [
+  {
+    tag: 'Velocidade',
+    title: 'No ar em 72h',
+    desc: 'Primeira versão publicada rápido — para você testar mercado, não esperar reunião eterna.',
+  },
+  {
+    tag: 'Integração',
+    title: 'Tudo conversando',
+    desc: 'WhatsApp, formulário, CRM e métricas no mesmo fluxo. Menos planilha, mais venda.',
+  },
+  {
+    tag: 'Clareza',
+    title: 'Número que importa',
+    desc: 'Você vê de onde veio o lead e o que virou oportunidade — sem dashboard que ninguém abre.',
+  },
+] as const;
+
 export const VIDEO_SHOWCASE = [
-  { id: 'funil', caption: 'Funil · clique até o CRM', srcKey: 'manifesto' as const },
+  { id: 'funil', caption: 'Funil · clique até o CRM', srcKey: 'salesFunnel' as const },
+  { id: 'revenue', caption: 'Faturamento · previsibilidade', srcKey: 'manifesto' as const },
   { id: 'automacao', caption: 'Automação · WhatsApp e n8n', srcKey: 'performance' as const },
-  { id: 'performance', caption: 'Site no ar · performance real', srcKey: 'heroBusiness' as const },
+  { id: 'equipe', caption: 'Vendas · time alinhado', srcKey: 'salesTeam' as const },
 ] as const;
 
 export const TRUST_STATS = [
   { value: '72h', label: '1ª versão' },
   { value: '4.8×', label: 'Retorno médio' },
   { value: '24h', label: 'Resposta' },
+] as const;
+
+export const HOME_NICHES = [
+  { title: 'Clínicas & Estética', imgKey: 'saude' as const, to: '/saude' },
+  { title: 'Restaurantes & Bares', imgKey: 'restaurante' as const, to: '/projetos' },
+  { title: 'Lojas & Varejo', imgKey: 'comercio' as const, to: '/projetos' },
+  { title: 'Serviços & B2B', imgKey: 'servicos' as const, to: '/negocios' },
+  { title: 'Imobiliário', imgKey: 'imobiliaria' as const, to: '/projetos' },
+  { title: 'Academias & Studios', imgKey: 'academia' as const, to: '/projetos' },
+] as const;
+
+export const SALES_HIGHLIGHTS = [
+  { title: 'Faturamento previsível', imgKey: 'revenue' as const },
+  { title: 'Lucro com clareza', imgKey: 'profit' as const },
+  { title: 'Crescimento mensurável', imgKey: 'growth' as const },
 ] as const;

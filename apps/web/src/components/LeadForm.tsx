@@ -5,6 +5,14 @@ import type { LeadPayload, LeadSource } from '@altiq/types';
 import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@altiq/utils';
 import { trackConversion } from '@/components/AnalyticsProvider';
 import { Input } from '@altiq/ui';
+import {
+  formatPhoneDisplay,
+  normalizeBrazilPhone,
+  suggestEmailFix,
+  validateLeadEmail,
+  validateLeadName,
+  validateLeadPhone,
+} from '@/lib/lead-validation';
 
 const Schema = z.object({
   name: z.string().trim().min(2).max(80).optional().or(z.literal('')),
@@ -12,6 +20,13 @@ const Schema = z.object({
   phone: z.string().trim().min(8).max(40).optional().or(z.literal('')),
   company: z.string().trim().min(2).max(120).optional().or(z.literal('')),
   city: z.string().trim().min(2).max(80).optional().or(z.literal('')),
+  consent: z.boolean(),
+});
+
+const MinimalSchema = z.object({
+  name: z.string().trim().min(3).max(80),
+  email: z.string().trim().min(3).max(160),
+  phone: z.string().trim().min(8).max(40),
   consent: z.boolean(),
 });
 
@@ -90,7 +105,7 @@ type LeadFormProps = {
   title?: string;
   description?: string;
   ctaLabel?: string;
-  formVariant?: 'compact' | 'full';
+  formVariant?: 'compact' | 'full' | 'minimal';
   context?: Record<string, unknown>;
   onSuccess?: () => void;
   className?: string;
@@ -109,6 +124,11 @@ export function LeadForm({
 }: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
+  const [fieldHints, setFieldHints] = useState<{ name?: string; email?: string; phone?: string }>({});
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+
+  const isMinimal = formVariant === 'minimal';
+  const isFull = formVariant === 'full';
 
   const visitorId = useMemo(() => getOrCreateVisitorId(window.localStorage), []);
   const variant = useMemo(() => assignAbVariant(visitorId), [visitorId]);
@@ -117,6 +137,7 @@ export function LeadForm({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>({ defaultValues: { consent: false }, mode: 'onBlur' });
 
@@ -127,7 +148,28 @@ export function LeadForm({
         setError(null);
         setStatus('sending');
 
-        const parsed = (formVariant === 'full' ? FullSchema : Schema).safeParse(values);
+        if (isMinimal) {
+          const nameErr = validateLeadName(values.name ?? '');
+          const emailErr = validateLeadEmail(values.email ?? '');
+          const phoneErr = validateLeadPhone(values.phone ?? '');
+          if (nameErr || emailErr || phoneErr) {
+            setFieldHints({
+              name: nameErr?.message,
+              email: emailErr?.suggestion ? `${emailErr.message} ${emailErr.suggestion}` : emailErr?.message,
+              phone: phoneErr?.message,
+            });
+            setStatus('error');
+            setError('Confira os dados antes de enviar.');
+            return;
+          }
+          if (!values.consent) {
+            setStatus('error');
+            setError('Confirme o consentimento para continuar.');
+            return;
+          }
+        }
+
+        const parsed = (isFull ? FullSchema : isMinimal ? MinimalSchema : Schema).safeParse(values);
         if (!parsed.success) {
           setStatus('error');
           setError('Confira os campos e tente novamente.');
@@ -139,12 +181,13 @@ export function LeadForm({
           return;
         }
 
+        const data = parsed.data as FormValues;
         const payload: LeadPayload = {
-          email: parsed.data.email,
-          name: parsed.data.name || undefined,
-          phone: parsed.data.phone || undefined,
-          company: parsed.data.company || undefined,
-          city: parsed.data.city || undefined,
+          email: data.email.trim().toLowerCase(),
+          name: data.name || undefined,
+          phone: isMinimal ? normalizeBrazilPhone(data.phone ?? '') : data.phone || undefined,
+          company: isMinimal ? undefined : data.company || undefined,
+          city: isMinimal ? undefined : data.city || undefined,
           consent: parsed.data.consent,
           source,
           variant: variant,
@@ -190,20 +233,35 @@ export function LeadForm({
         </p>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div
+        className={
+          isMinimal ? 'mt-6 grid grid-cols-1 gap-4' : 'mt-6 grid grid-cols-1 gap-4 md:grid-cols-2'
+        }
+      >
         <div>
           <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="name">
-            Nome
+            Nome {isMinimal ? <span className="text-brand-blue" aria-hidden="true">*</span> : null}
           </label>
           <div className="mt-2">
             <Input
               id="name"
               autoComplete="name"
-              placeholder="Seu nome"
+              placeholder="Seu nome completo"
+              aria-required={isMinimal}
               className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
-              {...register('name')}
+              {...register('name', { required: isMinimal })}
+              onBlur={(e) => {
+                if (!isMinimal) return;
+                const err = validateLeadName(e.target.value);
+                setFieldHints((h) => ({ ...h, name: err?.message }));
+              }}
             />
           </div>
+          {(fieldHints.name || errors.name) && (
+            <p className="mt-1 text-xs text-red-400" role="alert">
+              {fieldHints.name ?? 'Informe seu nome.'}
+            </p>
+          )}
         </div>
 
         <div>
@@ -219,60 +277,109 @@ export function LeadForm({
               aria-required="true"
               className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
               {...register('email', { required: true })}
+              onBlur={(e) => {
+                const err = validateLeadEmail(e.target.value);
+                const fix = suggestEmailFix(e.target.value);
+                setEmailSuggestion(fix);
+                if (isMinimal) {
+                  setFieldHints((h) => ({
+                    ...h,
+                    email: err?.suggestion ? `${err.message} ${err.suggestion}` : err?.message,
+                  }));
+                }
+              }}
             />
           </div>
-          {errors.email && (
+          {emailSuggestion && (
+            <button
+              type="button"
+              className="mt-1 text-left text-xs text-[#C9A84C]/90 underline"
+              onClick={() => {
+                setValue('email', emailSuggestion);
+                setEmailSuggestion(null);
+                setFieldHints((h) => ({ ...h, email: undefined }));
+              }}
+            >
+              Corrigir para {emailSuggestion}
+            </button>
+          )}
+          {(fieldHints.email || errors.email) && (
             <p className="mt-1 text-xs text-red-400" role="alert">
-              Informe um e-mail válido.
+              {fieldHints.email ?? 'Informe um e-mail válido.'}
             </p>
           )}
         </div>
 
-        <div>
+        <div className={isMinimal ? '' : ''}>
           <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="phone">
-            WhatsApp
+            WhatsApp {isMinimal ? <span className="text-brand-blue" aria-hidden="true">*</span> : null}
           </label>
           <div className="mt-2">
             <Input
               id="phone"
               type="tel"
+              inputMode="tel"
               autoComplete="tel"
-              placeholder="(DDD) 99999-9999"
+              placeholder="(16) 99999-9999"
+              aria-required={isMinimal}
               className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
-              {...register('phone')}
+              {...register('phone', {
+                required: isMinimal,
+                onChange: (e) => {
+                  const formatted = formatPhoneDisplay(e.target.value);
+                  setValue('phone', formatted, { shouldDirty: true });
+                },
+              })}
+              onBlur={(e) => {
+                if (!isMinimal) return;
+                const err = validateLeadPhone(e.target.value);
+                setFieldHints((h) => ({ ...h, phone: err?.message }));
+              }}
             />
           </div>
+          {fieldHints.phone && (
+            <p className="mt-1 text-xs text-red-400" role="alert">
+              {fieldHints.phone}
+            </p>
+          )}
         </div>
 
-        <div>
-          <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="company">
-            Empresa / projeto
-          </label>
-          <div className="mt-2">
-            <Input
-              id="company"
-              autoComplete="organization"
-              placeholder="Nome da empresa ou projeto"
-              className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
-              {...register('company')}
-            />
-          </div>
-        </div>
+        {!isMinimal && (
+          <>
+            <div>
+              <label
+                className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40"
+                htmlFor="company"
+              >
+                Empresa / projeto
+              </label>
+              <div className="mt-2">
+                <Input
+                  id="company"
+                  autoComplete="organization"
+                  placeholder="Nome da empresa ou projeto"
+                  className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+                  {...register('company')}
+                />
+              </div>
+            </div>
 
-        <div>
-          <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="city">
-            Cidade
-          </label>
-          <div className="mt-2">
-            <Input
-              id="city"
-              autoComplete="address-level2"
-              placeholder="Ex.: São Paulo"
-              className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
-              {...register('city')}
-            />
-          </div>
-        </div>
+            <div>
+              <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="city">
+                Cidade
+              </label>
+              <div className="mt-2">
+                <Input
+                  id="city"
+                  autoComplete="address-level2"
+                  placeholder="Ex.: São Paulo"
+                  className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+                  {...register('city')}
+                />
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {formVariant === 'full' && (

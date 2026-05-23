@@ -48,8 +48,9 @@ export function LeadCaptureSection({
           <div className="rounded-3xl border border-white/10 bg-black/70 p-6 shadow-2xl shadow-black/40 md:p-8">
             <LeadForm
               source={source}
+              formVariant="minimal"
               title="Solicitar diagnóstico estratégico"
-              description="Envie seus dados. A Rei das Vendas retorna com rota recomendada, escopo inicial e próximos passos."
+              description="Nome, e-mail e WhatsApp. Retorno com rota, escopo inicial e próximos passos."
               ctaLabel={ctaLabel ?? 'Solicitar diagnóstico'}
               context={{ intent }}
             />

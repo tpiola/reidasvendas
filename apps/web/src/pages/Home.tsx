@@ -4,17 +4,27 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { HOME_SEO } from '@/lib/seo-meta';
+import { BRAND } from '@/lib/brand';
 import {
   DELIVERY_PILLARS,
   HOME_FAQ,
+  HOME_NICHES,
+  HOME_STATS,
   PAIN_POINTS,
+  PERFORMANCE_CARDS,
+  TECH_STACK,
   TRUST_STATS,
   VIDEO_SHOWCASE,
 } from '@/lib/home-content';
+import { HERO_POSTER, NICHE_PHOTOS } from '@/lib/media';
 import { HeroVideo } from '@/components/HeroVideo';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
+import { AnimatedCounter } from '@/components/home/AnimatedCounter';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
+import { InlineVideo } from '@/components/home/InlineVideo';
+import { NicheCard } from '@/components/home/NicheCard';
+import { SalesHighlightStrip } from '@/components/home/SalesHighlightStrip';
 import { VideoShowcaseGrid } from '@/components/home/VideoShowcaseGrid';
 
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
@@ -168,6 +178,76 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <section className="relative overflow-hidden border-y border-white/[0.04] bg-[#08080B] py-12" aria-hidden>
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#08080B] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#08080B] to-transparent" />
+        <div className="flex animate-marquee">
+          {[0, 1].map((row) => (
+            <div key={row} className="flex min-w-max shrink-0 items-center">
+              {TECH_STACK.map((logo) => (
+                <span
+                  key={`${row}-${logo}`}
+                  className="mx-10 cursor-default whitespace-nowrap text-[10px] font-bold tracking-[0.3em] text-white/12 transition-colors duration-300 hover:text-white/35"
+                >
+                  {logo}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-white relative overflow-hidden py-24 md:py-36" aria-label="Números">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-4">
+            {HOME_STATS.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.08}>
+                <div className="pb-8 text-center md:border-l md:border-black/[0.06] md:pb-0 md:pl-8 md:text-left">
+                  <div className="stat-number text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight text-[#0A0A0B]">
+                    <AnimatedCounter value={s.value} delay={i * 0.1} />
+                  </div>
+                  <div className="mb-3 mt-1.5 h-[2px] w-8 bg-[#0057FF]/40" />
+                  <p className="text-sm leading-snug text-[#0A0A0B]/45">{s.label}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <SalesHighlightStrip />
+
+      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-48">
+        <AmbientOrbs />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 md:grid-cols-2 md:gap-28">
+          <Reveal>
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Manifesto</span>
+            <h2 className="mt-5 text-heading font-semibold text-white">
+              Não vendemos “site bonito”.
+              <br />
+              <span className="text-gradient-titanium">Montamos máquina</span>
+              <br />
+              de venda previsível.
+            </h2>
+            <div className="mt-6 h-[1px] max-w-sm w-full bg-gradient-to-r from-[#C9A84C]/50 to-transparent" />
+            <p className="mt-6 max-w-md text-base leading-relaxed text-white/45">
+              Página certa, mensagem certa, follow-up no momento certo. É assim que negócio local deixa de competir no
+              preço e passa a competir em presença.
+            </p>
+          </Reveal>
+          <Reveal delay={0.14}>
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-3xl bg-[#0057FF]/5 blur-2xl" />
+              <InlineVideo
+                src={BRAND.inlineVideos.manifesto}
+                poster={HERO_POSTER}
+                caption="Faturamento · operação digital 24h"
+              />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       <section className="border-y border-white/[0.04] bg-[#08080B] py-20 md:py-28" aria-labelledby="pain-heading">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="max-w-xl">
@@ -210,7 +290,72 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-48">
+        <AmbientOrbs />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <Reveal className="mb-16 text-center">
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/22">
+              Performance em tempo real
+            </span>
+            <h2 className="mt-4 text-heading font-semibold text-white">
+              Enquanto você atende,
+              <br />
+              <span className="text-gradient-titanium">o sistema não esquece ninguém.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="relative">
+              <div className="absolute -inset-8 rounded-3xl bg-[#0057FF]/4 blur-3xl" />
+              <InlineVideo
+                src={BRAND.inlineVideos.performance}
+                poster={HERO_POSTER}
+                caption="Lucro e métricas · presença premium"
+              />
+            </div>
+          </Reveal>
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {PERFORMANCE_CARDS.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.09}>
+                <div className="card-dark group p-8">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/70">
+                    {item.tag}
+                  </span>
+                  <h3 className="mb-2.5 mt-4 text-base font-bold text-white">{item.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/40">{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <VideoShowcaseGrid items={VIDEO_SHOWCASE} />
+
+      <section className="section-white py-28 md:py-44">
+        <div className="mx-auto max-w-6xl px-6">
+          <Reveal className="mb-16">
+            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Segmentos</span>
+            <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
+              O cliente que você quer
+              <br />
+              <span className="text-gradient-gold">já está online.</span>
+            </h2>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {HOME_NICHES.map((n, i) => (
+              <NicheCard key={n.title} title={n.title} img={NICHE_PHOTOS[n.imgKey]} to={n.to} index={i} />
+            ))}
+          </div>
+          <Reveal delay={0.3} className="mt-14 flex justify-center">
+            <Link
+              to="/projetos"
+              className="btn-ghost inline-flex h-12 items-center justify-center border border-black/15 px-10 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0A0A0B] transition-all duration-300 hover:border-black hover:bg-black hover:text-white"
+            >
+              Ver todos os projetos
+            </Link>
+          </Reveal>
+        </div>
+      </section>
       <FaqAccordion items={HOME_FAQ} />
 
       <section className="relative overflow-hidden bg-[#030305] py-32 md:py-44">
@@ -237,8 +382,9 @@ export default function Home() {
               <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0057FF]/40 to-transparent" />
               <LeadForm
                 source="hero"
+                formVariant="minimal"
                 title="Diagnóstico gratuito"
-                description="Resposta em até 24h com rota e escopo inicial."
+                description="Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo inicial."
                 ctaLabel="Quero meu diagnóstico gratuito"
                 context={{ intent: 'diagnostico' }}
               />
