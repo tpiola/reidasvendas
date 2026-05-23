@@ -33,9 +33,16 @@ pnpm install
 # Executar ambiente de desenvolvimento
 pnpm dev
 
-# Build de produção
-pnpm build
+# Build de produção (site)
+pnpm build:web
+
+# CI local (check + lint + test + build + E2E)
+pnpm run ci
 ```
+
+## Deploy (Vercel)
+
+Site em `apps/web`. Pipeline, variáveis de ambiente e checklist pós-deploy: [`docs/DEPLOY_VERCEL.md`](docs/DEPLOY_VERCEL.md).
 
 ## Engenharia de MVO & Escala
 O sistema está preparado para rastreamento de Mapas de Calor e Funis Líquidos que se adaptam ao interesse do Lead (ex: Saúde vs. Negócios).

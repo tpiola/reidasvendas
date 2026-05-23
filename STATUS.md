@@ -10,7 +10,7 @@
 - Monorepo `pnpm` + `turbo` (`pnpm-workspace.yaml`, `turbo.json`).
 - Apps: `apps/web` (site principal — Vite + React 18 + Tailwind), `apps/docs` (Storybook), `apps/admin` (placeholder).
 - Packages: `packages/ui`, `packages/utils`, `packages/types`, `packages/config`.
-- Deploy: `vercel.json` aponta `outputDirectory: "public"` com SPA rewrites.
+- Deploy: Vercel com Root Directory `apps/web` (ou raiz com `outputDirectory: apps/web/dist`). Ver [`docs/DEPLOY_VERCEL.md`](docs/DEPLOY_VERCEL.md).
 - Workflows externos: `n8n/workflows`, função `api/lead.ts`.
 
 ### Erros / pontos críticos detectados
