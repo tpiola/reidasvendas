@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://reidasvendas.com/sitemap.xml
+Sitemap: https://reidasvendas.com.br/sitemap.xml

@@ -16,28 +16,28 @@
     <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- SEO fallback (sobrescrito em runtime por seo.ts em cada página) -->
-    <title>Rei das Vendas — A Solução Completa Digital para Líderes e Instituições</title>
-    <meta name="description" content="Democratizando a Inteligência Artificial. Entregamos para o seu negócio a mesma tecnologia das maiores empresas do mundo, com foco em resultado real." />
+    <title>Rei das Vendas — Fábrica Digital de Alta Velocidade | Sites, Apps e Funis com IA</title>
+    <meta name="description" content="Desenvolvemos sites, aplicativos, extensões e inteligência de vendas com IA de ponta. Valide projetos na velocidade da luz e cresça sem caos operacional." />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <link rel="canonical" href="https://reidasvendas.com/" />
+    <link rel="canonical" href="https://reidasvendas.com.br/" />
 
     <!-- Open Graph -->
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Rei das Vendas" />
-    <meta property="og:title" content="Rei das Vendas — A Solução Completa Digital para Líderes e Instituições" />
-    <meta property="og:description" content="Democratizando a Inteligência Artificial. Entregamos para o seu negócio a mesma tecnologia das maiores empresas do mundo, com foco em resultado real." />
-    <meta property="og:url" content="https://reidasvendas.com/" />
-    <meta property="og:image" content="https://reidasvendas.com/og-image.svg" />
+    <meta property="og:title" content="Rei das Vendas — Fábrica Digital de Alta Velocidade | Sites, Apps e Funis com IA" />
+    <meta property="og:description" content="Desenvolvemos sites, aplicativos, extensões e inteligência de vendas com IA de ponta. Valide projetos na velocidade da luz e cresça sem caos operacional." />
+    <meta property="og:url" content="https://reidasvendas.com.br/" />
+    <meta property="og:image" content="https://reidasvendas.com.br/og-image.svg" />
     <meta property="og:image:alt" content="Rei das Vendas" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@reidasvendas" />
     <meta name="twitter:creator" content="@thiagopiola" />
-    <meta name="twitter:title" content="Rei das Vendas — A Solução Completa Digital para Líderes e Instituições" />
-    <meta name="twitter:description" content="Democratizando a Inteligência Artificial. Entregamos para o seu negócio a mesma tecnologia das maiores empresas do mundo, com foco em resultado real." />
-    <meta name="twitter:image" content="https://reidasvendas.com/og-image.svg" />
+    <meta name="twitter:title" content="Rei das Vendas — Fábrica Digital de Alta Velocidade | Sites, Apps e Funis com IA" />
+    <meta name="twitter:description" content="Desenvolvemos sites, aplicativos, extensões e inteligência de vendas com IA de ponta. Valide projetos na velocidade da luz e cresça sem caos operacional." />
+    <meta name="twitter:image" content="https://reidasvendas.com.br/og-image.svg" />
 
     <!-- Core Web Vitals: font preconnect antes do preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -78,50 +78,35 @@
       #root{min-height:100dvh}
     </style>
 
-    <!-- JSON-LD: Organization + WebSite + DigitalMarketingAgency (GEO-optimized) -->
+    <!-- JSON-LD fallback (runtime: buildHomeJsonLd em Home via seo.ts) -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["Organization", "LocalBusiness", "DigitalMarketingAgency"],
-      "@id": "https://reidasvendas.com/#organization",
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": "https://reidasvendas.com.br/#organization",
       "name": "Rei das Vendas",
-      "url": "https://reidasvendas.com/",
-      "logo": "https://reidasvendas.com/favicon.svg",
+      "url": "https://reidasvendas.com.br/",
+      "logo": "https://reidasvendas.com.br/favicon.svg",
       "email": "hello@reidasvendas.com",
-      "description": "Democratizando a Inteligência Artificial. Engenharia de Crescimento e IA para Negócios Locais e Instituições.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Franca",
-        "addressRegion": "SP",
-        "addressCountry": "BR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-20.5383",
-        "longitude": "-47.4008"
-      },
-      "areaServed": {
-        "@type": "Country",
-        "name": "Brazil"
-      },
-      "priceRange": "$$"
+      "description": "Fábrica Digital de Alta Velocidade: sites, aplicativos, extensões, funis de vendas e social media com inteligência artificial.",
+      "knowsAbout": ["Desenvolvimento de Software", "Inteligência Artificial", "Aceleração Comercial", "Engenharia de Funis de Vendas"],
+      "address": { "@type": "PostalAddress", "addressLocality": "Franca", "addressRegion": "SP", "addressCountry": "BR" }
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://reidasvendas.com.br/#professional-service",
+      "name": "Rei das Vendas — Fábrica Digital",
+      "provider": { "@id": "https://reidasvendas.com.br/#organization" },
+      "serviceType": ["Desenvolvimento de Software", "Inteligência Artificial aplicada a vendas", "Engenharia de Funis de Vendas"]
     },
     {
       "@type": "WebSite",
-      "@id": "https://reidasvendas.com/#website",
-      "name": "Rei das Vendas",
-      "url": "https://reidasvendas.com/",
+      "@id": "https://reidasvendas.com.br/#website",
+      "url": "https://reidasvendas.com.br/",
       "inLanguage": "pt-BR",
-      "publisher": {
-        "@id": "https://reidasvendas.com/#organization"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://reidasvendas.com/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
     }
   ]
 }

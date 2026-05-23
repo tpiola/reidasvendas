@@ -55,7 +55,29 @@ export function SiteFooter() {
               />
             </div>
             <p className="mt-8 max-w-xs text-xs leading-relaxed text-white/40">
-              Infraestrutura de engenharia digital para operações de alta performance.
+              Fábrica Digital de Alta Velocidade — sites, apps, funis e IA com revisão humana.
+            </p>
+            <dl className="mt-6 space-y-2 text-[11px] text-white/35">
+              <div>
+                <dt className="inline font-semibold text-white/45">Razão social: </dt>
+                <dd className="inline">[A inserir — dados cadastrais]</dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold text-white/45">CNPJ: </dt>
+                <dd className="inline">[A inserir]</dd>
+              </div>
+              <div>
+                <dt className="inline font-semibold text-white/45">E-mail: </dt>
+                <dd className="inline">
+                  <a href={`mailto:${BRAND.email}`} className="hover:text-white transition-colors">
+                    {BRAND.email}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+            <p className="mt-6 max-w-sm text-[10px] leading-relaxed text-white/30 border-l border-[#C9A84C]/30 pl-3">
+              Usamos Inteligência Artificial para acelerar processos e desenvolvimento, com estrita revisão e
+              validação humana em cada entrega crítica.
             </p>
             {/* Redes sociais */}
             <div className="mt-8 flex items-center gap-3">

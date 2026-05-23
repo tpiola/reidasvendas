@@ -2,7 +2,7 @@ import { HERO_POSTER, PEXELS } from '@/lib/media';
 
 export const BRAND = {
   name: 'Rei das Vendas',
-  domain: 'reidasvendas.com',
+  domain: 'reidasvendas.com.br',
   email: 'hello@reidasvendas.com',
   phone: '5516992333344',
   whatsappText:

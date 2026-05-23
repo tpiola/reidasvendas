@@ -1,4 +1,5 @@
 import { BRAND } from './brand';
+import { DEFAULT_OG_IMAGE } from './seo-meta';
 import { buildOrganizationJsonLd } from './seo-schema';
 
 type SeoInput = {
@@ -56,7 +57,7 @@ export function applySeo(input: SeoInput) {
   }
 
   const url = canonicalHref ?? window.location.href;
-  const ogImage = input.ogImage ?? `https://${BRAND.domain}/og-image.svg`;
+  const ogImage = input.ogImage ?? DEFAULT_OG_IMAGE;
 
   setMetaBy('property', 'og:type', 'website');
   setMetaBy('property', 'og:site_name', BRAND.name);
