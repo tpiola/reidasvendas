@@ -71,8 +71,8 @@ export default function Politica() {
             <p className="mt-3">
               Você pode solicitar acesso, correção, portabilidade ou remoção dos seus dados
               a qualquer momento. Basta enviar um e-mail para{' '}
-              <a href="mailto:hello@reidasvendas.com" className="underline hover:text-black">
-                hello@reidasvendas.com
+              <a href="mailto:contato@reidasvendas.com.br" className="underline hover:text-black">
+                contato@reidasvendas.com.br
               </a>
               .
             </p>

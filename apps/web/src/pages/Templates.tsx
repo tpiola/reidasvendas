@@ -1,32 +1,37 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
 import { TEMPLATES } from '@/data/templates';
 import { TemplateCard } from '@/components/TemplateCard';
 import { LeadCaptureSection } from '@/components/LeadCaptureSection';
+import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
 
 export default function Templates() {
   useEffect(() => {
     applySeo({
-      title: 'Templates — Rei das Vendas',
+      title: 'Catálogo de amostras — Rei das Vendas',
       description:
-        'Escolha um template editorial premium por nicho. Ao ver preço, você entra no fluxo de lead e automações.',
+        'Referências visuais de sites por nicho. Cada cliente recebe projeto exclusivo, feito do zero para maximizar conversão.',
       canonicalPath: '/templates',
     });
   }, []);
 
   return (
-    <main className="bg-white">
-      <section className="border-b border-black/10">
-        <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
-            Catálogo
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Templates por nicho, com execução premium
+    <main className="bg-[#030305] text-white">
+      <section className="relative overflow-hidden border-b border-white/[0.06] py-16 md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(0,87,255,0.15)_0%,transparent_50%)]" />
+        <div className="relative mx-auto max-w-6xl px-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">Catálogo completo</p>
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+            Amostras do que construímos para clientes
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-black/65">
-            Cada template já vem com estrutura de conversão, SEO base e eventos. Quando você clica para ver preço, a página do template abre com captura de lead e o webhook dispara as automações.
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 md:text-base">
+            Estas páginas são referências de estética e estrutura — não pacotes prontos. Cada projeto nasce do zero,
+            com copy, oferta e jornada desenhadas para o que o público do seu cliente realmente quer.
           </p>
+          <div className="mt-8">
+            <BuiltFromScratchBanner variant="dark" />
+          </div>
         </div>
       </section>
 
@@ -36,13 +41,27 @@ export default function Templates() {
             <TemplateCard key={t.slug} template={t} />
           ))}
         </div>
+        <div className="mt-14 flex flex-wrap justify-center gap-4">
+          <Link
+            to="/planos"
+            className="btn-glow inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white"
+          >
+            Ver planos e assinaturas
+          </Link>
+          <Link
+            to="/contato"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+          >
+            Agendar diagnóstico
+          </Link>
+        </div>
       </section>
 
       <LeadCaptureSection
         id="diagnostico"
         source="template_catalog"
-        headline="Quer transformar este catálogo em um sistema operacional?"
-        description="Solicite um diagnóstico estratégico. Você recebe uma rota recomendada, escopo inicial e a estrutura mínima para capturar, qualificar e responder com previsibilidade."
+        headline="Quer um projeto exclusivo — não uma cópia?"
+        description="Nome, e-mail e WhatsApp. Devolvemos rota, escopo e próximo passo em até 24h."
         intent="templates"
       />
     </main>

@@ -25,7 +25,9 @@ import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { InlineVideo } from '@/components/home/InlineVideo';
 import { NicheCard } from '@/components/home/NicheCard';
 import { SalesHighlightStrip } from '@/components/home/SalesHighlightStrip';
+import { TemplateCatalogSection } from '@/components/home/TemplateCatalogSection';
 import { VideoShowcaseGrid } from '@/components/home/VideoShowcaseGrid';
+import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
 
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
 
@@ -331,6 +333,8 @@ export default function Home() {
 
       <VideoShowcaseGrid items={VIDEO_SHOWCASE} />
 
+      <TemplateCatalogSection />
+
       <section className="section-white py-28 md:py-44">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="mb-16">
@@ -356,6 +360,12 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+      <section className="bg-[#08080B] py-16 md:py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <BuiltFromScratchBanner variant="dark" />
+        </div>
+      </section>
+
       <FaqAccordion items={HOME_FAQ} />
 
       <section className="relative overflow-hidden bg-[#030305] py-32 md:py-44">

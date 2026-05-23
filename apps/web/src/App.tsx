@@ -16,6 +16,13 @@ const Solucoes = lazy(() => import('@/pages/Solucoes'));
 const Governanca = lazy(() => import('@/pages/Governanca'));
 const Politica = lazy(() => import('@/pages/Politica'));
 const Termos = lazy(() => import('@/pages/Termos'));
+const Templates = lazy(() => import('@/pages/Templates'));
+const TemplatePage = lazy(() => import('@/pages/TemplatePage'));
+const PlanosIndex = lazy(() => import('@/pages/planos/PlanosIndex'));
+const PlanoEssencial = lazy(() => import('@/pages/planos/PlanoEssencial'));
+const PlanoCrescimento = lazy(() => import('@/pages/planos/PlanoCrescimento'));
+const PlanoEscala = lazy(() => import('@/pages/planos/PlanoEscala'));
+const PlanoSobMedida = lazy(() => import('@/pages/planos/PlanoSobMedida'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 function RouteFallback() {
@@ -48,6 +55,13 @@ export default function App() {
             <Route path="/governanca" element={<Governanca />} />
             <Route path="/politica" element={<Politica />} />
             <Route path="/termos" element={<Termos />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/templates/:slug" element={<TemplatePage />} />
+            <Route path="/planos" element={<PlanosIndex />} />
+            <Route path="/planos/essencial" element={<PlanoEssencial />} />
+            <Route path="/planos/crescimento" element={<PlanoCrescimento />} />
+            <Route path="/planos/escala" element={<PlanoEscala />} />
+            <Route path="/planos/sob-medida" element={<PlanoSobMedida />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -6,7 +6,8 @@ export type LeadSource =
   | 'template_catalog'
   | 'template_page'
   | 'template_price'
-  | 'template_builder';
+  | 'template_builder'
+  | 'pricing';
 
 export type AbVariant = 'A' | 'B';
 
@@ -19,6 +20,7 @@ export const LEAD_SOURCES = [
   'template_page',
   'template_price',
   'template_builder',
+  'pricing',
 ] as const;
 
 export const AB_VARIANTS = ['A', 'B'] as const;

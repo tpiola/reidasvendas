@@ -69,6 +69,7 @@ export default function TemplateBuilder() {
       niche: safeNiche,
       tagline: tagline.trim() || 'Template editorial premium com conversão e automações.',
       coverImageUrl: cover,
+      thumbImageUrl: cover,
       galleryImageUrls: (imageUrls.length > 0 ? imageUrls : baseTemplate.galleryImageUrls).slice(0, 6),
       basePriceCents: baseTemplate.basePriceCents,
       includedModuleIds: baseTemplate.includedModuleIds,

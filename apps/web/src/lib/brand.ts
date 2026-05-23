@@ -8,7 +8,7 @@ import {
 export const BRAND = {
   name: 'Rei das Vendas',
   domain: 'reidasvendas.com.br',
-  email: 'hello@reidasvendas.com',
+  email: 'contato@reidasvendas.com.br',
   phone: '5516992333344',
   whatsappText:
     'Olá! Vi o site e quero entender como colocar meu negócio para vender com mais previsibilidade.',

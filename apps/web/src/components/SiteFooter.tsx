@@ -1,26 +1,30 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Facebook, Twitter } from 'lucide-react';
+import { Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { BrandLogo } from '@/components/BrandLogo';
 
 const YEAR = new Date().getFullYear();
-
-const SOCIALS = [
-  { label: 'Instagram', Icon: Instagram, href: BRAND.instagram ?? '#' },
-  { label: 'LinkedIn', Icon: Linkedin, href: BRAND.linkedin ?? '#' },
-  { label: 'Facebook', Icon: Facebook, href: BRAND.facebook ?? '#' },
-  { label: 'X / Twitter', Icon: Twitter, href: BRAND.twitter ?? '#' },
-] as const;
 
 type FooterLink = { label: string; to: string };
 type FooterCol = { title: string; links: FooterLink[] };
 
 const FOOTER_COLS: FooterCol[] = [
   {
-    title: 'Plataforma',
+    title: 'Soluções',
     links: [
-      { label: 'Soluções', to: '/solucoes' },
+      { label: 'Planos e assinaturas', to: '/planos' },
+      { label: 'Plano Essencial', to: '/planos/essencial' },
+      { label: 'Plano Crescimento', to: '/planos/crescimento' },
+      { label: 'Plano Escala', to: '/planos/escala' },
+      { label: 'Plano Sob medida', to: '/planos/sob-medida' },
+    ],
+  },
+  {
+    title: 'Catálogo',
+    links: [
+      { label: 'Amostras de sites', to: '/templates' },
       { label: 'Projetos', to: '/projetos' },
+      { label: 'Soluções', to: '/solucoes' },
       { label: 'Negócios', to: '/negocios' },
       { label: 'Saúde', to: '/saude' },
     ],
@@ -29,8 +33,9 @@ const FOOTER_COLS: FooterCol[] = [
     title: 'Empresa',
     links: [
       { label: 'Contato', to: '/contato' },
+      { label: 'Diagnóstico gratuito', to: '/contato' },
+      { label: 'Privacidade (LGPD)', to: '/politica' },
       { label: 'Termos', to: '/termos' },
-      { label: 'Privacidade', to: '/politica' },
       { label: 'Governança', to: '/governanca' },
     ],
   },
@@ -38,62 +43,80 @@ const FOOTER_COLS: FooterCol[] = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[color:var(--header-border)] bg-[color:var(--footer-bg)] text-[color:var(--footer-fg)] transition-colors duration-350">
-      <div className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:px-6 sm:pt-20">
-        <div className="grid gap-14 lg:grid-cols-12">
+    <footer className="relative overflow-hidden border-t border-[#C9A84C]/15 bg-[#030305] text-white">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.12)_0%,transparent_55%)]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-20 md:pt-24">
+        <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--rdv-blue)]">
-              <BrandLogo layout="stacked" size="lg" variant="auto" />
+            <Link
+              to="/"
+              className="inline-block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
+            >
+              <BrandLogo layout="stacked" size="lg" variant="onDark" />
             </Link>
-            <p className="mt-8 max-w-xs text-xs leading-relaxed text-[color:var(--footer-muted)]">
-              Site, funil e automação para negócio local que quer vender com previsibilidade.
+            <p className="mt-8 max-w-sm text-sm leading-relaxed text-white/45">
+              Construímos presença digital, funil e automação do zero — para negócio local vender com previsibilidade,
+              como empresa que já escalou.
             </p>
-            <dl className="mt-6 space-y-2 text-[11px] text-[color:var(--footer-muted)]">
-              <div>
-                <dt className="inline font-semibold opacity-80">Razão social: </dt>
-                <dd className="inline">[A inserir — dados cadastrais]</dd>
-              </div>
-              <div>
-                <dt className="inline font-semibold opacity-80">CNPJ: </dt>
-                <dd className="inline">[A inserir]</dd>
-              </div>
-              <div>
-                <dt className="inline font-semibold opacity-80">E-mail: </dt>
-                <dd className="inline">
-                  <a href={`mailto:${BRAND.email}`} className="underline-offset-2 hover:underline">
-                    {BRAND.email}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              {SOCIALS.map(({ href, label, Icon }) => (
+            <ul className="mt-8 space-y-3 text-sm text-white/55">
+              <li className="flex items-start gap-3">
+                <Mail size={16} className="mt-0.5 shrink-0 text-[#C9A84C]/80" aria-hidden />
+                <a href={`mailto:${BRAND.email}`} className="hover:text-white transition-colors">
+                  {BRAND.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone size={16} className="mt-0.5 shrink-0 text-[#C9A84C]/80" aria-hidden />
                 <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
+                  href={BRAND.whatsappLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[color:var(--header-border)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
+                  className="hover:text-white transition-colors"
                 >
-                  <Icon size={15} aria-hidden />
+                  WhatsApp comercial
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-[#C9A84C]/80" aria-hidden />
+                <span>{BRAND.baseCity}</span>
+              </li>
+            </ul>
+            <div className="mt-8 flex gap-3">
+              {[
+                { Icon: Instagram, label: 'Instagram', href: BRAND.instagram },
+                { Icon: Linkedin, label: 'LinkedIn', href: BRAND.linkedin },
+              ].map(({ Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href ?? '#'}
+                  aria-label={label}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50 transition-colors hover:border-[#C9A84C]/30 hover:text-white"
+                  {...(href ? { target: '_blank', rel: 'noreferrer' } : {})}
+                >
+                  <Icon size={16} aria-hidden />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-2 lg:col-span-8">
+          <div className="grid gap-12 sm:grid-cols-3 lg:col-span-8">
             {FOOTER_COLS.map((col) => (
               <div key={col.title}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--footer-muted)]">
-                  {col.title}
-                </p>
-                <ul className="mt-6 grid gap-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/70">{col.title}</p>
+                <ul className="mt-6 space-y-3">
                   {col.links.map(({ label, to }) => (
-                    <li key={to}>
+                    <li key={`${col.title}-${to}-${label}`}>
                       <Link
                         to={to}
-                        className="text-[12px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
+                        className="text-[13px] text-white/45 transition-colors hover:text-white"
                       >
                         {label}
                       </Link>
@@ -105,27 +128,35 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-6 border-t border-[color:var(--header-border)] pt-8 md:flex-row md:items-center md:justify-between">
-          <span className="text-[11px] text-[color:var(--footer-muted)]">
-            &copy; {YEAR} {BRAND.name}. Todos os direitos reservados.
-          </span>
-          <nav
-            aria-label="Links legais"
-            className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] text-[color:var(--footer-muted)]"
+        <div className="mt-16 rounded-2xl border border-white/[0.06] bg-gradient-to-br from-[#0057FF]/10 via-transparent to-[#C9A84C]/5 p-8 md:flex md:items-center md:justify-between md:gap-8">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/80">Próximo passo</p>
+            <p className="mt-2 text-lg font-semibold text-white">Diagnóstico gratuito em 24h</p>
+            <p className="mt-1 text-sm text-white/45">Rota, escopo e plano — sem compromisso.</p>
+          </div>
+          <Link
+            to="/contato"
+            className="btn-glow mt-6 inline-flex h-12 shrink-0 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white md:mt-0"
           >
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/termos">
+            Agendar diagnóstico
+          </Link>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/[0.06] pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="text-[11px] text-white/35">
+            &copy; {YEAR} {BRAND.name}. Cada projeto é único — amostras do catálogo não são réplicas.
+          </p>
+          <nav aria-label="Links legais" className="flex flex-wrap gap-x-6 gap-y-2 text-[11px] text-white/35">
+            <Link className="hover:text-white/70" to="/termos">
               Termos
             </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/politica">
-              Privacidade (LGPD)
+            <Link className="hover:text-white/70" to="/politica">
+              Privacidade
             </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/politica">
-              Cookies
-            </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/governanca">
+            <Link className="hover:text-white/70" to="/governanca">
               Segurança
             </Link>
-            <a className="hover:text-[color:var(--footer-fg)]" href="/sitemap.xml">
+            <a className="hover:text-white/70" href="/sitemap.xml">
               Sitemap
             </a>
           </nav>

@@ -7,9 +7,10 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
 
 const NAV_LINKS = [
-  { to: '/solucoes', label: 'Soluções' },
+  { to: '/templates', label: 'Amostras' },
+  { to: '/planos', label: 'Planos' },
   { to: '/projetos', label: 'Projetos' },
-  { to: '/negocios', label: 'Negócios' },
+  { to: '/solucoes', label: 'Soluções' },
 ] as const;
 
 function NavItem({ to, label }: { to: string; label: string }) {

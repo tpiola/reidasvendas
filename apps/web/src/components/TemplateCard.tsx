@@ -8,7 +8,7 @@ type TemplateCardProps = {
 
 export function TemplateCard({ template }: TemplateCardProps) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/5 transition-all hover:-translate-y-0.5 hover:shadow-md hover:shadow-black/10">
+    <article className="glass-card group overflow-hidden rounded-2xl transition-all hover:-translate-y-0.5">
       <Link
         to={`/templates/${template.slug}`}
         className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
@@ -16,8 +16,12 @@ export function TemplateCard({ template }: TemplateCardProps) {
       >
         <div className="relative aspect-[16/9] overflow-hidden">
           <img
-            src={template.coverImageUrl}
-            alt=""
+            src={template.thumbImageUrl}
+            srcSet={`${template.thumbImageUrl} 960w, ${template.coverImageUrl} 1920w`}
+            sizes="(max-width: 1024px) 100vw, 33vw"
+            alt={`Amostra ${template.name} — ${template.niche}`}
+            width={960}
+            height={540}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             loading="lazy"
             decoding="async"
@@ -35,21 +39,21 @@ export function TemplateCard({ template }: TemplateCardProps) {
       </Link>
 
       <div className="p-5">
-        <p className="text-sm leading-relaxed text-black/70">{template.tagline}</p>
+        <p className="text-sm leading-relaxed text-white/50">{template.tagline}</p>
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-black/55">A partir de {formatBRL(template.basePriceCents)}</p>
+          <p className="text-xs text-white/35">Referência · a partir de {formatBRL(template.basePriceCents)}</p>
           <div className="flex items-center gap-2">
             <Link
               to={`/templates/${template.slug}`}
-              className="inline-flex h-10 items-center justify-center rounded-xl border border-black/15 px-4 text-xs font-semibold text-black/75 transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-white/15 px-4 text-xs font-semibold text-white/75 transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
             >
-              Ver template
+              Ver amostra
             </Link>
             <Link
-              to={`/templates/${template.slug}?intent=price`}
-              className="inline-flex h-10 items-center justify-center rounded-xl bg-black px-4 text-xs font-semibold text-white transition-colors hover:bg-black/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              to={`/planos/sob-medida`}
+              className="inline-flex h-10 items-center justify-center rounded-xl bg-[#0057FF] px-4 text-xs font-semibold text-white transition-colors hover:bg-[#0057FF]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057FF]"
             >
-              Ver preço
+              Montar projeto
             </Link>
           </div>
         </div>

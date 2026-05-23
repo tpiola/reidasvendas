@@ -25,6 +25,12 @@ export const HOME_FAQ = [
     answer:
       'Site rápido, funil, WhatsApp e CRM integrados, automação (n8n), tráfego com mensagem certa e relatório do que converteu.',
   },
+  {
+    id: 'templates',
+    question: 'Os sites do catálogo são copiados?',
+    answer:
+      'Não. As amostras mostram estilo e estrutura possíveis. Cada cliente recebe projeto feito do zero, com copy e jornada para o público dele converter mais.',
+  },
 ] as const;
 
 export const PAIN_POINTS = [
