@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { applySeo } from '@/lib/seo';
 import { HeroVideo } from '@/components/HeroVideo';
 import { LeadForm } from '@/components/LeadForm';
