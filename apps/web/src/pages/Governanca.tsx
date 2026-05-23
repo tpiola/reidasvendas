@@ -6,8 +6,9 @@ export default function Governanca() {
   useEffect(() => {
     applySeo({
       title: 'Governança — Rei das Vendas',
-      description: 'Transparência total, rigor de campo e escala humana. A governança da Rei das Vendas.',
+      description: 'Transparência, LGPD e governança de dados. Em atualização — consulte a Política de Privacidade.',
       canonicalPath: '/governanca',
+      robots: 'noindex, follow',
     });
   }, []);
 

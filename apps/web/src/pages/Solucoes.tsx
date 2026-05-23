@@ -5,9 +5,10 @@ import { Reveal } from '@/components/Reveal';
 export default function Solucoes() {
   useEffect(() => {
     applySeo({
-      title: 'Soluções — Rei das Vendas',
-      description: 'A Solução Completa Digital para Líderes e Instituições. Teoria de ponta, execução de trincheira.',
+      title: 'Soluções — Rei das Vendas | Fábrica Digital',
+      description: 'Sites, aplicativos, extensões e funis com IA. Em atualização — solicite diagnóstico na home.',
       canonicalPath: '/solucoes',
+      robots: 'noindex, follow',
     });
   }, []);
 
