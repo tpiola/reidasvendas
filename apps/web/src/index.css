@@ -13,8 +13,8 @@
   --rdv-gold: #C9A84C;
   --rdv-gold-light: #F0D080;
   --rdv-white: #F8F8FA;
-  --rdv-muted: rgba(248,248,250,0.42);
-  --rdv-border: rgba(255,255,255,0.06);
+  --rdv-muted: rgba(248, 248, 250, 0.42);
+  --rdv-border: rgba(255, 255, 255, 0.06);
   --rdv-radius: 0px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-synthesis: none;
@@ -26,10 +26,47 @@
   --altiq-serif: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 }
 
+/* ─── Tema escuro (padrão) ─── */
+html.dark {
+  color-scheme: dark;
+  --page-bg: #030305;
+  --page-fg: #f8f8fa;
+  --header-fg: #ffffff;
+  --header-fg-muted: rgba(255, 255, 255, 0.6);
+  --header-border: rgba(255, 255, 255, 0.07);
+  --header-surface: rgba(3, 3, 5, 0.88);
+  --header-surface-overlay: rgba(3, 3, 5, 0.35);
+  --header-hover: rgba(255, 255, 255, 0.08);
+  --footer-bg: #050505;
+  --footer-fg: #f8f8fa;
+  --footer-muted: rgba(255, 255, 255, 0.45);
+}
+
+/* ─── Tema claro ─── */
+html.light {
+  color-scheme: light;
+  --page-bg: #f4f4f6;
+  --page-fg: #0a0a0b;
+  --header-fg: #0a0a0b;
+  --header-fg-muted: rgba(10, 10, 11, 0.55);
+  --header-border: rgba(10, 10, 11, 0.08);
+  --header-surface: rgba(255, 255, 255, 0.92);
+  --header-surface-overlay: rgba(255, 255, 255, 0.75);
+  --header-hover: rgba(10, 10, 11, 0.05);
+  --footer-bg: #ffffff;
+  --footer-fg: #0a0a0b;
+  --footer-muted: rgba(10, 10, 11, 0.5);
+}
+
 /* ─── Base Reset ─── */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-padding-top: 4.5rem; }
-body { background: var(--rdv-black); color: var(--rdv-white); overflow-x: hidden; }
+body {
+  background: var(--page-bg, var(--rdv-black));
+  color: var(--page-fg, var(--rdv-white));
+  overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
 a { text-decoration: none; color: inherit; }
 img, video { max-width: 100%; height: auto; display: block; }
 
@@ -59,7 +96,15 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Gold Gradient Text ─── */
 .text-gradient-gold {
-  background: linear-gradient(135deg, #F0D080 0%, #C9A84C 45%, #FFE090 75%, #B8903C 100%);
+  background: linear-gradient(135deg, #f0d080 0%, #c9a84c 45%, #ffe090 75%, #b8903c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ouro legível em fundos claros (logo, seções white) */
+.text-gradient-gold-dark {
+  background: linear-gradient(135deg, #7a5c12 0%, #b8903c 40%, #9a7209 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -389,6 +434,33 @@ img, video { max-width: 100%; height: auto; display: block; }
 @media (max-width: 640px) {
   .text-display { font-size: clamp(2.2rem, 11vw, 3.5rem); }
   .text-heading { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+}
+
+/* ─── WhatsApp FAB animado ─── */
+@keyframes wa-fab-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.wa-fab-ring {
+  animation: wa-fab-ring 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-fab-ring {
+    animation: none;
+    opacity: 0.2;
+  }
 }
 
 /* ─── Reduced motion ─── */

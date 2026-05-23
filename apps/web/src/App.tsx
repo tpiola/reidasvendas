@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@/hooks/useTheme';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
@@ -20,7 +21,7 @@ const NotFound = lazy(() => import('@/pages/NotFound'));
 function RouteFallback() {
   return (
     <div
-      className="flex min-h-[40vh] items-center justify-center text-sm text-white/50"
+      className="flex min-h-[40vh] items-center justify-center text-sm text-[color:var(--page-fg)] opacity-50"
       aria-live="polite"
       aria-busy="true"
     >
@@ -31,6 +32,7 @@ function RouteFallback() {
 
 export default function App() {
   return (
+    <ThemeProvider>
     <Router>
       <SiteHeader />
       <AnalyticsProvider />
@@ -54,5 +56,6 @@ export default function App() {
       <CookieConsent />
       <WhatsAppFab />
     </Router>
+    </ThemeProvider>
   );
 }
