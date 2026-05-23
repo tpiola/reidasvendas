@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 import { Reveal } from '@/components/Reveal';
 import type { PlanDetail } from '@/data/plans';
 import { PLANS_HUB } from '@/data/plans';
-import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
+import { BuiltFromScratchNotice } from '@/components/BuiltFromScratchNotice';
 import { LeadForm } from '@/components/LeadForm';
 
 type PlanPageShellProps = {
@@ -62,9 +62,7 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
               </p>
             </Reveal>
             {children ? <div className="mt-12">{children}</div> : null}
-            <div className="mt-12">
-              <BuiltFromScratchBanner variant="dark" />
-            </div>
+            <BuiltFromScratchNotice className="mt-10" />
           </div>
           <Reveal delay={0.12} className="lg:col-span-5">
             <div className="glass-card rounded-2xl p-8">

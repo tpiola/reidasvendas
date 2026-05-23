@@ -4,7 +4,8 @@ import { applySeo } from '@/lib/seo';
 import { TEMPLATES } from '@/data/templates';
 import { TemplateCard } from '@/components/TemplateCard';
 import { LeadCaptureSection } from '@/components/LeadCaptureSection';
-import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
+import { BuiltFromScratchNotice } from '@/components/BuiltFromScratchNotice';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 
 export default function Templates() {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function Templates() {
       description:
         'Referências visuais de sites por nicho. Cada cliente recebe projeto exclusivo, feito do zero para maximizar conversão.',
       canonicalPath: '/templates',
+      ogImage: DEFAULT_OG_IMAGE,
     });
   }, []);
 
@@ -26,12 +28,9 @@ export default function Templates() {
             Amostras do que construímos para clientes
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 md:text-base">
-            Estas páginas são referências de estética e estrutura — não pacotes prontos. Cada projeto nasce do zero,
-            com copy, oferta e jornada desenhadas para o que o público do seu cliente realmente quer.
+            Referências de estética e estrutura por nicho — para você visualizar o nível da entrega antes do diagnóstico.
           </p>
-          <div className="mt-8">
-            <BuiltFromScratchBanner variant="dark" />
-          </div>
+          <BuiltFromScratchNotice className="mt-6" />
         </div>
       </section>
 

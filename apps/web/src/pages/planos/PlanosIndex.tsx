@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { applySeo } from '@/lib/seo';
 import { PLANS_HUB } from '@/data/plans';
 import { Reveal } from '@/components/Reveal';
-import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
+import { BuiltFromScratchNotice } from '@/components/BuiltFromScratchNotice';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 
 export default function PlanosIndex() {
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function PlanosIndex() {
       description:
         'Três planos de assinatura e um pacote sob medida. Cada projeto digital é construído do zero para maximizar conversão do seu cliente.',
       canonicalPath: '/planos',
+      ogImage: DEFAULT_OG_IMAGE,
     });
   }, []);
 
@@ -30,13 +32,13 @@ export default function PlanosIndex() {
               Escolha uma assinatura ou monte um pacote sob medida. Cada página abaixo detalha entregáveis — sem
               prender você em um único scroll infinito.
             </p>
+            <BuiltFromScratchNotice className="mx-auto mt-6 max-w-xl text-center" />
           </Reveal>
         </div>
       </section>
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <BuiltFromScratchBanner variant="dark" className="mb-14" />
           <div className="grid gap-6 md:grid-cols-2">
             {PLANS_HUB.map((plan, i) => (
               <Reveal key={plan.slug} delay={i * 0.06}>

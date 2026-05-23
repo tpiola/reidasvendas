@@ -1,5 +1,5 @@
 import { BRAND } from './brand';
-import { DEFAULT_OG_IMAGE } from './seo-meta';
+import { DEFAULT_OG_IMAGE, DEFAULT_OG_IMAGE_ALT } from './seo-meta';
 import { buildOrganizationJsonLd } from './seo-schema';
 
 type SeoInput = {
@@ -65,6 +65,9 @@ export function applySeo(input: SeoInput) {
   setMetaBy('property', 'og:description', input.description);
   setMetaBy('property', 'og:url', url);
   setMetaBy('property', 'og:image', ogImage);
+  setMetaBy('property', 'og:image:width', '1200');
+  setMetaBy('property', 'og:image:height', '630');
+  setMetaBy('property', 'og:image:alt', DEFAULT_OG_IMAGE_ALT);
 
   setMetaBy('name', 'twitter:card', 'summary_large_image');
   setMetaBy('name', 'twitter:title', input.title);

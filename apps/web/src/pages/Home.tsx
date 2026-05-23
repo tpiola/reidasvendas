@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
-import { HOME_SEO } from '@/lib/seo-meta';
+import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
 import {
   CINEMATIC_BAND,
   DELIVERY_PILLARS,
@@ -68,6 +68,7 @@ export default function Home() {
       title: HOME_SEO.title,
       description: HOME_SEO.description,
       canonicalPath: '/',
+      ogImage: DEFAULT_OG_IMAGE,
       jsonLd: buildHomeJsonLd(HOME_FAQ),
     });
   }, []);

@@ -56,6 +56,10 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
 export const HERO_POSTER =
   'https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1920&q=85&fm=webp';
 
+/** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
+export const OG_SHARE_IMAGE =
+  'https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=630&q=88';
+
 export function unsplashPhoto(id: string, w = 1600, h = 1200): string {
   return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=85&fm=webp`;
 }
