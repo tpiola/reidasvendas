@@ -10,6 +10,7 @@ import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 const Home = lazy(() => import('@/pages/Home'));
 const Projetos = lazy(() => import('@/pages/Projetos'));
 const Contato = lazy(() => import('@/pages/Contato'));
+const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
 const Saude = lazy(() => import('@/pages/Saude'));
 const Negocios = lazy(() => import('@/pages/Negocios'));
 const Solucoes = lazy(() => import('@/pages/Solucoes'));
@@ -49,6 +50,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/projetos" element={<Projetos />} />
             <Route path="/contato" element={<Contato />} />
+            <Route path="/diagnostico" element={<Diagnostico />} />
             <Route path="/saude" element={<Saude />} />
             <Route path="/negocios" element={<Negocios />} />
             <Route path="/solucoes" element={<Solucoes />} />

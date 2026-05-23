@@ -37,7 +37,7 @@ export function LeadCaptureSection({
           <h2 className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">{headline}</h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">{description}</p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs">
-            {['Resposta em até 1 dia útil', 'Rastreio de origem (UTM)', 'Próximos passos por automação'].map((t) => (
+            {['Nome · E-mail · WhatsApp', 'Resposta em 24h', 'Projeto feito do zero'].map((t) => (
               <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-white/75">
                 {t}
               </span>

@@ -116,7 +116,7 @@ export function LeadForm({
   title = 'Diagnóstico estratégico',
   description = 'Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo para o seu negócio.',
   ctaLabel = 'Quero meu diagnóstico',
-  formVariant = 'compact',
+  formVariant = 'minimal',
   context,
   onSuccess,
   className,

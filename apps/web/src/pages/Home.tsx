@@ -26,6 +26,8 @@ import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { InlineVideo } from '@/components/home/InlineVideo';
 import { NicheCard } from '@/components/home/NicheCard';
 import { SalesHighlightStrip } from '@/components/home/SalesHighlightStrip';
+import { HeroScrollCue } from '@/components/home/HeroScrollCue';
+import { PillarCard } from '@/components/home/PillarCard';
 import { TemplateCatalogSection } from '@/components/home/TemplateCatalogSection';
 import { VideoShowcaseGrid } from '@/components/home/VideoShowcaseGrid';
 import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
@@ -155,7 +157,7 @@ export default function Home() {
           <Reveal delay={0.26}>
             <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
               <Link
-                to="/contato"
+                to="/diagnostico"
                 className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Agendar diagnóstico
@@ -181,6 +183,7 @@ export default function Home() {
               ))}
             </div>
           </Reveal>
+          <HeroScrollCue />
         </motion.div>
       </section>
 
@@ -288,15 +291,9 @@ export default function Home() {
               {PILLARS_SECTION.subtitle}
             </p>
           </Reveal>
-          <div className="grid gap-0 border border-black/[0.06] md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-0 overflow-hidden rounded-sm border border-black/[0.06] md:grid-cols-2 lg:grid-cols-4">
             {DELIVERY_PILLARS.map((p, i) => (
-              <Reveal key={p.num} delay={i * 0.08} emphasis>
-                <div className="pillar-card h-full border-r border-black/[0.06] bg-white p-8 last:border-r-0 hover:bg-[#F0F4FF]">
-                  <div className="mb-5 text-[10px] font-bold tracking-[0.32em] text-[#0057FF]/50">{p.num}</div>
-                  <h3 className="mb-3 text-xl font-bold text-[#0A0A0B]">{p.title}</h3>
-                  <p className="text-sm leading-relaxed text-[#0A0A0B]/50">{p.desc}</p>
-                </div>
-              </Reveal>
+              <PillarCard key={p.num} pillar={p} index={i} />
             ))}
           </div>
         </div>

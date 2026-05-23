@@ -109,7 +109,7 @@ export function SiteHeader() {
               Contato
             </Link>
             <Link
-              to="/contato"
+              to="/diagnostico"
               className="btn-glow inline-flex h-11 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.28em] text-white"
             >
               Agendar diagnóstico
