@@ -143,14 +143,12 @@ export const TEMPLATES: TemplateDefinition[] = [
   },
 ];
 
-/** Amostras exibidas na Home (catálogo completo em /templates) */
+/** Amostras na Home — 4 profissões; catálogo completo em /templates */
 export const HOME_FEATURED_TEMPLATE_SLUGS = [
   'estetica-lux',
   'odontologia-pro',
-  'personal-prime',
-  'restaurante-chef',
   'varejo-prime',
-  'imobiliaria-gold',
+  'restaurante-chef',
 ] as const;
 
 export function findTemplate(slug: string | undefined): TemplateDefinition | null {

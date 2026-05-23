@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Reveal } from '@/components/Reveal';
-import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
 import { getFeaturedTemplates } from '@/data/templates';
 import { TemplatePreviewCard } from '@/components/home/TemplatePreviewCard';
 
@@ -15,22 +14,17 @@ export function TemplateCatalogSection() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="max-w-2xl">
-          <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Catálogo visual</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Amostras por profissão</span>
           <h2 id="catalog-heading" className="mt-4 text-heading font-semibold text-white">
-            Sites que construímos
-            <span className="text-gradient-gold"> para nossos clientes.</span>
+            O visual que o seu cliente
+            <span className="text-gradient-gold"> espera ver.</span>
           </h2>
           <p className="mt-5 text-base leading-relaxed text-white/45">
-            Referências reais de estética, saúde, varejo e serviços — cada entrega nasce do zero, alinhada ao que o
-            público do cliente busca.
+            Quatro referências na Home. Cada projeto é feito do zero — copy e jornada para o seu nicho converter.
           </p>
         </Reveal>
 
-        <div className="mt-10">
-          <BuiltFromScratchBanner variant="dark" />
-        </div>
-
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((t, i) => (
             <TemplatePreviewCard key={t.slug} template={t} index={i} />
           ))}
@@ -39,15 +33,22 @@ export function TemplateCatalogSection() {
         <Reveal delay={0.2} className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <Link
             to="/templates"
-            className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white"
+            className="group relative inline-flex h-14 items-center justify-center overflow-hidden rounded-sm border border-[#C9A84C]/40 bg-gradient-to-r from-[#C9A84C]/15 via-[#C9A84C]/8 to-transparent px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-[#C9A84C] transition-all duration-300 hover:border-[#C9A84C]/70 hover:from-[#C9A84C]/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
           >
-            Ver mais tipos de sites
+            <span className="relative z-10">Catálogo completo · premium</span>
+            <span
+              className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              style={{
+                background: 'radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.2), transparent 70%)',
+              }}
+              aria-hidden
+            />
           </Link>
           <Link
             to="/planos"
             className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75"
           >
-            Ver planos e assinaturas
+            Planos e assinaturas
           </Link>
         </Reveal>
       </div>

@@ -4,33 +4,24 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { HOME_SEO } from '@/lib/seo-meta';
-import { BRAND } from '@/lib/brand';
 import {
+  CINEMATIC_BAND,
   DELIVERY_PILLARS,
-  PILLARS_SECTION,
+  HOME_CTA,
   HOME_FAQ,
-  HOME_NICHES,
-  HOME_STATS,
   PAIN_POINTS,
-  PERFORMANCE_CARDS,
+  PILLARS_SECTION,
   TECH_STACK,
   TRUST_STATS,
-  VIDEO_SHOWCASE,
 } from '@/lib/home-content';
-import { HERO_POSTER, NICHE_PHOTOS } from '@/lib/media';
 import { HeroVideo } from '@/components/HeroVideo';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
-import { AnimatedCounter } from '@/components/home/AnimatedCounter';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { NicheCard } from '@/components/home/NicheCard';
-import { SalesHighlightStrip } from '@/components/home/SalesHighlightStrip';
 import { HeroScrollCue } from '@/components/home/HeroScrollCue';
 import { PillarCard } from '@/components/home/PillarCard';
 import { TemplateCatalogSection } from '@/components/home/TemplateCatalogSection';
-import { VideoShowcaseGrid } from '@/components/home/VideoShowcaseGrid';
-import { BuiltFromScratchBanner } from '@/components/BuiltFromScratchBanner';
+import { CinematicVideoBand } from '@/components/home/CinematicVideoBand';
 
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
 
@@ -106,7 +97,7 @@ export default function Home() {
         >
           <Reveal>
             <Link
-              to="/contato"
+              to="/diagnostico"
               className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] px-5 py-2.5 backdrop-blur-sm transition-colors duration-300 hover:border-[#C9A84C]/45 hover:bg-[#C9A84C]/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/50"
             >
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C9A84C]" aria-hidden />
@@ -148,9 +139,8 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.18}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/55 md:text-xl">
-              Site, WhatsApp e automação na mesma mesa — para atrair o cliente certo e parar de depender só de
-              indicação.
+            <p className="mt-8 max-w-lg text-lg leading-relaxed text-white/55 md:text-xl">
+              Site, app e automação para quem precisa de lead qualificado — não de mais um cartão de visita online.
             </p>
           </Reveal>
 
@@ -163,10 +153,10 @@ export default function Home() {
                 Agendar diagnóstico
               </Link>
               <Link
-                to="/projetos"
+                to="/templates"
                 className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75 hover:text-white"
               >
-                Ver projetos
+                Ver amostras
               </Link>
             </div>
           </Reveal>
@@ -206,63 +196,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-white relative overflow-hidden py-24 md:py-36" aria-label="Números">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-4">
-            {HOME_STATS.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.08}>
-                <div className="pb-8 text-center md:border-l md:border-black/[0.06] md:pb-0 md:pl-8 md:text-left">
-                  <div className="stat-number text-[clamp(2.5rem,5vw,3.5rem)] font-bold tracking-tight text-[#0A0A0B]">
-                    <AnimatedCounter value={s.value} delay={i * 0.1} />
-                  </div>
-                  <div className="mb-3 mt-1.5 h-[2px] w-8 bg-[#0057FF]/40" />
-                  <p className="text-sm leading-snug text-[#0A0A0B]/45">{s.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <SalesHighlightStrip />
-
-      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-48">
-        <AmbientOrbs />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 md:grid-cols-2 md:gap-28">
-          <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Manifesto</span>
-            <h2 className="mt-5 text-heading font-semibold text-white">
-              Não vendemos “site bonito”.
-              <br />
-              <span className="text-gradient-titanium">Montamos máquina</span>
-              <br />
-              de venda previsível.
-            </h2>
-            <div className="mt-6 h-[1px] max-w-sm w-full bg-gradient-to-r from-[#C9A84C]/50 to-transparent" />
-            <p className="mt-6 max-w-md text-base leading-relaxed text-white/45">
-              Página certa, mensagem certa, follow-up no momento certo. É assim que negócio local deixa de competir no
-              preço e passa a competir em presença.
-            </p>
-          </Reveal>
-          <Reveal delay={0.14}>
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl bg-[#0057FF]/5 blur-2xl" />
-              <InlineVideo
-                src={BRAND.inlineVideos.manifesto}
-                poster={HERO_POSTER}
-                caption="Faturamento · operação digital 24h"
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       <section className="border-y border-white/[0.04] bg-[#08080B] py-20 md:py-28" aria-labelledby="pain-heading">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal emphasis className="max-w-xl">
             <h2 id="pain-heading" className="text-heading font-semibold text-white">
               Onde a venda trava
             </h2>
+            <p className="mt-4 text-sm text-white/40">Quatro frentes que drenam receita — e que o diagnóstico fecha.</p>
           </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {PAIN_POINTS.map((p, i) => (
@@ -287,7 +227,7 @@ export default function Home() {
               {PILLARS_SECTION.title}
               <span className="text-gradient-gold"> {PILLARS_SECTION.titleAccent}</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-[#0A0A0B]/50 md:text-base">
+            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#0A0A0B]/50 md:text-base">
               {PILLARS_SECTION.subtitle}
             </p>
           </Reveal>
@@ -299,79 +239,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-48">
-        <AmbientOrbs />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <Reveal className="mb-16 text-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/22">
-              Performance em tempo real
-            </span>
-            <h2 className="mt-4 text-heading font-semibold text-white">
-              Enquanto você atende,
-              <br />
-              <span className="text-gradient-titanium">o sistema não esquece ninguém.</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="relative">
-              <div className="absolute -inset-8 rounded-3xl bg-[#0057FF]/4 blur-3xl" />
-              <InlineVideo
-                src={BRAND.inlineVideos.performance}
-                poster={HERO_POSTER}
-                caption="Lucro e métricas · presença premium"
-              />
-            </div>
-          </Reveal>
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
-            {PERFORMANCE_CARDS.map((item, i) => (
-              <Reveal key={item.title} delay={i * 0.09}>
-                <div className="card-dark group p-8">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/70">
-                    {item.tag}
-                  </span>
-                  <h3 className="mb-2.5 mt-4 text-base font-bold text-white">{item.title}</h3>
-                  <p className="text-sm leading-relaxed text-white/40">{item.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <VideoShowcaseGrid items={VIDEO_SHOWCASE} />
+      <CinematicVideoBand {...CINEMATIC_BAND} />
 
       <TemplateCatalogSection />
-
-      <section className="section-white py-28 md:py-44">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="mb-16">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Segmentos</span>
-            <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              O cliente que você quer
-              <br />
-              <span className="text-gradient-gold">já está online.</span>
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {HOME_NICHES.map((n, i) => (
-              <NicheCard key={n.title} title={n.title} img={NICHE_PHOTOS[n.imgKey]} to={n.to} index={i} />
-            ))}
-          </div>
-          <Reveal delay={0.3} className="mt-14 flex justify-center">
-            <Link
-              to="/projetos"
-              className="btn-ghost inline-flex h-12 items-center justify-center border border-black/15 px-10 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0A0A0B] transition-all duration-300 hover:border-black hover:bg-black hover:text-white"
-            >
-              Ver todos os projetos
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-      <section className="bg-[#08080B] py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <BuiltFromScratchBanner variant="dark" />
-        </div>
-      </section>
 
       <FaqAccordion items={HOME_FAQ} />
 
@@ -382,15 +252,14 @@ export default function Home() {
           <div className="md:col-span-5">
             <Reveal>
               <h2 className="text-heading font-semibold text-white">
-                Pronto para o
-                <span className="text-gradient-titanium"> próximo nível?</span>
+                {HOME_CTA.title}
+                <span className="text-gradient-titanium"> {HOME_CTA.titleAccent}</span>
               </h2>
-              <p className="mt-6 text-base leading-relaxed text-white/40">
-                Conte onde você está. Devolvemos rota e próximo passo — sem slide corporativo.
-              </p>
+              <p className="mt-6 text-base leading-relaxed text-white/40">{HOME_CTA.subtitle}</p>
               <ul className="mt-8 space-y-3 text-sm text-white/45">
-                <li>Diagnóstico em 24h</li>
-                <li>Sem contrato de fidelidade</li>
+                {HOME_CTA.bullets.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
               </ul>
             </Reveal>
           </div>
@@ -401,7 +270,7 @@ export default function Home() {
                 source="hero"
                 formVariant="minimal"
                 title="Diagnóstico estratégico"
-                description="Apenas nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo inicial."
+                description="Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo."
                 ctaLabel="Quero meu diagnóstico"
                 context={{ intent: 'diagnostico' }}
               />
