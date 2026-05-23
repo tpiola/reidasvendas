@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react';
 import { BRAND } from '@/lib/brand';
 
 function buildUrl() {
-  const base = `https://wa.me/${BRAND.phone}`;
-  const text = encodeURIComponent(BRAND.whatsappText);
-  return `${base}?text=${text}`;
+  return BRAND.whatsappLink;
 }
 
 function WhatsAppIcon({ size = 18 }: { size?: number }) {

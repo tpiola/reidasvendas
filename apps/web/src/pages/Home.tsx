@@ -5,37 +5,47 @@ import { applySeo } from '@/lib/seo';
 import { HeroVideo } from '@/components/HeroVideo';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
+import { BRAND } from '@/lib/brand';
+import { HERO_POSTER, NICHE_PHOTOS } from '@/lib/media';
 
 const SPRING = { type: 'spring' as const, stiffness: 80, damping: 20 };
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
 
 const PILLARS = [
-  { num: '01', title: 'Diagnose', desc: 'Análise cirúrgica da operação. Identificamos gargalos antes de tocar em uma linha de código.' },
-  { num: '02', title: 'Arquitetura', desc: 'Estrutura de páginas, funis e mensuração desenhados para conversão.' },
-  { num: '03', title: 'Construção', desc: 'Implementação modular com performance e UX de nível enterprise.' },
-  { num: '04', title: 'Ativação', desc: 'n8n, WhatsApp, CRM e e-mail em harmonia. Seu lead qualificado, 24/7.' },
+  { num: '01', title: 'Raio-X', desc: 'Mergulhamos na sua operação como sócio — não como fornecedor distante.' },
+  { num: '02', title: 'Rota', desc: 'Funil, mensagem e canais desenhados para o cliente que você quer atrair.' },
+  { num: '03', title: 'Obra', desc: 'Site rápido, integrações limpas e experiência que passa confiança.' },
+  { num: '04', title: 'Ritmo', desc: 'Automação e IA cuidando do follow-up enquanto você cuida do negócio.' },
 ] as const;
 
 const STATS = [
-  { value: '97%', label: 'Taxa de retenção de clientes' },
-  { value: '4.8×', label: 'ROI médio em 6 meses' },
-  { value: '48h', label: 'Primeira entrega em produção' },
-  { value: '100%', label: 'Sem contrato de fidelidade' },
+  { value: '347+', label: 'Operações que já passaram por nós' },
+  { value: '72h', label: 'Para primeira versão no ar' },
+  { value: '4.8×', label: 'Retorno médio reportado' },
+  { value: '0', label: 'Meses de fidelidade obrigatória' },
 ] as const;
-
-const IMG = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&h=900&q=90&fm=webp`;
 
 const NICHES = [
-  { title: 'Saúde & Estética', img: IMG('photo-1576091160550-2173dba999ef'), to: '/saude' },
-  { title: 'Negócios & B2B', img: IMG('photo-1552664730-d307ca884978'), to: '/negocios' },
-  { title: 'Imobiliário', img: IMG('photo-1560518883-ce09059eeffa'), to: '/projetos' },
-  { title: 'E-commerce', img: IMG('photo-1555421689-491a97ff2040'), to: '/projetos' },
-  { title: 'Governança', img: '/hero-slide-2.svg', to: '/governanca' },
-  { title: 'Soluções Digitais', img: '/hero-slide-3.svg', to: '/solucoes' },
+  { title: 'Clínicas & Estética', img: NICHE_PHOTOS.saude, to: '/saude' },
+  { title: 'Restaurantes & Bares', img: NICHE_PHOTOS.restaurante, to: '/projetos' },
+  { title: 'Lojas & Varejo', img: NICHE_PHOTOS.comercio, to: '/projetos' },
+  { title: 'Serviços & B2B', img: NICHE_PHOTOS.servicos, to: '/negocios' },
+  { title: 'Imobiliário', img: NICHE_PHOTOS.imobiliaria, to: '/projetos' },
+  { title: 'Academias & Studios', img: NICHE_PHOTOS.academia, to: '/projetos' },
 ] as const;
 
-const TECH_STACK = ['GOOGLE CLOUD', 'VERCEL', 'OPENAI', 'STRIPE', 'N8N', 'CLOUDFLARE', 'SUPABASE', 'FIREBASE', 'TAILWIND', 'REACT', 'TYPESCRIPT'];
+const TECH_STACK = [
+  'GOOGLE ADS',
+  'META ADS',
+  'GA4',
+  'N8N',
+  'VERCEL',
+  'OPENAI',
+  'WHATSAPP API',
+  'STRIPE',
+  'SUPABASE',
+  'HOTJAR',
+];
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ value, delay = 0 }: { value: string; delay?: number }) {
@@ -90,12 +100,11 @@ function NicheCard({ title, img, to, i }: { title: string; img: string; to: stri
         decoding="async"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-      <div className="absolute inset-0 bg-[#0057FF]/0 group-hover:bg-[#0057FF]/8 transition-colors duration-500" />
-      {/* Bottom accent line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#0057FF] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-[#C9A84C]/0 group-hover:bg-[#C9A84C]/10 transition-colors duration-500" />
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
         <h3 className="text-sm font-bold tracking-widest uppercase text-white/90 group-hover:text-white transition-colors">{title}</h3>
-        <Link to={to} className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-[#0057FF] transition-colors duration-300">
+        <Link to={to} className="mt-2 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50 hover:text-[#C9A84C] transition-colors duration-300">
           Ver solução
           <span className="transform group-hover:translate-x-1 transition-transform duration-300">→</span>
         </Link>
@@ -118,6 +127,7 @@ function InlineVideo({ src, poster, caption }: { src: string; poster?: string; c
         playsInline
         preload="metadata"
         poster={poster}
+        crossOrigin="anonymous"
       >
         <source src={src} type="video/mp4" />
       </video>
@@ -181,8 +191,9 @@ export default function Home() {
 
   useEffect(() => {
     applySeo({
-      title: 'Rei das Vendas — Infraestrutura Digital que Converte | Franca-SP',
-      description: 'Transforme visitantes em clientes com site, funil e automação n8n. Diagnóstico gratuito, entrega em 48h e ROI mensurável.',
+      title: 'Rei das Vendas — Seu negócio vendendo como as gigantes | Franca-SP',
+      description:
+        'Site, funil, WhatsApp e automação para negócios locais que cansaram de depender só de indicação. Diagnóstico gratuito em 24h.',
       canonicalPath: '/',
     });
   }, []);
@@ -219,13 +230,13 @@ export default function Home() {
           {/* Badge */}
           <Reveal>
             <motion.div
-              className="mb-10 inline-flex items-center gap-3 border border-white/8 bg-white/[0.03] px-5 py-2.5 backdrop-blur-sm"
-              whileHover={{ borderColor: 'rgba(0,87,255,0.3)', backgroundColor: 'rgba(0,87,255,0.05)' }}
+              className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] px-5 py-2.5 backdrop-blur-sm"
+              whileHover={{ borderColor: 'rgba(201,168,76,0.45)', backgroundColor: 'rgba(201,168,76,0.1)' }}
               transition={{ duration: 0.3 }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0057FF] animate-pulse" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/55">
-                Diagnóstico gratuito · Resposta em 24h · Franca, SP
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/85">
+                Franca-SP · Conversa real · Resposta em 24h
               </span>
             </motion.div>
           </Reveal>
@@ -235,28 +246,28 @@ export default function Home() {
             <Reveal delay={0.06}>
               <h1 className="text-display font-semibold text-white">
                 <motion.span
-                  className="block text-gradient-titanium"
+                  className="block text-gradient-gold"
                   initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.15 }}
                 >
-                  Mais leads qualificados.
+                  Seu negócio local
+                </motion.span>
+                <motion.span
+                  className="block text-gradient-titanium"
+                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
+                >
+                  vendendo como
                 </motion.span>
                 <motion.span
                   className="block"
                   initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
-                >
-                  Menos desperdício
-                </motion.span>
-                <motion.span
-                  className="block text-gradient-gold"
-                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
-                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.4 }}
                 >
-                  em marketing.
+                  as gigantes.
                 </motion.span>
               </h1>
             </Reveal>
@@ -264,8 +275,8 @@ export default function Home() {
 
           <Reveal delay={0.18}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/55 md:text-xl">
-              Site, funil, WhatsApp e mensuração em um sistema só — com
-              engenharia de nível enterprise, sem contrato de fidelidade.
+              Colocamos site, WhatsApp e automação na mesma mesa — para você atrair o cliente certo,
+              responder no timing certo e parar de depender só de sorte ou indicação.
             </p>
           </Reveal>
 
@@ -291,9 +302,9 @@ export default function Home() {
           <Reveal delay={0.35}>
             <div className="mt-14 flex items-center gap-6 text-center">
               {[
-                { value: '97%', label: 'Retenção' },
-                { value: '48h', label: '1ª entrega' },
-                { value: '4.8×', label: 'ROI médio' },
+                { value: '72h', label: '1ª versão' },
+                { value: '4.8×', label: 'Retorno médio' },
+                { value: '24h', label: 'Resposta humana' },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col items-center gap-1">
                   <span className="text-xl font-bold text-white/90 tracking-tight">{item.value}</span>
@@ -361,13 +372,13 @@ export default function Home() {
           <Reveal>
             <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Manifesto</span>
             <h2 className="mt-5 text-heading font-semibold text-white">
-              Não somos uma agência.<br />
-              <span className="text-gradient-titanium">Somos engenheiros</span><br />
-              de crescimento.
+              Não vendemos “site bonito”.<br />
+              <span className="text-gradient-titanium">Montamos máquina</span><br />
+              de venda previsível.
             </h2>
-            <div className="mt-6 h-[1px] w-full max-w-sm bg-gradient-to-r from-[#0057FF]/40 to-transparent" />
+            <div className="mt-6 h-[1px] w-full max-w-sm bg-gradient-to-r from-[#C9A84C]/50 to-transparent" />
             <p className="mt-6 text-base leading-relaxed text-white/45 max-w-md">
-              Enquanto agências entregam sites bonitos, nós construímos sistemas que pensam, automatizam e convertem. A diferença está na governança.
+              Página certa, mensagem certa, follow-up no momento certo. É assim que negócio local deixa de competir no preço e passa a competir em presença.
             </p>
             <div className="mt-10 flex items-center gap-4">
               <div className="h-px w-12 bg-[#0057FF]/60" />
@@ -377,7 +388,11 @@ export default function Home() {
           <Reveal delay={0.14}>
             <div className="relative">
               <div className="absolute -inset-4 bg-[#0057FF]/5 blur-2xl rounded-3xl" />
-              <InlineVideo src="/hero.mp4" poster="/hero-slide-1.svg" caption="Infraestrutura em operação · 24/7" />
+              <InlineVideo
+                src={BRAND.inlineVideos.manifesto}
+                poster={HERO_POSTER}
+                caption="Operação digital · ativa 24h"
+              />
             </div>
           </Reveal>
         </div>
@@ -389,8 +404,8 @@ export default function Home() {
           <Reveal className="text-center mb-20">
             <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Metodologia</span>
             <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              Quatro fases.<br />
-              <span className="text-gradient-gold">Um resultado.</span>
+              Quatro passos.<br />
+              <span className="text-gradient-gold">Sem enrolação.</span>
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0 border border-black/[0.06]">
@@ -414,26 +429,44 @@ export default function Home() {
           <Reveal className="text-center mb-16">
             <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/22">Performance em tempo real</span>
             <h2 className="mt-4 text-heading font-semibold text-white">
-              Tecnologia que{' '}
-              <span className="text-gradient-titanium">trabalha enquanto você dorme.</span>
+              Enquanto você atende,<br />
+              <span className="text-gradient-titanium">o sistema não esquece ninguém.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="relative">
               <div className="absolute -inset-8 bg-[#0057FF]/4 blur-3xl rounded-3xl" />
-              <InlineVideo src="/hero.mp4" poster="/hero-slide-2.svg" caption="Automação e IA · ativos 24h" />
+              <InlineVideo
+                src={BRAND.inlineVideos.performance}
+                poster={HERO_POSTER}
+                caption="Marca em movimento · presença premium"
+              />
             </div>
           </Reveal>
           <div className="mt-16 grid md:grid-cols-3 gap-6">
             {[
-              { icon: '⚡', title: 'Deploy em Horas', desc: 'Não semanas. Seu site no ar e convertendo dentro de 48 horas da assinatura.' },
-              { icon: '🔗', title: 'Integração Total', desc: 'WhatsApp, CRM, e-mail e analytics em um ecossistema unificado e auditável.' },
-              { icon: '📊', title: 'Dados em Tempo Real', desc: 'Dashboards com clareza cirúrgica sobre o que converte — sem suposições.' },
+              {
+                tag: 'Velocidade',
+                title: 'No ar em 72h',
+                desc: 'Primeira versão publicada rápido — para você testar mercado, não esperar reunião de alinhamento eterna.',
+              },
+              {
+                tag: 'Integração',
+                title: 'Tudo conversando',
+                desc: 'WhatsApp, formulário, CRM e métricas no mesmo fluxo. Menos planilha, mais venda.',
+              },
+              {
+                tag: 'Clareza',
+                title: 'Número que importa',
+                desc: 'Você vê de onde veio o lead e o que virou oportunidade — sem dashboard que ninguém abre.',
+              },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.09}>
                 <div className="card-dark group p-8">
-                  <div className="text-2xl mb-5">{item.icon}</div>
-                  <h3 className="text-base font-bold text-white mb-2.5">{item.title}</h3>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/70">
+                    {item.tag}
+                  </span>
+                  <h3 className="mt-4 text-base font-bold text-white mb-2.5">{item.title}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>
@@ -448,8 +481,8 @@ export default function Home() {
           <Reveal className="mb-16">
             <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Segmentos</span>
             <h2 className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              Seu mercado.<br />
-              <span className="text-gradient-gold">Nossa especialidade.</span>
+              O cliente que você quer<br />
+              <span className="text-gradient-gold">já está online.</span>
             </h2>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -484,7 +517,7 @@ export default function Home() {
                 <span className="text-gradient-titanium">próximo nível?</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/40">
-                Envie seus dados. Receba proposta, próximos passos e um plano orientado por métricas — sem compromisso.
+                Conte onde você está hoje. Devolvemos rota, escopo e próximo passo — em linguagem de gente, não de slide corporativo.
               </p>
             </Reveal>
 

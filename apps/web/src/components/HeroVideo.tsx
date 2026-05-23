@@ -27,7 +27,7 @@ export function HeroVideo({ className, poster }: HeroVideoProps) {
     if (reduceMotion) return;
     timerRef.current = setTimeout(() => {
       setActiveIndex((i) => (i + 1) % VIDEOS.length);
-    }, 6000);
+    }, 9000);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
@@ -61,6 +61,7 @@ export function HeroVideo({ className, poster }: HeroVideoProps) {
             loop
             playsInline
             preload={i === 0 ? 'auto' : 'metadata'}
+            crossOrigin="anonymous"
             onCanPlayThrough={() => markLoaded(i)}
           >
             <source src={src} type="video/mp4" />
