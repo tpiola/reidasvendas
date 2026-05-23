@@ -6,7 +6,7 @@ export default function Negocios() {
   useEffect(() => {
     applySeo({
       title: 'Negócios & B2B — Rei das Vendas',
-      description: 'Infraestrutura digital inabalável para empresas e consultorias. Teoria de ponta, execução de trincheira.',
+      description: 'Site e funil B2B. Lead qualificado e CRM integrado.',
       canonicalPath: '/negocios',
     });
   }, []);
@@ -22,7 +22,7 @@ export default function Negocios() {
         
         <Reveal delay={0.1}>
           <p className="mt-8 text-lg leading-relaxed text-white/60 md:text-xl max-w-3xl mx-auto">
-            Teoria de Ponta. Execução de Trincheira. Instalamos infraestrutura inabalável para líderes focarem na estratégia e nas pessoas.
+            Funil e automação para serviços e consultorias que vendem ticket médio alto.
           </p>
         </Reveal>
       </div>

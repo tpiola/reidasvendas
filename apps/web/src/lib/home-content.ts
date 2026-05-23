@@ -1,121 +1,82 @@
-/** Copy e dados estruturados da Home — Fábrica Digital de Performance */
+/** Copy da Home — direto, sem jargão de template */
 
 export const HOME_FAQ = [
   {
     id: 'prazo',
-    question: 'Em quanto tempo a primeira versão fica no ar?',
+    question: 'Quanto tempo para a primeira versão no ar?',
     answer:
-      'Projetos de funil e landing costumam ter primeira versão publicada em até 72 horas úteis, após diagnóstico. Aplicativos e extensões dependem do escopo — sempre com marcos claros e entrega incremental, nunca “surpresa” no fim do prazo.',
+      'Landing e funil: em geral até 72h após o diagnóstico. App ou extensão depende do escopo — sempre com marco e data, nada de prazo surpresa no final.',
   },
   {
     id: 'dados',
-    question: 'Como vocês tratam segurança de dados e LGPD?',
+    question: 'Como ficam meus dados e o LGPD?',
     answer:
-      'Seguimos princípios de minimização de dados, consentimento explícito nos formulários, criptografia em trânsito (HTTPS) e política de privacidade alinhada à LGPD e orientações da ANPD. Integrações (CRM, WhatsApp, n8n) são configuradas com credenciais server-side, nunca expostas no front-end.',
+      'Formulário com consentimento, HTTPS, credenciais de integração só no servidor. Política de privacidade publicada e alinhada à LGPD.',
   },
   {
     id: 'google',
-    question: 'O site fica alinhado às políticas do Google e Core Web Vitals?',
+    question: 'O site passa no Google (velocidade e SEO)?',
     answer:
-      'Sim. Performance, acessibilidade e SEO técnico fazem parte do escopo: código enxuto, imagens WebP, lazy load, meta-tags consistentes, JSON-LD e páginas rápidas — requisitos para ranquear bem e ser citado em buscas tradicionais e em motores generativos (GEO).',
-  },
-  {
-    id: 'ia-humano',
-    question: 'A IA substitui a equipe humana de vocês?',
-    answer:
-      'Não. Usamos inteligência artificial para acelerar desenvolvimento, copy, automações e análises — com revisão e validação humana em cada entrega crítica. O objetivo é velocidade com responsabilidade, não conteúdo genérico em escala.',
+      'Sim. Código enxuto, imagens leves, meta-tags certas e página rápida no celular — isso entra no escopo, não é extra opcional.',
   },
   {
     id: 'escopo',
-    question: 'O que exatamente vocês entregam?',
+    question: 'O que vocês entregam na prática?',
     answer:
-      'Sites e landing pages ultra-rápidas, aplicativos e extensões sob medida, funis de vendas, automações (WhatsApp, CRM, n8n), tráfego pago integrado a IA, dashboards, playbooks comerciais e social media com engenharia de performance — tudo conectado a métricas reais.',
+      'Site rápido, funil, WhatsApp e CRM integrados, automação (n8n), tráfego com mensagem certa e relatório do que converteu.',
   },
 ] as const;
 
 export const PAIN_POINTS = [
   {
-    title: 'Equipe lenta, processo manual',
-    desc: 'Follow-up esquecido, planilha duplicada e oportunidade morrendo no WhatsApp pessoal.',
+    title: 'Lead esfria no WhatsApp',
+    desc: 'Sem resposta no timing certo, a venda vai para o concorrente.',
   },
   {
-    title: 'Anúncio sem contexto',
-    desc: 'Tráfego pago que chega em página genérica — sem mensagem, sem prova, sem próximo passo claro.',
+    title: 'Anúncio sem página à altura',
+    desc: 'Gasta tráfego e manda o cliente para um site que não convence.',
   },
   {
-    title: 'CRM abandonado',
-    desc: 'Ferramenta cara que ninguém alimenta; funil existe no slide, não na operação.',
+    title: 'CRM parado',
+    desc: 'Ferramenta paga, funil só no PowerPoint.',
   },
   {
-    title: 'Site que não converte',
-    desc: 'Bonito no mockup, lento no celular, invisível para o Google e para as IAs que citam concorrentes.',
+    title: 'Site lento ou genérico',
+    desc: 'Bonito no desktop, some no Google e no celular.',
   },
 ] as const;
 
 export const DELIVERY_PILLARS = [
   {
     num: '01',
-    title: 'IA para Captar',
-    desc: 'Landing pages ultra-rápidas, tráfego pago nativo integrado a IA e captação de dados contextuais para qualificar antes do primeiro contato humano.',
+    title: 'Raio-X',
+    desc: 'Entramos na operação como sócio — não como fornecedor distante.',
   },
   {
     num: '02',
-    title: 'IA para Vender',
-    desc: 'Extensões personalizadas, automações inteligentes de atendimento e fluxos de comunicação que respondem no timing certo — sem robô frio.',
+    title: 'Rota',
+    desc: 'Funil, mensagem e canal para o cliente que você quer.',
   },
   {
     num: '03',
-    title: 'IA para Treinar',
-    desc: 'Centrais de microtreinamento, playbooks dinâmicos e simulações para equipes comerciais operarem o mesmo script com autonomia.',
+    title: 'Obra',
+    desc: 'Site rápido, integração limpa, experiência que passa confiança.',
   },
   {
     num: '04',
-    title: 'IA para Operar',
-    desc: 'Dashboards, inteligência analítica de CRM e velocidade máxima em testes de novos produtos, públicos e ofertas — decisão com dado, não com achismo.',
+    title: 'Ritmo',
+    desc: 'Automação no follow-up. Você cuida do negócio, o sistema não esquece lead.',
   },
 ] as const;
 
 export const VIDEO_SHOWCASE = [
-  {
-    id: 'funil',
-    caption: 'Engenharia de funil · do clique ao CRM',
-    srcKey: 'manifesto' as const,
-  },
-  {
-    id: 'automacao',
-    caption: 'Automação e fluxos · bastidores técnicos',
-    srcKey: 'performance' as const,
-  },
-  {
-    id: 'performance',
-    caption: 'Core Web Vitals · performance em produção',
-    srcKey: 'heroBusiness' as const,
-  },
+  { id: 'funil', caption: 'Funil · clique até o CRM', srcKey: 'manifesto' as const },
+  { id: 'automacao', caption: 'Automação · WhatsApp e n8n', srcKey: 'performance' as const },
+  { id: 'performance', caption: 'Site no ar · performance real', srcKey: 'heroBusiness' as const },
 ] as const;
 
-export const CASE_PLACEHOLDERS = [
-  {
-    id: 'case-a',
-    segment: 'Varejo local',
-    problem: '[Problema real autorizado — a inserir]',
-    intervention: '[Intervenção tecnológica — a inserir]',
-    outcome: '[Mudança observada — a inserir]',
-    timeline: '[Tempo de implementação — a inserir]',
-  },
-  {
-    id: 'case-b',
-    segment: 'Serviços B2B',
-    problem: '[Problema real autorizado — a inserir]',
-    intervention: '[Intervenção tecnológica — a inserir]',
-    outcome: '[Mudança observada — a inserir]',
-    timeline: '[Tempo de implementação — a inserir]',
-  },
-  {
-    id: 'case-c',
-    segment: 'Saúde & estética',
-    problem: '[Problema real autorizado — a inserir]',
-    intervention: '[Intervenção tecnológica — a inserir]',
-    outcome: '[Mudança observada — a inserir]',
-    timeline: '[Tempo de implementação — a inserir]',
-  },
+export const TRUST_STATS = [
+  { value: '72h', label: '1ª versão' },
+  { value: '4.8×', label: 'Retorno médio' },
+  { value: '24h', label: 'Resposta' },
 ] as const;

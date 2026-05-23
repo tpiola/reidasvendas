@@ -165,22 +165,20 @@ export default function Projetos() {
           <Reveal>
             <span className="border-glow-blue inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.24em] text-brand-blue">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-blue" />
-              A Era da Engenharia de Conversão
+              Projetos reais
             </span>
           </Reveal>
           
           <Reveal delay={0.1}>
             <h1 className="mt-8 font-serif text-4xl font-medium leading-[1.1] tracking-[-0.03em] text-white md:text-6xl lg:text-7xl">
-              O mercado <span className="text-red-500/90">mudou.</span><br />
-              A Inteligência Artificial reescreve as regras <span className="text-gradient-titanium">todos os dias.</span>
+              Estruturas que
+              <span className="text-gradient-titanium"> convertem.</span>
             </h1>
           </Reveal>
           
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-8 max-w-3xl text-base leading-relaxed text-white/60 md:text-lg">
-              O digital tradicional está morto. O mercado exige adaptação em tempo real. Nossa empresa está preparada para colocar o seu negócio como <strong>referência absoluta</strong>, garantindo a mais alta satisfação dos seus clientes.
-              <br /><br />
-              <span className="text-white/90 font-medium">Seja o primeiro no Google Meu Negócio. Domine as buscas. Somos incansáveis e frenéticos por vendas e conversão.</span>
+            <p className="mx-auto mt-8 max-w-2xl text-base leading-relaxed text-white/60 md:text-lg">
+              Referências por segmento. Cada entrega é adaptada ao seu funil, CRM e WhatsApp — nada de pacote genérico.
             </p>
           </Reveal>
         </div>
@@ -196,8 +194,7 @@ export default function Projetos() {
             Ponto de Partida. <span className="text-white/40">Execução Exclusiva.</span>
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 mx-auto md:mx-0">
-            O acervo abaixo não é um catálogo de cópias. É inspiração. Cada linha de código, cada automação e cada pixel 
-            será forjado exclusivamente para o ecossistema do seu negócio, garantindo maestria total.
+            Modelos de partida. O que vai para produção é feito sob medida para a sua operação.
           </p>
         </Reveal>
 
@@ -222,8 +219,7 @@ export default function Projetos() {
                 Pronto para dominar o seu <span className="text-gradient-titanium">mercado?</span>
               </h2>
               <p className="mt-6 text-sm leading-relaxed text-white/50">
-                Nós garantimos o trabalho bem executado. Deixe a tecnologia complexa, 
-                as animações 3D e as integrações de IA conosco. Seu único foco será atender a demanda.
+                Site, automação e integração no escopo. Você foca em fechar e atender.
               </p>
             </Reveal>
           </div>

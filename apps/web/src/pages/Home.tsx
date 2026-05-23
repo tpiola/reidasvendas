@@ -5,10 +5,10 @@ import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { HOME_SEO } from '@/lib/seo-meta';
 import {
-  CASE_PLACEHOLDERS,
   DELIVERY_PILLARS,
   HOME_FAQ,
   PAIN_POINTS,
+  TRUST_STATS,
   VIDEO_SHOWCASE,
 } from '@/lib/home-content';
 import { HeroVideo } from '@/components/HeroVideo';
@@ -16,9 +16,9 @@ import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { VideoShowcaseGrid } from '@/components/home/VideoShowcaseGrid';
-import { CasePlaceholderGrid } from '@/components/home/CasePlaceholderGrid';
 
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
+
 function AmbientOrbs() {
   const reduce = useReducedMotion();
   if (reduce) return null;
@@ -70,7 +70,6 @@ export default function Home() {
     <main className="overflow-x-hidden bg-[#030305]">
       <ScrollProgress />
 
-      {/* Hero */}
       <section ref={heroRef} className="relative isolate min-h-screen overflow-hidden">
         <motion.div style={{ y: heroY, scale: heroScale }} className="absolute inset-0 parallax-bg">
           <HeroVideo />
@@ -94,80 +93,94 @@ export default function Home() {
             <div className="mb-10 inline-flex items-center gap-3 border border-[#C9A84C]/25 bg-[#C9A84C]/[0.06] px-5 py-2.5 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#C9A84C]" />
               <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/85">
-                Fábrica digital · Franca-SP · IA com revisão humana
+                Franca-SP · Resposta em 24h
               </span>
             </div>
           </Reveal>
 
-          <div className="max-w-4xl">
+          <div className="max-w-5xl">
             <Reveal delay={0.06}>
-              <h1 className="text-display font-semibold text-white leading-[1.08]">
+              <h1 className="text-display font-semibold text-white">
                 <motion.span
                   className="block text-gradient-gold"
-                  initial={{ opacity: 0, y: 32, filter: 'blur(10px)' }}
+                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ duration: 0.9, ease: EASE_LUXURY, delay: 0.12 }}
+                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.15 }}
                 >
-                  Se sua empresa ainda vende como ontem,
+                  Seu negócio local
                 </motion.span>
                 <motion.span
-                  className="mt-2 block text-gradient-titanium"
-                  initial={{ opacity: 0, y: 32, filter: 'blur(10px)' }}
+                  className="block text-gradient-titanium"
+                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  transition={{ duration: 0.9, ease: EASE_LUXURY, delay: 0.24 }}
+                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.28 }}
                 >
-                  já está perdendo para quem opera com IA hoje.
+                  vendendo como
+                </motion.span>
+                <motion.span
+                  className="block"
+                  initial={{ opacity: 0, y: 40, filter: 'blur(12px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ duration: 1, ease: EASE_LUXURY, delay: 0.4 }}
+                >
+                  as gigantes.
                 </motion.span>
               </h1>
             </Reveal>
           </div>
 
-          <Reveal delay={0.16}>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/55 md:text-xl">
-              Desenvolvemos sites, aplicativos, extensões sob medida e inteligência de vendas para negócios que
-              precisam validar projetos na velocidade da luz, dominar o mercado e crescer sem caos operacional.
+          <Reveal delay={0.18}>
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/55 md:text-xl">
+              Site, WhatsApp e automação na mesma mesa — para atrair o cliente certo e parar de depender só de
+              indicação.
             </p>
           </Reveal>
 
-          <Reveal delay={0.24}>
+          <Reveal delay={0.26}>
             <div className="mt-12 flex flex-col items-center gap-4 sm:flex-row">
               <Link
                 to="/contato"
-                className="btn-glow inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.26em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Quero um Diagnóstico de Funil com IA
+                Agendar diagnóstico gratuito
               </Link>
-              <a
-                href="#tecnologia"
-                className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.26em] text-white/75 hover:text-white"
+              <Link
+                to="/projetos"
+                className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75 hover:text-white"
               >
-                Ver Tecnologia em Ação
-              </a>
+                Ver projetos
+              </Link>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.35}>
+            <div className="mt-14 flex items-center gap-8 text-center">
+              {TRUST_STATS.map((item) => (
+                <div key={item.label} className="flex flex-col items-center gap-1">
+                  <span className="text-xl font-bold tracking-tight text-white/90">{item.value}</span>
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
             </div>
           </Reveal>
         </motion.div>
       </section>
 
-      {/* Dor */}
-      <section className="border-y border-white/[0.04] bg-[#08080B] py-24 md:py-32" aria-labelledby="pain-heading">
+      <section className="border-y border-white/[0.04] bg-[#08080B] py-20 md:py-28" aria-labelledby="pain-heading">
         <div className="mx-auto max-w-6xl px-6">
-          <Reveal className="max-w-2xl">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/25">Diagnóstico do atrito</span>
-            <h2 id="pain-heading" className="mt-4 text-heading font-semibold text-white">
-              O cansaço operacional
-              <span className="text-gradient-titanium"> antes da virada.</span>
+          <Reveal className="max-w-xl">
+            <h2 id="pain-heading" className="text-heading font-semibold text-white">
+              Onde a venda trava
             </h2>
-            <p className="mt-5 text-sm leading-relaxed text-white/40">
-              Não é falta de vontade — é excesso de ferramenta solta, processo manual e promessa de agência que não
-              entrega código nem funil.
-            </p>
           </Reveal>
-          <div className="mt-14 grid gap-4 sm:grid-cols-2">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
             {PAIN_POINTS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.06}>
-                <article className="card-dark border-l-2 border-l-[#0057FF]/40 p-7">
+              <Reveal key={p.title} delay={i * 0.05}>
+                <article className="card-dark border-l-2 border-l-[#C9A84C]/50 p-6">
                   <h3 className="text-base font-bold text-white">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/40">{p.desc}</p>
+                  <p className="mt-2 text-sm text-white/45">{p.desc}</p>
                 </article>
               </Reveal>
             ))}
@@ -175,20 +188,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Pilares */}
-      <section className="section-white py-28 md:py-44" aria-labelledby="pillars-heading">
+      <section className="section-white py-28 md:py-40" aria-labelledby="pillars-heading">
         <div className="mx-auto max-w-6xl px-6">
           <Reveal className="mb-16 text-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0A0A0B]/30">Mecanismo de entrega</span>
-            <h2 id="pillars-heading" className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              Quatro motores de
-              <span className="text-gradient-gold"> IA aplicada.</span>
+            <h2 id="pillars-heading" className="text-heading font-semibold text-[#0A0A0B]">
+              Quatro passos.
+              <span className="text-gradient-gold"> Sem enrolação.</span>
             </h2>
           </Reveal>
           <div className="grid gap-0 border border-black/[0.06] md:grid-cols-2 lg:grid-cols-4">
             {DELIVERY_PILLARS.map((p, i) => (
               <Reveal key={p.num} delay={i * 0.08}>
-                <div className="pillar-card group relative h-full border-r border-black/[0.06] bg-white p-8 transition-all duration-400 last:border-r-0 hover:bg-[#F0F4FF]">
+                <div className="pillar-card h-full border-r border-black/[0.06] bg-white p-8 last:border-r-0 hover:bg-[#F0F4FF]">
                   <div className="mb-5 text-[10px] font-bold tracking-[0.32em] text-[#0057FF]/50">{p.num}</div>
                   <h3 className="mb-3 text-xl font-bold text-[#0A0A0B]">{p.title}</h3>
                   <p className="text-sm leading-relaxed text-[#0A0A0B]/50">{p.desc}</p>
@@ -200,25 +211,25 @@ export default function Home() {
       </section>
 
       <VideoShowcaseGrid items={VIDEO_SHOWCASE} />
-      <CasePlaceholderGrid items={CASE_PLACEHOLDERS} />
       <FaqAccordion items={HOME_FAQ} />
 
-      {/* CTA / Lead */}
-      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-48">
+      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-44">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_65%)]" />
         <AmbientOrbs />
         <div className="relative mx-auto grid max-w-6xl items-start gap-16 px-6 md:grid-cols-12">
           <div className="md:col-span-5">
             <Reveal>
-              <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0057FF]/60">Próximo passo</span>
-              <h2 className="mt-5 text-heading font-semibold text-white">
-                Diagnóstico de funil
-                <span className="text-gradient-titanium"> com IA.</span>
+              <h2 className="text-heading font-semibold text-white">
+                Pronto para o
+                <span className="text-gradient-titanium"> próximo nível?</span>
               </h2>
               <p className="mt-6 text-base leading-relaxed text-white/40">
-                Conte onde está a operação hoje. Devolvemos rota, escopo técnico e prioridade — em linguagem de
-                quem executa, não de quem só apresenta deck.
+                Conte onde você está. Devolvemos rota e próximo passo — sem slide corporativo.
               </p>
+              <ul className="mt-8 space-y-3 text-sm text-white/45">
+                <li>Diagnóstico em 24h</li>
+                <li>Sem contrato de fidelidade</li>
+              </ul>
             </Reveal>
           </div>
           <Reveal delay={0.12} className="md:col-span-7">
@@ -226,10 +237,10 @@ export default function Home() {
               <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0057FF]/40 to-transparent" />
               <LeadForm
                 source="hero"
-                title="Diagnóstico de Funil com IA"
-                description="Mapeamento de gargalos, stack recomendada e próximo marco de entrega — resposta em até 24h."
-                ctaLabel="Quero meu diagnóstico de funil"
-                context={{ intent: 'diagnostico-funil-ia' }}
+                title="Diagnóstico gratuito"
+                description="Resposta em até 24h com rota e escopo inicial."
+                ctaLabel="Quero meu diagnóstico gratuito"
+                context={{ intent: 'diagnostico' }}
               />
             </div>
           </Reveal>

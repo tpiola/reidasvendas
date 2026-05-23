@@ -5,8 +5,8 @@ import { Reveal } from '@/components/Reveal';
 export default function Solucoes() {
   useEffect(() => {
     applySeo({
-      title: 'Soluções — Rei das Vendas | Fábrica Digital',
-      description: 'Sites, aplicativos, extensões e funis com IA. Em atualização — solicite diagnóstico na home.',
+      title: 'Soluções — Rei das Vendas',
+      description: 'Site, funil e automação. Solicite diagnóstico na home.',
       canonicalPath: '/solucoes',
       robots: 'noindex, follow',
     });
@@ -23,7 +23,7 @@ export default function Solucoes() {
         
         <Reveal delay={0.1}>
           <p className="mt-8 text-lg leading-relaxed text-white/60 md:text-xl max-w-3xl mx-auto">
-            A Solução Completa Digital para Líderes e Instituições. Teoria de Ponta. Execução de Trincheira.
+            Site, funil e integrações para o seu segmento. Diagnóstico gratuito em 24h.
           </p>
         </Reveal>
       </div>
