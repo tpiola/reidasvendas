@@ -23,7 +23,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
           Perguntas frequentes
         </h2>
         <p className="mt-4 text-center text-sm text-[#0A0A0B]/45 max-w-lg mx-auto">
-          Respostas objetivas para decisores — indexadas para busca e motores generativos (GEO).
+          Prazo, dados, escopo — sem letra miúda escondida.
         </p>
 
         <div className="mt-14 divide-y divide-black/[0.08] border border-black/[0.06]">

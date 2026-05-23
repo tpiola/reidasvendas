@@ -15,13 +15,11 @@ export function formatPhoneE164(phone: string): string {
 }
 
 const KNOWS_ABOUT = [
-  'Desenvolvimento de Software',
-  'Inteligência Artificial',
-  'Aceleração Comercial',
-  'Engenharia de Funis de Vendas',
-  'Automação de Marketing',
-  'Core Web Vitals',
-  'Generative Engine Optimization',
+  'Desenvolvimento web',
+  'Funil de vendas',
+  'Automação comercial',
+  'Marketing digital',
+  'WhatsApp Business',
 ] as const;
 
 function buildOrganizationNode() {
@@ -36,7 +34,7 @@ function buildOrganizationNode() {
     email: BRAND.email,
     ...(tel ? { telephone: tel } : {}),
     description:
-      'Fábrica Digital de Alta Velocidade e Performance: sites, aplicativos, extensões, funis de vendas e social media com inteligência artificial de ponta.',
+      'Engenharia digital para negócios locais: site rápido, funil, WhatsApp, automação e tráfego com mensuração.',
     inLanguage: 'pt-BR',
     address: {
       '@type': 'PostalAddress',
@@ -61,17 +59,12 @@ function buildProfessionalServiceNode() {
   return {
     '@type': 'ProfessionalService',
     '@id': `${BASE}/#professional-service`,
-    name: `${BRAND.name} — Fábrica Digital`,
+    name: BRAND.name,
     url: `${BASE}/`,
     provider: { '@id': `${BASE}/#organization` },
     description:
-      'Desenvolvimento de software, engenharia de funis, automação comercial e aceleração de vendas com IA — para negócios que precisam validar e escalar sem caos operacional.',
-    serviceType: [
-      'Desenvolvimento de Software',
-      'Inteligência Artificial aplicada a vendas',
-      'Aceleração Comercial',
-      'Engenharia de Funis de Vendas',
-    ],
+      'Sites, funis de venda, integração WhatsApp/CRM e automação para empresas em Franca-SP e Brasil.',
+    serviceType: ['Desenvolvimento web', 'Funil de vendas', 'Automação comercial'],
     knowsAbout: [...KNOWS_ABOUT],
     areaServed: { '@type': 'Country', name: 'Brazil' },
   };

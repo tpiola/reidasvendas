@@ -6,7 +6,7 @@ export default function Saude() {
   useEffect(() => {
     applySeo({
       title: 'Saúde & Estética — Rei das Vendas',
-      description: 'Infraestrutura digital inabalável para clínicas e profissionais da saúde. Teoria de ponta, execução de trincheira.',
+      description: 'Site e funil para clínicas e estética. Captação e follow-up no WhatsApp.',
       canonicalPath: '/saude',
     });
   }, []);
@@ -22,7 +22,7 @@ export default function Saude() {
         
         <Reveal delay={0.1}>
           <p className="mt-8 text-lg leading-relaxed text-white/60 md:text-xl max-w-3xl mx-auto">
-            Teoria de Ponta. Execução de Trincheira. Instalamos infraestrutura inabalável para que você foque no paciente, não no software.
+            Página rápida, agendamento e follow-up automático — você foca no paciente.
           </p>
         </Reveal>
       </div>

@@ -1,13 +1,9 @@
-## O que foi feito
+## O que mudou
 
 - 
 
 ## Checklist
 
-- [ ] `pnpm check`
-- [ ] `pnpm lint`
-- [ ] `pnpm test`
-- [ ] `pnpm build`
-- [ ] Sem `console.log` em produção
-- [ ] A11y (teclado + foco) verificado
-
+- [ ] `pnpm run ci`
+- [ ] Copy revisada (sem texto genérico)
+- [ ] A11y básico (foco, contraste)

@@ -46,7 +46,7 @@ export function SiteFooter() {
               <BrandLogo layout="stacked" size="lg" variant="auto" />
             </Link>
             <p className="mt-8 max-w-xs text-xs leading-relaxed text-[color:var(--footer-muted)]">
-              Fábrica Digital de Alta Velocidade — sites, apps, funis e IA com revisão humana.
+              Site, funil e automação para negócio local que quer vender com previsibilidade.
             </p>
             <dl className="mt-6 space-y-2 text-[11px] text-[color:var(--footer-muted)]">
               <div>
@@ -66,10 +66,6 @@ export function SiteFooter() {
                 </dd>
               </div>
             </dl>
-            <p className="mt-6 max-w-sm border-l border-[#C9A84C]/35 pl-3 text-[10px] leading-relaxed text-[color:var(--footer-muted)]">
-              Usamos Inteligência Artificial para acelerar processos e desenvolvimento, com estrita revisão e
-              validação humana em cada entrega crítica.
-            </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               {SOCIALS.map(({ href, label, Icon }) => (
                 <a
