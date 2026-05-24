@@ -27,8 +27,9 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
         </p>
 
         <div className="mt-14 divide-y divide-black/[0.08] border border-black/[0.06]">
-          {items.map((item) => {
+          {items.map((item, index) => {
             const isOpen = openId === item.id;
+            const num = String(index + 1).padStart(2, '0');
             const panelId = `${baseId}-panel-${item.id}`;
             const triggerId = `${baseId}-trigger-${item.id}`;
 
@@ -48,8 +49,11 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-[#F8F9FC]"
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                 >
-                  <h3 itemProp="name" className="text-sm font-semibold text-[#0A0A0B] md:text-base pr-4">
-                    {item.question}
+                  <h3 itemProp="name" className="flex items-start gap-4 text-sm font-semibold text-[#0A0A0B] md:text-base pr-4">
+                    <span className="shrink-0 text-[10px] font-bold tracking-[0.2em] text-[#0057FF]/50" aria-hidden>
+                      {num}.
+                    </span>
+                    <span>{item.question}</span>
                   </h3>
                   <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center border border-black/10 text-[#0A0A0B]/50 text-lg leading-none"

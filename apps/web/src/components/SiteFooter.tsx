@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import { Instagram, Linkedin, Mail, MapPin } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { BrandLogo } from '@/components/BrandLogo';
-import { LazyVideo } from '@/components/home/LazyVideo';
-import { HERO_POSTER } from '@/lib/media';
 import { FooterWhatsAppQr } from '@/components/footer/FooterWhatsAppQr';
 import { Reveal } from '@/components/Reveal';
 
@@ -37,7 +35,7 @@ const FOOTER_COLS: FooterCol[] = [
     title: 'Empresa',
     links: [
       { label: 'Contato', to: '/contato' },
-      { label: 'Agendar diagnóstico', to: '/contato' },
+      { label: 'Agendar diagnóstico', to: '/diagnostico' },
       { label: 'Privacidade (LGPD)', to: '/politica' },
       { label: 'Termos', to: '/termos' },
       { label: 'Governança', to: '/governanca' },
@@ -52,21 +50,6 @@ export function SiteFooter() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(201,168,76,0.06)_0%,transparent_50%),radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_55%)]"
         aria-hidden
       />
-
-      <Reveal emphasis className="relative border-b border-white/[0.06]">
-        <div className="relative mx-auto max-w-7xl px-4 pt-12 sm:px-6 md:pt-16">
-          <div className="video-section-wrapper aspect-[21/9] max-h-[320px] shadow-2xl shadow-black/60 md:max-h-[380px]">
-            <LazyVideo
-              src={BRAND.inlineVideos.salesTeam}
-              poster={HERO_POSTER}
-              caption="Operação comercial · presença premium"
-              aspectClass="aspect-[21/9] max-h-[380px]"
-              className="max-h-[380px]"
-            />
-          </div>
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#030305] to-transparent" />
-        </div>
-      </Reveal>
 
       <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-16 md:pt-20">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
@@ -154,7 +137,7 @@ export function SiteFooter() {
               <p className="mt-1 text-sm text-white/45">Nome, e-mail e WhatsApp. Rota e escopo sem compromisso.</p>
             </div>
             <Link
-              to="/contato"
+              to="/diagnostico"
               className="btn-glow mt-6 inline-flex h-12 shrink-0 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white md:mt-0"
             >
               Agendar diagnóstico

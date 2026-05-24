@@ -101,3 +101,120 @@ export const HOME_CTA = {
   subtitle: 'Nome, e-mail e WhatsApp. Em até 24h você recebe rota e escopo — sem slide corporativo.',
   bullets: ['Diagnóstico em 24h', 'Sem fidelidade obrigatória'] as const,
 } as const;
+
+export const PRODUCT_DEMO = {
+  eyebrow: 'Veja na prática',
+  title: 'O funil que trabalha',
+  titleAccent: 'enquanto você atende.',
+  subtitle: 'Preview do que entregamos: página, captura, WhatsApp e métricas no mesmo fluxo.',
+  steps: [
+    'Lead entra pelo site ou anúncio com mensagem certa',
+    'WhatsApp responde no timing — sem sumir no silêncio',
+    'CRM registra origem e estágio da oportunidade',
+    'Você vê o que converteu — sem planilha paralela',
+  ],
+} as const;
+
+export const HOW_IT_WORKS = {
+  eyebrow: 'Como funciona',
+  title: 'Três passos.',
+  titleAccent: 'Do diagnóstico ao ar.',
+  subtitle: 'Sem reunião eterna nem slide corporativo — só rota clara e execução.',
+  steps: [
+    {
+      num: '01',
+      title: 'Diagnóstico',
+      desc: 'Nome, e-mail e WhatsApp. Em até 24h você recebe rota, escopo e prioridade de investimento.',
+    },
+    {
+      num: '02',
+      title: 'Obra digital',
+      desc: 'Site, funil e integrações no ar — rápido no celular, pronto para anúncio e SEO técnico.',
+    },
+    {
+      num: '03',
+      title: 'Ritmo comercial',
+      desc: 'Automação no follow-up e relatório do que virou lead — você atende, o sistema sustenta.',
+    },
+  ],
+} as const;
+
+export const FUNNEL_MOCK_TASKS = [
+  { label: 'Landing publicada com copy do nicho', done: true },
+  { label: 'Formulário + consentimento LGPD', done: true },
+  { label: 'WhatsApp conectado ao funil', done: false },
+  { label: 'CRM recebendo leads qualificados', done: false },
+  { label: 'Dashboard de conversão ativo', done: false },
+] as const;
+
+export const COMPARISON_SECTION = {
+  eyebrow: 'Por que nós',
+  title: 'Agência comum',
+  titleAccent: 'vs Rei das Vendas.',
+} as const;
+
+export const COMPARISON_ROWS = [
+  {
+    label: 'Prazo da 1ª versão',
+    generic: 'Semanas ou escopo indefinido',
+    rdv: 'Até 72h após diagnóstico (landing/funil)',
+  },
+  {
+    label: 'Integração',
+    generic: 'Site isolado do WhatsApp e CRM',
+    rdv: 'Site, funil, WhatsApp e métricas conversando',
+  },
+  {
+    label: 'LGPD e dados',
+    generic: 'Formulário genérico, política genérica',
+    rdv: 'Consentimento, HTTPS e política alinhada',
+  },
+  {
+    label: 'Projeto',
+    generic: 'Template reaproveitado',
+    rdv: 'Feito do zero para o seu público converter',
+  },
+] as const;
+
+export const STATS_BAND = {
+  title: 'Números que importam para o dono',
+  subtitle: 'Métricas que já usamos com operações locais — sem promessa vazia.',
+  extra: { value: '0', label: 'Meses de fidelidade obrigatória' },
+} as const;
+
+export const DELIVERABLES = {
+  eyebrow: 'Tudo incluso',
+  title: 'O que montamos',
+  titleAccent: 'para o seu negócio.',
+  subtitle: 'Três frentes — construir, lançar e crescer — com stack que você já ouviu falar.',
+  categories: [
+    {
+      tag: 'Construir',
+      title: 'Presença e conversão',
+      items: ['Site ou landing sob medida', 'Copy orientada ao seu nicho', 'Design premium (glass/bento)'],
+    },
+    {
+      tag: 'Lançar',
+      title: 'Operação no ar',
+      items: ['WhatsApp integrado', 'Funil e formulários', 'Hospedagem Vercel + SSL'],
+    },
+    {
+      tag: 'Crescer',
+      title: 'Ritmo e escala',
+      items: ['Automação n8n', 'GA4 e Search Console', 'Planos de assinatura alinhados'],
+    },
+  ],
+} as const;
+
+export const PRICING_PREVIEW = {
+  eyebrow: 'Planos',
+  title: 'Investimento',
+  titleAccent: 'claro.',
+  subtitle: 'Escolha o ritmo. Cada plano tem página própria com entregáveis detalhados.',
+} as const;
+
+export const PAIN_SECTION = {
+  eyebrow: 'Diagnóstico',
+  title: 'Onde a venda trava',
+  subtitle: 'Quatro frentes que drenam receita — e que fechamos no diagnóstico.',
+} as const;

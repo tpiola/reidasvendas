@@ -1,29 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
-import {
-  CINEMATIC_BAND,
-  DELIVERY_PILLARS,
-  HOME_CTA,
-  HOME_FAQ,
-  PAIN_POINTS,
-  PILLARS_SECTION,
-  TECH_STACK,
-  TRUST_STATS,
-} from '@/lib/home-content';
+import { CINEMATIC_BAND, HOME_CTA, HOME_FAQ, TECH_STACK, TRUST_STATS } from '@/lib/home-content';
 import { HeroVideo } from '@/components/HeroVideo';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { HeroScrollCue } from '@/components/home/HeroScrollCue';
-import { PillarCard } from '@/components/home/PillarCard';
-import { TemplateCatalogSection } from '@/components/home/TemplateCatalogSection';
-import { CinematicVideoBand } from '@/components/home/CinematicVideoBand';
+import { ProductDemoSection } from '@/components/shipper/ProductDemoSection';
+import { HowItWorksSection } from '@/components/shipper/HowItWorksSection';
+import { FunnelComparisonSection } from '@/components/shipper/FunnelComparisonSection';
+import { StatsBand } from '@/components/shipper/StatsBand';
+import { PainPointsSection } from '@/components/shipper/PainPointsSection';
+import { DeliverablesGrid } from '@/components/shipper/DeliverablesGrid';
+import { PricingPreview } from '@/components/shipper/PricingPreview';
+
+const CinematicVideoBand = lazy(() =>
+  import('@/components/home/CinematicVideoBand').then((m) => ({ default: m.CinematicVideoBand })),
+);
+const TemplateCatalogSection = lazy(() =>
+  import('@/components/home/TemplateCatalogSection').then((m) => ({ default: m.TemplateCatalogSection })),
+);
 
 const EASE_LUXURY = [0.16, 1, 0.3, 1] as const;
+
+function SectionFallback() {
+  return <div className="min-h-[12rem] bg-[#030305]" aria-hidden />;
+}
 
 function AmbientOrbs() {
   const reduce = useReducedMotion();
@@ -178,6 +184,9 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <ProductDemoSection />
+      <HowItWorksSection />
+
       <section className="relative overflow-hidden border-y border-white/[0.04] bg-[#08080B] py-12" aria-hidden>
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#08080B] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#08080B] to-transparent" />
@@ -197,52 +206,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-y border-white/[0.04] bg-[#08080B] py-20 md:py-28" aria-labelledby="pain-heading">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal emphasis className="max-w-xl">
-            <h2 id="pain-heading" className="text-heading font-semibold text-white">
-              Onde a venda trava
-            </h2>
-            <p className="mt-4 text-sm text-white/40">Quatro frentes que drenam receita — e que o diagnóstico fecha.</p>
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
-            {PAIN_POINTS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.05}>
-                <article className="card-dark border-l-2 border-l-[#C9A84C]/50 p-6">
-                  <h3 className="text-base font-bold text-white">{p.title}</h3>
-                  <p className="mt-2 text-sm text-white/45">{p.desc}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FunnelComparisonSection />
+      <StatsBand />
+      <PainPointsSection />
+      <DeliverablesGrid />
 
-      <section className="section-white py-28 md:py-40" aria-labelledby="pillars-heading">
-        <div className="mx-auto max-w-6xl px-6">
-          <Reveal emphasis className="mb-16 text-center">
-            <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#0057FF]/50">
-              {PILLARS_SECTION.eyebrow}
-            </span>
-            <h2 id="pillars-heading" className="mt-4 text-heading font-semibold text-[#0A0A0B]">
-              {PILLARS_SECTION.title}
-              <span className="text-gradient-gold"> {PILLARS_SECTION.titleAccent}</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#0A0A0B]/50 md:text-base">
-              {PILLARS_SECTION.subtitle}
-            </p>
-          </Reveal>
-          <div className="grid gap-0 overflow-hidden rounded-sm border border-black/[0.06] md:grid-cols-2 lg:grid-cols-4">
-            {DELIVERY_PILLARS.map((p, i) => (
-              <PillarCard key={p.num} pillar={p} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <Suspense fallback={<SectionFallback />}>
+        <CinematicVideoBand {...CINEMATIC_BAND} />
+      </Suspense>
 
-      <CinematicVideoBand {...CINEMATIC_BAND} />
+      <Suspense fallback={<SectionFallback />}>
+        <TemplateCatalogSection />
+      </Suspense>
 
-      <TemplateCatalogSection />
+      <PricingPreview />
 
       <FaqAccordion items={HOME_FAQ} />
 

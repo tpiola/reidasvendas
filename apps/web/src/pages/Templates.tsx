@@ -6,6 +6,7 @@ import { TemplateCard } from '@/components/TemplateCard';
 import { LeadCaptureSection } from '@/components/LeadCaptureSection';
 import { BuiltFromScratchNotice } from '@/components/BuiltFromScratchNotice';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
+import { PageHero } from '@/components/shipper/PageHero';
 
 export default function Templates() {
   useEffect(() => {
@@ -20,19 +21,15 @@ export default function Templates() {
 
   return (
     <main className="bg-[#030305] text-white">
-      <section className="relative overflow-hidden border-b border-white/[0.06] py-16 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(0,87,255,0.15)_0%,transparent_50%)]" />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">Catálogo completo</p>
-          <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
-            Amostras do que construímos para clientes
-          </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/50 md:text-base">
-            Referências de estética e estrutura por nicho — para você visualizar o nível da entrega antes do diagnóstico.
-          </p>
-          <BuiltFromScratchNotice className="mt-6" />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Catálogo completo"
+        title="Amostras do que construímos"
+        titleAccent="para clientes."
+        subtitle="Referências de estética e estrutura por nicho — para visualizar o nível da entrega antes do diagnóstico."
+        align="left"
+      >
+        <BuiltFromScratchNotice className="mt-6" />
+      </PageHero>
 
       <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -48,7 +45,7 @@ export default function Templates() {
             Ver planos e assinaturas
           </Link>
           <Link
-            to="/contato"
+            to="/diagnostico"
             className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
           >
             Agendar diagnóstico

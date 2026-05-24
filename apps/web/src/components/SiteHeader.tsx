@@ -171,10 +171,16 @@ export function SiteHeader() {
               </NavLink>
             ))}
             <Link
-              to="/contato"
+              to="/diagnostico"
               className="btn-glow mt-10 inline-flex h-14 items-center justify-center text-[11px] font-bold uppercase tracking-[0.28em] text-white"
             >
               Agendar diagnóstico
+            </Link>
+            <Link
+              to="/templates"
+              className="btn-ghost mt-4 inline-flex h-12 items-center justify-center text-[11px] font-bold uppercase tracking-[0.26em] text-white/75"
+            >
+              Ver amostras
             </Link>
           </nav>
         </div>
