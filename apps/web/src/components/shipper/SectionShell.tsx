@@ -46,11 +46,11 @@ export function SectionShell({
             </span>
           ) : null}
           <h2
-            className={`mt-4 text-heading font-semibold ${isDark ? 'text-[color:var(--page-fg)]' : 'text-[#0A0A0B]'}`}
+            className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]"
           >
             {title}
             {titleAccent ? (
-              <span className={isDark ? ' text-gradient-accent' : ' text-gradient-gold'}>
+              <span className={isDark ? ' text-gradient-accent' : ' text-gradient-gold-dark'}>
                 {' '}
                 {titleAccent}
               </span>
@@ -58,9 +58,7 @@ export function SectionShell({
           </h2>
           {subtitle ? (
             <p
-              className={`mt-5 text-sm leading-relaxed md:text-base ${
-                isDark ? 'text-[color:var(--text-muted)]' : 'text-[#0A0A0B]/50'
-              } ${align === 'center' ? 'mx-auto max-w-xl' : ''}`}
+              className={`mt-5 text-sm leading-relaxed text-[color:var(--text-muted)] md:text-base ${align === 'center' ? 'mx-auto max-w-xl' : ''}`}
             >
               {subtitle}
             </p>

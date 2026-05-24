@@ -22,11 +22,11 @@ export function PricingPreview({ showAllPlans = false, className = '' }: Pricing
           <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">
             {PRICING_PREVIEW.eyebrow}
           </span>
-          <h2 id="pricing-preview-heading" className="mt-4 text-heading font-semibold text-white">
+          <h2 id="pricing-preview-heading" className="mt-4 text-heading font-semibold section-ink">
             {PRICING_PREVIEW.title}
             <span className="text-gradient-titanium"> {PRICING_PREVIEW.titleAccent}</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-sm text-white/45">{PRICING_PREVIEW.subtitle}</p>
+          <p className="section-ink-muted mx-auto mt-5 max-w-xl text-sm">{PRICING_PREVIEW.subtitle}</p>
         </Reveal>
 
         <div className={`mt-14 grid gap-6 ${showAllPlans ? 'md:grid-cols-2' : 'md:grid-cols-3'}`}>
@@ -49,11 +49,11 @@ export function PricingPreview({ showAllPlans = false, className = '' }: Pricing
                   <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">
                     {plan.name}
                   </p>
-                  <p className="mt-3 text-sm text-white/50">{plan.tagline}</p>
+                  <p className="section-ink-muted mt-3 text-sm">{plan.tagline}</p>
                   <p className="mt-6 text-2xl font-bold text-gradient-gold">{plan.priceLabel}</p>
                   <ul className="mt-6 flex-1 space-y-2">
                     {plan.highlights.map((h) => (
-                      <li key={h} className="flex gap-2 text-sm text-white/45">
+                      <li key={h} className="section-ink-muted flex gap-2 text-sm">
                         <span className="text-[#0057FF]" aria-hidden>
                           ✓
                         </span>
@@ -64,7 +64,7 @@ export function PricingPreview({ showAllPlans = false, className = '' }: Pricing
                   <Link
                     to={`/planos/${plan.slug}`}
                     className={`mt-8 inline-flex h-12 w-full items-center justify-center text-[11px] font-bold uppercase tracking-[0.24em] ${
-                      isPopular ? 'btn-glow text-white' : 'btn-ghost text-white/80'
+                      isPopular ? 'btn-glow text-white' : 'btn-ghost'
                     }`}
                   >
                     {plan.ctaLabel}
@@ -78,7 +78,7 @@ export function PricingPreview({ showAllPlans = false, className = '' }: Pricing
         <Reveal delay={0.2} className="mt-12 flex justify-center">
           <Link
             to="/planos"
-            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em]"
           >
             Comparar todos os planos
           </Link>

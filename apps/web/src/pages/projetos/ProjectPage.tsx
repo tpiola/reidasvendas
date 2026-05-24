@@ -38,11 +38,11 @@ export default function ProjectPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.16)_0%,transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <nav className="text-[11px] hero-ink-muted" aria-label="Breadcrumb">
-            <Link to="/projetos" className="hover:text-white/80">
+            <Link to="/projetos" className="transition-colors hover:text-[color:var(--section-fg)]">
               Projetos
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-white/80">{project.title}</span>
+            <span className="hero-ink-muted">{project.title}</span>
           </nav>
           <Reveal className="mt-8 max-w-3xl">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">{project.niche}</p>

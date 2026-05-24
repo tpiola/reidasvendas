@@ -87,13 +87,13 @@ export default function Diagnostico() {
 
       <section className="section-dark border-t border-white/[0.06] py-14">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-xl font-semibold text-white">Perguntas frequentes</h2>
+          <h2 className="text-xl font-semibold section-ink">Perguntas frequentes</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {FAQ.map((x, i) => (
               <Reveal key={x.q} delay={i * 0.05}>
-                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
-                  <p className="text-sm font-semibold text-white">{x.q}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/55">{x.a}</p>
+                <div className="rounded-2xl border border-[color:var(--section-border)] bg-white/[0.04] p-6">
+                  <p className="text-sm font-semibold section-ink">{x.q}</p>
+                  <p className="section-ink-muted mt-2 text-sm leading-relaxed">{x.a}</p>
                 </div>
               </Reveal>
             ))}

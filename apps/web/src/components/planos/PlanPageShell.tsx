@@ -43,11 +43,11 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.18)_0%,transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <nav className="text-[11px] hero-ink-muted" aria-label="Breadcrumb">
-            <Link to="/planos" className="hover:text-white/80">
+            <Link to="/planos" className="transition-colors hover:text-[color:var(--section-fg)]">
               Planos
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-white/80">{plan.headline}</span>
+            <span className="hero-ink-muted">{plan.headline}</span>
           </nav>
           <Reveal className="mt-8 max-w-3xl">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">Assinatura</p>
@@ -66,7 +66,7 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
                 href={BRAND.whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-ghost inline-flex h-12 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-white/75"
+                className="btn-ghost inline-flex h-12 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em]"
               >
                 WhatsApp
               </a>

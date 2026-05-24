@@ -19,7 +19,7 @@ export function ProductDemoSection() {
     >
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <div className="glass-card overflow-hidden rounded-2xl border border-white/[0.08] p-2">
+          <div className="glass-card overflow-hidden rounded-2xl border border-[color:var(--border-subtle)] p-2">
             <InlineVideo
               src={BRAND.inlineVideos.performance}
               poster={HERO_POSTER}

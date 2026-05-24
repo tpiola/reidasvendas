@@ -5,6 +5,9 @@ import { BRAND } from '@/lib/brand';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 import { LeadForm } from '@/components/LeadForm';
 import { PageHero } from '@/components/shipper/PageHero';
+import { InlineVideo } from '@/components/home/InlineVideo';
+import { HERO_POSTER } from '@/lib/media';
+import { Reveal } from '@/components/Reveal';
 import { trackEvent } from '@/lib/analytics';
 
 const MAP_EMBED =
@@ -50,6 +53,18 @@ export default function Contato() {
           <p>{BRAND.baseCity}</p>
         </div>
       </PageHero>
+
+      <section className="mx-auto max-w-6xl px-6 pb-8">
+        <Reveal>
+          <div className="glass-card overflow-hidden rounded-2xl p-2">
+            <InlineVideo
+              src={BRAND.inlineVideos.salesTeam}
+              poster={HERO_POSTER}
+              caption="Atendimento · Franca-SP e remoto"
+            />
+          </div>
+        </Reveal>
+      </section>
 
       <section className="mx-auto grid max-w-6xl gap-12 px-6 py-12 md:grid-cols-2 md:py-16">
         <div className="glass-card rounded-2xl p-8 md:p-10">
