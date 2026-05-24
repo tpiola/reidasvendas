@@ -1,7 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#0A0A0A"/>
-  <rect x="58" y="58" width="396" height="396" rx="96" fill="#0F0F0F" stroke="#D4AF37" stroke-width="6"/>
-  <path d="M170 341L256 149l86 192" fill="none" stroke="#D4AF37" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M206 266h100" fill="none" stroke="#D4AF37" stroke-width="10" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-label="Rei das Vendas">
+  <defs>
+    <linearGradient id="rdv-gold" x1="96" y1="64" x2="416" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFE9A8"/>
+      <stop offset="45%" stop-color="#E8C56A"/>
+      <stop offset="100%" stop-color="#C9A84C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#030305"/>
+  <g transform="translate(64, 72) scale(6)">
+    <path d="M32 6 L38 22 L52 18 L44 34 L56 40 L32 36 L8 40 L20 34 L12 18 L26 22 Z" stroke="url(#rdv-gold)" stroke-width="1.35" stroke-linejoin="miter" fill="none"/>
+    <path d="M32 6 L26 22 L20 34 M32 6 L38 22 L44 34 M26 22 L38 22 M20 34 L44 34" stroke="url(#rdv-gold)" stroke-width="0.9" stroke-opacity="0.65" fill="none"/>
+    <path d="M14 44 H50" stroke="url(#rdv-gold)" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M32 12 L32 28" stroke="url(#rdv-gold)" stroke-width="0.75" stroke-opacity="0.5"/>
+  </g>
 </svg>
-

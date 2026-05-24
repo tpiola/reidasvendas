@@ -1,7 +1,7 @@
 {
   "id": "/",
   "name": "Rei das Vendas",
-  "short_name": "Rei das Vendas",
+  "short_name": "Rei Vendas",
   "description": "Democratizando a Inteligência Artificial. Engenharia de Crescimento e IA para Negócios Locais e Instituições.",
   "lang": "pt-BR",
   "dir": "ltr",
@@ -13,6 +13,12 @@
   "theme_color": "#030303",
   "categories": ["business", "productivity", "utilities"],
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/pwa-192.svg",
       "sizes": "192x192",

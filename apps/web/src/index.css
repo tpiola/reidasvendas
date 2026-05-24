@@ -16,14 +16,14 @@
   --rdv-muted: rgba(248, 248, 250, 0.42);
   --rdv-border: rgba(255, 255, 255, 0.06);
   --rdv-radius: 0px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
-  --altiq-serif: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --altiq-serif: 'Playfair Display', ui-serif, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
 }
 
 /* ─── Tema escuro (padrão) ─── */
@@ -463,6 +463,7 @@ img, video { max-width: 100%; height: auto; display: block; }
    TYPOGRAPHY SYSTEM
 ═══════════════════════════════════════════ */
 .text-display { 
+  font-family: var(--altiq-serif);
   font-size: clamp(2.8rem, 8vw, 7rem); 
   font-weight: 600; 
   letter-spacing: -0.045em; 

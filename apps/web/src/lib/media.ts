@@ -15,8 +15,11 @@ export function pexelsUhd(id: number, fps: 25 | 30 = 25): string {
   return `https://videos.pexels.com/video-files/${id}/${id}-uhd_2560_1440_${fps}fps.mp4`;
 }
 
-/** Clip único do hero Home — 1 request, melhor LCP */
+/** Clip único do hero Home — HD mobile / conexão lenta */
 export const HERO_HOME_VIDEO = pexelsHd(3943445);
+
+/** Hero desktop — UHD quando a rede permitir */
+export const HERO_HOME_VIDEO_UHD = pexelsUhd(3943445);
 
 export const PEXELS = {
   heroSkyline: pexelsUhd(3571264, 30),
@@ -65,16 +68,16 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
 
 const HERO_PHOTO_ID = 'photo-1486406146926-c627a92cc1b1';
 
-/** Poster LCP — menor que 1920 para first paint < 3s */
-export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=75&fm=webp`;
+/** Poster mobile / LCP rápido */
+export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=82&fm=webp`;
 
-export const HERO_POSTER_SRCSET = [
-  `${HERO_POSTER_LCP} 1200w`,
-  `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1920&h=1080&q=80&fm=webp 1920w`,
-].join(', ');
+/** Poster alta definição — desktop retina */
+export const HERO_POSTER_HD = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1920&h=1080&q=88&fm=webp`;
 
-/** Compat: OG, lazy sections e fallbacks */
-export const HERO_POSTER = HERO_POSTER_LCP;
+export const HERO_POSTER_SRCSET = [`${HERO_POSTER_LCP} 1200w`, `${HERO_POSTER_HD} 1920w`].join(', ');
+
+/** Hero e seções premium */
+export const HERO_POSTER = HERO_POSTER_HD;
 
 /** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
 export const OG_SHARE_IMAGE =

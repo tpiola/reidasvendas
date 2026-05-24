@@ -23,9 +23,11 @@
     <meta name="theme-color" content="#f4f4f6" media="(prefers-color-scheme: light)" />
     <meta name="color-scheme" content="dark light" />
 
-    <!-- Favicons & PWA -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Favicons & PWA — coroa da marca (mesmo traço do header) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
+    <link rel="alternate icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/pwa-192.svg" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/pwa-512.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- SEO fallback (sobrescrito em runtime por seo.ts em cada página) -->
@@ -54,11 +56,31 @@
     <meta name="twitter:description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Orçamento em 24h." />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=630&q=88" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://videos.pexels.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap"
+      />
+    </noscript>
 
     <link
       rel="preload"
-      href="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=675&q=75&fm=webp"
+      href="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1920&h=1080&q=88&fm=webp"
       as="image"
       type="image/webp"
       fetchpriority="high"
@@ -85,7 +107,7 @@
       "@id": "https://reidasvendas.com.br/#organization",
       "name": "Rei das Vendas",
       "url": "https://reidasvendas.com.br/",
-      "logo": "https://reidasvendas.com.br/favicon.svg",
+      "logo": "https://reidasvendas.com.br/logo.svg",
       "email": "contato@reidasvendas.com.br",
       "description": "Fábrica Digital de Alta Velocidade: sites, aplicativos, extensões, funis de vendas e social media com inteligência artificial.",
       "knowsAbout": ["Desenvolvimento de Software", "Inteligência Artificial", "Aceleração Comercial", "Engenharia de Funis de Vendas"],

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
-import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
+import { HERO_POSTER, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
 import { runWhenIdle } from '@/lib/defer-idle';
 
 const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
@@ -9,11 +9,9 @@ type HeroVideoProps = {
   className?: string;
   poster?: string;
   src?: string;
-  /** Home: 1 clip (local ou Pexels) — sem rotação */
   preferLocalHero?: boolean;
-  /** Força um único vídeo (performance LCP) */
   singleClip?: boolean;
-  /** Adia o `<video>` até após idle — poster cobre o LCP */
+  /** Mobile: adia vídeo ~600ms; desktop: imediato */
   deferVideo?: boolean;
 };
 
@@ -46,11 +44,16 @@ export function HeroVideo({
   src,
   preferLocalHero = false,
   singleClip = false,
-  deferVideo = true,
+  deferVideo = false,
 }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
-  const [shouldPlayVideo, setShouldPlayVideo] = useState(() => !deferVideo);
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(() => {
+    if (deferVideo && typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches) {
+      return false;
+    }
+    return true;
+  });
   const [localHeroReady, setLocalHeroReady] = useState(() =>
     preferLocalHero ? readLocalHeroCached() : false,
   );
@@ -61,7 +64,7 @@ export function HeroVideo({
     if (src) return [src];
     if (singleClip || preferLocalHero) {
       if (preferLocalHero && localHeroReady) return [BRAND.heroLocalMp4];
-      return [BRAND.heroHomeVideo];
+      return [useHd ? BRAND.heroHomeVideo : BRAND.heroHomeVideoUhd];
     }
     const list = useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
     return list.slice(0, useHd ? 3 : 2);
@@ -69,35 +72,33 @@ export function HeroVideo({
 
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const posterUrl = poster ?? HERO_POSTER_LCP;
+  const posterUrl = poster ?? HERO_POSTER;
 
   useEffect(() => {
     setUseHd(preferHdHero());
   }, []);
 
   useEffect(() => {
-    if (reduceMotion || !deferVideo || shouldPlayVideo) return;
-    runWhenIdle(() => setShouldPlayVideo(true), 1800);
-  }, [reduceMotion, deferVideo, shouldPlayVideo]);
+    if (reduceMotion || shouldPlayVideo) return;
+    runWhenIdle(() => setShouldPlayVideo(true), 900);
+  }, [reduceMotion, shouldPlayVideo]);
 
   useEffect(() => {
     if (!preferLocalHero || localHeroReady) return;
     let cancelled = false;
-    runWhenIdle(() => {
-      fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
-        .then((r) => {
-          if (cancelled || !r.ok) return;
-          try {
-            sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
-          } catch {
-            /* ignore */
-          }
-          setLocalHeroReady(true);
-        })
-        .catch(() => {
-          /* Pexels */
-        });
-    }, 3500);
+    fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
+      .then((r) => {
+        if (cancelled || !r.ok) return;
+        try {
+          sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
+        } catch {
+          /* ignore */
+        }
+        setLocalHeroReady(true);
+      })
+      .catch(() => {
+        /* Pexels */
+      });
     return () => {
       cancelled = true;
     };
@@ -135,8 +136,8 @@ export function HeroVideo({
         loading="eager"
         fetchPriority="high"
         decoding="async"
-        width={1200}
-        height={675}
+        width={1920}
+        height={1080}
         sizes="100vw"
       />
       {!reduceMotion &&
@@ -150,7 +151,7 @@ export function HeroVideo({
             muted
             loop
             playsInline
-            preload={i === 0 ? 'metadata' : 'none'}
+            preload={i === 0 ? 'auto' : 'none'}
             poster={posterUrl}
             crossOrigin={videoSrc.startsWith('http') ? 'anonymous' : undefined}
             onCanPlay={() => markLoaded(i)}

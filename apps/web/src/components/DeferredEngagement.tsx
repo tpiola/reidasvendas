@@ -18,7 +18,7 @@ export function DeferredEngagement() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    runAfterFirstPaint(() => setReady(true), 400);
+    runAfterFirstPaint(() => setReady(true), 120);
   }, []);
 
   if (!ready) return null;
