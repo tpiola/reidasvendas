@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { applySeo, applyJsonLd } from '@/lib/seo';
 import { BRAND } from '@/lib/brand';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
+import { PageHero } from '@/components/shipper/PageHero';
 
 const FAQ = [
   {
@@ -27,6 +29,7 @@ export default function Diagnostico() {
       description:
         'Agende diagnóstico: nome, e-mail e WhatsApp. Rota e escopo para colocar seu negócio à frente com tecnologia de ponta.',
       canonicalPath: '/diagnostico',
+      ogImage: DEFAULT_OG_IMAGE,
     });
 
     applyJsonLd('faq', {
@@ -42,22 +45,12 @@ export default function Diagnostico() {
 
   return (
     <main className="bg-[#030305] text-white">
-      <section className="relative overflow-hidden border-b border-white/[0.06]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.16)_0%,transparent_55%)]" />
-        <div className="relative mx-auto max-w-6xl px-6 py-16 md:py-24">
-          <Reveal>
-            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/80">Diagnóstico</p>
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-              Rota de conversão
-              <span className="text-gradient-gold"> com padrão premium</span>
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/50">
-              Preencha só nome, e-mail e WhatsApp. Devolvemos o próximo passo para você operar na frente do mercado —
-              sem formulário longo.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Diagnóstico"
+        title="Rota de conversão"
+        titleAccent="com padrão premium."
+        subtitle="Preencha só nome, e-mail e WhatsApp. Devolvemos o próximo passo para você operar na frente do mercado — sem formulário longo."
+      />
 
       <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
         <Reveal delay={0.08}>

@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { to: '/templates', label: 'Amostras' },
   { to: '/planos', label: 'Planos' },
   { to: '/projetos', label: 'Projetos' },
-  { to: '/solucoes', label: 'Soluções' },
+  { to: '/diagnostico', label: 'Diagnóstico' },
 ] as const;
 
 function NavItem({ to, label }: { to: string; label: string }) {

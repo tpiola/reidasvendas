@@ -218,3 +218,34 @@ export const PAIN_SECTION = {
   title: 'Onde a venda trava',
   subtitle: 'Quatro frentes que drenam receita — e que fechamos no diagnóstico.',
 } as const;
+
+export const TESTIMONIALS_SECTION = {
+  eyebrow: 'Operações atendidas',
+  title: 'Quem já colocou',
+  titleAccent: 'ritmo no funil.',
+  disclaimer:
+    'Relatos resumidos de perfis atendidos — resultados variam conforme nicho, investimento e execução comercial.',
+} as const;
+
+export const TESTIMONIALS = [
+  {
+    quote: 'Saí do site parado para uma landing que já recebe lead com mensagem certa no WhatsApp.',
+    role: 'Dono · clínica de estética',
+    segment: 'Franca / SP',
+  },
+  {
+    quote: 'O diagnóstico cortou ruído: em poucos dias tínhamos escopo fechado e primeira versão no ar.',
+    role: 'Sócio · serviços B2B',
+    segment: 'Interior de SP',
+  },
+  {
+    quote: 'Finalmente CRM e formulário conversando — parei de perder contato no meio do caminho.',
+    role: 'Gestor · varejo local',
+    segment: 'Região de Ribeirão',
+  },
+  {
+    quote: 'Página rápida no celular e pronta para anúncio. O tráfego parou de ir para lugar nenhum.',
+    role: 'Operador · restaurante',
+    segment: 'Franca / SP',
+  },
+] as const;

@@ -4,9 +4,8 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
-import { CINEMATIC_BAND, HOME_CTA, HOME_FAQ, TECH_STACK, TRUST_STATS } from '@/lib/home-content';
+import { CINEMATIC_BAND, HOME_FAQ, TECH_STACK, TRUST_STATS } from '@/lib/home-content';
 import { HeroVideo } from '@/components/HeroVideo';
-import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { HeroScrollCue } from '@/components/home/HeroScrollCue';
@@ -17,6 +16,8 @@ import { StatsBand } from '@/components/shipper/StatsBand';
 import { PainPointsSection } from '@/components/shipper/PainPointsSection';
 import { DeliverablesGrid } from '@/components/shipper/DeliverablesGrid';
 import { PricingPreview } from '@/components/shipper/PricingPreview';
+import { TestimonialsMarquee } from '@/components/shipper/TestimonialsMarquee';
+import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
 
 const CinematicVideoBand = lazy(() =>
   import('@/components/home/CinematicVideoBand').then((m) => ({ default: m.CinematicVideoBand })),
@@ -221,41 +222,11 @@ export default function Home() {
 
       <PricingPreview />
 
+      <TestimonialsMarquee />
+
       <FaqAccordion items={HOME_FAQ} />
 
-      <section className="relative overflow-hidden bg-[#030305] py-32 md:py-44">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_65%)]" />
-        <AmbientOrbs />
-        <div className="relative mx-auto grid max-w-6xl items-start gap-16 px-6 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Reveal>
-              <h2 className="text-heading font-semibold text-white">
-                {HOME_CTA.title}
-                <span className="text-gradient-titanium"> {HOME_CTA.titleAccent}</span>
-              </h2>
-              <p className="mt-6 text-base leading-relaxed text-white/40">{HOME_CTA.subtitle}</p>
-              <ul className="mt-8 space-y-3 text-sm text-white/45">
-                {HOME_CTA.bullets.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-          <Reveal delay={0.12} className="md:col-span-7">
-            <div className="glass-card relative overflow-hidden rounded-2xl p-8 md:p-10">
-              <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#0057FF]/40 to-transparent" />
-              <LeadForm
-                source="hero"
-                formVariant="minimal"
-                title="Diagnóstico estratégico"
-                description="Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo."
-                ctaLabel="Quero meu diagnóstico"
-                context={{ intent: 'diagnostico' }}
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <HomeFinalCta />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { applySeo } from '@/lib/seo';
+import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 import { Reveal } from '@/components/Reveal';
 import { LeadForm } from '@/components/LeadForm';
 
@@ -103,7 +104,7 @@ function DopamineCard({ project, index }: { project: Project; index: number }) {
 
         <div className="mt-8">
           <Link
-            to="/contato"
+            to="/diagnostico"
             className="btn-glow inline-flex h-12 w-full items-center justify-center rounded-xl px-5 text-[11px] font-bold uppercase tracking-[0.2em] text-white group-hover:shadow-[0_0_30px_rgba(0,112,243,0.6)] transition-all duration-300"
           >
             Quero dominar meu mercado
@@ -135,6 +136,7 @@ export default function Projetos() {
       title: 'O Fim do Digital Obsoleto — Rei das Vendas',
       description: 'O digital tradicional está morto. Conheça o cardápio de Hubs Digitais da Rei das Vendas. Automação, IA, SEO e conversão extrema.',
       canonicalPath: '/projetos',
+      ogImage: DEFAULT_OG_IMAGE,
     });
   }, []);
 
@@ -150,7 +152,7 @@ export default function Projetos() {
             opacity: [0.3, 0.5, 0.3]
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(0,112,243,0.08)_0%,transparent_60%)] blur-3xl pointer-events-none"
+          className="absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(0,87,255,0.08)_0%,transparent_60%)] blur-3xl pointer-events-none"
         />
         <motion.div 
           animate={{ 
@@ -158,7 +160,7 @@ export default function Projetos() {
             opacity: [0.1, 0.3, 0.1]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.05)_0%,transparent_60%)] blur-3xl pointer-events-none"
+          className="absolute -bottom-[20%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(201,168,76,0.06)_0%,transparent_60%)] blur-3xl pointer-events-none"
         />
         
         <div className="relative mx-auto max-w-6xl px-6 text-center">
