@@ -1,3 +1,5 @@
+import { PEXELS, unsplashPhoto } from '@/lib/media';
+
 /** Copy da Home — mínima, CTA rápido */
 
 export const HOME_FAQ = [
@@ -105,8 +107,9 @@ export const VIDEO_TESTIMONIALS = [
     author: 'Gestora clínica',
     quote: 'Em poucos dias tínhamos página, funil e WhatsApp integrados. O time respondeu rápido no orçamento.',
     rating: 5,
-    /** Substitua por ID real do YouTube em VITE_TESTIMONIAL_YT_1 */
     youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_1 as string | undefined) || undefined,
+    fallbackVideo: PEXELS.profDoctor,
+    posterUrl: unsplashPhoto('photo-1576091160399-175737edbf78', 1280, 720),
     transcript:
       'Depoimento sobre implantação de site e funil para clínica em Franca. Destaque para prazo de entrega, integração com WhatsApp e suporte no orçamento.',
   },
@@ -117,6 +120,8 @@ export const VIDEO_TESTIMONIALS = [
     quote: 'Primeira versão no ar em dias. Métricas claras do que converte no funil.',
     rating: 5,
     youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_2 as string | undefined) || undefined,
+    fallbackVideo: PEXELS.profEngineer,
+    posterUrl: unsplashPhoto('photo-1460925895917-afdab827c52f', 1280, 720),
     transcript:
       'Cliente B2B relata escopo fechado, entrega rápida da landing e visibilidade de métricas no funil de vendas.',
   },

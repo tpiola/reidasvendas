@@ -15,7 +15,7 @@ export default function BlogPost() {
       title: `${post.title} — Blog Rei das Vendas`,
       description: post.excerpt,
       canonicalPath: `/blog/${post.slug}`,
-      ogImage: DEFAULT_OG_IMAGE,
+      ogImage: post.coverImageUrl,
     });
   }, [post]);
 
@@ -32,7 +32,18 @@ export default function BlogPost() {
           <span>{post.category}</span>
         </nav>
         <Reveal>
-          <h1 className="mt-6 text-3xl font-semibold tracking-tight text-surface md:text-4xl">{post.title}</h1>
+          <div className="media-band mt-8 overflow-hidden rounded-2xl">
+            <img
+              src={post.coverImageUrl}
+              alt={post.title}
+              width={1920}
+              height={1080}
+              className="aspect-[16/9] w-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+          <h1 className="mt-8 text-3xl font-semibold tracking-tight text-surface md:text-4xl">{post.title}</h1>
           <p className="mt-4 text-sm text-surface-muted">
             {post.readMinutes} min de leitura · {post.publishedAt}
           </p>

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { applySeo } from '@/lib/seo';
 import { Reveal } from '@/components/Reveal';
+import { InlineVideo } from '@/components/home/InlineVideo';
+import { HERO_POSTER, PEXELS } from '@/lib/media';
 
 export default function Governanca() {
   useEffect(() => {
@@ -29,21 +31,17 @@ export default function Governanca() {
       </div>
 
       <Reveal delay={0.2} className="mt-24 mx-auto max-w-6xl px-6">
-        <div className="relative aspect-video overflow-hidden rounded-2xl border border-[color:var(--border-subtle)] bg-[color:var(--glass-bg)]">
-          <video
-            className="absolute inset-0 h-full w-full object-cover grayscale opacity-60"
-            autoPlay
-            muted
-            loop
-            playsInline
-          >
-            <source src="https://cdn.coverr.co/videos/coverr-a-man-working-in-a-coffee-shop-5254/1080p.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--page-bg)] via-transparent to-transparent" />
-          <div className="absolute bottom-10 left-10">
-            <p className="font-serif text-2xl text-surface">Rigor de Campo. O que vai para o ar, funciona.</p>
-          </div>
+        <div className="media-band glass-card overflow-hidden rounded-2xl p-2">
+          <InlineVideo
+            src={PEXELS.profCharts}
+            poster={HERO_POSTER}
+            caption="Operação · rigor de campo"
+            className="grayscale-[0.35]"
+          />
         </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center font-serif text-2xl text-surface md:text-3xl">
+          Rigor de Campo. O que vai para o ar, funciona.
+        </p>
       </Reveal>
     </main>
   );

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Reveal } from '@/components/Reveal';
 import { LazyVideo } from '@/components/home/LazyVideo';
 import { VIDEO_TESTIMONIALS, TESTIMONIALS_SECTION } from '@/lib/home-content';
-import { PEXELS } from '@/lib/media';
 
 function YouTubeEmbed({ videoId, title }: { videoId: string; title: string }) {
   return (
@@ -41,13 +40,14 @@ export function TestimonialsVideoSection() {
 
         <div className="mt-12 grid gap-10 lg:grid-cols-2">
           {VIDEO_TESTIMONIALS.map((item, index) => (
-            <Reveal key={item.id} delay={index * 0.08} emphasis>
-              <article className="glass-card overflow-hidden rounded-2xl p-4 md:p-5">
+            <Reveal key={item.id} delay={index * 0.08}>
+              <article className="glass-card media-band overflow-hidden rounded-2xl p-4 md:p-5">
                 {item.youtubeId ? (
                   <YouTubeEmbed videoId={item.youtubeId} title={`Depoimento — ${item.title}`} />
                 ) : (
                   <LazyVideo
-                    src={PEXELS.profDoctor}
+                    src={item.fallbackVideo}
+                    poster={item.posterUrl}
                     caption={item.title}
                     aspectClass="aspect-video"
                   />
