@@ -24,8 +24,9 @@ const FOOTER_COLS: FooterCol[] = [
   {
     title: 'Catálogo',
     links: [
-      { label: 'Amostras de sites', to: '/templates' },
       { label: 'Projetos', to: '/projetos' },
+      { label: 'Amostras de sites', to: '/templates' },
+      { label: 'Blog', to: '/blog' },
       { label: 'Soluções', to: '/solucoes' },
       { label: 'Negócios', to: '/negocios' },
       { label: 'Saúde', to: '/saude' },

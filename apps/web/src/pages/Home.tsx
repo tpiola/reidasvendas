@@ -15,7 +15,8 @@ import { FunnelComparisonSection } from '@/components/shipper/FunnelComparisonSe
 import { StatsBand } from '@/components/shipper/StatsBand';
 import { PainPointsSection } from '@/components/shipper/PainPointsSection';
 import { DeliverablesGrid } from '@/components/shipper/DeliverablesGrid';
-import { PricingPreview } from '@/components/shipper/PricingPreview';
+import { ProjectsShowcaseSection } from '@/components/shipper/ProjectsShowcaseSection';
+import { HERO_COPY } from '@/lib/home-content';
 import { TestimonialsMarquee } from '@/components/shipper/TestimonialsMarquee';
 import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
 
@@ -147,9 +148,7 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.18}>
-            <p className="mt-8 max-w-lg text-lg leading-relaxed text-white/55 md:text-xl">
-              Site, app e automação para quem precisa de lead qualificado — não de mais um cartão de visita online.
-            </p>
+            <p className="mt-8 max-w-lg text-lg leading-relaxed text-white/55 md:text-xl">{HERO_COPY.subhead}</p>
           </Reveal>
 
           <Reveal delay={0.26}>
@@ -158,13 +157,13 @@ export default function Home() {
                 to="/diagnostico"
                 className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
-                Agendar diagnóstico
+                {HERO_COPY.ctaPrimary}
               </Link>
               <Link
-                to="/templates"
+                to="/projetos"
                 className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/75 hover:text-white"
               >
-                Ver amostras
+                {HERO_COPY.ctaSecondary}
               </Link>
             </div>
           </Reveal>
@@ -220,7 +219,24 @@ export default function Home() {
         <TemplateCatalogSection />
       </Suspense>
 
-      <PricingPreview />
+      <ProjectsShowcaseSection />
+
+      <Reveal className="border-y border-white/[0.04] bg-[#030305] py-16">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-6 text-center sm:flex-row sm:justify-center">
+          <Link
+            to="/planos"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+          >
+            Ver planos e investimento
+          </Link>
+          <Link
+            to="/templates"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+          >
+            Catálogo de amostras
+          </Link>
+        </div>
+      </Reveal>
 
       <TestimonialsMarquee />
 

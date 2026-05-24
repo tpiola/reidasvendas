@@ -49,7 +49,7 @@ export function HeroVideo({ className, poster, src }: HeroVideoProps) {
     if (reduceMotion) return;
     timerRef.current = setTimeout(() => {
       setActiveIndex((i) => (i + 1) % videos.length);
-    }, 9000);
+    }, 12000);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };

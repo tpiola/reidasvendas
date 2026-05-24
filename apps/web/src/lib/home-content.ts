@@ -227,6 +227,21 @@ export const TESTIMONIALS_SECTION = {
     'Relatos resumidos de perfis atendidos — resultados variam conforme nicho, investimento e execução comercial.',
 } as const;
 
+export const PROJECTS_HOME_SECTION = {
+  eyebrow: 'Projetos por segmento',
+  title: 'Cada nicho tem',
+  titleAccent: 'sua máquina de vendas.',
+  subtitle:
+    'Referências por segmento — cada entrega é exclusiva, nunca cópia. Preços e planos na área dedicada.',
+} as const;
+
+export const HERO_COPY = {
+  subhead:
+    'Você sente que seu negócio está invisível? Imagine um funil que trabalha enquanto você atende — site, WhatsApp e automação no mesmo fluxo.',
+  ctaPrimary: 'Quero minha máquina de vendas',
+  ctaSecondary: 'Ver projetos',
+} as const;
+
 export const TESTIMONIALS = [
   {
     quote: 'Saí do site parado para uma landing que já recebe lead com mensagem certa no WhatsApp.',

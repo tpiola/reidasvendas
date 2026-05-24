@@ -5,6 +5,11 @@ import type { PlanDetail } from '@/data/plans';
 import { PLANS_HUB } from '@/data/plans';
 import { BuiltFromScratchNotice } from '@/components/BuiltFromScratchNotice';
 import { LeadForm } from '@/components/LeadForm';
+import { InlineVideo } from '@/components/home/InlineVideo';
+import { HERO_POSTER } from '@/lib/media';
+import { PLAN_DEMO_VIDEOS } from '@/data/projects';
+import { PlanComparisonTable } from '@/components/planos/PlanComparisonTable';
+import { BRAND } from '@/lib/brand';
 
 type PlanPageShellProps = {
   plan: PlanDetail;
@@ -61,8 +66,18 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
                 {plan.notIncluded.join(' · ')}
               </p>
             </Reveal>
+            <Reveal delay={0.06} className="mt-10">
+              <div className="glass-card overflow-hidden rounded-2xl p-2">
+                <InlineVideo
+                  src={PLAN_DEMO_VIDEOS[plan.slug] ?? BRAND.inlineVideos.performance}
+                  poster={HERO_POSTER}
+                  caption={`${plan.headline} · demonstração visual`}
+                />
+              </div>
+            </Reveal>
             {children ? <div className="mt-12">{children}</div> : null}
             <BuiltFromScratchNotice className="mt-10" />
+            <PlanComparisonTable currentSlug={plan.slug} />
           </div>
           <Reveal delay={0.12} className="lg:col-span-5">
             <div className="glass-card rounded-2xl p-8">

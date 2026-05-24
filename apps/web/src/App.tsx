@@ -6,9 +6,15 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
+import { ExitIntentModal } from '@/components/engagement/ExitIntentModal';
+import { ProactiveAssist } from '@/components/engagement/ProactiveAssist';
+import { PlanosEngagementBanner } from '@/components/engagement/PlanosEngagementBanner';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Projetos = lazy(() => import('@/pages/Projetos'));
+const ProjectPage = lazy(() => import('@/pages/projetos/ProjectPage'));
+const Blog = lazy(() => import('@/pages/Blog'));
+const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Contato = lazy(() => import('@/pages/Contato'));
 const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
 const Saude = lazy(() => import('@/pages/Saude'));
@@ -49,6 +55,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projetos" element={<Projetos />} />
+            <Route path="/projetos/:slug" element={<ProjectPage />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/diagnostico" element={<Diagnostico />} />
             <Route path="/saude" element={<Saude />} />
@@ -71,6 +80,9 @@ export default function App() {
       <SiteFooter />
       <CookieConsent />
       <WhatsAppFab />
+      <ProactiveAssist />
+      <PlanosEngagementBanner />
+      <ExitIntentModal />
     </Router>
     </ThemeProvider>
   );
