@@ -20,11 +20,11 @@ export function CinematicVideoBand({
   ctaTo,
 }: CinematicVideoBandProps) {
   return (
-    <section className="relative overflow-hidden bg-[#030305] py-28 md:py-40" aria-labelledby="cinematic-heading">
+    <section className="relative overflow-hidden bg-[color:var(--page-bg)] py-20 md:py-32" aria-labelledby="cinematic-heading">
       <div className="relative mx-auto max-w-6xl px-6">
         <Reveal className="mb-12 text-center md:mb-16">
-          <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/22">{eyebrow}</span>
-          <h2 id="cinematic-heading" className="mt-4 text-heading font-semibold text-white">
+          <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/70">{eyebrow}</span>
+          <h2 id="cinematic-heading" className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {title}
             <span className="text-gradient-titanium"> {titleAccent}</span>
           </h2>

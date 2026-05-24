@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
+import { CTA } from '@/lib/cta-copy';
 
 const NAV_LINKS = [
   { to: '/projetos', label: 'Projetos' },
@@ -19,24 +20,14 @@ function NavItem({ to, label }: { to: string; label: string }) {
       to={to}
       className={({ isActive }) =>
         cn(
-          'group relative py-1 text-[11px] font-semibold uppercase tracking-[0.26em] transition-colors duration-300',
+          'rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] transition-all duration-300',
           isActive
-            ? 'text-[color:var(--header-fg)]'
-            : 'text-[color:var(--header-fg-muted)] hover:text-[color:var(--header-fg)]',
+            ? 'bg-[#0057FF]/15 text-[color:var(--header-fg)]'
+            : 'text-[color:var(--header-fg-muted)] hover:bg-[color:var(--header-hover)] hover:text-[color:var(--header-fg)]',
         )
       }
     >
-      {({ isActive }) => (
-        <>
-          {label}
-          <span
-            className={cn(
-              'absolute -bottom-1 left-0 h-px bg-[#C9A84C] transition-all duration-300',
-              isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-60',
-            )}
-          />
-        </>
-      )}
+      {label}
     </NavLink>
   );
 }
@@ -52,7 +43,7 @@ export function SiteHeader() {
   }, [location.pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -73,7 +64,7 @@ export function SiteHeader() {
         className={cn(
           'fixed inset-x-0 top-0 z-50 transition-all duration-500',
           scrolled || !heroGlass
-            ? 'border-b border-[color:var(--header-border)] bg-[color:var(--header-surface)] shadow-[0_8px_32px_rgba(0,0,0,0.12)] backdrop-blur-glass-md'
+            ? 'border-b border-[color:var(--header-border)] bg-[color:var(--header-surface)] shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-glass-md'
             : 'border-b border-transparent bg-[color:var(--header-surface-overlay)] backdrop-blur-glass-md',
         )}
       >
@@ -82,10 +73,10 @@ export function SiteHeader() {
           aria-hidden
         />
 
-        <div className="mx-auto flex h-[4.75rem] max-w-7xl items-center justify-between gap-4 px-5 sm:h-20 sm:px-8">
+        <div className="mx-auto flex h-[4.25rem] max-w-7xl items-center justify-between gap-3 px-4 sm:h-[4.75rem] sm:px-8">
           <Link
             to="/"
-            className="min-w-0 shrink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+            className="min-w-0 shrink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
             aria-label="Rei das Vendas — início"
           >
             <BrandLogo layout="horizontal" size="lg" className="hidden sm:inline-flex" />
@@ -93,7 +84,7 @@ export function SiteHeader() {
           </Link>
 
           <nav
-            className="hidden items-center gap-9 lg:flex"
+            className="hidden items-center gap-1 rounded-full border border-[color:var(--header-border)] bg-[color:var(--header-hover)]/40 p-1 lg:flex"
             aria-label="Navegação principal"
           >
             {NAV_LINKS.map((link) => (
@@ -101,23 +92,23 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <div className="hidden items-center gap-5 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex">
             <Link
               to="/contato"
-              className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--header-fg-muted)] transition-colors hover:text-[color:var(--header-fg)]"
+              className="text-[10px] font-bold uppercase tracking-[0.22em] text-[color:var(--header-fg-muted)] transition-colors hover:text-[color:var(--header-fg)]"
             >
               Contato
             </Link>
             <Link
               to="/diagnostico"
-              className="btn-glow inline-flex h-11 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.28em] text-white"
+              className="btn-glow inline-flex h-10 items-center justify-center px-7 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
             >
-              Agendar diagnóstico
+              {CTA.orcamento}
             </Link>
-            <ThemeToggle className="opacity-80 hover:opacity-100" />
+            <ThemeToggle className="opacity-85 hover:opacity-100" />
           </div>
 
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-1 lg:hidden">
             <ThemeToggle className="h-9 w-9" />
             <button
               type="button"
@@ -134,23 +125,23 @@ export function SiteHeader() {
 
       {menuOpen && (
         <div
-          className="fixed inset-0 z-[60] bg-[#030305]/97 backdrop-blur-xl lg:hidden"
+          className="fixed inset-0 z-[60] bg-[color:var(--page-bg)]/98 backdrop-blur-xl lg:hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
         >
-          <div className="flex h-[4.75rem] items-center justify-end px-5 sm:h-20 sm:px-8">
+          <div className="flex h-[4.25rem] items-center justify-end px-4 sm:h-[4.75rem] sm:px-8">
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center text-white/80"
+              className="inline-flex h-10 w-10 items-center justify-center text-[color:var(--page-fg)]"
               aria-label="Fechar menu"
               onClick={() => setMenuOpen(false)}
             >
               <X size={24} strokeWidth={1.5} />
             </button>
           </div>
-          <nav className="mx-auto flex max-w-lg flex-col px-8 pt-4" aria-label="Navegação mobile">
-            <div className="mb-10 flex justify-center border-b border-white/10 pb-10">
+          <nav className="mx-auto flex max-w-lg flex-col px-8 pt-2" aria-label="Navegação mobile">
+            <div className="mb-8 flex justify-center border-b border-[color:var(--border-subtle)] pb-8">
               <BrandLogo layout="stacked" size="lg" />
             </div>
             {NAV_LINKS.map((link, i) => (
@@ -159,12 +150,12 @@ export function SiteHeader() {
                 to={link.to}
                 className={({ isActive }) =>
                   cn(
-                    'border-b border-white/[0.06] py-5 text-2xl font-semibold tracking-tight transition-colors',
-                    isActive ? 'text-white' : 'text-white/55 hover:text-white',
+                    'border-b border-[color:var(--border-subtle)] py-4 text-xl font-semibold tracking-tight',
+                    isActive ? 'text-[color:var(--page-fg)]' : 'text-[color:var(--text-muted)]',
                   )
                 }
               >
-                <span className="mr-4 text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A84C]/70">
+                <span className="mr-3 text-[10px] font-bold uppercase tracking-[0.3em] text-[#C9A84C]/70">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 {link.label}
@@ -172,15 +163,9 @@ export function SiteHeader() {
             ))}
             <Link
               to="/diagnostico"
-              className="btn-glow mt-10 inline-flex h-14 items-center justify-center text-[11px] font-bold uppercase tracking-[0.28em] text-white"
+              className="btn-glow mt-8 inline-flex h-14 items-center justify-center text-[11px] font-bold uppercase tracking-[0.28em] text-white"
             >
-              Agendar diagnóstico
-            </Link>
-            <Link
-              to="/templates"
-              className="btn-ghost mt-4 inline-flex h-12 items-center justify-center text-[11px] font-bold uppercase tracking-[0.26em] text-white/75"
-            >
-              Ver amostras
+              {CTA.orcamento}
             </Link>
           </nav>
         </div>

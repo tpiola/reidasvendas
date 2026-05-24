@@ -20,12 +20,12 @@ export default function Projetos() {
   }, []);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero
         eyebrow="Projetos"
         title="Estruturas que"
         titleAccent="convertem."
-        subtitle="Referências por segmento. Cada entrega nasce do zero para o público do seu cliente — nunca cópia de template."
+        subtitle="Um funil por segmento. Exclusivo — nunca cópia."
       >
         <BuiltFromScratchNotice className="mx-auto mt-6 max-w-xl" />
       </PageHero>

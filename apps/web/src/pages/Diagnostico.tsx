@@ -25,9 +25,9 @@ const FAQ = [
 export default function Diagnostico() {
   useEffect(() => {
     applySeo({
-      title: 'Diagnóstico estratégico — Rei das Vendas',
+      title: 'Solicitar orçamento — Rei das Vendas',
       description:
-        'Agende diagnóstico: nome, e-mail e WhatsApp. Rota e escopo para colocar seu negócio à frente com tecnologia de ponta.',
+        'Nome, e-mail e WhatsApp. Proposta com escopo e investimento em até 24h.',
       canonicalPath: '/diagnostico',
       ogImage: DEFAULT_OG_IMAGE,
     });
@@ -44,12 +44,12 @@ export default function Diagnostico() {
   }, []);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero
-        eyebrow="Diagnóstico"
-        title="Rota de conversão"
-        titleAccent="com padrão premium."
-        subtitle="Preencha só nome, e-mail e WhatsApp. Devolvemos o próximo passo para você operar na frente do mercado — sem formulário longo."
+        eyebrow="Orçamento"
+        title="Proposta sob medida"
+        titleAccent="em 24h."
+        subtitle="Nome, e-mail e WhatsApp. Escopo e investimento alinhados ao seu nicho."
       />
 
       <section className="mx-auto max-w-6xl px-6 py-12 md:py-16">
@@ -58,9 +58,9 @@ export default function Diagnostico() {
             <LeadForm
               source="hero"
               formVariant="minimal"
-              title="Agendar diagnóstico"
-              description="Somente nome, e-mail e WhatsApp."
-              ctaLabel="Enviar e receber retorno"
+              title="Solicitar orçamento"
+              description="Nome, e-mail e WhatsApp."
+              ctaLabel="Solicitar orçamento"
               context={{ intent: 'diagnostico' }}
             />
           </div>

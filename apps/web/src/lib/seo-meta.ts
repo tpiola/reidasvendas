@@ -7,7 +7,7 @@ export const SITE_NAME = 'Rei das Vendas';
 export const HOME_SEO = {
   title: 'Rei das Vendas — Seu negócio vendendo como as gigantes | Franca-SP',
   description:
-    'Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Diagnóstico em 24h.',
+    'Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Orçamento em 24h.',
 } as const;
 
 /** Raster 1200×630 (frame editorial do hero) — melhor preview em redes */

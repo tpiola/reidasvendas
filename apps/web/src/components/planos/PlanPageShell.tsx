@@ -28,7 +28,7 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
   }, [plan]);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <section className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
         <img
           src={plan.coverImageUrl}

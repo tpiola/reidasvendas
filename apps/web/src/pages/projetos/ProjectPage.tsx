@@ -33,7 +33,7 @@ export default function ProjectPage() {
   }
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <section className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.16)_0%,transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">

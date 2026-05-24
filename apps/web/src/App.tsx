@@ -9,6 +9,7 @@ import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { ExitIntentModal } from '@/components/engagement/ExitIntentModal';
 import { AssistWidget } from '@/components/engagement/AssistWidget';
 import { PlanosEngagementBanner } from '@/components/engagement/PlanosEngagementBanner';
+import { ScrollToTop } from '@/components/ScrollToTop';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Projetos = lazy(() => import('@/pages/Projetos'));
@@ -48,6 +49,7 @@ export default function App() {
   return (
     <ThemeProvider>
     <Router>
+      <ScrollToTop />
       <SiteHeader />
       <AnalyticsProvider />
       <div className="pt-16">

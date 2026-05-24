@@ -8,6 +8,9 @@ import { PricingBreakdown } from '@/components/PricingBreakdown';
 import { LeadForm } from '@/components/LeadForm';
 import { isTemplateUnlocked, unlockTemplate } from '@/utils/unlock';
 import { quoteTemplate } from '@/utils/pricing';
+import { InlineVideo } from '@/components/home/InlineVideo';
+import { getTemplateDemoVideo } from '@/lib/template-videos';
+import { CTA } from '@/lib/cta-copy';
 
 type PreviewState = {
   previewTemplate?: TemplateDefinition;
@@ -123,6 +126,27 @@ export default function TemplatePage() {
               className="inline-flex h-12 items-center justify-center rounded-xl border border-white/25 bg-white/5 px-6 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
               Montar com módulos
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-black/10 bg-black/[0.02] py-12">
+        <div className="mx-auto max-w-4xl px-6">
+          <h2 className="text-center text-[10px] font-bold uppercase tracking-[0.28em] text-black/45">Demo</h2>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-black/10">
+            <InlineVideo
+              src={getTemplateDemoVideo(template.slug)}
+              poster={template.coverImageUrl}
+              caption={`${template.name} · preview`}
+            />
+          </div>
+          <div className="mt-6 flex justify-center">
+            <Link
+              to="/diagnostico"
+              className="btn-glow inline-flex h-12 items-center justify-center px-10 text-[10px] font-bold uppercase tracking-[0.24em] text-white"
+            >
+              {CTA.orcamento}
             </Link>
           </div>
         </div>

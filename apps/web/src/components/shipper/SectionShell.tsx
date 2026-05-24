@@ -30,7 +30,7 @@ export function SectionShell({
   return (
     <section
       id={id}
-      className={`py-24 md:py-32 ${isDark ? 'bg-[#030305]' : 'section-white'} ${className}`}
+      className={`py-20 md:py-28 ${isDark ? 'bg-[color:var(--page-bg)]' : 'section-white'} ${className}`}
     >
       <div className="mx-auto max-w-6xl px-6">
         <Reveal emphasis className={alignClass}>
@@ -38,7 +38,7 @@ export function SectionShell({
             <span
               className={
                 isDark
-                  ? 'text-[10px] font-bold uppercase tracking-[0.32em] text-white/25'
+                  ? 'text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/70'
                   : 'text-[10px] font-bold uppercase tracking-[0.32em] text-[#0057FF]/50'
               }
             >
@@ -46,7 +46,7 @@ export function SectionShell({
             </span>
           ) : null}
           <h2
-            className={`mt-4 text-heading font-semibold ${isDark ? 'text-white' : 'text-[#0A0A0B]'}`}
+            className={`mt-4 text-heading font-semibold ${isDark ? 'text-[color:var(--page-fg)]' : 'text-[#0A0A0B]'}`}
           >
             {title}
             {titleAccent ? (
@@ -59,7 +59,7 @@ export function SectionShell({
           {subtitle ? (
             <p
               className={`mt-5 text-sm leading-relaxed md:text-base ${
-                isDark ? 'text-white/45' : 'text-[#0A0A0B]/50'
+                isDark ? 'text-[color:var(--text-muted)]' : 'text-[#0A0A0B]/50'
               } ${align === 'center' ? 'mx-auto max-w-xl' : ''}`}
             >
               {subtitle}

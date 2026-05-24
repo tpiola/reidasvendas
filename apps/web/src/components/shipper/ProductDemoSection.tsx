@@ -4,6 +4,7 @@ import { InlineVideo } from '@/components/home/InlineVideo';
 import { BRAND } from '@/lib/brand';
 import { HERO_POSTER } from '@/lib/media';
 import { PRODUCT_DEMO } from '@/lib/home-content';
+import { CTA } from '@/lib/cta-copy';
 import { SectionShell } from '@/components/shipper/SectionShell';
 
 export function ProductDemoSection() {
@@ -31,12 +32,12 @@ export function ProductDemoSection() {
             {PRODUCT_DEMO.steps.map((step, i) => (
               <li
                 key={step}
-                className="flex gap-4 border border-white/[0.06] bg-white/[0.03] p-4 transition-colors hover:border-[#0057FF]/25"
+                className="flex gap-4 border border-[color:var(--border-subtle)] bg-[color:var(--surface)] p-4 transition-colors hover:border-[#0057FF]/25"
               >
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#0057FF]/15 text-[11px] font-bold text-[#0057FF]">
                   {i + 1}
                 </span>
-                <span className="text-sm leading-relaxed text-white/55">{step}</span>
+                <span className="text-sm leading-relaxed text-[color:var(--text-muted)]">{step}</span>
               </li>
             ))}
           </ol>
@@ -49,9 +50,9 @@ export function ProductDemoSection() {
             </Link>
             <Link
               to="/diagnostico"
-              className="btn-ghost inline-flex h-12 items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.26em] text-white/75"
+              className="btn-ghost inline-flex h-12 items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.26em]"
             >
-              Agendar diagnóstico
+              {CTA.orcamento}
             </Link>
           </div>
         </Reveal>

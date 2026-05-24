@@ -7,7 +7,7 @@ export function ProjectsShowcaseSection() {
   return (
     <section
       id="projetos"
-      className="border-y border-white/[0.04] bg-[#08080B] py-24 md:py-32"
+      className="border-y border-[color:var(--border-subtle)] bg-[color:var(--surface)] py-20 md:py-28"
       aria-labelledby="projects-home-heading"
     >
       <div className="mx-auto max-w-6xl px-6">
@@ -15,11 +15,11 @@ export function ProjectsShowcaseSection() {
           <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">
             {PROJECTS_HOME_SECTION.eyebrow}
           </span>
-          <h2 id="projects-home-heading" className="mt-4 text-heading font-semibold text-white">
+          <h2 id="projects-home-heading" className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {PROJECTS_HOME_SECTION.title}
             <span className="text-gradient-titanium"> {PROJECTS_HOME_SECTION.titleAccent}</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-sm text-white/45">{PROJECTS_HOME_SECTION.subtitle}</p>
+          <p className="mx-auto mt-5 max-w-xl text-sm text-[color:var(--text-muted)]">{PROJECTS_HOME_SECTION.subtitle}</p>
         </Reveal>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
@@ -43,8 +43,8 @@ export function ProjectsShowcaseSection() {
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="text-lg font-semibold text-white group-hover:text-[#C9A84C]/90">{p.title}</h3>
-                  <p className="mt-2 flex-1 text-sm text-white/45">{p.tagline}</p>
+                  <h3 className="text-lg font-semibold text-[color:var(--page-fg)] group-hover:text-[#C9A84C]/90">{p.title}</h3>
+                  <p className="mt-2 flex-1 text-sm text-[color:var(--text-muted)]">{p.tagline}</p>
                   <span className="mt-4 text-[10px] font-bold uppercase tracking-[0.22em] text-[#0057FF]/80">
                     Ver solução →
                   </span>

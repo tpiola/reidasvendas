@@ -17,7 +17,7 @@ export default function PlanosIndex() {
   }, []);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero
         eyebrow="Vendas"
         title="Planos que escalam"

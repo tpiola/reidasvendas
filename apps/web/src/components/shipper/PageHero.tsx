@@ -21,17 +21,17 @@ export function PageHero({
   const alignClass = align === 'center' ? 'text-center mx-auto' : 'max-w-2xl';
 
   return (
-    <section className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+    <section className="relative overflow-hidden border-b border-[color:var(--border-subtle)] bg-[color:var(--page-bg)] py-20 md:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(201,168,76,0.08)_0%,transparent_60%)]" />
       <div className={`relative mx-auto max-w-6xl px-6 ${alignClass}`}>
         <Reveal>
           <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">{eyebrow}</p>
-          <h1 className="mt-4 text-display font-semibold text-white">
+          <h1 className="mt-4 text-display font-semibold text-[color:var(--page-fg)]">
             {title}
             {titleAccent ? <span className="text-gradient-titanium"> {titleAccent}</span> : null}
           </h1>
           {subtitle ? (
-            <p className={`mt-6 text-base leading-relaxed text-white/45 ${align === 'center' ? 'max-w-2xl' : ''}`}>
+            <p className={`mt-6 text-base leading-relaxed text-[color:var(--text-muted)] ${align === 'center' ? 'max-w-2xl' : ''}`}>
               {subtitle}
             </p>
           ) : null}

@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '@/components/Reveal';
 import { LeadForm } from '@/components/LeadForm';
 import { HOME_CTA } from '@/lib/home-content';
+import { FORM } from '@/lib/cta-copy';
 
 function AmbientOrbs() {
   const reduce = useReducedMotion();
@@ -20,18 +21,18 @@ function AmbientOrbs() {
 
 export function HomeFinalCta() {
   return (
-    <section className="relative overflow-hidden bg-[#030305] py-32 md:py-44" id="diagnostico-form">
+    <section className="relative overflow-hidden bg-[color:var(--page-bg)] py-24 md:py-32" id="diagnostico-form">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_65%)]" />
       <AmbientOrbs />
       <div className="relative mx-auto grid max-w-6xl items-start gap-16 px-6 md:grid-cols-12">
         <div className="md:col-span-5">
           <Reveal>
-            <h2 className="text-heading font-semibold text-white">
+            <h2 className="text-heading font-semibold text-[color:var(--page-fg)]">
               {HOME_CTA.title}
               <span className="text-gradient-titanium"> {HOME_CTA.titleAccent}</span>
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-white/40">{HOME_CTA.subtitle}</p>
-            <ul className="mt-8 space-y-3 text-sm text-white/45">
+            <p className="mt-6 text-base leading-relaxed text-[color:var(--text-muted)]">{HOME_CTA.subtitle}</p>
+            <ul className="mt-8 space-y-3 text-sm text-[color:var(--text-muted)]">
               {HOME_CTA.bullets.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -44,9 +45,9 @@ export function HomeFinalCta() {
             <LeadForm
               source="hero"
               formVariant="minimal"
-              title="Diagnóstico estratégico"
-              description="Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo."
-              ctaLabel="Quero meu diagnóstico"
+              title={FORM.title}
+              description={FORM.description}
+              ctaLabel={FORM.cta}
               context={{ intent: 'diagnostico' }}
             />
           </div>

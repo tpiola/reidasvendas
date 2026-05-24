@@ -53,7 +53,7 @@ export function ExitIntentModal() {
           E se o funil trabalhasse enquanto você atende?
         </h2>
         <p className="mt-4 text-sm text-white/50">
-          Fale no WhatsApp ou agende diagnóstico — resposta em até 24h com rota e escopo.
+          Fale no WhatsApp ou solicite orçamento — proposta em até 24h.
         </p>
         <div className="mt-8 flex flex-col gap-3">
           <a
@@ -69,7 +69,7 @@ export function ExitIntentModal() {
             className="btn-ghost inline-flex h-12 items-center justify-center text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
             onClick={() => setOpen(false)}
           >
-            Agendar diagnóstico
+            Solicitar orçamento
           </Link>
         </div>
       </div>

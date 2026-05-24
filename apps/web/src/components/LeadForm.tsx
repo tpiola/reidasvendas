@@ -114,9 +114,9 @@ type LeadFormProps = {
 
 export function LeadForm({
   source,
-  title = 'Diagnóstico estratégico',
-  description = 'Nome, e-mail e WhatsApp. Resposta em até 24h com rota e escopo para o seu negócio.',
-  ctaLabel = 'Quero meu diagnóstico',
+  title = 'Solicitar orçamento',
+  description = 'Nome, e-mail e WhatsApp. Proposta com escopo e investimento.',
+  ctaLabel = 'Solicitar orçamento',
   formVariant = 'minimal',
   context,
   onSuccess,
