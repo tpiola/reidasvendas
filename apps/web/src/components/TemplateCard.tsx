@@ -39,13 +39,15 @@ export function TemplateCard({ template }: TemplateCardProps) {
       </Link>
 
       <div className="p-5">
-        <p className="text-sm leading-relaxed text-white/50">{template.tagline}</p>
+        <p className="text-sm leading-relaxed text-surface-muted">{template.tagline}</p>
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/35">Referência · a partir de {formatBRL(template.basePriceCents)}</p>
+          <p className="text-xs text-surface-muted opacity-80">
+            Referência · a partir de {formatBRL(template.basePriceCents)}
+          </p>
           <div className="flex items-center gap-2">
             <Link
               to={`/templates/${template.slug}`}
-              className="inline-flex h-10 items-center justify-center rounded-xl border border-white/15 px-4 text-xs font-semibold text-white/75 transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
+              className="btn-ghost inline-flex h-10 items-center justify-center rounded-xl px-4 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
             >
               Ver amostra
             </Link>

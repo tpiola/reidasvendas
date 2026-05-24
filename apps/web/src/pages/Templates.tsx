@@ -20,7 +20,7 @@ export default function Templates() {
   }, []);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero
         eyebrow="Catálogo completo"
         title="Amostras do que construímos"
@@ -46,7 +46,7 @@ export default function Templates() {
           </Link>
           <Link
             to="/diagnostico"
-            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em]"
           >
             Agendar diagnóstico
           </Link>

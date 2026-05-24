@@ -33,7 +33,7 @@ export function SectionShell({
       className={`py-20 md:py-28 ${isDark ? 'bg-[color:var(--page-bg)]' : 'section-white'} ${className}`}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal emphasis className={alignClass}>
+        <Reveal className={alignClass}>
           {eyebrow ? (
             <span
               className={

@@ -18,7 +18,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero
         eyebrow="Blog"
         title="Conteúdo que"
@@ -32,13 +32,13 @@ export default function Blog() {
             <Reveal key={post.slug} delay={i * 0.06}>
               <article className="card-dark flex h-full flex-col p-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#C9A84C]/70">{post.category}</p>
-                <h2 className="mt-3 text-lg font-semibold text-white">
+                <h2 className="mt-3 text-lg font-semibold text-surface">
                   <Link to={`/blog/${post.slug}`} className="hover:text-[#C9A84C]/90">
                     {post.title}
                   </Link>
                 </h2>
-                <p className="mt-3 flex-1 text-sm text-white/45">{post.excerpt}</p>
-                <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-white/30">
+                <p className="mt-3 flex-1 text-sm text-surface-muted">{post.excerpt}</p>
+                <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-surface-muted opacity-70">
                   {post.readMinutes} min · {post.publishedAt}
                 </p>
               </article>

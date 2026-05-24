@@ -14,7 +14,7 @@ export function PricingPreview({ showAllPlans = false, className = '' }: Pricing
 
   return (
     <section
-      className={`border-y border-white/[0.04] bg-[#08080B] py-24 md:py-32 ${className}`}
+      className={`section-dark border-y border-white/[0.04] bg-[#08080B] py-24 md:py-32 ${className}`}
       aria-labelledby="pricing-preview-heading"
     >
       <div className="mx-auto max-w-6xl px-6">

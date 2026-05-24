@@ -10,11 +10,15 @@ npx lighthouse https://reidasvendas.com.br/ --only-categories=performance,access
 ## Já aplicado no código
 
 - Imagens Unsplash com `fm=webp` e `srcset`
-- Vídeos lazy abaixo da dobra; hero com poster + UHD desktop
-- Code-splitting (router, motion, form) no Vite
+- Vídeos lazy abaixo da dobra; hero com poster 1200w (mobile) + UHD desktop; `preload="metadata"` no 1º clip
+- Hero Home sem framer-motion no H1; `Reveal` via CSS + `IntersectionObserver` (sem blur)
+- `page-surface` + tokens de tema nas rotas públicas; bandas `.section-dark` onde o fundo é fixo escuro
+- Code-splitting (router, engagement, vídeos) no Vite
 - JSON-LD dinâmico (LocalBusiness, FAQ, Review, Product em planos)
-- Fonts com `media="print"` + `onload`
+- Fonts com `media="print"` + `onload`; Playfair reduzido a 600/700
+- Poster LCP preload com `media` mobile/desktop em `index.html`
 - CSP e headers de segurança em `vercel.json`
+- Barra sticky de conversão + tracking `whatsapp_click` em FAB/sticky/footer
 
 ## Metas sugeridas
 

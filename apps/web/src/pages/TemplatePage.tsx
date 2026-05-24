@@ -70,16 +70,13 @@ export default function TemplatePage() {
 
   if (!template) {
     return (
-      <main className="mx-auto max-w-6xl px-6 py-16">
-        <h1 className="text-2xl font-semibold tracking-tight">Template não encontrado</h1>
-        <p className="mt-3 text-sm text-black/65">
+      <main className="page-surface mx-auto max-w-6xl px-6 py-16">
+        <h1 className="text-2xl font-semibold tracking-tight text-surface">Template não encontrado</h1>
+        <p className="mt-3 text-sm text-surface-muted">
           Volte ao catálogo para escolher um template disponível.
         </p>
         <div className="mt-8">
-          <Link
-            to="/templates"
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-black px-5 text-sm font-semibold text-white transition-colors hover:bg-black/85"
-          >
+          <Link to="/templates" className="btn-glow inline-flex h-11 items-center justify-center px-6 text-sm font-semibold text-white">
             Ver catálogo
           </Link>
         </div>
@@ -90,8 +87,8 @@ export default function TemplatePage() {
   const included = template.includedModuleIds;
 
   return (
-    <main className="bg-white">
-      <section className="relative overflow-hidden border-b border-black/10">
+    <main className="page-surface">
+      <section className="hero-dark relative overflow-hidden border-b border-[color:var(--border-subtle)]">
         <div className="absolute inset-0">
           <img
             src={template.coverImageUrl}
@@ -131,10 +128,10 @@ export default function TemplatePage() {
         </div>
       </section>
 
-      <section className="border-y border-black/10 bg-black/[0.02] py-12">
+      <section className="border-y border-[color:var(--border-subtle)] py-12">
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="text-center text-[10px] font-bold uppercase tracking-[0.28em] text-black/45">Demo</h2>
-          <div className="mt-6 overflow-hidden rounded-2xl border border-black/10">
+          <h2 className="text-center text-[10px] font-bold uppercase tracking-[0.28em] text-surface-muted">Demo</h2>
+          <div className="mt-6 overflow-hidden rounded-2xl border border-[color:var(--border-subtle)]">
             <InlineVideo
               src={getTemplateDemoVideo(template.slug)}
               poster={template.coverImageUrl}
@@ -154,12 +151,12 @@ export default function TemplatePage() {
 
       <section className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-12 md:py-16">
         <div className="md:col-span-7">
-          <h2 className="text-xl font-semibold tracking-tight">Galeria</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-surface">Galeria</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {template.galleryImageUrls.map((src) => (
               <div
                 key={src}
-                className="overflow-hidden rounded-2xl border border-black/10"
+                className="overflow-hidden rounded-2xl border border-[color:var(--border-subtle)]"
               >
                 <img src={src} alt="" className="h-full w-full object-cover" loading="lazy" decoding="async" />
               </div>
@@ -168,12 +165,12 @@ export default function TemplatePage() {
         </div>
 
         <div className="md:col-span-5">
-          <div className="rounded-2xl border border-black/10 bg-black/2 p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/55">
+          <div className="glass-card rounded-2xl p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-surface-muted">
               Módulos
             </p>
-            <h2 className="mt-2 text-xl font-semibold tracking-tight">O que o hub pode ter</h2>
-            <p className="mt-2 text-sm leading-relaxed text-black/65">
+            <h2 className="mt-2 text-xl font-semibold tracking-tight text-surface">O que o hub pode ter</h2>
+            <p className="mt-2 text-sm leading-relaxed text-surface-muted">
               Selecione o que faz sentido para o nicho. O valor cresce conforme o escopo aumenta.
             </p>
           </div>
@@ -196,7 +193,7 @@ export default function TemplatePage() {
         </div>
       </section>
 
-      <section id="preco" className="border-t border-black/10 bg-white">
+      <section id="preco" className="border-t border-[color:var(--border-subtle)]">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
           {!quote ? null : isUnlocked ? (
             <PricingBreakdown quote={quote} />
@@ -218,7 +215,7 @@ export default function TemplatePage() {
               onSuccess={() => {
                 if (slug) unlockTemplate(slug);
               }}
-              className="rounded-2xl border border-black/10 bg-white p-6 shadow-lg shadow-black/5 md:p-8"
+              className="glass-card rounded-2xl p-6 md:p-8"
             />
           )}
         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
-import { HERO_POSTER, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
+import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
 import { runWhenIdle } from '@/lib/defer-idle';
 
 const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
@@ -44,7 +44,7 @@ export function HeroVideo({
   src,
   preferLocalHero = false,
   singleClip = false,
-  deferVideo = false,
+  deferVideo = true,
 }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
@@ -72,7 +72,7 @@ export function HeroVideo({
 
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const posterUrl = poster ?? HERO_POSTER;
+  const posterUrl = poster ?? HERO_POSTER_LCP;
 
   useEffect(() => {
     setUseHd(preferHdHero());
@@ -136,9 +136,9 @@ export function HeroVideo({
         loading="eager"
         fetchPriority="high"
         decoding="async"
-        width={1920}
-        height={1080}
-        sizes="100vw"
+        width={1200}
+        height={675}
+        sizes="(max-width: 1023px) 100vw, 1920px"
       />
       {!reduceMotion &&
         shouldPlayVideo &&
@@ -151,7 +151,7 @@ export function HeroVideo({
             muted
             loop
             playsInline
-            preload={i === 0 ? 'auto' : 'none'}
+            preload={i === 0 ? 'metadata' : 'none'}
             poster={posterUrl}
             crossOrigin={videoSrc.startsWith('http') ? 'anonymous' : undefined}
             onCanPlay={() => markLoaded(i)}

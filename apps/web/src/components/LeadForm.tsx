@@ -394,50 +394,53 @@ export function LeadForm({
       {formVariant === 'full' && (
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
           <div>
-            <label className="text-xs font-semibold text-black/65" htmlFor="objective">
+            <label className="label-field" htmlFor="objective">
               Objetivo principal
             </label>
             <div className="mt-2">
               <Input
                 id="objective"
+                className="input-field border-glow-1"
                 placeholder="Ex.: aumentar leads, agendamentos, vendas"
                 {...register('objective')}
               />
             </div>
           </div>
           <div>
-            <label className="text-xs font-semibold text-black/65" htmlFor="stage">
+            <label className="label-field" htmlFor="stage">
               Estágio atual
             </label>
             <div className="mt-2">
               <Input
                 id="stage"
+                className="input-field border-glow-1"
                 placeholder="Ex.: já vendo / validando / lançando"
                 {...register('stage')}
               />
             </div>
           </div>
           <div className="md:col-span-2">
-            <label className="text-xs font-semibold text-black/65" htmlFor="timeline">
+            <label className="label-field" htmlFor="timeline">
               Prazo
             </label>
             <div className="mt-2">
               <Input
                 id="timeline"
+                className="input-field border-glow-1"
                 placeholder="Ex.: 2 semanas / 30 dias / sem urgência"
                 {...register('timeline')}
               />
             </div>
           </div>
           <div className="md:col-span-2">
-            <label className="text-xs font-semibold text-black/65" htmlFor="message">
+            <label className="label-field" htmlFor="message">
               Mensagem
             </label>
             <div className="mt-2">
               <textarea
                 id="message"
                 rows={4}
-                className="w-full rounded-xl border border-black/15 bg-white px-3 py-2 text-sm text-black placeholder:text-black/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+                className="input-field border-glow-1 min-h-[7rem] resize-y"
                 placeholder="Contexto, oferta, público, links e qualquer detalhe relevante."
                 {...register('message')}
               />

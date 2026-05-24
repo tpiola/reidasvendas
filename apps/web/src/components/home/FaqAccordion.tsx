@@ -1,5 +1,4 @@
 import { useId, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import type { FaqItem } from '@/lib/seo-schema';
 
 type FaqAccordionProps = {
@@ -62,27 +61,22 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                     {isOpen ? '−' : '+'}
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      id={panelId}
-                      role="region"
-                      aria-labelledby={triggerId}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                      className="overflow-hidden"
-                      itemScope
-                      itemProp="acceptedAnswer"
-                      itemType="https://schema.org/Answer"
-                    >
-                      <p itemProp="text" className="px-6 pb-6 text-sm leading-relaxed text-[#0A0A0B]/55">
-                        {item.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  className="faq-panel-grid"
+                  data-open={isOpen ? 'true' : 'false'}
+                  itemScope
+                  itemProp="acceptedAnswer"
+                  itemType="https://schema.org/Answer"
+                >
+                  <div>
+                    <p itemProp="text" className="px-6 pb-6 text-sm leading-relaxed text-[#0A0A0B]/55">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
               </article>
             );
           })}

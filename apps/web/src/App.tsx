@@ -8,6 +8,7 @@ import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { DeferredEngagement } from '@/components/DeferredEngagement';
 import { ScrollToTop } from '@/components/ScrollToTop';
+import { ConversionStickyBar } from '@/components/conversion/ConversionStickyBar';
 import Home from '@/pages/Home';
 const Projetos = lazy(() => import('@/pages/Projetos'));
 const ProjectPage = lazy(() => import('@/pages/projetos/ProjectPage'));
@@ -47,6 +48,7 @@ export default function App() {
     <ThemeProvider>
     <Router>
       <ScrollToTop />
+      <ConversionStickyBar />
       <SiteHeader />
       <AnalyticsProvider />
       <div className="site-header-offset">

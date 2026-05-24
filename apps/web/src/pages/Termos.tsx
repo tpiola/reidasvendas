@@ -14,9 +14,9 @@ export default function Termos() {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        <nav className="mb-8 text-xs text-black/60" aria-label="Breadcrumb">
-          <Link to="/" className="hover:text-black transition-colors">Início</Link>
+      <main className="page-surface mx-auto max-w-3xl px-6 py-16 md:py-24">
+        <nav className="mb-8 text-xs text-surface-muted" aria-label="Breadcrumb">
+          <Link to="/" className="text-surface transition-colors hover:opacity-80">Início</Link>
           <span className="mx-2">›</span>
           <span>Termos de Uso</span>
         </nav>
@@ -25,15 +25,15 @@ export default function Termos() {
           Termos de Uso
         </h1>
 
-        <p className="mt-2 text-xs text-black/60">Última atualização: abril de 2026</p>
+        <p className="mt-2 text-xs text-surface-muted">Última atualização: abril de 2026</p>
 
-        <div className="mt-8 space-y-8 text-sm leading-relaxed text-black/70">
+        <div className="mt-8 space-y-8 text-sm leading-relaxed text-surface-muted">
           <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-xs text-amber-800">
             <strong>Versão inicial — </strong>antes de ir para produção, ajuste cláusulas comerciais, limitações de responsabilidade e políticas de suporte com seu jurídico.
           </div>
 
           <section aria-labelledby="aceitacao-heading">
-            <h2 id="aceitacao-heading" className="text-base font-semibold text-black">
+            <h2 id="aceitacao-heading" className="text-base font-semibold text-surface">
               1. Aceitação dos termos
             </h2>
             <p className="mt-3">
@@ -43,7 +43,7 @@ export default function Termos() {
           </section>
 
           <section aria-labelledby="servicos-heading">
-            <h2 id="servicos-heading" className="text-base font-semibold text-black">
+            <h2 id="servicos-heading" className="text-base font-semibold text-surface">
               2. Serviços oferecidos
             </h2>
             <p className="mt-3">
@@ -54,7 +54,7 @@ export default function Termos() {
           </section>
 
           <section aria-labelledby="propriedade-heading">
-            <h2 id="propriedade-heading" className="text-base font-semibold text-black">
+            <h2 id="propriedade-heading" className="text-base font-semibold text-surface">
               3. Propriedade intelectual
             </h2>
             <p className="mt-3">
@@ -65,7 +65,7 @@ export default function Termos() {
           </section>
 
           <section aria-labelledby="limitacoes-heading">
-            <h2 id="limitacoes-heading" className="text-base font-semibold text-black">
+            <h2 id="limitacoes-heading" className="text-base font-semibold text-surface">
               4. Limitação de responsabilidade
             </h2>
             <p className="mt-3">
@@ -77,7 +77,7 @@ export default function Termos() {
           </section>
 
           <section aria-labelledby="modificacoes-heading">
-            <h2 id="modificacoes-heading" className="text-base font-semibold text-black">
+            <h2 id="modificacoes-heading" className="text-base font-semibold text-surface">
               5. Modificações
             </h2>
             <p className="mt-3">
@@ -90,7 +90,7 @@ export default function Termos() {
         <div className="mt-10 border-t border-black/8 pt-8">
           <Link
             to="/"
-            className="inline-flex h-10 items-center gap-2 rounded-xl border border-black/15 px-4 text-xs font-semibold text-black/70 transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+            className="btn-ghost inline-flex h-10 items-center gap-2 rounded-xl px-4 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
           >
             ← Voltar para a Home
           </Link>

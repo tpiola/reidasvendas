@@ -42,7 +42,7 @@ export function NicheLandingPage({
   }, [seoTitle, seoDescription, canonicalPath]);
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <PageHero eyebrow={eyebrow} title={title} titleAccent={titleAccent} subtitle={subtitle} align="center" />
 
       <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
@@ -55,7 +55,7 @@ export function NicheLandingPage({
         <Reveal delay={0.1} className="mt-12 grid gap-4 sm:grid-cols-3">
           {highlights.map((item) => (
             <div key={item} className="card-dark p-5 text-center">
-              <p className="text-sm text-white/55">{item}</p>
+              <p className="text-sm text-surface-muted">{item}</p>
             </div>
           ))}
         </Reveal>
@@ -68,10 +68,10 @@ export function NicheLandingPage({
             Agendar diagnóstico
           </Link>
           <Link
-            to="/templates"
-            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+            to="/planos"
+            className="btn-ghost inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em]"
           >
-            Ver amostras
+            Ver planos
           </Link>
         </Reveal>
       </section>

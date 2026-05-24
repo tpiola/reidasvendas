@@ -13,23 +13,23 @@ export default function Governanca() {
   }, []);
 
   return (
-    <main className="bg-background min-h-screen pt-32 pb-24">
+    <main className="page-surface min-h-screen pt-32 pb-24">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <Reveal>
-          <h1 className="font-serif text-5xl font-medium tracking-tight text-white md:text-7xl">
+          <h1 className="font-serif text-5xl font-medium tracking-tight text-surface md:text-7xl">
             <span className="text-gradient-titanium">Governança Corporativa</span>
           </h1>
         </Reveal>
         
         <Reveal delay={0.1}>
-          <p className="mt-8 text-lg leading-relaxed text-white/60 md:text-xl max-w-3xl mx-auto">
+          <p className="mt-8 max-w-3xl mx-auto text-lg leading-relaxed text-surface-muted md:text-xl">
             Teoria de Ponta. Execução de Trincheira. Transparência total, rigor de campo e escala humana.
           </p>
         </Reveal>
       </div>
 
       <Reveal delay={0.2} className="mt-24 mx-auto max-w-6xl px-6">
-        <div className="relative aspect-video rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02]">
+        <div className="relative aspect-video overflow-hidden rounded-2xl border border-[color:var(--border-subtle)] bg-[color:var(--glass-bg)]">
           <video
             className="absolute inset-0 h-full w-full object-cover grayscale opacity-60"
             autoPlay
@@ -39,9 +39,9 @@ export default function Governanca() {
           >
             <source src="https://cdn.coverr.co/videos/coverr-a-man-working-in-a-coffee-shop-5254/1080p.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--page-bg)] via-transparent to-transparent" />
           <div className="absolute bottom-10 left-10">
-            <p className="font-serif text-2xl text-white">Rigor de Campo. O que vai para o ar, funciona.</p>
+            <p className="font-serif text-2xl text-surface">Rigor de Campo. O que vai para o ar, funciona.</p>
           </div>
         </div>
       </Reveal>

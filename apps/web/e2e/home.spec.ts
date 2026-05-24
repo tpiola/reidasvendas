@@ -7,7 +7,7 @@ test('home carrega e exibe CTA', async ({ page }) => {
   await expect(page.locator('#demo')).toBeVisible();
   await expect(page.locator('#evolucao')).toBeVisible();
   await expect(page.locator('#projetos')).toBeVisible();
-  await expect(page.getByRole('link', { name: /Ver planos/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Ver planos/i }).first()).toBeVisible();
   await expect(page.getByRole('heading', { name: /escalou/i })).toBeVisible();
 });
 

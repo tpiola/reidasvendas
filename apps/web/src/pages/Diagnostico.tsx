@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { applySeo, applyJsonLd } from '@/lib/seo';
 import { BRAND } from '@/lib/brand';
+import { trackEvent } from '@/lib/analytics';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 import { LeadForm } from '@/components/LeadForm';
 import { Reveal } from '@/components/Reveal';
@@ -68,7 +69,7 @@ export default function Diagnostico() {
         <Reveal delay={0.12} className="mt-8 flex flex-wrap gap-4">
           <Link
             to="/planos"
-            className="btn-ghost inline-flex h-11 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-white/70"
+            className="btn-ghost inline-flex h-11 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em]"
           >
             Ver planos
           </Link>
@@ -76,6 +77,7 @@ export default function Diagnostico() {
             href={BRAND.whatsappLink}
             target="_blank"
             rel="noreferrer"
+            onClick={() => trackEvent('whatsapp_click', { location: 'diagnostico' })}
             className="btn-glow inline-flex h-11 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-white"
           >
             WhatsApp direto
@@ -83,15 +85,15 @@ export default function Diagnostico() {
         </Reveal>
       </section>
 
-      <section className="border-t border-white/[0.06] bg-[#08080B] py-14">
+      <section className="section-dark border-t border-white/[0.06] py-14">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-xl font-semibold">Perguntas frequentes</h2>
+          <h2 className="text-xl font-semibold text-white">Perguntas frequentes</h2>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {FAQ.map((x, i) => (
               <Reveal key={x.q} delay={i * 0.05}>
-                <div className="card-dark p-6">
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
                   <p className="text-sm font-semibold text-white">{x.q}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-white/45">{x.a}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/55">{x.a}</p>
                 </div>
               </Reveal>
             ))}

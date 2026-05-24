@@ -22,29 +22,29 @@ export default function BlogPost() {
   if (!post) return <Navigate to="/blog" replace />;
 
   return (
-    <main className="bg-[#030305] text-white">
+    <main className="page-surface">
       <article className="mx-auto max-w-3xl px-6 py-20 md:py-28">
-        <nav className="text-[11px] text-white/40">
-          <Link to="/blog" className="hover:text-white/70">
+        <nav className="text-[11px] text-surface-muted">
+          <Link to="/blog" className="hover:text-[color:var(--page-fg)]">
             Blog
           </Link>
           <span className="mx-2">/</span>
-          <span className="text-white/60">{post.category}</span>
+          <span>{post.category}</span>
         </nav>
         <Reveal>
-          <h1 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">{post.title}</h1>
-          <p className="mt-4 text-sm text-white/40">
+          <h1 className="mt-6 text-3xl font-semibold tracking-tight text-surface md:text-4xl">{post.title}</h1>
+          <p className="mt-4 text-sm text-surface-muted">
             {post.readMinutes} min de leitura · {post.publishedAt}
           </p>
         </Reveal>
-        <div className="prose-invert mt-10 space-y-6">
+        <div className="mt-10 space-y-6">
           {post.body.map((paragraph) => (
             <Reveal key={paragraph}>
-              <p className="text-base leading-relaxed text-white/55">{paragraph}</p>
+              <p className="text-base leading-relaxed text-surface-muted">{paragraph}</p>
             </Reveal>
           ))}
         </div>
-        <Reveal className="mt-14 border-t border-white/[0.06] pt-10">
+        <Reveal className="mt-14 border-t border-[color:var(--border-subtle)] pt-10">
           <Link
             to="/diagnostico"
             className="btn-glow inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white"

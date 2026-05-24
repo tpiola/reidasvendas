@@ -14,9 +14,9 @@ export default function Politica() {
 
   return (
     <>
-      <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        <nav className="mb-8 text-xs text-black/60" aria-label="Breadcrumb">
-          <Link to="/" className="hover:text-black transition-colors">Início</Link>
+      <main className="page-surface mx-auto max-w-3xl px-6 py-16 md:py-24">
+        <nav className="mb-8 text-xs text-surface-muted" aria-label="Breadcrumb">
+          <Link to="/" className="text-surface transition-colors hover:opacity-80">Início</Link>
           <span className="mx-2">›</span>
           <span>Política de Privacidade</span>
         </nav>
@@ -25,15 +25,15 @@ export default function Politica() {
           Política de Privacidade
         </h1>
 
-        <p className="mt-2 text-xs text-black/60">Última atualização: abril de 2026</p>
+        <p className="mt-2 text-xs text-surface-muted">Última atualização: abril de 2026</p>
 
-        <div className="mt-8 space-y-8 text-sm leading-relaxed text-black/70">
+        <div className="mt-8 space-y-8 text-sm leading-relaxed text-surface-muted">
           <div className="rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-xs text-amber-800">
             <strong>Versão inicial — </strong>antes de ir para produção, adeque este documento com seu jurídico (LGPD), mapeie bases legais, prazos de retenção e fornecedores.
           </div>
 
           <section aria-labelledby="coleta-heading">
-            <h2 id="coleta-heading" className="text-base font-semibold text-black">
+            <h2 id="coleta-heading" className="text-base font-semibold text-surface">
               1. Dados coletados
             </h2>
             <p className="mt-3">
@@ -43,7 +43,7 @@ export default function Politica() {
           </section>
 
           <section aria-labelledby="finalidade-heading">
-            <h2 id="finalidade-heading" className="text-base font-semibold text-black">
+            <h2 id="finalidade-heading" className="text-base font-semibold text-surface">
               2. Finalidade
             </h2>
             <p className="mt-3">
@@ -54,7 +54,7 @@ export default function Politica() {
           </section>
 
           <section aria-labelledby="armazenamento-heading">
-            <h2 id="armazenamento-heading" className="text-base font-semibold text-black">
+            <h2 id="armazenamento-heading" className="text-base font-semibold text-surface">
               3. Armazenamento e segurança
             </h2>
             <p className="mt-3">
@@ -65,13 +65,13 @@ export default function Politica() {
           </section>
 
           <section aria-labelledby="direitos-heading">
-            <h2 id="direitos-heading" className="text-base font-semibold text-black">
+            <h2 id="direitos-heading" className="text-base font-semibold text-surface">
               4. Seus direitos (LGPD)
             </h2>
             <p className="mt-3">
               Você pode solicitar acesso, correção, portabilidade ou remoção dos seus dados
               a qualquer momento. Basta enviar um e-mail para{' '}
-              <a href="mailto:contato@reidasvendas.com.br" className="underline hover:text-black">
+              <a href="mailto:contato@reidasvendas.com.br" className="text-surface underline hover:opacity-80">
                 contato@reidasvendas.com.br
               </a>
               .
@@ -79,7 +79,7 @@ export default function Politica() {
           </section>
 
           <section aria-labelledby="cookies-heading">
-            <h2 id="cookies-heading" className="text-base font-semibold text-black">
+            <h2 id="cookies-heading" className="text-base font-semibold text-surface">
               5. Cookies
             </h2>
             <p className="mt-3">
@@ -94,7 +94,7 @@ export default function Politica() {
         <div className="mt-10 border-t border-black/8 pt-8">
           <Link
             to="/"
-            className="inline-flex h-10 items-center gap-2 rounded-xl border border-black/15 px-4 text-xs font-semibold text-black/70 transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+            className="btn-ghost inline-flex h-10 items-center gap-2 rounded-xl px-4 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
           >
             ← Voltar para a Home
           </Link>

@@ -44,6 +44,7 @@ export function WhatsAppFab() {
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--page-bg)]',
         'bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]',
         'h-14 w-14 min-[520px]:h-[3.5rem] min-[520px]:w-auto',
+        'wa-fab-nudge-once',
         ready ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
       )}
     >

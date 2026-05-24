@@ -1,29 +1,17 @@
-import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '@/components/Reveal';
 import { LeadForm } from '@/components/LeadForm';
 import { HOME_CTA } from '@/lib/home-content';
 import { FORM } from '@/lib/cta-copy';
 
-function AmbientOrbs() {
-  const reduce = useReducedMotion();
-  if (reduce) return null;
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      <motion.div
-        className="absolute -top-[20%] -left-[10%] h-[400px] w-[400px] rounded-full opacity-15 blur-[100px]"
-        style={{ background: 'radial-gradient(circle, #0057FF, transparent 70%)' }}
-        animate={{ x: [0, 20, 0], y: [0, -15, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-      />
-    </div>
-  );
-}
-
 export function HomeFinalCta() {
   return (
     <section className="relative overflow-hidden bg-[color:var(--page-bg)] py-24 md:py-32" id="diagnostico-form">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.14)_0%,transparent_65%)]" />
-      <AmbientOrbs />
+      <div
+        className="pointer-events-none absolute -top-[20%] -left-[10%] h-[400px] w-[400px] rounded-full opacity-15"
+        style={{ background: 'radial-gradient(circle, #0057FF, transparent 70%)' }}
+        aria-hidden
+      />
       <div className="relative mx-auto grid max-w-6xl items-start gap-16 px-6 md:grid-cols-12">
         <div className="md:col-span-5">
           <Reveal>
