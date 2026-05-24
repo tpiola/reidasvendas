@@ -30,7 +30,25 @@ export default function Blog() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {BLOG_POSTS.map((post, i) => (
             <Reveal key={post.slug} delay={i * 0.06}>
-              <article className="card-dark flex h-full flex-col p-6">
+              <article className="card-dark group flex h-full flex-col overflow-hidden">
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="relative block aspect-[16/10] overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0057FF]"
+                >
+                  <img
+                    src={post.thumbImageUrl}
+                    srcSet={`${post.thumbImageUrl} 960w, ${post.coverImageUrl} 1920w`}
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    alt={post.title}
+                    width={960}
+                    height={600}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" aria-hidden />
+                </Link>
+                <div className="flex flex-1 flex-col p-6">
                 <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#C9A84C]/70">{post.category}</p>
                 <h2 className="mt-3 text-lg font-semibold text-surface">
                   <Link to={`/blog/${post.slug}`} className="hover:text-[#C9A84C]/90">
@@ -41,6 +59,7 @@ export default function Blog() {
                 <p className="mt-4 text-[10px] uppercase tracking-[0.2em] text-surface-muted opacity-70">
                   {post.readMinutes} min · {post.publishedAt}
                 </p>
+                </div>
               </article>
             </Reveal>
           ))}

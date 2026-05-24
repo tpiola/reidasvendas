@@ -1,3 +1,5 @@
+import { catalogCover, catalogThumb } from '@/lib/catalog-images';
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -5,6 +7,8 @@ export type BlogPost = {
   category: string;
   publishedAt: string;
   readMinutes: number;
+  coverImageUrl: string;
+  thumbImageUrl: string;
   body: string[];
 };
 
@@ -16,6 +20,8 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Funil',
     publishedAt: '2026-05-20',
     readMinutes: 5,
+    coverImageUrl: catalogCover('photo-1611224923853-80b023f02d71'),
+    thumbImageUrl: catalogThumb('photo-1611224923853-80b023f02d71'),
     body: [
       'O empreendedor local não perde só por falta de tráfego — perde quando o lead esfria no silêncio.',
       'Um funil bem desenhado conecta anúncio, landing, formulário e WhatsApp com mensagem alinhada ao que o cliente busca.',
@@ -29,6 +35,8 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Performance',
     publishedAt: '2026-05-15',
     readMinutes: 4,
+    coverImageUrl: catalogCover('photo-1460925895917-afdab827c52f'),
+    thumbImageUrl: catalogThumb('photo-1460925895917-afdab827c52f'),
     body: [
       'Mais da metade da busca acontece no celular. Se a página demora, o cliente some antes de ler sua oferta.',
       'Hospedagem moderna, imagens WebP e código enxuto entram no escopo — não como extra opcional.',
@@ -42,6 +50,8 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Automação',
     publishedAt: '2026-05-10',
     readMinutes: 6,
+    coverImageUrl: catalogCover('photo-1552664730-d307ca884978'),
+    thumbImageUrl: catalogThumb('photo-1552664730-d307ca884978'),
     body: [
       'CRM parado é dinheiro mensal jogado fora. A automação certa responde, registra e lembra — sem spam.',
       'Integrações com WhatsApp API e formulário mantêm o histórico em um lugar só.',

@@ -74,6 +74,7 @@ As skills abaixo já vêm com plugins instalados (Vercel, Supabase, Notion, Meta
 | `update-cursor-settings` | Mexer em `settings.json` do Cursor/VSCode. |
 | `statusline` | Customizar status line da CLI. |
 | `playwright` | Automação de browser via terminal. |
+| `site-analyst` | Auditoria bloco a bloco, contraste dark/light, gaps de mídia/SEO/conversão. Ver `.cursor/skills/site-analyst/SKILL.md`. |
 | `cursor-guide` | Dúvidas sobre o produto Cursor. |
 
 ### Meta Quest / XR
