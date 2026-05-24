@@ -6,12 +6,9 @@ import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
-import { ExitIntentModal } from '@/components/engagement/ExitIntentModal';
-import { AssistWidget } from '@/components/engagement/AssistWidget';
-import { PlanosEngagementBanner } from '@/components/engagement/PlanosEngagementBanner';
+import { DeferredEngagement } from '@/components/DeferredEngagement';
 import { ScrollToTop } from '@/components/ScrollToTop';
-
-const Home = lazy(() => import('@/pages/Home'));
+import Home from '@/pages/Home';
 const Projetos = lazy(() => import('@/pages/Projetos'));
 const ProjectPage = lazy(() => import('@/pages/projetos/ProjectPage'));
 const Blog = lazy(() => import('@/pages/Blog'));
@@ -82,9 +79,7 @@ export default function App() {
       <SiteFooter />
       <CookieConsent />
       <WhatsAppFab />
-      <AssistWidget />
-      <PlanosEngagementBanner />
-      <ExitIntentModal />
+      <DeferredEngagement />
     </Router>
     </ThemeProvider>
   );

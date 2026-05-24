@@ -63,8 +63,18 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
   PEXELS.heroSkyline,
 ] as const;
 
-export const HERO_POSTER =
-  'https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1920&q=85&fm=webp';
+const HERO_PHOTO_ID = 'photo-1486406146926-c627a92cc1b1';
+
+/** Poster LCP — menor que 1920 para first paint < 3s */
+export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=75&fm=webp`;
+
+export const HERO_POSTER_SRCSET = [
+  `${HERO_POSTER_LCP} 1200w`,
+  `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1920&h=1080&q=80&fm=webp 1920w`,
+].join(', ');
+
+/** Compat: OG, lazy sections e fallbacks */
+export const HERO_POSTER = HERO_POSTER_LCP;
 
 /** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
 export const OG_SHARE_IMAGE =

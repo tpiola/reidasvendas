@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
-import { LOCAL_HERO_VIDEO } from '@/lib/media';
+import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
+import { runWhenIdle } from '@/lib/defer-idle';
 
 const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
 
@@ -12,6 +13,8 @@ type HeroVideoProps = {
   preferLocalHero?: boolean;
   /** Força um único vídeo (performance LCP) */
   singleClip?: boolean;
+  /** Adia o `<video>` até após idle — poster cobre o LCP */
+  deferVideo?: boolean;
 };
 
 function getReducedMotion(): boolean {
@@ -43,9 +46,11 @@ export function HeroVideo({
   src,
   preferLocalHero = false,
   singleClip = false,
+  deferVideo = true,
 }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(() => !deferVideo);
   const [localHeroReady, setLocalHeroReady] = useState(() =>
     preferLocalHero ? readLocalHeroCached() : false,
   );
@@ -64,28 +69,35 @@ export function HeroVideo({
 
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const posterUrl = poster ?? BRAND.heroPosterUrl;
+  const posterUrl = poster ?? HERO_POSTER_LCP;
 
   useEffect(() => {
     setUseHd(preferHdHero());
   }, []);
 
   useEffect(() => {
+    if (reduceMotion || !deferVideo || shouldPlayVideo) return;
+    runWhenIdle(() => setShouldPlayVideo(true), 1800);
+  }, [reduceMotion, deferVideo, shouldPlayVideo]);
+
+  useEffect(() => {
     if (!preferLocalHero || localHeroReady) return;
     let cancelled = false;
-    fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
-      .then((r) => {
-        if (cancelled || !r.ok) return;
-        try {
-          sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
-        } catch {
-          /* ignore */
-        }
-        setLocalHeroReady(true);
-      })
-      .catch(() => {
-        /* Pexels */
-      });
+    runWhenIdle(() => {
+      fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
+        .then((r) => {
+          if (cancelled || !r.ok) return;
+          try {
+            sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
+          } catch {
+            /* ignore */
+          }
+          setLocalHeroReady(true);
+        })
+        .catch(() => {
+          /* Pexels */
+        });
+    }, 3500);
     return () => {
       cancelled = true;
     };
@@ -117,16 +129,18 @@ export function HeroVideo({
     <div className={className ?? 'absolute inset-0'} aria-hidden="true">
       <img
         src={posterUrl}
+        srcSet={HERO_POSTER_SRCSET}
         alt=""
         className="absolute inset-0 h-full w-full object-cover object-center"
         loading="eager"
         fetchPriority="high"
         decoding="async"
-        width={1920}
-        height={1080}
+        width={1200}
+        height={675}
         sizes="100vw"
       />
       {!reduceMotion &&
+        shouldPlayVideo &&
         videos.map((videoSrc, i) => (
           <video
             key={videoSrc}
@@ -136,7 +150,7 @@ export function HeroVideo({
             muted
             loop
             playsInline
-            preload={i === 0 ? 'auto' : 'metadata'}
+            preload={i === 0 ? 'metadata' : 'none'}
             poster={posterUrl}
             crossOrigin={videoSrc.startsWith('http') ? 'anonymous' : undefined}
             onCanPlay={() => markLoaded(i)}

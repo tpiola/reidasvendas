@@ -159,6 +159,33 @@ html.light ::selection {
   color: rgba(248, 248, 250, 0.55);
 }
 
+/* Hero — animação CSS (sem framer-motion no above-the-fold) */
+@keyframes hero-enter-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  animation: hero-enter-rise 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-enter-delay-1 { animation-delay: 0.04s; }
+.hero-enter-delay-2 { animation-delay: 0.1s; }
+.hero-enter-delay-3 { animation-delay: 0.18s; }
+.hero-enter-delay-4 { animation-delay: 0.26s; }
+.hero-enter-delay-5 { animation-delay: 0.34s; }
+.hero-enter-delay-6 { animation-delay: 0.42s; }
+
+.hero-content {
+  contain: layout style;
+}
+
 .section-below-fold {
   content-visibility: auto;
   contain-intrinsic-size: auto 480px;
@@ -586,6 +613,10 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .text-display { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+  .hero-content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* ─── WhatsApp FAB animado ─── */
@@ -622,5 +653,10 @@ img, video { max-width: 100%; height: auto; display: block; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .hero-enter {
+    opacity: 1;
+    transform: none;
   }
 }
