@@ -39,20 +39,20 @@ export function ExitIntentModal() {
       aria-modal="true"
       aria-labelledby="exit-intent-title"
     >
-      <div className="glass-card relative max-w-md rounded-2xl p-8 text-center text-white">
+      <div className="glass-card relative max-w-md rounded-2xl p-8 text-center">
         <button
           type="button"
-          className="absolute right-4 top-4 text-white/40 hover:text-white"
+          className="absolute right-4 top-4 text-surface-muted transition-colors hover:text-[color:var(--page-fg)]"
           aria-label="Fechar"
           onClick={() => setOpen(false)}
         >
           ×
         </button>
         <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/80">Antes de sair</p>
-        <h2 id="exit-intent-title" className="mt-4 text-xl font-semibold">
+        <h2 id="exit-intent-title" className="mt-4 text-xl font-semibold text-surface">
           E se o funil trabalhasse enquanto você atende?
         </h2>
-        <p className="mt-4 text-sm text-white/50">
+        <p className="mt-4 text-sm text-surface-muted">
           Fale no WhatsApp ou solicite orçamento — proposta em até 24h.
         </p>
         <div className="mt-8 flex flex-col gap-3">
@@ -66,7 +66,7 @@ export function ExitIntentModal() {
           </a>
           <Link
             to="/diagnostico"
-            className="btn-ghost inline-flex h-12 items-center justify-center text-[11px] font-bold uppercase tracking-[0.24em] text-white/75"
+            className="btn-ghost inline-flex h-12 items-center justify-center text-[11px] font-bold uppercase tracking-[0.24em]"
             onClick={() => setOpen(false)}
           >
             Solicitar orçamento

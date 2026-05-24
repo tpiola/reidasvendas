@@ -28,7 +28,7 @@ export function PageHero({
           <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">{eyebrow}</p>
           <h1 className="mt-4 text-display font-semibold text-[color:var(--page-fg)]">
             {title}
-            {titleAccent ? <span className="text-gradient-titanium"> {titleAccent}</span> : null}
+            {titleAccent ? <span className="text-gradient-accent"> {titleAccent}</span> : null}
           </h1>
           {subtitle ? (
             <p className={`mt-6 text-base leading-relaxed text-[color:var(--text-muted)] ${align === 'center' ? 'max-w-2xl' : ''}`}>

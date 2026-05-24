@@ -26,7 +26,7 @@ export function CinematicVideoBand({
           <span className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/70">{eyebrow}</span>
           <h2 id="cinematic-heading" className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {title}
-            <span className="text-gradient-titanium"> {titleAccent}</span>
+            <span className="text-gradient-accent"> {titleAccent}</span>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>

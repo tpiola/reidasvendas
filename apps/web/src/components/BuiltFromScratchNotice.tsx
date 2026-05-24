@@ -7,13 +7,7 @@ type BuiltFromScratchNoticeProps = {
 export function BuiltFromScratchNotice({ variant = 'dark', className = '' }: BuiltFromScratchNoticeProps) {
   const isDark = variant === 'dark';
   return (
-    <p
-      className={
-        isDark
-          ? `text-xs leading-relaxed text-white/40 md:text-sm ${className}`
-          : `text-xs leading-relaxed text-[#0A0A0B]/50 md:text-sm ${className}`
-      }
-    >
+    <p className={`text-xs leading-relaxed text-[color:var(--text-muted)] md:text-sm ${className}`}>
       <span className={isDark ? 'font-semibold text-[#C9A84C]/85' : 'font-semibold text-[#0057FF]/80'}>
         Amostras, não pacotes:
       </span>{' '}

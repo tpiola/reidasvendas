@@ -43,7 +43,7 @@ export function StoryVideoBand({
             className="mt-3 text-heading font-semibold text-[color:var(--page-fg)]"
           >
             {title}
-            {titleAccent ? <span className="text-gradient-titanium"> {titleAccent}</span> : null}
+            {titleAccent ? <span className="text-gradient-accent"> {titleAccent}</span> : null}
           </h2>
           {subtitle ? (
             <p className="mx-auto mt-4 max-w-lg text-sm text-[color:var(--text-muted)]">{subtitle}</p>

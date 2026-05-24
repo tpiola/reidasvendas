@@ -32,7 +32,7 @@ export function TestimonialsVideoSection() {
           </span>
           <h2 className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {TESTIMONIALS_SECTION.title}
-            <span className="text-gradient-titanium"> em vídeo</span>
+            <span className="text-gradient-accent"> em vídeo</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-[color:var(--text-muted)]">
             {TESTIMONIALS_SECTION.disclaimer} Transcrição disponível para leitores de tela e buscadores.

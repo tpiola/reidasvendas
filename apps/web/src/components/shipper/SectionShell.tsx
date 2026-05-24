@@ -50,7 +50,7 @@ export function SectionShell({
           >
             {title}
             {titleAccent ? (
-              <span className={isDark ? ' text-gradient-titanium' : ' text-gradient-gold'}>
+              <span className={isDark ? ' text-gradient-accent' : ' text-gradient-gold'}>
                 {' '}
                 {titleAccent}
               </span>

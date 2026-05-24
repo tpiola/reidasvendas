@@ -17,7 +17,7 @@ export function HomeFinalCta() {
           <Reveal>
             <h2 className="text-heading font-semibold text-[color:var(--page-fg)]">
               {HOME_CTA.title}
-              <span className="text-gradient-titanium"> {HOME_CTA.titleAccent}</span>
+              <span className="text-gradient-accent"> {HOME_CTA.titleAccent}</span>
             </h2>
             <p className="mt-6 text-base leading-relaxed text-[color:var(--text-muted)]">{HOME_CTA.subtitle}</p>
             <ul className="mt-8 space-y-3 text-sm text-[color:var(--text-muted)]">

@@ -9,7 +9,7 @@ export function HomePlanosCtaBand() {
         <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">Investimento claro</p>
         <h2 className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
           Planos que escalam
-          <span className="text-gradient-titanium"> com o seu negócio</span>
+          <span className="text-gradient-accent"> com o seu negócio</span>
         </h2>
         <p className="mx-auto mt-4 max-w-md text-sm text-[color:var(--text-muted)]">
           Sem fidelidade forçada. Cada plano com página própria, entregáveis e orçamento em 24h.

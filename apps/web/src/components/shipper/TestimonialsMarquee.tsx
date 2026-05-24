@@ -13,7 +13,7 @@ export function TestimonialsMarquee() {
           </span>
           <h2 className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {TESTIMONIALS_SECTION.title}
-            <span className="text-gradient-titanium"> {TESTIMONIALS_SECTION.titleAccent}</span>
+            <span className="text-gradient-accent"> {TESTIMONIALS_SECTION.titleAccent}</span>
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm text-[color:var(--text-muted)]">{TESTIMONIALS_SECTION.disclaimer}</p>
         </Reveal>

@@ -17,7 +17,7 @@ export function ProjectsShowcaseSection() {
           </span>
           <h2 id="projects-home-heading" className="mt-4 text-heading font-semibold text-[color:var(--page-fg)]">
             {PROJECTS_HOME_SECTION.title}
-            <span className="text-gradient-titanium"> {PROJECTS_HOME_SECTION.titleAccent}</span>
+            <span className="text-gradient-accent"> {PROJECTS_HOME_SECTION.titleAccent}</span>
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-sm text-[color:var(--text-muted)]">{PROJECTS_HOME_SECTION.subtitle}</p>
         </Reveal>

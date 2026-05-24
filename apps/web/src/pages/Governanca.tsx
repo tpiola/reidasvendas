@@ -17,7 +17,7 @@ export default function Governanca() {
       <div className="mx-auto max-w-5xl px-6 text-center">
         <Reveal>
           <h1 className="font-serif text-5xl font-medium tracking-tight text-surface md:text-7xl">
-            <span className="text-gradient-titanium">Governança Corporativa</span>
+            <span className="text-gradient-accent">Governança Corporativa</span>
           </h1>
         </Reveal>
         

@@ -24,10 +24,10 @@ export function ProactiveAssist() {
   return (
     <div className="fixed bottom-24 right-5 z-[55] max-w-[min(320px,90vw)]">
       {expanded ? (
-        <div className="relative glass-card rounded-2xl border border-white/[0.08] p-5 pt-8 text-white shadow-2xl">
+        <div className="relative glass-card rounded-2xl border border-[color:var(--border-subtle)] p-5 pt-8 shadow-2xl">
           <button
             type="button"
-            className="absolute right-3 top-3 text-white/40 hover:text-white"
+            className="absolute right-3 top-3 text-surface-muted transition-colors hover:text-[color:var(--page-fg)]"
             aria-label="Minimizar"
             onClick={() => {
               setExpanded(false);
@@ -41,7 +41,7 @@ export function ProactiveAssist() {
             ×
           </button>
           <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#C9A84C]/80">Especialista</p>
-          <p className="mt-2 text-sm text-white/55">
+          <p className="mt-2 text-sm text-surface-muted">
             Você sente que seu negócio está invisível online? O diagnóstico mostra o próximo passo em 24h.
           </p>
           <div className="mt-4 flex flex-col gap-2">
@@ -55,7 +55,7 @@ export function ProactiveAssist() {
               href={BRAND.whatsappLink}
               target="_blank"
               rel="noreferrer"
-              className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white/50 hover:text-[#C9A84C]"
+              className="text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-surface-muted transition-colors hover:text-[#C9A84C]"
             >
               WhatsApp direto
             </a>

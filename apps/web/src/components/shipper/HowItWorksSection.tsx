@@ -12,17 +12,17 @@ export function HowItWorksSection() {
       subtitle={HOW_IT_WORKS.subtitle}
       variant="light"
       align="center"
-      className="border-y border-black/[0.06]"
+      className="border-y border-[color:var(--border-subtle)]"
     >
       <div className="grid gap-6 md:grid-cols-3">
         {HOW_IT_WORKS.steps.map((step, i) => (
           <Reveal key={step.title} delay={i * 0.08}>
-            <article className="h-full border border-black/[0.06] bg-white p-8 text-center">
+            <article className="h-full border border-[color:var(--border-subtle)] bg-[color:var(--surface)] p-8 text-center">
               <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]">
                 Passo {step.num}
               </span>
-              <h3 className="mt-4 text-lg font-semibold text-[#0A0A0B]">{step.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-[#0A0A0B]/50">{step.desc}</p>
+              <h3 className="mt-4 text-lg font-semibold text-[color:var(--page-fg)]">{step.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-[color:var(--text-muted)]">{step.desc}</p>
             </article>
           </Reveal>
         ))}

@@ -84,9 +84,20 @@ html.light {
   color: #f8f8fa;
 }
 
-html.light .hero-dark .text-gradient-titanium {
-  background: linear-gradient(135deg, #ffffff 0%, #e8e8f0 50%, #d0d0dc 100%);
+/* Titanium legível em fundos claros (page-surface, cards, etc.) */
+html.light .text-gradient-titanium {
+  background: linear-gradient(135deg, #141418 0%, #2d3a52 38%, #0057ff 72%, #1a2744 100%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Titanium claro só em bandas escuras fixas */
+html.light .hero-dark .text-gradient-titanium,
+html.light .section-dark .text-gradient-titanium {
+  background: linear-gradient(135deg, #ffffff 0%, #d8d8e8 35%, #f0f0ff 60%, #b0b0c8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
@@ -276,9 +287,32 @@ img, video { max-width: 100%; height: auto; display: block; }
    GRADIENTS & EFFECTS PREMIUM
 ═══════════════════════════════════════════ */
 
-/* ─── Titanium Gradient Text ─── */
+/* ─── Titanium Gradient Text (fundos escuros) ─── */
 .text-gradient-titanium {
-  background: linear-gradient(135deg, #FFFFFF 0%, #D8D8E8 30%, #F0F0FF 60%, #B0B0C8 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #d8d8e8 30%, #f0f0ff 60%, #b0b0c8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Destaque em título — legível em tema claro e escuro */
+.text-gradient-accent {
+  background: linear-gradient(135deg, #ffffff 0%, #d8d8e8 30%, #f0f0ff 60%, #b0b0c8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.light .text-gradient-accent {
+  background: linear-gradient(135deg, #141418 0%, #2d3a52 38%, #0057ff 72%, #1a2744 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+html.light .hero-dark .text-gradient-accent,
+html.light .section-dark .text-gradient-accent {
+  background: linear-gradient(135deg, #ffffff 0%, #d8d8e8 35%, #f0f0ff 60%, #b0b0c8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -333,14 +367,24 @@ img, video { max-width: 100%; height: auto; display: block; }
     0 0 40px rgba(0,87,255,0.06);
 }
 
-/* ─── White Section (High Contrast) ─── */
+/* ─── Seção de alto contraste (respeita tema) ─── */
 .section-white {
-  background: #F5F5F7;
-  color: #0A0A0B;
+  background: var(--surface);
+  color: var(--page-fg);
 }
-.section-white .section-label { color: rgba(10,10,11,0.35); }
-.section-white .section-heading { color: #0A0A0B; }
-.section-white .section-body { color: rgba(10,10,11,0.55); }
+.section-white .section-label {
+  color: var(--text-muted);
+}
+.section-white .section-heading {
+  color: var(--page-fg);
+}
+.section-white .section-body {
+  color: var(--text-muted);
+}
+
+html.dark .section-white {
+  background: var(--surface-2);
+}
 
 /* ═══════════════════════════════════════════
    TEXTURE & NOISE

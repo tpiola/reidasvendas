@@ -18,14 +18,14 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
       itemType="https://schema.org/FAQPage"
     >
       <div className="mx-auto max-w-3xl px-6">
-        <h2 id={`${baseId}-heading`} className="text-heading font-semibold text-[#0A0A0B] text-center">
+        <h2 id={`${baseId}-heading`} className="text-center text-heading font-semibold text-[color:var(--page-fg)]">
           Perguntas frequentes
         </h2>
-        <p className="mt-4 text-center text-sm text-[#0A0A0B]/45 max-w-lg mx-auto">
+        <p className="mx-auto mt-4 max-w-lg text-center text-sm text-[color:var(--text-muted)]">
           Prazo, dados, escopo — sem letra miúda escondida.
         </p>
 
-        <div className="mt-14 divide-y divide-black/[0.08] border border-black/[0.06]">
+        <div className="mt-14 divide-y divide-[color:var(--border-subtle)] border border-[color:var(--border-subtle)]">
           {items.map((item, index) => {
             const isOpen = openId === item.id;
             const num = String(index + 1).padStart(2, '0');
@@ -38,24 +38,27 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                 itemScope
                 itemProp="mainEntity"
                 itemType="https://schema.org/Question"
-                className="bg-white"
+                className="bg-[color:var(--surface)]"
               >
                 <button
                   type="button"
                   id={triggerId}
                   aria-expanded={isOpen}
                   aria-controls={panelId}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-[#F8F9FC]"
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-[color:var(--header-hover)]"
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                 >
-                  <h3 itemProp="name" className="flex items-start gap-4 text-sm font-semibold text-[#0A0A0B] md:text-base pr-4">
-                    <span className="shrink-0 text-[10px] font-bold tracking-[0.2em] text-[#0057FF]/50" aria-hidden>
+                  <h3
+                    itemProp="name"
+                    className="flex items-start gap-4 pr-4 text-sm font-semibold text-[color:var(--page-fg)] md:text-base"
+                  >
+                    <span className="shrink-0 text-[10px] font-bold tracking-[0.2em] text-[#0057FF]/70" aria-hidden>
                       {num}.
                     </span>
                     <span>{item.question}</span>
                   </h3>
                   <span
-                    className="flex h-8 w-8 shrink-0 items-center justify-center border border-black/10 text-[#0A0A0B]/50 text-lg leading-none"
+                    className="flex h-8 w-8 shrink-0 items-center justify-center border border-[color:var(--border-subtle)] text-lg leading-none text-[color:var(--text-muted)]"
                     aria-hidden
                   >
                     {isOpen ? '−' : '+'}
@@ -72,7 +75,7 @@ export function FaqAccordion({ items }: FaqAccordionProps) {
                   itemType="https://schema.org/Answer"
                 >
                   <div>
-                    <p itemProp="text" className="px-6 pb-6 text-sm leading-relaxed text-[#0A0A0B]/55">
+                    <p itemProp="text" className="px-6 pb-6 text-sm leading-relaxed text-[color:var(--text-muted)]">
                       {item.answer}
                     </p>
                   </div>

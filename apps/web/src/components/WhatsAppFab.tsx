@@ -30,7 +30,7 @@ export function WhatsAppFab() {
       href={BRAND.whatsappLink}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Falar no WhatsApp — Rei das Vendas"
+      aria-label="Abrir WhatsApp"
       onClick={() => {
         const gtag = window.gtag;
         if (typeof gtag === 'function') {
@@ -38,12 +38,11 @@ export function WhatsAppFab() {
         }
       }}
       className={cn(
-        'wa-fab group fixed z-[100] flex items-center justify-center gap-0 rounded-full min-[520px]:rounded-full min-[520px]:pr-4 min-[520px]:pl-3',
+        'wa-fab group fixed z-[100] flex h-14 w-14 items-center justify-center rounded-full',
         'bg-[#25D366] text-white shadow-lg shadow-black/30',
         'transition-all duration-300 hover:bg-[#20BD5B] hover:scale-105 active:scale-95',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--page-bg)]',
         'bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]',
-        'h-14 w-14 min-[520px]:h-[3.5rem] min-[520px]:w-auto',
         'wa-fab-nudge-once',
         ready ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
       )}
@@ -52,11 +51,8 @@ export function WhatsAppFab() {
         className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366] opacity-40 wa-fab-ring"
         aria-hidden
       />
-      <WhatsAppIcon className="relative z-[1] h-7 w-7 shrink-0 min-[520px]:h-7 min-[520px]:w-7" />
-      <span className="sr-only">WhatsApp — orçamento</span>
-      <span className="relative z-[1] ml-0 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] min-[520px]:ml-2 min-[520px]:inline">
-        Orçamento
-      </span>
+      <WhatsAppIcon className="relative z-[1] h-7 w-7 shrink-0" />
+      <span className="sr-only">WhatsApp</span>
     </a>
   );
 }
