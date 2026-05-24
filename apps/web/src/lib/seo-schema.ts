@@ -122,3 +122,46 @@ export function buildOrganizationJsonLd() {
     '@graph': [buildOrganizationNode(), buildProfessionalServiceNode(), buildWebSiteNode()],
   };
 }
+
+type PlanProductInput = {
+  slug: string;
+  headline: string;
+  seoDescription: string;
+  priceLabel: string;
+  coverImageUrl: string;
+};
+
+/** Product + Offer para páginas de plano */
+export function buildPlanProductJsonLd(plan: PlanProductInput) {
+  const path = `/planos/${plan.slug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildOrganizationNode(),
+      {
+        '@type': 'Product',
+        '@id': `${BASE}${path}#product`,
+        name: `Plano ${plan.headline} — ${BRAND.name}`,
+        description: plan.seoDescription,
+        image: plan.coverImageUrl,
+        brand: { '@type': 'Brand', name: BRAND.name },
+        offers: {
+          '@type': 'Offer',
+          url: `${BASE}${path}`,
+          priceCurrency: 'BRL',
+          availability: 'https://schema.org/InStock',
+          description: plan.priceLabel,
+          seller: { '@id': `${BASE}/#organization` },
+        },
+      },
+      {
+        '@type': 'Service',
+        '@id': `${BASE}${path}#service`,
+        name: `Assinatura ${plan.headline}`,
+        description: plan.seoDescription,
+        provider: { '@id': `${BASE}/#organization` },
+        areaServed: { '@type': 'Country', name: 'Brazil' },
+      },
+    ],
+  };
+}

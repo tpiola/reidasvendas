@@ -8,6 +8,23 @@
       "dependabot/**": false
     }
   },
+  "redirects": [
+    {
+      "source": "/projetos/hub-clinico",
+      "destination": "/projetos/clube-digital",
+      "permanent": true
+    },
+    {
+      "source": "/projetos/imobiliario-premium",
+      "destination": "/projetos/vitrine-imobiliaria-3d",
+      "permanent": true
+    },
+    {
+      "source": "/projetos/e-commerce-elite",
+      "destination": "/projetos/maquina-de-varejo",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }

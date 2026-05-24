@@ -1,10 +1,18 @@
-# STATUS DO PROJETO — 2026-04-26 (snapshot)
+# STATUS DO PROJETO — 2026-05-23 (snapshot)
 
 > Arquivo de checkpoint para retomar o trabalho amanhã sem entrar em loop de autenticação/configuração.
 
 ---
 
 ## 1. Estado atual do workspace
+
+### Site `apps/web` (2026-05-23)
+- Rotas SEO: `/`, `/planos/*`, `/projetos/*`, `/diagnostico`, `/contato`, `/blog`.
+- Preços **somente** em `/planos` (removidos da Home).
+- Assistente guiado (`AssistWidget`) + exit-intent + banner em planos; chat OpenAI com `VITE_CHAT_ENABLED`.
+- Capas WebP por plano + JSON-LD Product/Offer.
+- Redirects 301 de slugs legados de projetos em `apps/web/vercel.json`.
+- Relatório: [`docs/SEO_PERFORMANCE_REPORT.md`](docs/SEO_PERFORMANCE_REPORT.md).
 
 ### Stack identificada
 - Monorepo `pnpm` + `turbo` (`pnpm-workspace.yaml`, `turbo.json`).

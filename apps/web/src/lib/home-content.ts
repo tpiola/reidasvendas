@@ -237,7 +237,7 @@ export const PROJECTS_HOME_SECTION = {
 
 export const HERO_COPY = {
   subhead:
-    'Você sente que seu negócio está invisível? Imagine um funil que trabalha enquanto você atende — site, WhatsApp e automação no mesmo fluxo.',
+    'E se você pudesse vender enquanto atende? Você sente que seu negócio está invisível — imagine ver a agenda cheia e ouvir o alerta de novo contrato. Site, WhatsApp e automação no mesmo fluxo.',
   ctaPrimary: 'Quero minha máquina de vendas',
   ctaSecondary: 'Ver projetos',
 } as const;

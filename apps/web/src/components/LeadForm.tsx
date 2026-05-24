@@ -4,6 +4,7 @@ import { z } from 'zod';
 import type { LeadPayload, LeadSource } from '@altiq/types';
 import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@altiq/utils';
 import { trackConversion } from '@/components/AnalyticsProvider';
+import { saveVisitorProfile } from '@/lib/visitor';
 import { Input } from '@altiq/ui';
 import {
   formatPhoneDisplay,
@@ -208,7 +209,11 @@ export function LeadForm({
         const r = await submitLead(payload);
         if (r.ok) {
           setStatus('sent');
-          
+          saveVisitorProfile({
+            firstName: data.name,
+            email: data.email,
+          });
+
           // [MVO Rei das Vendas] Dispara evento de conversão unificado
           trackConversion('generate_lead', {
             value: 0,

@@ -2,6 +2,7 @@ import {
   HERO_POSTER,
   HERO_PROFESSION_VIDEOS_HD,
   HERO_PROFESSION_VIDEOS_UHD,
+  LOCAL_HERO_VIDEO,
   PEXELS,
 } from '@/lib/media';
 
@@ -17,6 +18,8 @@ export const BRAND = {
   webhookSecretHeader: 'X-ReiDasVendas-Webhook-Secret',
   heroVideosHd: [...HERO_PROFESSION_VIDEOS_HD],
   heroVideosUhd: [...HERO_PROFESSION_VIDEOS_UHD],
+  heroLocalMp4: LOCAL_HERO_VIDEO.mp4,
+  heroVideoWebm: LOCAL_HERO_VIDEO.webm,
   heroVideoUrl: HERO_PROFESSION_VIDEOS_UHD[0],
   heroPosterUrl: HERO_POSTER,
   inlineVideos: {

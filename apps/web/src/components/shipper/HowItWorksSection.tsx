@@ -5,6 +5,7 @@ import { SectionShell } from '@/components/shipper/SectionShell';
 export function HowItWorksSection() {
   return (
     <SectionShell
+      id="como-funciona"
       eyebrow={HOW_IT_WORKS.eyebrow}
       title={HOW_IT_WORKS.title}
       titleAccent={HOW_IT_WORKS.titleAccent}

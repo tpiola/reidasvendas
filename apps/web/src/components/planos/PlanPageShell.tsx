@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { Reveal } from '@/components/Reveal';
@@ -10,6 +11,8 @@ import { HERO_POSTER } from '@/lib/media';
 import { PLAN_DEMO_VIDEOS } from '@/data/projects';
 import { PlanComparisonTable } from '@/components/planos/PlanComparisonTable';
 import { BRAND } from '@/lib/brand';
+import { applyJsonLd } from '@/lib/seo';
+import { buildPlanProductJsonLd } from '@/lib/seo-schema';
 
 type PlanPageShellProps = {
   plan: PlanDetail;
@@ -20,9 +23,23 @@ type PlanPageShellProps = {
 export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProps) {
   const otherPlans = PLANS_HUB.filter((p) => p.slug !== plan.slug);
 
+  useEffect(() => {
+    applyJsonLd('plan-product', buildPlanProductJsonLd(plan));
+  }, [plan]);
+
   return (
     <main className="bg-[#030305] text-white">
       <section className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+        <img
+          src={plan.coverImageUrl}
+          alt={plan.coverImageAlt}
+          className="absolute inset-0 h-full w-full object-cover opacity-35"
+          width={1920}
+          height={1080}
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#030305] via-[#030305]/85 to-[#030305]/40" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.18)_0%,transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
           <nav className="text-[11px] text-white/40" aria-label="Breadcrumb">
@@ -38,6 +55,22 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
             <p className="mt-6 text-lg leading-relaxed text-white/50">{plan.subhead}</p>
             <p className="mt-8 text-3xl font-bold tracking-tight text-gradient-gold">{plan.priceLabel}</p>
             <p className="mt-2 text-sm text-white/35">{plan.billingNote}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#contratar-plano"
+                className="btn-glow inline-flex h-12 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-white"
+              >
+                {plan.ctaContractLabel}
+              </a>
+              <a
+                href={BRAND.whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-ghost inline-flex h-12 items-center justify-center px-8 text-[10px] font-bold uppercase tracking-[0.22em] text-white/75"
+              >
+                WhatsApp
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -79,18 +112,20 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
             <BuiltFromScratchNotice className="mt-10" />
             <PlanComparisonTable currentSlug={plan.slug} />
           </div>
-          <Reveal delay={0.12} className="lg:col-span-5">
+          <div id="contratar-plano" className="lg:col-span-5">
+          <Reveal delay={0.12}>
             <div className="glass-card rounded-2xl p-8">
               <LeadForm
                 source="pricing"
                 formVariant="minimal"
                 title="Quero este plano"
                 description="Nome, e-mail e WhatsApp. Retorno com proposta alinhada ao seu cenário."
-                ctaLabel={`Solicitar ${plan.headline}`}
+                ctaLabel={plan.ctaContractLabel}
                 context={{ intent: 'plano', plan: plan.slug, ...leadContext }}
               />
             </div>
           </Reveal>
+          </div>
         </div>
       </section>
 

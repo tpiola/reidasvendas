@@ -1,5 +1,12 @@
 /** Mídia curada (Pexels / Unsplash) — HD no hero mobile; UHD no desktop quando permitido */
 
+/** Vídeo hero local (10–15 s, sem áudio) — coloque em public/videos/ */
+export const LOCAL_HERO_VIDEO = {
+  webm: '/videos/hero.webm',
+  mp4: '/videos/hero.mp4',
+  poster: '/videos/hero-poster.webp',
+} as const;
+
 export function pexelsHd(id: number): string {
   return `https://videos.pexels.com/video-files/${id}/${id}-hd_1920_1080_25fps.mp4`;
 }

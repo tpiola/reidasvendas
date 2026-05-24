@@ -7,7 +7,7 @@ import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { ExitIntentModal } from '@/components/engagement/ExitIntentModal';
-import { ProactiveAssist } from '@/components/engagement/ProactiveAssist';
+import { AssistWidget } from '@/components/engagement/AssistWidget';
 import { PlanosEngagementBanner } from '@/components/engagement/PlanosEngagementBanner';
 
 const Home = lazy(() => import('@/pages/Home'));
@@ -80,7 +80,7 @@ export default function App() {
       <SiteFooter />
       <CookieConsent />
       <WhatsAppFab />
-      <ProactiveAssist />
+      <AssistWidget />
       <PlanosEngagementBanner />
       <ExitIntentModal />
     </Router>

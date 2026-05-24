@@ -87,7 +87,7 @@ export default function Home() {
 
       <section ref={heroRef} className="relative isolate min-h-screen overflow-hidden">
         <motion.div style={{ y: heroY, scale: heroScale }} className="absolute inset-0 parallax-bg">
-          <HeroVideo />
+          <HeroVideo preferLocalHero />
         </motion.div>
         <AmbientOrbs />
         <div

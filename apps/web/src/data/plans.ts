@@ -1,5 +1,7 @@
 /** Planos e slugs de vendas — cada botão abre sua própria página */
 
+import { catalogCover } from '@/lib/catalog-images';
+
 export const PLAN_SLUGS = ['essencial', 'crescimento', 'escala', 'sob-medida'] as const;
 export type PlanSlug = (typeof PLAN_SLUGS)[number];
 
@@ -55,9 +57,31 @@ export type PlanDetail = {
   subhead: string;
   priceLabel: string;
   billingNote: string;
+  coverImageUrl: string;
+  coverImageAlt: string;
+  ctaContractLabel: string;
   includes: string[];
   idealFor: string;
   notIncluded: string[];
+};
+
+const PLAN_COVERS: Record<PlanSlug, { photoId: string; alt: string }> = {
+  essencial: {
+    photoId: 'photo-1556761175-b413da4baf72',
+    alt: 'Empreendedor local em frente ao notebook — plano Essencial Rei das Vendas',
+  },
+  crescimento: {
+    photoId: 'photo-1460925895917-afdab827c52f',
+    alt: 'Dashboard de funil e métricas — plano Crescimento Rei das Vendas',
+  },
+  escala: {
+    photoId: 'photo-1551288049-bebda4e38f71',
+    alt: 'Equipe analisando crescimento de vendas — plano Escala Rei das Vendas',
+  },
+  'sob-medida': {
+    photoId: 'photo-1522071820081-009f0129c71c',
+    alt: 'Reunião estratégica para projeto sob medida — Rei das Vendas',
+  },
 };
 
 export const PLAN_DETAILS: Record<PlanSlug, PlanDetail> = {
@@ -70,6 +94,9 @@ export const PLAN_DETAILS: Record<PlanSlug, PlanDetail> = {
     subhead: 'Sua vitrine premium no ar, com mensagem clara e canal de contato que responde.',
     priceLabel: 'R$ 497/mês',
     billingNote: 'Setup inicial sob consulta · sem fidelidade obrigatória',
+    coverImageUrl: catalogCover(PLAN_COVERS.essencial.photoId),
+    coverImageAlt: PLAN_COVERS.essencial.alt,
+    ctaContractLabel: 'Garantir minha vaga',
     includes: [
       'Site institucional ou landing feito do zero para o seu nicho',
       'Copy orientada à conversão do seu público',
@@ -90,6 +117,9 @@ export const PLAN_DETAILS: Record<PlanSlug, PlanDetail> = {
     subhead: 'Do clique ao WhatsApp qualificado — com ritmo e sem lead esquecido.',
     priceLabel: 'R$ 997/mês',
     billingNote: 'Inclui tudo do Essencial · upgrade de módulos sob demanda',
+    coverImageUrl: catalogCover(PLAN_COVERS.crescimento.photoId),
+    coverImageAlt: PLAN_COVERS.crescimento.alt,
+    ctaContractLabel: 'Quero minha máquina de vendas',
     includes: [
       'Tudo do plano Essencial',
       'Funil multi-etapas com eventos de conversão (GA4)',
@@ -110,6 +140,9 @@ export const PLAN_DETAILS: Record<PlanSlug, PlanDetail> = {
     subhead: 'Time enxuto, operação de empresa grande — sem contratar dez ferramentas soltas.',
     priceLabel: 'R$ 1.997/mês',
     billingNote: 'Escopo de mídia e IA alinhado no diagnóstico',
+    coverImageUrl: catalogCover(PLAN_COVERS.escala.photoId),
+    coverImageAlt: PLAN_COVERS.escala.alt,
+    ctaContractLabel: 'Falar com especialista',
     includes: [
       'Tudo do plano Crescimento',
       'Estratégia e criativos para Google e Meta (setup + otimização)',
@@ -130,6 +163,9 @@ export const PLAN_DETAILS: Record<PlanSlug, PlanDetail> = {
     subhead: 'Você escolhe o que entra: digital, pessoas e estratégia — nós desenhamos e executamos.',
     priceLabel: 'Proposta após diagnóstico',
     billingNote: 'Projeto e assinatura podem ser combinados',
+    coverImageUrl: catalogCover(PLAN_COVERS['sob-medida'].photoId),
+    coverImageAlt: PLAN_COVERS['sob-medida'].alt,
+    ctaContractLabel: 'Montar meu pacote',
     includes: [
       'Arquitetura feita do zero (não é template replicado)',
       'Escopo fechado por entregável e marco',

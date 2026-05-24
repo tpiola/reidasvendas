@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
+import { LOCAL_HERO_VIDEO } from '@/lib/media';
 
 type HeroVideoProps = {
   className?: string;
   poster?: string;
   /** Vídeo único (páginas internas); omitir na Home para rotação */
   src?: string;
+  /** Hero da Home: prioriza clip local curto quando existir em /public/videos */
+  preferLocalHero?: boolean;
 };
 
 function getReducedMotion(): boolean {
@@ -23,14 +26,18 @@ function preferHdHero(): boolean {
   return false;
 }
 
-export function HeroVideo({ className, poster, src }: HeroVideoProps) {
+export function HeroVideo({ className, poster, src, preferLocalHero = false }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
+  const [localHeroReady, setLocalHeroReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const heroWebm = BRAND.heroVideoWebm;
   const videos = useMemo(() => {
     if (src) return [src];
-    return useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
-  }, [src, useHd]);
+    const list = useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
+    if (preferLocalHero && localHeroReady) return [BRAND.heroLocalMp4, ...list];
+    return list;
+  }, [src, useHd, preferLocalHero, localHeroReady]);
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -39,6 +46,21 @@ export function HeroVideo({ className, poster, src }: HeroVideoProps) {
   useEffect(() => {
     setUseHd(preferHdHero());
   }, []);
+
+  useEffect(() => {
+    if (!preferLocalHero) return;
+    let cancelled = false;
+    fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
+      .then((r) => {
+        if (!cancelled && r.ok) setLocalHeroReady(true);
+      })
+      .catch(() => {
+        /* fallback Pexels */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [preferLocalHero]);
 
   useEffect(() => {
     setLoaded(videos.map(() => false));
@@ -84,10 +106,16 @@ export function HeroVideo({ className, poster, src }: HeroVideoProps) {
             muted
             loop
             playsInline
-            preload={i <= 1 ? 'auto' : 'metadata'}
-            crossOrigin="anonymous"
+            preload={i === 0 ? 'auto' : 'metadata'}
+            crossOrigin={src.startsWith('http') ? 'anonymous' : undefined}
             onCanPlayThrough={() => markLoaded(i)}
+            onError={() => {
+              if (i === 0 && preferLocalHero) markLoaded(i);
+            }}
           >
+            {preferLocalHero && i === 0 ? (
+              <source src={heroWebm} type="video/webm" />
+            ) : null}
             <source src={src} type="video/mp4" />
           </video>
         ))}
