@@ -4,6 +4,7 @@ import { z } from 'zod';
 import type { LeadPayload, LeadSource } from '@altiq/types';
 import { assignAbVariant, getOrCreateVisitorId, isEmail, pickUtm } from '@altiq/utils';
 import { trackConversion } from '@/components/AnalyticsProvider';
+import { mirrorLeadToGoogleSheets } from '@/lib/google-sheets';
 import { saveVisitorProfile } from '@/lib/visitor';
 import { Input } from '@altiq/ui';
 import {
@@ -69,6 +70,7 @@ async function submitLead(
     }
     list.unshift({ ...payload, receivedAt: new Date().toISOString() });
     window.localStorage.setItem(key, JSON.stringify(list.slice(0, 50)));
+    void mirrorLeadToGoogleSheets({ ...payload, receivedAt: new Date().toISOString() });
     return { ok: true };
   }
 
@@ -86,7 +88,10 @@ async function submitLead(
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    if (r.ok) return { ok: true };
+    if (r.ok) {
+      void mirrorLeadToGoogleSheets({ ...payload, receivedAt: new Date().toISOString() });
+      return { ok: true };
+    }
     const data: unknown = await r.json().catch(() => null);
     const error =
       typeof data === 'object' &&

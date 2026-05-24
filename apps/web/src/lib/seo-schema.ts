@@ -1,4 +1,5 @@
 import { BRAND } from './brand';
+import { HERO_POSTER_HD } from './media';
 
 const BASE = `https://${BRAND.domain}`;
 
@@ -6,6 +7,14 @@ export type FaqItem = {
   id: string;
   question: string;
   answer: string;
+};
+
+export type ReviewInput = {
+  id: string;
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+  datePublished?: string;
 };
 
 export function formatPhoneE164(phone: string): string {
@@ -22,6 +31,21 @@ const KNOWS_ABOUT = [
   'WhatsApp Business',
 ] as const;
 
+const OPENING_HOURS = [
+  {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '08:00',
+    closes: '18:00',
+  },
+  {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: 'Saturday',
+    opens: '09:00',
+    closes: '13:00',
+  },
+] as const;
+
 function buildOrganizationNode() {
   const tel = formatPhoneE164(BRAND.phone);
   return {
@@ -29,10 +53,11 @@ function buildOrganizationNode() {
     '@id': `${BASE}/#organization`,
     name: BRAND.name,
     url: `${BASE}/`,
-    logo: `${BASE}/favicon.svg`,
-    image: [`${BASE}/og-image.svg`, `${BASE}/logo.svg`],
+    logo: `${BASE}/logo.svg`,
+    image: [HERO_POSTER_HD, `${BASE}/og-image.svg`, `${BASE}/logo.svg`],
     email: BRAND.email,
     ...(tel ? { telephone: tel } : {}),
+    priceRange: '$$',
     description:
       'Engenharia digital para negócios locais: site rápido, funil, WhatsApp, automação e tráfego com mensuração.',
     inLanguage: 'pt-BR',
@@ -49,10 +74,44 @@ function buildOrganizationNode() {
     },
     areaServed: [
       { '@type': 'City', name: 'Franca' },
+      { '@type': 'State', name: 'São Paulo' },
       { '@type': 'Country', name: 'Brazil' },
     ],
+    openingHoursSpecification: OPENING_HOURS,
     knowsAbout: [...KNOWS_ABOUT],
   };
+}
+
+function buildAggregateRatingNode(reviews: readonly ReviewInput[]) {
+  if (reviews.length === 0) return null;
+  const sum = reviews.reduce((acc, r) => acc + r.ratingValue, 0);
+  const ratingValue = Math.round((sum / reviews.length) * 10) / 10;
+  return {
+    '@type': 'AggregateRating',
+    '@id': `${BASE}/#aggregate-rating`,
+    ratingValue,
+    bestRating: 5,
+    worstRating: 1,
+    ratingCount: reviews.length,
+    reviewCount: reviews.length,
+  };
+}
+
+function buildReviewNodes(reviews: readonly ReviewInput[]) {
+  return reviews.map((r) => ({
+    '@type': 'Review',
+    '@id': `${BASE}/#review-${r.id}`,
+    author: { '@type': 'Person', name: r.author },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: r.ratingValue,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    reviewBody: r.reviewBody,
+    datePublished: r.datePublished ?? '2025-01-15',
+    itemReviewed: { '@id': `${BASE}/#organization` },
+  }));
 }
 
 function buildProfessionalServiceNode() {
@@ -78,11 +137,6 @@ function buildWebSiteNode() {
     url: `${BASE}/`,
     inLanguage: 'pt-BR',
     publisher: { '@id': `${BASE}/#organization` },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${BASE}/?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 }
 
@@ -102,16 +156,31 @@ export function buildFaqPageJsonLd(faq: readonly FaqItem[]) {
   };
 }
 
-/** JSON-LD completo da Home: Organization + ProfessionalService + WebSite + FAQ */
-export function buildHomeJsonLd(faq: readonly FaqItem[]) {
+/** JSON-LD completo da Home: LocalBusiness + FAQ + Reviews */
+export function buildHomeJsonLd(faq: readonly FaqItem[], reviews: readonly ReviewInput[] = []) {
+  const org = buildOrganizationNode();
+  const aggregate = buildAggregateRatingNode(reviews);
+  const orgWithRating =
+    aggregate !== null
+      ? {
+          ...org,
+          aggregateRating: { '@id': `${BASE}/#aggregate-rating` },
+        }
+      : org;
+
+  const graph: Record<string, unknown>[] = [
+    orgWithRating,
+    buildProfessionalServiceNode(),
+    buildWebSiteNode(),
+    buildFaqPageJsonLd(faq),
+    ...buildReviewNodes(reviews),
+  ];
+
+  if (aggregate) graph.push(aggregate);
+
   return {
     '@context': 'https://schema.org',
-    '@graph': [
-      buildOrganizationNode(),
-      buildProfessionalServiceNode(),
-      buildWebSiteNode(),
-      buildFaqPageJsonLd(faq),
-    ],
+    '@graph': graph,
   };
 }
 

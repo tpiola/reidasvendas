@@ -38,12 +38,12 @@ export function WhatsAppFab() {
         }
       }}
       className={cn(
-        'wa-fab group fixed z-50 flex items-center justify-center rounded-full',
+        'wa-fab group fixed z-[100] flex items-center justify-center gap-0 rounded-full min-[520px]:rounded-full min-[520px]:pr-4 min-[520px]:pl-3',
         'bg-[#25D366] text-white shadow-lg shadow-black/30',
         'transition-all duration-300 hover:bg-[#20BD5B] hover:scale-105 active:scale-95',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--page-bg)]',
         'bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))]',
-        'h-14 w-14 min-[480px]:h-[3.75rem] min-[480px]:w-[3.75rem]',
+        'h-14 w-14 min-[520px]:h-[3.5rem] min-[520px]:w-auto',
         ready ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
       )}
     >
@@ -51,8 +51,11 @@ export function WhatsAppFab() {
         className="pointer-events-none absolute inset-0 rounded-full bg-[#25D366] opacity-40 wa-fab-ring"
         aria-hidden
       />
-      <WhatsAppIcon className="relative z-[1] h-7 w-7 min-[480px]:h-8 min-[480px]:w-8" />
-      <span className="sr-only">WhatsApp</span>
+      <WhatsAppIcon className="relative z-[1] h-7 w-7 shrink-0 min-[520px]:h-7 min-[520px]:w-7" />
+      <span className="sr-only">WhatsApp — orçamento</span>
+      <span className="relative z-[1] ml-0 hidden whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.2em] min-[520px]:ml-2 min-[520px]:inline">
+        Orçamento
+      </span>
     </a>
   );
 }

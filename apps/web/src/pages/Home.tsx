@@ -4,7 +4,14 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
-import { CINEMATIC_BAND, HOME_FAQ, MID_VIDEO, TRUST_STATS, HERO_COPY } from '@/lib/home-content';
+import {
+  CINEMATIC_BAND,
+  HOME_FAQ,
+  MID_VIDEO,
+  SCHEMA_REVIEWS,
+  TRUST_STATS,
+  HERO_COPY,
+} from '@/lib/home-content';
 import { CTA } from '@/lib/cta-copy';
 import { HeroVideo } from '@/components/HeroVideo';
 import { Reveal } from '@/components/Reveal';
@@ -15,6 +22,8 @@ import { HowItWorksSection } from '@/components/shipper/HowItWorksSection';
 import { ProjectsShowcaseSection } from '@/components/shipper/ProjectsShowcaseSection';
 import { TestimonialsMarquee } from '@/components/shipper/TestimonialsMarquee';
 import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
+import { TestimonialsVideoSection } from '@/components/home/TestimonialsVideoSection';
+import { TrustGuaranteeBand } from '@/components/home/TrustGuaranteeBand';
 import { StoryVideoBand } from '@/components/media/StoryVideoBand';
 import { BRAND } from '@/lib/brand';
 
@@ -41,7 +50,7 @@ export default function Home() {
       description: HOME_SEO.description,
       canonicalPath: '/',
       ogImage: DEFAULT_OG_IMAGE,
-      jsonLd: buildHomeJsonLd(HOME_FAQ),
+      jsonLd: buildHomeJsonLd(HOME_FAQ, SCHEMA_REVIEWS),
     });
   }, []);
 
@@ -164,6 +173,10 @@ export default function Home() {
       </Reveal>
 
       <TestimonialsMarquee />
+
+      <TestimonialsVideoSection />
+
+      <TrustGuaranteeBand />
 
       <FaqAccordion items={HOME_FAQ} />
 

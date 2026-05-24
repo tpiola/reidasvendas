@@ -97,6 +97,57 @@ export const TESTIMONIALS = [
   },
 ] as const;
 
+/** Depoimentos com vídeo + transcrição (SEO / a11y) */
+export const VIDEO_TESTIMONIALS = [
+  {
+    id: 'clinica-franca',
+    title: 'Clínica · Franca-SP',
+    author: 'Gestora clínica',
+    quote: 'Em poucos dias tínhamos página, funil e WhatsApp integrados. O time respondeu rápido no orçamento.',
+    rating: 5,
+    /** Substitua por ID real do YouTube em VITE_TESTIMONIAL_YT_1 */
+    youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_1 as string | undefined) || undefined,
+    transcript:
+      'Depoimento sobre implantação de site e funil para clínica em Franca. Destaque para prazo de entrega, integração com WhatsApp e suporte no orçamento.',
+  },
+  {
+    id: 'b2b-interior',
+    title: 'B2B · Interior de SP',
+    author: 'Diretor comercial',
+    quote: 'Primeira versão no ar em dias. Métricas claras do que converte no funil.',
+    rating: 5,
+    youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_2 as string | undefined) || undefined,
+    transcript:
+      'Cliente B2B relata escopo fechado, entrega rápida da landing e visibilidade de métricas no funil de vendas.',
+  },
+] as const;
+
+export const GUARANTEE_SEALS = [
+  {
+    id: 'garantia-7d',
+    title: '7 dias de garantia',
+    description: 'Ajustes críticos no escopo acordado na primeira semana após a entrega.',
+  },
+  {
+    id: 'resposta-24h',
+    title: 'Resposta em 24h',
+    description: 'Orçamento e próximos passos com prazo claro no WhatsApp ou e-mail.',
+  },
+  {
+    id: 'sem-fidelidade',
+    title: 'Sem fidelidade forçada',
+    description: 'Planos com transparência — você decide renovar conforme o resultado.',
+  },
+] as const;
+
+/** Reviews para JSON-LD (alinhado aos depoimentos) */
+export const SCHEMA_REVIEWS = VIDEO_TESTIMONIALS.map((t) => ({
+  id: t.id,
+  author: t.author,
+  reviewBody: t.quote,
+  ratingValue: t.rating,
+}));
+
 /** Legado — evita imports quebrados em blocos removidos da Home */
 export const TECH_STACK = ['GA4', 'N8N', 'VERCEL', 'WHATSAPP'] as const;
 export const FUNNEL_MOCK_TASKS = [

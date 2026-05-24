@@ -11,6 +11,6 @@ export const CTA = {
 
 export const FORM = {
   title: 'Solicitar orçamento',
-  description: 'Nome, e-mail e WhatsApp. Retorno com proposta e escopo.',
-  cta: CTA.orcamento,
+  description: 'Nome, e-mail e WhatsApp. Retorno com proposta e escopo em até 24h.',
+  cta: 'Quero meu site em 72h!',
 } as const;

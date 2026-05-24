@@ -32,7 +32,7 @@ export const TEMPLATE_MODULES: TemplateModule[] = [
   },
   {
     id: 'automation',
-    label: 'Automações (Make/Zapier)',
+    label: 'Automações (n8n / Google Sheets)',
     description: 'Sequências de follow-up, roteamento e enriquecimento do lead.',
     priceCents: 159000,
   },

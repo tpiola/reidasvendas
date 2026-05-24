@@ -153,6 +153,23 @@ export default async function handler(req: unknown, res: unknown) {
   });
 
   if (!r.ok) return json(response, 502, { ok: false, error: 'webhook_failed' });
+
+  const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  if (sheetsUrl?.startsWith('https://script.google.com/')) {
+    void fetch(sheetsUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: payload.name ?? '',
+        email: payload.email,
+        phone: payload.phone ?? '',
+        source: payload.source,
+        variant: payload.variant,
+        receivedAt: payload.receivedAt,
+      }),
+    }).catch(() => undefined);
+  }
+
   return json(response, 200, { ok: true });
 }
 
