@@ -30,7 +30,7 @@
 
     <!-- SEO fallback (sobrescrito em runtime por seo.ts em cada página) -->
     <title>Rei das Vendas — Seu negócio vendendo como as gigantes | Franca-SP</title>
-    <meta name="description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Diagnóstico em 24h." />
+    <meta name="description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Orçamento em 24h." />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="canonical" href="https://reidasvendas.com.br/" />
 
@@ -39,7 +39,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Rei das Vendas" />
     <meta property="og:title" content="Rei das Vendas — Seu negócio vendendo como as gigantes | Franca-SP" />
-    <meta property="og:description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Diagnóstico em 24h." />
+    <meta property="og:description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Orçamento em 24h." />
     <meta property="og:url" content="https://reidasvendas.com.br/" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=630&q=88" />
     <meta property="og:image:width" content="1200" />
@@ -51,7 +51,7 @@
     <meta name="twitter:site" content="@reidasvendas" />
     <meta name="twitter:creator" content="@thiagopiola" />
     <meta name="twitter:title" content="Rei das Vendas — Seu negócio vendendo como as gigantes | Franca-SP" />
-    <meta name="twitter:description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Diagnóstico em 24h." />
+    <meta name="twitter:description" content="Site, funil, WhatsApp e automação para negócios locais. Primeira versão em até 72h. Orçamento em 24h." />
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=630&q=88" />
 
     <!-- Core Web Vitals: font preconnect antes do preload -->
@@ -88,9 +88,11 @@
     <!-- Critical CSS inline: previne FOUC e melhora LCP -->
     <style>
       *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth;scrollbar-gutter:stable}
-      body{margin:0;background-color:#030303;color:#fff;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-      #root{min-height:100dvh}
+      html{scroll-behavior:smooth;scrollbar-gutter:stable;scroll-padding-top:calc(4.25rem + env(safe-area-inset-top,0px))}
+      body{margin:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+      html.dark body{background-color:#030305;color:#f8f8fa}
+      html.light body{background-color:#f4f4f6;color:#0a0a0b}
+      #root{min-height:100dvh;min-height:100svh}
     </style>
 
     <!-- JSON-LD fallback (runtime: buildHomeJsonLd em Home via seo.ts) -->

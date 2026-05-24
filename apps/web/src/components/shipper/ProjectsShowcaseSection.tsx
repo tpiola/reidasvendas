@@ -36,6 +36,7 @@ export function ProjectsShowcaseSection() {
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 576px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#08080B] via-transparent to-transparent" />
                   <span className="absolute left-4 top-4 text-[9px] font-bold uppercase tracking-[0.22em] text-white/80">

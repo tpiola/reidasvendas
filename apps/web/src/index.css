@@ -131,9 +131,80 @@ html.light ::-webkit-scrollbar-thumb {
   background: rgba(0, 87, 255, 0.25);
 }
 
+html.light ::selection {
+  background: rgba(0, 87, 255, 0.18);
+  color: var(--page-fg);
+}
+
+/* ─── Layout responsivo + safe area ─── */
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.site-header-offset {
+  padding-top: calc(4.25rem + env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 640px) {
+  .site-header-offset {
+    padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+  }
+}
+
+.hero-ink {
+  color: #f8f8fa;
+}
+
+.hero-ink-muted {
+  color: rgba(248, 248, 250, 0.55);
+}
+
+.section-below-fold {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+}
+
+.label-field {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.input-field {
+  height: 3rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface);
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: var(--page-fg);
+  outline: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.input-field::placeholder {
+  color: var(--text-muted);
+  opacity: 0.65;
+}
+
+.input-field:focus-visible {
+  border-color: rgba(0, 87, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.12);
+}
+
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
 /* ─── Base Reset ─── */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-padding-top: 4.5rem; }
+html {
+  scroll-padding-top: calc(4.25rem + env(safe-area-inset-top, 0px));
+}
 body {
   background: var(--page-bg, var(--rdv-black));
   color: var(--page-fg, var(--rdv-white));
@@ -505,8 +576,16 @@ img, video { max-width: 100%; height: auto; display: block; }
    MOBILE
 ═══════════════════════════════════════════ */
 @media (max-width: 640px) {
-  .text-display { font-size: clamp(2.2rem, 11vw, 3.5rem); }
-  .text-heading { font-size: clamp(1.6rem, 8vw, 2.2rem); }
+  .text-display { font-size: clamp(2rem, 10vw, 3.25rem); }
+  .text-heading { font-size: clamp(1.5rem, 7.5vw, 2.1rem); }
+  .glass-card {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .text-display { font-size: clamp(2.4rem, 6vw, 4.5rem); }
 }
 
 /* ─── WhatsApp FAB animado ─── */

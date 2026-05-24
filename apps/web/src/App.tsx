@@ -52,7 +52,7 @@ export default function App() {
       <ScrollToTop />
       <SiteHeader />
       <AnalyticsProvider />
-      <div className="pt-16">
+      <div className="site-header-offset">
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />

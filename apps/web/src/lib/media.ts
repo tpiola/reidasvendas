@@ -15,6 +15,9 @@ export function pexelsUhd(id: number, fps: 25 | 30 = 25): string {
   return `https://videos.pexels.com/video-files/${id}/${id}-uhd_2560_1440_${fps}fps.mp4`;
 }
 
+/** Clip único do hero Home — 1 request, melhor LCP */
+export const HERO_HOME_VIDEO = pexelsHd(3943445);
+
 export const PEXELS = {
   heroSkyline: pexelsUhd(3571264, 30),
   heroLifestyle: pexelsUhd(5377684),

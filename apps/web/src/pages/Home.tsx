@@ -47,16 +47,16 @@ export default function Home() {
 
   return (
     <main className="page-surface overflow-x-hidden">
-      <section ref={heroRef} className="hero-dark relative isolate min-h-[92vh] overflow-hidden">
+      <section ref={heroRef} className="hero-dark relative isolate min-h-[100dvh] min-h-[100svh] overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0 parallax-bg">
-          <HeroVideo preferLocalHero />
+          <HeroVideo preferLocalHero singleClip />
         </motion.div>
         <div className="absolute inset-0 bg-[#030303]/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/85" />
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative flex min-h-[92vh] flex-col items-center justify-center px-6 pb-20 pt-32 text-center"
+          className="relative flex min-h-[100dvh] min-h-[100svh] flex-col items-center justify-center px-4 pb-[max(5rem,env(safe-area-inset-bottom))] pt-28 text-center sm:px-6 sm:pt-32"
         >
           <Reveal>
             <Link
@@ -72,7 +72,7 @@ export default function Home() {
 
           <div className="max-w-4xl">
             <Reveal delay={0.06}>
-              <h1 className="text-display font-semibold text-white">
+              <h1 className="text-display font-semibold hero-ink">
                 <motion.span
                   className="block text-gradient-gold"
                   initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -94,26 +94,34 @@ export default function Home() {
           </div>
 
           <Reveal delay={0.14}>
-            <p className="mt-6 max-w-md text-base text-white/55 md:text-lg">{HERO_COPY.subhead}</p>
+            <p className="mt-6 max-w-md text-base hero-ink-muted md:text-lg">{HERO_COPY.subhead}</p>
           </Reveal>
 
           <Reveal delay={0.22}>
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-              <Link to="/diagnostico" className="btn-glow inline-flex h-14 items-center justify-center px-12 text-[11px] font-bold uppercase tracking-[0.28em] text-white">
+            <div className="mt-10 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+              <Link
+                to="/diagnostico"
+                className="btn-glow touch-target inline-flex h-14 w-full items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.28em] text-white sm:w-auto sm:px-12"
+              >
                 {HERO_COPY.ctaPrimary}
               </Link>
-              <Link to="/projetos" className="btn-ghost inline-flex h-14 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.28em] text-white/80">
+              <Link
+                to="/projetos"
+                className="btn-ghost touch-target inline-flex h-14 w-full items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.28em] text-white/85 sm:w-auto sm:px-10"
+              >
                 {HERO_COPY.ctaSecondary}
               </Link>
             </div>
           </Reveal>
 
           <Reveal delay={0.3}>
-            <div className="mt-12 flex items-center gap-8">
+            <div className="mt-12 grid w-full max-w-xs grid-cols-3 gap-4 sm:flex sm:max-w-none sm:items-center sm:gap-10">
               {TRUST_STATS.map((item) => (
                 <div key={item.label} className="flex flex-col items-center gap-1">
-                  <span className="text-lg font-bold text-white/90">{item.value}</span>
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/35">{item.label}</span>
+                  <span className="text-base font-bold hero-ink sm:text-lg">{item.value}</span>
+                  <span className="text-[8px] font-semibold uppercase tracking-[0.18em] hero-ink-muted sm:text-[9px]">
+                    {item.label}
+                  </span>
                 </div>
               ))}
             </div>
@@ -122,7 +130,9 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <ProductDemoSection />
+      <div className="section-below-fold">
+        <ProductDemoSection />
+      </div>
 
       <StoryVideoBand
         id="evolucao"

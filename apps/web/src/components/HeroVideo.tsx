@@ -2,13 +2,16 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
 import { LOCAL_HERO_VIDEO } from '@/lib/media';
 
+const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
+
 type HeroVideoProps = {
   className?: string;
   poster?: string;
-  /** Vídeo único (páginas internas); omitir na Home para rotação */
   src?: string;
-  /** Hero da Home: prioriza clip local curto quando existir em /public/videos */
+  /** Home: 1 clip (local ou Pexels) — sem rotação */
   preferLocalHero?: boolean;
+  /** Força um único vídeo (performance LCP) */
+  singleClip?: boolean;
 };
 
 function getReducedMotion(): boolean {
@@ -21,26 +24,46 @@ function preferHdHero(): boolean {
   const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
     .connection;
   if (conn?.saveData) return true;
-  if (window.matchMedia('(max-width: 768px)').matches) return true;
+  if (window.matchMedia('(max-width: 1024px)').matches) return true;
   if (conn?.effectiveType && /(?:2g|slow-2g)/i.test(conn.effectiveType)) return true;
   return false;
 }
 
-export function HeroVideo({ className, poster, src, preferLocalHero = false }: HeroVideoProps) {
+function readLocalHeroCached(): boolean {
+  try {
+    return sessionStorage.getItem(LOCAL_HERO_CACHE_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function HeroVideo({
+  className,
+  poster,
+  src,
+  preferLocalHero = false,
+  singleClip = false,
+}: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
-  const [localHeroReady, setLocalHeroReady] = useState(false);
+  const [localHeroReady, setLocalHeroReady] = useState(() =>
+    preferLocalHero ? readLocalHeroCached() : false,
+  );
   const [activeIndex, setActiveIndex] = useState(0);
   const heroWebm = BRAND.heroVideoWebm;
+
   const videos = useMemo(() => {
     if (src) return [src];
+    if (singleClip || preferLocalHero) {
+      if (preferLocalHero && localHeroReady) return [BRAND.heroLocalMp4];
+      return [BRAND.heroHomeVideo];
+    }
     const list = useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
-    if (preferLocalHero && localHeroReady) return [BRAND.heroLocalMp4, ...list];
-    return list;
-  }, [src, useHd, preferLocalHero, localHeroReady]);
+    return list.slice(0, useHd ? 3 : 2);
+  }, [src, useHd, preferLocalHero, localHeroReady, singleClip]);
+
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const posterUrl = poster ?? BRAND.heroPosterUrl;
 
   useEffect(() => {
@@ -48,19 +71,25 @@ export function HeroVideo({ className, poster, src, preferLocalHero = false }: H
   }, []);
 
   useEffect(() => {
-    if (!preferLocalHero) return;
+    if (!preferLocalHero || localHeroReady) return;
     let cancelled = false;
     fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
       .then((r) => {
-        if (!cancelled && r.ok) setLocalHeroReady(true);
+        if (cancelled || !r.ok) return;
+        try {
+          sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
+        } catch {
+          /* ignore */
+        }
+        setLocalHeroReady(true);
       })
       .catch(() => {
-        /* fallback Pexels */
+        /* Pexels */
       });
     return () => {
       cancelled = true;
     };
-  }, [preferLocalHero]);
+  }, [preferLocalHero, localHeroReady]);
 
   useEffect(() => {
     setLoaded(videos.map(() => false));
@@ -68,10 +97,10 @@ export function HeroVideo({ className, poster, src, preferLocalHero = false }: H
   }, [videos]);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || videos.length <= 1) return;
     timerRef.current = setTimeout(() => {
       setActiveIndex((i) => (i + 1) % videos.length);
-    }, 12000);
+    }, 14000);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
@@ -89,40 +118,43 @@ export function HeroVideo({ className, poster, src, preferLocalHero = false }: H
       <img
         src={posterUrl}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-center"
         loading="eager"
         fetchPriority="high"
         decoding="async"
         width={1920}
         height={1080}
+        sizes="100vw"
       />
       {!reduceMotion &&
-        videos.map((src, i) => (
+        videos.map((videoSrc, i) => (
           <video
-            key={`${src}-${i}`}
-            className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[2000ms] ease-in-out"
+            key={videoSrc}
+            className="absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1800ms] ease-in-out motion-reduce:transition-none"
             style={{ opacity: activeIndex === i && loaded[i] ? 1 : 0 }}
             autoPlay
             muted
             loop
             playsInline
             preload={i === 0 ? 'auto' : 'metadata'}
-            crossOrigin={src.startsWith('http') ? 'anonymous' : undefined}
-            onCanPlayThrough={() => markLoaded(i)}
+            poster={posterUrl}
+            crossOrigin={videoSrc.startsWith('http') ? 'anonymous' : undefined}
+            onCanPlay={() => markLoaded(i)}
             onError={() => {
-              if (i === 0 && preferLocalHero) markLoaded(i);
+              if (i === 0) markLoaded(i);
             }}
           >
-            {preferLocalHero && i === 0 ? (
+            {preferLocalHero && localHeroReady && i === 0 ? (
               <source src={heroWebm} type="video/webm" />
             ) : null}
-            <source src={src} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
         ))}
       <div className="absolute inset-0 hero-noise" />
-      <div className="absolute inset-0 bg-[#030303]/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_60%,rgba(0,112,243,0.15)_0%,transparent_65%)]" />
+      <div className="absolute inset-0 bg-[#030303]/55" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030305]/40 via-transparent to-[#030305]/90" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(0,87,255,0.12)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(201,168,76,0.08)_0%,transparent_45%)]" />
     </div>
   );
 }

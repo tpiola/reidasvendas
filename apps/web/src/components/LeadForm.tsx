@@ -231,8 +231,8 @@ export function LeadForm({
       aria-describedby={error ? 'lead-error' : undefined}
     >
       <div>
-        <h2 className="text-xl font-semibold tracking-tight text-white">{title}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-white/50">
+        <h2 className="text-xl font-semibold tracking-tight text-[color:var(--page-fg)]">{title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-[color:var(--text-muted)]">
           {description}
         </p>
       </div>
@@ -243,7 +243,7 @@ export function LeadForm({
         }
       >
         <div>
-          <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="name">
+          <label className="label-field" htmlFor="name">
             Nome {isMinimal ? <span className="text-brand-blue" aria-hidden="true">*</span> : null}
           </label>
           <div className="mt-2">
@@ -252,7 +252,7 @@ export function LeadForm({
               autoComplete="name"
               placeholder="Seu nome completo"
               aria-required={isMinimal}
-              className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+              className="input-field border-glow-1"
               {...register('name', { required: isMinimal })}
               onBlur={(e) => {
                 if (!isMinimal) return;
@@ -269,7 +269,7 @@ export function LeadForm({
         </div>
 
         <div>
-          <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="email">
+          <label className="label-field" htmlFor="email">
             E-mail <span className="text-brand-blue" aria-hidden="true">*</span>
           </label>
           <div className="mt-2">
@@ -279,7 +279,7 @@ export function LeadForm({
               autoComplete="email"
               placeholder="voce@empresa.com"
               aria-required="true"
-              className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+              className="input-field border-glow-1"
               {...register('email', { required: true })}
               onBlur={(e) => {
                 const err = validateLeadEmail(e.target.value);
@@ -315,7 +315,7 @@ export function LeadForm({
         </div>
 
         <div className={isMinimal ? '' : ''}>
-          <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="phone">
+          <label className="label-field" htmlFor="phone">
             WhatsApp {isMinimal ? <span className="text-brand-blue" aria-hidden="true">*</span> : null}
           </label>
           <div className="mt-2">
@@ -326,7 +326,7 @@ export function LeadForm({
               autoComplete="tel"
               placeholder="(16) 99999-9999"
               aria-required={isMinimal}
-              className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+              className="input-field border-glow-1"
               {...register('phone', {
                 required: isMinimal,
                 onChange: (e) => {
@@ -352,7 +352,7 @@ export function LeadForm({
           <>
             <div>
               <label
-                className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40"
+                className="label-field"
                 htmlFor="company"
               >
                 Empresa / projeto
@@ -362,14 +362,14 @@ export function LeadForm({
                   id="company"
                   autoComplete="organization"
                   placeholder="Nome da empresa ou projeto"
-                  className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+                  className="input-field border-glow-1"
                   {...register('company')}
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40" htmlFor="city">
+              <label className="label-field" htmlFor="city">
                 Cidade
               </label>
               <div className="mt-2">
@@ -377,7 +377,7 @@ export function LeadForm({
                   id="city"
                   autoComplete="address-level2"
                   placeholder="Ex.: São Paulo"
-                  className="border-glow-1 bg-white/[0.04] text-white placeholder:text-white/25 focus-visible:ring-brand-blue focus-visible:border-brand-blue/50"
+                  className="input-field border-glow-1"
                   {...register('city')}
                 />
               </div>
@@ -449,9 +449,9 @@ export function LeadForm({
           aria-required="true"
           {...register('consent', { required: true })}
         />
-        <label className="text-[11px] leading-relaxed text-white/40" htmlFor="consent">
+        <label className="text-[11px] leading-relaxed text-[color:var(--text-muted)]" htmlFor="consent">
           Concordo em receber contato, conforme a{' '}
-          <a href="/politica" className="text-white/60 underline hover:text-white transition-colors">
+          <a href="/politica" className="text-[color:var(--page-fg)] opacity-70 underline hover:opacity-100 transition-colors">
             política de privacidade
           </a>
           .
@@ -485,7 +485,7 @@ export function LeadForm({
               ? 'Enviando…'
               : ctaLabel}
         </button>
-        <p className="text-[11px] text-white/30">
+        <p className="text-[11px] text-[color:var(--text-muted)]">
           Sem spam. Cancele a qualquer momento.
         </p>
       </div>

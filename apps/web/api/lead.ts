@@ -3,11 +3,14 @@ const LEAD_SOURCES = [
   'sticky',
   'exit',
   'footer',
+  'pricing',
   'template_catalog',
   'template_page',
   'template_price',
   'template_builder',
 ] as const;
+
+const MAX_BODY_BYTES = 32_768;
 
 const AB_VARIANTS = ['A', 'B'] as const;
 
@@ -110,7 +113,25 @@ export default async function handler(req: unknown, res: unknown) {
     return json(response, 405, { ok: false, error: 'method_not_allowed' });
   }
 
-  const parsed = parseLeadPayload(request.body);
+  let bodyUnknown: unknown = request.body;
+  if (typeof request.body === 'string') {
+    if (request.body.length > MAX_BODY_BYTES) {
+      return json(response, 413, { ok: false, error: 'payload_too_large' });
+    }
+    try {
+      bodyUnknown = JSON.parse(request.body) as unknown;
+    } catch {
+      return json(response, 400, { ok: false, error: 'invalid_json' });
+    }
+  } else if (request.body !== undefined && request.body !== null) {
+    const serialized = JSON.stringify(request.body);
+    if (serialized.length > MAX_BODY_BYTES) {
+      return json(response, 413, { ok: false, error: 'payload_too_large' });
+    }
+    bodyUnknown = request.body;
+  }
+
+  const parsed = parseLeadPayload(bodyUnknown);
   if (parsed.ok === false) return json(response, 400, { ok: false, error: parsed.error });
   if (!isEmail(parsed.value.email)) return json(response, 400, { ok: false, error: 'invalid_email' });
 

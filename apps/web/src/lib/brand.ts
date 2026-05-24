@@ -1,5 +1,6 @@
 import {
   HERO_POSTER,
+  HERO_HOME_VIDEO,
   HERO_PROFESSION_VIDEOS_HD,
   HERO_PROFESSION_VIDEOS_UHD,
   LOCAL_HERO_VIDEO,
@@ -20,7 +21,8 @@ export const BRAND = {
   heroVideosUhd: [...HERO_PROFESSION_VIDEOS_UHD],
   heroLocalMp4: LOCAL_HERO_VIDEO.mp4,
   heroVideoWebm: LOCAL_HERO_VIDEO.webm,
-  heroVideoUrl: HERO_PROFESSION_VIDEOS_UHD[0],
+  heroVideoUrl: HERO_HOME_VIDEO,
+  heroHomeVideo: HERO_HOME_VIDEO,
   heroPosterUrl: HERO_POSTER,
   inlineVideos: {
     manifesto: PEXELS.profRevenue,

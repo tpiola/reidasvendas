@@ -62,7 +62,7 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-500',
+          'safe-top fixed inset-x-0 top-0 z-50 transition-all duration-500',
           scrolled || !heroGlass
             ? 'border-b border-[color:var(--header-border)] bg-[color:var(--header-surface)] shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-glass-md'
             : 'border-b border-transparent bg-[color:var(--header-surface-overlay)] backdrop-blur-glass-md',

@@ -29,7 +29,7 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
 
   return (
     <main className="page-surface">
-      <section className="relative overflow-hidden border-b border-white/[0.06] py-20 md:py-28">
+      <section className="hero-dark relative overflow-hidden border-b border-[color:var(--border-subtle)] py-16 sm:py-20 md:py-28">
         <img
           src={plan.coverImageUrl}
           alt={plan.coverImageAlt}
@@ -42,19 +42,19 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
         <div className="absolute inset-0 bg-gradient-to-r from-[#030305] via-[#030305]/85 to-[#030305]/40" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(0,87,255,0.18)_0%,transparent_55%)]" />
         <div className="relative mx-auto max-w-6xl px-6">
-          <nav className="text-[11px] text-white/40" aria-label="Breadcrumb">
-            <Link to="/planos" className="hover:text-white/70">
+          <nav className="text-[11px] hero-ink-muted" aria-label="Breadcrumb">
+            <Link to="/planos" className="hover:text-white/80">
               Planos
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-white/70">{plan.headline}</span>
+            <span className="text-white/80">{plan.headline}</span>
           </nav>
           <Reveal className="mt-8 max-w-3xl">
             <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/80">Assinatura</p>
-            <h1 className="mt-4 text-display font-semibold text-white">{plan.headline}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-white/50">{plan.subhead}</p>
-            <p className="mt-8 text-3xl font-bold tracking-tight text-gradient-gold">{plan.priceLabel}</p>
-            <p className="mt-2 text-sm text-white/35">{plan.billingNote}</p>
+            <h1 className="mt-4 text-display font-semibold hero-ink">{plan.headline}</h1>
+            <p className="mt-6 text-lg leading-relaxed hero-ink-muted">{plan.subhead}</p>
+            <p className="mt-8 text-2xl font-bold tracking-tight text-gradient-gold sm:text-3xl">{plan.priceLabel}</p>
+            <p className="mt-2 text-sm hero-ink-muted">{plan.billingNote}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#contratar-plano"
@@ -79,10 +79,10 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
         <div className="mx-auto grid max-w-6xl gap-16 px-6 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <Reveal>
-              <h2 className="text-xl font-semibold text-white">O que está incluso</h2>
+              <h2 className="text-xl font-semibold text-[color:var(--page-fg)]">O que está incluso</h2>
               <ul className="mt-6 space-y-3">
                 {plan.includes.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-white/55">
+                  <li key={item} className="flex gap-3 text-sm leading-relaxed text-[color:var(--text-muted)]">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0057FF]" aria-hidden />
                     {item}
                   </li>
@@ -90,12 +90,12 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
               </ul>
             </Reveal>
             <Reveal delay={0.08} className="mt-10">
-              <p className="text-sm text-white/45">
-                <span className="font-semibold text-white/70">Ideal para: </span>
+              <p className="text-sm text-[color:var(--text-muted)]">
+                <span className="font-semibold text-[color:var(--page-fg)]">Ideal para: </span>
                 {plan.idealFor}
               </p>
-              <p className="mt-4 text-sm text-white/35">
-                <span className="font-semibold text-white/50">Não inclui: </span>
+              <p className="mt-4 text-sm text-[color:var(--text-muted)]">
+                <span className="font-semibold text-[color:var(--page-fg)]">Não inclui: </span>
                 {plan.notIncluded.join(' · ')}
               </p>
             </Reveal>
@@ -129,9 +129,9 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
         </div>
       </section>
 
-      <section className="border-t border-white/[0.06] bg-[#08080B] py-16">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
+      <section className="border-t border-[color:var(--border-subtle)] bg-[color:var(--surface)] py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <h2 className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--text-muted)]">
             Outros planos
           </h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -142,7 +142,7 @@ export function PlanPageShell({ plan, children, leadContext }: PlanPageShellProp
                 className="card-dark rounded-2xl p-6 transition-colors hover:border-[#0057FF]/30"
               >
                 <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#C9A84C]/70">{p.name}</p>
-                <p className="mt-2 text-sm text-white/50">{p.tagline}</p>
+                <p className="mt-2 text-sm text-[color:var(--text-muted)]">{p.tagline}</p>
                 <span className="mt-4 inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#0057FF]/80">
                   {p.ctaLabel} →
                 </span>
