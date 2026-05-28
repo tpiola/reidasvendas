@@ -4,7 +4,7 @@
 export const LOCAL_HERO_VIDEO = {
   webm: '/videos/hero.webm',
   mp4: '/videos/hero.mp4',
-  poster: '/videos/hero-poster.webp',h
+  poster: '/videos/hero-poster.webp',
 } as const;
 
 export function pexelsHd(id: number): string {
