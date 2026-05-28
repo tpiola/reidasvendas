@@ -84,11 +84,27 @@ export const TESTIMONIALS_SECTION = {
   disclaimer: 'Em breve: resultados reais de clientes.',
 } as const;
 
+export type Testimonial = {
+  quote: string;
+  role: string;
+  segment: string;
+};
+
+export type VideoTestimonial = {
+  id: string;
+  title: string;
+  author: string;
+  quote: string;
+  rating: number;
+  youtubeId?: string;
+  transcript: string;
+};
+
 /** Adicione depoimentos reais aqui quando tiver */
-export const TESTIMONIALS = [] as const;
+export const TESTIMONIALS: readonly Testimonial[] = [];
 
 /** Depoimentos com vídeo — adicione vídeos reais aqui */
-export const VIDEO_TESTIMONIALS = [] as const;
+export const VIDEO_TESTIMONIALS: readonly VideoTestimonial[] = [];
 
 export const GUARANTEE_SEALS = [
   {
