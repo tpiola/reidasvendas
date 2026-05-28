@@ -79,48 +79,16 @@ export const HERO_COPY = {
 
 export const TESTIMONIALS_SECTION = {
   eyebrow: 'Resultados',
-  title: 'Quem já',
-  titleAccent: 'escalou.',
-  disclaimer: 'Perfis reais — resultados variam por nicho e investimento.',
+  title: 'Cases em',
+  titleAccent: 'construção.',
+  disclaimer: 'Em breve: resultados reais de clientes.',
 } as const;
 
-export const TESTIMONIALS = [
-  {
-    quote: 'Landing no ar com lead qualificado no WhatsApp.',
-    role: 'Clínica · Franca',
-    segment: '',
-  },
-  {
-    quote: 'Escopo fechado e primeira versão em dias.',
-    role: 'B2B · Interior SP',
-    segment: '',
-  },
-] as const;
+/** Adicione depoimentos reais aqui quando tiver */
+export const TESTIMONIALS = [] as const;
 
-/** Depoimentos com vídeo + transcrição (SEO / a11y) */
-export const VIDEO_TESTIMONIALS = [
-  {
-    id: 'clinica-franca',
-    title: 'Clínica · Franca-SP',
-    author: 'Gestora clínica',
-    quote: 'Em poucos dias tínhamos página, funil e WhatsApp integrados. O time respondeu rápido no orçamento.',
-    rating: 5,
-    /** Substitua por ID real do YouTube em VITE_TESTIMONIAL_YT_1 */
-    youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_1 as string | undefined) || undefined,
-    transcript:
-      'Depoimento sobre implantação de site e funil para clínica em Franca. Destaque para prazo de entrega, integração com WhatsApp e suporte no orçamento.',
-  },
-  {
-    id: 'b2b-interior',
-    title: 'B2B · Interior de SP',
-    author: 'Diretor comercial',
-    quote: 'Primeira versão no ar em dias. Métricas claras do que converte no funil.',
-    rating: 5,
-    youtubeId: (import.meta.env.VITE_TESTIMONIAL_YT_2 as string | undefined) || undefined,
-    transcript:
-      'Cliente B2B relata escopo fechado, entrega rápida da landing e visibilidade de métricas no funil de vendas.',
-  },
-] as const;
+/** Depoimentos com vídeo — adicione vídeos reais aqui */
+export const VIDEO_TESTIMONIALS = [] as const;
 
 export const GUARANTEE_SEALS = [
   {
