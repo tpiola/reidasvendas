@@ -4,7 +4,7 @@
 export const LOCAL_HERO_VIDEO = {
   webm: '/videos/hero.webm',
   mp4: '/videos/hero.mp4',
-  poster: '/videos/hero-poster.webp',
+  poster: '/videos/hero-poster.webp',h
 } as const;
 
 export function pexelsHd(id: number): string {
@@ -66,7 +66,7 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
   PEXELS.heroSkyline,
 ] as const;
 
-const HERO_PHOTO_ID = 'photo-1486406146926-c627a92cc1b1';
+const HERO_PHOTO_ID = 'photo-1454165804606-c3d57bc86b40';
 
 /** Poster mobile / LCP rápido */
 export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=82&fm=webp`;
@@ -81,7 +81,7 @@ export const HERO_POSTER = HERO_POSTER_HD;
 
 /** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
 export const OG_SHARE_IMAGE =
-  'https://images.unsplash.com/photo-1486406146926-c627a92cc1b1?auto=format&fit=crop&w=1200&h=630&q=88';
+  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=630&q=88';
 
 export function unsplashPhoto(id: string, w = 1600, h = 1200): string {
   return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=85&fm=webp`;
