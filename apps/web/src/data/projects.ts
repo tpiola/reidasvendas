@@ -1,5 +1,5 @@
-import { BRAND } from '@/lib/brand';
-import { PEXELS } from '@/lib/media';
+import { BRAND } from "@/lib/brand";
+import { PEXELS } from "@/lib/media";
 
 export type ProjectDefinition = {
   slug: string;
@@ -17,87 +17,99 @@ export type ProjectDefinition = {
 
 export const PROJECTS: ProjectDefinition[] = [
   {
-    slug: 'clube-digital',
-    niche: 'Saúde & Estética',
-    title: 'Clube Digital',
-    tagline: 'Agenda, WhatsApp e funil para clínica que não pode perder lead no silêncio.',
+    slug: "clube-digital",
+    niche: "Saúde & Estética",
+    title: "Clube Digital",
+    tagline:
+      "Agenda, WhatsApp e funil para clínica que não pode perder lead no silêncio.",
     story:
-      'Paciente entra pelo site, recebe resposta no timing certo e cai no CRM com origem rastreada — você atende, o sistema sustenta a fila.',
+      "Paciente entra pelo site, recebe resposta no timing certo e cai no CRM com origem rastreada — você atende, o sistema sustenta a fila.",
     imageUrl:
-      'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp',
+      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.profDoctor,
-    videoCaption: 'Clínica · captação e follow-up',
-    features: ['Landing por procedimento', 'WhatsApp integrado', 'SEO local'],
+    videoCaption: "Clínica · captação e follow-up",
+    features: ["Landing por procedimento", "WhatsApp integrado", "SEO local"],
     testimonial: {
-      quote: 'A agenda passou a encher com lead que já chega qualificado — sem depender só de indicação.',
-      role: 'Gestora · clínica de estética',
+      quote:
+        "A agenda passou a encher com lead que já chega qualificado — sem depender só de indicação.",
+      role: "Gestora · clínica de estética",
     },
-    ctaLabel: 'Quero dominar meu mercado',
+    ctaLabel: "Quero dominar meu mercado",
   },
   {
-    slug: 'advocacia-soberana',
-    niche: 'Direito & Advocacia',
-    title: 'Advocacia Soberana',
-    tagline: 'Autoridade digital e filtro de lead antes da primeira consulta.',
+    slug: "advocacia-soberana",
+    niche: "Direito & Advocacia",
+    title: "Advocacia Soberana",
+    tagline: "Autoridade digital e filtro de lead antes da primeira consulta.",
     story:
-      'Site que transmite confiança, formulário com consentimento LGPD e automação que separa curioso de cliente com perfil.',
+      "Site que transmite confiança, formulário com consentimento LGPD e automação que separa curioso de cliente com perfil.",
     imageUrl:
-      'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp',
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.profService,
-    videoCaption: 'Advocacia · prova e captação',
-    features: ['Copy para decisor', 'Filtro de leads', 'CRM + n8n'],
+    videoCaption: "Advocacia · prova e captação",
+    features: ["Copy para decisor", "Filtro de leads", "CRM + n8n"],
     testimonial: {
-      quote: 'Parou de perder tempo com contato fora do perfil — o funil faz a triagem inicial.',
-      role: 'Sócio · escritório de advocacia',
+      quote:
+        "Parou de perder tempo com contato fora do perfil — o funil faz a triagem inicial.",
+      role: "Sócio · escritório de advocacia",
     },
-    ctaLabel: 'Garantir minha vaga',
+    ctaLabel: "Garantir minha vaga",
   },
   {
-    slug: 'vitrine-imobiliaria-3d',
-    niche: 'Imóveis & Arquitetura',
-    title: 'Vitrine Imobiliária 3D',
-    tagline: 'Experiência premium para imóvel de alto padrão — do clique à visita.',
+    slug: "vitrine-imobiliaria-3d",
+    niche: "Imóveis & Arquitetura",
+    title: "Vitrine Imobiliária 3D",
+    tagline:
+      "Experiência premium para imóvel de alto padrão — do clique à visita.",
     story:
-      'Galeria rápida, tour e CTA para corretor no WhatsApp — presença à altura do ticket do empreendimento.',
+      "Galeria rápida, tour e CTA para corretor no WhatsApp — presença à altura do ticket do empreendimento.",
     imageUrl:
-      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp',
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.heroLifestyle,
-    videoCaption: 'Imobiliário · vitrine digital',
-    features: ['Galeria otimizada', 'Captação qualificada', 'Integração CRM'],
+    videoCaption: "Imobiliário · vitrine digital",
+    features: ["Galeria otimizada", "Captação qualificada", "Integração CRM"],
     testimonial: {
-      quote: 'O visitante entende o imóvel antes da ligação — conversa mais curta e mais fechamento.',
-      role: 'Corretor · alto padrão',
+      quote:
+        "O visitante entende o imóvel antes da ligação — conversa mais curta e mais fechamento.",
+      role: "Corretor · alto padrão",
     },
-    ctaLabel: 'Quero minha máquina de vendas',
+    ctaLabel: "Quero minha máquina de vendas",
   },
   {
-    slug: 'maquina-de-varejo',
-    niche: 'Varejo & E-commerce',
-    title: 'Máquina de Varejo',
-    tagline: 'Tráfego, vitrine e recuperação de carrinho no mesmo fluxo.',
+    slug: "maquina-de-varejo",
+    niche: "Varejo & E-commerce",
+    title: "Máquina de Varejo",
+    tagline: "Tráfego, vitrine e recuperação de carrinho no mesmo fluxo.",
     story:
-      'Anúncio leva para página que converte, WhatsApp recupera abandono e você vê de onde veio cada venda.',
+      "Anúncio leva para página que converte, WhatsApp recupera abandono e você vê de onde veio cada venda.",
     imageUrl:
-      'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp',
+      "https://images.unsplash.com/photo-1555529669-2269763671c0?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.profRetail,
-    videoCaption: 'Varejo · funil e métricas',
-    features: ['Google/Meta ready', 'Recuperação WhatsApp', 'Relatório de conversão'],
+    videoCaption: "Varejo · funil e métricas",
+    features: [
+      "Google/Meta ready",
+      "Recuperação WhatsApp",
+      "Relatório de conversão",
+    ],
     testimonial: {
-      quote: 'Deixamos de mandar tráfego para página genérica — o ROI do anúncio ficou visível.',
-      role: 'Dono · loja física + online',
+      quote:
+        "Deixamos de mandar tráfego para página genérica — o ROI do anúncio ficou visível.",
+      role: "Dono · loja física + online",
     },
-    ctaLabel: 'Falar com especialista',
+    ctaLabel: "Falar com especialista",
   },
 ];
 
 /** Slugs antigos → canônicos (SEO) */
 export const PROJECT_LEGACY_REDIRECTS: Record<string, string> = {
-  'hub-clinico': 'clube-digital',
-  'imobiliario-premium': 'vitrine-imobiliaria-3d',
-  'e-commerce-elite': 'maquina-de-varejo',
+  "hub-clinico": "clube-digital",
+  "imobiliario-premium": "vitrine-imobiliaria-3d",
+  "e-commerce-elite": "maquina-de-varejo",
 };
 
-export function findProject(slug: string | undefined): ProjectDefinition | null {
+export function findProject(
+  slug: string | undefined,
+): ProjectDefinition | null {
   if (!slug) return null;
   const canonical = PROJECT_LEGACY_REDIRECTS[slug] ?? slug;
   return PROJECTS.find((p) => p.slug === canonical) ?? null;
@@ -111,5 +123,5 @@ export const PLAN_DEMO_VIDEOS: Record<string, string> = {
   essencial: PEXELS.profCharts,
   crescimento: BRAND.inlineVideos.performance,
   escala: BRAND.inlineVideos.salesFunnel,
-  'sob-medida': BRAND.inlineVideos.manifesto,
+  "sob-medida": BRAND.inlineVideos.manifesto,
 };
