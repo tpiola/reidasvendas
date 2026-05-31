@@ -2,21 +2,23 @@ import {
   HERO_POSTER,
   HERO_HOME_VIDEO,
   HERO_HOME_VIDEO_UHD,
+  HERO_HOME_SEQUENCE_HD,
+  HERO_HOME_SEQUENCE_UHD,
   HERO_PROFESSION_VIDEOS_HD,
   HERO_PROFESSION_VIDEOS_UHD,
   LOCAL_HERO_VIDEO,
   PEXELS,
-} from '@/lib/media';
+} from "@/lib/media";
 
 export const BRAND = {
-  name: 'Rei das Vendas',
-  domain: 'reidasvendas.com.br',
-  email: 'contato@reidasvendas.com.br',
-  phone: '5516992333344',
-  whatsappText: 'Olá! Vi o site da Rei das Vendas e quero um orçamento.',
+  name: "Rei das Vendas",
+  domain: "reidasvendas.com.br",
+  email: "contato@reidasvendas.com.br",
+  phone: "5516992333344",
+  whatsappText: "Olá! Vi o site da Rei das Vendas e quero um orçamento.",
   whatsappLink:
-    'https://wa.me/5516992333344?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Rei%20das%20Vendas%20e%20quero%20um%20or%C3%A7amento.',
-  webhookSecretHeader: 'X-ReiDasVendas-Webhook-Secret',
+    "https://wa.me/5516992333344?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Rei%20das%20Vendas%20e%20quero%20um%20or%C3%A7amento.",
+  webhookSecretHeader: "X-ReiDasVendas-Webhook-Secret",
   heroVideosHd: [...HERO_PROFESSION_VIDEOS_HD],
   heroVideosUhd: [...HERO_PROFESSION_VIDEOS_UHD],
   heroLocalMp4: LOCAL_HERO_VIDEO.mp4,
@@ -24,6 +26,10 @@ export const BRAND = {
   heroVideoUrl: HERO_HOME_VIDEO,
   heroHomeVideo: HERO_HOME_VIDEO,
   heroHomeVideoUhd: HERO_HOME_VIDEO_UHD,
+  heroHomeClips: {
+    hd: [...HERO_HOME_SEQUENCE_HD],
+    uhd: [...HERO_HOME_SEQUENCE_UHD],
+  },
   heroPosterUrl: HERO_POSTER,
   inlineVideos: {
     manifesto: PEXELS.profRevenue,
@@ -31,8 +37,8 @@ export const BRAND = {
     salesTeam: PEXELS.salesTeam,
     salesFunnel: PEXELS.salesFunnel,
   },
-  baseCity: 'Franca / SP',
-  mapsQuery: 'Franca SP',
+  baseCity: "Franca / SP",
+  mapsQuery: "Franca SP",
   instagram: null as string | null,
   linkedin: null as string | null,
   facebook: null as string | null,

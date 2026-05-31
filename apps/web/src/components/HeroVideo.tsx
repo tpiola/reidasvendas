@@ -1,9 +1,13 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { BRAND } from '@/lib/brand';
-import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
-import { runWhenIdle } from '@/lib/defer-idle';
+import { useState, useEffect, useRef, useMemo } from "react";
+import { BRAND } from "@/lib/brand";
+import {
+  HERO_POSTER_LCP,
+  HERO_POSTER_SRCSET,
+  LOCAL_HERO_VIDEO,
+} from "@/lib/media";
+import { runWhenIdle } from "@/lib/defer-idle";
 
-const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
+const LOCAL_HERO_CACHE_KEY = "rdv-hero-local";
 
 type HeroVideoProps = {
   className?: string;
@@ -11,28 +15,34 @@ type HeroVideoProps = {
   src?: string;
   preferLocalHero?: boolean;
   singleClip?: boolean;
+  /** Sequência curada (HD/UHD) — footage real em rotação cinematográfica */
+  clips?: { hd: readonly string[]; uhd: readonly string[] };
   /** Mobile: adia vídeo ~600ms; desktop: imediato */
   deferVideo?: boolean;
 };
 
 function getReducedMotion(): boolean {
-  if (typeof window === 'undefined') return false;
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 function preferHdHero(): boolean {
-  if (typeof window === 'undefined') return true;
-  const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
-    .connection;
+  if (typeof window === "undefined") return true;
+  const conn = (
+    navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }
+  ).connection;
   if (conn?.saveData) return true;
-  if (window.matchMedia('(max-width: 1024px)').matches) return true;
-  if (conn?.effectiveType && /(?:2g|slow-2g)/i.test(conn.effectiveType)) return true;
+  if (window.matchMedia("(max-width: 1024px)").matches) return true;
+  if (conn?.effectiveType && /(?:2g|slow-2g)/i.test(conn.effectiveType))
+    return true;
   return false;
 }
 
 function readLocalHeroCached(): boolean {
   try {
-    return sessionStorage.getItem(LOCAL_HERO_CACHE_KEY) === '1';
+    return sessionStorage.getItem(LOCAL_HERO_CACHE_KEY) === "1";
   } catch {
     return false;
   }
@@ -44,12 +54,17 @@ export function HeroVideo({
   src,
   preferLocalHero = false,
   singleClip = false,
+  clips,
   deferVideo = true,
 }: HeroVideoProps) {
   const [reduceMotion] = useState(getReducedMotion);
   const [useHd, setUseHd] = useState(true);
   const [shouldPlayVideo, setShouldPlayVideo] = useState(() => {
-    if (deferVideo && typeof window !== 'undefined' && window.matchMedia('(max-width: 1024px)').matches) {
+    if (
+      deferVideo &&
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 1024px)").matches
+    ) {
       return false;
     }
     return true;
@@ -62,15 +77,18 @@ export function HeroVideo({
 
   const videos = useMemo(() => {
     if (src) return [src];
+    if (clips) return [...(useHd ? clips.hd : clips.uhd)];
     if (singleClip || preferLocalHero) {
       if (preferLocalHero && localHeroReady) return [BRAND.heroLocalMp4];
       return [useHd ? BRAND.heroHomeVideo : BRAND.heroHomeVideoUhd];
     }
     const list = useHd ? BRAND.heroVideosHd : BRAND.heroVideosUhd;
     return list.slice(0, useHd ? 3 : 2);
-  }, [src, useHd, preferLocalHero, localHeroReady, singleClip]);
+  }, [src, useHd, preferLocalHero, localHeroReady, singleClip, clips]);
 
-  const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
+  const [loaded, setLoaded] = useState<boolean[]>(() =>
+    videos.map(() => false),
+  );
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const posterUrl = poster ?? HERO_POSTER_LCP;
 
@@ -86,11 +104,11 @@ export function HeroVideo({
   useEffect(() => {
     if (!preferLocalHero || localHeroReady) return;
     let cancelled = false;
-    fetch(LOCAL_HERO_VIDEO.mp4, { method: 'HEAD' })
+    fetch(LOCAL_HERO_VIDEO.mp4, { method: "HEAD" })
       .then((r) => {
         if (cancelled || !r.ok) return;
         try {
-          sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, '1');
+          sessionStorage.setItem(LOCAL_HERO_CACHE_KEY, "1");
         } catch {
           /* ignore */
         }
@@ -127,7 +145,7 @@ export function HeroVideo({
     });
 
   return (
-    <div className={className ?? 'absolute inset-0'} aria-hidden="true">
+    <div className={className ?? "absolute inset-0"} aria-hidden="true">
       <img
         src={posterUrl}
         srcSet={HERO_POSTER_SRCSET}
@@ -151,9 +169,9 @@ export function HeroVideo({
             muted
             loop
             playsInline
-            preload={i === 0 ? 'metadata' : 'none'}
+            preload={i === 0 ? "metadata" : "none"}
             poster={posterUrl}
-            crossOrigin={videoSrc.startsWith('http') ? 'anonymous' : undefined}
+            crossOrigin={videoSrc.startsWith("http") ? "anonymous" : undefined}
             onCanPlay={() => markLoaded(i)}
             onError={() => {
               if (i === 0) markLoaded(i);

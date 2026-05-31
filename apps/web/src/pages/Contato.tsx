@@ -1,24 +1,25 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { applySeo } from '@/lib/seo';
-import { BRAND } from '@/lib/brand';
-import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
-import { LeadForm } from '@/components/LeadForm';
-import { PageHero } from '@/components/shipper/PageHero';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
-import { Reveal } from '@/components/Reveal';
-import { trackEvent } from '@/lib/analytics';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { applySeo } from "@/lib/seo";
+import { BRAND } from "@/lib/brand";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo-meta";
+import { LeadForm } from "@/components/LeadForm";
+import { PageHero } from "@/components/shipper/PageHero";
+import { InlineVideo } from "@/components/home/InlineVideo";
+import { SECTION_POSTERS } from "@/lib/media";
+import { Reveal } from "@/components/Reveal";
+import { trackEvent } from "@/lib/analytics";
 
 const MAP_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.0!2d-47.400!3d-20.538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0ba00c8c8c8c9%3A0x0!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1';
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.0!2d-47.400!3d-20.538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0ba00c8c8c8c9%3A0x0!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1";
 
 export default function Contato() {
   useEffect(() => {
     applySeo({
-      title: 'Contato — Rei das Vendas | Franca-SP',
-      description: 'Agende diagnóstico: nome, e-mail e WhatsApp. Resposta em até 24h. Franca-SP e atendimento remoto.',
-      canonicalPath: '/contato',
+      title: "Contato — Rei das Vendas | Franca-SP",
+      description:
+        "Agende diagnóstico: nome, e-mail e WhatsApp. Resposta em até 24h. Franca-SP e atendimento remoto.",
+      canonicalPath: "/contato",
       ogImage: DEFAULT_OG_IMAGE,
     });
   }, []);
@@ -33,18 +34,23 @@ export default function Contato() {
       >
         <div className="mt-6 space-y-2 text-sm text-surface-muted">
           <p>
-            E-mail:{' '}
-            <a href={`mailto:${BRAND.email}`} className="text-[#C9A84C]/90 hover:underline">
+            E-mail:{" "}
+            <a
+              href={`mailto:${BRAND.email}`}
+              className="text-[#C9A84C]/90 hover:underline"
+            >
               {BRAND.email}
             </a>
           </p>
           <p>
-            WhatsApp:{' '}
+            WhatsApp:{" "}
             <a
               href={BRAND.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackEvent('whatsapp_click', { location: 'contato' })}
+              onClick={() =>
+                trackEvent("whatsapp_click", { location: "contato" })
+              }
               className="text-[#C9A84C]/90 hover:underline"
             >
               {BRAND.phone}
@@ -59,7 +65,7 @@ export default function Contato() {
           <div className="glass-card overflow-hidden rounded-2xl p-2">
             <InlineVideo
               src={BRAND.inlineVideos.salesTeam}
-              poster={HERO_POSTER}
+              poster={SECTION_POSTERS.handshake}
               caption="Atendimento · Franca-SP e remoto"
             />
           </div>
@@ -74,7 +80,7 @@ export default function Contato() {
             title="Agendar diagnóstico"
             description="Somente nome, e-mail e WhatsApp."
             ctaLabel="Enviar e receber retorno"
-            context={{ intent: 'contact' }}
+            context={{ intent: "contact" }}
           />
         </div>
         <div className="overflow-hidden rounded-2xl border border-[color:var(--border-subtle)]">
