@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { applySeo } from '@/lib/seo';
-import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
-import { Reveal } from '@/components/Reveal';
-import { PageHero } from '@/components/shipper/PageHero';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { applySeo } from "@/lib/seo";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo-meta";
+import { Reveal } from "@/components/Reveal";
+import { PageHero } from "@/components/shipper/PageHero";
+import { InlineVideo } from "@/components/home/InlineVideo";
+import { SECTION_POSTERS } from "@/lib/media";
 
 type NicheLandingPageProps = {
   seoTitle: string;
@@ -17,6 +17,8 @@ type NicheLandingPageProps = {
   subtitle: string;
   videoSrc: string;
   videoCaption: string;
+  /** Pôster coerente com o nicho (cai no de funil por padrão) */
+  poster?: string;
   highlights: readonly string[];
 };
 
@@ -30,6 +32,7 @@ export function NicheLandingPage({
   subtitle,
   videoSrc,
   videoCaption,
+  poster = SECTION_POSTERS.funnel,
   highlights,
 }: NicheLandingPageProps) {
   useEffect(() => {
@@ -43,12 +46,22 @@ export function NicheLandingPage({
 
   return (
     <main className="page-surface">
-      <PageHero eyebrow={eyebrow} title={title} titleAccent={titleAccent} subtitle={subtitle} align="center" />
+      <PageHero
+        eyebrow={eyebrow}
+        title={title}
+        titleAccent={titleAccent}
+        subtitle={subtitle}
+        align="center"
+      />
 
       <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
         <Reveal>
           <div className="glass-card overflow-hidden rounded-2xl p-2">
-            <InlineVideo src={videoSrc} poster={HERO_POSTER} caption={videoCaption} />
+            <InlineVideo
+              src={videoSrc}
+              poster={poster}
+              caption={videoCaption}
+            />
           </div>
         </Reveal>
 
@@ -60,7 +73,10 @@ export function NicheLandingPage({
           ))}
         </Reveal>
 
-        <Reveal delay={0.15} className="mt-12 flex flex-wrap justify-center gap-4">
+        <Reveal
+          delay={0.15}
+          className="mt-12 flex flex-wrap justify-center gap-4"
+        >
           <Link
             to="/diagnostico"
             className="btn-glow inline-flex h-12 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white"

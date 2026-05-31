@@ -25,7 +25,7 @@ export const PROJECTS: ProjectDefinition[] = [
     story:
       "Paciente entra pelo site, recebe resposta no timing certo e cai no CRM com origem rastreada — você atende, o sistema sustenta a fila.",
     imageUrl:
-      "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1576091160399-175737edbf78?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.profDoctor,
     videoCaption: "Clínica · captação e follow-up",
     features: ["Landing por procedimento", "WhatsApp integrado", "SEO local"],
@@ -83,7 +83,7 @@ export const PROJECTS: ProjectDefinition[] = [
     story:
       "Anúncio leva para página que converte, WhatsApp recupera abandono e você vê de onde veio cada venda.",
     imageUrl:
-      "https://images.unsplash.com/photo-1555529669-2269763671c0?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
+      "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?auto=format&fit=crop&w=1200&h=800&q=80&fm=webp",
     videoSrc: PEXELS.profRetail,
     videoCaption: "Varejo · funil e métricas",
     features: [

@@ -1,7 +1,11 @@
-import { NicheLandingPage } from '@/components/shipper/NicheLandingPage';
-import { BRAND } from '@/lib/brand';
+import { NicheLandingPage } from "@/components/shipper/NicheLandingPage";
+import { PEXELS, NICHE_PHOTOS } from "@/lib/media";
 
-const HIGHLIGHTS = ['Agendamento e WhatsApp integrados', 'Copy para paciente certo', 'SEO local e velocidade'] as const;
+const HIGHLIGHTS = [
+  "Agendamento e WhatsApp integrados",
+  "Copy para paciente certo",
+  "SEO local e velocidade",
+] as const;
 
 export default function Saude() {
   return (
@@ -13,8 +17,9 @@ export default function Saude() {
       title="Paciente certo,"
       titleAccent="agenda cheia."
       subtitle="Página rápida, prova social e follow-up automático — você foca no atendimento."
-      videoSrc={BRAND.inlineVideos.manifesto}
+      videoSrc={PEXELS.profDoctor}
       videoCaption="Clínica · presença premium"
+      poster={NICHE_PHOTOS.saude}
       highlights={HIGHLIGHTS}
     />
   );

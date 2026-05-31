@@ -1,7 +1,12 @@
-import { NicheLandingPage } from '@/components/shipper/NicheLandingPage';
-import { BRAND } from '@/lib/brand';
+import { NicheLandingPage } from "@/components/shipper/NicheLandingPage";
+import { BRAND } from "@/lib/brand";
+import { SECTION_POSTERS } from "@/lib/media";
 
-const HIGHLIGHTS = ['Site + funil sob medida', 'Automação n8n', 'Diagnóstico em 24h'] as const;
+const HIGHLIGHTS = [
+  "Site + funil sob medida",
+  "Automação n8n",
+  "Diagnóstico em 24h",
+] as const;
 
 export default function Solucoes() {
   return (
@@ -15,6 +20,7 @@ export default function Solucoes() {
       subtitle="Site, integrações e ritmo comercial para o seu segmento — escopo fechado no diagnóstico."
       videoSrc={BRAND.inlineVideos.salesFunnel}
       videoCaption="Funil · captação até o CRM"
+      poster={SECTION_POSTERS.demo}
       highlights={HIGHLIGHTS}
     />
   );
