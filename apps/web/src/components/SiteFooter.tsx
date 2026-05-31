@@ -1,14 +1,22 @@
-import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck } from 'lucide-react';
-import { BRAND } from '@/lib/brand';
-import { BrandLogo } from '@/components/BrandLogo';
-import { FooterWhatsAppQr } from '@/components/footer/FooterWhatsAppQr';
-import { FooterWhatsAppIcon } from '@/components/footer/FooterWhatsAppIcon';
-import { Reveal } from '@/components/Reveal';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
-import { CTA } from '@/lib/cta-copy';
-import { useTheme } from '@/hooks/useTheme';
+import { Link } from "react-router-dom";
+import {
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Shield,
+  Lock,
+  FileCheck,
+} from "lucide-react";
+import { BRAND } from "@/lib/brand";
+import { BrandLogo } from "@/components/BrandLogo";
+import { FooterWhatsAppQr } from "@/components/footer/FooterWhatsAppQr";
+import { FooterWhatsAppIcon } from "@/components/footer/FooterWhatsAppIcon";
+import { Reveal } from "@/components/Reveal";
+import { InlineVideo } from "@/components/home/InlineVideo";
+import { SECTION_POSTERS } from "@/lib/media";
+import { CTA } from "@/lib/cta-copy";
+import { useTheme } from "@/hooks/useTheme";
 
 const YEAR = new Date().getFullYear();
 
@@ -17,42 +25,42 @@ type FooterCol = { title: string; links: FooterLink[] };
 
 const FOOTER_COLS: FooterCol[] = [
   {
-    title: 'Soluções',
+    title: "Soluções",
     links: [
-      { label: 'Planos e assinaturas', to: '/planos' },
-      { label: 'Plano Essencial', to: '/planos/essencial' },
-      { label: 'Plano Crescimento', to: '/planos/crescimento' },
-      { label: 'Plano Escala', to: '/planos/escala' },
-      { label: 'Plano Sob medida', to: '/planos/sob-medida' },
+      { label: "Planos e assinaturas", to: "/planos" },
+      { label: "Plano Essencial", to: "/planos/essencial" },
+      { label: "Plano Crescimento", to: "/planos/crescimento" },
+      { label: "Plano Escala", to: "/planos/escala" },
+      { label: "Plano Sob medida", to: "/planos/sob-medida" },
     ],
   },
   {
-    title: 'Catálogo',
+    title: "Catálogo",
     links: [
-      { label: 'Projetos', to: '/projetos' },
-      { label: 'Amostras de sites', to: '/templates' },
-      { label: 'Blog', to: '/blog' },
-      { label: 'Soluções', to: '/solucoes' },
-      { label: 'Negócios', to: '/negocios' },
-      { label: 'Saúde', to: '/saude' },
+      { label: "Projetos", to: "/projetos" },
+      { label: "Amostras de sites", to: "/templates" },
+      { label: "Blog", to: "/blog" },
+      { label: "Soluções", to: "/solucoes" },
+      { label: "Negócios", to: "/negocios" },
+      { label: "Saúde", to: "/saude" },
     ],
   },
   {
-    title: 'Empresa',
+    title: "Empresa",
     links: [
-      { label: 'Contato', to: '/contato' },
-      { label: 'Solicitar orçamento', to: '/diagnostico' },
-      { label: 'Privacidade (LGPD)', to: '/politica' },
-      { label: 'Termos', to: '/termos' },
-      { label: 'Governança', to: '/governanca' },
+      { label: "Contato", to: "/contato" },
+      { label: "Solicitar orçamento", to: "/diagnostico" },
+      { label: "Privacidade (LGPD)", to: "/politica" },
+      { label: "Termos", to: "/termos" },
+      { label: "Governança", to: "/governanca" },
     ],
   },
 ];
 
 const TRUST_ITEMS = [
-  { Icon: Shield, label: 'HTTPS em produção' },
-  { Icon: Lock, label: 'Dados com consentimento LGPD' },
-  { Icon: FileCheck, label: 'Escopo documentado por plano' },
+  { Icon: Shield, label: "HTTPS em produção" },
+  { Icon: Lock, label: "Dados com consentimento LGPD" },
+  { Icon: FileCheck, label: "Escopo documentado por plano" },
 ] as const;
 
 export function SiteFooter() {
@@ -78,7 +86,7 @@ export function SiteFooter() {
           <div className="glass-card mx-auto mt-8 max-w-4xl overflow-hidden rounded-2xl p-2 shadow-xl">
             <InlineVideo
               src={BRAND.inlineVideos.manifesto}
-              poster={HERO_POSTER}
+              poster={SECTION_POSTERS.team}
               caption="Rei das Vendas · entrega premium"
             />
           </div>
@@ -90,11 +98,15 @@ export function SiteFooter() {
               to="/"
               className="inline-block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
             >
-              <BrandLogo layout="stacked" size="lg" variant={isDark ? 'onDark' : 'onLight'} />
+              <BrandLogo
+                layout="stacked"
+                size="lg"
+                variant={isDark ? "onDark" : "onLight"}
+              />
             </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-[color:var(--footer-muted)]">
-              Infraestrutura digital, funil e automação sob medida — para o negócio local competir com quem já domina
-              tráfego e follow-up.
+              Infraestrutura digital, funil e automação sob medida — para o
+              negócio local competir com quem já domina tráfego e follow-up.
             </p>
             <a
               href={`mailto:${BRAND.email}`}
@@ -104,20 +116,26 @@ export function SiteFooter() {
               {BRAND.email}
             </a>
             <p className="mt-2 flex items-center gap-2 text-sm text-[color:var(--footer-muted)]">
-              <MapPin size={14} className="shrink-0 text-[#C9A84C]/60" aria-hidden />
+              <MapPin
+                size={14}
+                className="shrink-0 text-[#C9A84C]/60"
+                aria-hidden
+              />
               {BRAND.baseCity}
             </p>
             <div className="mt-6 flex gap-3">
               {[
-                { Icon: Instagram, label: 'Instagram', href: BRAND.instagram },
-                { Icon: Linkedin, label: 'LinkedIn', href: BRAND.linkedin },
+                { Icon: Instagram, label: "Instagram", href: BRAND.instagram },
+                { Icon: Linkedin, label: "LinkedIn", href: BRAND.linkedin },
               ].map(({ Icon, label, href }) => (
                 <a
                   key={label}
-                  href={href ?? '#'}
+                  href={href ?? "#"}
                   aria-label={label}
                   className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:border-[#C9A84C]/35 hover:text-[color:var(--footer-fg)]"
-                  {...(href ? { target: '_blank', rel: 'noreferrer' } : { 'aria-disabled': true })}
+                  {...(href
+                    ? { target: "_blank", rel: "noreferrer" }
+                    : { "aria-disabled": true })}
                 >
                   <Icon size={18} aria-hidden />
                 </a>
@@ -128,7 +146,9 @@ export function SiteFooter() {
           <div className="grid gap-10 sm:grid-cols-3 lg:col-span-5">
             {FOOTER_COLS.map((col, i) => (
               <Reveal key={col.title} delay={0.06 + i * 0.03}>
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">{col.title}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">
+                  {col.title}
+                </p>
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map(({ label, to }) => (
                     <li key={`${col.title}-${label}`}>
@@ -145,7 +165,10 @@ export function SiteFooter() {
             ))}
           </div>
 
-          <Reveal delay={0.15} className="flex flex-col items-center lg:col-span-3 lg:items-end">
+          <Reveal
+            delay={0.15}
+            className="flex flex-col items-center lg:col-span-3 lg:items-end"
+          >
             <p className="mb-4 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--footer-muted)] lg:text-right">
               WhatsApp
             </p>
@@ -159,7 +182,10 @@ export function SiteFooter() {
         <Reveal delay={0.1} className="mt-12">
           <ul className="flex flex-wrap justify-center gap-6 border-y border-[color:var(--border-subtle)] py-6 md:gap-10">
             {TRUST_ITEMS.map(({ Icon, label }) => (
-              <li key={label} className="flex items-center gap-2 text-[11px] text-[color:var(--footer-muted)]">
+              <li
+                key={label}
+                className="flex items-center gap-2 text-[11px] text-[color:var(--footer-muted)]"
+              >
                 <Icon size={14} className="text-[#C9A84C]/80" aria-hidden />
                 {label}
               </li>
@@ -170,10 +196,15 @@ export function SiteFooter() {
         <Reveal delay={0.12} className="mt-10">
           <div className="rounded-2xl border border-[color:var(--border-subtle)] bg-gradient-to-r from-[#0057FF]/10 via-[color:var(--surface)] to-[#C9A84C]/10 p-6 md:flex md:items-center md:justify-between md:gap-8 md:p-8">
             <div className="text-center md:text-left">
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/85">Próximo passo</p>
-              <p className="mt-2 text-lg font-semibold text-[color:var(--footer-fg)]">Proposta em até 24h</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/85">
+                Próximo passo
+              </p>
+              <p className="mt-2 text-lg font-semibold text-[color:var(--footer-fg)]">
+                Proposta em até 24h
+              </p>
               <p className="mt-1 text-sm text-[color:var(--footer-muted)]">
-                Escopo e investimento alinhados ao seu nicho — sem fidelidade forçada.
+                Escopo e investimento alinhados ao seu nicho — sem fidelidade
+                forçada.
               </p>
             </div>
             <Link
@@ -187,7 +218,8 @@ export function SiteFooter() {
 
         <div className="mt-10 flex flex-col gap-4 border-t border-[color:var(--border-subtle)] pt-8 md:flex-row md:items-center md:justify-between">
           <p className="text-center text-[11px] text-[color:var(--footer-muted)] md:text-left">
-            &copy; {YEAR} {BRAND.name}. Projetos exclusivos — catálogo é referência visual.
+            &copy; {YEAR} {BRAND.name}. Projetos exclusivos — catálogo é
+            referência visual.
           </p>
           <nav
             aria-label="Links legais"
@@ -196,13 +228,22 @@ export function SiteFooter() {
             <Link className="hover:text-[color:var(--footer-fg)]" to="/termos">
               Termos
             </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/politica">
+            <Link
+              className="hover:text-[color:var(--footer-fg)]"
+              to="/politica"
+            >
               Privacidade
             </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/governanca">
+            <Link
+              className="hover:text-[color:var(--footer-fg)]"
+              to="/governanca"
+            >
               Segurança
             </Link>
-            <a className="hover:text-[color:var(--footer-fg)]" href="/sitemap.xml">
+            <a
+              className="hover:text-[color:var(--footer-fg)]"
+              href="/sitemap.xml"
+            >
               Sitemap
             </a>
           </nav>

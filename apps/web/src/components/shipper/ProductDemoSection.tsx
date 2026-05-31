@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Reveal } from '@/components/Reveal';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { BRAND } from '@/lib/brand';
-import { HERO_POSTER } from '@/lib/media';
-import { PRODUCT_DEMO } from '@/lib/home-content';
-import { CTA } from '@/lib/cta-copy';
-import { SectionShell } from '@/components/shipper/SectionShell';
+import { Link } from "react-router-dom";
+import { Reveal } from "@/components/Reveal";
+import { InlineVideo } from "@/components/home/InlineVideo";
+import { BRAND } from "@/lib/brand";
+import { SECTION_POSTERS } from "@/lib/media";
+import { PRODUCT_DEMO } from "@/lib/home-content";
+import { CTA } from "@/lib/cta-copy";
+import { SectionShell } from "@/components/shipper/SectionShell";
 
 export function ProductDemoSection() {
   return (
@@ -22,7 +22,7 @@ export function ProductDemoSection() {
           <div className="glass-card overflow-hidden rounded-2xl border border-[color:var(--border-subtle)] p-2">
             <InlineVideo
               src={BRAND.inlineVideos.performance}
-              poster={HERO_POSTER}
+              poster={SECTION_POSTERS.demo}
               caption="Funil em operação · preview"
             />
           </div>
@@ -37,7 +37,9 @@ export function ProductDemoSection() {
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-[#0057FF]/15 text-[11px] font-bold text-[#0057FF]">
                   {i + 1}
                 </span>
-                <span className="text-sm leading-relaxed text-[color:var(--text-muted)]">{step}</span>
+                <span className="text-sm leading-relaxed text-[color:var(--text-muted)]">
+                  {step}
+                </span>
               </li>
             ))}
           </ol>
