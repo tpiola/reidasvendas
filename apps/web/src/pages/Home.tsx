@@ -56,7 +56,7 @@ export default function Home() {
     <main className="page-surface overflow-x-hidden">
       <section className="hero-dark relative isolate min-h-[100dvh] min-h-[100svh] overflow-hidden">
         <div className="absolute inset-0">
-          <HeroVideo clips={BRAND.heroHomeClips} deferVideo />
+          <HeroVideo preferLocalHero singleClip deferVideo />
         </div>
         <div className="absolute inset-0 bg-[#030303]/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/85" />
