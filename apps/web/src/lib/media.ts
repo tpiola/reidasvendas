@@ -16,10 +16,10 @@ export function pexelsUhd(id: number, fps: 25 | 30 = 25): string {
 }
 
 /** Clip único do hero Home — HD mobile / conexão lenta */
-export const HERO_HOME_VIDEO = pexelsHd(3943445);
+export const HERO_HOME_VIDEO = pexelsHd(4270175);
 
 /** Hero desktop — UHD quando a rede permitir */
-export const HERO_HOME_VIDEO_UHD = pexelsUhd(3943445);
+export const HERO_HOME_VIDEO_UHD = pexelsUhd(4270175);
 
 export const PEXELS = {
   heroSkyline: pexelsUhd(3571264, 30),
@@ -33,23 +33,22 @@ export const PEXELS = {
   profHardware: pexelsHd(5473967),
   profService: pexelsHd(5494297),
   profClassroom: pexelsHd(7161750),
+  dubaiSkyline: pexelsHd(4270175),
+  dubaiNight: pexelsHd(4197969),
+  dubaiLuxury: pexelsHd(3443903),
   profCharts: pexelsHd(3943445),
   profRevenue: pexelsHd(7578652),
+  goldCoins: pexelsHd(7578652),
   salesFunnel: pexelsHd(4328609),
   salesTeam: pexelsHd(5377684),
 } as const;
 
 /** Sequência do hero — profissionais locais + editorial (HD = LCP rápido) */
 export const HERO_PROFESSION_VIDEOS_HD = [
-  PEXELS.profDoctor,
-  PEXELS.profEngineer,
-  PEXELS.profFashion,
-  PEXELS.profHardware,
-  PEXELS.profService,
-  PEXELS.profClassroom,
+  PEXELS.dubaiSkyline,
+  PEXELS.profRevenue,
   PEXELS.profCharts,
-  pexelsHd(5377684),
-  pexelsHd(4328609),
+  pexelsHd(4197969),
   pexelsHd(3571264),
 ] as const;
 
