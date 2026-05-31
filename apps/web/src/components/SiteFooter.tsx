@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck } from 'lucide-react';
+import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck, ExternalLink } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { BrandLogo } from '@/components/BrandLogo';
 import { FooterWhatsAppQr } from '@/components/footer/FooterWhatsAppQr';
@@ -12,7 +12,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 const YEAR = new Date().getFullYear();
 
-type FooterLink = { label: string; to: string };
+type FooterLink = { label: string; to: string; external?: boolean };
 type FooterCol = { title: string; links: FooterLink[] };
 
 const FOOTER_COLS: FooterCol[] = [
@@ -46,7 +46,13 @@ const FOOTER_COLS: FooterCol[] = [
       { label: 'Termos', to: '/termos' },
       { label: 'Governança', to: '/governanca' },
     ],
-  },
+  },,
+  {
+    title: 'Treinamentos',
+    links: [
+      { label: 'Atendente de Premium de Farmacia', to: 'https://saudegpt.com', external: true },
+    ],
+  }
 ];
 
 const TRUST_ITEMS = [
@@ -130,7 +136,7 @@ export function SiteFooter() {
               <Reveal key={col.title} delay={0.06 + i * 0.03}>
                 <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">{col.title}</p>
                 <ul className="mt-4 space-y-2.5">
-                  {col.links.map(({ label, to }) => (
+                  {col.links.map(({ label, to, external }) => (
                     <li key={`${col.title}-${label}`}>
                       <Link
                         to={to}
@@ -204,6 +210,9 @@ export function SiteFooter() {
             </Link>
             <a className="hover:text-[color:var(--footer-fg)]" href="/sitemap.xml">
               Sitemap
+            </a>
+            <a href="https://www.thiagopiola.com.br" target="_blank" rel="noreferrer" className="hover:text-[#C9A84C] transition-colors">
+              thiagopiola.com.br
             </a>
           </nav>
         </div>
