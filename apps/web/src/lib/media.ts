@@ -2,9 +2,9 @@
 
 /** Vídeo hero local (10–15 s, sem áudio) — coloque em public/videos/ */
 export const LOCAL_HERO_VIDEO = {
-  webm: '/videos/hero.webm',
-  mp4: '/videos/hero.mp4',
-  poster: '/videos/hero-poster.webp',
+  webm: "/videos/hero.webm",
+  mp4: "/videos/hero.mp4",
+  poster: "/videos/hero-poster.webp",
 } as const;
 
 export function pexelsHd(id: number): string {
@@ -15,11 +15,28 @@ export function pexelsUhd(id: number, fps: 25 | 30 = 25): string {
   return `https://videos.pexels.com/video-files/${id}/${id}-uhd_2560_1440_${fps}fps.mp4`;
 }
 
-/** Clip único do hero Home — HD mobile / conexão lenta */
-export const HERO_HOME_VIDEO = pexelsHd(3943445);
+/** Clip único do hero Home — HD mobile / conexão lenta (equipe de vendas, footage real) */
+export const HERO_HOME_VIDEO = pexelsHd(5377684);
 
 /** Hero desktop — UHD quando a rede permitir */
-export const HERO_HOME_VIDEO_UHD = pexelsUhd(3943445);
+export const HERO_HOME_VIDEO_UHD = pexelsUhd(5377684);
+
+/**
+ * Sequência cinematográfica do hero Home — footage 100% real (sem IA).
+ * Conta a história: equipe de vendas → reunião de negócios → crescimento/prosperidade.
+ * Distinta do clipe de gráficos (3943445) usado nas seções internas, para não repetir mídia.
+ */
+export const HERO_HOME_SEQUENCE_HD = [
+  pexelsHd(5377684), // equipe de vendas em ação
+  pexelsHd(4328609), // reunião de negócios / fechamento
+  pexelsHd(7578652), // receita e crescimento
+] as const;
+
+export const HERO_HOME_SEQUENCE_UHD = [
+  pexelsUhd(5377684), // equipe de vendas em ação
+  pexelsUhd(4328609), // reunião de negócios / fechamento
+  pexelsUhd(3571264, 30), // skyline ao entardecer — prosperidade
+] as const;
 
 export const PEXELS = {
   heroSkyline: pexelsUhd(3571264, 30),
@@ -66,7 +83,7 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
   PEXELS.heroSkyline,
 ] as const;
 
-const HERO_PHOTO_ID = 'photo-1454165804606-c3d57bc86b40';
+const HERO_PHOTO_ID = "photo-1454165804606-c3d57bc86b40";
 
 /** Poster mobile / LCP rápido */
 export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=82&fm=webp`;
@@ -74,14 +91,17 @@ export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?aut
 /** Poster alta definição — desktop retina */
 export const HERO_POSTER_HD = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1920&h=1080&q=88&fm=webp`;
 
-export const HERO_POSTER_SRCSET = [`${HERO_POSTER_LCP} 1200w`, `${HERO_POSTER_HD} 1920w`].join(', ');
+export const HERO_POSTER_SRCSET = [
+  `${HERO_POSTER_LCP} 1200w`,
+  `${HERO_POSTER_HD} 1920w`,
+].join(", ");
 
 /** Hero e seções premium */
 export const HERO_POSTER = HERO_POSTER_HD;
 
 /** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
 export const OG_SHARE_IMAGE =
-  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=630&q=88';
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=630&q=88";
 
 export function unsplashPhoto(id: string, w = 1600, h = 1200): string {
   return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=85&fm=webp`;
@@ -89,18 +109,18 @@ export function unsplashPhoto(id: string, w = 1600, h = 1200): string {
 
 /** Nichos — fotos reais WebP */
 export const NICHE_PHOTOS = {
-  saude: unsplashPhoto('photo-1576091160399-175737edbf78'),
-  restaurante: unsplashPhoto('photo-1517248135467-4c7edcad34c4'),
-  comercio: unsplashPhoto('photo-1441986300917-64674bd600d8'),
-  servicos: unsplashPhoto('photo-1552664730-d307ca884978'),
-  imobiliaria: unsplashPhoto('photo-1560518883-ce09059eeffa'),
-  academia: unsplashPhoto('photo-1534438327276-14e5300c3a48'),
+  saude: unsplashPhoto("photo-1576091160399-175737edbf78"),
+  restaurante: unsplashPhoto("photo-1517248135467-4c7edcad34c4"),
+  comercio: unsplashPhoto("photo-1441986300917-64674bd600d8"),
+  servicos: unsplashPhoto("photo-1552664730-d307ca884978"),
+  imobiliaria: unsplashPhoto("photo-1560518883-ce09059eeffa"),
+  academia: unsplashPhoto("photo-1534438327276-14e5300c3a48"),
 } as const;
 
 /** Vendas, faturamento, lucro — editorial */
 export const SALES_PHOTOS = {
-  revenue: unsplashPhoto('photo-1554224155-6726b3fffa30', 1200, 900),
-  profit: unsplashPhoto('photo-1460925895917-afdab827c52f', 1200, 900),
-  growth: unsplashPhoto('photo-1611974789855-9f2a0a3e1a4f', 1200, 900),
-  handshake: unsplashPhoto('photo-1521791139204-a94e286c4c2e', 1200, 900),
+  revenue: unsplashPhoto("photo-1554224155-6726b3fffa30", 1200, 900),
+  profit: unsplashPhoto("photo-1460925895917-afdab827c52f", 1200, 900),
+  growth: unsplashPhoto("photo-1611974789855-9f2a0a3e1a4f", 1200, 900),
+  handshake: unsplashPhoto("photo-1521791139204-a94e286c4c2e", 1200, 900),
 } as const;
