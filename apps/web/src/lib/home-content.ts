@@ -15,7 +15,7 @@ export const HOME_FAQ = [
 
 export const TRUST_STATS = [
   { value: '72h', label: '1ª versão' },
-  { value: '4.8×', label: 'Retorno médio' },
+  { value: 'Funil + CRM', label: 'Integrado' },
   { value: '24h', label: 'Resposta' },
 ] as const;
 
@@ -125,12 +125,12 @@ export const GUARANTEE_SEALS = [
 ] as const;
 
 /** Reviews para JSON-LD (alinhado aos depoimentos) */
-export const SCHEMA_REVIEWS = VIDEO_TESTIMONIALS.map((t) => ({
-  id: t.id,
-  author: t.author,
-  reviewBody: t.quote,
-  ratingValue: t.rating,
-}));
+export const SCHEMA_REVIEWS: Array<{
+  id: string;
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+}> = [];
 
 /** Legado — evita imports quebrados em blocos removidos da Home */
 export const TECH_STACK = ['GA4', 'N8N', 'VERCEL', 'WHATSAPP'] as const;
