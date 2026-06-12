@@ -1,10 +1,10 @@
-/** Mídia curada (Pexels / Unsplash) — HD no hero mobile; UHD no desktop quando permitido */
+/** Mídia local — todas as imagens são locais, otimizadas para retina */
 
 /** Vídeo hero local (10–15 s, sem áudio) — coloque em public/videos/ */
 export const LOCAL_HERO_VIDEO = {
   webm: '/videos/hero.webm',
   mp4: '/videos/hero.mp4',
-  poster: '/videos/hero-poster.webp',
+  poster: '/imagens/hero-slide-1.png',
 } as const;
 
 export function pexelsHd(id: number): string {
@@ -17,15 +17,12 @@ export function pexelsUhd(id: number, fps: 25 | 30 = 25): string {
 
 /** Clip único do hero Home — HD mobile / conexão lenta */
 export const HERO_HOME_VIDEO = pexelsHd(4270175);
-
-/** Hero desktop — UHD quando a rede permitir */
 export const HERO_HOME_VIDEO_UHD = pexelsUhd(4270175);
 
 export const PEXELS = {
   heroSkyline: pexelsUhd(3571264, 30),
   heroLifestyle: pexelsUhd(5377684),
   heroBusiness: pexelsUhd(4328609),
-  /** Profissionais locais — consulta, obra, varejo, ensino (planos/fechados quando possível) */
   profDoctor: pexelsHd(7579341),
   profEngineer: pexelsHd(3129671),
   profRetail: pexelsHd(3255277),
@@ -43,7 +40,6 @@ export const PEXELS = {
   salesTeam: pexelsHd(5377684),
 } as const;
 
-/** Sequência do hero — profissionais locais + editorial (HD = LCP rápido) */
 export const HERO_PROFESSION_VIDEOS_HD = [
   PEXELS.dubaiSkyline,
   PEXELS.profRevenue,
@@ -65,41 +61,34 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
   PEXELS.heroSkyline,
 ] as const;
 
-const HERO_PHOTO_ID = 'photo-1454165804606-c3d57bc86b40';
-
-/** Poster mobile / LCP rápido */
-export const HERO_POSTER_LCP = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1200&h=675&q=82&fm=webp`;
+/** Poster local — LCP rápido */
+export const HERO_POSTER_LCP = '/imagens/hero-slide-1.png';
 
 /** Poster alta definição — desktop retina */
-export const HERO_POSTER_HD = `https://images.unsplash.com/${HERO_PHOTO_ID}?auto=format&fit=crop&w=1920&h=1080&q=88&fm=webp`;
+export const HERO_POSTER_HD = '/imagens/hero-slide-1.png';
 
-export const HERO_POSTER_SRCSET = [`${HERO_POSTER_LCP} 1200w`, `${HERO_POSTER_HD} 1920w`].join(', ');
+export const HERO_POSTER_SRCSET = `${HERO_POSTER_LCP} 1200w, ${HERO_POSTER_HD} 1920w`;
 
 /** Hero e seções premium */
 export const HERO_POSTER = HERO_POSTER_HD;
 
-/** Open Graph / Twitter — mesmo frame editorial do hero (1200×630) */
-export const OG_SHARE_IMAGE =
-  'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&h=630&q=88';
+/** Open Graph / Twitter — local */
+export const OG_SHARE_IMAGE = '/og-image.svg';
 
-export function unsplashPhoto(id: string, w = 1600, h = 1200): string {
-  return `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&h=${h}&q=85&fm=webp`;
-}
-
-/** Nichos — fotos reais WebP */
-export const NICHE_PHOTOS = {
-  saude: unsplashPhoto('photo-1576091160399-175737edbf78'),
-  restaurante: unsplashPhoto('photo-1517248135467-4c7edcad34c4'),
-  comercio: unsplashPhoto('photo-1441986300917-64674bd600d8'),
-  servicos: unsplashPhoto('photo-1552664730-d307ca884978'),
-  imobiliaria: unsplashPhoto('photo-1560518883-ce09059eeffa'),
-  academia: unsplashPhoto('photo-1534438327276-14e5300c3a48'),
+/** Vitrine — todas locais */
+export const NICHE_PHOTOS: Record<string, string> = {
+  saude: '/imagens/nicho-estetica-cover.png',
+  restaurante: '/imagens/nicho-restaurante-cover.png',
+  comercio: '/imagens/nicho-varejo-cover.png',
+  servicos: '/imagens/nicho-servicos-cover.png',
+  imobiliaria: '/imagens/nicho-imobiliaria-cover.png',
+  academia: '/imagens/nicho-personal-cover.png',
 } as const;
 
-/** Vendas, faturamento, lucro — editorial */
-export const SALES_PHOTOS = {
-  revenue: unsplashPhoto('photo-1554224155-6726b3fffa30', 1200, 900),
-  profit: unsplashPhoto('photo-1460925895917-afdab827c52f', 1200, 900),
-  growth: unsplashPhoto('photo-1611974789855-9f2a0a3e1a4f', 1200, 900),
-  handshake: unsplashPhoto('photo-1521791139204-a94e286c4c2e', 1200, 900),
+/** Vendas, faturamento, lucro */
+export const SALES_PHOTOS: Record<string, string> = {
+  revenue: '/imagens/stock-sales-growth.png',
+  profit: '/imagens/stock-digital-strategy.png',
+  growth: '/imagens/stock-business-meeting.png',
+  handshake: '/imagens/stock-customer-service.png',
 } as const;

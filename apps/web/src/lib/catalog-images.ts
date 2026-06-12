@@ -1,5 +1,4 @@
-/** Imagens do catálogo — imagens locais otimizadas para retina */
-
+/** Imagens do catálogo — todas locais, únicas por nicho, otimizadas para retina */
 const LOCAL_IMAGES: Record<string, Record<string, string>> = {
   cover: {
     estetica: '/imagens/nicho-estetica-cover.png',
@@ -8,20 +7,20 @@ const LOCAL_IMAGES: Record<string, Record<string, string>> = {
     restaurante: '/imagens/nicho-restaurante-cover.png',
     varejo: '/imagens/nicho-varejo-cover.png',
     imob: '/imagens/nicho-imobiliaria-cover.png',
-    advocacia: '/images/project-advocacia.jpg',
-    educacao: '/stock/digital-strategy.jpg',
-    servicos: '/stock/business-meeting.jpg',
+    advocacia: '/imagens/nicho-advocacia-cover.png',
+    educacao: '/imagens/nicho-educacao-cover.png',
+    servicos: '/imagens/nicho-servicos-cover.png',
   },
   gallery: {
-    estetica: '/stock/digital-strategy.jpg',
-    odonto: '/stock/sales-growth.jpg',
-    fitness: '/stock/business-meeting.jpg',
-    restaurante: '/stock/customer-service.jpg',
-    varejo: '/stock/sales-growth.jpg',
-    imob: '/images/project-imobiliaria.jpg',
-    advocacia: '/images/project-varejo.jpg',
-    educacao: '/stock/customer-service.jpg',
-    servicos: '/images/project-clinica.jpg',
+    estetica: '/imagens/stock-professional-team.png',
+    odonto: '/imagens/stock-business-meeting.png',
+    fitness: '/imagens/stock-customer-service.png',
+    restaurante: '/imagens/stock-digital-strategy.png',
+    varejo: '/imagens/stock-sales-growth.png',
+    imob: '/imagens/stock-professional-team.png',
+    advocacia: '/imagens/stock-professional-team.png',
+    educacao: '/imagens/stock-digital-strategy.png',
+    servicos: '/imagens/stock-business-meeting.png',
   },
 };
 
@@ -34,5 +33,5 @@ export function catalogThumb(key: string): string {
 }
 
 export function catalogGallery(key: string): string {
-  return LOCAL_IMAGES.gallery[key] ?? LOCAL_IMAGES.cover[key] ?? `${key}`;
+  return LOCAL_IMAGES.cover[key] ?? LOCAL_IMAGES.gallery[key] ?? `${key}`;
 }
