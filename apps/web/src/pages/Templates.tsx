@@ -137,7 +137,7 @@ function StatsBar() {
           transition={{ delay: i * 0.1 }}
         >
           <span className="bg-gradient-to-b from-white to-zinc-400 bg-clip-text text-3xl font-black tracking-tight text-transparent">
-            {inView ? <AnimatedCount end={s.end} suffix={s.suffix} /> : '0'}
+            <AnimatedCount end={s.end} suffix={s.suffix} />
           </span>
           <span className="mt-1 text-xs font-medium tracking-wide text-zinc-500">{s.label}</span>
         </motion.div>
