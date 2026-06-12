@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck, ExternalLink } from 'lucide-react';
+import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { BrandLogo } from '@/components/BrandLogo';
 import { FooterWhatsAppQr } from '@/components/footer/FooterWhatsAppQr';
@@ -46,7 +46,7 @@ const FOOTER_COLS: FooterCol[] = [
       { label: 'Termos', to: '/termos' },
       { label: 'Governança', to: '/governanca' },
     ],
-  },,
+  },
   {
     title: 'Treinamentos',
     links: [
@@ -138,12 +138,23 @@ export function SiteFooter() {
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map(({ label, to, external }) => (
                     <li key={`${col.title}-${label}`}>
-                      <Link
-                        to={to}
-                        className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
-                      >
-                        {label}
-                      </Link>
+                      {external ? (
+                        <a
+                          href={to}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
+                        >
+                          {label}
+                        </a>
+                      ) : (
+                        <Link
+                          to={to}
+                          className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
+                        >
+                          {label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>

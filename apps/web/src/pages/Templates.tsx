@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { applySeo } from '@/lib/seo';
 import { TEMPLATES } from '@/data/templates';
 import { LeadCaptureSection } from '@/components/LeadCaptureSection';
+import { TemplatePreviewModal } from '@/components/TemplatePreviewModal';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 
 /* ── Typewriter animado ── */
@@ -66,7 +67,6 @@ function ParticleField() {
         ctx.fillStyle = `rgba(255,255,255,${p.a})`;
         ctx.fill();
       });
-      // Connect nearby particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -151,9 +151,25 @@ const NICHO_ALL = 'todos';
 const NICHOS = [NICHO_ALL, ...new Set(TEMPLATES.map((t) => t.niche))];
 
 /* ── Template card premium ── */
-function PremiumTemplateCard({ template, index }: { template: typeof TEMPLATES[0]; index: number }) {
+function PremiumTemplateCard({ template, index, onPreview }: { template: typeof TEMPLATES[0]; index: number; onPreview: (t: typeof TEMPLATES[0]) => void }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    cardRef.current.style.setProperty('--rotate-x', `${y * -8}deg`);
+    cardRef.current.style.setProperty('--rotate-y', `${x * 8}deg`);
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.setProperty('--rotate-x', '0deg');
+    cardRef.current.style.setProperty('--rotate-y', '0deg');
+  };
 
   return (
     <motion.div
@@ -161,66 +177,75 @@ function PremiumTemplateCard({ template, index }: { template: typeof TEMPLATES[0
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.08 }}
-      whileHover={{ y: -6 }}
-      className="group relative"
+      className="group relative perspective-[1000px]"
     >
-      <Link to={`/templates/${template.slug}`} className="block focus-visible:outline-none">
-        {/* Glow card */}
-        <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/30 group-hover:shadow-[0_0_40px_-8px_rgba(0,87,255,0.15)]">
-          {/* Image */}
-          <div className="relative aspect-[16/10] overflow-hidden">
-            <img
-              src={template.thumbImageUrl}
-              alt={`${template.name} — ${template.niche}`}
-              className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-            
-            {/* Niche badge */}
-            <div className="absolute left-3 top-3">
-              <span className="inline-block rounded-full border border-white/10 bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-sm">
-                {template.niche}
-              </span>
-            </div>
-
-            {/* Featured */}
-            {template.featured && (
-              <div className="absolute right-3 top-3">
-                <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-lg">
-                  <span className="h-1.5 w-1.5 rounded-full bg-white/80 animate-pulse" />
-                  Destaque
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative transition-transform duration-200 ease-out"
+        style={{
+          transform: 'perspective(1000px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg))',
+        }}
+      >
+        <Link to={`/templates/${template.slug}`} className="block focus-visible:outline-none">
+          <div className="relative overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-b from-zinc-900/80 to-zinc-950/80 backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/30 group-hover:shadow-[0_0_40px_-8px_rgba(0,87,255,0.15)]">
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <img
+                src={template.thumbImageUrl}
+                alt={`${template.name} — ${template.niche}`}
+                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+              <div className="absolute left-3 top-3">
+                <span className="inline-block rounded-full border border-white/10 bg-black/60 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-sm">
+                  {template.niche}
                 </span>
               </div>
-            )}
-
-            {/* Bottom overlay */}
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="text-lg font-bold tracking-tight text-white">{template.name}</h3>
-              <p className="mt-0.5 text-xs leading-relaxed text-zinc-400">{template.tagline}</p>
+              {template.featured && (
+                <div className="absolute right-3 top-3">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-lg">
+                    <span className="h-1.5 w-1.5 rounded-full bg-white/80 animate-pulse" />
+                    Destaque
+                  </span>
+                </div>
+              )}
+              <div className="absolute bottom-0 left-0 right-0 p-4">
+                <h3 className="text-lg font-bold tracking-tight text-white">{template.name}</h3>
+                <p className="mt-0.5 text-xs leading-relaxed text-zinc-400">{template.tagline}</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between border-t border-white/5 px-4 py-3">
+              <span className="text-[11px] font-medium text-zinc-500">
+                a partir de <span className="text-zinc-300">R$ {Math.floor(template.basePriceCents / 100).toLocaleString('pt-BR')}</span>
+              </span>
+              <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-blue-400 transition-all group-hover:text-blue-300 group-hover:gap-1.5">
+                Ver amostra
+                <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
             </div>
           </div>
-
-          {/* Footer */}
-          <div className="flex items-center justify-between border-t border-white/5 px-4 py-3">
-            <span className="text-[11px] font-medium text-zinc-500">
-              a partir de <span className="text-zinc-300">R$ {Math.floor(template.basePriceCents / 100).toLocaleString('pt-BR')}</span>
-            </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-blue-400 transition-all group-hover:text-blue-300 group-hover:gap-1.5">
-              Ver amostra
-              <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </Link>
+        </Link>
+        <button
+          onClick={(e) => { e.preventDefault(); onPreview(template); }}
+          className="absolute right-3 bottom-[4.5rem] z-10 flex h-9 w-9 items-center justify-center rounded-full bg-blue-600/90 text-white opacity-0 shadow-lg backdrop-blur-sm transition-all duration-200 hover:bg-blue-500 group-hover:opacity-100"
+          aria-label={`Preview rápido: ${template.name}`}
+        >
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+        </button>
+      </div>
     </motion.div>
   );
 }
 
 export default function Templates() {
   const [filter, setFilter] = useState(NICHO_ALL);
+  const [previewTemplate, setPreviewTemplate] = useState<typeof TEMPLATES[0] | null>(null);
   const filtered = filter === NICHO_ALL ? TEMPLATES : TEMPLATES.filter((t) => t.niche === filter);
   const featured = TEMPLATES.filter((t) => t.featured);
 
@@ -236,6 +261,7 @@ export default function Templates() {
   return (
     <>
       <ParticleField />
+      <TemplatePreviewModal template={previewTemplate} onClose={() => setPreviewTemplate(null)} />
 
       <main className="relative z-10 page-surface min-h-screen">
         {/* ═══ HERO ═══ */}
@@ -250,7 +276,6 @@ export default function Templates() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 backdrop-blur-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-blue-300">
@@ -258,7 +283,6 @@ export default function Templates() {
                 </span>
               </div>
 
-              {/* Title */}
               <h1 className="mt-6 max-w-3xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
                 <span className="text-white">Inspiração que </span>
                 <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-zinc-100 bg-clip-text text-transparent">
@@ -286,7 +310,6 @@ export default function Templates() {
                 </Link>
               </div>
             </motion.div>
-
             <StatsBar />
           </div>
         </section>
@@ -303,7 +326,7 @@ export default function Templates() {
 
               <div className="mt-10 grid gap-6 md:grid-cols-2">
                 {featured.slice(0, 4).map((t, i) => (
-                  <PremiumTemplateCard key={t.slug} template={t} index={i} />
+                  <PremiumTemplateCard key={t.slug} template={t} index={i} onPreview={setPreviewTemplate} />
                 ))}
               </div>
             </div>
@@ -313,7 +336,6 @@ export default function Templates() {
         {/* ═══ CATÁLOGO COMPLETO ═══ */}
         <section id="catalogo" className="py-16 md:py-20">
           <div className="mx-auto max-w-7xl px-6">
-            {/* Filter */}
             <div className="mb-10 flex flex-wrap items-center gap-2">
               <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Filtrar:</span>
               {NICHOS.map((n) => (
@@ -334,14 +356,12 @@ export default function Templates() {
               </span>
             </div>
 
-            {/* Grid */}
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {filtered.map((t, i) => (
-                <PremiumTemplateCard key={t.slug} template={t} index={i} />
+                <PremiumTemplateCard key={t.slug} template={t} index={i} onPreview={setPreviewTemplate} />
               ))}
             </div>
 
-            {/* CTA */}
             <motion.div
               className="mt-16 flex flex-col items-center gap-4 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -369,7 +389,6 @@ export default function Templates() {
           </div>
         </section>
 
-        {/* ═══ FORM ═══ */}
         <section className="border-t border-white/5">
           <LeadCaptureSection
             id="diagnostico"

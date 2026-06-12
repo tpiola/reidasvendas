@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>reidasvendas — Sites premium para negócios locais, em 48h</title>
+<meta name="description" content="Design editorial, SEO local, WhatsApp automatizado e Google Meu Negócio em um único pacote. Entrega em 48h com garantia de 100%.">
+<meta property="og:title" content="reidasvendas — Seu site no ar em 48h">
+<meta property="og:description" content="O sistema de sites premium para negócios locais no Brasil.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{
+  colors:{cream:'#f4efe6',paper:'#ebe3d3',ink:'#1a1613',clay:'#c2481f',gold:'#d4a24c',moss:'#4a5240'},
+  fontFamily:{display:['Fraunces','serif'],sans:['Inter','system-ui','sans-serif']}
+}}}
+</script>
+<style>
+html{scroll-behavior:smooth}
+body{background:#f4efe6;color:#1a1613;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.display{font-family:Fraunces,serif;font-weight:400;letter-spacing:-0.025em;line-height:0.95}
+.italic-serif{font-family:Fraunces,serif;font-style:italic;font-weight:400}
+.reveal{opacity:0;transform:translateY(20px);transition:all 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.on{opacity:1;transform:none}
+.hscroll{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.hscroll>*{scroll-snap-align:start}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll{scrollbar-width:none}
+.btn{transition:all .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-clay{background:#c2481f;color:#f4efe6}
+.btn-clay:hover{background:#a03a16;box-shadow:0 14px 30px -10px rgba(194,72,31,.45)}
+.btn-ink{background:#1a1613;color:#f4efe6}
+.btn-ghost{border:1px solid #1a1613}
+.btn-ghost:hover{background:#1a1613;color:#f4efe6}
+.card{background:#f4efe6;border:1px solid rgba(26,22,19,.08)}
+.ticker{animation:tick 40s linear infinite}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+details>summary{cursor:pointer;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+.chev{transition:transform .3s ease}
+details[open] .chev{transform:rotate(45deg)}
+.pill{border:1px solid rgba(26,22,19,.2);padding:4px 12px;border-radius:999px;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.grid-tiles>a{transition:transform .3s ease}
+.grid-tiles>a:hover{transform:translateY(-4px)}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"reidasvendas","url":"https://reidasvendas.com.br","description":"Sites premium para negócios locais no Brasil em 48h.","areaServed":"Brasil","priceRange":"R$9800-R$34000"}
+</script>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-cream/85 backdrop-blur border-b border-ink/10">
+  <nav class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2">
+      <span class="text-xl">👑</span>
+      <span class="display text-2xl">reidasvendas</span>
+    </a>
+    <div class="hidden lg:flex items-center gap-10 text-sm">
+      <a href="#modelos" class="hover:opacity-60">Modelos</a>
+      <a href="#como" class="hover:opacity-60">Como funciona</a>
+      <a href="#recursos" class="hover:opacity-60">Recursos</a>
+      <a href="#cases" class="hover:opacity-60">Cases</a>
+      <a href="#pacotes" class="hover:opacity-60">Pacotes</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#cta" class="hidden sm:inline text-sm hover:opacity-60">Falar com vendas</a>
+      <a href="#cta" class="btn btn-ink px-5 py-2.5 rounded-full text-sm font-medium">Começar em 48h</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="px-6 pt-16 pb-20">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-5xl">
+      <span class="pill">Sites para negócios locais</span>
+      <h1 class="display text-6xl md:text-8xl lg:text-[9.5rem] mt-6">
+        Um site <span class="italic-serif text-clay">à altura</span><br>
+        do seu negócio —<br>
+        no ar em 48h.
+      </h1>
+      <p class="mt-10 text-lg md:text-xl max-w-2xl text-ink/75 leading-relaxed">
+        Design editorial, SEO local, WhatsApp automatizado e Google Meu Negócio. Um único pacote, feito por humanos com IA, entregue antes de qualquer agência começar a responder seu e-mail.
+      </p>
+      <div class="mt-10 flex flex-wrap items-center gap-4">
+        <a href="#cta" class="btn btn-clay px-8 py-4 rounded-full font-medium">Quero meu site em 48h</a>
+        <a href="#modelos" class="btn btn-ghost px-8 py-4 rounded-full font-medium">Ver modelos →</a>
+      </div>
+      <p class="mt-6 text-sm text-ink/50">Sem fidelidade. Garantia de 100% se não entregarmos no prazo.</p>
+    </div>
+
+    <!-- Hero image -->
+    <div class="mt-20 relative rounded-[32px] overflow-hidden aspect-[16/9] bg-ink">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80" alt="Interior de negócio premium" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent"></div>
+      <div class="absolute bottom-8 left-8 right-8 flex items-end justify-between text-cream">
+        <div>
+          <p class="text-xs uppercase tracking-widest opacity-70">Exemplo · Clínica estética</p>
+          <p class="display text-4xl md:text-5xl mt-2">Marina Estética Avançada</p>
+        </div>
+        <span class="hidden md:inline-block text-xs border border-cream/40 rounded-full px-4 py-1.5">Ver ao vivo →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<section class="py-8 border-y border-ink/10 overflow-hidden bg-paper">
+  <div class="ticker flex gap-12 whitespace-nowrap display text-3xl md:text-4xl text-ink/60">
+    <span>Clínicas</span><span class="text-clay">·</span>
+    <span class="italic-serif">Advocacia</span><span class="text-clay">·</span>
+    <span>Restaurantes</span><span class="text-clay">·</span>
+    <span class="italic-serif">Imobiliárias</span><span class="text-clay">·</span>
+    <span>Estética</span><span class="text-clay">·</span>
+    <span class="italic-serif">Arquitetos</span><span class="text-clay">·</span>
+    <span>Academias</span><span class="text-clay">·</span>
+    <span class="italic-serif">Odontologia</span><span class="text-clay">·</span>
+    <span>Contabilidade</span><span class="text-clay">·</span>
+    <span class="italic-serif">Pilates</span><span class="text-clay">·</span>
+    <span>Clínicas</span><span class="text-clay">·</span>
+    <span class="italic-serif">Advocacia</span><span class="text-clay">·</span>
+    <span>Restaurantes</span><span class="text-clay">·</span>
+    <span class="italic-serif">Imobiliárias</span><span class="text-clay">·</span>
+    <span>Estética</span><span class="text-clay">·</span>
+    <span class="italic-serif">Arquitetos</span><span class="text-clay">·</span>
+    <span>Academias</span>
+  </div>
+</section>
+
+<!-- MODELOS / BENTO -->
+<section id="modelos" class="px-6 py-28">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-16">
+      <div>
+        <span class="pill">Modelos</span>
+        <h2 class="display text-5xl md:text-7xl mt-4">Feitos para <span class="italic-serif text-clay">conversão</span>.</h2>
+      </div>
+      <p class="max-w-md text-ink/70">Mais de 40 modelos base, cada um refinado para o padrão de compra do seu nicho. Personalização total em 48h.</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4 grid-tiles">
+      <a href="#" class="col-span-12 md:col-span-8 aspect-[16/10] relative rounded-3xl overflow-hidden block">
+        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1400&q=80" class="w-full h-full object-cover" alt="Clínica">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-cream">
+          <p class="text-xs uppercase tracking-widest opacity-70">Saúde · Clínica</p>
+          <p class="display text-3xl md:text-4xl mt-1">Sempre Saudável</p>
+        </div>
+      </a>
+      <a href="#" class="col-span-6 md:col-span-4 aspect-[4/5] relative rounded-3xl overflow-hidden block">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80" class="w-full h-full object-cover" alt="Restaurante">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-cream">
+          <p class="text-xs uppercase tracking-widest opacity-70">Gastronomia</p>
+          <p class="display text-3xl mt-1">Trattoria Nord</p>
+        </div>
+      </a>
+      <a href="#" class="col-span-6 md:col-span-4 aspect-square relative rounded-3xl overflow-hidden block">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80" class="w-full h-full object-cover" alt="Contabilidade">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-cream">
+          <p class="text-xs uppercase tracking-widest opacity-70">Contábil</p>
+          <p class="display text-2xl mt-1">Cifra Consultoria</p>
+        </div>
+      </a>
+      <a href="#" class="col-span-12 md:col-span-4 aspect-square relative rounded-3xl overflow-hidden block">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=80" class="w-full h-full object-cover" alt="Imobiliária">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-cream">
+          <p class="text-xs uppercase tracking-widest opacity-70">Imobiliário</p>
+          <p class="display text-2xl mt-1">Casa Alta Vista</p>
+        </div>
+      </a>
+      <a href="#" class="col-span-12 md:col-span-4 aspect-square relative rounded-3xl overflow-hidden block">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80" class="w-full h-full object-cover" alt="Academia">
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent"></div>
+        <div class="absolute bottom-6 left-6 text-cream">
+          <p class="text-xs uppercase tracking-widest opacity-70">Fitness</p>
+          <p class="display text-2xl mt-1">Núcleo Pilates</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="mt-12 text-center"><a href="#cta" class="btn btn-ghost px-8 py-4 rounded-full font-medium inline-block">Ver todos os modelos →</a></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como" class="px-6 py-28 bg-paper">
+  <div class="max-w-[1400px] mx-auto">
+    <span class="pill">Como funciona</span>
+    <h2 class="display text-5xl md:text-7xl mt-4 max-w-3xl">Três passos. Quarenta e oito horas. <span class="italic-serif text-clay">Zero fricção.</span></h2>
+
+    <div class="mt-20 grid md:grid-cols-3 gap-10">
+      <div>
+        <span class="display text-7xl text-clay">01</span>
+        <h3 class="display text-3xl mt-4">Você preenche o brief</h3>
+        <p class="mt-3 text-ink/70">Formulário inteligente de 10 minutos. A gente captura essência, diferenciais e identidade visual do seu negócio.</p>
+      </div>
+      <div>
+        <span class="display text-7xl text-clay">02</span>
+        <h3 class="display text-3xl mt-4">Nossa equipe produz</h3>
+        <p class="mt-3 text-ink/70">Designers, copywriters e engenheiros trabalham com IA para entregar em tempo recorde sem perder refinamento.</p>
+      </div>
+      <div>
+        <span class="display text-7xl text-clay">03</span>
+        <h3 class="display text-3xl mt-4">Você recebe em 48h</h3>
+        <p class="mt-3 text-ink/70">Site publicado, SEO ativo, WhatsApp conectado, anúncios prontos. Você começa a vender no mesmo dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS / SPLIT -->
+<section id="recursos" class="px-6 py-28">
+  <div class="max-w-[1400px] mx-auto space-y-24">
+
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="pill">Design</span>
+        <h3 class="display text-4xl md:text-6xl mt-4">Tipografia <span class="italic-serif text-clay">editorial</span>. Layouts que respiram.</h3>
+        <p class="mt-6 text-ink/70 text-lg">Cada modelo nasce do estudo dos negócios que mais convertem no seu nicho. Hierarquia clara, imagem forte, tipografia com personalidade. O cliente percebe em 3 segundos que você é diferente.</p>
+        <ul class="mt-8 space-y-3 text-ink/80">
+          <li>— Sistema de design proprietário em 40+ nichos</li>
+          <li>— Fotografia curada + direção de arte</li>
+          <li>— Micro-interações sem excesso</li>
+        </ul>
+      </div>
+      <div class="aspect-[4/5] rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1200&q=80" class="w-full h-full object-cover"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="order-2 md:order-1 aspect-[4/5] rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80" class="w-full h-full object-cover"></div>
+      <div class="order-1 md:order-2">
+        <span class="pill">Máquina de clientes</span>
+        <h3 class="display text-4xl md:text-6xl mt-4">SEO local, WhatsApp e anúncios <span class="italic-serif text-clay">integrados</span>.</h3>
+        <p class="mt-6 text-ink/70 text-lg">Seu site não é vitrine — é máquina de agendamentos. Google Meu Negócio otimizado, schema de Local Business, WhatsApp com respostas automáticas e pixel das redes já configurados no dia 1.</p>
+        <ul class="mt-8 space-y-3 text-ink/80">
+          <li>— GMB + NAP + citações em diretórios BR</li>
+          <li>— WhatsApp com funil de qualificação</li>
+          <li>— Pixel Meta + GA4 + Google Tag Manager</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="pill">Operação</span>
+        <h3 class="display text-4xl md:text-6xl mt-4">Edite você mesmo. <span class="italic-serif text-clay">Sem desenvolvedor.</span></h3>
+        <p class="mt-6 text-ink/70 text-lg">Entregamos em Framer ou Next.js com painel amigável. Quer mudar um preço, um texto ou adicionar um serviço? É arrastar e soltar — ou nos chamar no WhatsApp e resolvemos em minutos.</p>
+      </div>
+      <div class="aspect-[4/5] rounded-3xl overflow-hidden"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80" class="w-full h-full object-cover"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CASES HSCROLL -->
+<section id="cases" class="py-28 bg-ink text-cream overflow-hidden">
+  <div class="max-w-[1400px] mx-auto px-6">
+    <div class="flex flex-wrap items-end justify-between gap-6 mb-12">
+      <div>
+        <span class="pill" style="border-color:rgba(244,239,230,.3);color:#f4efe6">Cases</span>
+        <h2 class="display text-5xl md:text-7xl mt-4">Negócios reais.<br><span class="italic-serif text-gold">Resultados reais.</span></h2>
+      </div>
+      <p class="max-w-md text-cream/70">Números médios dos 60 primeiros clientes. Não prometemos mágica — prometemos processo.</p>
+    </div>
+  </div>
+  <div class="hscroll flex gap-6 overflow-x-auto px-6 pb-4">
+    <article class="card bg-cream text-ink rounded-3xl p-8 min-w-[340px] max-w-[380px]">
+      <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1629909615184-74f495363b67?w=800&q=80" class="w-full h-full object-cover"></div>
+      <p class="text-xs uppercase tracking-widest text-ink/50">Clínica estética · Curitiba</p>
+      <p class="display text-3xl mt-2">+127% em agendamentos em 45 dias</p>
+      <p class="mt-3 text-ink/70 text-sm">Site novo + SEO local + WhatsApp com fluxo de pré-atendimento. ROI no 1º mês.</p>
+    </article>
+    <article class="card bg-cream text-ink rounded-3xl p-8 min-w-[340px] max-w-[380px]">
+      <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" class="w-full h-full object-cover"></div>
+      <p class="text-xs uppercase tracking-widest text-ink/50">Restaurante · São Paulo</p>
+      <p class="display text-3xl mt-2">Reservas online saltaram 4x</p>
+      <p class="mt-3 text-ink/70 text-sm">Cardapio digital + integração com Google + reservas pelo WhatsApp em 1 toque.</p>
+    </article>
+    <article class="card bg-cream text-ink rounded-3xl p-8 min-w-[340px] max-w-[380px]">
+      <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80" class="w-full h-full object-cover"></div>
+      <p class="text-xs uppercase tracking-widest text-ink/50">Advocacia · Brasília</p>
+      <p class="display text-3xl mt-2">Custo por lead caiu 62%</p>
+      <p class="mt-3 text-ink/70 text-sm">Landing por área de atuação + Meta Ads otimizado + WhatsApp triado por IA.</p>
+    </article>
+    <article class="card bg-cream text-ink rounded-3xl p-8 min-w-[340px] max-w-[380px]">
+      <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80" class="w-full h-full object-cover"></div>
+      <p class="text-xs uppercase tracking-widest text-ink/50">Imobiliária · Floripa</p>
+      <p class="display text-3xl mt-2">3 imóveis vendidos em 21 dias</p>
+      <p class="mt-3 text-ink/70 text-sm">Páginas individuais com tour virtual + captura automatizada no WhatsApp.</p>
+    </article>
+    <article class="card bg-cream text-ink rounded-3xl p-8 min-w-[340px] max-w-[380px]">
+      <div class="aspect-[4/3] rounded-2xl overflow-hidden mb-6"><img src="https://images.unsplash.com/photo-1554774853-719586f82d77?w=800&q=80" class="w-full h-full object-cover"></div>
+      <p class="text-xs uppercase tracking-widest text-ink/50">Odontologia · Belo Horizonte</p>
+      <p class="display text-3xl mt-2">Agenda cheia em 30 dias</p>
+      <p class="mt-3 text-ink/70 text-sm">SEO local + Google Meu Negócio + fluxo de indicação automatizado por WhatsApp.</p>
+    </article>
+  </div>
+  <p class="text-center text-xs text-cream/40 mt-6">* Exemplos ilustrativos de performance típica. Resultados variam por nicho e execução.</p>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="px-6 py-28">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-3xl">
+      <span class="pill">Depoimentos</span>
+      <h2 class="display text-5xl md:text-7xl mt-4">O que nossos clientes <span class="italic-serif text-clay">sentem</span>.</h2>
+    </div>
+    <div class="mt-16 grid md:grid-cols-3 gap-6">
+      <figure class="card rounded-3xl p-8">
+        <p class="display text-2xl leading-snug">“Em três dias eu tinha um site melhor que o da agência que tentei contratar por seis meses.”</p>
+        <figcaption class="mt-8 flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&q=80" class="w-10 h-10 rounded-full object-cover">
+          <div><p class="font-medium">Juliana Mendes</p><p class="text-sm text-ink/60">Dermatologista, Goiânia</p></div>
+        </figcaption>
+      </figure>
+      <figure class="card rounded-3xl p-8">
+        <p class="display text-2xl leading-snug">“O WhatsApp que veio com o site triplicou nosso fechamento. Já recuperei o investimento no primeiro mês.”</p>
+        <figcaption class="mt-8 flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&q=80" class="w-10 h-10 rounded-full object-cover">
+          <div><p class="font-medium">Rafael Costa</p><p class="text-sm text-ink/60">Sócio, escritório de advocacia · Campinas</p></div>
+        </figcaption>
+      </figure>
+      <figure class="card rounded-3xl p-8">
+        <p class="display text-2xl leading-snug">“Finalmente alguém entendeu que não precisava ser bonito — precisava vender. E ainda ficou lindo.”</p>
+        <figcaption class="mt-8 flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80" class="w-10 h-10 rounded-full object-cover">
+          <div><p class="font-medium">Patrícia Alves</p><p class="text-sm text-ink/60">CEO, rede de estúdios de pilates · SP</p></div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- PACOTES -->
+<section id="pacotes" class="px-6 py-28 bg-paper">
+  <div class="max-w-[1400px] mx-auto">
+    <div class="max-w-3xl"><span class="pill">Pacotes</span><h2 class="display text-5xl md:text-7xl mt-4">Transparente. <span class="italic-serif text-clay">Como deve ser.</span></h2></div>
+    <div class="mt-16 grid md:grid-cols-3 gap-6">
+      <div class="card rounded-3xl p-10">
+        <p class="pill">Essencial</p>
+        <p class="display text-6xl mt-6">R$9.800</p>
+        <p class="text-sm text-ink/60">ou 12x de R$925</p>
+        <ul class="mt-8 space-y-3 text-ink/80 text-sm">
+          <li>— Site até 5 páginas</li>
+          <li>— SEO local básico</li>
+          <li>— WhatsApp integrado</li>
+          <li>— Entrega em 7 dias</li>
+          <li>— 30 dias de suporte</li>
+        </ul>
+        <a href="#cta" class="mt-10 btn btn-ghost inline-block px-8 py-3 rounded-full text-sm">Começar</a>
+      </div>
+      <div class="card rounded-3xl p-10 relative" style="background:#1a1613;color:#f4efe6;border-color:#1a1613">
+        <span class="absolute -top-3 left-10 text-xs bg-gold text-ink font-bold px-3 py-1 rounded-full tracking-widest">MAIS ESCOLHIDO</span>
+        <p class="pill" style="border-color:rgba(244,239,230,.3);color:#f4efe6">Premium</p>
+        <p class="display text-6xl mt-6">R$18.000</p>
+        <p class="text-sm opacity-60">ou 12x de R$1.699</p>
+        <ul class="mt-8 space-y-3 opacity-90 text-sm">
+          <li>— Site até 10 páginas + blog</li>
+          <li>— SEO local completo + GMB otimizado</li>
+          <li>— WhatsApp com funil automatizado</li>
+          <li>— Integração Meta Ads + Google Ads</li>
+          <li>— Entrega em 48h</li>
+          <li>— 3 meses de suporte + relatórios</li>
+          <li>— Bônus: 10 criativos + 30 posts</li>
+        </ul>
+        <a href="#cta" class="mt-10 inline-block px-8 py-3 rounded-full text-sm font-medium" style="background:#c2481f;color:#f4efe6">Começar em 48h</a>
+      </div>
+      <div class="card rounded-3xl p-10">
+        <p class="pill">Elite</p>
+        <p class="display text-6xl mt-6">R$34.000</p>
+        <p class="text-sm text-ink/60">ou 12x de R$3.200</p>
+        <ul class="mt-8 space-y-3 text-ink/80 text-sm">
+          <li>— Site sob medida ilimitado</li>
+          <li>— Identidade visual completa</li>
+          <li>— Automações avançadas (n8n)</li>
+          <li>— CRM integrado</li>
+          <li>— Gestão de tráfego 3 meses</li>
+          <li>— 6 meses de suporte prioritário</li>
+        </ul>
+        <a href="#cta" class="mt-10 btn btn-ghost inline-block px-8 py-3 rounded-full text-sm">Falar com vendas</a>
+      </div>
+    </div>
+    <p class="text-center text-xs text-ink/50 mt-8">Garantia incondicional: site no ar em 48h (pacote Premium) ou 100% de volta.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="px-6 py-28">
+  <div class="max-w-4xl mx-auto">
+    <span class="pill">Dúvidas</span>
+    <h2 class="display text-5xl md:text-7xl mt-4">Perguntas <span class="italic-serif text-clay">honestas</span>.</h2>
+    <div class="mt-16 divide-y divide-ink/15 border-y border-ink/15">
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">É realmente 48h?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Sim. O relógio começa quando você envia o brief completo. Se perdermos o prazo, você recebe 100% de volta — sem discussão.</p></details>
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">O site é meu?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Totalmente. Domínio no seu nome, código seu, dados seus. Você pode migrar quando quiser.</p></details>
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">E se eu não gostar do resultado?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Duas rodadas de ajustes incluídas em todos os pacotes. Se ainda assim não estiver feliz, 100% do valor de volta em até 7 dias.</p></details>
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">Funciona pro meu nicho?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Já entregamos para 40+ segmentos. Se for negócio local, ecommerce de nicho ou serviço profissional, funciona.</p></details>
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">Posso editar sozinho depois?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Sim. Entregamos em Framer ou Next.js com painel amigável e vídeo explicativo. Alternativamente, cuidamos tudo por R$497/mês.</p></details>
+      <details class="py-6"><summary class="flex items-center justify-between gap-6"><span class="display text-2xl">Quem hospeda?</span><span class="chev text-3xl text-clay">+</span></summary><p class="mt-4 text-ink/70">Vercel (infra global) ou Framer. Velocidade de classe mundial, SSL, backup automático — incluso nos primeiros 12 meses.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta" class="px-6 py-32 bg-ink text-cream">
+  <div class="max-w-[1400px] mx-auto text-center">
+    <h2 class="display text-6xl md:text-8xl lg:text-9xl leading-[0.95]">O próximo cliente<br><span class="italic-serif text-gold">já está procurando.</span></h2>
+    <p class="mt-10 text-xl text-cream/70 max-w-2xl mx-auto">Em 48h, ele encontra você antes do seu concorrente. Ou você não paga nada.</p>
+    <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+      <a href="https://wa.me/55SEU_WHATS?text=Quero%20meu%20site%20em%2048h" class="btn btn-clay px-10 py-5 rounded-full font-medium text-lg">Quero em 48h →</a>
+      <a href="#" class="px-10 py-5 rounded-full font-medium text-lg border border-cream/30 hover:bg-cream hover:text-ink">Agendar demo de 20min</a>
+    </div>
+    <p class="mt-10 text-sm text-cream/40">Sem fidelidade. Garantia de 100%. Pagamento em até 12x.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-cream border-t border-ink/10 px-6 py-16">
+  <div class="max-w-[1400px] mx-auto grid md:grid-cols-5 gap-10">
+    <div class="md:col-span-2">
+      <div class="flex items-center gap-2"><span class="text-xl">👑</span><span class="display text-2xl">reidasvendas</span></div>
+      <p class="mt-4 text-ink/60 max-w-xs text-sm">Sites premium para negócios locais. Feitos em 48h, com garantia.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="https://instagram.com/SEU_INSTAGRAM" class="btn-ghost btn px-4 py-2 rounded-full text-xs">Instagram</a>
+        <a href="https://wa.me/55SEU_WHATS" class="btn-ghost btn px-4 py-2 rounded-full text-xs">WhatsApp</a>
+      </div>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-widest text-ink/50 mb-4">Produto</p>
+      <ul class="space-y-2 text-sm"><li><a href="#modelos">Modelos</a></li><li><a href="#recursos">Recursos</a></li><li><a href="#pacotes">Pacotes</a></li><li><a href="#cases">Cases</a></li></ul>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-widest text-ink/50 mb-4">Empresa</p>
+      <ul class="space-y-2 text-sm"><li><a href="#">Sobre</a></li><li><a href="#">Blog</a></li><li><a href="#">Carreira</a></li><li><a href="#cta">Contato</a></li></ul>
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-widest text-ink/50 mb-4">Legal</p>
+      <ul class="space-y-2 text-sm"><li><a href="#">Termos</a></li><li><a href="#">Privacidade (LGPD)</a></li><li><a href="#">Garantia</a></li></ul>
+    </div>
+  </div>
+  <div class="max-w-[1400px] mx-auto mt-16 pt-8 border-t border-ink/10 flex flex-wrap justify-between gap-4 text-xs text-ink/50">
+    <p>© 2026 reidasvendas. Feito com capricho no Brasil.</p>
+    <p>CNPJ 00.000.000/0001-00</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/55SEU_WHATS?text=Oi!%20Quero%20saber%20sobre%20o%20reidasvendas" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script>
+// Reveal on scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('on')),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
