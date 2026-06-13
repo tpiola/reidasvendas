@@ -22,6 +22,17 @@ const LOCAL_IMAGES: Record<string, Record<string, string>> = {
     educacao: '/imagens/stock-education-class.png',
     servicos: '/imagens/stock-customer-service.png',
   },
+  gallery2: {
+    estetica: '/imagens/gallery-estetica.png',
+    odonto: '/imagens/gallery-odontologia.png',
+    fitness: '/imagens/gallery-personal.png',
+    restaurante: '/imagens/gallery-restaurante.png',
+    varejo: '/imagens/gallery-varejo.png',
+    imob: '/imagens/gallery-imobiliaria.png',
+    advocacia: '/imagens/gallery-advocacia.png',
+    educacao: '/imagens/gallery-educacao.png',
+    servicos: '/imagens/gallery-servicos.png',
+  },
 };
 
 export function catalogCover(key: string): string {
@@ -34,4 +45,8 @@ export function catalogThumb(key: string): string {
 
 export function catalogGallery(key: string): string {
   return LOCAL_IMAGES.gallery[key] ?? LOCAL_IMAGES.cover[key] ?? `${key}`;
+}
+
+export function catalogGallery2(key: string): string {
+  return LOCAL_IMAGES.gallery2[key] ?? LOCAL_IMAGES.gallery[key] ?? LOCAL_IMAGES.cover[key] ?? `${key}`;
 }

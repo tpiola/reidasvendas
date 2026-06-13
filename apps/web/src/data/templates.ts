@@ -1,4 +1,4 @@
-import { catalogCover, catalogThumb, catalogGallery } from '@/lib/catalog-images';
+import { catalogCover, catalogThumb, catalogGallery, catalogGallery2 } from '@/lib/catalog-images';
 
 export type TemplateDefinition = {
   slug: string;
@@ -40,7 +40,7 @@ export const TEMPLATES: TemplateDefinition[] = [
     tagline: 'Editorial minimal com conversão em dois cliques.',
     coverImageUrl: catalogCover(P.estetica),
     thumbImageUrl: catalogThumb(P.estetica),
-    galleryImageUrls: [catalogGallery(P.estetica), catalogGallery(P.estetica)],
+    galleryImageUrls: [catalogGallery(P.estetica), catalogGallery2(P.estetica)],
     basePriceCents: 490_000,
     includedModuleIds: ['crm-inbox', 'analytics'],
     featured: true,
