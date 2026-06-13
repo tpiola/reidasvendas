@@ -12,15 +12,15 @@ const LOCAL_IMAGES: Record<string, Record<string, string>> = {
     servicos: '/imagens/nicho-servicos-cover.png',
   },
   gallery: {
-    estetica: '/imagens/stock-professional-team.png',
-    odonto: '/imagens/stock-business-meeting.png',
-    fitness: '/imagens/stock-customer-service.png',
+    estetica: '/imagens/stock-business-meeting.png',
+    odonto: '/imagens/stock-customer-service.png',
+    fitness: '/imagens/stock-professional-team.png',
     restaurante: '/imagens/stock-digital-strategy.png',
     varejo: '/imagens/stock-sales-growth.png',
-    imob: '/imagens/stock-professional-team.png',
-    advocacia: '/imagens/stock-professional-team.png',
+    imob: '/imagens/stock-business-meeting.png',
+    advocacia: '/imagens/stock-customer-service.png',
     educacao: '/imagens/stock-digital-strategy.png',
-    servicos: '/imagens/stock-business-meeting.png',
+    servicos: '/imagens/stock-professional-team.png',
   },
 };
 
@@ -33,5 +33,5 @@ export function catalogThumb(key: string): string {
 }
 
 export function catalogGallery(key: string): string {
-  return LOCAL_IMAGES.cover[key] ?? LOCAL_IMAGES.gallery[key] ?? `${key}`;
+  return LOCAL_IMAGES.gallery[key] ?? LOCAL_IMAGES.cover[key] ?? `${key}`;
 }

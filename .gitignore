@@ -37,3 +37,6 @@ _origin_main_wt/
 .trae/
 
 .vercel
+.next/
+next-env.d.ts
+gen_*.py
