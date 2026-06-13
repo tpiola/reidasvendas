@@ -888,3 +888,454 @@ html.dark .section-white {
     transform: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   SCROLL-DRIVEN ANIMATIONS 2026
+   CSS-only parallax, reveal, sticky scroll, progress indicators
+   Requires Chrome 115+ / Edge 115+ (animation-timeline support)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. PARALLAX SECTIONS (animation-timeline: view()) ─── */
+@supports (animation-timeline: scroll()) {
+
+  /* Parallax background — moves slower than scroll */
+  .parallax-bg {
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1px;
+  }
+
+  .parallax-bg::before {
+    content: '';
+    position: absolute;
+    inset: -20% 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    will-change: transform;
+    /* scroll-driven parallax */
+    animation: parallax-scroll linear;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes parallax-scroll {
+    from {
+      transform: translateY(-10%) scale(1.05);
+    }
+    to {
+      transform: translateY(10%) scale(1.05);
+    }
+  }
+
+  /* Generic parallax layer for foreground elements */
+  .parallax-layer {
+    will-change: transform;
+    animation: parallax-layer-fwd linear;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  .parallax-layer--slow {
+    animation-name: parallax-layer-slow;
+  }
+
+  .parallax-layer--fast {
+    animation-name: parallax-layer-fast;
+  }
+
+  @keyframes parallax-layer-slow {
+    from { transform: translateY(5%); }
+    to   { transform: translateY(-5%); }
+  }
+
+  @keyframes parallax-layer-fwd {
+    from { transform: translateY(2%); }
+    to   { transform: translateY(-2%); }
+  }
+
+  @keyframes parallax-layer-fast {
+    from { transform: translateY(8%); }
+    to   { transform: translateY(-8%); }
+  }
+}
+
+/* Fallback for non-supporting browsers — subtle static transform */
+@supports not (animation-timeline: scroll()) {
+  .parallax-bg::before {
+    transform: scale(1.05);
+  }
+}
+
+/* ─── 2. SCROLL PROGRESS INDICATOR (animation-timeline: scroll()) ─── */
+@supports (animation-timeline: scroll()) {
+
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 9999;
+    pointer-events: none;
+    background: transparent;
+  }
+
+  .scroll-progress::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--rdv-blue, #0057FF),
+      var(--rdv-gold, #C9A84C)
+    );
+    transform-origin: left center;
+    animation: progress-grow linear;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes progress-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* Section-scoped progress */
+  .scroll-progress--section {
+    position: sticky;
+    top: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--rdv-border, rgba(255,255,255,0.06));
+  }
+
+  .scroll-progress--section::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: var(--rdv-blue, #0057FF);
+    transform-origin: left center;
+    animation: progress-grow linear;
+    animation-timeline: view(inline);
+    animation-range: contain 0% contain 100%;
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .scroll-progress::after {
+    display: none;
+  }
+}
+
+/* ─── 3. SCROLL-TRIGGERED REVEAL ANIMATIONS (fade + translate) ─── */
+@supports (animation-timeline: scroll()) {
+
+  .reveal-on-scroll {
+    opacity: 0;
+    animation: reveal-fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  .reveal-on-scroll--left {
+    animation-name: reveal-fade-left;
+  }
+
+  .reveal-on-scroll--right {
+    animation-name: reveal-fade-right;
+  }
+
+  .reveal-on-scroll--scale {
+    animation-name: reveal-scale;
+  }
+
+  .reveal-on-scroll--down {
+    animation-name: reveal-fade-down;
+  }
+
+  @keyframes reveal-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-fade-left {
+    from {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes reveal-fade-right {
+    from {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes reveal-fade-down {
+    from {
+      opacity: 0;
+      transform: translateY(-60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Staggered reveal for grids / lists */
+  .reveal-on-scroll--stagger > * {
+    opacity: 0;
+    animation: reveal-fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  .reveal-on-scroll--stagger > *:nth-child(1) { animation-range: entry 0% entry 60%;  }
+  .reveal-on-scroll--stagger > *:nth-child(2) { animation-range: entry 10% entry 70%; }
+  .reveal-on-scroll--stagger > *:nth-child(3) { animation-range: entry 20% entry 80%; }
+  .reveal-on-scroll--stagger > *:nth-child(4) { animation-range: entry 30% entry 90%; }
+  .reveal-on-scroll--stagger > *:nth-child(5) { animation-range: entry 40% entry 100%; }
+  .reveal-on-scroll--stagger > *:nth-child(6) { animation-range: entry 45% entry 100%; }
+  .reveal-on-scroll--stagger > *:nth-child(7) { animation-range: entry 50% entry 100%; }
+  .reveal-on-scroll--stagger > *:nth-child(8) { animation-range: entry 55% entry 100%; }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .reveal-on-scroll,
+  .reveal-on-scroll--left,
+  .reveal-on-scroll--right,
+  .reveal-on-scroll--scale,
+  .reveal-on-scroll--down,
+  .reveal-on-scroll--stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ─── 4. STICKY SCROLL EFFECTS ─── */
+@supports (animation-timeline: scroll()) {
+
+  .sticky-scroll {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* Fade-in as it enters the viewport */
+    animation: sticky-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+
+  @keyframes sticky-reveal {
+    from {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+      opacity: 1;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  }
+
+  /* Sticky section with image swap */
+  .sticky-scroll--pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    animation: sticky-opacity linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes sticky-opacity {
+    from { opacity: 0.4; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    to   { opacity: 0.4; }
+  }
+
+  /* Sticky header that shrinks on scroll */
+  .sticky-scroll--shrink {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    animation: sticky-shrink linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 200px;
+  }
+
+  @keyframes sticky-shrink {
+    from {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      background: transparent;
+      box-shadow: none;
+    }
+    to {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      background: rgba(3, 3, 5, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--rdv-border, rgba(255,255,255,0.06));
+    }
+  }
+}
+
+@supports not (animation-timeline: scroll()) {
+  .sticky-scroll {
+    opacity: 1;
+  }
+
+  .sticky-scroll--shrink {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background: rgba(3, 3, 5, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+}
+
+/* ─── 5. REDUCED MOTION FALLBACK ─── */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-bg::before {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .parallax-layer,
+  .parallax-layer--slow,
+  .parallax-layer--fast {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .scroll-progress::after {
+    animation: none !important;
+  }
+
+  .reveal-on-scroll,
+  .reveal-on-scroll--left,
+  .reveal-on-scroll--right,
+  .reveal-on-scroll--scale,
+  .reveal-on-scroll--down {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .reveal-on-scroll--stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .sticky-scroll {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .sticky-scroll--shrink {
+    animation: none !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background: rgba(3, 3, 5, 0.85);
+  }
+
+  .sticky-scroll--pin {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ─── 6. VIEW TRANSITIONS API SUPPORT ─── */
+@view-transition {
+  navigation: auto;
+}
+
+/* Crossfade default for all view transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: vt-fade-out 0.35s ease-in-out both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.35s ease-in-out both;
+}
+
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.98); }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: scale(1.02); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Named view transitions for specific page sections */
+::view-transition-group(hero) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-group(product-card) {
+  animation-duration: 0.3s;
+  animation-delay: 0.05s;
+}
+
+::view-transition-group(nav) {
+  animation-duration: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+
+  @view-transition {
+    navigation: none;
+  }
+}
