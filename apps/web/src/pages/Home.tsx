@@ -76,7 +76,7 @@ export default function Home() {
             <h1 className="text-display font-semibold hero-ink">
               <span className="hero-enter hero-enter-delay-2 block text-gradient-gold">Seu negócio local</span>
               <span className="hero-enter hero-enter-delay-3 block text-gradient-titanium">
-                vendendo como as gigantes.
+                {" "}vendendo como as gigantes.
               </span>
             </h1>
           </div>

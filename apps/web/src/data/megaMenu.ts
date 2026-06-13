@@ -512,7 +512,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Hub Clínico Autônomo',
     description: 'Triagem via IA, agendamento inteligente e funil de recuperação de pacientes. Ideal para médicos e dentistas.',
     chips: ['SaúdeGPT', 'Agendamento IA', 'WhatsApp Bot', 'SEO Local'],
-    imageUrl: '/imagens/project-clube-digital.png',
+    imageUrl: '/imagens/project-clube-digital.webp',
   },
   {
     slug: 'advocacia-soberana',
@@ -520,7 +520,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Advocacia Soberana',
     description: 'Autoridade instantânea. Captação de leads qualificados e qualificação via n8n para escritórios de advocacia.',
     chips: ['Filtro de Leads', 'Google Ads Ready', 'CRM', 'Autoridade'],
-    imageUrl: '/imagens/project-advocacia-soberana.png',
+    imageUrl: '/imagens/project-advocacia-soberana.webp',
   },
   {
     slug: 'vitrine-imobiliaria',
@@ -528,7 +528,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Vitrine Imobiliária 3D',
     description: 'Experiência imersiva, sites falantes e tour virtual para imóveis de alto padrão e arquitetura.',
     chips: ['Sites Falantes', 'Tour 3D', 'Avatares IA', 'Premium'],
-    imageUrl: '/imagens/project-vitrine-imobiliaria.png',
+    imageUrl: '/imagens/project-vitrine-imobiliaria.webp',
   },
   {
     slug: 'maquina-de-varejo',
@@ -536,7 +536,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Máquina de Varejo',
     description: 'Integração Google Meu Negócio, tráfego pago e recuperação de carrinho via WhatsApp para e-commerce e farmácias.',
     chips: ['Farmacêutico.shop', 'Google Shopping', 'Recuperação WhatsApp', 'Upsell'],
-    imageUrl: '/imagens/project-maquina-varejo.png',
+    imageUrl: '/imagens/project-maquina-varejo.webp',
   },
   {
     slug: 'automacao-whatsapp',
@@ -544,7 +544,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Automação de WhatsApp',
     description: 'SaaS de infraestrutura de WhatsApp API. O motor de comunicação de baixo custo que sustenta a escala das PMEs.',
     chips: ['OpenZap', 'n8n', 'Chatbots', 'Atendimento'],
-    imageUrl: '/imagens/nicho-servicos-cover.png',
+    imageUrl: '/imagens/nicho-servicos-cover.webp',
   },
   {
     slug: 'consultoria-performance',
@@ -552,7 +552,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Consultoria de Alta Performance',
     description: 'Venda de consultoria High-Ticket, infraestrutura completa e implementação de agentes de IA por Thiago Piola.',
     chips: ['Thiago Piola', 'High-Ticket', 'Engenharia de Dados', 'PNL'],
-    imageUrl: '/imagens/stock-sales-growth.png',
+    imageUrl: '/imagens/stock-sales-growth.webp',
   },
 ];
 
@@ -593,7 +593,7 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
 export const RESOURCES_INSPIRE = {
   title: 'Feito com Rei das Vendas',
   description: 'Uma coleção de templates e hubs inspiradores criados para operações reais.',
-  mediaUrl: '/imagens/stock-modern-presentation.png',
+  mediaUrl: '/imagens/stock-modern-presentation.webp',
   to: '/templates',
 } as const;
 

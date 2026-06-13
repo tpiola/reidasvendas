@@ -23,7 +23,7 @@ export const PROJECTS: ProjectDefinition[] = [
     tagline: 'Agenda, WhatsApp e funil para clínica que não pode perder lead no silêncio.',
     story:
       'Paciente entra pelo site, recebe resposta no timing certo e cai no CRM com origem rastreada — você atende, o sistema sustenta a fila.',
-    imageUrl: '/imagens/project-clube-digital.png',
+    imageUrl: '/imagens/project-clube-digital.webp',
     videoSrc: PEXELS.profDoctor,
     videoCaption: 'Clínica · captação e follow-up',
     features: ['Landing por procedimento', 'WhatsApp integrado', 'SEO local'],
@@ -40,7 +40,7 @@ export const PROJECTS: ProjectDefinition[] = [
     tagline: 'Autoridade digital e filtro de lead antes da primeira consulta.',
     story:
       'Site que transmite confiança, formulário com consentimento LGPD e automação que separa curioso de cliente com perfil.',
-    imageUrl: '/imagens/project-advocacia-soberana.png',
+    imageUrl: '/imagens/project-advocacia-soberana.webp',
     videoSrc: PEXELS.profService,
     videoCaption: 'Advocacia · prova e captação',
     features: ['Copy para decisor', 'Filtro de leads', 'CRM + n8n'],
@@ -57,7 +57,7 @@ export const PROJECTS: ProjectDefinition[] = [
     tagline: 'Experiência premium para imóvel de alto padrão — do clique à visita.',
     story:
       'Galeria rápida, tour e CTA para corretor no WhatsApp — presença à altura do ticket do empreendimento.',
-    imageUrl: '/imagens/project-vitrine-imobiliaria.png',
+    imageUrl: '/imagens/project-vitrine-imobiliaria.webp',
     videoSrc: PEXELS.heroLifestyle,
     videoCaption: 'Imobiliário · vitrine digital',
     features: ['Galeria otimizada', 'Captação qualificada', 'Integração CRM'],
@@ -74,7 +74,7 @@ export const PROJECTS: ProjectDefinition[] = [
     tagline: 'Tráfego, vitrine e recuperação de carrinho no mesmo fluxo.',
     story:
       'Anúncio leva para página que converte, WhatsApp recupera abandono e você vê de onde veio cada venda.',
-    imageUrl: '/imagens/project-maquina-varejo.png',
+    imageUrl: '/imagens/project-maquina-varejo.webp',
     videoSrc: PEXELS.profRetail,
     videoCaption: 'Varejo · funil e métricas',
     features: ['Google/Meta ready', 'Recuperação WhatsApp', 'Relatório de conversão'],

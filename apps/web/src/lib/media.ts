@@ -4,7 +4,7 @@
 export const LOCAL_HERO_VIDEO = {
     webm: '/hero.webm',
     mp4: '/hero.mp4',
-    poster: '/imagens/hero-slide-1.png',
+    poster: '/imagens/hero-slide-1.webp',
 } as const;
 
 export function pexelsHd(id: number): string {
@@ -64,10 +64,10 @@ export const HERO_PROFESSION_VIDEOS_UHD = [
   ] as const;
 
 /** Poster local — LCP rápido */
-export const HERO_POSTER_LCP = '/imagens/hero-slide-1.png';
+export const HERO_POSTER_LCP = '/imagens/hero-slide-1.webp';
 
 /** Poster alta definição — desktop retina */
-export const HERO_POSTER_HD = '/imagens/hero-slide-1.png';
+export const HERO_POSTER_HD = '/imagens/hero-slide-1.webp';
 
 export const HERO_POSTER_SRCSET = `${HERO_POSTER_LCP} 1200w, ${HERO_POSTER_HD} 1920w`;
 
@@ -76,9 +76,9 @@ export const HERO_POSTER = HERO_POSTER_HD;
 
 /** Poster images for hero carousel rotation */
 export const HERO_POSTERS = [
-    '/imagens/hero-slide-1.png',
-    '/imagens/hero-slide-2.png',
-    '/imagens/hero-slide-3.png',
+    '/imagens/hero-slide-1.webp',
+    '/imagens/hero-slide-2.webp',
+    '/imagens/hero-slide-3.webp',
   ] as const;
 
 /** Open Graph / Twitter — local */
@@ -86,18 +86,18 @@ export const OG_SHARE_IMAGE = '/og-image.svg';
 
 /** Vitrine — todas locais */
 export const NICHE_PHOTOS: Record<string, string> = {
-    saude: '/imagens/nicho-estetica-cover.png',
-    restaurante: '/imagens/nicho-restaurante-cover.png',
-    comercio: '/imagens/nicho-varejo-cover.png',
-    servicos: '/imagens/nicho-servicos-cover.png',
-    imobiliaria: '/imagens/nicho-imobiliaria-cover.png',
-    academia: '/imagens/nicho-personal-cover.png',
+    saude: '/imagens/nicho-estetica-cover.webp',
+    restaurante: '/imagens/nicho-restaurante-cover.webp',
+    comercio: '/imagens/nicho-varejo-cover.webp',
+    servicos: '/imagens/nicho-servicos-cover.webp',
+    imobiliaria: '/imagens/nicho-imobiliaria-cover.webp',
+    academia: '/imagens/nicho-personal-cover.webp',
 } as const;
 
 /** Vendas, faturamento, lucro */
 export const SALES_PHOTOS: Record<string, string> = {
-    revenue: '/imagens/stock-startup-growth.png',
-    profit: '/imagens/stock-digital-strategy.png',
-    growth: '/imagens/stock-team-collaboration.png',
-    handshake: '/imagens/stock-networking.png',
+    revenue: '/imagens/stock-startup-growth.webp',
+    profit: '/imagens/stock-digital-strategy.webp',
+    growth: '/imagens/stock-team-collaboration.webp',
+    handshake: '/imagens/stock-networking.webp',
 } as const;
