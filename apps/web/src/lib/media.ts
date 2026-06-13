@@ -2,8 +2,8 @@
 
 /** Vídeo hero local (10–15 s, sem áudio) — coloque em public/videos/ */
 export const LOCAL_HERO_VIDEO = {
-  webm: '/videos/hero.webm',
-  mp4: '/videos/hero.mp4',
+  webm: '/hero.webm',
+  mp4: '/hero.mp4',
   poster: '/imagens/hero-slide-1.png',
 } as const;
 
@@ -34,7 +34,7 @@ export const PEXELS = {
   dubaiNight: pexelsHd(4197969),
   dubaiLuxury: pexelsHd(3443903),
   profCharts: pexelsHd(3943445),
-  profRevenue: pexelsHd(7578652),
+  profRevenue: pexelsHd(4328609),
   goldCoins: pexelsHd(7578652),
   salesFunnel: pexelsHd(4328609),
   salesTeam: pexelsHd(5377684),
@@ -71,6 +71,13 @@ export const HERO_POSTER_SRCSET = `${HERO_POSTER_LCP} 1200w, ${HERO_POSTER_HD} 1
 
 /** Hero e seções premium */
 export const HERO_POSTER = HERO_POSTER_HD;
+
+/** Poster images for hero carousel rotation */
+export const HERO_POSTERS = [
+  '/imagens/hero-slide-1.png',
+  '/imagens/hero-slide-2.png',
+  '/imagens/hero-slide-3.png',
+] as const;
 
 /** Open Graph / Twitter — local */
 export const OG_SHARE_IMAGE = '/og-image.svg';

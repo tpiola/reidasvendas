@@ -79,7 +79,7 @@ export const HERO_COPY = {
 
 export const TESTIMONIALS_SECTION = {
   eyebrow: 'Resultados',
-  title: 'Cases em',
+  title: 'Cases',
   titleAccent: 'construção.',
   disclaimer: 'Em breve: resultados reais de clientes.',
 } as const;

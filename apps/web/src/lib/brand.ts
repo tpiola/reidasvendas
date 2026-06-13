@@ -33,8 +33,8 @@ export const BRAND = {
   },
   baseCity: 'Franca / SP',
   mapsQuery: 'Franca SP',
-  instagram: null as string | null,
-  linkedin: null as string | null,
+  instagram: '#', // Em breve
+  linkedin: '#', // Em breve
   facebook: null as string | null,
   twitter: null as string | null,
 } as const;

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { BRAND } from '@/lib/brand';
-import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, LOCAL_HERO_VIDEO } from '@/lib/media';
+import { HERO_POSTER_LCP, HERO_POSTER_SRCSET, HERO_POSTERS, LOCAL_HERO_VIDEO } from '@/lib/media';
 import { runWhenIdle } from '@/lib/defer-idle';
 
 const LOCAL_HERO_CACHE_KEY = 'rdv-hero-local';
@@ -72,7 +72,7 @@ export function HeroVideo({
 
   const [loaded, setLoaded] = useState<boolean[]>(() => videos.map(() => false));
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const posterUrl = poster ?? HERO_POSTER_LCP;
+  const posterUrl = poster ?? HERO_POSTERS[activeIndex % HERO_POSTERS.length];
 
   useEffect(() => {
     setUseHd(preferHdHero());
