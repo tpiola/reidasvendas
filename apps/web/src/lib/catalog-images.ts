@@ -12,17 +12,6 @@ const LOCAL_IMAGES: Record<string, Record<string, string>> = {
     servicos: '/imagens/nicho-servicos-cover.png',
   },
   gallery: {
-    estetica: '/imagens/stock-clinic-reception.png',
-    odonto: '/imagens/stock-business-meeting.png',
-    fitness: '/imagens/stock-professional-team.png',
-    restaurante: '/imagens/stock-digital-marketing.png',
-    varejo: '/imagens/stock-sales-growth.png',
-    imob: '/imagens/stock-consulting-room.png',
-    advocacia: '/imagens/stock-law-firm.png',
-    educacao: '/imagens/stock-education-class.png',
-    servicos: '/imagens/stock-customer-service.png',
-  },
-  gallery2: {
     estetica: '/imagens/gallery-estetica.png',
     odonto: '/imagens/gallery-odontologia.png',
     fitness: '/imagens/gallery-personal.png',
@@ -32,6 +21,17 @@ const LOCAL_IMAGES: Record<string, Record<string, string>> = {
     advocacia: '/imagens/gallery-advocacia.png',
     educacao: '/imagens/gallery-educacao.png',
     servicos: '/imagens/gallery-servicos.png',
+  },
+  gallery2: {
+    estetica: '/imagens/stock-clinic-reception.png',
+    odonto: '/imagens/stock-business-meeting.png',
+    fitness: '/imagens/stock-professional-team.png',
+    restaurante: '/imagens/stock-digital-marketing.png',
+    varejo: '/imagens/stock-sales-growth.png',
+    imob: '/imagens/stock-consulting-room.png',
+    advocacia: '/imagens/stock-law-firm.png',
+    educacao: '/imagens/stock-education-class.png',
+    servicos: '/imagens/stock-customer-service.png',
   },
 };
 
