@@ -552,7 +552,7 @@ export const SOLUTION_CATEGORIES: SolutionCategory[] = [
     title: 'Consultoria de Alta Performance',
     description: 'Venda de consultoria High-Ticket, infraestrutura completa e implementação de agentes de IA por Thiago Piola.',
     chips: ['Thiago Piola', 'High-Ticket', 'Engenharia de Dados', 'PNL'],
-    imageUrl: '/imagens/stock-professional-team.png',
+    imageUrl: '/imagens/stock-sales-growth.png',
   },
 ];
 
@@ -593,7 +593,7 @@ export const RESOURCE_ITEMS: ResourceItem[] = [
 export const RESOURCES_INSPIRE = {
   title: 'Feito com Rei das Vendas',
   description: 'Uma coleção de templates e hubs inspiradores criados para operações reais.',
-  mediaUrl: '/imagens/stock-digital-strategy.png',
+  mediaUrl: '/imagens/stock-modern-presentation.png',
   to: '/templates',
 } as const;
 

@@ -94,8 +94,8 @@ export const NICHE_PHOTOS: Record<string, string> = {
 
 /** Vendas, faturamento, lucro */
 export const SALES_PHOTOS: Record<string, string> = {
-  revenue: '/imagens/stock-sales-growth.png',
+  revenue: '/imagens/stock-startup-growth.png',
   profit: '/imagens/stock-digital-strategy.png',
-  growth: '/imagens/stock-business-meeting.png',
-  handshake: '/imagens/stock-customer-service.png',
+  growth: '/imagens/stock-team-collaboration.png',
+  handshake: '/imagens/stock-networking.png',
 } as const;
