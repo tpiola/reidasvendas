@@ -34,8 +34,8 @@ export const BRAND = {
     },
     baseCity: 'Franca / SP',
     mapsQuery: 'Franca SP',
-    instagram: '#', // Em breve
-    linkedin: '#', // Em breve
-    facebook: null as string | null,
-    twitter: null as string | null,
+    instagram: 'https://www.instagram.com/reidasvendasoficial',
+    linkedin: 'https://www.linkedin.com/company/reidasvendas',
+    facebook: 'https://www.facebook.com/reidasvendasoficial',
+    twitter: 'https://twitter.com/reidasvendas',
 } as const;

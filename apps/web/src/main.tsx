@@ -24,6 +24,29 @@ function initThemeClass() {
 
 initThemeClass()
 
+// Scroll Progress Bar
+const progressBar = document.createElement('div')
+progressBar.className = 'scroll-progress'
+document.body.appendChild(progressBar)
+
+// IntersectionObserver for scroll-reveal animations
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+        observer.unobserve(entry.target)
+      }
+    })
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+)
+
+// Observe all .reveal elements after DOM is ready
+runAfterFirstPaint(() => {
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

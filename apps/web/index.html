@@ -107,7 +107,7 @@
       #root{min-height:100dvh;min-height:100svh}
     </style>
 
-    <!-- JSON-LD fallback (runtime: buildHomeJsonLd em Home via seo.ts) -->
+    <!-- JSON-LD — Schema.org LocalBusiness com geo + reviews -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -121,13 +121,33 @@
       "telephone": "+5516992333344",
       "email": "contato@reidasvendas.com.br",
       "description": "Sites, funis e automação para negócios locais em Franca-SP.",
-      "address": { "@type": "PostalAddress", "addressLocality": "Franca", "addressRegion": "SP", "addressCountry": "BR" },
+      "areaServed": {
+        "@type": "City",
+        "name": "Franca",
+        "sameAs": "https://pt.wikipedia.org/wiki/Franca"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Franca",
+        "addressRegion": "SP",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -20.5395,
+        "longitude": -47.4017
+      },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
         "opens": "08:00",
         "closes": "18:00"
-      }
+      },
+      "sameAs": [
+        "https://www.instagram.com/reidasvendasoficial",
+        "https://www.linkedin.com/company/reidasvendas",
+        "https://twitter.com/reidasvendas"
+      ]
     },
     {
       "@type": "WebSite",
@@ -135,6 +155,14 @@
       "url": "https://reidasvendas.com.br/",
       "inLanguage": "pt-BR",
       "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://reidasvendas.com.br/#local",
+      "name": "Rei das Vendas — Agência Digital",
+      "image": "https://reidasvendas.com.br/og-image.webp",
+      "priceRange": "$$",
+      "keywords": "site para negócios locais, funil de vendas, automação WhatsApp, marketing digital Franca SP"
     }
   ]
 }

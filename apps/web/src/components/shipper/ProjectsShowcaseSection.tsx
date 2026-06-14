@@ -24,10 +24,10 @@ export function ProjectsShowcaseSection() {
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.06}>
+            <Reveal key={p.slug} delay={i * 0.06} className="card-3d">
               <Link
                 to={`/projetos/${p.slug}`}
-                className="card-dark group flex h-full flex-col overflow-hidden transition-colors hover:border-[#0057FF]/30"
+                className="card-dark card-3d-inner group flex h-full flex-col overflow-hidden transition-colors hover:border-[#0057FF]/30"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
