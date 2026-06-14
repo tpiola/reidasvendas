@@ -13,7 +13,7 @@ const servicos = [
 
 const nichos = [
   { nome: 'Calçadista', img: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80' },
-  { nome: 'Comércio', img: 'https://images.unsplash.com/photo-1553729459-afe8f2e2b59b?w=600&q=80' },
+  { nome: 'Comércio', img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80' },
   { nome: 'Indústria', img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80' },
   { nome: 'Saúde', img: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80' },
   { nome: 'Educação', img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80' },
@@ -90,7 +90,7 @@ const ServicosSection = () => (
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {servicos.map((s, i) => (
           <div key={s.title} className={`reveal reveal-delay-${(i % 4) + 1} group relative overflow-hidden rounded-2xl`}>
-            <img src={s.img} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img src={s.img} alt="" className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="relative p-8">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 backdrop-blur text-white">
@@ -149,7 +149,7 @@ const ComoFuncionaSection = () => (
           { num: '03', title: 'Otimização e Crescimento', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80', desc: 'Monitoramos, ajustamos e escalamos sua operação digital com base em dados e resultados reais.' },
         ].map((item, i) => (
           <div key={item.num} className={`reveal reveal-delay-${(i % 4) + 1} grid items-center gap-8 md:grid-cols-2`}>
-            <img src={item.img} className="h-64 w-full rounded-2xl object-cover" />
+            <img src={item.img} alt="" className="h-64 w-full rounded-2xl object-cover" />
             <div>
               <div className="text-5xl font-extrabold text-[#0057FF]">{item.num}</div>
               <h3 className="mt-2 font-['Playfair_Display'] text-2xl font-semibold text-white">{item.title}</h3>
