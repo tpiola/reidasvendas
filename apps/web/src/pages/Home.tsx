@@ -1,20 +1,23 @@
+/* ═══════════════════════════════════════════
+   HOME.TSX — Rei das Vendas
+   Home completa com design premium
+   Ordem: Hero → Servicos → Nichos → ComoFunciona → Cases → FAQ → CTA Final
+   SEM blog, SEM preços, SEM emojis em cards
+═══════════════════════════════════════════ */
+
 import { useEffect } from 'react';
 import { applySeo } from '@/lib/seo';
 import { buildHomeJsonLd } from '@/lib/seo-schema';
 import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
-import {
-  HOME_FAQ,
-  SCHEMA_REVIEWS,
-} from '@/lib/home-content';
+import { HOME_FAQ, SCHEMA_REVIEWS } from '@/lib/home-content';
 import { FaqAccordion } from '@/components/home/FaqAccordion';
 import { TrustGuaranteeBand } from '@/components/home/TrustGuaranteeBand';
 import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
-import VideoHero from '@/components/VideoHero';
+import HeroSection from '@/components/HeroSection';
 import ServicosSection from '@/components/ServicosSection';
 import NichosSection from '@/components/NichosSection';
 import CasesSection from '@/components/CasesSection';
 import ComoFuncionaSection from '@/components/ComoFuncionaSection';
-import PricingCardsPremium from '@/components/conversion/PricingCardsPremium';
 
 export default function Home() {
   useEffect(() => {
@@ -29,23 +32,20 @@ export default function Home() {
 
   return (
     <main className="page-surface overflow-x-hidden">
-      {/* Hero FULLSCREEN com vídeo real Pexels */}
-      <VideoHero />
+      {/* Hero com imagem real */}
+      <HeroSection />
 
-      {/* Serviços / Soluções */}
+      {/* Serviços / Soluções — SVGs, sem emojis */}
       <ServicosSection />
 
-      {/* Nichos de Franca-SP */}
+      {/* Nichos de Franca-SP — imagens grandes */}
       <NichosSection />
 
-      {/* Como Funciona - 3 passos */}
+      {/* Como Funciona — 3 passos horizontais */}
       <ComoFuncionaSection />
 
-      {/* Casos de Sucesso */}
+      {/* Casos de Sucesso — 2 cases grandes 50/50 */}
       <CasesSection />
-
-      {/* Planos — fonte única alinhada com data/plans.ts */}
-      <PricingCardsPremium />
 
       {/* Garantia de confiança */}
       <TrustGuaranteeBand />
