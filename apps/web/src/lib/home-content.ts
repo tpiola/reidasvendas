@@ -72,12 +72,12 @@ export const PROJECTS_HOME_SECTION = {
 } as const;
 
 export const HERO_COPY = {
-  subhead: 'Site profissional, funil de vendas e WhatsApp automatizado. Primeira versão em até 72h. Orçamento em 24h.',
-  ctaPrimary: 'Quero resultados em 72h',
-  ctaSecondary: 'Antes: R$ 0 com site genérico. Depois: máquina de vendas funcionando enquanto você dorme.',
+  subhead: 'De R$ 0 com site genérico para uma máquina de vendas funcionando 24h. Primeira versão em até 72h. Orçamento em 24h.',
+  ctaPrimary: 'QUERO MEU SITE EM 72H',
+  ctaSecondary: 'Orçamento em 24h · Sem fidelidade · Suporte direto',
   proofStat: '+40%',
-  proofLabel: 'conversão média dos nossos clientes',
-  urgencyText: 'Vagas limitadas por mês — garantia de qualidade',
+  proofLabel: 'conversão média — baseado em 40+ clientes',
+  urgencyText: 'ÚLTIMAS 2 VAGAS DO MÊS — Garantia de qualidade total',
 } as const;
 
 export const TESTIMONIALS_SECTION = {
@@ -95,6 +95,7 @@ export type Testimonial = {
 
 export type VideoTestimonial = {
   id: string;
+  posterUrl: string;
   title: string;
   author: string;
   quote: string;
@@ -143,18 +144,27 @@ export const VIDEO_TESTIMONIALS: readonly VideoTestimonial[] = [
     id: 'video-rafael',
     posterUrl: '/imagens/testimonial-poster.webp',
     title: 'Resultado em 4 dias — Dr. Rafael',
+    author: 'Dr. Rafael Oliveira',
+    quote: 'Em 4 dias meu site estava no ar com WhatsApp integrado.',
+    rating: 5,
     transcript: 'Em 4 dias meu site estava no ar com WhatsApp integrado. Já recebi 3 orçamentos na primeira semana.',
   },
   {
     id: 'video-ana',
     posterUrl: '/imagens/testimonial-poster.webp',
     title: '40% mais conversão — Ana Beatriz',
+    author: 'Ana Beatriz Martins',
+    quote: 'O funil de vendas mudou meu jogo. Resultado: 40% mais conversão com follow-up automático.',
+    rating: 5,
     transcript: 'O funil de vendas mudou meu jogo. Resultado: 40% mais conversão com follow-up automático.',
   },
   {
     id: 'video-carlos',
     posterUrl: '/imagens/testimonial-poster.webp',
     title: '72h no ar — Carlos Mendes',
+    author: 'Carlos Mendes',
+    quote: 'Em 72h estava tudo rodando — site, WhatsApp, agendamento.',
+    rating: 5,
     transcript: 'Em 72h estava tudo rodando — site, WhatsApp, agendamento. Profissionalismo que impressiona.',
   },
 ];

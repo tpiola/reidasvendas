@@ -23,6 +23,7 @@ import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
 import { TrustGuaranteeBand } from '@/components/home/TrustGuaranteeBand';
 import { StoryVideoBand } from '@/components/media/StoryVideoBand';
 import { HomePlanosCtaBand } from '@/components/conversion/HomePlanosCtaBand';
+import { StickyCtaBar } from '@/components/conversion/StickyCtaBar';
 import { BRAND } from '@/lib/brand';
 
 const CinematicVideoBand = lazy(() =>
@@ -62,6 +63,11 @@ export default function Home() {
           <div className="orb orb-1" />
           <div className="orb orb-2" />
           <div className="orb orb-3" />
+          <div className="orb orb-4" />
+          <div className="orb orb-5" />
+        </div>
+        <div className="hero-sparkle" aria-hidden="true">
+          <span /><span /><span /><span /><span /><span /><span /><span /><span /><span />
         </div>
         <div className="absolute inset-0 bg-[#030303]/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/85" />
@@ -106,6 +112,11 @@ export default function Home() {
               {CTA.planos}
             </Link>
           </div>
+
+          {/* Micro-copy — confiança abaixo do CTA */}
+          <p className="hero-enter hero-enter-delay-5 mt-3 text-[9px] font-semibold uppercase tracking-[0.2em] hero-ink-muted/60">
+            {HERO_COPY.ctaSecondary}
+          </p>
 
           {/* Social Proof — resultados reais */}
           <div className="hero-enter hero-enter-delay-6 mt-6 flex items-center justify-center gap-4">
@@ -171,6 +182,8 @@ export default function Home() {
       <FaqAccordion items={HOME_FAQ} />
 
       <HomeFinalCta />
+
+      <StickyCtaBar />
     </main>
   );
 }
