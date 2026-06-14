@@ -1,59 +1,56 @@
 /* ═══════════════════════════════════════════
    HOME.TSX — Rei das Vendas
-   Home completa com design premium
-   Ordem: Hero → Servicos → Nichos → ComoFunciona → Cases → FAQ → CTA Final
-   SEM blog, SEM preços, SEM emojis em cards
+   Experiência Cinematográfica de Alta Conversão
+   Apenas seções essenciais, SEM repetição
 ═══════════════════════════════════════════ */
 
 import { useEffect } from 'react';
 import { applySeo } from '@/lib/seo';
-import { buildHomeJsonLd } from '@/lib/seo-schema';
-import { DEFAULT_OG_IMAGE, HOME_SEO } from '@/lib/seo-meta';
-import { HOME_FAQ, SCHEMA_REVIEWS } from '@/lib/home-content';
-import { FaqAccordion } from '@/components/home/FaqAccordion';
-import { TrustGuaranteeBand } from '@/components/home/TrustGuaranteeBand';
-import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
 import HeroSection from '@/components/HeroSection';
 import ServicosSection from '@/components/ServicosSection';
-import NichosSection from '@/components/NichosSection';
 import CasesSection from '@/components/CasesSection';
 import ComoFuncionaSection from '@/components/ComoFuncionaSection';
+import { FaqAccordion } from '@/components/home/FaqAccordion';
+import { HomeFinalCta } from '@/components/shipper/HomeFinalCta';
+import { HOME_FAQ } from '@/lib/home-content';
 
 export default function Home() {
   useEffect(() => {
     applySeo({
-      title: HOME_SEO.title,
-      description: HOME_SEO.description,
+      title: 'Rei das Vendas — Soluções Digitais | Franca-SP',
+      description: 'Soluções digitais para negócios locais em Franca-SP. Sites, aplicativos, automações e consultoria. Diagnóstico gratuito.',
       canonicalPath: '/',
-      ogImage: DEFAULT_OG_IMAGE,
-      jsonLd: buildHomeJsonLd(HOME_FAQ, SCHEMA_REVIEWS),
     });
   }, []);
 
   return (
-    <main className="page-surface overflow-x-hidden">
-      {/* Hero com imagem real */}
+    <main className="overflow-x-hidden bg-[#030303]">
+      {/* 1. HERO — Experiência cinematográfica com vídeo */}
       <HeroSection />
 
-      {/* Serviços / Soluções — SVGs, sem emojis */}
+      {/* 2. SOLUÇÕES — Cards visuais com SVGs, texto curto */}
       <ServicosSection />
 
-      {/* Nichos de Franca-SP — imagens grandes */}
-      <NichosSection />
-
-      {/* Como Funciona — 3 passos horizontais */}
+      {/* 3. COMO FUNCIONA — 3 passos, narrativa de transformação */}
       <ComoFuncionaSection />
 
-      {/* Casos de Sucesso — 2 cases grandes 50/50 */}
+      {/* 4. RESULTADOS — Apenas 2 cases com números grandes */}
       <CasesSection />
 
-      {/* Garantia de confiança */}
-      <TrustGuaranteeBand />
+      {/* 5. FAQ — Responder objeções */}
+      <section className="bg-[#08080b] py-20">
+        <div className="mx-auto max-w-3xl px-6">
+          <h2 className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[#0057FF]/80">
+            DÚVIDAS
+          </h2>
+          <p className="mb-10 text-center text-sm text-white/40">
+            Prazo, dados, escopo — sem letra miúda.
+          </p>
+          <FaqAccordion items={HOME_FAQ} />
+        </div>
+      </section>
 
-      {/* FAQ */}
-      <FaqAccordion items={HOME_FAQ} />
-
-      {/* CTA Final */}
+      {/* 6. CTA FINAL — Única chamada para ação */}
       <HomeFinalCta />
     </main>
   );
