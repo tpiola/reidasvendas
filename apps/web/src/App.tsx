@@ -10,6 +10,7 @@ import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { DeferredEngagement } from '@/components/DeferredEngagement';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { ConversionStickyBar } from '@/components/conversion/ConversionStickyBar';
+import UrgencyBar from '@/components/conversion/UrgencyBar';
 import { CursorFollower } from '@/components/CursorFollower';
 import Home from '@/pages/Home';
 const Projetos = lazy(() => import('@/pages/Projetos'));
@@ -99,6 +100,7 @@ export default function App() {
     <Router>
       <ScrollToTop />
       <ConversionStickyBar />
+      <UrgencyBar />
       <CursorFollower />
       <SiteHeader />
       <AnalyticsProvider />

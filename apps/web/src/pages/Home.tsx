@@ -25,6 +25,9 @@ import { StoryVideoBand } from '@/components/media/StoryVideoBand';
 import { HomePlanosCtaBand } from '@/components/conversion/HomePlanosCtaBand';
 import { StickyCtaBar } from '@/components/conversion/StickyCtaBar';
 import { BRAND } from '@/lib/brand';
+import VideoHero from '@/components/VideoHero';
+import SocialProof from '@/components/conversion/SocialProof';
+import PricingCardsPremium from '@/components/conversion/PricingCardsPremium';
 
 const CinematicVideoBand = lazy(() =>
   import('@/components/home/CinematicVideoBand').then((m) => ({ default: m.CinematicVideoBand })),
@@ -53,6 +56,9 @@ export default function Home() {
 
   return (
     <main className="page-surface overflow-x-hidden">
+      {/* 🎬 VideoHero — hero fullscreen com vídeo de fundo */}
+      <VideoHero />
+
       <section className="hero-dark relative isolate min-h-[100dvh] min-h-[100svh] overflow-hidden">
         <div className="absolute inset-0">
           <HeroVideo preferLocalHero singleClip deferVideo />
@@ -182,6 +188,12 @@ export default function Home() {
       <FaqAccordion items={HOME_FAQ} />
 
       <HomeFinalCta />
+
+      {/* 💰 Tabela de planos premium */}
+      <PricingCardsPremium />
+
+      {/* ⭐ Prova social com depoimentos */}
+      <SocialProof />
 
       <StickyCtaBar />
     </main>
