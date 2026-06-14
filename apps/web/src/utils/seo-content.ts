@@ -230,6 +230,45 @@ export const SEO = {
     },
   } as const,
 
+  /* ─── Páginas de Serviço ─── */
+  servico: {
+    sites: {
+      title: 'Criação de Sites Profissionais — Rei das Vendas | Franca-SP',
+      description:
+        'Sites institucionais, landing pages e e-commerce para negócios locais em Franca-SP. Design premium, SEO completo, WhatsApp integrado. A partir de R$ 497/mês.',
+      keywords: 'criação de sites, site profissional franca sp, landing page, site institucional, site para comercio local',
+      path: '/servicos/sites',
+    },
+    apps: {
+      title: 'Aplicativos Mobile e Web — Rei das Vendas | Franca-SP',
+      description:
+        'Apps nativos iOS/Android e PWA para negócios locais. Catálogo digital, delivery próprio, agendamento online. Destaque-se na Play Store e App Store.',
+      keywords: 'aplicativo delivery, app para restaurante, app para farmacia, aplicativo ios android franca sp',
+      path: '/servicos/apps',
+    },
+    extensoes: {
+      title: 'Extensões e Automações — Rei das Vendas | Franca-SP',
+      description:
+        'Extensões de Chrome, automações n8n, bots de WhatsApp e CRM personalizado para empresas de Franca-SP. Automatize processos sem trocar de sistema.',
+      keywords: 'automacao de processos, extensao chrome, bot whatsapp, crm personalizado, n8n automacao franca sp',
+      path: '/servicos/extensoes',
+    },
+    dashboards: {
+      title: 'Dashboards e Relatórios — Rei das Vendas | Franca-SP',
+      description:
+        'Painéis executivos, controle de estoque, DRE online e KPIs em tempo real para empresas de Franca-SP. Decisões baseadas em dados.',
+      keywords: 'dashboard empresarial, indicadores de desempenho, relatorio de vendas, dre online, kpi franca sp',
+      path: '/servicos/dashboards',
+    },
+    mentoria: {
+      title: 'Mentoria e Consultoria Digital — Rei das Vendas | Franca-SP',
+      description:
+        'Consultoria em marketing digital e transformação digital para negócios de Franca-SP. Diagnóstico completo, plano de ação e acompanhamento mensal.',
+      keywords: 'mentoria marketing digital, consultoria transformacao digital, consultoria negocios franca sp',
+      path: '/servicos/mentoria',
+    },
+  } as const,
+
   /* ─── Open Graph Tags ─── */
   openGraph (pagina: keyof typeof SEO['paginas']): Record<string, string> {
     const p = this.paginas[pagina];
