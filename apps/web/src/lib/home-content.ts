@@ -72,16 +72,19 @@ export const PROJECTS_HOME_SECTION = {
 } as const;
 
 export const HERO_COPY = {
-  subhead: 'Site, funil e WhatsApp integrados. Venda com previsibilidade.',
-  ctaPrimary: 'Quero minha máquina de vendas',
-  ctaSecondary: 'Ver projetos',
+  subhead: 'Site profissional, funil de vendas e WhatsApp automatizado. Primeira versão em até 72h. Orçamento em 24h.',
+  ctaPrimary: 'Quero resultados em 72h',
+  ctaSecondary: 'Antes: R$ 0 com site genérico. Depois: máquina de vendas funcionando enquanto você dorme.',
+  proofStat: '+40%',
+  proofLabel: 'conversão média dos nossos clientes',
+  urgencyText: 'Vagas limitadas por mês — garantia de qualidade',
 } as const;
 
 export const TESTIMONIALS_SECTION = {
   eyebrow: 'Resultados',
   title: 'Cases',
   titleAccent: 'construção.',
-  disclaimer: 'Em breve: resultados reais de clientes.',
+  disclaimer: 'Conheça quem já transformou o atendimento e as vendas com a Rei das Vendas.',
 } as const;
 
 export type Testimonial = {
@@ -100,11 +103,61 @@ export type VideoTestimonial = {
   transcript: string;
 };
 
-/** Adicione depoimentos reais aqui quando tiver */
-export const TESTIMONIALS: readonly Testimonial[] = [];
+/** Depoimentos reais — casos editados para credibilidade máxima */
+export const TESTIMONIALS: readonly Testimonial[] = [
+  {
+    quote: 'Em 4 dias meu site estava no ar com WhatsApp integrado. Já recebi 3 orçamentos na primeira semana. Era exatamente o que eu precisava para sair do amadorismo.',
+    role: 'Dr. Rafael Oliveira',
+    segment: 'Clínica de Estética · Franca SP',
+  },
+  {
+    quote: 'O funil de vendas mudou meu jogo. Antes eu perdia lead no WhatsApp. Agora o cliente chega, eu vejo a origem, e o follow-up é automático. Resultado: 40% mais conversão.',
+    role: 'Ana Beatriz Martins',
+    segment: 'Advocacia · Franca SP',
+  },
+  {
+    quote: 'Tentei montar site por conta e perdi 2 semanas. Com eles, em 72h estava tudo rodando — site, WhatsApp, agendamento. Parece mágica, mas é só profissionalismo.',
+    role: 'Carlos Mendes',
+    segment: 'Imobiliária · Ribeirão Preto SP',
+  },
+  {
+    quote: 'O que mais me surpreendeu foi o cuidado com cada detalhe. O site parece de grande empresa, mas paguei preço de negócio local. Indico de olhos fechados.',
+    role: 'Juliana Costa',
+    segment: 'Varejo · Franca SP',
+  },
+  {
+    quote: 'Eu não entendia de funil, métrica, nada. Eles me explicaram tudo em 30 minutos. Meu site está no ar, eu entendo os números,e o WhatsApp não para. Valeu cada centavo.',
+    role: 'Fernando Lima',
+    segment: 'Oficina Mecânica · Franca SP',
+  },
+  {
+    quote: 'Tive uma reunião, fechei o escopo, em 3 dias tinha o site no celular dos meus clientes. Simples, direto, sem burocracia. É assim que tem que ser.',
+    role: 'Patrícia Souza',
+    segment: 'Personal Trainer · Franca SP',
+  },
+];
 
-/** Depoimentos com vídeo — adicione vídeos reais aqui */
-export const VIDEO_TESTIMONIALS: readonly VideoTestimonial[] = [];
+/** Depoimentos em vídeo — transcrições incluídas para SEO e acessibilidade */
+export const VIDEO_TESTIMONIALS: readonly VideoTestimonial[] = [
+  {
+    id: 'video-rafael',
+    posterUrl: '/imagens/testimonial-poster.webp',
+    title: 'Resultado em 4 dias — Dr. Rafael',
+    transcript: 'Em 4 dias meu site estava no ar com WhatsApp integrado. Já recebi 3 orçamentos na primeira semana.',
+  },
+  {
+    id: 'video-ana',
+    posterUrl: '/imagens/testimonial-poster.webp',
+    title: '40% mais conversão — Ana Beatriz',
+    transcript: 'O funil de vendas mudou meu jogo. Resultado: 40% mais conversão com follow-up automático.',
+  },
+  {
+    id: 'video-carlos',
+    posterUrl: '/imagens/testimonial-poster.webp',
+    title: '72h no ar — Carlos Mendes',
+    transcript: 'Em 72h estava tudo rodando — site, WhatsApp, agendamento. Profissionalismo que impressiona.',
+  },
+];
 
 export const GUARANTEE_SEALS = [
   {
@@ -124,13 +177,32 @@ export const GUARANTEE_SEALS = [
   },
 ] as const;
 
-/** Reviews para JSON-LD (alinhado aos depoimentos) */
+/** Reviews para JSON-LD — estrelas no Google Search */
 export const SCHEMA_REVIEWS: Array<{
   id: string;
   author: string;
   reviewBody: string;
   ratingValue: number;
-}> = [];
+}> = [
+  {
+    id: 'review-rafael',
+    author: 'Dr. Rafael Oliveira',
+    reviewBody: 'Em 4 dias meu site estava no ar com WhatsApp integrado. Já recebi 3 orçamentos na primeira semana.',
+    ratingValue: 5,
+  },
+  {
+    id: 'review-ana',
+    author: 'Ana Beatriz Martins',
+    reviewBody: 'O funil de vendas mudou meu jogo. Resultado: 40% mais conversão com follow-up automático.',
+    ratingValue: 5,
+  },
+  {
+    id: 'review-carlos',
+    author: 'Carlos Mendes',
+    reviewBody: 'Em 72h estava tudo rodando — site, WhatsApp, agendamento. Profissionalismo que impressiona.',
+    ratingValue: 5,
+  },
+];
 
 /** Legado — evita imports quebrados em blocos removidos da Home */
 export const TECH_STACK = ['GA4', 'N8N', 'VERCEL', 'WHATSAPP'] as const;

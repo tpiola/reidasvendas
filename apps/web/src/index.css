@@ -559,6 +559,105 @@ html.dark .section-white {
    FIX: LIGHT MODE CONTRAST
 ═══════════════════════════════════════════ */
 
+/* ─── 3D Geometric Hero Background ─── */
+.hero-3d-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-3d-bg .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.3;
+  will-change: transform;
+}
+.hero-3d-bg .orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,87,255,0.25), transparent 70%);
+  top: -15%; left: -10%;
+  animation: orb-drift-1 20s ease-in-out infinite;
+}
+.hero-3d-bg .orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(201,168,76,0.15), transparent 70%);
+  bottom: -20%; right: -10%;
+  animation: orb-drift-2 25s ease-in-out infinite;
+}
+.hero-3d-bg .orb-3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(0,87,255,0.12), transparent 70%);
+  top: 40%; right: 15%;
+  animation: orb-drift-3 18s ease-in-out infinite;
+}
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(80px, 60px) scale(1.1); }
+  66% { transform: translate(-40px, 100px) scale(0.95); }
+}
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-60px, -80px) scale(1.15); }
+  66% { transform: translate(50px, -40px) scale(0.9); }
+}
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -50px) scale(1.08); }
+}
+
+/* ─── 3D Grid Lines ─── */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,87,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,87,255,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  perspective: 800px;
+  transform: rotateX(55deg);
+  transform-origin: center bottom;
+  mask-image: radial-gradient(ellipse at 50% 100%, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 100%, black 30%, transparent 70%);
+}
+
+/* ─── CTA Pulse Glow ─── */
+@keyframes cta-pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,87,255,0.45), 0 4px 20px rgba(0,87,255,0.45); }
+  50% { box-shadow: 0 0 40px rgba(0,87,255,0.7), 0 4px 30px rgba(0,87,255,0.6); }
+}
+.btn-conversion {
+  animation: cta-pulse-glow 2.5s ease-in-out infinite;
+}
+.btn-conversion:hover {
+  animation: none;
+  box-shadow: 0 0 60px rgba(0,87,255,0.8), 0 8px 40px rgba(0,87,255,0.7);
+}
+
+/* ─── Social Proof Counter ─── */
+.proof-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,87,255,0.08);
+  border: 1px solid rgba(0,87,255,0.2);
+  border-radius: 999px;
+  padding: 4px 14px 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rdv-blue);
+  letter-spacing: 0.02em;
+}
+.proof-counter::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rdv-blue);
+  box-shadow: 0 0 8px rgba(0,87,255,0.6);
+}
+
 /* Hero dark fix em light mode — garante texto claro */
 html.light .hero-dark,
 html.light .section-dark {

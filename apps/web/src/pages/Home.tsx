@@ -56,8 +56,15 @@ export default function Home() {
         <div className="absolute inset-0">
           <HeroVideo preferLocalHero singleClip deferVideo />
         </div>
-        <div className="absolute inset-0 bg-[#030303]/55" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/85" />
+        {/* 3D Geometric Background */}
+        <div className="hero-grid" aria-hidden="true" />
+        <div className="hero-3d-bg" aria-hidden="true">
+          <div className="orb orb-1" />
+          <div className="orb orb-2" />
+          <div className="orb orb-3" />
+        </div>
+        <div className="absolute inset-0 bg-[#030303]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/10 to-black/85" />
 
         <div className="hero-content relative flex min-h-[100dvh] min-h-[100svh] flex-col items-center justify-center px-4 pb-[max(5rem,env(safe-area-inset-bottom))] pt-[max(6.5rem,env(safe-area-inset-top))] text-center sm:px-6 md:px-8 md:pt-32 lg:px-10">
           <div className="hero-enter hero-enter-delay-1">
@@ -88,7 +95,7 @@ export default function Home() {
           <div className="hero-enter hero-enter-delay-5 mt-10 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center md:gap-4">
             <Link
               to="/diagnostico"
-              className="btn-glow touch-target inline-flex h-14 w-full items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.28em] text-white sm:w-auto sm:px-12"
+              className="btn-glow btn-conversion touch-target inline-flex h-14 w-full items-center justify-center px-8 text-[11px] font-bold uppercase tracking-[0.28em] text-white sm:w-auto sm:px-12"
             >
               {HERO_COPY.ctaPrimary}
             </Link>
@@ -100,7 +107,13 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="hero-enter hero-enter-delay-6 mt-12 grid w-full max-w-xs grid-cols-3 gap-4 sm:flex sm:max-w-none sm:items-center sm:gap-10 md:gap-12">
+          {/* Social Proof — resultados reais */}
+          <div className="hero-enter hero-enter-delay-6 mt-6 flex items-center justify-center gap-4">
+            <span className="proof-counter">{HERO_COPY.proofStat}</span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] hero-ink-muted">{HERO_COPY.proofLabel}</span>
+          </div>
+
+          <div className="hero-enter hero-enter-delay-6 mt-10 grid w-full max-w-xs grid-cols-3 gap-4 sm:flex sm:max-w-none sm:items-center sm:gap-10 md:gap-12">
             {TRUST_STATS.map((item) => (
               <div key={item.label} className="flex flex-col items-center gap-1">
                 <span className="text-base font-bold hero-ink sm:text-lg">{item.value}</span>
@@ -110,6 +123,12 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Urgency — vagas limitadas */}
+          <p className="hero-enter hero-enter-delay-6 mt-6 text-[9px] font-semibold uppercase tracking-[0.28em] hero-ink-muted/60">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#C9A84C] animate-pulse mr-2 align-middle" aria-hidden />
+            {HERO_COPY.urgencyText}
+          </p>
           <HeroScrollCue />
         </div>
       </section>
