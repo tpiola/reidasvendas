@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type Consent = 'accepted' | 'rejected';
 
@@ -15,19 +16,50 @@ export function CookieConsent() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[60] p-4">
-      <div className="mx-auto max-w-6xl rounded-2xl border border-black/10 bg-white p-5 shadow-xl shadow-black/10">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div
+      className="fixed z-[60] p-4"
+      style={{
+        bottom: 'max(24px, env(safe-area-inset-bottom, 24px))',
+        left: 'max(24px, env(safe-area-inset-left, 24px))',
+        maxWidth: '400px',
+      }}
+    >
+      <div
+        className="rounded-2xl border p-5 shadow-xl"
+        style={{
+          background: 'rgba(9, 13, 18, 0.88)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          borderColor: 'rgba(255, 255, 255, 0.08)',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)',
+        }}
+      >
+        <div className="flex flex-col gap-4">
           <div>
-            <div className="text-sm font-semibold tracking-tight">Cookies e dados</div>
-            <p className="mt-1 text-xs leading-relaxed text-black/70">
-              Eu uso cookies essenciais para funcionamento e, com sua permissão, medição de performance para otimizar conversão.
+            <p className="text-xs leading-relaxed text-white/70">
+              Usamos cookies para melhorar sua experiencia. Ao continuar, voce concorda com nossa{' '}
+              <Link
+                to="/politica"
+                className="text-[#C9A84C] underline underline-offset-2 hover:text-[#F0D080] transition-colors"
+                onClick={() => {
+                  window.localStorage.setItem(storageKey, 'accepted');
+                  setValue('accepted');
+                }}
+              >
+                Politica de Privacidade
+              </Link>
+              .
             </p>
           </div>
           <div className="flex gap-3">
             <button
               type="button"
-              className="h-10 rounded-xl border border-black/15 bg-white px-4 text-xs font-semibold text-black transition-colors hover:bg-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              className="h-10 rounded-xl border px-4 text-xs font-semibold transition-all"
+              style={{
+                borderColor: 'rgba(255, 255, 255, 0.12)',
+                background: 'rgba(255, 255, 255, 0.04)',
+                color: 'rgba(255, 255, 255, 0.8)',
+              }}
               onClick={() => {
                 window.localStorage.setItem(storageKey, 'rejected');
                 setValue('rejected');
@@ -37,7 +69,11 @@ export function CookieConsent() {
             </button>
             <button
               type="button"
-              className="h-10 rounded-xl bg-black px-4 text-xs font-semibold text-white transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2"
+              className="h-10 rounded-xl px-4 text-xs font-semibold text-white transition-all"
+              style={{
+                background: 'linear-gradient(135deg, #0047CC 0%, #0057FF 50%, #3377FF 100%)',
+                boxShadow: '0 0 20px rgba(0,87,255,0.3)',
+              }}
               onClick={() => {
                 window.localStorage.setItem(storageKey, 'accepted');
                 setValue('accepted');
@@ -45,10 +81,24 @@ export function CookieConsent() {
             >
               Aceitar
             </button>
+            <Link
+              to="/politica"
+              className="inline-flex h-10 items-center rounded-xl border px-4 text-xs font-semibold transition-all"
+              style={{
+                borderColor: 'rgba(255, 255, 255, 0.12)',
+                background: 'rgba(255, 255, 255, 0.04)',
+                color: 'rgba(201, 168, 76, 0.9)',
+              }}
+              onClick={() => {
+                window.localStorage.setItem(storageKey, 'accepted');
+                setValue('accepted');
+              }}
+            >
+              Saiba mais
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

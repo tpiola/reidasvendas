@@ -5,19 +5,20 @@ import { Menu, X } from 'lucide-react';
 import { BrandLogo } from '@/components/BrandLogo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
-import { CTA } from '@/lib/cta-copy';
+import { BRAND } from '@/lib/brand';
 
 const NAV_LINKS = [
-  { to: '/projetos', label: 'Projetos' },
-  { to: '/planos', label: 'Planos' },
-  { to: '/templates', label: 'Amostras' },
+  { to: '/', label: 'Home' },
+  { to: '/solucoes', label: 'Servicos' },
   { to: '/blog', label: 'Blog' },
+  { to: '/contato', label: 'Contato' },
 ] as const;
 
 function NavItem({ to, label }: { to: string; label: string }) {
   return (
     <NavLink
       to={to}
+      end={to === '/'}
       className={({ isActive }) =>
         cn(
           'rounded-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] transition-all duration-300',
@@ -77,7 +78,7 @@ export function SiteHeader() {
           <Link
             to="/"
             className="min-w-0 shrink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
-            aria-label="Rei das Vendas — início"
+            aria-label="Rei das Vendas — inicio"
           >
             <BrandLogo layout="horizontal" size="lg" className="hidden sm:inline-flex" />
             <BrandLogo layout="horizontal" size="md" className="inline-flex sm:hidden" />
@@ -85,7 +86,7 @@ export function SiteHeader() {
 
           <nav
             className="hidden items-center gap-1 rounded-full border border-[color:var(--header-border)] bg-[color:var(--header-hover)]/40 p-1 lg:flex"
-            aria-label="Navegação principal"
+            aria-label="Navegacao principal"
           >
             {NAV_LINKS.map((link) => (
               <NavItem key={link.to} to={link.to} label={link.label} />
@@ -93,18 +94,14 @@ export function SiteHeader() {
           </nav>
 
           <div className="hidden items-center gap-4 lg:flex">
-            <Link
-              to="/contato"
-              className="text-[10px] font-bold uppercase tracking-[0.22em] text-[color:var(--header-fg-muted)] transition-colors hover:text-[color:var(--header-fg)]"
-            >
-              Contato
-            </Link>
-            <Link
-              to="/diagnostico"
+            <a
+              href={BRAND.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-glow inline-flex h-10 items-center justify-center px-7 text-[10px] font-bold uppercase tracking-[0.26em] text-white"
             >
-              {CTA.orcamento}
-            </Link>
+              WhatsApp
+            </a>
             <ThemeToggle className="opacity-85 hover:opacity-100" />
           </div>
 
@@ -140,7 +137,7 @@ export function SiteHeader() {
               <X size={24} strokeWidth={1.5} />
             </button>
           </div>
-          <nav className="mx-auto flex max-w-lg flex-col px-8 pt-2" aria-label="Navegação mobile">
+          <nav className="mx-auto flex max-w-lg flex-col px-8 pt-2" aria-label="Navegacao mobile">
             <div className="mb-8 flex justify-center border-b border-[color:var(--border-subtle)] pb-8">
               <BrandLogo layout="stacked" size="lg" />
             </div>
@@ -148,6 +145,7 @@ export function SiteHeader() {
               <NavLink
                 key={link.to}
                 to={link.to}
+                end={link.to === '/'}
                 className={({ isActive }) =>
                   cn(
                     'border-b border-[color:var(--border-subtle)] py-4 text-xl font-semibold tracking-tight',
@@ -161,12 +159,14 @@ export function SiteHeader() {
                 {link.label}
               </NavLink>
             ))}
-            <Link
-              to="/diagnostico"
+            <a
+              href={BRAND.whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-glow mt-8 inline-flex h-14 items-center justify-center text-[11px] font-bold uppercase tracking-[0.28em] text-white"
             >
-              {CTA.orcamento}
-            </Link>
+              WhatsApp
+            </a>
           </nav>
         </div>
       )}

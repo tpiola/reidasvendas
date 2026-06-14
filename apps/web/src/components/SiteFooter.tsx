@@ -1,65 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Instagram, Linkedin, Mail, MapPin, Shield, Lock, FileCheck } from 'lucide-react';
+import { Instagram, Linkedin } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { BrandLogo } from '@/components/BrandLogo';
-import { FooterWhatsAppQr } from '@/components/footer/FooterWhatsAppQr';
-import { FooterWhatsAppIcon } from '@/components/footer/FooterWhatsAppIcon';
-import { Reveal } from '@/components/Reveal';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
-import { CTA } from '@/lib/cta-copy';
 import { useTheme } from '@/hooks/useTheme';
 
 const YEAR = new Date().getFullYear();
-
-type FooterLink = { label: string; to: string; external?: boolean };
-type FooterCol = { title: string; links: FooterLink[] };
-
-const FOOTER_COLS: FooterCol[] = [
-  {
-    title: 'Soluções',
-    links: [
-      { label: 'Planos e assinaturas', to: '/planos' },
-      { label: 'Plano Essencial', to: '/planos/essencial' },
-      { label: 'Plano Crescimento', to: '/planos/crescimento' },
-      { label: 'Plano Escala', to: '/planos/escala' },
-      { label: 'Plano Sob medida', to: '/planos/sob-medida' },
-    ],
-  },
-  {
-    title: 'Catálogo',
-    links: [
-      { label: 'Projetos', to: '/projetos' },
-      { label: 'Amostras de sites', to: '/templates' },
-      { label: 'Blog', to: '/blog' },
-      { label: 'Soluções', to: '/solucoes' },
-      { label: 'Negócios', to: '/negocios' },
-      { label: 'Saúde', to: '/saude' },
-    ],
-  },
-  {
-    title: 'Empresa',
-    links: [
-      { label: 'Contato', to: '/contato' },
-      { label: 'Solicitar orçamento', to: '/diagnostico' },
-      { label: 'Privacidade (LGPD)', to: '/politica' },
-      { label: 'Termos', to: '/termos' },
-      { label: 'Governança', to: '/governanca' },
-    ],
-  },
-  {
-    title: 'Treinamentos',
-    links: [
-      { label: 'Atendente de Premium de Farmacia', to: 'https://saudegpt.com', external: true },
-    ],
-  }
-];
-
-const TRUST_ITEMS = [
-  { Icon: Shield, label: 'HTTPS em produção' },
-  { Icon: Lock, label: 'Dados com consentimento LGPD' },
-  { Icon: FileCheck, label: 'Escopo documentado por plano' },
-] as const;
 
 export function SiteFooter() {
   const { isDark } = useTheme();
@@ -72,159 +17,95 @@ export function SiteFooter() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-10 sm:px-6 md:pb-14 md:pt-14">
-        <Reveal className="mb-12 md:mb-14">
-          <div className="text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-[#C9A84C]/85">
-              Presença que converte
-            </p>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-[color:var(--footer-muted)]">
-              Vídeo, funil e automação — o que seu cliente vê antes de comprar.
-            </p>
-          </div>
-          <div className="glass-card mx-auto mt-8 max-w-4xl overflow-hidden rounded-2xl p-2 shadow-xl">
-            <InlineVideo
-              src={BRAND.inlineVideos.manifesto}
-              poster={HERO_POSTER}
-              caption="Rei das Vendas · entrega premium"
-            />
-          </div>
-        </Reveal>
-
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-          <Reveal delay={0.04} className="lg:col-span-4">
+        <div className="grid gap-10 md:grid-cols-3 md:gap-8">
+          {/* Brand */}
+          <div>
             <Link
               to="/"
               className="inline-block rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A84C]/60"
             >
               <BrandLogo layout="stacked" size="lg" variant={isDark ? 'onDark' : 'onLight'} />
             </Link>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-[color:var(--footer-muted)]">
-              Infraestrutura digital, funil e automação sob medida — para o negócio local competir com quem já domina
-              tráfego e follow-up.
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-[color:var(--footer-muted)]">
+              Infraestrutura digital, funil e automacao sob medida para o negocio local competir com quem ja domina trafego e follow-up.
             </p>
-            <a
-              href={`mailto:${BRAND.email}`}
-              className="mt-5 inline-flex items-center gap-2 text-sm text-[color:var(--footer-muted)] transition-colors hover:text-[#C9A84C]"
-            >
-              <Mail size={16} className="text-[#C9A84C]/80" aria-hidden />
-              {BRAND.email}
-            </a>
-            <p className="mt-2 flex items-center gap-2 text-sm text-[color:var(--footer-muted)]">
-              <MapPin size={14} className="shrink-0 text-[#C9A84C]/60" aria-hidden />
-              {BRAND.baseCity}
-            </p>
-            <div className="mt-6 flex gap-3">
-              {[
-                { Icon: Instagram, label: 'Instagram', href: BRAND.instagram },
-                { Icon: Linkedin, label: 'LinkedIn', href: BRAND.linkedin },
-              ].map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href ?? '#'}
-                  aria-label={label}
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:border-[#C9A84C]/35 hover:text-[color:var(--footer-fg)]"
-                  {...(href ? { target: '_blank', rel: 'noreferrer' } : { 'aria-disabled': true })}
-                >
-                  <Icon size={18} aria-hidden />
-                </a>
-              ))}
+            <div className="mt-5 flex gap-3">
+              <a
+                href={BRAND.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:border-[#C9A84C]/35 hover:text-[color:var(--footer-fg)]"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </a>
+              <a
+                href={BRAND.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:border-[#C9A84C]/35 hover:text-[color:var(--footer-fg)]"
+              >
+                <Instagram size={18} aria-hidden />
+              </a>
+              <a
+                href={BRAND.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--header-hover)] text-[color:var(--footer-muted)] transition-colors hover:border-[#C9A84C]/35 hover:text-[color:var(--footer-fg)]"
+              >
+                <Linkedin size={18} aria-hidden />
+              </a>
             </div>
-          </Reveal>
-
-          <div className="grid gap-10 sm:grid-cols-3 lg:col-span-5">
-            {FOOTER_COLS.map((col, i) => (
-              <Reveal key={col.title} delay={0.06 + i * 0.03}>
-                <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">{col.title}</p>
-                <ul className="mt-4 space-y-2.5">
-                  {col.links.map(({ label, to, external }) => (
-                    <li key={`${col.title}-${label}`}>
-                      {external ? (
-                        <a
-                          href={to}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
-                        >
-                          {label}
-                        </a>
-                      ) : (
-                        <Link
-                          to={to}
-                          className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]"
-                        >
-                          {label}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
           </div>
 
-          <Reveal delay={0.15} className="flex flex-col items-center lg:col-span-3 lg:items-end">
-            <p className="mb-4 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[color:var(--footer-muted)] lg:text-right">
-              WhatsApp
-            </p>
-            <div className="flex flex-col items-center gap-5 sm:flex-row lg:flex-col">
-              <FooterWhatsAppIcon />
-              <FooterWhatsAppQr />
-            </div>
-          </Reveal>
+          {/* Links */}
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">Links</p>
+            <ul className="mt-4 space-y-2.5">
+              <li><Link to="/" className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">Home</Link></li>
+              <li><Link to="/solucoes" className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">Servicos</Link></li>
+              <li><Link to="/blog" className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">Blog</Link></li>
+              <li><Link to="/contato" className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">Contato</Link></li>
+            </ul>
+          </div>
+
+          {/* Contato */}
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/75">Contato</p>
+            <ul className="mt-4 space-y-2.5">
+              <li>
+                <a href={`mailto:${BRAND.email}`} className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">
+                  {BRAND.email}
+                </a>
+              </li>
+              <li>
+                <a href={BRAND.whatsappLink} target="_blank" rel="noopener noreferrer" className="text-[13px] text-[color:var(--footer-muted)] transition-colors hover:text-[color:var(--footer-fg)]">
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <span className="text-[13px] text-[color:var(--footer-muted)]">{BRAND.baseCity}</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <Reveal delay={0.1} className="mt-12">
-          <ul className="flex flex-wrap justify-center gap-6 border-y border-[color:var(--border-subtle)] py-6 md:gap-10">
-            {TRUST_ITEMS.map(({ Icon, label }) => (
-              <li key={label} className="flex items-center gap-2 text-[11px] text-[color:var(--footer-muted)]">
-                <Icon size={14} className="text-[#C9A84C]/80" aria-hidden />
-                {label}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal delay={0.12} className="mt-10">
-          <div className="rounded-2xl border border-[color:var(--border-subtle)] bg-gradient-to-r from-[#0057FF]/10 via-[color:var(--surface)] to-[#C9A84C]/10 p-6 md:flex md:items-center md:justify-between md:gap-8 md:p-8">
-            <div className="text-center md:text-left">
-              <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#C9A84C]/85">Próximo passo</p>
-              <p className="mt-2 text-lg font-semibold text-[color:var(--footer-fg)]">Proposta em até 24h</p>
-              <p className="mt-1 text-sm text-[color:var(--footer-muted)]">
-                Escopo e investimento alinhados ao seu nicho — sem fidelidade forçada.
-              </p>
-            </div>
-            <Link
-              to="/diagnostico"
-              className="btn-glow mx-auto mt-6 inline-flex h-12 shrink-0 items-center justify-center px-10 text-[11px] font-bold uppercase tracking-[0.24em] text-white md:mx-0 md:mt-0"
-            >
-              {CTA.orcamento}
-            </Link>
-          </div>
-        </Reveal>
-
+        {/* Bottom bar */}
         <div className="mt-10 flex flex-col gap-4 border-t border-[color:var(--border-subtle)] pt-8 md:flex-row md:items-center md:justify-between">
           <p className="text-center text-[11px] text-[color:var(--footer-muted)] md:text-left">
-            &copy; {YEAR} {BRAND.name}. Projetos exclusivos — catálogo é referência visual.
+            &copy; {YEAR} {BRAND.name}. Todos os direitos reservados.
           </p>
           <nav
             aria-label="Links legais"
             className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-[11px] text-[color:var(--footer-muted)] md:justify-end"
           >
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/termos">
-              Termos
-            </Link>
             <Link className="hover:text-[color:var(--footer-fg)]" to="/politica">
-              Privacidade
+              Politica de Privacidade
             </Link>
-            <Link className="hover:text-[color:var(--footer-fg)]" to="/governanca">
-              Segurança
-            </Link>
-            <a className="hover:text-[color:var(--footer-fg)]" href="/sitemap.xml">
-              Sitemap
-            </a>
-            <a href="https://www.thiagopiola.com.br" target="_blank" rel="noreferrer" className="hover:text-[#C9A84C] transition-colors">
-              thiagopiola.com.br
-            </a>
           </nav>
         </div>
       </div>

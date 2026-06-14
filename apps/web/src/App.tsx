@@ -5,12 +5,11 @@ import { ThemeProvider } from '@/hooks/useTheme';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
-import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { DeferredEngagement } from '@/components/DeferredEngagement';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { ConversionStickyBar } from '@/components/conversion/ConversionStickyBar';
-import { AssistenteVendas } from '@/components/AssistenteVendas';
+import { SuporteBot } from '@/components/SuporteBot';
 
 import Home from '@/pages/Home';
 const Projetos = lazy(() => import('@/pages/Projetos'));
@@ -44,7 +43,7 @@ function RouteFallback() {
       aria-live="polite"
       aria-busy="true"
     >
-      Carregando…
+      Carregando...
     </div>
   );
 }
@@ -111,9 +110,8 @@ export default function App() {
       </div>
       <SiteFooter />
       <CookieConsent />
-      <WhatsAppFab />
       <DeferredEngagement />
-      <AssistenteVendas />
+      <SuporteBot />
     </Router>
     </ThemeProvider>
   );
