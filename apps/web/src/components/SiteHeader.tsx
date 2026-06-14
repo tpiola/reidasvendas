@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, MessageCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { BRAND } from '@/lib/brand';
 
@@ -86,39 +87,47 @@ export function SiteHeader() {
         </button>
       </div>
 
-      {/* Mobile Nav */}
-      {open && (
-        <div className="border-t border-[rgba(255,255,255,0.06)] bg-[rgba(3,3,5,0.97)] backdrop-blur-xl md:hidden">
-          <nav className="flex flex-col gap-1 px-4 py-4">
-            {NAV.map(({ to, label }) => (
-              <NavLink
-                key={to}
-                to={to}
-                end={to === '/'}
-                className={({ isActive }) =>
-                  cn(
-                    'rounded-xl px-4 py-3 text-sm font-semibold transition',
-                    isActive
-                      ? 'bg-[#0057FF]/15 text-white'
-                      : 'text-[rgba(255,255,255,0.55)] hover:bg-[rgba(255,255,255,0.04)]'
-                  )
-                }
+      {/* Mobile Nav — Animado */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden border-t border-[rgba(255,255,255,0.06)] bg-[rgba(3,3,5,0.97)] backdrop-blur-xl md:hidden"
+          >
+            <nav className="flex flex-col gap-1 px-4 py-4">
+              {NAV.map(({ to, label }) => (
+                <NavLink
+                  key={to}
+                  to={to}
+                  end={to === '/'}
+                  className={({ isActive }) =>
+                    cn(
+                      'rounded-xl px-4 py-3 text-sm font-semibold transition',
+                      isActive
+                        ? 'bg-[#0057FF]/15 text-white'
+                        : 'text-[rgba(255,255,255,0.55)] hover:bg-[rgba(255,255,255,0.04)]'
+                    )
+                  }
+                >
+                  {label}
+                </NavLink>
+              ))}
+              <a
+                href={BRAND.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#0057FF] py-3 text-sm font-bold text-white"
               >
-                {label}
-              </NavLink>
-            ))}
-            <a
-              href={BRAND.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#0057FF] py-3 text-sm font-bold text-white"
-            >
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
-          </nav>
-        </div>
-      )}
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

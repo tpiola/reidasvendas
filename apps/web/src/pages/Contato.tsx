@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Send, MessageCircle, Mail, MapPin } from 'lucide-react';
+import { Send, MessageCircle, Mail, MapPin, CheckCircle2 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
+import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
+import { motion } from 'framer-motion';
 
 export default function Contato() {
   const [form, setForm] = useState({ nome: '', email: '', whatsapp: '', mensagem: '' });
@@ -34,14 +36,18 @@ export default function Contato() {
         <div className="absolute inset-0 bg-[#030305]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(0,87,255,0.08)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
-          <span className="reveal inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">Contato</span>
-          <h1 className="reveal reveal-delay-1 mt-4 font-['Playfair_Display'] text-4xl font-bold text-white sm:text-5xl">
-            Vamos{' '}
-            <span className="text-gradient-blue">Conversar</span>
-          </h1>
-          <p className="reveal reveal-delay-2 mx-auto mt-4 max-w-xl text-lg text-[rgba(248,248,250,0.55)]">
-            Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24 horas.
-          </p>
+          <Reveal><SectionLabel>Contato</SectionLabel></Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="mt-4 font-serif text-4xl font-bold text-white sm:text-5xl">
+              Vamos{' '}
+              <span className="text-gradient-blue">Conversar</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-[rgba(248,248,250,0.55)]">
+              Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24 horas.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -50,13 +56,13 @@ export default function Contato() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="grid gap-10 md:grid-cols-2">
             {/* Form */}
-            <div className="reveal glass-card rounded-2xl p-6 sm:p-8">
+            <Reveal className="rounded-2xl p-6 sm:p-8 glass-card">
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-10 text-center">
                   <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(0,87,255,0.1)] text-[#0057FF]">
-                    <Send className="h-6 w-6" />
+                    <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <h3 className="font-['Playfair_Display'] text-xl font-semibold text-white">Mensagem Enviada!</h3>
+                  <h3 className="font-serif text-xl font-semibold text-white">Mensagem Enviada!</h3>
                   <p className="mt-2 text-sm text-[rgba(248,248,250,0.55)]">
                     Recebemos seu contato e responderemos em breve.
                   </p>
@@ -118,54 +124,60 @@ export default function Contato() {
                   </button>
                 </form>
               )}
-            </div>
+            </Reveal>
 
             {/* Info */}
-            <div className="reveal reveal-delay-1 space-y-6">
-              <div className="glass-card rounded-2xl p-6 sm:p-8">
-                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-white">Informações de Contato</h3>
-                <div className="mt-6 space-y-4">
-                  <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(37,211,102,0.1)] text-[#25D366]">
-                      <MessageCircle className="h-5 w-5" />
-                    </span>
-                    Fale pelo WhatsApp
-                  </a>
-                  <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(0,87,255,0.1)] text-[#0057FF]">
-                      <Mail className="h-5 w-5" />
-                    </span>
-                    {BRAND.email}
-                  </a>
-                  <div className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)]">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(201,168,76,0.1)] text-[#C9A84C]">
-                      <MapPin className="h-5 w-5" />
-                    </span>
-                    {BRAND.address}
+            <div className="space-y-6">
+              <Reveal delay={0.1}>
+                <div className="glass-card rounded-2xl p-6 sm:p-8">
+                  <h3 className="font-serif text-lg font-semibold text-white">Informações de Contato</h3>
+                  <div className="mt-6 space-y-4">
+                    <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(37,211,102,0.1)] text-[#25D366]">
+                        <MessageCircle className="h-5 w-5" />
+                      </span>
+                      Fale pelo WhatsApp
+                    </a>
+                    <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(0,87,255,0.1)] text-[#0057FF]">
+                        <Mail className="h-5 w-5" />
+                      </span>
+                      {BRAND.email}
+                    </a>
+                    <div className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)]">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(201,168,76,0.1)] text-[#C9A84C]">
+                        <MapPin className="h-5 w-5" />
+                      </span>
+                      {BRAND.address}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
 
-              <div className="glass-card rounded-2xl p-6 sm:p-8">
-                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-white">Horários</h3>
-                <div className="mt-4 space-y-2 text-sm text-[rgba(248,248,250,0.55)]">
-                  <p>Segunda a Sexta: 9h às 18h</p>
-                  <p>Sábado: 9h às 13h</p>
+              <Reveal delay={0.15}>
+                <div className="glass-card rounded-2xl p-6 sm:p-8">
+                  <h3 className="font-serif text-lg font-semibold text-white">Horários</h3>
+                  <div className="mt-4 space-y-2 text-sm text-[rgba(248,248,250,0.55)]">
+                    <p>Segunda a Sexta: 9h às 18h</p>
+                    <p>Sábado: 9h às 13h</p>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
 
-              <div className="glass-card overflow-hidden rounded-2xl">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119122.3!2d-47.45!3d-20.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0b2a5c9c9e2b5%3A0x5f8b8f9a0e2c8f4a!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
-                  width="100%"
-                  height="200"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização Rei das Vendas"
-                />
-              </div>
+              <Reveal delay={0.2}>
+                <div className="glass-card overflow-hidden rounded-2xl">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119122.3!2d-47.45!3d-20.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0b2a5c9c9e2b5%3A0x5f8b8f9a0e2c8f4a!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
+                    width="100%"
+                    height="200"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Localização Rei das Vendas"
+                  />
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
