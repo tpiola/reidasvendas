@@ -33,6 +33,7 @@ const PlanoEscala = lazy(() => import('@/pages/planos/PlanoEscala'));
 const PlanoSobMedida = lazy(() => import('@/pages/planos/PlanoSobMedida'));
 const TemplateBuilder = lazy(() => import('@/pages/TemplateBuilder'));
 const ServicoPage = lazy(() => import('@/pages/ServicoPage'));
+const NichoPage = lazy(() => import('@/pages/NichoPage'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
 function RouteFallback() {
@@ -88,6 +89,7 @@ function AnimatedRoutes() {
           <Route path="/planos/escala" element={<PageTransition><PlanoEscala /></PageTransition>} />
           <Route path="/planos/sob-medida" element={<PageTransition><PlanoSobMedida /></PageTransition>} />
           <Route path="/servicos/:slug" element={<PageTransition><ServicoPage /></PageTransition>} />
+          <Route path="/nichos/:slug" element={<PageTransition><NichoPage /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
       </AnimatePresence>
