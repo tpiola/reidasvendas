@@ -1,113 +1,119 @@
-/**
- * BLOG.TSX — Rei das Vendas
- * Grid de posts com imagem + titulo + excerpt + categoria + data
- * Design premium estilo Medium
- * Responsivo
- */
-
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { applySeo } from '@/lib/seo';
-import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
-import { BLOG_POSTS } from '@/data/blog';
-import { Reveal } from '@/components/Reveal';
+import { ArrowRight, Calendar } from 'lucide-react';
+
+const posts = [
+  {
+    slug: 'presenca-digital-negocios-locais',
+    title: 'Por que sua empresa precisa de presença digital em 2025?',
+    excerpt: 'Descubra como negócios locais estão usando sites profissionais e automação para competir com grandes marcas.',
+    date: '2025-05-15',
+    category: 'Marketing Digital',
+    img: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80',
+  },
+  {
+    slug: 'automacao-vendas-whatsapp',
+    title: 'Automação de Vendas no WhatsApp: Guia Completo',
+    excerpt: 'Aprenda como automatizar seu atendimento no WhatsApp sem perder a humanização e aumentando conversões.',
+    date: '2025-05-10',
+    category: 'Automação',
+    img: 'https://images.unsplash.com/photo-1553729459-afe8f2e2b59b?w=800&q=80',
+  },
+  {
+    slug: 'dashboards-gestao-negocios',
+    title: 'Dashboards de Gestão: Tomando Decisões Baseadas em Dados',
+    excerpt: 'Saiba como um dashboard personalizado pode transformar a gestão do seu negócio com dados em tempo real.',
+    date: '2025-05-05',
+    category: 'Tecnologia',
+    img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80',
+  },
+  {
+    slug: 'sites-que-vendem',
+    title: '6 Características de Sites que Realmente Vendem',
+    excerpt: 'Conheça os elementos essenciais que transformam visitantes em clientes no seu site institucional.',
+    date: '2025-04-28',
+    category: 'Sites',
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+  },
+  {
+    slug: 'mentoria-digital-empreendedores',
+    title: 'Mentoria Digital: O Atalho para Resultados Rápidos',
+    excerpt: 'Como a mentoria digital pode acelerar seus resultados e evitar erros comuns de quem está começando.',
+    date: '2025-04-20',
+    category: 'Mentoria',
+    img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80',
+  },
+  {
+    slug: 'aplicativos-negocios',
+    title: 'Por que seu negócio precisa de um aplicativo próprio?',
+    excerpt: 'Apps aumentam o engajamento, fidelizam clientes e geram receita recorrente. Veja como começar.',
+    date: '2025-04-15',
+    category: 'Apps',
+    img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80',
+  },
+];
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('pt-BR', {
+    day: '2-digit', month: 'long', year: 'numeric',
+  });
+}
 
 export default function Blog() {
-  useEffect(() => {
-    applySeo({
-      title: 'Blog — Marketing digital, funis e automacao | Rei das Vendas | Franca-SP',
-      description:
-        'Artigos sobre funil, WhatsApp, SEO e automacao para negocios locais de Franca-SP que querem previsibilidade comercial.',
-      canonicalPath: '/blog',
-      ogImage: DEFAULT_OG_IMAGE,
-    });
-  }, []);
-
   return (
-    <main className="page-surface">
-      {/* HEADER */}
-      <section className="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <Reveal>
-          <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#0057FF]/80">
-            Blog
-          </span>
-          <h1 className="mt-3 text-3xl font-bold tracking-tight text-[color:var(--page-fg)] sm:text-4xl lg:text-5xl">
-            Conteudo que educa e inspira
+    <main>
+      {/* Hero */}
+      <section className="relative py-20 sm:py-28">
+        <div className="absolute inset-0 bg-[#030305]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(0,87,255,0.08)_0%,transparent_60%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
+          <span className="reveal inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">Blog</span>
+          <h1 className="reveal reveal-delay-1 mt-4 font-['Playfair_Display'] text-4xl font-bold text-white sm:text-5xl">
+            Conteúdo que{' '}
+            <span className="text-gradient-gold">Transforma</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[color:var(--page-fg-muted)] sm:text-base">
-            Funil, tecnologia, performance e cases para o empreendedor de Franca que quer decidir com clareza.
+          <p className="reveal reveal-delay-2 mx-auto mt-4 max-w-xl text-lg text-[rgba(248,248,250,0.55)]">
+            Artigos, guias e insights sobre marketing digital, vendas e tecnologia para seu negócio crescer.
           </p>
-        </Reveal>
-      </section>
-
-      {/* POSTS GRID */}
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {BLOG_POSTS.map((post, i) => (
-            <Reveal key={post.slug} delay={i * 0.06}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--surface)] transition-all hover:shadow-lg hover:shadow-[#0057FF]/5">
-                {/* IMAGE */}
-                <Link to={`/blog/${post.slug}`} className="block aspect-[16/10] overflow-hidden bg-[color:var(--page-surface)]">
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </Link>
-
-                {/* CONTENT */}
-                <div className="flex flex-1 flex-col p-5">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]/70">
-                    {post.category}
-                  </span>
-                  <h2 className="mt-2 text-base font-semibold text-[color:var(--page-fg)] leading-snug">
-                    <Link
-                      to={`/blog/${post.slug}`}
-                      className="hover:text-[#0057FF] transition-colors"
-                    >
-                      {post.title}
-                    </Link>
-                  </h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[color:var(--page-fg-muted)]">
-                    {post.excerpt}
-                  </p>
-
-                  {/* META */}
-                  <div className="mt-4 flex items-center justify-between border-t border-[color:var(--border-subtle)] pt-3">
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-[color:var(--page-fg-muted)] opacity-60">
-                      {post.author}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-[color:var(--page-fg-muted)] opacity-60">
-                      {post.readMinutes} min
-                    </span>
-                  </div>
-                </div>
-              </article>
-            </Reveal>
-          ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="border-t border-[color:var(--border-subtle)] py-20">
-        <div className="mx-auto max-w-2xl px-6 text-center">
-          <Reveal>
-            <h2 className="text-2xl font-semibold tracking-tight text-[color:var(--page-fg)] sm:text-3xl">
-              Quer aplicar esses conhecimentos?
-            </h2>
-            <p className="mt-3 text-sm text-[color:var(--page-fg-muted)]">
-              Diagnostico gratuito para seu negocio em Franca-SP.
-            </p>
-            <div className="mt-6">
+      {/* Posts */}
+      <section className="pb-20 sm:pb-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post, i) => (
               <Link
-                to="/diagnostico"
-                className="inline-flex h-12 items-center justify-center rounded-lg bg-[#0057FF] px-7 text-sm font-semibold text-white transition-all hover:bg-[#0057FF]/90 active:scale-[0.98]"
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className={`reveal reveal-delay-${(i % 4) + 1} group glass-card rounded-2xl overflow-hidden transition-all hover:scale-[1.02]`}
               >
-                Solicitar Diagnostico Gratuito
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={post.img}
+                    alt={post.title}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-5">
+                  <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.15em]">
+                    <span className="rounded-full bg-[rgba(201,168,76,0.1)] px-3 py-1 text-[#C9A84C]">{post.category}</span>
+                    <span className="flex items-center gap-1 text-[rgba(248,248,250,0.35)]">
+                      <Calendar className="h-3 w-3" />
+                      {formatDate(post.date)}
+                    </span>
+                  </div>
+                  <h3 className="font-['Playfair_Display'] mt-3 text-lg font-semibold text-white group-hover:text-[#C9A84C] transition">
+                    {post.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[rgba(248,248,250,0.5)]">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-[#0057FF]">
+                    Ler mais <ArrowRight className="h-3 w-3" />
+                  </span>
+                </div>
               </Link>
-            </div>
-          </Reveal>
+            ))}
+          </div>
         </div>
       </section>
     </main>

@@ -1,98 +1,175 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { applySeo } from '@/lib/seo';
+import { useState } from 'react';
+import { Send, MessageCircle, Mail, MapPin } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
-import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
-import { LeadForm } from '@/components/LeadForm';
-import { PageHero } from '@/components/shipper/PageHero';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
-import { Reveal } from '@/components/Reveal';
-import { trackEvent } from '@/lib/analytics';
-
-const MAP_EMBED =
-  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3720.0!2d-47.400!3d-20.538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0ba00c8c8c8c9%3A0x0!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1';
 
 export default function Contato() {
-  useEffect(() => {
-    applySeo({
-      title: 'Contato — Rei das Vendas | Franca-SP',
-      description: 'Agende diagnóstico: nome, e-mail e WhatsApp. Resposta em até 24h. Franca-SP e atendimento remoto.',
-      canonicalPath: '/contato',
-      ogImage: DEFAULT_OG_IMAGE,
-    });
-  }, []);
+  const [form, setForm] = useState({ nome: '', email: '', whatsapp: '', mensagem: '' });
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: form.nome,
+          email: form.email,
+          whatsapp: form.whatsapp,
+          mensagem: form.mensagem,
+          pagina: '/contato',
+          timestamp: new Date().toISOString(),
+        }),
+      });
+      setSent(true);
+    } catch {
+      setSent(true);
+    }
+  };
 
   return (
-    <main className="page-surface">
-      <PageHero
-        eyebrow="Contato"
-        title="Diagnóstico em até"
-        titleAccent="24 horas."
-        subtitle="Preencha o formulário ou fale direto — rota, escopo e próximo passo sem enrolação."
-      >
-        <div className="mt-6 space-y-2 text-sm text-surface-muted">
-          <p>
-            E-mail:{' '}
-            <a href={`mailto:${BRAND.email}`} className="text-[#C9A84C]/90 hover:underline">
-              {BRAND.email}
-            </a>
+    <main>
+      {/* Hero */}
+      <section className="relative py-20 sm:py-28">
+        <div className="absolute inset-0 bg-[#030305]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(0,87,255,0.08)_0%,transparent_60%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
+          <span className="reveal inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">Contato</span>
+          <h1 className="reveal reveal-delay-1 mt-4 font-['Playfair_Display'] text-4xl font-bold text-white sm:text-5xl">
+            Vamos{' '}
+            <span className="text-gradient-blue">Conversar</span>
+          </h1>
+          <p className="reveal reveal-delay-2 mx-auto mt-4 max-w-xl text-lg text-[rgba(248,248,250,0.55)]">
+            Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24 horas.
           </p>
-          <p>
-            WhatsApp:{' '}
-            <a
-              href={BRAND.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent('whatsapp_click', { location: 'contato' })}
-              className="text-[#C9A84C]/90 hover:underline"
-            >
-              {BRAND.phone}
-            </a>
-          </p>
-          <p>{BRAND.baseCity}</p>
         </div>
-      </PageHero>
+      </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-8">
-        <Reveal>
-          <div className="glass-card overflow-hidden rounded-2xl p-2">
-            <InlineVideo
-              src={BRAND.inlineVideos.salesTeam}
-              poster={HERO_POSTER}
-              caption="Atendimento · Franca-SP e remoto"
-            />
+      {/* Form + Info */}
+      <section className="pb-20 sm:pb-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid gap-10 md:grid-cols-2">
+            {/* Form */}
+            <div className="reveal glass-card rounded-2xl p-6 sm:p-8">
+              {sent ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(0,87,255,0.1)] text-[#0057FF]">
+                    <Send className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-['Playfair_Display'] text-xl font-semibold text-white">Mensagem Enviada!</h3>
+                  <p className="mt-2 text-sm text-[rgba(248,248,250,0.55)]">
+                    Recebemos seu contato e responderemos em breve.
+                  </p>
+                  <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-primary mt-6">
+                    <MessageCircle className="h-4 w-4" />
+                    Falar pelo WhatsApp
+                  </a>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="label-field mb-1.5 block">Nome completo</label>
+                    <input
+                      type="text"
+                      required
+                      value={form.nome}
+                      onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                      placeholder="Seu nome completo"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="label-field mb-1.5 block">E-mail</label>
+                    <input
+                      type="email"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="seu@email.com"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="label-field mb-1.5 block">WhatsApp</label>
+                    <input
+                      type="tel"
+                      required
+                      value={form.whatsapp}
+                      onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
+                      placeholder="(11) 99999-0000"
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="label-field mb-1.5 block">Mensagem</label>
+                    <textarea
+                      required
+                      rows={4}
+                      value={form.mensagem}
+                      onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+                      placeholder="Conte um pouco sobre seu projeto..."
+                      className="input-field resize-none py-3"
+                      style={{ height: 'auto' }}
+                    />
+                  </div>
+                  <button type="submit" className="btn-primary w-full">
+                    <Send className="h-4 w-4" />
+                    Enviar Mensagem
+                  </button>
+                </form>
+              )}
+            </div>
+
+            {/* Info */}
+            <div className="reveal reveal-delay-1 space-y-6">
+              <div className="glass-card rounded-2xl p-6 sm:p-8">
+                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-white">Informações de Contato</h3>
+                <div className="mt-6 space-y-4">
+                  <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(37,211,102,0.1)] text-[#25D366]">
+                      <MessageCircle className="h-5 w-5" />
+                    </span>
+                    Fale pelo WhatsApp
+                  </a>
+                  <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)] transition hover:text-white">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(0,87,255,0.1)] text-[#0057FF]">
+                      <Mail className="h-5 w-5" />
+                    </span>
+                    {BRAND.email}
+                  </a>
+                  <div className="flex items-center gap-3 text-sm text-[rgba(248,248,250,0.6)]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(201,168,76,0.1)] text-[#C9A84C]">
+                      <MapPin className="h-5 w-5" />
+                    </span>
+                    {BRAND.address}
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-card rounded-2xl p-6 sm:p-8">
+                <h3 className="font-['Playfair_Display'] text-lg font-semibold text-white">Horários</h3>
+                <div className="mt-4 space-y-2 text-sm text-[rgba(248,248,250,0.55)]">
+                  <p>Segunda a Sexta: 9h às 18h</p>
+                  <p>Sábado: 9h às 13h</p>
+                </div>
+              </div>
+
+              <div className="glass-card overflow-hidden rounded-2xl">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14622.0!2d-46.65!3d-23.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59f1069d11d1%3A0xcb0b12318f3c2c0!2sS%C3%A3o%20Paulo%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
+                  width="100%"
+                  height="200"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Localização Rei das Vendas"
+                />
+              </div>
+            </div>
           </div>
-        </Reveal>
-      </section>
-
-      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-12 md:grid-cols-2 md:py-16">
-        <div className="glass-card rounded-2xl p-8 md:p-10">
-          <LeadForm
-            source="footer"
-            formVariant="minimal"
-            title="Agendar diagnóstico"
-            description="Somente nome, e-mail e WhatsApp."
-            ctaLabel="Enviar e receber retorno"
-            context={{ intent: 'contact' }}
-          />
-        </div>
-        <div className="overflow-hidden rounded-2xl border border-[color:var(--border-subtle)]">
-          <iframe
-            title="Mapa — Franca SP"
-            src={MAP_EMBED}
-            className="h-full min-h-[320px] w-full opacity-90 grayscale"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
         </div>
       </section>
-
-      <p className="pb-16 text-center text-sm text-surface-muted">
-        <Link to="/diagnostico" className="text-[#C9A84C]/85 hover:underline">
-          Página dedicada ao diagnóstico estratégico
-        </Link>
-      </p>
     </main>
   );
 }

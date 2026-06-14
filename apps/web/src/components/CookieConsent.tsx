@@ -1,102 +1,45 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-type Consent = 'accepted' | 'rejected';
+import { X } from 'lucide-react';
 
 export function CookieConsent() {
-  const storageKey = 'reidasvendas:cookie-consent';
-  const [value, setValue] = useState<Consent | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const v = window.localStorage.getItem(storageKey);
-    if (v === 'accepted' || v === 'rejected') setValue(v);
+    const accepted = localStorage.getItem('cookie-consent');
+    if (!accepted) setVisible(true);
   }, []);
 
-  const open = useMemo(() => value === null, [value]);
-  if (!open) return null;
+  const accept = () => {
+    localStorage.setItem('cookie-consent', 'true');
+    setVisible(false);
+  };
+
+  if (!visible) return null;
 
   return (
-    <div
-      className="fixed z-[60] p-4"
-      style={{
-        bottom: 'max(24px, env(safe-area-inset-bottom, 24px))',
-        left: 'max(24px, env(safe-area-inset-left, 24px))',
-        maxWidth: '400px',
-      }}
-    >
-      <div
-        className="rounded-2xl border p-5 shadow-xl"
-        style={{
-          background: 'rgba(9, 13, 18, 0.88)',
-          backdropFilter: 'blur(24px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-          borderColor: 'rgba(255, 255, 255, 0.08)',
-          boxShadow: '0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)',
-        }}
-      >
-        <div className="flex flex-col gap-4">
-          <div>
-            <p className="text-xs leading-relaxed text-white/70">
-              Usamos cookies para melhorar sua experiencia. Ao continuar, voce concorda com nossa{' '}
-              <Link
-                to="/politica"
-                className="text-[#C9A84C] underline underline-offset-2 hover:text-[#F0D080] transition-colors"
-                onClick={() => {
-                  window.localStorage.setItem(storageKey, 'accepted');
-                  setValue('accepted');
-                }}
-              >
-                Politica de Privacidade
-              </Link>
-              .
-            </p>
-          </div>
-          <div className="flex gap-3">
-            <button
-              type="button"
-              className="h-10 rounded-xl border px-4 text-xs font-semibold transition-all"
-              style={{
-                borderColor: 'rgba(255, 255, 255, 0.12)',
-                background: 'rgba(255, 255, 255, 0.04)',
-                color: 'rgba(255, 255, 255, 0.8)',
-              }}
-              onClick={() => {
-                window.localStorage.setItem(storageKey, 'rejected');
-                setValue('rejected');
-              }}
-            >
-              Rejeitar
-            </button>
-            <button
-              type="button"
-              className="h-10 rounded-xl px-4 text-xs font-semibold text-white transition-all"
-              style={{
-                background: 'linear-gradient(135deg, #0047CC 0%, #0057FF 50%, #3377FF 100%)',
-                boxShadow: '0 0 20px rgba(0,87,255,0.3)',
-              }}
-              onClick={() => {
-                window.localStorage.setItem(storageKey, 'accepted');
-                setValue('accepted');
-              }}
-            >
-              Aceitar
-            </button>
-            <Link
-              to="/politica"
-              className="inline-flex h-10 items-center rounded-xl border px-4 text-xs font-semibold transition-all"
-              style={{
-                borderColor: 'rgba(255, 255, 255, 0.12)',
-                background: 'rgba(255, 255, 255, 0.04)',
-                color: 'rgba(201, 168, 76, 0.9)',
-              }}
-              onClick={() => {
-                window.localStorage.setItem(storageKey, 'accepted');
-                setValue('accepted');
-              }}
-            >
-              Saiba mais
-            </Link>
-          </div>
+    <div className="fixed bottom-0 left-0 right-0 z-[9998] p-4" role="alert">
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(3,3,5,0.95)] p-4 shadow-2xl backdrop-blur-2xl sm:p-5">
+        <p className="text-sm leading-relaxed text-[rgba(248,248,250,0.7)]">
+          Utilizamos cookies para melhorar sua experiência. Ao continuar navegando, você concorda com nossa{' '}
+          <Link to="/politica" className="text-[#C9A84C] underline underline-offset-2 hover:text-[#f0d080]">
+            Política de Privacidade
+          </Link>.
+        </p>
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            onClick={accept}
+            className="whitespace-nowrap rounded-full bg-[#0057FF] px-5 py-2 text-xs font-bold uppercase tracking-[0.1em] text-white transition hover:bg-[#0044cc]"
+          >
+            Aceitar
+          </button>
+          <button
+            onClick={() => setVisible(false)}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-[rgba(255,255,255,0.35)] transition hover:bg-[rgba(255,255,255,0.06)] hover:text-white"
+            aria-label="Fechar"
+          >
+            <X className="h-4 w-4" />
+          </button>
         </div>
       </div>
     </div>
