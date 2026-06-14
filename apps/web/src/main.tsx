@@ -8,7 +8,9 @@ const bar = document.createElement('div');
 bar.className = 'scroll-progress';
 document.body.appendChild(bar);
 
-// IntersectionObserver for scroll-reveal
+// ─── Reveal: visível imediatamente se estiver acima da dobra ───
+const ELEMENTS_BEFORE_REVEAL = 6; // primeiros N elementos .reveal ficam visíveis de cara
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -18,20 +20,23 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
 );
 
-// Observe .reveal elements after mount
 const initReveal = () => {
   const elements = document.querySelectorAll('.reveal');
   elements.forEach((el, index) => {
-    // simple stagger via inline delay
-    (el as HTMLElement).style.transitionDelay = `${index * 80}ms`;
-    observer.observe(el);
+    (el as HTMLElement).style.transitionDelay = `${Math.min(index * 60, 400)}ms`;
+    // Acima da dobra: já aparece visível
+    if (index < ELEMENTS_BEFORE_REVEAL) {
+      el.classList.add('visible');
+    } else {
+      observer.observe(el);
+    }
   });
 };
 
-// Parallax effect on hero
+// Parallax
 const initParallax = () => {
   const hero = document.querySelector('.hero-parallax');
   if (!hero) return;
@@ -47,7 +52,6 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 
-// Init after paint
 requestAnimationFrame(() => {
   initReveal();
   initParallax();

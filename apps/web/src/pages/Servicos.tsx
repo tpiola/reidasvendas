@@ -54,7 +54,7 @@ export default function Servicos() {
             <span className="text-gradient-blue">Completas</span>
           </h1>
           <p className="reveal reveal-delay-2 mx-auto mt-4 max-w-xl text-lg text-[rgba(248,248,250,0.55)]">
-            Do diagnóstico à execução, tudo que seu negócio precisa para crescer no digital.
+            Do diagnóstico à execução, soluções digitais para empresas em Franca-SP e região.
           </p>
         </div>
       </section>

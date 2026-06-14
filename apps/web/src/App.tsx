@@ -9,6 +9,7 @@ import { SuporteBot } from '@/components/SuporteBot';
 const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
 const Blog = lazy(() => import('@/pages/Blog'));
+const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Contato = lazy(() => import('@/pages/Contato'));
 const Politica = lazy(() => import('@/pages/Politica'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
@@ -43,6 +44,7 @@ function AnimatedRoutes() {
           <Route path="/" element={<PageTransition><Home /></PageTransition>} />
           <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
           <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+          <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
           <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
           <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />

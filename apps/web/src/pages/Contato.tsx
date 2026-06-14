@@ -156,7 +156,7 @@ export default function Contato() {
 
               <div className="glass-card overflow-hidden rounded-2xl">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14622.0!2d-46.65!3d-23.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59f1069d11d1%3A0xcb0b12318f3c2c0!2sS%C3%A3o%20Paulo%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119122.3!2d-47.45!3d-20.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94b0b2a5c9c9e2b5%3A0x5f8b8f9a0e2c8f4a!2sFranca%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
                   width="100%"
                   height="200"
                   style={{ border: 0 }}
