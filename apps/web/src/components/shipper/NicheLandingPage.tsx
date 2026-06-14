@@ -4,8 +4,6 @@ import { applySeo } from '@/lib/seo';
 import { DEFAULT_OG_IMAGE } from '@/lib/seo-meta';
 import { Reveal } from '@/components/Reveal';
 import { PageHero } from '@/components/shipper/PageHero';
-import { InlineVideo } from '@/components/home/InlineVideo';
-import { HERO_POSTER } from '@/lib/media';
 
 type NicheLandingPageProps = {
   seoTitle: string;
@@ -15,8 +13,8 @@ type NicheLandingPageProps = {
   title: string;
   titleAccent?: string;
   subtitle: string;
-  videoSrc: string;
-  videoCaption: string;
+  imageSrc: string;
+  imageCaption: string;
   highlights: readonly string[];
 };
 
@@ -28,8 +26,8 @@ export function NicheLandingPage({
   title,
   titleAccent,
   subtitle,
-  videoSrc,
-  videoCaption,
+  imageSrc,
+  imageCaption,
   highlights,
 }: NicheLandingPageProps) {
   useEffect(() => {
@@ -47,8 +45,15 @@ export function NicheLandingPage({
 
       <section className="mx-auto max-w-6xl px-6 pb-16 md:pb-24">
         <Reveal>
-          <div className="glass-card overflow-hidden rounded-2xl p-2">
-            <InlineVideo src={videoSrc} poster={HERO_POSTER} caption={videoCaption} />
+          <div className="overflow-hidden rounded-2xl border border-white/10">
+            <img
+              src={imageSrc}
+              alt={imageCaption}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              width="1200"
+              height="675"
+            />
           </div>
         </Reveal>
 

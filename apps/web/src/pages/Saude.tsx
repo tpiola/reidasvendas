@@ -1,7 +1,13 @@
 import { NicheLandingPage } from '@/components/shipper/NicheLandingPage';
-import { BRAND } from '@/lib/brand';
 
-const HIGHLIGHTS = ['Agendamento e WhatsApp integrados', 'Copy para paciente certo', 'SEO local e velocidade'] as const;
+/* Imagem real de clínica/estética — alta qualidade */
+const SAUDE_IMAGE = 'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=1200&q=80';
+
+const HIGHLIGHTS = [
+  'Agendamento e WhatsApp integrados — paciente marca direto pelo site',
+  'Copy para paciente certo — mensagem que gera confiança antes da consulta',
+  'SEO local para clínicas — apareça quando buscarem por especialistas perto',
+] as const;
 
 export default function Saude() {
   return (
@@ -13,8 +19,8 @@ export default function Saude() {
       title="Paciente certo,"
       titleAccent="agenda cheia."
       subtitle="Página rápida, prova social e follow-up automático — você foca no atendimento."
-      videoSrc={BRAND.inlineVideos.manifesto}
-      videoCaption="Clínica · presença premium"
+      imageSrc={SAUDE_IMAGE}
+      imageCaption="Clínica · presença premium"
       highlights={HIGHLIGHTS}
     />
   );

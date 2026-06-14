@@ -1,192 +1,82 @@
 /* ═══════════════════════════════════════════
    VIDEOHERO.TSX — Rei das Vendas
-   Hero FULLSCREEN com vídeo de fundo real,
-   parallax scroll, typewriter, CTA pulsante,
-   seções de conteúdo com scroll reveal
+   Hero profissional estilo Squarespace
+   Imagem estática de alta qualidade + texto à esquerda
+   Sem timer, sem urgência, sem typewriter, sem orbes 3D
 ═══════════════════════════════════════════ */
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import '../styles/scroll-hero.css';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-/* URL real de vídeo de escritório/tecnologia (Pexels — domínio público) */
-const HERO_VIDEO_URL =
-  'https://videos.pexels.com/video-files/4328609/4328609-uhd_3840_2160_30fps.mp4';
-
-const HERO_POSTER_URL =
-  'https://images.pexels.com/photos/11813187/pexels-photo-11813187.jpeg?auto=compress&cs=tinysrgb&w=1920';
+/* Imagem de alta qualidade — mockup profissional de site + dashboard */
+const HERO_IMAGE =
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80';
 
 const VideoHero: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [scrollY, setScrollY] = useState(0);
-  const [showIndicator, setShowIndicator] = useState(true);
-  const [typewriterDone, setTypewriterDone] = useState(false);
-
-  /* ─── Parallax fallback (browsers sem scroll-driven) ─── */
-  const handleScroll = useCallback(() => {
-    setScrollY(window.scrollY);
-    setShowIndicator(window.scrollY < window.innerHeight * 0.6);
-  }, []);
-
-  useEffect(() => {
-    const supportsNative = CSS.supports('animation-timeline', 'scroll()');
-    if (!supportsNative) {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, [handleScroll]);
-
-  /* ─── Typewriter done ─── */
-  useEffect(() => {
-    const timer = setTimeout(() => setTypewriterDone(true), 3800);
-    return () => clearTimeout(timer);
-  }, []);
-
-  /* ─── IntersectionObserver para seções ─── */
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    sectionRefs.current.forEach((el) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            obs.unobserve(entry.target);
-          }
-        },
-        { threshold: 0.15, rootMargin: '0px 0px -60px 0px' },
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  const setSectionRef = (i: number) => (el: HTMLDivElement | null) => {
-    sectionRefs.current[i] = el;
-  };
-
-  /* ─── Parallax transform inline ─── */
-  const supportsScrollDriven = CSS.supports?.('animation-timeline', 'scroll()');
-  const videoParallax = supportsScrollDriven
-    ? {}
-    : {
-        transform: `translateY(${scrollY * 0.12}px) scale(${1 + scrollY * 0.00008})`,
-      };
-  const overlayParallax = supportsScrollDriven
-    ? {}
-    : {
-        transform: `translateY(${scrollY * 0.05}px)`,
-      };
-
-  const scrollToSections = () => {
-    const target = document.getElementById('hero-scroll-content');
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="video-hero" ref={scrollRef}>
-      {/* ─── Vídeo de fundo ─── */}
-      <video
-        ref={videoRef}
-        className="hero-video-bg"
-        autoPlay
-        loop
-        muted
-        playsInline
-        poster={HERO_POSTER_URL}
-        preload="auto"
-        style={videoParallax}
-      >
-        <source src={HERO_VIDEO_URL} type="video/mp4" />
-      </video>
+    <section className="relative isolate min-h-[85dvh] overflow-hidden bg-[#08080b]">
+      {/* Background gradient sutil */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a1a] via-[#08080b] to-[#050510]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_20%,rgba(0,87,255,0.06)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,rgba(201,168,76,0.04)_0%,transparent_50%)]" />
 
-      {/* ─── Overlay gradiente ─── */}
-      <div className="hero-overlay" style={overlayParallax} />
+      <div className="relative mx-auto flex min-h-[85dvh] max-w-7xl flex-col items-center gap-12 px-6 py-24 md:flex-row md:py-32 lg:px-10">
+        {/* Conteúdo textual — lado esquerdo */}
+        <div className="flex-1 text-center md:text-left">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <span className="block text-[#C9A84C]">Soluções digitais</span>
+            <span className="block text-white">para o seu negócio local crescer</span>
+          </h1>
 
-      {/* ─── Conteúdo principal ─── */}
-      <div className="hero-content">
-        <h1 className={`hero-title ${typewriterDone ? '' : 'caret-blink'}`}>
-          {typewriterDone
-            ? 'Seu negócio local vendendo COMO AS GIGANTES'
-            : 'Seu negócio local vendendo COMO AS GIGANTES'}
-        </h1>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/60 md:text-lg">
+            Site profissional + SEO + automação. Tudo que você precisa para atrair mais clientes e vender mais, todo santo dia.
+          </p>
 
-        <p className="hero-subtitle hero-enter hero-enter-delay-2">
-          Site profissional + SEO + WhatsApp = clientes todos os dias
-        </p>
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <Link
+              to="/diagnostico"
+              className="inline-flex h-14 items-center justify-center rounded-lg bg-[#0057FF] px-8 text-sm font-semibold text-white transition-all hover:bg-[#0057FF]/90 hover:shadow-[0_0_30px_rgba(0,87,255,0.3)]"
+            >
+              Solicitar diagnóstico gratuito
+            </Link>
+            <Link
+              to="/planos"
+              className="inline-flex h-14 items-center justify-center rounded-lg border border-white/15 bg-white/5 px-8 text-sm font-semibold text-white/80 transition-all hover:bg-white/10 hover:text-white"
+            >
+              Ver planos
+            </Link>
+          </div>
 
-        <a
-          href="/contato"
-          className="hero-cta hero-enter hero-enter-delay-4"
-          aria-label="Solicitar orçamento de site profissional"
-        >
-          QUERO MEU SITE EM 72H
-          <span aria-hidden="true" style={{ fontSize: '1.2rem' }}>
-            →
-          </span>
-        </a>
-      </div>
-
-      {/* ─── Scroll Indicator ─── */}
-      {showIndicator && (
-        <button
-          className="scroll-indicator"
-          onClick={scrollToSections}
-          aria-label="Rolar para saber mais"
-          type="button"
-        >
-          <span>Role para saber mais</span>
-          <span className="arrow-down" />
-        </button>
-      )}
-
-      {/* ─── Seções de conteúdo no scroll ─── */}
-      <div className="hero-scroll-sections" id="hero-scroll-content">
-        {/* Seção 1: Diagnóstico Gratuito */}
-        <div
-          ref={setSectionRef(0)}
-          className="hero-section-reveal"
-        >
-          <span className="section-icon" aria-hidden="true">🔍</span>
-          <h2 className="section-title">Diagnóstico Gratuito</h2>
-          <p className="section-desc">
-            Analisamos sua presença digital sem custo. Em 24 horas você recebe um
-            raio-X completo de como está sua visibilidade online — com plano de
-            ação personalizado.
+          {/* Micro-copy de confiança */}
+          <p className="mt-4 text-xs text-white/40">
+            Orçamento em 24h · Sem fidelidade · Suporte direto
           </p>
         </div>
 
-        {/* Seção 2: Projeto em 72h */}
-        <div
-          ref={setSectionRef(1)}
-          className="hero-section-reveal"
-        >
-          <span className="section-icon" aria-hidden="true">⚡</span>
-          <h2 className="section-title">Projeto em 72h</h2>
-          <p className="section-desc">
-            Enquanto agências tradicionais levam meses, entregamos seu site
-            profissional em até 72 horas. Design moderno, responsivo e otimizado
-            para conversão.
-          </p>
-        </div>
-
-        {/* Seção 3: Suporte Vitalício */}
-        <div
-          ref={setSectionRef(2)}
-          className="hero-section-reveal"
-        >
-          <span className="section-icon" aria-hidden="true">♾️</span>
-          <h2 className="section-title">Suporte Vitalício</h2>
-          <p className="section-desc">
-            Não é só um site. É uma parceria. Enquanto seu negócio existir, seu
-            site fica atualizado, seguro e funcionando. Suporte via WhatsApp com
-            resposta em até 2 horas.
-          </p>
+        {/* Imagem de alta qualidade — lado direito */}
+        <div className="flex-1">
+          <div className="relative mx-auto aspect-[4/3] w-full max-w-lg overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:mx-0">
+            <img
+              src={HERO_IMAGE}
+              alt="Dashboard de métricas e site profissional — soluções digitais para negócios locais"
+              className="h-full w-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+              width="800"
+              height="600"
+            />
+            <div className="absolute inset-0 rounded-2xl ring-1 ring-white/10 ring-inset" />
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Scroll indicator sutil */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 3v14M5 12l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-white/30" />
+        </svg>
+      </div>
+    </section>
   );
 };
 
