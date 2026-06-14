@@ -74,7 +74,7 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Title */}
-        <h1 className="animate-fade-in-up max-w-4xl text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+        <h1 className="animate-fade-in-up max-w-4xl text-3xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
           Soluções Digitais para o{' '}
           <span className="bg-gradient-to-r from-[#0057FF] to-[#C9A84C] bg-clip-text text-transparent">
             seu Negócio Local

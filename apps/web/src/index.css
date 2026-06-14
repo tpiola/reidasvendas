@@ -337,6 +337,7 @@ body {
   color: var(--page-fg, var(--rdv-white));
   overflow-x: hidden;
   transition: background-color 0.35s ease, color 0.35s ease;
+  font-size: 16px;
 }
 a { text-decoration: none; color: inherit; }
 img, video { max-width: 100%; height: auto; display: block; }
@@ -1689,5 +1690,67 @@ html.light .text-gradient-gold {
 
   @view-transition {
     navigation: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL (IntersectionObserver)
+   Usado por Home.tsx — fade + slide up
+═══════════════════════════════════════════ */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal-visible,
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ROBÔ ASSISTENTE — Animações
+═══════════════════════════════════════════ */
+
+@keyframes assistente-pulse {
+  0%, 100% {
+    box-shadow: 0 0 24px rgba(0, 87, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 48px rgba(0, 87, 255, 0.55);
+  }
+}
+
+.assistente-robot-btn {
+  animation: assistente-pulse 3s ease-in-out infinite;
+}
+
+.assistente-robot-btn:hover {
+  animation: none;
+}
+
+/* Mobile — assistente panel full screen */
+@media (max-width: 767px) {
+  .assistente-panel {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    max-height: 100dvh !important;
+    height: 100dvh !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
   }
 }

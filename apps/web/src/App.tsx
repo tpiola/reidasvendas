@@ -10,6 +10,7 @@ import { AnalyticsProvider } from '@/components/AnalyticsProvider';
 import { DeferredEngagement } from '@/components/DeferredEngagement';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { ConversionStickyBar } from '@/components/conversion/ConversionStickyBar';
+import { AssistenteVendas } from '@/components/AssistenteVendas';
 
 import Home from '@/pages/Home';
 const Projetos = lazy(() => import('@/pages/Projetos'));
@@ -112,6 +113,7 @@ export default function App() {
       <CookieConsent />
       <WhatsAppFab />
       <DeferredEngagement />
+      <AssistenteVendas />
     </Router>
     </ThemeProvider>
   );
