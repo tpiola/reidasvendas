@@ -23,7 +23,12 @@ const observer = new IntersectionObserver(
 
 // Observe .reveal elements after mount
 const initReveal = () => {
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  const elements = document.querySelectorAll('.reveal');
+  elements.forEach((el, index) => {
+    // simple stagger via inline delay
+    (el as HTMLElement).style.transitionDelay = `${index * 80}ms`;
+    observer.observe(el);
+  });
 };
 
 // Parallax effect on hero

@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Monitor, Smartphone, Bot, BarChart3, GraduationCap, MessageCircle } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { BRAND } from '@/lib/brand';
 
 const servicos = [
-  { icon: Monitor, title: 'Sites Profissionais', desc: 'Landing pages e sites institucionais de alta conversão, responsivos e otimizados para SEO.' },
-  { icon: Smartphone, title: 'Aplicativos', desc: 'Apps nativos e híbridos para iOS e Android com experiência premium e performance.' },
-  { icon: Bot, title: 'Automações', desc: 'Automação de marketing, vendas e atendimento com CRM, WhatsApp e e-mail integrados.' },
-  { icon: BarChart3, title: 'Dashboards', desc: 'Painéis de gestão personalizados com dados em tempo real para decisões inteligentes.' },
-  { icon: GraduationCap, title: 'Mentoria', desc: 'Mentoria digital para estruturar vendas online e presença digital do zero à escala.' },
+  { icon: Monitor, title: 'Sites Profissionais', img: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80', desc: 'Landing pages focadas em conversão.' },
+  { icon: Smartphone, title: 'Aplicativos', img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80', desc: 'Apps rápidos e modernos.' },
+  { icon: Bot, title: 'Automações', img: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80', desc: 'Funis automáticos com WhatsApp.' },
+  { icon: BarChart3, title: 'Dashboards', img: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80', desc: 'Dados em tempo real.' },
+  { icon: GraduationCap, title: 'Mentoria', img: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80', desc: 'Estratégia digital prática.' },
 ];
 
 const nichos = [
@@ -27,14 +28,15 @@ const faq = [
   { q: 'Qual o investimento mínimo?', r: 'Temos planos a partir de R$ 97/mês. Cada solução é customizada para sua necessidade.' },
 ];
 
-const HeroSection = () => (
+const HeroSection = () => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+
+  return (
   <section className="relative flex min-h-[90vh] items-center overflow-hidden">
-    {/* Background parallax */}
-    <div
-      className="hero-parallax absolute inset-0 bg-cover bg-center"
-      style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1600&q=80)',
-      }}
+    <motion.div
+      style={{ y, backgroundImage: 'url(https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1600&q=80)' }}
+      className="absolute inset-0 bg-cover bg-center"
     />
     {/* Overlay */}
     <div className="absolute inset-0 bg-gradient-to-r from-[rgba(3,3,5,0.92)] via-[rgba(3,3,5,0.7)] to-[rgba(3,3,5,0.4)]" />
@@ -43,7 +45,7 @@ const HeroSection = () => (
     <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
       <div className="max-w-3xl">
         <span className="reveal inline-block rounded-full border border-[#C9A84C]/30 bg-[rgba(201,168,76,0.1)] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">
-          Soluções Digitais Premium
+          Diagnóstico gratuito · Resposta em 24h
         </span>
         <h1 className="reveal reveal-delay-1 mt-6 font-['Playfair_Display'] text-4xl leading-tight font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl">
           Soluções Digitais que{' '}
@@ -63,10 +65,19 @@ const HeroSection = () => (
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+        <div className="mt-10 grid grid-cols-3 gap-6 text-white">
+          {[{ n: '+47', l: 'clientes' }, { n: '+82', l: 'projetos' }, { n: '+11', l: 'anos Franca' }].map((s) => (
+            <div key={s.l} className="reveal text-center">
+              <div className="text-2xl font-bold">{s.n}</div>
+              <div className="text-xs text-white/60">{s.l}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
-);
+  );
+};
 
 const ServicosSection = () => (
   <section className="bg-[#08080B] py-20 sm:py-28">

@@ -55,6 +55,30 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <Router>
+      {/* JSON-LD LocalBusiness */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Rei das Vendas',
+            areaServed: 'Franca-SP',
+            url: 'https://reidasvendas.com.br',
+            contactPoint: [{
+              '@type': 'ContactPoint',
+              telephone: 'https://wa.me/5599999999999',
+              contactType: 'customer support'
+            }],
+            makesOffer: [
+              'Sites','Apps','Automações','Dashboards','Mentoria'
+            ],
+            knowsAbout: [
+              'Calçadista','Comércio','Indústria','Saúde','Educação','Serviços'
+            ]
+          })
+        }}
+      />
       <SiteHeader />
       <div className="page-offset">
         <AnimatedRoutes />
