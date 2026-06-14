@@ -89,7 +89,10 @@ export default async function handler(req: any, res: any) {
   }
 
   const parsed = parseLeadBody(bodyUnknown);
-  if (!parsed.ok) return json(res, 400, { ok: false, error: parsed.error });
+  if (!parsed.ok) {
+    const err = (parsed as { ok: false; error: string }).error;
+    return json(res, 400, { ok: false, error: err });
+  }
   if (!isEmail(parsed.value.email)) return json(res, 400, { ok: false, error: 'invalid_email' });
 
   const payload = {
