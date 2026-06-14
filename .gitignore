@@ -41,3 +41,4 @@ _origin_main_wt/
 next-env.d.ts
 gen_*.py
 .env*
+*.tsbuildinfo

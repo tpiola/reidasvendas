@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     emptyOutDir: true,
     sourcemap: 'hidden',
+    target: 'esnext',
     rollupOptions: {
       output: {
         manualChunks: {
