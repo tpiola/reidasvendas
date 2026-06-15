@@ -4,7 +4,8 @@ import {
   MessageCircle, CheckCircle2, MapPin, Quote,
   TrendingUp, Shield, Zap, Clock, Target, Layers, Users,
 } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { BRAND } from '@/lib/brand';
 import {
   fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem,
@@ -17,6 +18,39 @@ import { DataPanel } from '@/components/DataPanel';
 import { LuxuryDivider, GoldBadge, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { AutomationFlow } from '@/components/AutomationFlow';
 import { FounderSection } from '@/components/FounderSection';
+
+/* ─── Animated Counter ─── */
+function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+  const hasPlus = value.includes('+');
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const duration = 2000;
+    const steps = 60;
+    const increment = numericValue / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= numericValue) {
+        setCount(numericValue);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+    return () => clearInterval(timer);
+  }, [isInView, numericValue]);
+
+  return (
+    <span ref={ref} className="num-gold text-3xl font-extrabold sm:text-4xl lg:text-5xl tabular-nums">
+      {count}{hasPlus ? '+' : ''}{suffix}
+    </span>
+  );
+}
 
 /* ─── DATA ─── */
 
@@ -166,17 +200,23 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 flex flex-wrap gap-4"
           >
-            <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" />
-              Diagnóstico Digital Gratuito
-            </PremiumButton>
+            <motion.div
+              animate={{ boxShadow: ['0 0 20px rgba(214,168,79,0.2)', '0 0 40px rgba(214,168,79,0.4)', '0 0 20px rgba(214,168,79,0.2)'] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="rounded-full"
+            >
+              <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="h-4 w-4" />
+                Diagnóstico Digital Gratuito
+              </PremiumButton>
+            </motion.div>
             <Link to="/servicos" className="btn-outline-gold text-sm sm:text-base group">
               Ver Soluções
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
 
-          {/* Stats */}
+          {/* Stats — Contador Animado */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
@@ -188,7 +228,7 @@ const HeroSection = () => {
               { n: BRAND.stats.years, l: 'anos de\natuação' },
             ].map((s) => (
               <div key={s.l} className="text-center">
-                <div className="num-gold text-3xl font-extrabold sm:text-4xl lg:text-5xl">{s.n}</div>
+                <AnimatedCounter value={s.n} />
                 <div className="mt-1 whitespace-pre-line text-[10px] font-semibold uppercase tracking-[0.15em] text-[#71717A]">{s.l}</div>
               </div>
             ))}
