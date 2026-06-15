@@ -571,7 +571,11 @@ const ProcessoSection = () => (
           <Reveal delay={0.2}>
             <div className="glass-premium rounded-2xl p-8 sm:p-10 sticky top-28">
               <div className="text-center">
-                <GoldBadge>Comece agora</GoldBadge>
+                <div className="inline-flex items-center gap-2.5 mb-4">
+                  <span className="block h-px w-6 bg-[#D6A84F]" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6A84F]">Comece agora</span>
+                  <span className="block h-px w-6 bg-[#D6A84F]" />
+                </div>
                 <h3 className="font-serif mt-6 text-2xl font-bold text-white">
                   Pronto para construir sua{' '}
                   <span className="text-gradient-gold">soberania digital</span>?
