@@ -73,26 +73,31 @@ const servicos = [
     icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Seu negócio aberto 24h',
     desc: 'Um site que carrega em 1.2s e entrega leads enquanto você dorme. SEO que coloca você no Google. Design que vende — não só que enfeita.',
     img: BRAND.images.services.sites,
+    videoSrc: '/videos/stock/sites.mp4',
   },
   {
     icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Na palma da mão do seu cliente',
     desc: 'App iOS/Android feito do zero pro seu negócio. Delivery, catálogo, fidelidade. Sem template. Sem bloatware. Só o que seu cliente precisa.',
     img: BRAND.images.services.apps,
+    videoSrc: '/videos/stock/apps.mp4',
   },
   {
     icon: Bot, title: 'Automação Comercial', tagline: 'Enquanto você dorme, ela vende',
     desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam sem você.',
     img: BRAND.images.services.automations,
+    videoSrc: '/videos/stock/automation.mp4',
   },
   {
     icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Palpite zero.',
     desc: 'Vendas, estoque, leads, ROI. Tudo num painel vivo. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha.',
     img: BRAND.images.services.dashboards,
+    videoSrc: '/videos/stock/dashboards.mp4',
   },
   {
     icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não curso',
     desc: 'Sessões individuais. Mês a mês na sua presença digital. Sem teoria, sem aula gravada. Resultado mensurável a cada encontro.',
     img: BRAND.images.services.mentoria,
+    videoSrc: '/videos/stock/mentoria.mp4',
   },
 ];
 
@@ -146,29 +151,19 @@ const HeroSection = () => {
       {/* Gold particles */}
       <GoldParticles count={50} />
 
-      {/* Background — Vídeo mudo premium */}
+      {/* Background — Vídeo premium sem texto */}
       <motion.div style={{ y: heroY, scale }} className="absolute inset-0">
         <video
           autoPlay
           muted
           loop
           playsInline
-          poster="/videos/hero-preview.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.35]"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
         >
-          <source src="/videos/hero-noaudio.mp4" type="video/mp4" />
+          <source src="/videos/stock/hero.mp4" type="video/mp4" />
         </video>
-        {/* Textura sutil — parede/canvas premium */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.06] mix-blend-overlay"
-        >
-          <source src="/videos/sentinela/7.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/80 to-[#030303]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/85 to-[#030303]" />
+        <div className="absolute inset-0 bg-grid-lg opacity-[0.04]" />
       </motion.div>
 
       {/* Gold glow gradients */}
@@ -270,27 +265,31 @@ const HeroSection = () => {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#71717A]"
-        >
-          <span>Role para explorar</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M6 9l6 6 6-6"/></svg>
-        </motion.div>
-      </motion.div>
+      {/* Scroll indicator removido — scroll-driven animations tomam seu lugar */}
     </section>
   );
 };
 
 /* ─── SECTION 2: O Problema ─── */
-const ProblemaSection = () => (
+const ProblemaSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+
+  return (
   <SectionWrapper dark>
-    <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative mx-auto max-w-7xl px-4 sm:px-6"
+    >
       <Reveal className="mx-auto mb-12 max-w-3xl text-center">
         <SectionLabel>O Diagnóstico</SectionLabel>
         <SectionTitle highlight="gargalo">
@@ -298,7 +297,13 @@ const ProblemaSection = () => (
         </SectionTitle>
       </Reveal>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        className="grid gap-6 md:grid-cols-3"
+      >
         {[
           { icon: Target, title: 'Sem Infraestrutura', desc: 'Site genérico, processo manual, dados espalhados. Falta uma base digital sólida para crescer com consistência.' },
           { icon: Zap, title: 'Dependência de Terceiros', desc: 'Instagram muda o algoritmo, tráfego pago encarece, e seu negócio fica refém de plataformas que você não controla.' },
@@ -312,7 +317,7 @@ const ProblemaSection = () => (
             <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
           </GlassCard>
         ))}
-      </div>
+      </motion.div>
 
       <Reveal delay={0.3}>
         <motion.div
@@ -328,20 +333,44 @@ const ProblemaSection = () => (
           </p>
         </motion.div>
       </Reveal>
-    </div>
+    </motion.div>
   </SectionWrapper>
 );
+};
 
 /* ─── SECTION 3: A Solução ─── */
-const SolucaoSection = () => (
+const SolucaoSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  return (
   <SectionWrapper>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <SectionHeading
-        label="Soluções"
-        title="A Arquitetura"
-        highlight="Rei das Vendas"
-        description="Cinco pilares que formam a base da sua soberania digital. Cada um é desenhado sob medida."
-      />
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto max-w-7xl px-4 sm:px-6"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SectionHeading
+          label="Soluções"
+          title="A Arquitetura"
+          highlight="Rei das Vendas"
+          description="Cinco pilares que formam a base da sua soberania digital. Cada um é desenhado sob medida."
+        />
+      </motion.div>
 
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
@@ -351,8 +380,12 @@ const SolucaoSection = () => (
         {servicos.map((s) => (
           <GlassCard key={s.title} hover glow>
             <div className="relative h-36 overflow-hidden rounded-xl mb-4">
-              <img src={s.img} alt={s.title} loading="lazy"
-                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110" />
+              <video
+                autoPlay muted loop playsInline
+                className="absolute inset-0 h-full w-full object-cover opacity-[0.4]"
+              >
+                <source src={s.videoSrc} type="video/mp4" />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent" />
               <div className="absolute bottom-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[rgba(214,168,79,0.15)] backdrop-blur-sm text-[#D6A84F]">
                 <s.icon className="h-4 w-4" />
@@ -364,9 +397,10 @@ const SolucaoSection = () => (
           </GlassCard>
         ))}
       </motion.div>
-    </div>
+    </motion.div>
   </SectionWrapper>
 );
+};
 
 /* ─── SECTION 4: Vídeo-Cinema (scroll reveal) ─── */
 const VideoSection = () => {
@@ -440,15 +474,38 @@ const VideoSection = () => {
 };
 
 /* ─── SECTION 5: Soluções Detalhadas ─── */
-const SolucoesDetalhadas = () => (
+const SolucoesDetalhadas = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+
+  return (
   <SectionWrapper>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <SectionHeading
-        label="Diferenciais"
-        title="Por que o"
-        highlight="Rei das Vendas"
-        description="Não somos uma agência. Somos construtores de infraestrutura digital com metodologia, tecnologia e compromisso com resultado."
-      />
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto max-w-7xl px-4 sm:px-6"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SectionHeading
+          label="Diferenciais"
+          title="Por que o"
+          highlight="Rei das Vendas"
+          description="Não somos uma agência. Somos construtores de infraestrutura digital com metodologia, tecnologia e compromisso com resultado."
+        />
+      </motion.div>
 
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
@@ -459,20 +516,44 @@ const SolucoesDetalhadas = () => (
           <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" />} title={d.title} description={d.desc} />
         ))}
       </motion.div>
-    </div>
+    </motion.div>
   </SectionWrapper>
 );
+};
 
 /* ─── SECTION 6: Projetos por Segmento ─── */
-const SegmentosSection = () => (
+const SegmentosSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [45, -45]);
+
+  return (
   <SectionWrapper dark>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <SectionHeading
-        label="Segmentos"
-        title="Soluções para cada"
-        highlight="realidade de negócio"
-        description="Cada nicho tem suas particularidades. Nossa arquitetura se adapta — nunca o contrário."
-      />
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto max-w-7xl px-4 sm:px-6"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SectionHeading
+          label="Segmentos"
+          title="Soluções para cada"
+          highlight="realidade de negócio"
+          description="Cada nicho tem suas particularidades. Nossa arquitetura se adapta — nunca o contrário."
+        />
+      </motion.div>
 
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
@@ -497,15 +578,22 @@ const SegmentosSection = () => (
           </motion.div>
         ))}
       </motion.div>
-    </div>
+    </motion.div>
   </SectionWrapper>
 );
+};
 
 /* ─── SECTION 7: Founder (importado) ─── */
 // FounderSection imported above
 
 /* ─── SECTION 8: Provas & Confiança ─── */
 const ProvaSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const depoimentos = [
     {
       texto: 'A infraestrutura digital que montaram transformou a forma como vendemos. O processo manual deu lugar a um ecossistema que funciona 24h. Resultado apareceu em semanas.',
@@ -526,13 +614,28 @@ const ProvaSection = () => {
 
   return (
     <SectionWrapper>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          label="Depoimentos"
-          title="Quem já viveu na pele"
-          highlight="recomenda"
-          description="Pessoas reais, resultados reais — sem roteiro, sem historinha."
-        />
+      <motion.div
+        ref={ref}
+        style={{ y: sectionY }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="mx-auto max-w-7xl px-4 sm:px-6"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <SectionHeading
+            label="Depoimentos"
+            title="Quem já viveu na pele"
+            highlight="recomenda"
+            description="Pessoas reais, resultados reais — sem roteiro, sem historinha."
+          />
+        </motion.div>
 
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible"
@@ -593,15 +696,31 @@ const ProvaSection = () => {
             </p>
           </div>
         </Reveal>
-      </div>
+      </motion.div>
     </SectionWrapper>
   );
 };
 
 /* ─── SECTION 8 (cont.): Processo + CTA ─── */
-const ProcessoSection = () => (
+const ProcessoSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  return (
   <SectionWrapper dark>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto max-w-7xl px-4 sm:px-6"
+    >
       <div className="grid gap-12 lg:grid-cols-5">
         {/* Process Steps */}
         <div className="lg:col-span-3">
@@ -662,19 +781,43 @@ const ProcessoSection = () => (
           </Reveal>
         </div>
       </div>
-    </div>
+    </motion.div>
   </SectionWrapper>
-);
+  );
+};
 
 /* ─── FAQ ─── */
-const FaqSection = () => (
+const FaqSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+
+  return (
   <SectionWrapper>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <SectionHeading
-        label="FAQ"
-        title="Perguntas"
-        highlight="frequentes"
-      />
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto max-w-7xl px-4 sm:px-6"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <SectionHeading
+          label="FAQ"
+          title="Perguntas"
+          highlight="frequentes"
+        />
+      </motion.div>
 
       <div className="mx-auto max-w-3xl">
         <motion.div
@@ -720,6 +863,39 @@ const FaqSection = () => (
           </div>
         </div>
       </Reveal>
+    </motion.div>
+  </SectionWrapper>
+  );
+};
+
+/* ─── CTA Banner Reutilizável ─── */
+const CtaBanner = ({ variant = 'dark' }: { variant?: 'dark' | 'light' }) => (
+  <SectionWrapper dark={variant === 'dark'}>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <Reveal>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center"
+        >
+          <LuxuryDivider />
+          <h3 className="font-serif mt-8 text-xl font-bold text-white sm:text-2xl">
+            Vamos construir sua{' '}
+            <span className="text-gradient-gold">infraestrutura digital</span>?
+          </h3>
+          <p className="mt-3 text-sm text-[#A1A1AA] max-w-md mx-auto">
+            Diagnóstico gratuito • Projeto sob medida • Resultado mensurável
+          </p>
+          <div className="mt-6">
+            <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
+              <MessageCircle className="h-4 w-4" />
+              Falar com o Time
+            </PremiumButton>
+          </div>
+        </motion.div>
+      </Reveal>
     </div>
   </SectionWrapper>
 );
@@ -730,14 +906,17 @@ export default function Home() {
     <main>
       <HeroSection />
       <ProblemaSection />
+      <CtaBanner />
       <SolucaoSection />
       <VideoSection />
       <SolucoesDetalhadas />
       <SegmentosSection />
+      <CtaBanner />
       <FounderSection />
       <ProvaSection />
       <ProcessoSection />
       <FaqSection />
+      <CtaBanner variant="light" />
     </main>
   );
 }

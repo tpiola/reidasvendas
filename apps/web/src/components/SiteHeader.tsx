@@ -44,9 +44,9 @@ export function SiteHeader() {
             className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
           />
           <img
-            src="/logo-texto.png"
+            src="/logo.svg"
             alt="Rei das Vendas"
-            className="h-5 w-auto object-contain transition-all duration-300 group-hover:opacity-90 hidden sm:block"
+            className="h-6 w-auto object-contain transition-all duration-300 group-hover:opacity-90 hidden sm:block"
           />
         </Link>
 
