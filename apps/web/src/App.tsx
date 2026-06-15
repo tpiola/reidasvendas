@@ -5,6 +5,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { SuporteBot } from '@/components/SuporteBot';
+import { GoldParticles } from '@/components/GoldParticles';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
@@ -17,7 +18,7 @@ const NotFound = lazy(() => import('@/pages/NotFound'));
 function Loading() {
   return (
     <div className="flex min-h-[50vh] items-center justify-center" aria-live="polite" aria-busy="true">
-      <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#0057FF] border-t-transparent" />
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#D6A84F] border-t-transparent" />
     </div>
   );
 }
@@ -57,7 +58,10 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <Router>
-      {/* JSON-LD LocalBusiness */}
+      {/* Gold particles background (fixed, subtle) */}
+      <GoldParticles count={20} />
+
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -65,20 +69,19 @@ export default function App() {
             '@context': 'https://schema.org',
             '@type': 'LocalBusiness',
             name: 'Rei das Vendas',
+            description: 'Infraestrutura digital de vendas para empresas. Sites premium, automação, IA e governança de resultados.',
             areaServed: 'Franca-SP',
             url: 'https://reidasvendas.com.br',
+            foundingDate: '2023',
+            founder: { '@type': 'Person', name: 'Thiago B. G. Piola' },
             contactPoint: [{
               '@type': 'ContactPoint',
-              telephone: 'https://wa.me/5599999999999',
-              contactType: 'customer support'
+              telephone: 'https://wa.me/5516999999999',
+              contactType: 'customer support',
             }],
-            makesOffer: [
-              'Sites','Apps','Automações','Dashboards','Mentoria'
-            ],
-            knowsAbout: [
-              'Calçadista','Comércio','Indústria','Saúde','Educação','Serviços'
-            ]
-          })
+            makesOffer: ['Sites Apps Automações Dashboards Mentoria'],
+            knowsAbout: ['Calçadista Comércio Indústria Saúde Educação Serviços'],
+          }),
         }}
       />
       <SiteHeader />

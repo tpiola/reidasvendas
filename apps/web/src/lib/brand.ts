@@ -1,18 +1,32 @@
 export const BRAND = {
   name: 'Rei das Vendas',
-  tagline: 'Soluções digitais premium para negócios que querem crescer',
+  tagline: 'Soberania Digital',
+  subtitle: 'Infraestrutura de vendas para empresas que querem vender com mais estrutura',
   phone: '5516999999999',
-  whatsapp: 'https://wa.me/5516999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20digitais%20para%20meu%20neg%C3%B3cio%20em%20Franca-SP.',
+  whatsapp: 'https://wa.me/5516999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20de%20soberania%20digital%20para%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
   instagram: 'https://instagram.com/reidasvendas',
   linkedin: 'https://linkedin.com/company/reidasvendas',
-  address: 'Franca, SP',
-  colors: {
-    blue: '#0057FF',
-    gold: '#C9A84C',
-    dark: '#030305',
+  address: 'Franca, SP — Brasil',
+  founder: {
+    name: 'Thiago B. G. Piola',
+    title: 'Founder & Diretor de Estratégia Digital',
+    crf: 'CRF-SP 58.519',
+    site: 'https://thiagopiola.com.br',
+    bio: 'Farmacêutico, web designer e estrategista digital. Une visão clínica à precisão tecnológica para construir infraestruturas de vendas que operam com a mesma confiabilidade de um protocolo de saúde.',
   },
-  // Premium Unsplash IDs — purposeful, storytelling images
+  stats: {
+    projects: '12+',
+    satisfaction: '98%',
+    years: '3',
+  },
+  colors: {
+    gold: '#D6A84F',
+    goldDark: '#B88932',
+    goldLight: '#F2D38A',
+    dark: '#030303',
+    surface: '#080808',
+  },
   images: {
     hero: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1920&q=85',
     heroMobile: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=80',

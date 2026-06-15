@@ -1,69 +1,108 @@
-import { Link } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
+import { LuxuryDivider } from '@/components/PremiumComponents';
+
+const FOOTER_LINKS = {
+  Soluções: [
+    { label: 'Sites & Landing Pages', to: '/servicos' },
+    { label: 'Aplicativos', to: '/servicos' },
+    { label: 'Automações', to: '/servicos' },
+    { label: 'Dashboards', to: '/servicos' },
+    { label: 'Mentoria Digital', to: '/servicos' },
+  ],
+  Segmentos: [
+    { label: 'Calçadista', to: '/servicos' },
+    { label: 'Comércio', to: '/servicos' },
+    { label: 'Indústria', to: '/servicos' },
+    { label: 'Saúde', to: '/servicos' },
+    { label: 'Educação', to: '/servicos' },
+  ],
+  Empresa: [
+    { label: 'Blog', to: '/blog' },
+    { label: 'Contato', to: '/contato' },
+    { label: 'Política de Privacidade', to: '/politica' },
+  ],
+};
 
 export function SiteFooter() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="relative overflow-hidden border-t border-[rgba(201,168,76,0.2)] bg-[#050505] text-[#f8f8fa]">
-      {/* Gradientes decorativos */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(201,168,76,0.06)_0%,transparent_50%),radial-gradient(ellipse_at_50%_100%,rgba(0,87,255,0.1)_0%,transparent_55%)]"
-        aria-hidden
-      />
+    <footer className="relative border-t border-[rgba(214,168,79,0.1)] bg-[#030303]">
+      {/* Background glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -bottom-[30%] left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[rgba(214,168,79,0.04)] blur-[120px]" />
+      </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-14 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-3">
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        {/* Top section */}
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
-          <div>
-            <Link to="/" className="inline-block">
-              <span className="text-2xl font-bold tracking-tight">
-                <span className="text-[#C9A84C]">REI</span>{' '}
-                <span className="text-white">DAS VENDAS</span>
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="footer-crown" x1="6" y1="4" x2="26" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#F2D38A"/>
+                    <stop offset="45%" stopColor="#D6A84F"/>
+                    <stop offset="100%" stopColor="#B88932"/>
+                  </linearGradient>
+                </defs>
+                <g transform="translate(4, 5) scale(0.375)">
+                  <path d="M32 6 L38 22 L52 18 L44 34 L56 40 L32 36 L8 40 L20 34 L12 18 L26 22 Z" stroke="url(#footer-crown)" strokeWidth="1.35" fill="none"/>
+                  <path d="M32 6 L26 22 L20 34 M32 6 L38 22 L44 34 M26 22 L38 22 M20 34 L44 34" stroke="url(#footer-crown)" strokeWidth="0.9" strokeOpacity="0.65" fill="none"/>
+                  <path d="M14 44 H50" stroke="url(#footer-crown)" strokeWidth="1.2" strokeLinecap="round"/>
+                </g>
+              </svg>
+              <span className="text-sm font-bold tracking-[0.15em]">
+                <span className="text-[#D6A84F]">REI</span>{' '}
+                <span className="text-white/80">DAS VENDAS</span>
               </span>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-[rgba(248,248,250,0.45)]">
-              Soluções digitais premium para negócios que querem crescer. Sites, apps, automações e muito mais.
+            </div>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#71717A]">
+              Infraestrutura digital de vendas para empresas que querem vender com mais estrutura. 
+              Tecnologia, design e estratégia — tudo sob medida.
             </p>
+            <div className="mt-6 flex gap-3">
+              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] transition-all hover:border-[#D6A84F] hover:text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]" aria-label="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+              </a>
+              <a href={BRAND.linkedin} target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] transition-all hover:border-[#D6A84F] hover:text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]" aria-label="LinkedIn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a href={`mailto:${BRAND.email}`} className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] transition-all hover:border-[#D6A84F] hover:text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]" aria-label="Email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+              </a>
+            </div>
           </div>
 
           {/* Links */}
-          <div>
-            <h4 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">Navegação</h4>
-            <nav className="flex flex-col gap-3" aria-label="Links do rodapé">
-              <Link to="/" className="text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white">Home</Link>
-              <Link to="/servicos" className="text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white">Serviços</Link>
-              <Link to="/blog" className="text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white">Blog</Link>
-              <Link to="/contato" className="text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white">Contato</Link>
-            </nav>
-          </div>
-
-          {/* Contato */}
-          <div>
-            <h4 className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">Contato</h4>
-            <div className="flex flex-col gap-3">
-              <a
-                href={BRAND.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white"
-              >
-                <MessageCircle className="h-4 w-4 text-[#C9A84C]" />
-                Fale conosco
-              </a>
-              <a href={`mailto:${BRAND.email}`} className="text-sm text-[rgba(248,248,250,0.55)] transition hover:text-white">
-                {BRAND.email}
-              </a>
-              <Link to="/politica" className="text-sm text-[rgba(248,248,250,0.45)] transition hover:text-white">
-                Política de Privacidade
-              </Link>
+          {Object.entries(FOOTER_LINKS).map(([title, links]) => (
+            <div key={title}>
+              <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6A84F] mb-4">{title}</h4>
+              <ul className="space-y-2.5">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.to}
+                      className="text-sm text-[#71717A] transition-colors hover:text-[#F5F5F5]"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          ))}
         </div>
 
-        <div className="mt-12 border-t border-[rgba(255,255,255,0.06)] pt-6 text-center text-xs text-[rgba(248,248,250,0.35)]">
-          &copy; {year} Rei das Vendas. Todos os direitos reservados.
+        <LuxuryDivider />
+
+        {/* Bottom */}
+        <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
+          <p className="text-xs text-[#71717A]">
+            © {new Date().getFullYear()} {BRAND.name}. Todos os direitos reservados.
+          </p>
+          <p className="text-xs text-[#71717A]">
+            Franca-SP — Brasil
+          </p>
         </div>
       </div>
     </footer>
