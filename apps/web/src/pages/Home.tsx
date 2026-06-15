@@ -16,7 +16,6 @@ import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
 import { DataPanel } from '@/components/DataPanel';
 import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
-import { AutomationFlow } from '@/components/AutomationFlow';
 import { FounderSection } from '@/components/FounderSection';
 
 /* ─── Animated Counter ─── */
@@ -71,39 +70,39 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
 
 const servicos = [
   {
-    icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Design que converte 24h',
-    desc: 'Landing pages que carregam em 1.2s. Sites institucionais com SEO que entrega leads. E-commerce que não perde venda por lentidão. Performance medida — não prometida.',
+    icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Seu negócio aberto 24h',
+    desc: 'Um site que carrega em 1.2s e entrega leads enquanto você dorme. SEO que coloca você no Google. Design que vende — não só que enfeita.',
     img: BRAND.images.services.sites,
   },
   {
-    icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Seu negócio no bolso',
-    desc: 'Apps iOS/Android construídos do zero. Delivery, catálogo, relacionamento. Sem template. Sem bloatware. O que seu cliente precisa, nada mais.',
+    icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Na palma da mão do seu cliente',
+    desc: 'App iOS/Android feito do zero pro seu negócio. Delivery, catálogo, fidelidade. Sem template. Sem bloatware. Só o que seu cliente precisa.',
     img: BRAND.images.services.apps,
   },
   {
-    icon: Bot, title: 'Automação Inteligente', tagline: 'Processos que rodam sem você',
-    desc: 'CRM integrado. Chatbots que qualificam antes de transferir. Disparo omnichannel. Funis que fecham venda enquanto você dorme.',
+    icon: Bot, title: 'Automação Comercial', tagline: 'Enquanto você dorme, ela vende',
+    desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam sem você.',
     img: BRAND.images.services.automations,
   },
   {
-    icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Não achismos.',
-    desc: 'Painéis com métricas vivas. Vendas, estoque, leads, ROI. O que funciona, o que não funciona — você vê na hora. Sem planilha, sem palpite.',
+    icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Palpite zero.',
+    desc: 'Vendas, estoque, leads, ROI. Tudo num painel vivo. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha.',
     img: BRAND.images.services.dashboards,
   },
   {
-    icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não tutorial',
-    desc: 'Sessões individuais. Metro a metro na sua presença digital. Sem teoria. Sem curso gravado. Resultado mensurável a cada quinzena.',
+    icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não curso',
+    desc: 'Sessões individuais. Mês a mês na sua presença digital. Sem teoria, sem aula gravada. Resultado mensurável a cada encontro.',
     img: BRAND.images.services.mentoria,
   },
 ];
 
 const diferenciais = [
-  { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecemos o mercado local. Atendimento presencial quando precisa.' },
-  { icon: Target, title: 'Projetos Únicos', desc: 'Zero template. Cada projeto nasce do zero para o seu problema.' },
-  { icon: Zap, title: 'Tecnologia Enterprise', desc: 'React, Next.js, IA, n8n. Mesmo stack que move bilhões. Sem firula.' },
-  { icon: Shield, title: 'Suporte Contínuo', desc: 'Entregamos e ficamos. Ajustes, evolução, segurança — prazo aberto.' },
-  { icon: Layers, title: 'Arquitetura Modular', desc: 'Começa pequeno. Escala sem precisar refazer. Cresce com você.' },
-  { icon: TrendingUp, title: 'Governança de Resultados', desc: 'Visitas, leads, CPA. Toda decisão apoiada em número. Sem chute.' },
+  { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecemos o mercado local. Atendimento presencial quando e onde precisar.' },
+  { icon: Target, title: 'Projetos Únicos', desc: 'Zero template. Cada projeto nasce do zero — do seu problema, não de um molde.' },
+  { icon: Zap, title: 'Stack Enterprise', desc: 'React, Next.js, IA, n8n. Mesma tecnologia que move bilhões. Sem firula, sem excesso.' },
+  { icon: Shield, title: 'Suporte Contínuo', desc: 'Entregamos e ficamos. Ajustes, evolução, segurança — porteira não fecha na entrega.' },
+  { icon: Layers, title: 'Arquitetura Modular', desc: 'Começa pequeno. Escala sem precisar refazer nada. Cresce no seu ritmo.' },
+  { icon: TrendingUp, title: 'Governança de Resultados', desc: 'Visitas, leads, CPA. Decisão baseada em dado. Palpite zero.' },
 ];
 
 const nichos = [
@@ -116,14 +115,14 @@ const nichos = [
 ];
 
 const processos = [
-  { num: '01', title: 'Diagnóstico Digital', desc: 'Análise do negócio, concorrência, mercado e metas. Mapeamento da infraestrutura atual — o que existe, o que falta, o que precisa ser refeito.' },
-  { num: '02', title: 'Arquitetura da Solução', desc: 'Definição da estrutura tecnológica, fluxo de conversão e usabilidade. Projeto detalhado antes de escrever uma linha de código.' },
-  { num: '03', title: 'Design Premium', desc: 'Identidade visual e interface com foco em conversão. Layouts testados antes de ir para desenvolvimento.' },
-  { num: '04', title: 'Desenvolvimento Ágil', desc: 'Construção com tecnologia de ponta. Sprints semanais. Entregas incrementais. Validação a cada ciclo.' },
-  { num: '05', title: 'Automação & Integrações', desc: 'Conexão com CRM, WhatsApp, e-mail, pagamentos. Processos que rodam 24h sem supervisão.' },
-  { num: '06', title: 'SEO & Performance', desc: 'Otimização para Google, Core Web Vitals, schema markup. Velocidade que segura visitante.' },
+  { num: '01', title: 'Diagnóstico Digital', desc: 'Análise do negócio, concorrência, mercado e metas. Mapeamento do que existe, o que falta, o que precisa ser reconstruído.' },
+  { num: '02', title: 'Arquitetura da Solução', desc: 'Estrutura tecnológica, fluxo de conversão, usabilidade. Projeto detalhado antes de escrever uma linha de código.' },
+  { num: '03', title: 'Design Premium', desc: 'Identidade visual e interface com foco em conversão. Layouts validados antes de ir para desenvolvimento.' },
+  { num: '04', title: 'Desenvolvimento Ágil', desc: 'Tecnologia de ponta. Sprints semanais. Entregas incrementais. Você vê o resultado a cada ciclo.' },
+  { num: '05', title: 'Automação & Integrações', desc: 'CRM, WhatsApp, e-mail, pagamentos — tudo conectado. Processos que rodam 24h sem supervisão.' },
+  { num: '06', title: 'SEO & Performance', desc: 'Otimização Google, Core Web Vitals, schema markup. Velocidade que segura o visitante.' },
   { num: '07', title: 'Testes & Validação', desc: 'QA completo. Testes de conversão. Acessibilidade. Responsividade. Zero surpresa no lançamento.' },
-  { num: '08', title: 'Governança & Evolução', desc: 'Entrega com métricas claras. Dashboard de resultados. Plano de evolução contínua — o projeto não morre na entrega.' },
+  { num: '08', title: 'Governança & Evolução', desc: 'Entrega com métricas claras. Dashboard de resultados. Plano de evolução contínua — seu projeto não morre na entrega.' },
 ];
 
 const faq = [
@@ -158,6 +157,16 @@ const HeroSection = () => {
           className="absolute inset-0 h-full w-full object-cover opacity-[0.35]"
         >
           <source src="/videos/hero-noaudio.mp4" type="video/mp4" />
+        </video>
+        {/* Textura sutil — parede/canvas premium */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.06] mix-blend-overlay"
+        >
+          <source src="/videos/sentinela/7.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/80 to-[#030303]" />
       </motion.div>
@@ -206,9 +215,8 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] leading-[1.02] font-extrabold tracking-[-0.03em] text-white"
           >
-            Soberania Digital{' '}
-            <span className="text-gradient-premium">para empresas</span>
-            {' '}que querem vender com mais estrutura
+            A infraestrutura digital{' '}
+            <span className="text-gradient-premium">que seu negócio merece</span>
           </motion.h1>
 
           {/* Sub */}
@@ -217,8 +225,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
           >
-            Infraestrutura digital de vendas para empresas que querem crescer com tecnologia, 
-            design e governança de resultados. Franca-SP e Brasil.
+            Sites premium, aplicativos sob medida, automações inteligentes e dashboards em tempo real — tudo integrado para empresas locais que querem vender mais, todos os dias, sem depender de ninguém.
           </motion.p>
 
           {/* CTAs */}
@@ -361,21 +368,76 @@ const SolucaoSection = () => (
   </SectionWrapper>
 );
 
-/* ─── SECTION 4: Arquitetura Rei das Vendas ─── */
-const ArquiteturaSection = () => (
-  <SectionWrapper dark>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <SectionHeading
-        label="Arquitetura"
-        title="Engenharia da"
-        highlight="Soberania Digital"
-        description="Do diagnóstico à governança: o fluxo completo que transforma seu negócio em uma máquina de vendas previsível."
-      />
+/* ─── SECTION 4: Vídeo-Cinema (scroll reveal) ─── */
+const VideoSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start']
+  });
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.5, 1], [100, 0, -100]);
 
-      <AutomationFlow />
-    </div>
-  </SectionWrapper>
-);
+  return (
+    <SectionWrapper dark>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <SectionHeading
+          label="Projetos em Ação"
+          title="Tecnologia que"
+          highlight="transforma negócios"
+          description="Cada projeto é uma infraestrutura digital viva — sites, apps, automações, dashboards. Tudo feito sob medida para empresas locais que pensam grande."
+        />
+
+        <motion.div ref={ref} style={{ scale, opacity }} className="relative mx-auto mt-12 max-w-4xl">
+          {/* Golden frame — glassmorphism */}
+          <div className="relative overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.25)] bg-[rgba(3,3,3,0.6)] backdrop-blur-sm shadow-[0_0_60px_rgba(214,168,79,0.08)]">
+            {/* Glow superior */}
+            <div className="pointer-events-none absolute -inset-1 rounded-3xl bg-gradient-to-b from-[rgba(214,168,79,0.1)] to-transparent blur-xl" />
+            
+            <motion.div style={{ y }} className="relative aspect-[9/16] max-h-[75vh] overflow-hidden rounded-2xl sm:mx-auto sm:w-auto">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
+              >
+                <source src="/videos/sentinela/7.mp4" type="video/mp4" />
+              </video>
+              {/* Overlay gradiente sutil */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/30" />
+              
+              {/* Texto sobreposto no canto inferior */}
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(3,3,3,0.7)] px-4 py-2 backdrop-blur-sm">
+                  <div className="h-1.5 w-1.5 rounded-full bg-[#D6A84F] animate-pulse" />
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
+                    Infraestrutura Digital • Franca-SP
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Legendas flutuantes */}
+          <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+            {[
+              { n: '12+', l: 'Projetos Entregues' },
+              { n: '98%', l: 'Clientes Satisfeitos' },
+              { n: '3 anos', l: 'Construindo o Futuro Digital' },
+            ].map((s) => (
+              <div key={s.l} className="rounded-xl border border-[rgba(214,168,79,0.08)] bg-[rgba(255,255,255,0.02)] px-3 py-4 backdrop-blur-sm">
+                <div className="text-lg font-bold text-[#D6A84F] sm:text-xl">{s.n}</div>
+                <div className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-[#71717A]">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </SectionWrapper>
+  );
+};
 
 /* ─── SECTION 5: Soluções Detalhadas ─── */
 const SolucoesDetalhadas = () => (
@@ -669,7 +731,7 @@ export default function Home() {
       <HeroSection />
       <ProblemaSection />
       <SolucaoSection />
-      <ArquiteturaSection />
+      <VideoSection />
       <SolucoesDetalhadas />
       <SegmentosSection />
       <FounderSection />

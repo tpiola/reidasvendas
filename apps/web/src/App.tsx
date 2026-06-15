@@ -74,20 +74,29 @@ export default function App() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'LocalBusiness',
+            '@type': ['LocalBusiness', 'ProfessionalService'],
             name: 'Rei das Vendas',
-            description: 'Infraestrutura digital de vendas para empresas. Sites premium, automação, IA e governança de resultados.',
-            areaServed: 'Franca-SP',
+            description: 'Sites premium, aplicativos sob medida, automações inteligentes e dashboards em tempo real para empresas locais em Franca-SP. Infraestrutura digital completa.',
+            areaServed: ['Franca', 'Ribeirão Preto', 'São Paulo', 'Brasil'],
             url: 'https://reidasvendas.com.br',
             foundingDate: '2023',
             founder: { '@type': 'Person', name: 'Thiago B. G. Piola' },
+            address: { '@type': 'PostalAddress', addressLocality: 'Franca', addressRegion: 'SP', addressCountry: 'BR' },
             contactPoint: [{
               '@type': 'ContactPoint',
-              telephone: 'https://wa.me/5516999999999',
+              telephone: '+5516999999999',
               contactType: 'customer support',
+              availableLanguage: ['Portuguese'],
             }],
-            makesOffer: ['Sites Apps Automações Dashboards Mentoria'],
-            knowsAbout: ['Calçadista Comércio Indústria Saúde Educação Serviços'],
+            makesOffer: [
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Criação de Sites Profissionais' }},
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desenvolvimento de Aplicativos' }},
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automação Comercial' }},
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dashboards em Tempo Real' }},
+              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mentoria Digital' }},
+            ],
+            knowsAbout: ['Web Design', 'Desenvolvimento de Software', 'Automação de Marketing', 'CRM', 'Inteligência Artificial', 'SEO'],
+            priceRange: '$$',
           }),
         }}
       />

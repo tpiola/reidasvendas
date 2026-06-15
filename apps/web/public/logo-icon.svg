@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-label="Rei das Vendas">
+  <defs>
+    <linearGradient id="rg" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2D38A"/>
+      <stop offset="35%" stop-color="#D6A84F"/>
+      <stop offset="75%" stop-color="#C4953A"/>
+      <stop offset="100%" stop-color="#9A7209"/>
+    </linearGradient>
+    <linearGradient id="rg2" x1="0" y1="0" x2="0" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFF8E7"/>
+      <stop offset="50%" stop-color="#F2D38A"/>
+      <stop offset="100%" stop-color="#C4953A"/>
+    </linearGradient>
+  </defs>
+  <!-- Crown points on top of R -->
+  <path d="M12 20 L24 8 L36 20" stroke="url(#rg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Crown jewels -->
+  <circle cx="24" cy="12" r="2" fill="url(#rg2)"/>
+  <circle cx="14" cy="18" r="1.5" fill="url(#rg)"/>
+  <circle cx="34" cy="18" r="1.5" fill="url(#rg)"/>
+  <!-- R vertical stem -->
+  <path d="M19 18 L19 42" stroke="url(#rg)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- R bowl (top curve) -->
+  <path d="M19 18 Q32 16 33 25 Q34 34 19 33" stroke="url(#rg)" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  <!-- R leg (diagonal) -->
+  <path d="M28 33 L38 42" stroke="url(#rg)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Subtle highlight on stem -->
+  <path d="M19 18 L19 42" stroke="url(#rg2)" stroke-width="1.2" stroke-linecap="round" opacity="0.4" transform="translate(-1.5,0)"/>
+</svg>

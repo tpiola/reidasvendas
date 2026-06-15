@@ -37,11 +37,11 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex flex-col">
+            <Link to="/" className="flex items-center gap-3">
               <img
-                src="/logo.jpg"
+                src="/logo.svg"
                 alt="Rei das Vendas"
-                className="h-14 w-auto object-contain mb-4"
+                className="h-10 w-auto object-contain"
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#71717A]">
