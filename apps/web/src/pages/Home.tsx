@@ -4,7 +4,7 @@ import {
   MessageCircle, CheckCircle2, MapPin, Quote,
   TrendingUp, Shield, Zap, Clock, Target, Layers, Users,
 } from 'lucide-react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { BRAND } from '@/lib/brand';
 import {
@@ -21,16 +21,27 @@ import { FounderSection } from '@/components/FounderSection';
 
 /* ─── Animated Counter ─── */
 function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-50px' });
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
-  const hasPlus = value.includes('+');
+  const ref = useRef<HTMLSpanElement>(null);
   const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
+  const hasPlus = value.includes('%') ? false : value.includes('+');
 
   useEffect(() => {
-    if (!isInView) return;
-    const duration = 2000;
-    const steps = 60;
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const duration = 1800;
+    const steps = 50;
     const increment = numericValue / steps;
     let current = 0;
     const timer = setInterval(() => {
@@ -43,11 +54,15 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
       }
     }, duration / steps);
     return () => clearInterval(timer);
-  }, [isInView, numericValue]);
+  }, [started, numericValue]);
+
+  const display = value.includes('%')
+    ? `${count}%`
+    : `${count}${hasPlus ? '+' : ''}`;
 
   return (
     <span ref={ref} className="num-gold text-3xl font-extrabold sm:text-4xl lg:text-5xl tabular-nums">
-      {count}{hasPlus ? '+' : ''}{suffix}
+      {display}
     </span>
   );
 }
