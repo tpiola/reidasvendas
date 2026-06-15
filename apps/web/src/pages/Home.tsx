@@ -15,7 +15,7 @@ import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
 import { DataPanel } from '@/components/DataPanel';
-import { LuxuryDivider, GoldBadge, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
+import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { AutomationFlow } from '@/components/AutomationFlow';
 import { FounderSection } from '@/components/FounderSection';
 
@@ -165,12 +165,15 @@ const HeroSection = () => {
       {/* Content */}
       <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div className="max-w-3xl">
-          {/* Badge */}
+          {/* Gold line + badge */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
-            <GoldBadge>
-              <MapPin className="h-3 w-3" />
-              Infraestrutura Digital • Franca-SP
-            </GoldBadge>
+            <div className="mb-4">
+              <div className="h-px w-6 bg-[#D6A84F] opacity-60 mb-3" />
+              <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D6A84F]">
+                <MapPin className="h-3 w-3 inline-block mr-1.5 -mt-0.5" />
+                Infraestrutura Digital • Franca-SP
+              </span>
+            </div>
           </motion.div>
 
           {/* Headline */}

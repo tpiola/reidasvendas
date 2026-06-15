@@ -219,17 +219,22 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Section Heading ─── */
 .section-label {
-  display: inline-block;
-  padding: 0.375rem 1rem;
-  border-radius: 9999px;
-  border: 1px solid var(--rdv-gold-border);
-  background: rgba(214,168,79,0.08);
+  display: block;
   color: var(--rdv-gold);
   font-size: 0.625rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
+  margin-bottom: 0.75rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--rdv-gold);
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
 }
 
 /* ─── Labels ─── */
