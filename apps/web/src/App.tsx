@@ -14,6 +14,7 @@ const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Contato = lazy(() => import('@/pages/Contato'));
 const Politica = lazy(() => import('@/pages/Politica'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
+const Dashboard = lazy(() => import('@/pages/Dashboard'));
 
 function Loading() {
   return (
@@ -36,32 +37,38 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   );
 }
 
-function AnimatedRoutes() {
+function SiteLayout() {
   const location = useLocation();
   return (
-    <Suspense fallback={<Loading />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-          <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
-          <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
-          <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
-          <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
-          <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
-          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+    <>
+      <GoldParticles count={20} />
+      <SiteHeader />
+      <div className="page-offset">
+        <Suspense fallback={<Loading />}>
+          <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
+              <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+              <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
+              <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
+              <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
+              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+            </Routes>
+          </AnimatePresence>
+        </Suspense>
+      </div>
+      <SiteFooter />
+      <CookieConsent />
+      <SuporteBot />
+    </>
   );
 }
 
 export default function App() {
   return (
     <Router>
-      {/* Gold particles background (fixed, subtle) */}
-      <GoldParticles count={20} />
-
-      {/* JSON-LD */}
+      {/* JSON-LD global */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -84,13 +91,11 @@ export default function App() {
           }),
         }}
       />
-      <SiteHeader />
-      <div className="page-offset">
-        <AnimatedRoutes />
-      </div>
-      <SiteFooter />
-      <CookieConsent />
-      <SuporteBot />
+
+      <Routes>
+        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="*" element={<SiteLayout />} />
+      </Routes>
     </Router>
   );
 }
