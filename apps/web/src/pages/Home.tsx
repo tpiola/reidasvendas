@@ -220,7 +220,7 @@ const ProblemaSection = () => (
       <Reveal className="mx-auto mb-12 max-w-3xl text-center">
         <SectionLabel>O Diagnóstico</SectionLabel>
         <SectionTitle highlight="gargalo">
-          Por que seu negócio ainda não vende
+          Por que seu negócio ainda não vende — o
         </SectionTitle>
       </Reveal>
 
@@ -241,9 +241,18 @@ const ProblemaSection = () => (
       </div>
 
       <Reveal delay={0.3}>
-        <div className="mt-10 text-center">
-          <GoldBadge>Mas existe uma maneira diferente</GoldBadge>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 text-center"
+        >
+          <div className="luxury-divider max-w-xs mx-auto mb-6" />
+          <p className="text-sm italic text-[#A1A1AA]">
+            É aqui que a maioria trava. Mas existe um caminho diferente.
+          </p>
+        </motion.div>
       </Reveal>
     </div>
   </SectionWrapper>
@@ -390,10 +399,10 @@ const ProvaSection = () => {
     <SectionWrapper>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
-          label="Prova Social"
+          label="Depoimentos"
           title="Quem já viveu na pele"
           highlight="recomenda"
-          description="Feedback real de quem confiou no nosso trabalho e viu o resultado."
+          description="Pessoas reais, resultados reais — sem roteiro, sem historinha."
         />
 
         <motion.div
@@ -450,7 +459,9 @@ const ProvaSection = () => {
 
         <Reveal>
           <div className="text-center">
-            <GoldBadge>Resultados reais baseados em dados dos nossos projetos</GoldBadge>
+            <p className="text-xs text-[#71717A] italic">
+              Números reais, baseados em dados consolidados dos nossos projetos.
+            </p>
           </div>
         </Reveal>
       </div>
