@@ -57,38 +57,38 @@ function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: strin
 const servicos = [
   {
     icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Design que converte 24h',
-    desc: 'Landing pages cinematográficas, sites institucionais premium e e-commerces. Performance obsessiva, SEO estrutural e conversão medida em cada pixel.',
+    desc: 'Landing pages que carregam em 1.2s. Sites institucionais com SEO que entrega leads. E-commerce que não perde venda por lentidão. Performance medida — não prometida.',
     img: BRAND.images.services.sites,
   },
   {
     icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Seu negócio no bolso',
-    desc: 'Apps iOS e Android com UX de classe mundial. Delivery, catálogo interativo, relacionamento — experiências digitais completas.',
+    desc: 'Apps iOS/Android construídos do zero. Delivery, catálogo, relacionamento. Sem template. Sem bloatware. O que seu cliente precisa, nada mais.',
     img: BRAND.images.services.apps,
   },
   {
-    icon: Bot, title: 'Automação Inteligente', tagline: 'Processos que vendem sozinhos',
-    desc: 'CRM integrado, chatbots com IA, funis automatizados e disparo omnichannel. Transforme processos manuais em máquinas de venda previsíveis.',
+    icon: Bot, title: 'Automação Inteligente', tagline: 'Processos que rodam sem você',
+    desc: 'CRM integrado. Chatbots que qualificam antes de transferir. Disparo omnichannel. Funis que fecham venda enquanto você dorme.',
     img: BRAND.images.services.automations,
   },
   {
-    icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Decisões baseadas em dados',
-    desc: 'Painéis personalizados com métricas vivas do seu negócio. Vendas, estoque, leads, ROI — tudo num golpe de vista.',
+    icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Não achismos.',
+    desc: 'Painéis com métricas vivas. Vendas, estoque, leads, ROI. O que funciona, o que não funciona — você vê na hora. Sem planilha, sem palpite.',
     img: BRAND.images.services.dashboards,
   },
   {
-    icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia que acelera',
-    desc: 'Sessões individuais para estruturar sua presença digital. Do zero à escala, com metas claras e acompanhamento contínuo.',
+    icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não tutorial',
+    desc: 'Sessões individuais. Metro a metro na sua presença digital. Sem teoria. Sem curso gravado. Resultado mensurável a cada quinzena.',
     img: BRAND.images.services.mentoria,
   },
 ];
 
 const diferenciais = [
-  { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecimento do mercado local. Atendimento presencial quando necessário.' },
-  { icon: Target, title: 'Projetos Únicos', desc: 'Zero template. Cada solução é desenhada sob medida para sua marca.' },
-  { icon: Zap, title: 'Tecnologia Enterprise', desc: 'React, Next.js, IA generativa, n8n. O mesmo stack das big techs.' },
-  { icon: Shield, title: 'Suporte Contínuo', desc: 'Não entregamos e sumimos. Acompanhamento, ajustes e evolução contínua.' },
-  { icon: Layers, title: 'Arquitetura Modular', desc: 'Soluções que crescem com seu negócio. Do MVP ao ecossistema completo.' },
-  { icon: TrendingUp, title: 'Governança de Resultados', desc: 'Métricas claras de visitas, leads, CPA. Decisões baseadas em dados reais.' },
+  { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecemos o mercado local. Atendimento presencial quando precisa.' },
+  { icon: Target, title: 'Projetos Únicos', desc: 'Zero template. Cada projeto nasce do zero para o seu problema.' },
+  { icon: Zap, title: 'Tecnologia Enterprise', desc: 'React, Next.js, IA, n8n. Mesmo stack que move bilhões. Sem firula.' },
+  { icon: Shield, title: 'Suporte Contínuo', desc: 'Entregamos e ficamos. Ajustes, evolução, segurança — prazo aberto.' },
+  { icon: Layers, title: 'Arquitetura Modular', desc: 'Começa pequeno. Escala sem precisar refazer. Cresce com você.' },
+  { icon: TrendingUp, title: 'Governança de Resultados', desc: 'Visitas, leads, CPA. Toda decisão apoiada em número. Sem chute.' },
 ];
 
 const nichos = [
@@ -101,23 +101,23 @@ const nichos = [
 ];
 
 const processos = [
-  { num: '01', title: 'Diagnóstico Digital', desc: 'Análise profunda do negócio, concorrência, mercado e metas. Mapeamento completo da infraestrutura atual.' },
-  { num: '02', title: 'Arquitetura da Solução', desc: 'Definição da estrutura tecnológica, jornada do usuário e estratégia de conversão. Projeto detalhado.' },
-  { num: '03', title: 'Design Premium', desc: 'Criação da identidade visual, UI/UX com foco em conversão. Layouts testados em neuro-UX.' },
-  { num: '04', title: 'Desenvolvimento Ágil', desc: 'Construção com tecnologia de ponta. Sprints semanais com entregas incrementais e validação contínua.' },
-  { num: '05', title: 'Automação & Integrações', desc: 'Conexão com CRM, WhatsApp, e-mail marketing, pagamentos. Processos que funcionam 24h.' },
-  { num: '06', title: 'SEO & Performance', desc: 'Otimização para mecanismos de busca, Core Web Vitals, schema markup e velocidade.' },
-  { num: '07', title: 'Testes & Validação', desc: 'QA completo, testes de conversão, acessibilidade WCAG, responsividade. Zero surpresas.' },
-  { num: '08', title: 'Governança & Evolução', desc: 'Entrega com métricas claras, dashboard de resultados e plano de evolução contínua.' },
+  { num: '01', title: 'Diagnóstico Digital', desc: 'Análise do negócio, concorrência, mercado e metas. Mapeamento da infraestrutura atual — o que existe, o que falta, o que precisa ser refeito.' },
+  { num: '02', title: 'Arquitetura da Solução', desc: 'Definição da estrutura tecnológica, fluxo de conversão e usabilidade. Projeto detalhado antes de escrever uma linha de código.' },
+  { num: '03', title: 'Design Premium', desc: 'Identidade visual e interface com foco em conversão. Layouts testados antes de ir para desenvolvimento.' },
+  { num: '04', title: 'Desenvolvimento Ágil', desc: 'Construção com tecnologia de ponta. Sprints semanais. Entregas incrementais. Validação a cada ciclo.' },
+  { num: '05', title: 'Automação & Integrações', desc: 'Conexão com CRM, WhatsApp, e-mail, pagamentos. Processos que rodam 24h sem supervisão.' },
+  { num: '06', title: 'SEO & Performance', desc: 'Otimização para Google, Core Web Vitals, schema markup. Velocidade que segura visitante.' },
+  { num: '07', title: 'Testes & Validação', desc: 'QA completo. Testes de conversão. Acessibilidade. Responsividade. Zero surpresa no lançamento.' },
+  { num: '08', title: 'Governança & Evolução', desc: 'Entrega com métricas claras. Dashboard de resultados. Plano de evolução contínua — o projeto não morre na entrega.' },
 ];
 
 const faq = [
-  { q: 'O que é soberania digital?', r: 'É a capacidade da sua empresa ter controle total sobre sua infraestrutura digital — dados, processos, automações — sem depender de plataformas genéricas ou terceiros. Você é dono do seu ecossistema.' },
-  { q: 'Quanto tempo leva para estruturar uma solução?', r: 'Um diagnóstico completo sai em até 48h. Projetos de infraestrutura digital levam de 2 a 8 semanas, dependendo da complexidade.' },
-  { q: 'Preciso saber programar?', r: 'Não. Nós cuidamos de toda a parte técnica. Você participa das decisões estratégicas e acompanha cada etapa sem se envolver com tecnologia.' },
-  { q: 'Quanto custa?', r: 'Cada projeto é único. O investimento varia conforme a complexidade. Oferecemos diagnóstico gratuito para apresentar uma proposta clara e sem surpresas.' },
-  { q: 'Atendem empresas de qualquer porte?', r: 'Sim. Trabalhamos desde MEIs que querem dar o primeiro passo digital até indústrias consolidadas que buscam escalar com automação e dados.' },
-  { q: 'Como funciona o suporte após a entrega?', r: 'Todo projeto inclui suporte e acompanhamento. Oferecemos planos de governança contínua com melhorias, segurança e novas funcionalidades.' },
+  { q: 'O que é soberania digital?', r: 'É você ter controle sobre seus dados, processos e automações — sem depender de plataforma de terceiro que muda as regras quando quer. Seu negócio. Sua infraestrutura.' },
+  { q: 'Quanto tempo leva?', r: 'Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade.' },
+  { q: 'Preciso saber programar?', r: 'Não. Você decide o que fazer. A gente faz acontecer. Zero envolvimento técnico.' },
+  { q: 'Quanto custa?', r: 'Cada projeto é um projeto. Varia conforme a complexidade. Diagnóstico gratuito para chegar num número justo — sem surpresa.' },
+  { q: 'Atendem empresas de qualquer porte?', r: 'MEI querendo sair do Instagram, indústria querendo escalar com automação. Tamanho não é filtro. Seriedade sim.' },
+  { q: 'E depois da entrega?', r: 'Todo projeto inclui suporte. Planos de governança contínua: melhorias, segurança, funcionalidades novas.' },
 ];
 
 /* ─── SECTION 1: Hero ─── */
@@ -191,7 +191,7 @@ const HeroSection = () => {
             className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
           >
             Infraestrutura digital de vendas para empresas que querem crescer com tecnologia, 
-            design premium e governança de resultados — em Franca-SP e em todo o Brasil.
+            design e governança de resultados. Franca-SP e Brasil.
           </motion.p>
 
           {/* CTAs */}
