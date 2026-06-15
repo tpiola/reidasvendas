@@ -37,15 +37,17 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group" aria-label="Rei das Vendas - Home">
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Rei das Vendas - Home">
           <img
-            src="/logo-icon.svg"
+            src="/logo-r-icon.png"
             alt="R"
-            className="h-8 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
+            className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
           />
-          <span className="hidden sm:inline text-[15px] font-bold tracking-[0.18em] bg-gradient-to-r from-[#F2D38A] via-[#D6A84F] to-[#B88932] bg-clip-text text-transparent">
-            REI DAS VENDAS
-          </span>
+          <img
+            src="/logo-texto.png"
+            alt="Rei das Vendas"
+            className="h-5 w-auto object-contain transition-all duration-300 group-hover:opacity-90 hidden sm:block"
+          />
         </Link>
 
         {/* Desktop Nav */}
