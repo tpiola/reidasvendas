@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { BRAND } from '@/lib/brand';
 import { LuxuryDivider } from '@/components/PremiumComponents';
 
@@ -36,26 +37,13 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <defs>
-                  <linearGradient id="footer-crown" x1="6" y1="4" x2="26" y2="28" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#F2D38A"/>
-                    <stop offset="45%" stopColor="#D6A84F"/>
-                    <stop offset="100%" stopColor="#B88932"/>
-                  </linearGradient>
-                </defs>
-                <g transform="translate(4, 5) scale(0.375)">
-                  <path d="M32 6 L38 22 L52 18 L44 34 L56 40 L32 36 L8 40 L20 34 L12 18 L26 22 Z" stroke="url(#footer-crown)" strokeWidth="1.35" fill="none"/>
-                  <path d="M32 6 L26 22 L20 34 M32 6 L38 22 L44 34 M26 22 L38 22 M20 34 L44 34" stroke="url(#footer-crown)" strokeWidth="0.9" strokeOpacity="0.65" fill="none"/>
-                  <path d="M14 44 H50" stroke="url(#footer-crown)" strokeWidth="1.2" strokeLinecap="round"/>
-                </g>
-              </svg>
-              <span className="text-sm font-bold tracking-[0.15em]">
-                <span className="text-[#D6A84F]">REI</span>{' '}
-                <span className="text-white/80">DAS VENDAS</span>
-              </span>
-            </div>
+            <Link to="/" className="flex flex-col">
+              <img
+                src="/logo.jpg"
+                alt="Rei das Vendas"
+                className="h-14 w-auto object-contain mb-4"
+              />
+            </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#71717A]">
               Infraestrutura digital de vendas para empresas que querem vender com mais estrutura. 
               Tecnologia, design e estratégia — tudo sob medida.

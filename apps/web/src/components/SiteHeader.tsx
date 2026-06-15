@@ -37,28 +37,12 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group" aria-label="Rei das Vendas - Home">
-          <div className="relative flex items-center gap-2">
-            {/* Crown SVG */}
-            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" className="transition-transform duration-500 group-hover:scale-110" aria-hidden="true">
-              <defs>
-                <linearGradient id="header-crown" x1="6" y1="4" x2="26" y2="28" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#F2D38A"/>
-                  <stop offset="45%" stopColor="#D6A84F"/>
-                  <stop offset="100%" stopColor="#B88932"/>
-                </linearGradient>
-              </defs>
-              <g transform="translate(4, 5) scale(0.375)">
-                <path d="M32 6 L38 22 L52 18 L44 34 L56 40 L32 36 L8 40 L20 34 L12 18 L26 22 Z" stroke="url(#header-crown)" strokeWidth="1.35" fill="none"/>
-                <path d="M32 6 L26 22 L20 34 M32 6 L38 22 L44 34 M26 22 L38 22 M20 34 L44 34" stroke="url(#header-crown)" strokeWidth="0.9" strokeOpacity="0.65" fill="none"/>
-                <path d="M14 44 H50" stroke="url(#header-crown)" strokeWidth="1.2" strokeLinecap="round"/>
-              </g>
-            </svg>
-            <span className="text-sm font-bold tracking-[0.15em]">
-              <span className="text-[#D6A84F]">REI</span>{' '}
-              <span className="text-white/90">DAS VENDAS</span>
-            </span>
-          </div>
+        <Link to="/" className="flex items-center gap-3 group" aria-label="Rei das Vendas - Home">
+          <img
+            src="/logo.jpg"
+            alt="Rei das Vendas"
+            className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
+          />
         </Link>
 
         {/* Desktop Nav */}
