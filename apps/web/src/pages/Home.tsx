@@ -73,31 +73,31 @@ const servicos = [
     icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Seu negócio aberto 24h',
     desc: 'Um site que carrega em 1.2s e entrega leads enquanto você dorme. SEO que coloca você no Google. Design que vende — não só que enfeita.',
     img: BRAND.images.services.sites,
-    videoSrc: '/videos/stock/sites.mp4',
+    videoSrc: '/videos/sentinela/4.mp4',
   },
   {
     icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Na palma da mão do seu cliente',
     desc: 'App iOS/Android feito do zero pro seu negócio. Delivery, catálogo, fidelidade. Sem template. Sem bloatware. Só o que seu cliente precisa.',
     img: BRAND.images.services.apps,
-    videoSrc: '/videos/stock/apps.mp4',
+    videoSrc: '/videos/sentinela/8.mp4',
   },
   {
     icon: Bot, title: 'Automação Comercial', tagline: 'Enquanto você dorme, ela vende',
     desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam sem você.',
     img: BRAND.images.services.automations,
-    videoSrc: '/videos/stock/automation.mp4',
+    videoSrc: '/videos/sentinela/3.mp4',
   },
   {
     icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Palpite zero.',
     desc: 'Vendas, estoque, leads, ROI. Tudo num painel vivo. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha.',
     img: BRAND.images.services.dashboards,
-    videoSrc: '/videos/stock/dashboards.mp4',
+    videoSrc: '/videos/sentinela/10.mp4',
   },
   {
     icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não curso',
     desc: 'Sessões individuais. Mês a mês na sua presença digital. Sem teoria, sem aula gravada. Resultado mensurável a cada encontro.',
     img: BRAND.images.services.mentoria,
-    videoSrc: '/videos/stock/mentoria.mp4',
+    videoSrc: '/videos/sentinela/2.mp4',
   },
 ];
 
@@ -160,7 +160,7 @@ const HeroSection = () => {
           playsInline
           className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
         >
-          <source src="/videos/stock/hero.mp4" type="video/mp4" />
+          <source src="/videos/sentinela/7.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/85 to-[#030303]" />
         <div className="absolute inset-0 bg-grid-lg opacity-[0.04]" />
