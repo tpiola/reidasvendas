@@ -147,10 +147,19 @@ const HeroSection = () => {
       {/* Gold particles */}
       <GoldParticles count={50} />
 
-      {/* Background */}
+      {/* Background — Vídeo mudo premium */}
       <motion.div style={{ y: heroY, scale }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1920&q=85')] bg-cover bg-center opacity-[0.12]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/85 to-[#030303]" />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/videos/hero-preview.jpg"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.35]"
+        >
+          <source src="/videos/hero-noaudio.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/80 to-[#030303]" />
       </motion.div>
 
       {/* Gold glow gradients */}
