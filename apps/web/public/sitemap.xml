@@ -3,9 +3,23 @@
 
   <url>
     <loc>https://reidasvendas.com.br/</loc>
-    <lastmod>2026-06-01</lastmod>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://reidasvendas.com.br/servicos</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://reidasvendas.com.br/portfolio</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
   <url>
@@ -44,94 +58,52 @@
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/templates</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://reidasvendas.com.br/blog</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/templates/estetica-lux</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/templates/odontologia-pro</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/templates/personal-prime</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/projetos</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/projetos/clube-digital</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://reidasvendas.com.br/blog/soberania-digital-o-que-e</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/projetos/advocacia-soberana</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://reidasvendas.com.br/blog/infraestrutura-de-vendas-digitais</loc>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/projetos/vitrine-imobiliaria-3d</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://reidasvendas.com.br/blog/automacao-inteligente-para-negocios-locais</loc>
+    <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/projetos/maquina-de-varejo</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/blog</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/blog/funil-whatsapp-negocio-local</loc>
+    <loc>https://reidasvendas.com.br/blog/design-premium-ou-template</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/blog/site-rapido-converte-mais</loc>
-    <lastmod>2026-06-01</lastmod>
+    <loc>https://reidasvendas.com.br/contato</loc>
+    <lastmod>2026-06-16</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://reidasvendas.com.br/blog/automacao-n8n-sem-complicar</loc>
+    <loc>https://reidasvendas.com.br/diagnostico</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.95</priority>
   </url>
 
   <url>
@@ -153,20 +125,6 @@
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/diagnostico</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <url>
-    <loc>https://reidasvendas.com.br/contato</loc>
-    <lastmod>2026-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
 
   <url>

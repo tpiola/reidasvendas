@@ -1,29 +1,153 @@
-import { useState } from 'react';
-import { Send, MessageCircle, Mail, MapPin, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Send, MessageCircle, Mail, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal } from '@/hooks/useAnimation';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GoldParticles } from '@/components/GoldParticles';
 
+/* ─── N8N Webhook URL ─── */
+const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL || '';
+
+type FormErrors = {
+  nome?: string;
+  email?: string;
+  telefone?: string;
+};
+
 export default function Contato() {
-  const [form, setForm] = useState({ nome: '', email: '', whatsapp: '', mensagem: '' });
+  const [form, setForm] = useState({
+    nome: '',
+    email: '',
+    empresa: '',
+    telefone: '',
+    comoConheceu: '',
+    mensagem: '',
+  });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [sent, setSent] = useState(false);
+  const [toastMessage, setToastMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  /* ─── Capturar ?plano= da URL ─── */
+  const [planoParam, setPlanoParam] = useState('');
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const plano = params.get('plano');
+    if (plano) {
+      setPlanoParam(plano);
+      const planoNome = plano === 'digital' ? 'Digital'
+        : plano === 'profissional' ? 'Profissional'
+        : plano === 'enterprise' ? 'Enterprise'
+        : plano;
+      setToastMessage({ type: 'success', text: `Você está contratando o plano ${planoNome}! Preencha os dados abaixo.` });
+      setForm((prev) => ({ ...prev, mensagem: `Quero contratar o plano ${planoNome}` }));
+    }
+  }, []);
+
+  /* ─── Exibir toast por 5s ─── */
+  useEffect(() => {
+    if (toastMessage) {
+      const t = setTimeout(() => setToastMessage(null), 5000);
+      return () => clearTimeout(t);
+    }
+  }, [toastMessage]);
+
+  /* ─── Validation ─── */
+  const validate = (): boolean => {
+    const errs: FormErrors = {};
+    if (!form.nome.trim()) errs.nome = 'Nome é obrigatório';
+    if (!form.email.trim()) errs.email = 'E-mail é obrigatório';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'E-mail inválido';
+    if (!form.telefone.trim()) errs.telefone = 'Telefone é obrigatório';
+    else if (form.telefone.replace(/\D/g, '').length < 10) errs.telefone = 'Telefone inválido — mínimo 10 dígitos';
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validate()) return;
+    setLoading(true);
+
+    const origem = window.location.pathname + window.location.search;
+
+    const leadPayload = {
+      nome: form.nome,
+      email: form.email,
+      empresa: form.empresa,
+      telefone: form.telefone,
+      comoConheceu: form.comoConheceu,
+      mensagem: form.mensagem,
+      plano: planoParam || undefined,
+      origem,
+      pagina: '/contato',
+      timestamp: new Date().toISOString(),
+    };
+
     try {
+      /* ─── Enviar para API local ─── */
       await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, pagina: '/contato', timestamp: new Date().toISOString() }),
+        body: JSON.stringify({ ...leadPayload }),
       });
     } catch { /* silent */ }
+
+    /* ─── Enviar para n8n ─── */
+    let n8nOk = false;
+    if (N8N_WEBHOOK_URL) {
+      try {
+        const r = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadPayload),
+        });
+        if (r.ok) n8nOk = true;
+        else console.warn('[n8n] webhook respondeu com status', r.status);
+      } catch (err) {
+        console.warn('[n8n] webhook falhou, salvando localmente', err);
+        try {
+          const localLeads = JSON.parse(localStorage.getItem('leads_pendentes') || '[]');
+          localLeads.push({ ...leadPayload, salvoEm: new Date().toISOString() });
+          localStorage.setItem('leads_pendentes', JSON.stringify(localLeads));
+        } catch { /* silent */ }
+      }
+    }
+
+    setLoading(false);
     setSent(true);
+    setToastMessage({
+      type: 'success',
+      text: n8nOk
+        ? 'Recebemos seu contato! Responderemos em breve.'
+        : 'Recebemos seu contato! (Modo offline — dados salvos localmente)',
+    });
   };
 
   return (
     <main>
       <GoldParticles count={20} />
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed top-24 left-1/2 z-50 -translate-x-1/2 animate-fade-in">
+          <div
+            className={`flex items-center gap-2.5 rounded-xl border px-5 py-3 shadow-2xl backdrop-blur-xl ${
+              toastMessage.type === 'success'
+                ? 'border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.1)] text-[#D6A84F]'
+                : 'border-red-500/30 bg-red-500/10 text-red-400'
+            }`}
+          >
+            {toastMessage.type === 'success' ? (
+              <CheckCircle2 className="h-4 w-4 shrink-0" />
+            ) : (
+              <AlertCircle className="h-4 w-4 shrink-0" />
+            )}
+            <span className="text-sm font-medium">{toastMessage.text}</span>
+          </div>
+        </div>
+      )}
 
       {/* Hero */}
       <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20">
@@ -63,26 +187,58 @@ export default function Contato() {
                   </PremiumButton>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  {planoParam && (
+                    <div className="rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(214,168,79,0.04)] px-4 py-3">
+                      <p className="text-xs font-medium text-[#D6A84F]">
+                        Contratando plano{' '}
+                        <strong>
+                          {planoParam === 'digital' ? 'Digital'
+                            : planoParam === 'profissional' ? 'Profissional'
+                            : planoParam === 'enterprise' ? 'Enterprise'
+                            : planoParam}
+                        </strong>
+                      </p>
+                    </div>
+                  )}
                   <div>
-                    <label className="label-field mb-1.5 block">Nome completo</label>
-                    <input type="text" required value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} placeholder="Seu nome completo" className="input-field" />
+                    <label className="label-field mb-1.5 block">Nome completo *</label>
+                    <input type="text" required value={form.nome} onChange={(e) => { setForm({ ...form, nome: e.target.value }); setErrors((prev) => ({ ...prev, nome: undefined })); }} placeholder="Seu nome completo" className={`input-field ${errors.nome ? 'border-red-500/50' : ''}`} />
+                    {errors.nome && <p className="mt-1 text-xs text-red-400">{errors.nome}</p>}
                   </div>
                   <div>
-                    <label className="label-field mb-1.5 block">E-mail</label>
-                    <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="seu@email.com" className="input-field" />
+                    <label className="label-field mb-1.5 block">E-mail *</label>
+                    <input type="email" required value={form.email} onChange={(e) => { setForm({ ...form, email: e.target.value }); setErrors((prev) => ({ ...prev, email: undefined })); }} placeholder="seu@email.com" className={`input-field ${errors.email ? 'border-red-500/50' : ''}`} />
+                    {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
                   </div>
                   <div>
-                    <label className="label-field mb-1.5 block">WhatsApp</label>
-                    <input type="tel" required value={form.whatsapp} onChange={(e) => setForm({ ...form, whatsapp: e.target.value })} placeholder="(16) 99999-0000" className="input-field" />
+                    <label className="label-field mb-1.5 block">Empresa</label>
+                    <input type="text" value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })} placeholder="Nome da sua empresa (opcional)" className="input-field" />
+                  </div>
+                  <div>
+                    <label className="label-field mb-1.5 block">Telefone / WhatsApp *</label>
+                    <input type="tel" required value={form.telefone} onChange={(e) => { setForm({ ...form, telefone: e.target.value }); setErrors((prev) => ({ ...prev, telefone: undefined })); }} placeholder="(16) 99999-0000" className={`input-field ${errors.telefone ? 'border-red-500/50' : ''}`} />
+                    {errors.telefone && <p className="mt-1 text-xs text-red-400">{errors.telefone}</p>}
+                  </div>
+                  <div>
+                    <label className="label-field mb-1.5 block">Como nos conheceu?</label>
+                    <select value={form.comoConheceu} onChange={(e) => setForm({ ...form, comoConheceu: e.target.value })} className="input-field appearance-none">
+                      <option value="" disabled>Selecione uma opção</option>
+                      <option value="google">Google</option>
+                      <option value="instagram">Instagram</option>
+                      <option value="facebook">Facebook</option>
+                      <option value="indicacao">Indicação de um amigo</option>
+                      <option value="whatsapp">Grupo de WhatsApp</option>
+                      <option value="outro">Outro</option>
+                    </select>
                   </div>
                   <div>
                     <label className="label-field mb-1.5 block">Mensagem</label>
-                    <textarea required rows={4} value={form.mensagem} onChange={(e) => setForm({ ...form, mensagem: e.target.value })} placeholder="Conte um pouco sobre seu projeto..." className="input-field resize-none py-3" style={{ height: 'auto' }} />
+                    <textarea rows={4} value={form.mensagem} onChange={(e) => setForm({ ...form, mensagem: e.target.value })} placeholder="Conte um pouco sobre seu projeto..." className="input-field resize-none py-3" />
                   </div>
-                  <button type="submit" className="btn-gold w-full justify-center">
+                  <button type="submit" disabled={loading} className="btn-gold w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed">
                     <Send className="h-4 w-4" />
-                    Enviar Mensagem
+                    {loading ? 'Enviando...' : 'Enviar Mensagem'}
                   </button>
                 </form>
               )}
@@ -96,15 +252,24 @@ export default function Contato() {
                   <div className="mt-6 space-y-4">
                     <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[#A1A1AA] transition hover:text-white">
                       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><MessageCircle className="h-5 w-5" /></span>
-                      Fale pelo WhatsApp
+                      <div>
+                        <p className="font-medium text-white">WhatsApp</p>
+                        <p className="text-[#71717A]">Resposta em até 1h em horário comercial</p>
+                      </div>
                     </a>
                     <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-[#A1A1AA] transition hover:text-white">
                       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><Mail className="h-5 w-5" /></span>
-                      {BRAND.email}
+                      <div>
+                        <p className="font-medium text-white">E-mail</p>
+                        <p className="text-[#71717A]">{BRAND.email}</p>
+                      </div>
                     </a>
                     <div className="flex items-center gap-3 text-sm text-[#A1A1AA]">
                       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><MapPin className="h-5 w-5" /></span>
-                      {BRAND.address}
+                      <div>
+                        <p className="font-medium text-white">Localização</p>
+                        <p className="text-[#71717A]">{BRAND.address}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -116,6 +281,10 @@ export default function Contato() {
                   <div className="mt-4 space-y-2 text-sm text-[#71717A]">
                     <p>Segunda a Sexta: 9h às 18h</p>
                     <p>Sábado: 9h às 13h</p>
+                    <p className="mt-3 text-[#D6A84F]">
+                      <MessageCircle className="-mt-0.5 mr-1 inline h-3 w-3" />
+                      WhatsApp disponível 24h — respondemos em até 1h em horário comercial
+                    </p>
                   </div>
                 </div>
               </Reveal>

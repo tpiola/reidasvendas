@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, CheckCircle2, XCircle, Monitor, ShoppingCart, LayoutDashboard,
   Bot, Smartphone, Brain, HeadphonesIcon, Star, Shield, Zap, Clock,
-  MessageCircle, BarChart3, Users, Globe, ChevronDown,
+  MessageCircle, BarChart3, Users, Globe, ChevronDown, CreditCard, Loader2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
@@ -200,8 +200,145 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   );
 }
 
+/* ─── Stripe Checkout Modal ─── */
+function StripeCheckoutModal({
+  isOpen,
+  onClose,
+  planSlug,
+  planName,
+  planPrice,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  planSlug: string;
+  planName: string;
+  planPrice: number;
+}) {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleCheckout = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !name) {
+      setError('Preencha todos os campos.');
+      return;
+    }
+    setLoading(true);
+    setError('');
+
+    try {
+      const r = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ planId: planSlug, email, name }),
+      });
+      const data = await r.json();
+      if (data.ok && data.url) {
+        window.location.href = data.url;
+      } else {
+        setError(data.message || 'Erro ao criar checkout. Tente novamente.');
+      }
+    } catch {
+      setError('Erro de conexão. Tente novamente ou fale conosco.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div
+        className="mx-4 w-full max-w-md rounded-2xl border border-[rgba(214,168,79,0.2)] bg-[#080808] p-6 sm:p-8 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(214,168,79,0.1)]">
+            <CreditCard className="h-6 w-6 text-[#D6A84F]" />
+          </div>
+          <h3 className="font-serif text-xl font-bold text-white">
+            Assinar Plano {planName}
+          </h3>
+          <p className="mt-1 text-sm text-[#A1A1AA]">
+            <span className="text-2xl font-bold text-[#D6A84F]">R$ {planPrice}</span>
+            <span className="text-[#71717A]">/mês</span>
+          </p>
+        </div>
+
+        <form onSubmit={handleCheckout} className="space-y-4">
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-[#A1A1AA]">Nome completo</label>
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Seu nome"
+              className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-2.5 text-sm text-white placeholder-[#71717A] outline-none transition-all duration-300 focus:border-[#D6A84F] focus:bg-[rgba(214,168,79,0.04)] focus:ring-1 focus:ring-[#D6A84F]/30"
+            />
+          </div>
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-[#A1A1AA]">E-mail</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu@email.com"
+              className="w-full rounded-xl border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-4 py-2.5 text-sm text-white placeholder-[#71717A] outline-none transition-all duration-300 focus:border-[#D6A84F] focus:bg-[rgba(214,168,79,0.04)] focus:ring-1 focus:ring-[#D6A84F]/30"
+            />
+          </div>
+
+          {error && (
+            <p className="text-xs text-red-400">{error}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] py-3 text-sm font-bold text-[#030303] transition-all duration-300 hover:shadow-[0_0_30px_rgba(214,168,79,0.3)] disabled:opacity-50"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Redirecionando para Stripe...
+              </>
+            ) : (
+              <>
+                <CreditCard className="h-4 w-4" />
+                Ir para Pagamento — R$ {planPrice}/mês
+              </>
+            )}
+          </button>
+
+          <p className="text-center text-xs text-[#71717A]">
+            Pagamento 100% seguro via Stripe. Cartão de crédito, boleto ou PIX.
+          </p>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-full text-center text-xs text-[#71717A] underline transition-colors hover:text-[#A1A1AA]"
+          >
+            Voltar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Page ─── */
 export default function Planos() {
+  const [stripeModal, setStripeModal] = useState<{
+    slug: string;
+    name: string;
+    price: number;
+  } | null>(null);
   return (
     <main>
       <GoldParticles count={30} />
@@ -336,17 +473,31 @@ export default function Planos() {
                     </p>
 
                     {/* CTA */}
-                    <Link
-                      to={`/contato?plano=${plano.slug}`}
-                      className={`mt-6 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all duration-300 ${
-                        plano.popular
-                          ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] hover:shadow-[0_0_30px_rgba(214,168,79,0.3)]'
-                          : 'border border-[rgba(214,168,79,0.2)] text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:border-[#D6A84F]'
-                      }`}
-                    >
-                      Comece Agora
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                    {plano.slug === 'enterprise' ? (
+                      <Link
+                        to={`/contato?plano=${plano.slug}`}
+                        className={`mt-6 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all duration-300 ${
+                          plano.popular
+                            ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] hover:shadow-[0_0_30px_rgba(214,168,79,0.3)]'
+                            : 'border border-[rgba(214,168,79,0.2)] text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:border-[#D6A84F]'
+                        }`}
+                      >
+                        Falar com Consultor
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => setStripeModal({ slug: plano.slug, name: plano.name, price: plano.price })}
+                        className={`mt-6 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all duration-300 ${
+                          plano.popular
+                            ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] hover:shadow-[0_0_30px_rgba(214,168,79,0.3)]'
+                            : 'border border-[rgba(214,168,79,0.2)] text-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:border-[#D6A84F]'
+                        }`}
+                      >
+                        Assinar Agora
+                        <CreditCard className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </button>
+                    )}
 
                     {/* Divider */}
                     <div className="my-5 h-px bg-gradient-to-r from-transparent via-[rgba(214,168,79,0.15)] to-transparent" />
@@ -601,13 +752,13 @@ export default function Planos() {
 
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Link
-                to="/contato?plano=digital"
+              <button
+                onClick={() => setStripeModal({ slug: 'digital', name: 'Digital', price: 97 })}
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35),0_0_80px_rgba(214,168,79,0.12)] hover:scale-[1.02] active:scale-[0.98]"
               >
-                Comece Agora — Plano Digital
+                Assinar Plano Digital
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
               <a
                 href={BRAND.whatsapp}
                 target="_blank"
@@ -642,6 +793,15 @@ export default function Planos() {
           </Reveal>
         </div>
       </section>
+
+      {/* Stripe Checkout Modal */}
+      <StripeCheckoutModal
+        isOpen={stripeModal !== null}
+        onClose={() => setStripeModal(null)}
+        planSlug={stripeModal?.slug ?? ''}
+        planName={stripeModal?.name ?? ''}
+        planPrice={stripeModal?.price ?? 0}
+      />
     </main>
   );
 }

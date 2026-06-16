@@ -23,12 +23,32 @@
     <meta name="theme-color" content="#f4f4f6" media="(prefers-color-scheme: light)" />
     <meta name="color-scheme" content="dark light" />
 
+    <!-- Hreflang / Language -->
+    <link rel="alternate" href="https://reidasvendas.com.br/" hreflang="pt-BR" />
+    <link rel="alternate" href="https://reidasvendas.com.br/" hreflang="x-default" />
+
+    <!-- Next / Prev (Blog pagination placeholder — update dynamically per page) -->
+    <link rel="next" href="https://reidasvendas.com.br/blog?page=2" />
+    <link rel="prev" href="https://reidasvendas.com.br/blog?page=1" />
+
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+
+    <!-- Preload Hero Media (LCP) -->
+    <link rel="preload" as="image" href="/videos/hero-preview.jpg" imagesrcset="" imagesizes="" />
+    <link rel="preload" as="fetch" href="/videos/sentinela/7.mp4" crossorigin="anonymous" />
+
     <!-- Favicons & PWA -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
     <link rel="alternate icon" href="/favicon.svg" />
     <link rel="apple-touch-icon" sizes="180x180" href="/pwa-192.svg" />
     <link rel="apple-touch-icon" sizes="512x512" href="/pwa-512.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- SEO -->
     <title>Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP</title>
@@ -44,10 +64,11 @@
     <meta property="og:title" content="Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP" />
     <meta property="og:description" content="Sites premium, aplicativos, automações e dashboards para empresas locais em Franca-SP. Infraestrutura digital completa que faz seu negócio vender todos os dias." />
     <meta property="og:url" content="https://reidasvendas.com.br/" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&h=630&q=90" />
+    <meta property="og:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Rei das Vendas — Infraestrutura digital em Franca-SP" />
+    <meta property="og:locale:alternate" content="pt_BR" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -55,7 +76,8 @@
     <meta name="twitter:creator" content="@thiagopiola" />
     <meta name="twitter:title" content="Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP" />
     <meta name="twitter:description" content="Sites premium, aplicativos, automações e dashboards para empresas locais. Infraestrutura digital que faz seu negócio vender todos os dias." />
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&h=630&q=90" />
+    <meta name="twitter:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
+    <meta name="twitter:image:alt" content="Rei das Vendas — Infraestrutura digital em Franca-SP" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -84,6 +106,35 @@
       html.dark body{background-color:#030303;color:#F5F5F5}
       html.light body{background-color:#f4f4f6;color:#0a0a0b}
       #root{min-height:100dvh;min-height:100svh}
+
+      /* ── Hero above-the-fold critical ── */
+      .hero-section{position:relative;display:flex;min-height:100dvh;align-items:center;overflow:hidden;background-color:#030303}
+      .hero-bg{position:absolute;inset:0}
+      .hero-video{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;opacity:0.3}
+      .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,#030303,#030303/rgba(3,3,3,0.85),#030303)}
+      .hero-grid{position:absolute;inset:0;opacity:0.04}
+      .hero-glow-1{position:absolute;left:-20%;top:-20%;height:60%;width:60%;border-radius:9999px;background:rgba(214,168,79,0.06);filter:blur(150px)}
+      .hero-glow-2{position:absolute;bottom:-20%;right:-20%;height:50%;width:50%;border-radius:9999px;background:rgba(214,168,79,0.04);filter:blur(120px)}
+      .hero-content{position:relative;margin:0 auto;width:100%;max-width:1280px;padding:0 1rem}
+      @media(min-width:640px){.hero-content{padding:0 1.5rem}}
+      .hero-headline{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.8rem,7.5vw,5.5rem);line-height:1.02;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-top:2rem}
+      .text-gradient-premium{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      .hero-sub{max-width:36rem;margin-top:1.25rem;font-size:1rem;line-height:1.625;color:#A1A1AA}
+      @media(min-width:640px){.hero-sub{font-size:1.125rem}}
+
+      /* ── Typography base ── */
+      .font-serif{font-family:'Playfair Display',Georgia,serif}
+      .text-gradient-gold{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      .text-gradient-premium{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+      .btn-outline-gold{display:inline-flex;align-items:center;gap:.5rem;border-radius:9999px;border:1px solid rgba(214,168,79,0.3);padding:.75rem 1.75rem;font-weight:600;color:#D6A84F;transition:all .3s;text-decoration:none}
+      .btn-outline-gold:hover{background:rgba(214,168,79,0.1);border-color:rgba(214,168,79,0.5)}
+      .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:#D6A84F}
+
+      /* ── Gold line decorative ── */
+      .gold-line{height:1px;width:1.5rem;background:#D6A84F;opacity:.6;margin-bottom:.75rem}
+
+      /* ── Scroll progress bar ── */
+      .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#D6A84F,#F2D38A);z-index:9999;width:var(--scroll,0%);transition:width .1s;will-change:width}
     </style>
 
     <!-- JSON-LD -->
@@ -97,12 +148,16 @@
       "name": "Rei das Vendas",
       "url": "https://reidasvendas.com.br/",
       "logo": "https://reidasvendas.com.br/logo.svg",
+      "image": "https://reidasvendas.com.br/imagens/og-default.jpg",
       "telephone": "+5516999999999",
       "email": "contato@reidasvendas.com.br",
       "description": "Infraestrutura digital de vendas para empresas. Sites premium, automação com IA, dashboards e governança de resultados.",
       "foundingDate": "2023",
       "founder": { "@type": "Person", "name": "Thiago B. G. Piola" },
-      "areaServed": { "@type": "City", "name": "Franca", "sameAs": "https://pt.wikipedia.org/wiki/Franca" },
+      "areaServed": [
+        { "@type": "City", "name": "Franca", "sameAs": "https://pt.wikipedia.org/wiki/Franca" },
+        { "@type": "State", "name": "São Paulo" }
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Franca",
@@ -125,8 +180,76 @@
       "@type": "WebSite",
       "@id": "https://reidasvendas.com.br/#website",
       "url": "https://reidasvendas.com.br/",
+      "name": "Rei das Vendas",
       "inLanguage": "pt-BR",
-      "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
+      "description": "Infraestrutura digital para empresas em Franca-SP. Sites premium, aplicativos, automações e dashboards.",
+      "publisher": { "@id": "https://reidasvendas.com.br/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://reidasvendas.com.br/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://reidasvendas.com.br/#webpage",
+      "url": "https://reidasvendas.com.br/",
+      "name": "Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP",
+      "description": "Sites premium, aplicativos sob medida, automações inteligentes e dashboards em tempo real para empresas locais em Franca-SP.",
+      "inLanguage": "pt-BR",
+      "isPartOf": { "@id": "https://reidasvendas.com.br/#website" },
+      "about": { "@id": "https://reidasvendas.com.br/#organization" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://reidasvendas.com.br/imagens/og-default.jpg",
+        "width": 1200,
+        "height": 630
+      },
+      "breadcrumb": { "@id": "https://reidasvendas.com.br/#breadcrumb" },
+      "dateModified": "2025-06-16",
+      "significantLink": [
+        "https://reidasvendas.com.br/servicos",
+        "https://reidasvendas.com.br/portfolio",
+        "https://reidasvendas.com.br/contato",
+        "https://reidasvendas.com.br/blog"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://reidasvendas.com.br/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://reidasvendas.com.br/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://reidasvendas.com.br/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Por que eu preciso de um site se tenho Instagram?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Instagram é aluguel. Você não controla o algoritmo, não é dono dos seus seguidores e a plataforma muda as regras quando quer. Um site é seu — você controla, aparece no Google e os leads vão direto pro seu WhatsApp. Instagram complementa. Site é base."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto custa? Vale a pena?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cada projeto é único — o valor depende da complexidade. Mas o diagnóstico é gratuito. A pergunta certa não é quanto custa, mas quanto você está perdendo sem infraestrutura digital. Empresas com site vendem 3x mais."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para criar um site ou aplicativo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade. Entrega incremental — você vê resultado em cada sprint."
+          }
+        }
+      ]
     }
   ]
 }

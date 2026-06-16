@@ -110,7 +110,9 @@ const HeroSection = () => {
           muted
           loop
           playsInline
+          poster="/videos/hero-preview.jpg"
           className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
+          preload="auto"
         >
           <source src="/videos/sentinela/7.mp4" type="video/mp4" />
         </video>
@@ -458,13 +460,14 @@ const VideoSection = () => {
           <div className="relative overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.25)] bg-[rgba(3,3,3,0.6)] backdrop-blur-sm shadow-[0_0_60px_rgba(214,168,79,0.08)]">
             {/* Glow superior */}
             <div className="pointer-events-none absolute -inset-1 rounded-3xl bg-gradient-to-b from-[rgba(214,168,79,0.1)] to-transparent blur-xl" />
-            
+              
             <motion.div style={{ y }} className="relative aspect-[9/16] max-h-[75vh] overflow-hidden rounded-2xl sm:mx-auto sm:w-auto">
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                poster="/videos/hero-preview.jpg"
                 className="h-full w-full object-cover"
               >
                 <source src="/videos/sentinela/7.mp4" type="video/mp4" />

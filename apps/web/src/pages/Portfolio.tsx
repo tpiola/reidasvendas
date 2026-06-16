@@ -20,7 +20,7 @@ const projetos = [
     client: 'Solução própria',
     description:
       'Plataforma de IA generativa especializada em saúde, oferecendo respostas inteligentes baseadas em diretrizes clínicas e literatura médica validada.',
-    cover: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=85',
+    cover: '/imagens/portfolio/saudegpt.jpg',
     techs: ['React', 'Node.js', 'OpenAI', 'PostgreSQL', 'Supabase'],
     href: 'https://saudegpt.com',
     metrics: 'Em breve',
@@ -31,7 +31,7 @@ const projetos = [
     client: 'Secretaria Municipal de Saúde',
     description:
       'Sistema de monitoramento e gestão para vigilância ambiental em saúde pública, com dashboards de indicadores e relatórios automatizados.',
-    cover: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=85',
+    cover: '/imagens/portfolio/sentinela.jpg',
     techs: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Chart.js'],
     href: 'https://sentinelasaudeambiental.com.br',
     metrics: 'Em breve',
@@ -42,7 +42,7 @@ const projetos = [
     client: 'Thiago B. G. Piola',
     description:
       'Site pessoal e portfólio profissional do Founder do Rei das Vendas, apresentando trajetória, projetos e serviços com design premium.',
-    cover: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=85',
+    cover: '/imagens/portfolio/thiagopiola.jpg',
     techs: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'],
     href: 'https://thiagopiola.com.br',
     metrics: 'Em breve',
