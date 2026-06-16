@@ -5,7 +5,7 @@ import {
   TrendingUp, Shield, Zap, Clock, Target, Layers, Users,
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { BRAND } from '@/lib/brand';
 import {
   fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem,
@@ -14,57 +14,8 @@ import {
 import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
-import { DataPanel } from '@/components/DataPanel';
 import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { FounderSection } from '@/components/FounderSection';
-
-/* ─── Animated Counter ─── */
-function AnimatedCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-  const numericValue = parseInt(value.replace(/[^0-9]/g, ''));
-  const hasPlus = value.includes('%') ? false : value.includes('+');
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true); },
-      { threshold: 0.3 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!started) return;
-    const duration = 1800;
-    const steps = 50;
-    const increment = numericValue / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= numericValue) {
-        setCount(numericValue);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(timer);
-  }, [started, numericValue]);
-
-  const display = value.includes('%')
-    ? `${count}%`
-    : `${count}${hasPlus ? '+' : ''}`;
-
-  return (
-    <span ref={ref} className="num-gold text-3xl font-extrabold sm:text-4xl lg:text-5xl tabular-nums">
-      {display}
-    </span>
-  );
-}
 
 /* ─── DATA ─── */
 
@@ -245,22 +196,18 @@ const HeroSection = () => {
             </Link>
           </motion.div>
 
-          {/* Stats — Contador Animado */}
+          {/* Stats — Em breve */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-14 grid grid-cols-3 gap-8 sm:gap-12"
+            className="mt-14"
           >
-            {[
-              { n: BRAND.stats.projects, l: 'projetos\nentregues' },
-              { n: BRAND.stats.satisfaction, l: 'clientes\nsatisfeitos' },
-              { n: BRAND.stats.years, l: 'anos de\natuação' },
-            ].map((s) => (
-              <div key={s.l} className="text-center">
-                <AnimatedCounter value={s.n} />
-                <div className="mt-1 whitespace-pre-line text-[10px] font-semibold uppercase tracking-[0.15em] text-[#71717A]">{s.l}</div>
-              </div>
-            ))}
+            <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
+              <Clock className="h-5 w-5 text-[#D6A84F]" />
+              <span className="text-sm font-semibold text-[#A1A1AA]">
+                Métricas em breve — resultados do primeiro projeto publicados aqui.
+              </span>
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -454,18 +401,14 @@ const VideoSection = () => {
             </motion.div>
           </div>
 
-          {/* Legendas flutuantes */}
-          <div className="mt-6 grid grid-cols-3 gap-4 text-center">
-            {[
-              { n: '12+', l: 'Projetos Entregues' },
-              { n: '98%', l: 'Clientes Satisfeitos' },
-              { n: '3 anos', l: 'Construindo o Futuro Digital' },
-            ].map((s) => (
-              <div key={s.l} className="rounded-xl border border-[rgba(214,168,79,0.08)] bg-[rgba(255,255,255,0.02)] px-3 py-4 backdrop-blur-sm">
-                <div className="text-lg font-bold text-[#D6A84F] sm:text-xl">{s.n}</div>
-                <div className="mt-0.5 text-[9px] font-semibold uppercase tracking-[0.15em] text-[#71717A]">{s.l}</div>
-              </div>
-            ))}
+          {/* Stats — Em breve */}
+          <div className="mt-6 text-center">
+            <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
+              <Clock className="h-5 w-5 text-[#D6A84F]" />
+              <span className="text-sm font-semibold text-[#A1A1AA]">
+                Métricas em breve — resultados do primeiro projeto publicados aqui.
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -594,23 +537,11 @@ const ProvaSection = () => {
     offset: ['start end', 'end start'],
   });
   const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-  const depoimentos = [
-    {
-      texto: 'A infraestrutura digital que montaram transformou a forma como vendemos. O processo manual deu lugar a um ecossistema que funciona 24h. Resultado apareceu em semanas.',
-      resultado: '+140% leads • Site no ar em 8 dias',
-      contexto: 'Comércio local — Franca-SP',
-    },
-    {
-      texto: 'Automatizamos o atendimento e hoje respondemos clientes em segundos. Antes levava horas. O impacto no faturamento veio em 30 dias.',
-      resultado: 'Atendimento 5x mais rápido • +35% conversão',
-      contexto: 'Prestador de serviços — Franca-SP',
-    },
-    {
-      texto: 'A mentoria online estruturou nosso marketing digital do zero. Em 3 meses saímos do nada para uma presença digital consistente com métricas claras.',
-      resultado: '+180% tráfego orgânico em 3 meses',
-      contexto: 'Indústria — Franca-SP',
-    },
-  ];
+  const depoimentos: {
+    texto: string;
+    resultado: string;
+    contexto: string;
+  }[] = [];
 
   return (
     <SectionWrapper>
@@ -640,62 +571,53 @@ const ProvaSection = () => {
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid gap-6 md:grid-cols-3"
+          className="grid gap-6 md:grid-cols-1"
         >
-          {depoimentos.map((d) => (
-            <GlassCard key={d.texto.slice(0, 30)} glow>
-              <Quote className="absolute top-4 right-4 h-8 w-8 text-[rgba(214,168,79,0.1)]" />
-              <p className="text-sm leading-relaxed text-[#A1A1AA]">&ldquo;{d.texto}&rdquo;</p>
-              <div className="my-3 flex items-center gap-2 text-sm font-bold text-[#D6A84F]">
-                <CheckCircle2 className="h-4 w-4" />
-                {d.resultado}
-              </div>
-              <div className="border-t border-[rgba(255,255,255,0.06)] pt-3">
-                <p className="text-xs text-[#71717A]">{d.contexto}</p>
+          {depoimentos.length > 0 ? (
+            depoimentos.map((d) => (
+              <GlassCard key={d.texto.slice(0, 30)} glow>
+                <Quote className="absolute top-4 right-4 h-8 w-8 text-[rgba(214,168,79,0.1)]" />
+                <p className="text-sm leading-relaxed text-[#A1A1AA]">&ldquo;{d.texto}&rdquo;</p>
+                <div className="my-3 flex items-center gap-2 text-sm font-bold text-[#D6A84F]">
+                  <CheckCircle2 className="h-4 w-4" />
+                  {d.resultado}
+                </div>
+                <div className="border-t border-[rgba(255,255,255,0.06)] pt-3">
+                  <p className="text-xs text-[#71717A]">{d.contexto}</p>
+                </div>
+              </GlassCard>
+            ))
+          ) : (
+            <GlassCard glow>
+              <div className="text-center py-8">
+                <Quote className="mx-auto h-10 w-10 text-[rgba(214,168,79,0.15)] mb-4" />
+                <p className="text-sm leading-relaxed text-[#A1A1AA] max-w-md mx-auto">
+                  Depoimentos reais em breve. Acompanhe nossos cases no Instagram.
+                </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F]">
+                  <MapPin className="h-3 w-3" />
+                  @reidasvendas
+                </div>
               </div>
             </GlassCard>
-          ))}
+          )}
         </motion.div>
 
-        {/* Data Panel */}
+        {/* Métricas honestas */}
         <Reveal delay={0.3}>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            <DataPanel
-              title="Performance Média"
-              items={[
-                { label: 'Aumento de Leads', value: '+165%', percent: 88 },
-                { label: 'Velocidade de Atendimento', value: '5,2x', percent: 82 },
-                { label: 'ROI Médio (12 meses)', value: '4,8x', percent: 76 },
-              ]}
-            />
-            <DataPanel
-              title="Métricas de Projeto"
-              items={[
-                { label: 'Entrega no Prazo', value: '94%', percent: 94 },
-                { label: 'Satisfação NPS', value: '92', percent: 85 },
-                { label: 'Retenção Anual', value: '87%', percent: 80 },
-              ]}
-            />
-            <DataPanel
-              title="Tráfego Orgânico"
-              items={[
-                { label: 'Crescimento SEO (6 meses)', value: '+210%', percent: 90 },
-                { label: 'Taxa de Conversão', value: '4,2%', percent: 72 },
-                { label: 'CTR Médio', value: '3,8%', percent: 68 },
-              ]}
-            />
+          <div className="mt-12 text-center">
+            <GlassCard glow>
+              <div className="py-6 px-4">
+                <BarChart3 className="mx-auto h-8 w-8 text-[rgba(214,168,79,0.2)] mb-3" />
+                <p className="text-sm font-medium text-[#A1A1AA]">
+                  Métricas disponíveis após o primeiro projeto entregue.
+                </p>
+              </div>
+            </GlassCard>
           </div>
         </Reveal>
 
         <LuxuryDivider />
-
-        <Reveal>
-          <div className="text-center">
-            <p className="text-xs text-[#71717A] italic">
-              Números reais, baseados em dados consolidados dos nossos projetos.
-            </p>
-          </div>
-        </Reveal>
       </motion.div>
     </SectionWrapper>
   );
