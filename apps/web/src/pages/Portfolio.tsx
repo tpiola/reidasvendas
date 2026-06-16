@@ -5,11 +5,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
-import { PremiumButton } from '@/components/PremiumButton';
-import { GlassCard } from '@/components/GlassCard';
-import { ProcessStep, SectionHeading } from '@/components/PremiumComponents';
 import { GoldParticles } from '@/components/GoldParticles';
 
 /* ─── Projetos Reais ─── */

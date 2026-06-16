@@ -1,16 +1,12 @@
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CheckCircle2, XCircle, Monitor, ShoppingCart, LayoutDashboard,
-  Bot, Smartphone, Brain, HeadphonesIcon, Star, Shield, Zap, Clock,
+  ArrowRight, CheckCircle2, XCircle, Monitor, Brain, HeadphonesIcon, Star, Shield, Zap, Clock,
   MessageCircle, BarChart3, Users, Globe, ChevronDown, CreditCard, Loader2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { BRAND } from '@/lib/brand';
-import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem, fadeInUp } from '@/hooks/useAnimation';
-import { PremiumButton } from '@/components/PremiumButton';
-import { GlassCard } from '@/components/GlassCard';
-import { SectionHeading, LuxuryDivider } from '@/components/PremiumComponents';
+import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
 
 /* ─── Planos Data ─── */

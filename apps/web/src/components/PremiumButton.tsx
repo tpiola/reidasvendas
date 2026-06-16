@@ -47,7 +47,7 @@ export function PremiumButton(props: Props) {
     );
   }
 
-  const { href: _h, ...btnProps } = rest as ButtonAsButton;
+  const btnProps = rest as ButtonAsButton;
   return (
     <button className={cls} {...btnProps}>
       {children}

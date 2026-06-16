@@ -1,5 +1,4 @@
-import { TrendingUp, Users, DollarSign, MessageCircle, Eye, MousePointerClick, CheckCircle2, ArrowRight, ExternalLink, Zap, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { TrendingUp, Users, DollarSign, MessageCircle, Eye, CheckCircle2, Zap, Sparkles } from 'lucide-react';
 import { DashboardSidebar } from '@/components/dashboard/Sidebar';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { StatCard } from '@/components/dashboard/StatCard';

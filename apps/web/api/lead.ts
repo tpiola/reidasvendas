@@ -4,6 +4,11 @@
    Encaminha para webhook (Notion → Make)
 ═══════════════════════════════════════════ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
+
 const MAX_BODY_BYTES = 65_536;
 
 type LeadPayload = {
@@ -59,13 +64,13 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
   };
 }
 
-function json(res: any, status: number, body: unknown) {
+function json(res: Res, status: number, body: unknown) {
   res.statusCode = status;
   res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
   res.end?.(JSON.stringify(body));
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: Req, res: Res) {
   /* ─── CORS ─────────────────────────────── */
   res.setHeader?.('Access-Control-Allow-Origin', '*');
   res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');

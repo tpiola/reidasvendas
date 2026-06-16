@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, Monitor, Smartphone, Bot, BarChart3, GraduationCap,
   MessageCircle, CheckCircle2, MapPin, Quote,
-  TrendingUp, Shield, Zap, Clock, Target, Layers, Users,
+  TrendingUp, Shield, Zap, Target, Layers,
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { BRAND } from '@/lib/brand';
 import {
-  fadeInUp, fadeInLeft, fadeInRight, staggerContainer, staggerItem,
+  staggerContainer, staggerItem,
   Reveal, SectionLabel, SectionTitle, SectionWrapper,
 } from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
