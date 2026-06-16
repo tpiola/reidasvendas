@@ -59,13 +59,25 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
   };
 }
 
-function json(res: any, status: number, body: unknown) {
+interface ApiRequest {
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string | string[] | undefined>;
+}
+
+interface ApiResponse {
+  statusCode: number;
+  setHeader?(name: string, value: string): void;
+  end?(chunk?: string): void;
+}
+
+function json(res: ApiResponse, status: number, body: unknown) {
   res.statusCode = status;
   res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
   res.end?.(JSON.stringify(body));
 }
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   /* ─── CORS ─────────────────────────────── */
   res.setHeader?.('Access-Control-Allow-Origin', '*');
   res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');

@@ -1,4 +1,4 @@
-import { TrendingUp, Users, DollarSign, MessageCircle, Eye, MousePointerClick } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, MessageCircle, Eye } from 'lucide-react';
 import { DashboardSidebar } from '@/components/dashboard/Sidebar';
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { StatCard } from '@/components/dashboard/StatCard';

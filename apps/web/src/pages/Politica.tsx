@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Reveal } from '@/hooks/useAnimation';
 
 export default function Politica() {

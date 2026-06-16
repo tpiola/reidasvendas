@@ -28,7 +28,6 @@ export const BRAND = {
     surface: '#080808',
   },
   images: {
-    hero: '/videos/hero-noaudio.mp4',
     og: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&h=630&q=90',
     services: {
       sites: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=85',
