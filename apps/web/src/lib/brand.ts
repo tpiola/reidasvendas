@@ -13,7 +13,7 @@ export const BRAND = {
     title: 'Founder & Diretor de Estratégia Digital',
     crf: 'CRF-SP 58.519',
     site: 'https://thiagopiola.com.br',
-    bio: 'Farmacêutico, web designer e estrategista digital. Une visão clínica à precisão tecnológica para construir infraestruturas de vendas que operam com a mesma confiabilidade de um protocolo de saúde.',
+    bio: 'Sou farmacêutico, web designer e estrategista digital. Pode parecer incomum, mas é essa combinação que me permite ver seu negócio com precisão clínica — diagnosticar o que realmente precisa ser resolvido antes de indicar o tratamento certo. Não vendo site. Vendo resultado.',
   },
   stats: {
     projects: '12+',

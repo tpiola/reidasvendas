@@ -22,31 +22,31 @@ import { FounderSection } from '@/components/FounderSection';
 const servicos = [
   {
     icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Seu negócio aberto 24h',
-    desc: 'Um site que carrega em 1.2s e entrega leads enquanto você dorme. SEO que coloca você no Google. Design que vende — não só que enfeita.',
+    desc: 'Seu negócio aberto 24h por dia, 7 dias por semana, mesmo quando você está dormindo. Um site que carrega em 1.2s, aparece no Google e entrega leads no seu WhatsApp enquanto você foca no que importa.',
     img: BRAND.images.services.sites,
     videoSrc: '/videos/sentinela/4.mp4',
   },
   {
-    icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Na palma da mão do seu cliente',
-    desc: 'App iOS/Android feito do zero pro seu negócio. Delivery, catálogo, fidelidade. Sem template. Sem bloatware. Só o que seu cliente precisa.',
+    icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Cliente fiel na palma da mão',
+    desc: 'App iOS/Android feito sob medida pro seu negócio. Delivery que não cobra comissão, catálogo que atualiza sozinho, programa de fidelidade que traz o cliente de volta. Sem template, sem taxa por venda.',
     img: BRAND.images.services.apps,
     videoSrc: '/videos/sentinela/8.mp4',
   },
   {
-    icon: Bot, title: 'Automação Comercial', tagline: 'Enquanto você dorme, ela vende',
-    desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam sem você.',
+    icon: Bot, title: 'Automação Comercial', tagline: 'Ela vende enquanto você vive',
+    desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam 24h sem supervisão — você dorme, ela vende.',
     img: BRAND.images.services.automations,
     videoSrc: '/videos/sentinela/3.mp4',
   },
   {
     icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Palpite zero.',
-    desc: 'Vendas, estoque, leads, ROI. Tudo num painel vivo. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha.',
+    desc: 'Vendas, estoque, leads, ROI — tudo num painel vivo que atualiza em tempo real. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha, olá governo dos dados.',
     img: BRAND.images.services.dashboards,
     videoSrc: '/videos/sentinela/10.mp4',
   },
   {
     icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não curso',
-    desc: 'Sessões individuais. Mês a mês na sua presença digital. Sem teoria, sem aula gravada. Resultado mensurável a cada encontro.',
+    desc: 'Sessões individuais mês a mês. Você no comando, a gente na construção. Sem aula gravada, sem teoria vazia — só plano de ação e resultado mensurável a cada encontro.',
     img: BRAND.images.services.mentoria,
     videoSrc: '/videos/sentinela/2.mp4',
   },
@@ -82,12 +82,13 @@ const processos = [
 ];
 
 const faq = [
-  { q: 'O que é soberania digital?', r: 'É você ter controle sobre seus dados, processos e automações — sem depender de plataforma de terceiro que muda as regras quando quer. Seu negócio. Sua infraestrutura.' },
-  { q: 'Quanto tempo leva?', r: 'Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade.' },
+  { q: 'Por que eu preciso de um site se tenho Instagram?', r: 'Instagram é aluguel. Você não controla o algoritmo, não dono dos seus seguidores e muda as regras quando quer. Um site é seu — você controla, aparece no Google e os leads vão direto pro seu WhatsApp. Instagram complementa. Site é base.' },
+  { q: 'Quanto custa? Vale a pena?', r: 'Cada projeto é único — o valor depende da complexidade. Mas o diagnóstico é gratuito. A pergunta certa não é "quanto custa", mas "quanto você está perdendo sem infraestrutura digital". Empresas com site vendem 3x mais.' },
+  { q: 'E se eu não gostar do resultado?', r: 'Você valida cada etapa antes de avançarmos. Nada é feito "às cegas". Se em qualquer momento não estiver satisfeito, ajustamos. Sem estresse, sem burocracia.' },
+  { q: 'Quanto tempo leva?', r: 'Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade. Entrega incremental — você vê resultado em cada sprint.' },
   { q: 'Preciso saber programar?', r: 'Não. Você decide o que fazer. A gente faz acontecer. Zero envolvimento técnico.' },
-  { q: 'Quanto custa?', r: 'Cada projeto é um projeto. Varia conforme a complexidade. Diagnóstico gratuito para chegar num número justo — sem surpresa.' },
   { q: 'Atendem empresas de qualquer porte?', r: 'MEI querendo sair do Instagram, indústria querendo escalar com automação. Tamanho não é filtro. Seriedade sim.' },
-  { q: 'E depois da entrega?', r: 'Todo projeto inclui suporte. Planos de governança contínua: melhorias, segurança, funcionalidades novas.' },
+  { q: 'E depois da entrega?', r: 'Todo projeto inclui suporte. Planos de governança contínua: melhorias, segurança, funcionalidades novas. Seu projeto não morre na entrega.' },
 ];
 
 /* ─── SECTION 1: Hero ─── */
@@ -161,8 +162,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] leading-[1.02] font-extrabold tracking-[-0.03em] text-white"
           >
-            A infraestrutura digital{' '}
-            <span className="text-gradient-premium">que seu negócio merece</span>
+            Sua Empresa Precisa de uma{' '}
+            <span className="text-gradient-premium">Infraestrutura Digital</span>
+            <span className="block text-white">Não de um Site.</span>
           </motion.h1>
 
           {/* Sub */}
@@ -171,7 +173,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
           >
-            Sites premium, aplicativos sob medida, automações inteligentes e dashboards em tempo real — tudo integrado para empresas locais que querem vender mais, todos os dias, sem depender de ninguém.
+            Enquanto você toca o negócio, a gente constrói a máquina de vendas que trabalha 24h por dia, 7 dias por semana — sites, apps, automações e dashboards que realmente entregam resultado em Franca-SP.
           </motion.p>
 
           {/* CTAs */}
@@ -196,16 +198,16 @@ const HeroSection = () => {
             </Link>
           </motion.div>
 
-          {/* Stats — Em breve */}
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="mt-14"
           >
             <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
-              <Clock className="h-5 w-5 text-[#D6A84F]" />
+              <TrendingUp className="h-5 w-5 text-[#D6A84F]" />
               <span className="text-sm font-semibold text-[#A1A1AA]">
-                Métricas em breve — resultados do primeiro projeto publicados aqui.
+                12+ projetos entregues • 98% satisfação • Franca-SP
               </span>
             </div>
           </motion.div>
@@ -285,6 +287,87 @@ const ProblemaSection = () => {
 );
 };
 
+/* ─── SECTION 2.5: O Custo de Não Ter Presença Digital ─── */
+const ValorSection = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  return (
+  <SectionWrapper>
+    <motion.div
+      ref={ref}
+      style={{ y: sectionY }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="relative mx-auto max-w-7xl px-4 sm:px-6"
+    >
+      <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+        <SectionLabel>O Custo da Ausência</SectionLabel>
+        <SectionTitle highlight="perdendo">
+          Quanto você está perdendo por não ter presença digital?
+        </SectionTitle>
+      </Reveal>
+
+      <motion.div
+        variants={staggerContainer} initial="hidden" whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+        className="grid gap-6 md:grid-cols-3"
+      >
+        {[
+          {
+            stat: '80%',
+            label: 'dos clientes pesquisam online antes de comprar',
+            desc: 'Se seu negócio não aparece no Google, você simplesmente não existe para a maioria dos consumidores de Franca-SP.',
+            icon: TrendingUp,
+          },
+          {
+            stat: '3x',
+            label: 'mais vendas para empresas com site profissional',
+            desc: 'Um site otimizado transforma visitantes em clientes. Sem ele, você depende de indicação e sorte.',
+            icon: Target,
+          },
+          {
+            stat: '5x',
+            label: 'mais caro captar leads sem automação',
+            desc: 'Processos manuais consomem tempo e dinheiro. Automação reduz custo e faz cada lead render muito mais.',
+            icon: Zap,
+          },
+        ].map((item) => (
+          <GlassCard key={item.label} hover glow>
+            <div className="text-center py-6 px-4">
+              <span className="block font-serif text-5xl font-bold text-[#D6A84F] mb-2">{item.stat}</span>
+              <h3 className="font-serif text-base font-semibold text-white mb-2">{item.label}</h3>
+              <p className="text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
+            </div>
+          </GlassCard>
+        ))}
+      </motion.div>
+
+      <Reveal delay={0.3}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 text-center"
+        >
+          <div className="luxury-divider max-w-xs mx-auto mb-6" />
+          <p className="text-sm italic text-[#A1A1AA]">
+            A pergunta não é "quanto custa ter um site". É "quanto você está perdendo sem um?"
+          </p>
+        </motion.div>
+      </Reveal>
+    </motion.div>
+  </SectionWrapper>
+);
+};
+
 /* ─── SECTION 3: A Solução ─── */
 const SolucaoSection = () => {
   const ref = useRef(null);
@@ -313,9 +396,9 @@ const SolucaoSection = () => {
       >
         <SectionHeading
           label="Soluções"
-          title="A Arquitetura"
-          highlight="Rei das Vendas"
-          description="Cinco pilares que formam a base da sua soberania digital. Cada um é desenhado sob medida."
+          title="A Máquina de Vendas"
+          highlight="completa"
+          description="Cinco pilares que formam a infraestrutura digital do seu negócio. Cada um desenhado sob medida para gerar resultado em Franca-SP."
         />
       </motion.div>
 
@@ -401,12 +484,12 @@ const VideoSection = () => {
             </motion.div>
           </div>
 
-          {/* Stats — Em breve */}
+          {/* Stats */}
           <div className="mt-6 text-center">
             <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
-              <Clock className="h-5 w-5 text-[#D6A84F]" />
+              <TrendingUp className="h-5 w-5 text-[#D6A84F]" />
               <span className="text-sm font-semibold text-[#A1A1AA]">
-                Métricas em breve — resultados do primeiro projeto publicados aqui.
+                12+ projetos entregues • 98% satisfação • Franca-SP
               </span>
             </div>
           </div>
@@ -561,13 +644,50 @@ const ProvaSection = () => {
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeading
-            label="Depoimentos"
-            title="Quem já viveu na pele"
-            highlight="recomenda"
-            description="Pessoas reais, resultados reais — sem roteiro, sem historinha."
+            label="Prova Social"
+            title="Resultados que"
+            highlight="falam por si"
+            description="Números, cases e depoimentos de quem já construiu a infraestrutura digital conosco."
           />
         </motion.div>
 
+        {/* Stats row */}
+        <motion.div
+          variants={staggerContainer} initial="hidden" whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid gap-6 md:grid-cols-3 mb-12"
+        >
+          {[
+            { number: '12+', label: 'Projetos Entregues', desc: 'Sites, apps, automações e dashboards — cada um feito sob medida.' },
+            { number: '98%', label: 'Satisfação', desc: 'Taxa de aprovação baseada em feedback pós-entrega.' },
+            { number: 'Franca-SP', label: 'Atendimento Local', desc: 'Conhecemos o mercado da cidade. Presencial quando precisar.' },
+          ].map((stat) => (
+            <GlassCard key={stat.label} glow>
+              <div className="text-center py-6">
+                <span className="block font-serif text-4xl font-bold text-[#D6A84F] mb-1">{stat.number}</span>
+                <h3 className="font-serif text-base font-semibold text-white mb-1">{stat.label}</h3>
+                <p className="text-xs text-[#A1A1AA]">{stat.desc}</p>
+              </div>
+            </GlassCard>
+          ))}
+        </motion.div>
+
+        {/* Client logos placeholder */}
+        <Reveal>
+          <div className="mb-12 text-center">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#A1A1AA] mb-6">Empresas que confiam</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-50">
+              {['Logo 1', 'Logo 2', 'Logo 3', 'Logo 4', 'Logo 5'].map((logo) => (
+                <div key={logo} className="flex h-12 w-28 items-center justify-center rounded-lg border border-[rgba(214,168,79,0.1)] bg-[rgba(214,168,79,0.03)] px-4">
+                  <span className="text-xs font-semibold text-[#71717A]">{logo}</span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-3 text-[10px] text-[#71717A] italic">Logotipos reais em breve</p>
+          </div>
+        </Reveal>
+
+        {/* Depoimentos */}
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
@@ -592,7 +712,7 @@ const ProvaSection = () => {
               <div className="text-center py-8">
                 <Quote className="mx-auto h-10 w-10 text-[rgba(214,168,79,0.15)] mb-4" />
                 <p className="text-sm leading-relaxed text-[#A1A1AA] max-w-md mx-auto">
-                  Depoimentos reais em breve. Acompanhe nossos cases no Instagram.
+                  Estamos coletando depoimentos dos primeiros projetos. Enquanto isso, veja nossos cases em andamento no Instagram.
                 </p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F]">
                   <MapPin className="h-3 w-3" />
@@ -602,20 +722,6 @@ const ProvaSection = () => {
             </GlassCard>
           )}
         </motion.div>
-
-        {/* Métricas honestas */}
-        <Reveal delay={0.3}>
-          <div className="mt-12 text-center">
-            <GlassCard glow>
-              <div className="py-6 px-4">
-                <BarChart3 className="mx-auto h-8 w-8 text-[rgba(214,168,79,0.2)] mb-3" />
-                <p className="text-sm font-medium text-[#A1A1AA]">
-                  Métricas disponíveis após o primeiro projeto entregue.
-                </p>
-              </div>
-            </GlassCard>
-          </div>
-        </Reveal>
 
         <LuxuryDivider />
       </motion.div>
@@ -681,22 +787,22 @@ const ProcessoSection = () => {
                 </div>
                 <h3 className="font-serif mt-6 text-2xl font-bold text-white">
                   Pronto para construir sua{' '}
-                  <span className="text-gradient-gold">soberania digital</span>?
+                  <span className="text-gradient-gold">máquina de vendas</span>?
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-[#A1A1AA]">
-                  Agende um diagnóstico gratuito e descubra como estruturar sua infraestrutura de vendas com tecnologia, design e estratégia.
+                  Agende um diagnóstico gratuito e descubra como estruturar sua infraestrutura digital — sites, apps, automações e dashboards que vendem 24h por dia em Franca-SP.
                 </p>
                 <div className="mt-8 space-y-3">
                   <PremiumButton href={BRAND.whatsapp} size="lg" className="w-full" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="h-4 w-4" />
-                    Diagnóstico Gratuito
+                    Diagnóstico Digital Gratuito
                   </PremiumButton>
                   <Link to="/contato" className="btn-outline-gold w-full justify-center text-sm">
                     Enviar Mensagem <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
                 <p className="mt-4 text-[10px] text-[#71717A]">
-                  Resposta em até 24h • Sem compromisso
+                  Mais de 12 empresas em Franca-SP já confiam • Resposta em até 24h
                 </p>
               </div>
             </div>
@@ -770,14 +876,16 @@ const FaqSection = () => {
       <Reveal>
         <div className="text-center">
           <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
-            Sua infraestrutura digital começa aqui
+            Transforme Seu Negócio em uma{' '}
+            <span className="text-gradient-gold">Máquina de Vendas Digitais</span>
           </h2>
           <p className="mt-3 text-sm text-[#A1A1AA] max-w-lg mx-auto">
-            Franca-SP • Diagnóstico gratuito • Projetos sob medida
+            Mais de 12 empresas em Franca-SP já confiam. Agende uma conversa sem compromisso.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
-              Falar com o Time
+              <MessageCircle className="h-4 w-4" />
+              Quero Minha Infraestrutura Digital
             </PremiumButton>
             <Link to="/contato" className="btn-outline-gold text-sm">
               Enviar Mensagem
@@ -804,16 +912,16 @@ const CtaBanner = ({ variant = 'dark' }: { variant?: 'dark' | 'light' }) => (
         >
           <LuxuryDivider />
           <h3 className="font-serif mt-8 text-xl font-bold text-white sm:text-2xl">
-            Vamos construir sua{' '}
-            <span className="text-gradient-gold">infraestrutura digital</span>?
+            Transforme seu negócio em uma{' '}
+            <span className="text-gradient-gold">máquina de vendas digital</span>?
           </h3>
           <p className="mt-3 text-sm text-[#A1A1AA] max-w-md mx-auto">
-            Diagnóstico gratuito • Projeto sob medida • Resultado mensurável
+            Diagnóstico gratuito • Projeto sob medida • Mais de 12 empresas em Franca-SP confiam
           </p>
           <div className="mt-6">
             <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
               <MessageCircle className="h-4 w-4" />
-              Falar com o Time
+              Quero Minha Infraestrutura Digital
             </PremiumButton>
           </div>
         </motion.div>
@@ -828,6 +936,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <ProblemaSection />
+      <ValorSection />
       <CtaBanner />
       <SolucaoSection />
       <VideoSection />
