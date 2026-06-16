@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  reidasvendas:
+    build: .
+    image: reidasvendas:latest
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.reidasvendas.rule=Host(`reidasvendas.com.br`) || Host(`www.reidasvendas.com.br`)"
+      - "traefik.http.routers.reidasvendas.entrypoints=websecure"
+      - "traefik.http.routers.reidasvendas.tls.certresolver=letsencrypt"
+      - "traefik.http.services.reidasvendas.loadbalancer.server.port=80"
