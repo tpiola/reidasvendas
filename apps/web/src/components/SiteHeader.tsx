@@ -38,17 +38,12 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group" aria-label="Rei das Vendas - Home">
+        {/* Logo — mesmo do rodapé */}
+        <Link to="/" className="flex items-start group" aria-label="Rei das Vendas - Home">
           <img
-            src="/logo-r-icon.png"
-            alt="R"
-            className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
-          />
-          <img
-            src="/logo.svg"
+            src="/logo-original.png"
             alt="Rei das Vendas"
-            className="h-6 w-auto object-contain transition-all duration-300 group-hover:opacity-90 hidden sm:block"
+            className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
           />
         </Link>
 
