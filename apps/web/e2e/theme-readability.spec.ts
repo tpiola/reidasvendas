@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const ROUTES = ['/', '/planos', '/projetos', '/diagnostico', '/contato'] as const;
+const ROUTES = ['/', '/servicos', '/blog', '/contato', '/politica'] as const;
 
 async function setTheme(page: import('@playwright/test').Page, theme: 'light' | 'dark') {
   await page.addInitScript((t) => {

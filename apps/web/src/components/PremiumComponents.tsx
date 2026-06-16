@@ -33,9 +33,9 @@ export function SectionHeading({
 }
 
 export function FeatureCard({
-  icon, title, description, index = 0,
+  icon, title, description,
 }: {
-  icon: React.ReactNode; title: string; description: string; index?: number;
+  icon: React.ReactNode; title: string; description: string;
 }) {
   return (
     <div className="glass-card group rounded-2xl p-6 sm:p-7 shine-effect hover:border-[rgba(214,168,79,0.3)] transition-all">

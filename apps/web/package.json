@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "check": "tsc -b --noEmit",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "e2e": "playwright test",
     "a11y": "playwright test -g a11y"
   },

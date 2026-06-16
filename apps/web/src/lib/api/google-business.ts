@@ -71,7 +71,7 @@ export async function listLocations(): Promise<{ name: string; locationName: str
     );
     if (!res.ok) throw new Error(`GBP error: ${res.status}`);
     const data = await res.json();
-    return (data.locations || []).map((l: any) => ({
+    return (data.locations || []).map((l: { name?: string; locationName?: string }) => ({
       name: l.name,
       locationName: l.locationName,
     }));

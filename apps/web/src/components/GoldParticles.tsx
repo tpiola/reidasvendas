@@ -15,7 +15,7 @@ export function GoldParticles({ count = 40 }: { count?: number }) {
     if (!ctx) return;
 
     let animId: number;
-    let particles: Particle[] = [];
+    const particles: Particle[] = [];
 
     const resize = () => {
       canvas.width = window.innerWidth;

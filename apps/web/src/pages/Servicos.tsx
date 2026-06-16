@@ -2,10 +2,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Monitor, Smartphone, Bot, BarChart3, GraduationCap, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { BRAND } from '@/lib/brand';
-import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
+import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { PremiumButton } from '@/components/PremiumButton';
-import { GlassCard } from '@/components/GlassCard';
-import { SectionHeading } from '@/components/PremiumComponents';
 import { GoldParticles } from '@/components/GoldParticles';
 
 const servicosDetalhados = [
