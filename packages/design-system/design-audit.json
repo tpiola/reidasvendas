@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rei das Vendas — Design Audit (2026-06-17)",
+  "meta": {
+    "site": "reidasvendas.com.br",
+    "audit_date": "2026-06-17",
+    "project": "altiq-monorepo",
+    "package": "@altiq/design-system",
+    "scope": "CSS audit, token gaps, component inventory, typography, spacing, color"
+  },
+  "colors": {
+    "primary_gold": {
+      "hex": "#D6A84F",
+      "usage": "Primary accent, buttons, labels, gradients, borders, text highlights",
+      "locations": ["text-[#D6A84F]", "bg-[#D6A84F]", "border-[#D6A84F]", "from-[#D6A84F]", "fill-[#D6A84F]", "var(--rdv-gold)"],
+      "opacity_variants": [
+        { "value": "rgba(214,168,79,0.02)", "usage": "bg subtle fills" },
+        { "value": "rgba(214,168,79,0.04)", "usage": "bg subtle fills" },
+        { "value": "rgba(214,168,79,0.06)", "usage": "bg fills, hero glow" },
+        { "value": "rgba(214,168,79,0.08)", "usage": "bg fills, badges" },
+        { "value": "rgba(214,168,79,0.10)", "usage": "bg fills, hover states" },
+        { "value": "rgba(214,168,79,0.12)", "usage": "bg fills, cards" },
+        { "value": "rgba(214,168,79,0.15)", "usage": "bg fills, borders" },
+        { "value": "rgba(214,168,79,0.20)", "usage": "borders" },
+        { "value": "rgba(214,168,79,0.22)", "usage": "borders (var(--rdv-gold-border))" },
+        { "value": "rgba(214,168,79,0.25)", "usage": "borders" },
+        { "value": "rgba(214,168,79,0.30)", "usage": "borders, scrollbar" },
+        { "value": "rgba(214,168,79,0.35)", "usage": "glow shadow (var(--rdv-gold-glow))" }
+      ]
+    },
+    "gold_light": { "hex": "#F2D38A", "usage": "Gradient via, text highlight" },
+    "gold_dark": { "hex": "#B88932", "usage": "Darker gold for data bars, var(--rdv-gold-dark)" },
+    "gold_extra_light": { "hex": "#F5D68A", "usage": "Gradient to" },
+    "black_bg": { "hex": "#030303", "usage": "Body background (var(--rdv-bg))" },
+    "surface_1": { "hex": "#080808", "usage": "Card surface (var(--rdv-surface))" },
+    "surface_2": { "hex": "#0B0B0B", "usage": "Secondary surface (var(--rdv-surface-2))" },
+    "surface_3": { "hex": "#111111", "usage": "Tertiary surface (var(--rdv-surface-3))" },
+    "white_text": { "hex": "#F5F5F5", "usage": "Primary text (var(--rdv-white))" },
+    "text_secondary": { "hex": "#A1A1AA", "usage": "Secondary text (var(--rdv-text-secondary))" },
+    "text_muted": { "hex": "#8A8A92", "usage": "Muted text (var(--rdv-text-muted))" },
+    "blue_accent": { "hex": "#0057FF", "usage": "Secondary accent (CTA buttons)" },
+    "green_accent": { "hex": "#25D366", "usage": "WhatsApp button" },
+    "green_accent_hover": { "hex": "#1DA851", "usage": "WhatsApp hover" },
+    "blue_accent_hover": { "hex": "#0044CC", "usage": "Blue CTA hover" },
+    "red_accent": { "hex": "#F87171", "usage": "Error states" },
+    "border_white": { "rgba": "rgba(255,255,255,0.06)", "usage": "Default borders (var(--rdv-border))" },
+    "glass_bg": { "rgba": "rgba(255,255,255,0.035)", "usage": "Glass card bg (var(--rdv-glass))" }
+  },
+  "typography": {
+    "fonts": {
+      "primary_sans": "Geist, -apple-system, BlinkMacSystemFont, Inter, sans-serif",
+      "primary_serif": "Playfair Display, Cormorant Garamond, ui-serif, Georgia, serif",
+      "mono": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace",
+      "import": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Geist:wght@300;400;500;600;700;800&display=swap"
+    },
+    "headings": {
+      "hero": { "size": "clamp(2.8rem, 7.5vw, 5.5rem)", "weight": 800, "font": "Playfair Display", "tracking": "-0.03em", "line_height": 1.02 },
+      "h2": { "sizes": ["text-2xl sm:text-4xl", "text-3xl sm:text-5xl"], "weight": 700 },
+      "h3": { "sizes": ["text-xl sm:text-2xl", "text-2xl"], "weight": 600 }
+    },
+    "body": { "size": "16px", "line_height": 1.6 },
+    "caps_labels": { "size": "10px", "weight": 700, "tracking": "0.3em", "text_transform": "uppercase" }
+  },
+  "spacing": {
+    "current_system": {
+      "space-1": "8px", "space-2": "16px", "space-3": "24px",
+      "space-4": "32px", "space-5": "40px", "space-6": "48px",
+      "space-7": "56px", "space-8": "64px", "space-10": "80px",
+      "space-12": "96px", "space-16": "128px", "space-20": "160px"
+    },
+    "gap_intervals": ["0.25rem", "0.375rem", "0.5rem", "0.625rem", "0.75rem", "1rem", "1.25rem", "1.5rem", "2rem", "2.5rem", "3rem"],
+    "section_padding_y": { "mobile": "2.5rem/5rem", "desktop": "4rem/10rem" }
+  },
+  "components": {
+    "glass_card": { "usage": "Cards, feature boxes, service cards", "props": "backdrop-filter: blur(32px) saturate(160%)", "hover": "border-color gold, lift 2px" },
+    "btn_gold": { "usage": "Primary CTA", "styles": "gold gradient bg, rounded-full, 0.875rem/700" },
+    "btn_outline_gold": { "usage": "Secondary CTA", "styles": "transparent bg, gold border, rounded-full" },
+    "input_field": { "usage": "Form inputs", "styles": "dark bg, 0.75rem radius, gold focus ring" },
+    "gold_badge": { "usage": "Category/tag labels", "styles": "gold border, 0.625rem, uppercase, 0.2em tracking" },
+    "section_label": { "usage": "Section headers prefix", "styles": "10px, 0.3em tracking, gold, gold line above" },
+    "glass_premium": { "usage": "Premium cards", "styles": "gold border, blur(48px)" },
+    "scroll_progress": { "usage": "Page scroll indicator", "styles": "fixed top, gold gradient, 3px height" },
+    "luxury_divider": { "usage": "Section dividers", "styles": "gold gradient line with dot" },
+    "text_gradient_gold": { "usage": "Gold gradient text", "styles": "linear-gradient(135deg, #D6A84F, #F2D38A, #D6A84F)" },
+    "data_bar": { "usage": "Progress/stat bars", "styles": "4px height, gold gradient fill" },
+    "gold_border_gradient": { "usage": "Premium card borders", "styles": "animated gold gradient border" }
+  },
+  "effects": {
+    "blur_glows": { "usage": "Hero and section backgrounds", "sizes": ["blur(60px)", "blur(80px)", "blur(100px)", "blur(120px)", "blur(150px)"] },
+    "radial_gradients": { "usage": "Section background ambient light", "positions": ["30% 30%", "30% 50%", "50% 40%", "50% 50%", "70% 70%"] },
+    "animations": {
+      "float": "6s ease-in-out infinite",
+      "shimmer": "4s linear infinite (bg-position)",
+      "pulse_glow": "3s ease-in-out infinite",
+      "slide_up_reveal": "0.7s cubic-bezier(0.16,1,0.3,1)",
+      "scale_in": "0.6s cubic-bezier(0.16,1,0.3,1)",
+      "stagger_fade": "0.5s cubic-bezier(0.16,1,0.3,1) staggered 0.05s each",
+      "scroll_progress": "CSS scroll-timeline"
+    },
+    "transition_easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "hover_effects": {
+      "hover_lift": "translateY(-4px)",
+      "hover_glow": "gold box-shadow",
+      "shine_effect": "::before sliding shine overlay"
+    }
+  },
+  "inconsistencies": [
+    {
+      "id": "INC-01",
+      "severity": "high",
+      "category": "spacing",
+      "description": "Spacing values are defined as CSS vars (--space-1 through --space-20) but NOT used consistently. Many elements use arbitrary Tailwind values like py-16, py-24, gap-10 instead of the space tokens.",
+      "recommendation": "Migrate all spacing to the space token scale. Use --space-* CSS vars or Tailwind config extensions."
+    },
+    {
+      "id": "INC-02",
+      "severity": "high",
+      "category": "typography",
+      "description": "No type scale system. Font sizes are applied inconsistently — some use Tailwind text-* classes, others use clamp() or arbitrary values. No defined hierarchy between h1-h6.",
+      "recommendation": "Define a complete type scale with fluid clamp() sizes in Style Dictionary tokens. Map to Tailwind text-* extensions."
+    },
+    {
+      "id": "INC-03",
+      "severity": "medium",
+      "category": "colors",
+      "description": "Gold color is used with 13+ different opacity variants inline. No semantic token system for gold-50 through gold-950. Blue (#0057FF) and green (#25D366) accents are not mapped to any scale.",
+      "recommendation": "Create full gold color scale (50-950) from light to dark. Map blue/green accents to semantic tokens."
+    },
+    {
+      "id": "INC-04",
+      "severity": "medium",
+      "category": "spacing",
+      "description": "No consistent section spacing. Section padding varies: py-16, py-20, py-24, sm:py-28, sm:py-32, lg:py-40. No spacing token for section gaps.",
+      "recommendation": "Define section-spacing tokens: --section-gap-mobile (72px), --section-gap-desktop (120px)."
+    },
+    {
+      "id": "INC-05",
+      "severity": "low",
+      "category": "borders",
+      "description": "Multiple border opacity variants for gold (0.06 through 0.30). No clear semantic tier for border-subtle, border-default, border-strong.",
+      "recommendation": "Consolidate into 3 semantic border tiers with consistent opacity mapping."
+    },
+    {
+      "id": "INC-06",
+      "severity": "medium",
+      "category": "elevation",
+      "description": "Shadow values are hardcoded: '0 0 10px rgba(214,168,79,0.3)', '0 0 30px...', '0 0 40px...', '0 0 60px...'. No shadow token system.",
+      "recommendation": "Define gold-glow shadow scale (sm, md, lg, xl) in Style Dictionary."
+    },
+    {
+      "id": "INC-07",
+      "severity": "low",
+      "category": "dark_light",
+      "description": "Site only supports dark mode (color-scheme: dark). Light mode CSS exists but is unused. No light-dark() color token strategy.",
+      "recommendation": "Implement light-dark color palette using CSS light-dark() function for future light mode support."
+    },
+    {
+      "id": "INC-08",
+      "severity": "low",
+      "category": "accessibility",
+      "description": "No OpenType feature settings, no font-feature-settings for numbers (tabular-nums), no ligatures configured.",
+      "recommendation": "Add font-feature-settings for slashed-zero, liga, kern, tnum on body text."
+    },
+    {
+      "id": "INC-09",
+      "severity": "medium",
+      "category": "image_handling",
+      "description": "No consistent image filter strategy. Images lack saturation/contrast filters for brand consistency.",
+      "recommendation": "Apply uniform image filter: saturate(0.9) contrast(1.05) on all content images."
+    },
+    {
+      "id": "INC-10",
+      "severity": "low",
+      "category": "hover_transitions",
+      "description": "Multiple transition easings used: cubic-bezier(0.16,1,0.3,1), cubic-bezier(0.4,0,0.2,1), ease-out, 0.3s. No standard interaction curve.",
+      "recommendation": "Standardize all hover/active transitions to cubic-bezier(0.22, 1, 0.36, 1) — the 'ease-out-expo' style."
+    }
+  ],
+  "inventory": {
+    "pages": ["/ (Home)", "/servicos", "/contato", "/diagnostico"],
+    "sections_on_home": {
+      "hero": "Full-viewport hero with video background, gold glow, clamp headline, subtitle, CTA buttons",
+      "services_overview": "Service cards grid with glass effect",
+      "process": "Step-by-step process connector",
+      "testimonials": "Client testimonials (likely carousel)",
+      "cta_section": "Call-to-action with WhatsApp integration",
+      "footer": "Multi-column footer with links, social, segments"
+    },
+    "interactive_components": {
+      "header_nav": ["HOME", "SERVIÇOS", "CONTATO", "Diagnóstico"],
+      "whatsapp_button": "Fixed position support button",
+      "cookie_consent": "GDPR-style banner",
+      "scroll_progress_bar": "CSS scroll-timeline based"
+    },
+    "utilities": {
+      "glass_card": "Reusable glassmorphism card component",
+      "btn_gold": "Primary gold gradient button",
+      "btn_outline_gold": "Outlined gold button",
+      "gold_badge": "Gold category badge",
+      "section_label": "Gold section label with line",
+      "text_gradient_gold": "Gold gradient text",
+      "luxury_divider": "Gold gradient divider with dot",
+      "hover_lift": "Lift on hover utility",
+      "hover_glow": "Glow on hover utility",
+      "reveal": "Intersection observer scroll reveal",
+      "stagger_children": "Staggered entrance animation"
+    }
+  }
+}

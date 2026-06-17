@@ -1,0 +1,36 @@
+{
+  "name": "@altiq/design-system",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Rei das Vendas Design System — Style Dictionary tokens, CSS custom properties, Tailwind config, SCSS, Puck components",
+  "main": "./build/css/tokens.css",
+  "style": "./build/css/tokens.css",
+  "sass": "./build/scss/_tokens.scss",
+  "scripts": {
+    "build": "style-dictionary build --config ./sd.config.js",
+    "dev": "style-dictionary build --config ./sd.config.js --watch",
+    "clean": "rm -rf build",
+    "test": "echo 'no tests yet'",
+    "lint": "echo skip",
+    "check": "echo skip"
+  },
+  "exports": {
+    "./*.css": "./build/css/*.css",
+    "./*.scss": "./build/scss/*.scss",
+    "./tailwind": "./build/tailwind/tailwind-preset.js",
+    "./tokens": "./src/tokens/index.js"
+  },
+  "dependencies": {
+    "style-dictionary": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "~5.8.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0 || ^4.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
