@@ -9,8 +9,39 @@ import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
 
+/* ─── Billing Toggle ─── */
+function BillingToggle({ annual, onChange }: { annual: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <div className="inline-flex items-center gap-4 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-1.5">
+      <button
+        onClick={() => onChange(false)}
+        className={`relative rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
+          !annual
+            ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] shadow-[0_0_20px_rgba(214,168,79,0.2)]'
+            : 'text-[#A1A1AA] hover:text-white'
+        }`}
+      >
+        Mensal
+      </button>
+      <button
+        onClick={() => onChange(true)}
+        className={`relative rounded-full px-5 py-2 text-xs font-semibold transition-all duration-300 ${
+          annual
+            ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] shadow-[0_0_20px_rgba(214,168,79,0.2)]'
+            : 'text-[#A1A1AA] hover:text-white'
+        }`}
+      >
+        Anual{' '}
+        <span className="ml-1 inline-block rounded-full bg-[rgba(214,168,79,0.15)] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-wider text-[#D6A84F]">
+          2 meses grátis
+        </span>
+      </button>
+    </div>
+  );
+}
+
 /* ─── Planos Data ─── */
-const PLANOS = [
+const PLANOS_BASE = [
   {
     name: 'Digital',
     slug: 'digital',
@@ -75,6 +106,26 @@ const PLANOS = [
   },
 ];
 
+/* ─── Feature Comparison (entre planos) ─── */
+const COMPARACAO_FEATURES = [
+  { feature: 'Site Premium (5 páginas)', Digital: true, Profissional: true, Enterprise: true },
+  { feature: 'Domínio .com.br grátis', Digital: true, Profissional: true, Enterprise: true },
+  { feature: 'Blog Integrado', Digital: true, Profissional: true, Enterprise: true },
+  { feature: 'SEO Básico', Digital: true, Profissional: true, Enterprise: true },
+  { feature: 'E-commerce Completo', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'Dashboard Gerencial', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'Automações de Marketing', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'CRM Integrado', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'Agendamento Online', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'Suporte Prioritário 24h', Digital: false, Profissional: true, Enterprise: true },
+  { feature: 'App iOS/Android', Digital: false, Profissional: false, Enterprise: true },
+  { feature: 'IA Generativa', Digital: false, Profissional: false, Enterprise: true },
+  { feature: 'Automações Ilimitadas', Digital: false, Profissional: false, Enterprise: true },
+  { feature: 'Suporte VIP (4h)', Digital: false, Profissional: false, Enterprise: true },
+  { feature: 'Consultoria Estratégica', Digital: false, Profissional: false, Enterprise: true },
+  { feature: 'SLA 99,9%', Digital: false, Profissional: false, Enterprise: true },
+];
+
 /* ─── Comparativo Concorrentes ─── */
 const COMPARATIVO = [
   { feature: 'Site Profissional', rei: true, squarespace: true, wix: true, wp: true },
@@ -98,40 +149,29 @@ const CONCORRENTES_PRECOS = [
   { name: 'WordPress (+plugins)', plan: 'Business', price: 'R$ 179/mês*', color: 'text-white/70', isBest: false },
 ];
 
-/* ─── FAQ ─── */
-const FAQ = [
+/* ─── Pricing FAQ (5 perguntas) ─── */
+const PRICING_FAQ = [
   {
-    q: 'Preciso de conhecimento técnico para gerenciar o site?',
-    a: 'Não. Nós cuidamos de tudo — da criação à manutenção. Você só precisa enviar o conteúdo (textos e fotos). O resto é conosco. Se quiser fazer alterações, o painel é tão simples quanto usar o Instagram.',
+    q: 'Os preços são fixos ou podem aumentar?',
+    a: 'Os preços dos planos são fixos enquanto você for assinante. Se houver reajuste no futuro, você será avisado com 30 dias de antecedência. Clientes antigos podem ter condições especiais de fidelidade.',
   },
   {
-    q: 'Quanto tempo demora para meu site ficar pronto?',
-    a: 'Seu site profissional fica no ar em até 7 dias úteis. Para planos com e-commerce ou funcionalidades avançadas, o prazo é de 15 a 21 dias, dependendo da complexidade. Você receberá um cronograma detalhado antes de começarmos.',
+    q: 'Qual a diferença entre pagamento mensal e anual?',
+    a: 'No plano anual, você paga 10 meses e leva 12 — uma economia de 2 meses grátis. Por exemplo, o plano Digital de R$ 97/mês sai por R$ 808/ano (R$ 67/mês). Uma economia de R$ 356 por ano.',
   },
   {
-    q: 'Posso cancelar quando quiser?',
-    a: 'Sim. Sem multa, sem burocracia, sem letras miúdas. Você cancela quando quiser com um simples e-mail. Seu conteúdo fica disponível para exportação por 30 dias após o cancelamento.',
+    q: 'Existe custo de setup ou taxa de adesão?',
+    a: 'Não. Todos os planos são livres de taxa de adesão, custo de setup ou qualquer taxa oculta. Você paga apenas o valor do plano escolhido. O domínio do primeiro ano é cortesia.',
   },
   {
-    q: 'E se eu não gostar do resultado?',
-    a: 'Oferecemos garantia incondicional de 30 dias. Se não ficar satisfeito por qualquer motivo, devolvemos 100% do seu dinheiro. Sem questionamentos. Nosso risco, não o seu.',
+    q: 'Posso mudar de plano depois?',
+    a: 'Sim! Você pode fazer upgrade ou downgrade a qualquer momento. No upgrade, pagamos a diferença proporcional. No downgrade, o novo valor passa a valer no próximo ciclo de faturamento.',
   },
   {
-    q: 'O domínio é realmente grátis?',
-    a: 'Sim. Todos os planos incluem domínio .com.br grátis no primeiro ano. A partir do segundo ano, a renovação é feita diretamente com o provedor (cerca de R$ 40/ano). Sem surpresas.',
-  },
-  {
-    q: 'O que acontece se meu site sair do ar?',
-    a: 'Temos infraestrutura em cloud com SLA de 99,9% de uptime. Nos planos Profissional e Enterprise, monitoramento 24/7 com alertas em tempo real. Se algo acontecer, resolvemos antes de você perceber.',
-  },
-  {
-    q: 'Vocês atendem empresas fora de Franca-SP?',
-    a: 'Sim! Atendemos empresas em todo o Brasil. Toda a comunicação é remota via WhatsApp, e-mail e videoconferência. O resultado é o mesmo — ou melhor, já que focamos 100% na entrega digital.',
+    q: 'O que está incluído na garantia de 30 dias?',
+    a: 'Se por qualquer motivo você não ficar satisfeito nos primeiros 30 dias, devolvemos 100% do valor pago. Sem burocracia, sem questionamentos. Seu risco zero, nosso compromisso total.',
   },
 ];
-
-/* ─── Depoimentos (em breve) ─── */
-const DEPOIMENTOS: { nome: string; empresa: string; texto: string; estrelas: number }[] = [];
 
 /* ─── FAQ Accordion ─── */
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
@@ -232,7 +272,6 @@ function StripeCheckoutModal({
         className="mx-4 w-full max-w-md rounded-2xl border border-[rgba(214,168,79,0.2)] bg-[#080808] p-6 sm:p-8 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="mb-6 text-center">
           <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[rgba(214,168,79,0.1)]">
             <CreditCard className="h-6 w-6 text-[#D6A84F]" />
@@ -311,18 +350,23 @@ function StripeCheckoutModal({
 
 /* ─── Page ─── */
 export default function Planos() {
+  const [annual, setAnnual] = useState(false);
   const [stripeModal, setStripeModal] = useState<{
     slug: string;
     name: string;
     price: number;
   } | null>(null);
+
+  const getPrice = (base: number) => annual ? Math.round(base * 10) : base;
+  const getPriceLabel = (base: number) => annual ? `R$ ${Math.round(base * 10)}` : `R$ ${base}`;
+  const getPeriodLabel = () => annual ? '/ano' : '/mês';
+
   return (
     <main>
       <GoldParticles count={30} />
 
       {/* ═══════ HERO ═══════ */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
-        {/* Background gradients */}
         <div className="absolute inset-0 bg-[#030303]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_30%,rgba(214,168,79,0.10)_0%,transparent_55%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_70%,rgba(214,168,79,0.05)_0%,transparent_50%)]" />
@@ -366,7 +410,6 @@ export default function Planos() {
             </div>
           </Reveal>
 
-          {/* Valor comparison banner */}
           <Reveal delay={0.35}>
             <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-[rgba(214,168,79,0.15)] bg-[rgba(214,168,79,0.04)] px-5 py-3">
               <p className="text-sm font-medium text-[#D6A84F]">
@@ -374,15 +417,22 @@ export default function Planos() {
                 <span className="font-bold">R$ 97/mês</span>
                 <span className="text-white/80"> = </span>
                 <span className="font-bold">R$ 3,22/dia</span>
-                <span className="text-white/80">. Menos que um cafezinho. ☕</span>
+                <span className="text-white/80">. Menos que um cafezinho.</span>
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* ═══════ BILLING TOGGLE ═══════ */}
+      <div className="flex justify-center -mt-4 mb-10">
+        <Reveal>
+          <BillingToggle annual={annual} onChange={setAnnual} />
+        </Reveal>
+      </div>
+
       {/* ═══════ PLANOS ═══════ */}
-      <section className="pb-20 sm:pb-28">
+      <section className="pb-16 sm:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <motion.div
             variants={staggerContainer}
@@ -391,10 +441,11 @@ export default function Planos() {
             viewport={{ once: true, margin: '-50px' }}
             className="grid gap-6 md:grid-cols-3 md:gap-8"
           >
-            {PLANOS.map((plano) => {
+            {PLANOS_BASE.map((plano) => {
               const Icon = plano.name === 'Digital' ? Monitor
                 : plano.name === 'Profissional' ? BarChart3
                 : Brain;
+              const precoFinal = annual ? Math.round(plano.price * 10) : plano.price;
 
               return (
                 <motion.div
@@ -432,12 +483,18 @@ export default function Planos() {
                     <h3 className="mt-5 font-serif text-2xl font-bold text-white">{plano.name}</h3>
                     <div className="mt-3 flex items-baseline gap-1">
                       <span className="text-4xl font-bold text-white sm:text-5xl">
-                        R$ {plano.price}
+                        {annual ? `R$ ${precoFinal}` : `R$ ${plano.price}`}
                       </span>
-                      <span className="text-sm text-[#71717A]">/mês</span>
+                      <span className="text-sm text-[#71717A]">{getPeriodLabel()}</span>
                     </div>
+                    {annual && (
+                      <p className="mt-1 text-xs text-[#D6A84F]">
+                        <Zap className="inline h-3 w-3 mr-0.5" />
+                        Economia de 2 meses — R$ {(plano.price * 2).toFixed(0)} grátis
+                      </p>
+                    )}
                     <p className="mt-1 text-xs text-[#71717A]">
-                      Faturamento mensal ou cobrança única com desconto
+                      {annual ? 'Pagamento único anual' : 'Faturamento mensal'}
                     </p>
 
                     <p className="mt-4 text-sm leading-relaxed text-[#A1A1AA]">
@@ -464,7 +521,7 @@ export default function Planos() {
                       </Link>
                     ) : (
                       <button
-                        onClick={() => setStripeModal({ slug: plano.slug, name: plano.name, price: plano.price })}
+                        onClick={() => setStripeModal({ slug: plano.slug, name: plano.name, price: precoFinal })}
                         className={`mt-6 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold transition-all duration-300 ${
                           plano.popular
                             ? 'bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] text-[#030303] hover:shadow-[0_0_30px_rgba(214,168,79,0.3)]'
@@ -496,7 +553,67 @@ export default function Planos() {
         </div>
       </section>
 
-      {/* ═══════ COMPARAÇÃO DE VALOR ═══════ */}
+      {/* ═══════ TABELA COMPARATIVA ENTRE PLANOS ═══════ */}
+      <section className="border-t border-[rgba(214,168,79,0.08)] py-20 sm:py-28">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal className="text-center">
+            <SectionLabel>Comparativo de Planos</SectionLabel>
+            <h2 className="mt-4 font-serif text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+              Veja qual plano <span className="text-gradient-gold">combina com você</span>
+            </h2>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <div className="mt-10 overflow-x-auto">
+              <table className="w-full min-w-[500px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-[rgba(214,168,79,0.1)]">
+                    <th className="pb-4 pr-4 font-semibold text-white">Funcionalidade</th>
+                    <th className="pb-4 px-3 text-center font-semibold text-[#A1A1AA]">Digital</th>
+                    <th className="pb-4 px-3 text-center font-semibold text-[#D6A84F]">Profissional</th>
+                    <th className="pb-4 px-3 text-center font-semibold text-[#A1A1AA]">Enterprise</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {COMPARACAO_FEATURES.map((row, i) => (
+                    <tr
+                      key={row.feature}
+                      className={`border-b border-[rgba(255,255,255,0.04)] transition-colors hover:bg-[rgba(214,168,79,0.03)] ${
+                        i % 2 === 0 ? 'bg-[rgba(255,255,255,0.01)]' : ''
+                      }`}
+                    >
+                      <td className="py-3.5 pr-4 text-[#A1A1AA]">{row.feature}</td>
+                      <td className="py-3.5 px-3 text-center">
+                        {row.Digital ? (
+                          <CheckCircle2 className="mx-auto h-4 w-4 text-[#D6A84F]" />
+                        ) : (
+                          <XCircle className="mx-auto h-4 w-4 text-[#71717A]" />
+                        )}
+                      </td>
+                      <td className="py-3.5 px-3 text-center">
+                        {row.Profissional ? (
+                          <CheckCircle2 className="mx-auto h-4 w-4 text-[#D6A84F]" />
+                        ) : (
+                          <XCircle className="mx-auto h-4 w-4 text-[#71717A]" />
+                        )}
+                      </td>
+                      <td className="py-3.5 px-3 text-center">
+                        {row.Enterprise ? (
+                          <CheckCircle2 className="mx-auto h-4 w-4 text-[#D6A84F]" />
+                        ) : (
+                          <XCircle className="mx-auto h-4 w-4 text-[#71717A]" />
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════ COMPARAÇÃO DE VALOR (concorrentes) ═══════ */}
       <section className="border-t border-[rgba(214,168,79,0.08)] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal>
@@ -612,7 +729,6 @@ export default function Planos() {
             </SectionTitle>
           </Reveal>
 
-          {/* Stats */}
           <Reveal delay={0.15}>
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               {[
@@ -638,48 +754,20 @@ export default function Planos() {
               })}
             </div>
           </Reveal>
-
-          {/* Depoimentos */}
-          <Reveal delay={0.2}>
-            <div className="mt-16 grid gap-6 sm:grid-cols-3">
-              {DEPOIMENTOS.map((dep) => (
-                <div
-                  key={dep.nome}
-                  className="rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-6 transition-all duration-300 hover:border-[rgba(214,168,79,0.15)]"
-                >
-                  {/* Stars */}
-                  <div className="mb-4 flex gap-1">
-                    {Array.from({ length: dep.estrelas }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#D6A84F] text-[#D6A84F]" />
-                    ))}
-                  </div>
-                  <blockquote className="text-sm leading-relaxed text-[#A1A1AA]">
-                    &ldquo;{dep.texto}&rdquo;
-                  </blockquote>
-                  <div className="mt-4 border-t border-[rgba(255,255,255,0.05)] pt-4">
-                    <p className="text-sm font-semibold text-white">{dep.nome}</p>
-                    <p className="text-xs text-[#71717A]">{dep.empresa}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      {/* ═══════ FAQ ═══════ */}
+      {/* ═══════ PRICING FAQ ═══════ */}
       <section className="border-t border-[rgba(214,168,79,0.08)] py-20 sm:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <Reveal>
-            <SectionLabel>Dúvidas Frequentes</SectionLabel>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <SectionTitle>
-              Tudo que Você Precisa Saber
-            </SectionTitle>
+          <Reveal className="text-center">
+            <SectionLabel>Dúvidas sobre Preços</SectionLabel>
+            <h2 className="mt-4 font-serif text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+              Tudo sobre <span className="text-gradient-gold">Planos e Pagamentos</span>
+            </h2>
           </Reveal>
 
-          <Reveal delay={0.2}>
+          <Reveal delay={0.15}>
             <motion.div
               variants={staggerContainer}
               initial="hidden"
@@ -687,10 +775,26 @@ export default function Planos() {
               viewport={{ once: true, margin: '-50px' }}
               className="mt-10 space-y-3"
             >
-              {FAQ.map((item, i) => (
+              {PRICING_FAQ.map((item, i) => (
                 <FaqItem key={i} q={item.q} a={item.a} index={i} />
               ))}
             </motion.div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="mt-8 text-center">
+              <p className="text-sm text-[#71717A]">
+                Ainda tem dúvidas sobre preços?{' '}
+                <a
+                  href={BRAND.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-[#D6A84F] underline underline-offset-2 transition-colors hover:text-[#F2D38A]"
+                >
+                  Fale conosco no WhatsApp
+                </a>
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -717,12 +821,11 @@ export default function Planos() {
             </p>
           </Reveal>
 
-          {/* Value reminder */}
           <Reveal delay={0.18}>
             <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.15)] bg-[rgba(214,168,79,0.04)] px-4 py-2">
               <Zap className="h-4 w-4 text-[#D6A84F]" />
               <span className="text-xs font-medium text-[#D6A84F]">
-                R$ 97/mês = R$ 3,22/dia — Menos que um cafezinho
+                {annual ? 'Plano anual com 2 meses grátis' : 'R$ 97/mês = R$ 3,22/dia — Menos que um cafezinho'}
               </span>
             </div>
           </Reveal>
@@ -730,7 +833,7 @@ export default function Planos() {
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <button
-                onClick={() => setStripeModal({ slug: 'digital', name: 'Digital', price: 97 })}
+                onClick={() => setStripeModal({ slug: 'digital', name: 'Digital', price: annual ? 970 : 97 })}
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35),0_0_80px_rgba(214,168,79,0.12)] hover:scale-[1.02] active:scale-[0.98]"
               >
                 Assinar Plano Digital

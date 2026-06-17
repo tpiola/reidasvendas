@@ -14,6 +14,9 @@ const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Contato = lazy(() => import('@/pages/Contato'));
 const Politica = lazy(() => import('@/pages/Politica'));
 const Planos = lazy(() => import('@/pages/Planos'));
+const Sobre = lazy(() => import('@/pages/Sobre'));
+const Recursos = lazy(() => import('@/pages/Recursos'));
+const Segmentos = lazy(() => import('@/pages/Segmentos'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
@@ -158,6 +161,9 @@ function SiteLayout() {
               <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
               <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
               <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
+              <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
+              <Route path="/recursos" element={<PageTransition><Recursos /></PageTransition>} />
+              <Route path="/segmentos" element={<PageTransition><Segmentos /></PageTransition>} />
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />

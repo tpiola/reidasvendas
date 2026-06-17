@@ -752,6 +752,89 @@ img, video { max-width: 100%; height: auto; display: block; }
   border-radius: 6px;
 }
 
+/* ─── Split text reveal (word-by-word) ─── */
+@keyframes split-text-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) skewX(-8deg);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+.split-text-word {
+  display: inline-block;
+  opacity: 0;
+  animation: split-text-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.split-text-word:nth-child(1)  { animation-delay: 0.00s; }
+.split-text-word:nth-child(2)  { animation-delay: 0.06s; }
+.split-text-word:nth-child(3)  { animation-delay: 0.12s; }
+.split-text-word:nth-child(4)  { animation-delay: 0.18s; }
+.split-text-word:nth-child(5)  { animation-delay: 0.24s; }
+.split-text-word:nth-child(6)  { animation-delay: 0.30s; }
+.split-text-word:nth-child(7)  { animation-delay: 0.36s; }
+.split-text-word:nth-child(8)  { animation-delay: 0.42s; }
+.split-text-word:nth-child(9)  { animation-delay: 0.48s; }
+.split-text-word:nth-child(10) { animation-delay: 0.54s; }
+.split-text-word:nth-child(11) { animation-delay: 0.60s; }
+.split-text-word:nth-child(12) { animation-delay: 0.66s; }
+.split-text-word:nth-child(13) { animation-delay: 0.72s; }
+.split-text-word:nth-child(14) { animation-delay: 0.78s; }
+.split-text-word:nth-child(15) { animation-delay: 0.84s; }
+
+/* ─── Carousel auto-scroll animation ─── */
+@keyframes carousel-auto-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.carousel-auto {
+  display: flex;
+  gap: 1.5rem;
+  animation: carousel-auto-scroll 30s linear infinite;
+}
+.carousel-auto:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Card lift (hover 3D elevado) ─── */
+@keyframes card-lift-hover {
+  0% {
+    transform: perspective(600px) rotateX(0deg) translateY(0);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+  }
+  100% {
+    transform: perspective(600px) rotateX(2deg) translateY(-8px);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(214,168,79,0.08);
+  }
+}
+.card-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+.card-lift:hover {
+  animation: card-lift-hover 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Scroll parallax (movimento sutil ao scroll) ─── */
+.scroll-parallax-slow {
+  transform: translateZ(0);
+  will-change: transform;
+}
+.scroll-parallax-medium {
+  transform: translateZ(0);
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-parallax-slow {
+    transition: transform 0.1s linear;
+  }
+}
+
 /* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

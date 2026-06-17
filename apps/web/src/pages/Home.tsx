@@ -3,16 +3,68 @@ import {
   ArrowRight, Monitor, Smartphone, Bot, BarChart3, GraduationCap,
   MessageCircle, CheckCircle2, MapPin, Quote,
   TrendingUp, Shield, Zap, Target, Layers,
+  Star, ChevronRight, ChevronLeft, Globe, ShoppingBag,
+  Building2, HeartPulse, BookOpen, Briefcase, Play,
+  Check, Sparkles, CreditCard, ArrowUpRight, ChevronDown,
+  Users, Clock, DollarSign,
 } from 'lucide-react';
-import { motion, useScroll, useTransform, useSpring, animate, useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import {
+  motion, useScroll, useTransform, useSpring, animate, useInView,
+  AnimatePresence,
+} from 'framer-motion';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { BRAND } from '@/lib/brand';
-import { springTransition, springSoft, springGentle, SectionWrapper, staggerContainer, staggerItem, Reveal, SectionLabel, SectionTitle } from '@/hooks/useAnimation';
+import {
+  springTransition, springSoft, springGentle,
+  SectionWrapper, staggerContainer, staggerItem,
+  Reveal, SectionLabel, SectionTitle,
+} from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
 import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { FounderSection } from '@/components/FounderSection';
+
+/* ─── Types ─── */
+interface VideoSlide {
+  src: string;
+  poster?: string;
+}
+
+interface Category {
+  id: string;
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  items: {
+    icon: React.ElementType;
+    title: string;
+    desc: string;
+    cta: string;
+  }[];
+}
+
+interface ProjectTemplate {
+  title: string;
+  category: string;
+  image: string;
+  tags: string[];
+}
+
+interface PricingPlan {
+  name: string;
+  desc: string;
+  monthly: number;
+  yearly: number;
+  features: string[];
+  highlighted?: boolean;
+  cta: string;
+}
+
+interface FaqItem {
+  q: string;
+  r: string;
+}
 
 /* ─── Counter Animation Hook ─── */
 function useCounter(end: number, duration = 2) {
@@ -25,58 +77,133 @@ function useCounter(end: number, duration = 2) {
     const controls = animate(0, end, {
       duration,
       ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => { node.textContent = Math.round(v).toLocaleString('pt-BR') + (end > 100 ? '%' : ''); },
+      onUpdate: (v) => {
+        node.textContent = Math.round(v).toLocaleString('pt-BR') + (end > 100 ? '%' : '');
+      },
     });
     return () => controls.stop();
   }, [inView, end, duration]);
   return ref;
 }
 
-/* ─── Smooth Counter (non-numeric) ─── */
-function useCounterText(end: string) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
-  useEffect(() => {
-    if (inView && ref.current) {
-      ref.current.textContent = end;
-    }
-  }, [inView, end]);
-  return ref;
-}
-
 /* ─── DATA ─── */
 
-const servicos = [
+const heroVideos: VideoSlide[] = [
+  { src: '/videos/sentinela/7.mp4' },
+  { src: '/videos/sentinela/4.mp4' },
+  { src: '/videos/sentinela/8.mp4' },
+  { src: '/videos/sentinela/10.mp4' },
+];
+
+const servicosData = [
   {
     icon: Monitor, title: 'Sites & Landing Pages', tagline: 'Seu negócio aberto 24h',
-    desc: 'Seu negócio aberto 24h por dia, 7 dias por semana, mesmo quando você está dormindo. Um site que carrega em 1.2s, aparece no Google e entrega leads no seu WhatsApp enquanto você foca no que importa.',
+    desc: 'Seu negócio aberto 24h por dia, 7 dias por semana. Um site que carrega em 1.2s, aparece no Google e entrega leads no seu WhatsApp.',
     img: BRAND.images.services.sites,
-    videoSrc: '/videos/sentinela/4.mp4',
   },
   {
     icon: Smartphone, title: 'Aplicativos Sob Medida', tagline: 'Cliente fiel na palma da mão',
-    desc: 'App iOS/Android feito sob medida pro seu negócio. Delivery que não cobra comissão, catálogo que atualiza sozinho, programa de fidelidade que traz o cliente de volta. Sem template, sem taxa por venda.',
+    desc: 'App iOS/Android sob medida. Delivery sem comissão, catálogo que atualiza sozinho, fidelidade que traz o cliente de volta.',
     img: BRAND.images.services.apps,
-    videoSrc: '/videos/sentinela/8.mp4',
   },
   {
     icon: Bot, title: 'Automação Comercial', tagline: 'Ela vende enquanto você vive',
-    desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar. Processos que rodam 24h sem supervisão — você dorme, ela vende.',
+    desc: 'CRM que alimenta o funil sozinho. Chatbot que qualifica antes de transferir. Disparo omnichannel que segue o lead até fechar.',
     img: BRAND.images.services.automations,
-    videoSrc: '/videos/sentinela/3.mp4',
   },
   {
     icon: BarChart3, title: 'Dashboards em Tempo Real', tagline: 'Números. Palpite zero.',
-    desc: 'Vendas, estoque, leads, ROI — tudo num painel vivo que atualiza em tempo real. O que funciona cresce. O que não funciona você ajusta na hora. Adeus planilha, olá governo dos dados.',
+    desc: 'Vendas, estoque, leads, ROI — tudo num painel vivo que atualiza em tempo real. Adeus planilha, olá governo dos dados.',
     img: BRAND.images.services.dashboards,
-    videoSrc: '/videos/sentinela/10.mp4',
   },
   {
-    icon: GraduationCap, title: 'Mentoria Digital', tagline: 'Estratégia, não curso',
-    desc: 'Sessões individuais mês a mês. Você no comando, a gente na construção. Sem aula gravada, sem teoria vazia — só plano de ação e resultado mensurável a cada encontro.',
+    icon: GraduationCap, title: 'Consultoria Digital', tagline: 'Estratégia, não curso',
+    desc: 'Sessões individuais mês a mês. Você no comando, a gente na construção. Sem teoria vazia — só plano de ação e resultado mensurável.',
     img: BRAND.images.services.mentoria,
-    videoSrc: '/videos/sentinela/2.mp4',
   },
+  {
+    icon: Zap, title: 'Soluções com IA', tagline: 'Inteligência que vende',
+    desc: 'Chatbots inteligentes, análise preditiva de vendas, recomendação personalizada e automação cognitiva para seu negócio.',
+    img: BRAND.images.services.dashboards,
+  },
+];
+
+const categorias: Category[] = [
+  {
+    id: 'sites',
+    icon: Monitor,
+    title: 'Sites Premium',
+    description: 'Presença digital profissional que vende 24h por dia',
+    items: [
+      { icon: Globe, title: 'Landing Pages', desc: 'Páginas de alta conversão com design premium e SEO integrado.', cta: 'Ver Sites' },
+      { icon: ShoppingBag, title: 'E-commerce', desc: 'Loja virtual completa com checkout otimizado e gestão de produtos.', cta: 'Ver E-commerce' },
+      { icon: Briefcase, title: 'Institucionais', desc: 'Site corporativo com identidade visual única e performance excepcional.', cta: 'Ver Institucionais' },
+    ],
+  },
+  {
+    id: 'apps',
+    icon: Smartphone,
+    title: 'Aplicativos',
+    description: 'Apps nativos iOS/Android que engajam clientes',
+    items: [
+      { icon: ShoppingBag, title: 'App Delivery', desc: 'Delivery próprio sem taxa por venda. Catálogo, pedidos e pagamentos.', cta: 'Ver Delivery' },
+      { icon: Star, title: 'Fidelidade', desc: 'Programa de pontos e cashback que traz o cliente de volta toda semana.', cta: 'Ver Fidelidade' },
+      { icon: Users, title: 'App Corporativo', desc: 'Sistema mobile para equipe interna, estoque e gestão de tarefas.', cta: 'Ver Corporativo' },
+    ],
+  },
+  {
+    id: 'automacoes',
+    icon: Bot,
+    title: 'Automações',
+    description: 'Processos que rodam 24h sem supervisão humana',
+    items: [
+      { icon: MessageCircle, title: 'Chatbot Inteligente', desc: 'Atendimento automático que qualifica leads antes de transferir.', cta: 'Ver Chatbot' },
+      { icon: Zap, title: 'CRM Automatizado', desc: 'Funil de vendas que alimenta, nutre e acompanha cada lead sozinho.', cta: 'Ver CRM' },
+      { icon: TrendingUp, title: 'Disparo Omnichannel', desc: 'E-mail, SMS, WhatsApp — sequência automática que segue o lead até fechar.', cta: 'Ver Disparo' },
+    ],
+  },
+  {
+    id: 'dashboards',
+    icon: BarChart3,
+    title: 'Dashboards',
+    description: 'Painéis em tempo real para decisão baseada em dados',
+    items: [
+      { icon: TrendingUp, title: 'Vendas & ROI', desc: 'Receita, conversão, ticket médio. Tudo atualizado em tempo real.', cta: 'Ver Vendas' },
+      { icon: Users, title: 'Equipe & Metas', desc: 'Performance individual, metas batidas, comissões calculadas automaticamente.', cta: 'Ver Equipe' },
+      { icon: Target, title: 'Marketing & Tráfego', desc: 'CAC, ROAS, leads por canal. Decisão baseada em dado, palpite zero.', cta: 'Ver Marketing' },
+    ],
+  },
+  {
+    id: 'consultoria',
+    icon: GraduationCap,
+    title: 'Consultoria Digital',
+    description: 'Estratégia personalizada mês a mês',
+    items: [
+      { icon: Target, title: 'Diagnóstico Digital', desc: 'Análise completa do negócio, concorrência e oportunidades.', cta: 'Agendar' },
+      { icon: Zap, title: 'Plano de Ação', desc: 'Roadmap personalizado com metas, prazos e entregáveis claros.', cta: 'Ver Planos' },
+      { icon: TrendingUp, title: 'Mentoria Mensal', desc: 'Acompanhamento contínuo com ajustes e otimização de resultados.', cta: 'Saber Mais' },
+    ],
+  },
+  {
+    id: 'ia',
+    icon: Zap,
+    title: 'Soluções com IA',
+    description: 'Inteligência artificial aplicada ao seu negócio',
+    items: [
+      { icon: Bot, title: 'Chatbots com IA', desc: 'Atendimento inteligente que entende contexto e aprende com o tempo.', cta: 'Ver Chatbots' },
+      { icon: BarChart3, title: 'Análise Preditiva', desc: 'Previsão de vendas, sazonalidade e comportamento do cliente.', cta: 'Ver Análise' },
+      { icon: Sparkles, title: 'Automação Cognitiva', desc: 'Processos que tomam decisão sozinhos baseados em dados reais.', cta: 'Ver Automação' },
+    ],
+  },
+];
+
+const templates: ProjectTemplate[] = [
+  { title: 'Calçados King', category: 'Site Premium', image: BRAND.images.nichos.calcadista, tags: ['E-commerce', 'Franca-SP'] },
+  { title: 'Clínica Vitalis', category: 'App Saúde', image: BRAND.images.nichos.saude, tags: ['App', 'Agendamento'] },
+  { title: 'Delícias do Chef', category: 'App Delivery', image: BRAND.images.nichos.comercio, tags: ['Delivery', 'Mobile'] },
+  { title: 'TechSolution', category: 'Dashboard', image: BRAND.images.nichos.industria, tags: ['Painel', 'Tempo Real'] },
+  { title: 'Escola Genius', category: 'Plataforma', image: BRAND.images.nichos.educacao, tags: ['Educação', 'CRM'] },
+  { title: 'OfficePlus', category: 'Automação', image: BRAND.images.nichos.servicos, tags: ['BPM', 'Workflow'] },
 ];
 
 const diferenciais = [
@@ -89,12 +216,12 @@ const diferenciais = [
 ];
 
 const nichos = [
-  { nome: 'Calçadista', img: BRAND.images.nichos.calcadista },
-  { nome: 'Comércio', img: BRAND.images.nichos.comercio },
-  { nome: 'Indústria', img: BRAND.images.nichos.industria },
-  { nome: 'Saúde', img: BRAND.images.nichos.saude },
-  { nome: 'Educação', img: BRAND.images.nichos.educacao },
-  { nome: 'Serviços', img: BRAND.images.nichos.servicos },
+  { nome: 'Calçadista', img: BRAND.images.nichos.calcadista, icon: Briefcase },
+  { nome: 'Comércio', img: BRAND.images.nichos.comercio, icon: ShoppingBag },
+  { nome: 'Indústria', img: BRAND.images.nichos.industria, icon: Building2 },
+  { nome: 'Saúde', img: BRAND.images.nichos.saude, icon: HeartPulse },
+  { nome: 'Educação', img: BRAND.images.nichos.educacao, icon: BookOpen },
+  { nome: 'Serviços', img: BRAND.images.nichos.servicos, icon: Briefcase },
 ];
 
 const processos = [
@@ -102,14 +229,59 @@ const processos = [
   { num: '02', title: 'Arquitetura da Solução', desc: 'Estrutura tecnológica, fluxo de conversão, usabilidade. Projeto detalhado antes de escrever uma linha de código.' },
   { num: '03', title: 'Design Premium', desc: 'Identidade visual e interface com foco em conversão. Layouts validados antes de ir para desenvolvimento.' },
   { num: '04', title: 'Desenvolvimento Ágil', desc: 'Tecnologia de ponta. Sprints semanais. Entregas incrementais. Você vê o resultado a cada ciclo.' },
-  { num: '05', title: 'Automação & Integrações', desc: 'CRM, WhatsApp, e-mail, pagamentos — tudo conectado. Processos que rodam 24h sem supervisão.' },
-  { num: '06', title: 'SEO & Performance', desc: 'Otimização Google, Core Web Vitals, schema markup. Velocidade que segura o visitante.' },
-  { num: '07', title: 'Testes & Validação', desc: 'QA completo. Testes de conversão. Acessibilidade. Responsividade. Zero surpresa no lançamento.' },
-  { num: '08', title: 'Governança & Evolução', desc: 'Entrega com métricas claras. Dashboard de resultados. Plano de evolução contínua — seu projeto não morre na entrega.' },
 ];
 
-const faq = [
-  { q: 'Por que eu preciso de um site se tenho Instagram?', r: 'Instagram é aluguel. Você não controla o algoritmo, não dono dos seus seguidores e muda as regras quando quer. Um site é seu — você controla, aparece no Google e os leads vão direto pro seu WhatsApp. Instagram complementa. Site é base.' },
+const planos: PricingPlan[] = [
+  {
+    name: 'Essencial',
+    desc: 'Perfeito para quem está dando o primeiro passo na infraestrutura digital.',
+    monthly: 147,
+    yearly: 119,
+    features: [
+      'Site institucional ou landing page',
+      'Design responsivo premium',
+      'SEO básico otimizado',
+      'Integração com WhatsApp',
+      'Hospedagem 12 meses',
+      'Suporte por e-mail',
+    ],
+    cta: 'Começar Agora',
+  },
+  {
+    name: 'Profissional',
+    desc: 'Para empresas que querem uma máquina de vendas completa.',
+    monthly: 297,
+    yearly: 247,
+    features: [
+      'Tudo do Essencial +',
+      'Site + App ou Automação',
+      'Dashboard em tempo real',
+      'CRM integrado',
+      'Chatbot inteligente',
+      'Suporte prioritário 24h',
+    ],
+    highlighted: true,
+    cta: 'Mais Escolhido',
+  },
+  {
+    name: 'Enterprise',
+    desc: 'Solução completa com infraestrutura digital de alto desempenho.',
+    monthly: 597,
+    yearly: 497,
+    features: [
+      'Tudo do Profissional +',
+      'E-commerce ou plataforma',
+      'Automações avançadas',
+      'IA e análise preditiva',
+      'Mentoria mensal exclusiva',
+      'Suporte dedicado 24/7',
+    ],
+    cta: 'Falar com Consultor',
+  },
+];
+
+const faq: FaqItem[] = [
+  { q: 'Por que eu preciso de um site se tenho Instagram?', r: 'Instagram é aluguel. Você não controla o algoritmo, não é dono dos seus seguidores e muda as regras quando quer. Um site é seu — você controla, aparece no Google e os leads vão direto pro seu WhatsApp. Instagram complementa. Site é base.' },
   { q: 'Quanto custa? Vale a pena?', r: 'Cada projeto é único — o valor depende da complexidade. Mas o diagnóstico é gratuito. A pergunta certa não é "quanto custa", mas "quanto você está perdendo sem infraestrutura digital". Empresas com site vendem 3x mais.' },
   { q: 'E se eu não gostar do resultado?', r: 'Você valida cada etapa antes de avançarmos. Nada é feito "às cegas". Se em qualquer momento não estiver satisfeito, ajustamos. Sem estresse, sem burocracia.' },
   { q: 'Quanto tempo leva?', r: 'Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade. Entrega incremental — você vê resultado em cada sprint.' },
@@ -118,55 +290,68 @@ const faq = [
   { q: 'E depois da entrega?', r: 'Todo projeto inclui suporte. Planos de governança contínua: melhorias, segurança, funcionalidades novas. Seu projeto não morre na entrega.' },
 ];
 
-/* ─── SECTION 1: Hero ─── */
-const HeroSection = () => {
+/* ─── SECTION 1: HERO with Video Carousel ─── */
+function HeroSection() {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, 150]);
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const scale = useTransform(scrollY, [0, 600], [1, 1.1]);
 
+  const [currentVideo, setCurrentVideo] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideo((prev) => (prev + 1) % heroVideos.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[#030303]">
-      {/* Gold particles */}
       <GoldParticles count={50} />
 
-      {/* Background — Vídeo premium sem texto */}
+      {/* Video Carousel Background */}
       <motion.div style={{ y: heroY, scale }} className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/videos/hero-preview.jpg"
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
-          preload="auto"
-        >
-          <source src="/videos/sentinela/7.mp4" type="video/mp4" />
-        </video>
+        <AnimatePresence mode="wait">
+          <motion.video
+            key={currentVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/videos/hero-preview.jpg"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
+            preload="auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.3 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <source src={heroVideos[currentVideo].src} type="video/mp4" />
+          </motion.video>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/85 to-[#030303]" />
-        <div className="absolute inset-0 bg-grid-lg opacity-[0.04]" />
       </motion.div>
 
       {/* Gold glow gradients */}
       <div className="absolute inset-0">
         <div className="absolute -left-[20%] -top-[20%] h-[60%] w-[60%] rounded-full bg-[rgba(214,168,79,0.06)] blur-[150px]" />
         <div className="absolute -bottom-[20%] -right-[20%] h-[50%] w-[50%] rounded-full bg-[rgba(214,168,79,0.04)] blur-[120px]" />
-        <div className="absolute left-[20%] top-[30%] h-[200px] w-[200px] rounded-full bg-[rgba(214,168,79,0.03)] blur-[80px] animate-float-slow" />
-        <div className="absolute right-[15%] top-[60%] h-[120px] w-[120px] rounded-full bg-[rgba(214,168,79,0.03)] blur-[60px] animate-float" />
       </div>
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-grid-lg opacity-[0.3]" />
 
       {/* Content */}
       <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div className="max-w-3xl">
           {/* Gold line + badge */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={springGentle}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...springGentle }}
+          >
             <div className="mb-4">
-              <div className="h-px w-6 bg-[#D6A84F] opacity-60 mb-3" />
+              <div className="mb-3 h-px w-6 bg-[#D6A84F] opacity-60" />
               <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D6A84F]">
-                <MapPin className="h-3 w-3 inline-block mr-1.5 -mt-0.5" />
+                <MapPin className="mr-1.5 inline-block h-3 w-3" />
                 Infraestrutura Digital • Franca-SP
               </span>
             </div>
@@ -174,9 +359,10 @@ const HeroSection = () => {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ ...springGentle, delay: 0.15 }}
-            className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] leading-[1.02] font-extrabold tracking-[-0.03em] text-white"
+            className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-white"
           >
             Sua Empresa Precisa de uma{' '}
             <span className="text-gradient-premium">Infraestrutura Digital</span>
@@ -185,40 +371,53 @@ const HeroSection = () => {
 
           {/* Sub */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ ...springGentle, delay: 0.25 }}
             className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
           >
-            Enquanto você toca o negócio, a gente constrói a máquina de vendas que trabalha 24h por dia, 7 dias por semana — sites, apps, automações e dashboards que realmente entregam resultado em Franca-SP.
+            Enquanto você toca o negócio, a gente constrói a máquina de vendas que trabalha 24h por dia, 7 dias por semana — sites, apps, automações e dashboards que realmente entregam resultado.
           </motion.p>
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ ...springGentle, delay: 0.35 }}
             className="mt-8 flex flex-wrap gap-4"
           >
             <motion.div
-              animate={{ boxShadow: ['0 0 20px rgba(214,168,79,0.2)', '0 0 40px rgba(214,168,79,0.4)', '0 0 20px rgba(214,168,79,0.2)'] }}
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(214,168,79,0.2)',
+                  '0 0 40px rgba(214,168,79,0.4)',
+                  '0 0 20px rgba(214,168,79,0.2)',
+                ],
+              }}
               transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               className="rounded-full"
             >
-              <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
+              <PremiumButton
+                href={BRAND.whatsapp}
+                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <MessageCircle className="h-4 w-4" />
                 Diagnóstico Digital Gratuito
               </PremiumButton>
             </motion.div>
-            <Link to="/servicos" className="btn-outline-gold text-sm sm:text-base group">
+            <Link to="/servicos" className="btn-outline-gold group text-sm sm:text-base">
               Ver Soluções
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </motion.div>
 
-          {/* Stats */}
+          {/* Stats Bar */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ ...springGentle, delay: 0.45 }}
-
             className="mt-14"
           >
             <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
@@ -228,422 +427,355 @@ const HeroSection = () => {
               </span>
             </div>
           </motion.div>
+
+          {/* Video Carousel Indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mt-6 flex items-center gap-2"
+          >
+            {heroVideos.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentVideo(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === currentVideo ? 'w-8 bg-[#D6A84F]' : 'w-1.5 bg-[rgba(214,168,79,0.3)]'
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </motion.div>
         </div>
       </motion.div>
-
-      {/* Scroll indicator removido — scroll-driven animations tomam seu lugar */}
     </section>
   );
-};
+}
 
-/* ─── SECTION 2: O Problema ─── */
-const ProblemaSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+/* ─── SECTION 2: Category Tabs ─── */
+function CategoryTabsSection() {
+  const [activeTab, setActiveTab] = useState(categorias[0].id);
 
-  return (
-  <SectionWrapper dark>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-        <SectionLabel>O Diagnóstico</SectionLabel>
-        <SectionTitle highlight="gargalo">
-          Por que seu negócio ainda não vende — o
-        </SectionTitle>
-      </Reveal>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="grid gap-8 md:grid-cols-3"
-      >
-        {[
-          { icon: Target, title: 'Sem Infraestrutura', desc: 'Site genérico, processo manual, dados espalhados. Falta uma base digital sólida para crescer com consistência.' },
-          { icon: Zap, title: 'Dependência de Terceiros', desc: 'Instagram muda o algoritmo, tráfego pago encarece, e seu negócio fica refém de plataformas que você não controla.' },
-          { icon: TrendingUp, title: 'Resultados Imprevisíveis', desc: 'Sem métricas claras, sem governança. Você investe mas não sabe exatamente o que funciona e o que precisa ser ajustado.' },
-        ].map((item) => (
-          <GlassCard key={item.title} hover glow>
-            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]">
-              <item.icon className="h-5 w-5" />
-            </div>
-            <h3 className="font-serif text-base font-semibold text-white">{item.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
-          </GlassCard>
-        ))}
-      </motion.div>
-
-      <Reveal delay={0.3}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 text-center"
-        >
-          <div className="luxury-divider max-w-xs mx-auto mb-6" />
-          <p className="text-sm italic text-[#A1A1AA]">
-            É aqui que a maioria trava. Mas existe um caminho diferente.
-          </p>
-        </motion.div>
-      </Reveal>
-    </motion.div>
-  </SectionWrapper>
-);
-};
-
-/* ─── SECTION 2.5: O Custo de Não Ter Presença Digital ─── */
-const ValorSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
-  return (
-  <SectionWrapper>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="relative mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-        <SectionLabel>O Custo da Ausência</SectionLabel>
-        <SectionTitle highlight="perdendo">
-          Quanto você está perdendo por não ter presença digital?
-        </SectionTitle>
-      </Reveal>
-
-      <motion.div
-        variants={staggerContainer} initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-6 md:grid-cols-3"
-      >
-        {[
-          {
-            stat: '80%',
-            label: 'dos clientes pesquisam online antes de comprar',
-            desc: 'Se seu negócio não aparece no Google, você simplesmente não existe para a maioria dos consumidores de Franca-SP.',
-            icon: TrendingUp,
-          },
-          {
-            stat: '3x',
-            label: 'mais vendas para empresas com site profissional',
-            desc: 'Um site otimizado transforma visitantes em clientes. Sem ele, você depende de indicação e sorte.',
-            icon: Target,
-          },
-          {
-            stat: '5x',
-            label: 'mais caro captar leads sem automação',
-            desc: 'Processos manuais consomem tempo e dinheiro. Automação reduz custo e faz cada lead render muito mais.',
-            icon: Zap,
-          },
-        ].map((item) => (
-          <GlassCard key={item.label} hover glow>
-            <div className="text-center py-6 px-4">
-              {item.stat.endsWith('%') || item.stat.endsWith('x') ? (
-                <span className="block font-serif text-5xl font-bold mb-2">
-                  <span className="text-gradient-animated">{item.stat}</span>
-                </span>
-              ) : (
-                <span className="block font-serif text-5xl font-bold text-[#D6A84F] mb-2">{item.stat}</span>
-              )}
-              <h3 className="font-serif text-base font-semibold text-white mb-2">{item.label}</h3>
-              <p className="text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
-            </div>
-          </GlassCard>
-        ))}
-      </motion.div>
-
-      <Reveal delay={0.3}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-12 text-center"
-        >
-          <div className="luxury-divider max-w-xs mx-auto mb-6" />
-          <p className="text-sm italic text-[#A1A1AA]">
-            A pergunta não é "quanto custa ter um site". É "quanto você está perdendo sem um?"
-          </p>
-        </motion.div>
-      </Reveal>
-    </motion.div>
-  </SectionWrapper>
-);
-};
-
-/* ─── SECTION 3: A Solução ─── */
-const SolucaoSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
-  return (
-  <SectionWrapper>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <SectionHeading
-          label="Soluções"
-          title="A Máquina de Vendas"
-          highlight="completa"
-          description="Cinco pilares que formam a infraestrutura digital do seu negócio. Cada um desenhado sob medida para gerar resultado em Franca-SP."
-        />
-      </motion.div>
-
-      <motion.div
-        variants={staggerContainer} initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 stagger-children"
-      >
-        {servicos.map((s) => (
-          <GlassCard key={s.title} hover glow className="hover-lift hover-glow-gold">
-            <div className="relative h-36 overflow-hidden rounded-xl mb-4">
-              <video
-                autoPlay muted loop playsInline
-                className="absolute inset-0 h-full w-full object-cover opacity-[0.4]"
-              >
-                <source src={s.videoSrc} type="video/mp4" />
-              </video>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent" />
-              <div className="absolute bottom-3 left-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[rgba(214,168,79,0.15)] backdrop-blur-sm text-[#D6A84F]">
-                <s.icon className="h-4 w-4" />
-              </div>
-            </div>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">{s.tagline}</span>
-            <h3 className="font-serif mt-1.5 text-lg font-semibold text-white">{s.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{s.desc}</p>
-          </GlassCard>
-        ))}
-      </motion.div>
-    </motion.div>
-  </SectionWrapper>
-);
-};
-
-/* ─── SECTION 4: Vídeo-Cinema (scroll reveal) ─── */
-const VideoSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start']
-  });
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.85]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [100, 0, -100]);
+  const activeCategory = categorias.find((c) => c.id === activeTab) ?? categorias[0];
 
   return (
     <SectionWrapper dark>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          label="Projetos em Ação"
-          title="Tecnologia que"
-          highlight="transforma negócios"
-          description="Cada projeto é uma infraestrutura digital viva — sites, apps, automações, dashboards. Tudo feito sob medida para empresas locais que pensam grande."
-        />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-10 max-w-3xl text-center">
+          <SectionLabel>Amplie seus negócios</SectionLabel>
+          <SectionTitle highlight="digital">
+            Soluções completas para sua presença
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            De sites premium a automações com IA — cada solução é desenhada sob medida para o seu negócio em Franca-SP.
+          </p>
+        </Reveal>
 
-        <motion.div ref={ref} style={{ scale, opacity }} className="relative mx-auto mt-12 max-w-4xl">
-          {/* Golden frame — glassmorphism */}
-          <div className="relative overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.25)] bg-[rgba(3,3,3,0.6)] backdrop-blur-sm shadow-[0_0_60px_rgba(214,168,79,0.08)]">
-            {/* Glow superior */}
-            <div className="pointer-events-none absolute -inset-1 rounded-3xl bg-gradient-to-b from-[rgba(214,168,79,0.1)] to-transparent blur-xl" />
-              
-            <motion.div style={{ y }} className="relative aspect-[9/16] max-h-[75vh] overflow-hidden rounded-2xl sm:mx-auto sm:w-auto">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="/videos/hero-preview.jpg"
-                className="h-full w-full object-cover"
-              >
-                <source src="/videos/sentinela/7.mp4" type="video/mp4" />
-              </video>
-              {/* Overlay gradiente sutil */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/30" />
-              
-              {/* Texto sobreposto no canto inferior */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(3,3,3,0.7)] px-4 py-2 backdrop-blur-sm">
-                  <div className="h-1.5 w-1.5 rounded-full bg-[#D6A84F] animate-pulse" />
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
-                    Infraestrutura Digital • Franca-SP
-                  </span>
-                </div>
-              </div>
+        {/* Tabs */}
+        <div className="mb-10 flex flex-wrap justify-center gap-2">
+          {categorias.map((cat) => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveTab(cat.id)}
+              className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.1em] transition-all duration-300 min-h-[44px] ${
+                activeTab === cat.id
+                  ? 'bg-[#D6A84F] text-[#030303] shadow-[0_0_20px_rgba(214,168,79,0.3)]'
+                  : 'border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] hover:border-[#D6A84F] hover:text-[#D6A84F]'
+              }`}
+            >
+              <cat.icon className="h-3.5 w-3.5" />
+              {cat.title}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="mb-8 text-center text-sm text-[#D6A84F]">
+              {activeCategory.description}
+            </p>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {activeCategory.items.map((item) => (
+                <GlassCard key={item.title} hover glow className="hover-lift">
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-serif text-base font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
+                  <Link
+                    to="/servicos"
+                    className="mt-4 inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-[#D6A84F] transition-all hover:gap-2"
+                  >
+                    {item.cta}
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </GlassCard>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/* ─── SECTION 3: Template Carousel ─── */
+function TemplateCarouselSection() {
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const itemsPerView = 3;
+  const maxIdx = Math.max(0, templates.length - itemsPerView);
+
+  const next = useCallback(() => {
+    setCurrentIdx((prev) => Math.min(prev + 1, maxIdx));
+  }, [maxIdx]);
+
+  const prev = useCallback(() => {
+    setCurrentIdx((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  return (
+    <SectionWrapper>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+          <SectionLabel>Portfólio</SectionLabel>
+          <SectionTitle highlight="reais">
+            Projetos que entregamos para clientes
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            Cada projeto é único — construído do zero para resolver problemas reais de empresas em Franca-SP.
+          </p>
+        </Reveal>
+
+        {/* Carousel */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prev}
+            disabled={currentIdx === 0}
+            className="absolute -left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[#030303] text-[#D6A84F] transition-all hover:bg-[rgba(214,168,79,0.1)] hover:shadow-[0_0_20px_rgba(214,168,79,0.15)] disabled:cursor-not-allowed disabled:opacity-30"
+            aria-label="Anterior"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            onClick={next}
+            disabled={currentIdx >= maxIdx}
+            className="absolute -right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[#030303] text-[#D6A84F] transition-all hover:bg-[rgba(214,168,79,0.1)] hover:shadow-[0_0_20px_rgba(214,168,79,0.15)] disabled:cursor-not-allowed disabled:opacity-30"
+            aria-label="Próximo"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          {/* Cards Track */}
+          <div className="overflow-hidden">
+            <motion.div
+              animate={{ x: `-${currentIdx * (100 / itemsPerView)}%` }}
+              transition={{ type: 'spring', stiffness: 80, damping: 25 }}
+              className="flex gap-6"
+            >
+              {templates.map((t, i) => (
+                <motion.div
+                  key={i}
+                  className="min-w-[calc(33.333%-16px)] shrink-0"
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="group relative h-72 overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)]">
+                    <img
+                      src={t.image}
+                      alt={t.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/50 to-transparent" />
+                    <div className="absolute inset-0 bg-[rgba(214,168,79,0.06)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <span className="mb-2 inline-block rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#D6A84F] backdrop-blur-sm">
+                        {t.category}
+                      </span>
+                      <h3 className="font-serif mt-2 text-lg font-semibold text-white">{t.title}</h3>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {t.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-full bg-[rgba(255,255,255,0.05)] px-2.5 py-0.5 text-[10px] text-[#A1A1AA]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
 
-          {/* Stats */}
-          <div className="mt-6 text-center">
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
-              <TrendingUp className="h-5 w-5 text-[#D6A84F]" />
-              <span className="text-sm font-semibold text-[#A1A1AA]">
-                12+ projetos entregues • 98% satisfação • Franca-SP
-              </span>
-            </div>
+          {/* Dots */}
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {Array.from({ length: maxIdx + 1 }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIdx(i)}
+                className={`h-2 rounded-full transition-all duration-500 ${
+                  i === currentIdx ? 'w-8 bg-[#D6A84F]' : 'w-2 bg-[rgba(214,168,79,0.2)]'
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
           </div>
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/* ─── SECTION 4: Stat Bar ─── */
+function StatBarSection() {
+  const projectsRef = useCounter(12);
+  const satisfactionRef = useCounter(98);
+  const clientsRef = useCounter(50);
+  const cityRef = useRef<HTMLSpanElement>(null);
+  const inViewCity = useInView(cityRef, { once: true });
+  useEffect(() => {
+    if (inViewCity && cityRef.current) {
+      cityRef.current.textContent = 'Franca-SP';
+    }
+  }, [inViewCity]);
+
+  return (
+    <section className="relative border-y border-[rgba(214,168,79,0.08)] bg-[#080808] py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+          {[
+            { ref: projectsRef, number: '', label: 'Projetos Entregues', suffix: '+' },
+            { ref: satisfactionRef, number: '', label: 'Satisfação', suffix: '%' },
+            { ref: clientsRef, number: '', label: 'Clientes Atendidos', suffix: '+' },
+            { ref: cityRef, number: '', label: 'Atendimento Local', suffix: '' },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="text-center"
+            >
+              <span className="block font-serif text-4xl font-bold text-[#D6A84F] sm:text-5xl">
+                <span ref={stat.ref as React.Ref<HTMLSpanElement>} />
+                {stat.suffix}
+              </span>
+              <span className="mt-1 block text-xs font-semibold uppercase tracking-[0.15em] text-[#A1A1AA]">
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── SECTION 5: Features / Diferenciais ─── */
+function FeaturesSection() {
+  return (
+    <SectionWrapper dark>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+          <SectionLabel>Diferenciais</SectionLabel>
+          <SectionTitle highlight="Rei das Vendas">
+            Por que o
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            Não somos uma agência. Somos construtores de infraestrutura digital com metodologia, tecnologia e compromisso com resultado.
+          </p>
+        </Reveal>
+
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
+        >
+          {diferenciais.map((d) => (
+            <FeatureCard
+              key={d.title}
+              icon={<d.icon className="h-5 w-5" />}
+              title={d.title}
+              description={d.desc}
+              className="hover-lift"
+            />
+          ))}
         </motion.div>
       </div>
     </SectionWrapper>
   );
-};
+}
 
-/* ─── SECTION 5: Soluções Detalhadas ─── */
-const SolucoesDetalhadas = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-
+/* ─── SECTION 6: Segmentos ─── */
+function SegmentosSection() {
   return (
-  <SectionWrapper>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <SectionHeading
-          label="Diferenciais"
-          title="Por que o"
-          highlight="Rei das Vendas"
-          description="Não somos uma agência. Somos construtores de infraestrutura digital com metodologia, tecnologia e compromisso com resultado."
-        />
-      </motion.div>
+    <SectionWrapper>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+          <SectionLabel>Segmentos</SectionLabel>
+          <SectionTitle highlight="realidade de negócio">
+            Soluções para cada
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            Cada nicho tem suas particularidades. Nossa arquitetura se adapta — nunca o contrário.
+          </p>
+        </Reveal>
 
-      <motion.div
-        variants={staggerContainer} initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
-      >
-        {diferenciais.map((d) => (
-          <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" />} title={d.title} description={d.desc} className="hover-lift" />
-        ))}
-      </motion.div>
-    </motion.div>
-  </SectionWrapper>
-);
-};
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
+        >
+          {nichos.map((n) => (
+            <motion.div
+              key={n.nome}
+              variants={staggerItem}
+              className="group relative h-52 cursor-pointer overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)] hover-lift"
+            >
+              <img
+                src={n.img}
+                alt={n.nome}
+                loading="lazy"
+                className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <div className="absolute inset-0 bg-[rgba(214,168,79,0.08)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="absolute bottom-0 left-0 right-0 p-5">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F] backdrop-blur-sm transition-all duration-300 group-hover:bg-[rgba(214,168,79,0.2)]">
+                  <n.icon className="h-3.5 w-3.5" />
+                  {n.nome}
+                  <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </SectionWrapper>
+  );
+}
 
-/* ─── SECTION 6: Projetos por Segmento ─── */
-const SegmentosSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [45, -45]);
-
-  return (
-  <SectionWrapper dark>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <SectionHeading
-          label="Segmentos"
-          title="Soluções para cada"
-          highlight="realidade de negócio"
-          description="Cada nicho tem suas particularidades. Nossa arquitetura se adapta — nunca o contrário."
-        />
-      </motion.div>
-
-      <motion.div
-        variants={staggerContainer} initial="hidden" whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
-      >
-        {nichos.map((n) => (
-          <motion.div
-            key={n.nome} variants={staggerItem}
-            className="group relative h-52 overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)] cursor-pointer hover-lift"
-          >
-            <img src={n.img} alt={n.nome} loading="lazy"
-              className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-            <div className="absolute inset-0 bg-[rgba(214,168,79,0.08)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="absolute bottom-0 left-0 right-0 p-5">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F] backdrop-blur-sm transition-all duration-300 group-hover:bg-[rgba(214,168,79,0.2)]">
-                {n.nome}
-                <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1" />
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.div>
-  </SectionWrapper>
-);
-};
-
-/* ─── SECTION 7: Founder (importado) ─── */
+/* ─── SECTION 7: Founder (imported) ─── */
 // FounderSection imported above
 
-/* ─── SECTION 8: Provas & Confiança ─── */
-const ProvaSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+/* ─── SECTION 8: Prova Social (Depoimentos + Números) ─── */
+function ProvaSection() {
   const depoimentos: {
     texto: string;
     resultado: string;
@@ -651,35 +783,25 @@ const ProvaSection = () => {
   }[] = [];
 
   return (
-    <SectionWrapper>
-      <motion.div
-        ref={ref}
-        style={{ y: sectionY }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="mx-auto max-w-7xl px-4 sm:px-6"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <SectionHeading
-            label="Prova Social"
-            title="Resultados que"
-            highlight="falam por si"
-            description="Números, cases e depoimentos de quem já construiu a infraestrutura digital conosco."
-          />
-        </motion.div>
+    <SectionWrapper dark>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
+          <SectionLabel>Prova Social</SectionLabel>
+          <SectionTitle highlight="falam por si">
+            Resultados que
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            Números, cases e depoimentos de quem já construiu a infraestrutura digital conosco.
+          </p>
+        </Reveal>
 
         {/* Stats row */}
         <motion.div
-          variants={staggerContainer} initial="hidden" whileInView="visible"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid gap-6 md:grid-cols-3 mb-12 stagger-children"
+          className="mb-12 grid gap-6 md:grid-cols-3 stagger-children"
         >
           {[
             { number: '12+', label: 'Projetos Entregues', desc: 'Sites, apps, automações e dashboards — cada um feito sob medida.' },
@@ -687,22 +809,26 @@ const ProvaSection = () => {
             { number: 'Franca-SP', label: 'Atendimento Local', desc: 'Conhecemos o mercado da cidade. Presencial quando precisar.' },
           ].map((stat) => (
             <GlassCard key={stat.label} glow className="hover-lift">
-              <div className="text-center py-6">
-                <span className="block font-serif text-4xl font-bold text-[#D6A84F] mb-1">{stat.number}</span>
-                <h3 className="font-serif text-base font-semibold text-white mb-1">{stat.label}</h3>
+              <div className="py-6 text-center">
+                <span className="mb-1 block font-serif text-4xl font-bold text-[#D6A84F]">{stat.number}</span>
+                <h3 className="mb-1 font-serif text-base font-semibold text-white">{stat.label}</h3>
                 <p className="text-xs text-[#A1A1AA]">{stat.desc}</p>
               </div>
             </GlassCard>
           ))}
         </motion.div>
 
-        {/* Social proof - em breve */}
+        {/* Social proof logos */}
         <Reveal>
           <div className="mb-12 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#A1A1AA] mb-6">Empresas que confiam</p>
+            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.2em] text-[#A1A1AA]">
+              Empresas que confiam
+            </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <div className="rounded-xl border border-[rgba(214,168,79,0.08)] bg-[rgba(214,168,79,0.02)] px-6 py-4">
-                <p className="text-xs text-[#8A8A92] italic">Adicione aqui os logotipos reais dos seus clientes</p>
+                <p className="text-xs italic text-[#8A8A92]">
+                  Adicione aqui os logotipos reais dos seus clientes
+                </p>
               </div>
             </div>
           </div>
@@ -710,14 +836,16 @@ const ProvaSection = () => {
 
         {/* Depoimentos */}
         <motion.div
-          variants={staggerContainer} initial="hidden" whileInView="visible"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
           className="grid gap-6 md:grid-cols-1"
         >
           {depoimentos.length > 0 ? (
             depoimentos.map((d) => (
               <GlassCard key={d.texto.slice(0, 30)} glow>
-                <Quote className="absolute top-4 right-4 h-8 w-8 text-[rgba(214,168,79,0.1)]" />
+                <Quote className="absolute right-4 top-4 h-8 w-8 text-[rgba(214,168,79,0.1)]" />
                 <p className="text-sm leading-relaxed text-[#A1A1AA]">&ldquo;{d.texto}&rdquo;</p>
                 <div className="my-3 flex items-center gap-2 text-sm font-bold text-[#D6A84F]">
                   <CheckCircle2 className="h-4 w-4" />
@@ -730,9 +858,9 @@ const ProvaSection = () => {
             ))
           ) : (
             <GlassCard glow>
-              <div className="text-center py-8">
-                <Quote className="mx-auto h-10 w-10 text-[rgba(214,168,79,0.15)] mb-4" />
-                <p className="text-sm leading-relaxed text-[#A1A1AA] max-w-md mx-auto">
+              <div className="py-8 text-center">
+                <Quote className="mx-auto mb-4 h-10 w-10 text-[rgba(214,168,79,0.15)]" />
+                <p className="mx-auto max-w-md text-sm leading-relaxed text-[#A1A1AA]">
                   Estamos coletando depoimentos dos primeiros projetos. Enquanto isso, veja nossos cases em andamento no Instagram.
                 </p>
                 <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F]">
@@ -745,230 +873,431 @@ const ProvaSection = () => {
         </motion.div>
 
         <LuxuryDivider />
-      </motion.div>
+      </div>
     </SectionWrapper>
   );
-};
+}
 
-/* ─── SECTION 8 (cont.): Processo + CTA ─── */
-const ProcessoSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+/* ─── SECTION 9: Processo (Timeline 4 etapas) ─── */
+function ProcessoSection() {
+  return (
+    <SectionWrapper>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-5">
+          {/* Process Steps */}
+          <div className="lg:col-span-3">
+            <Reveal>
+              <SectionLabel>Processo</SectionLabel>
+              <SectionTitle highlight="etapas">
+                Como construímos sua infraestrutura em 4
+              </SectionTitle>
+              <p className="mt-3 max-w-md text-sm text-[#A1A1AA]">
+                Metodologia proprietária testada em dezenas de projetos. Cada etapa tem entregáveis claros e validação antes de avançar.
+              </p>
+            </Reveal>
+
+            <div className="mt-8 space-y-1">
+              {processos.map((p, i) => (
+                <ProcessStep
+                  key={p.num}
+                  number={p.num}
+                  title={p.title}
+                  description={p.desc}
+                  isLast={i === processos.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* CTA Card */}
+          <div className="lg:col-span-2">
+            <Reveal delay={0.2}>
+              <div className="glass-premium sticky top-28 rounded-2xl p-8 sm:p-10">
+                <div className="text-center">
+                  <div className="mb-4 inline-flex items-center gap-2.5">
+                    <span className="block h-px w-6 bg-[#D6A84F]" />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6A84F]">
+                      Comece agora
+                    </span>
+                    <span className="block h-px w-6 bg-[#D6A84F]" />
+                  </div>
+                  <h3 className="font-serif mt-6 text-2xl font-bold text-white">
+                    Pronto para construir sua{' '}
+                    <span className="text-gradient-gold">máquina de vendas</span>?
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-[#A1A1AA]">
+                    Agende um diagnóstico gratuito e descubra como estruturar sua infraestrutura digital — sites, apps, automações e dashboards que vendem 24h por dia.
+                  </p>
+                  <div className="mt-8 space-y-3">
+                    <PremiumButton
+                      href={BRAND.whatsapp}
+                      size="lg"
+                      className="w-full"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      Diagnóstico Digital Gratuito
+                    </PremiumButton>
+                    <Link to="/contato" className="btn-outline-gold w-full justify-center text-sm">
+                      Enviar Mensagem <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+                  <p className="mt-4 text-[10px] text-[#71717A]">
+                    Mais de 12 empresas em Franca-SP já confiam • Resposta em até 24h
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/* ─── SECTION 10: Pricing Preview ─── */
+function PricingSection() {
+  const [isYearly, setIsYearly] = useState(false);
 
   return (
-  <SectionWrapper dark>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <div className="grid gap-12 lg:grid-cols-5">
-        {/* Process Steps */}
-        <div className="lg:col-span-3">
-          <Reveal>
-            <SectionLabel>Processo</SectionLabel>
-            <SectionTitle highlight="etapas">
-              Como construímos sua infraestrutura em 8
-            </SectionTitle>
-            <p className="mt-3 text-sm text-[#A1A1AA] max-w-md">
-              Metodologia proprietária testada em dezenas de projetos. Cada etapa tem entregáveis claros e validação antes de avançar.
-            </p>
-          </Reveal>
+    <SectionWrapper dark>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-10 max-w-3xl text-center">
+          <SectionLabel>Planos</SectionLabel>
+          <SectionTitle highlight="ideal">
+            Escolha o plano
+          </SectionTitle>
+          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            Invista na infraestrutura digital do seu negócio com planos que cabem no seu bolso.
+          </p>
+        </Reveal>
 
-          <div className="mt-8 space-y-1">
-            {processos.map((p, i) => (
-              <ProcessStep
-                key={p.num}
-                number={p.num}
-                title={p.title}
-                description={p.desc}
-                isLast={i === processos.length - 1}
-              />
+        {/* Toggle */}
+        <div className="mb-10 flex items-center justify-center gap-4">
+          <span
+            className={`text-sm font-semibold transition-colors ${
+              !isYearly ? 'text-[#D6A84F]' : 'text-[#A1A1AA]'
+            }`}
+          >
+            Mensal
+          </span>
+          <button
+            onClick={() => setIsYearly(!isYearly)}
+            className={`relative h-7 w-14 rounded-full transition-colors ${
+              isYearly ? 'bg-[#D6A84F]' : 'bg-[rgba(255,255,255,0.1)]'
+            }`}
+            aria-label="Alternar para anual"
+          >
+            <motion.div
+              animate={{ x: isYearly ? 28 : 2 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="absolute top-1 h-5 w-5 rounded-full bg-white shadow-lg"
+            />
+          </button>
+          <span
+            className={`text-sm font-semibold transition-colors ${
+              isYearly ? 'text-[#D6A84F]' : 'text-[#A1A1AA]'
+            }`}
+          >
+            Anual
+            <span className="ml-1.5 rounded-full bg-[rgba(214,168,79,0.15)] px-2 py-0.5 text-[10px] text-[#D6A84F]">
+              -20%
+            </span>
+          </span>
+        </div>
+
+        {/* Cards */}
+        <div className="grid gap-6 lg:grid-cols-3">
+          {planos.map((plano, i) => (
+            <motion.div
+              key={plano.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative rounded-2xl border p-6 sm:p-8 transition-all duration-500 hover:border-[rgba(214,168,79,0.3)] hover:shadow-[0_0_40px_rgba(214,168,79,0.06)] ${
+                plano.highlighted
+                  ? 'border-[#D6A84F] bg-gradient-to-b from-[rgba(214,168,79,0.06)] to-[rgba(214,168,79,0.02)]'
+                  : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)]'
+              }`}
+            >
+              {plano.highlighted && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-[#D6A84F] px-4 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#030303]">
+                    <Sparkles className="h-3 w-3" />
+                    Mais Popular
+                  </span>
+                </div>
+              )}
+
+              <h3 className="font-serif text-xl font-bold text-white">{plano.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{plano.desc}</p>
+
+              <div className="mt-6 flex items-baseline gap-1">
+                <span className="font-serif text-4xl font-bold text-white">
+                  R${isYearly ? plano.yearly : plano.monthly}
+                </span>
+                <span className="text-sm text-[#A1A1AA]">/mês</span>
+              </div>
+              {isYearly && (
+                <p className="mt-1 text-xs text-[#D6A84F]">
+                  Economia de R${(plano.monthly - plano.yearly) * 12}/ano
+                </p>
+              )}
+
+              <ul className="mt-6 space-y-3">
+                {plano.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-[#A1A1AA]">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#D6A84F]" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-8">
+                <PremiumButton
+                  href={BRAND.whatsapp}
+                  variant={plano.highlighted ? 'primary' : 'outline'}
+                  className="w-full justify-center"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {plano.cta}
+                  <ArrowUpRight className="h-4 w-4" />
+                </PremiumButton>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/* ─── SECTION 11: FAQ Accordion ─── */
+function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <SectionWrapper>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal className="mx-auto mb-10 max-w-3xl text-center">
+          <SectionLabel>FAQ</SectionLabel>
+          <SectionTitle highlight="frequentes">
+            Perguntas
+          </SectionTitle>
+        </Reveal>
+
+        <div className="mx-auto max-w-3xl">
+          <div className="space-y-3">
+            {faq.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ delay: i * 0.05, duration: 0.4 }}
+              >
+                <button
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className={`w-full rounded-xl border text-left transition-all duration-300 min-h-[44px] ${
+                    openIndex === i
+                      ? 'border-[rgba(214,168,79,0.25)] bg-[rgba(214,168,79,0.04)]'
+                      : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(214,168,79,0.15)]'
+                  }`}
+                  aria-expanded={openIndex === i}
+                >
+                  <div className="flex items-center justify-between px-5 py-4">
+                    <span className="pr-4 text-sm font-medium text-white">{item.q}</span>
+                    <motion.div
+                      animate={{ rotate: openIndex === i ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="shrink-0"
+                    >
+                      <ChevronDown className="h-4 w-4 text-[#D6A84F]" />
+                    </motion.div>
+                  </div>
+                  <AnimatePresence initial={false}>
+                    {openIndex === i && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="border-t border-[rgba(214,168,79,0.08)] px-5 pb-4 pt-3">
+                          <p className="text-sm leading-relaxed text-[#A1A1AA]">{item.r}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* CTA Card */}
-        <div className="lg:col-span-2">
-          <Reveal delay={0.2}>
-            <div className="glass-premium rounded-2xl p-8 sm:p-10 sticky top-28">
-              <div className="text-center">
-                <div className="inline-flex items-center gap-2.5 mb-4">
-                  <span className="block h-px w-6 bg-[#D6A84F]" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6A84F]">Comece agora</span>
-                  <span className="block h-px w-6 bg-[#D6A84F]" />
-                </div>
-                <h3 className="font-serif mt-6 text-2xl font-bold text-white">
-                  Pronto para construir sua{' '}
-                  <span className="text-gradient-gold">máquina de vendas</span>?
-                </h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#A1A1AA]">
-                  Agende um diagnóstico gratuito e descubra como estruturar sua infraestrutura digital — sites, apps, automações e dashboards que vendem 24h por dia em Franca-SP.
-                </p>
-                <div className="mt-8 space-y-3">
-                  <PremiumButton href={BRAND.whatsapp} size="lg" className="w-full" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="h-4 w-4" />
-                    Diagnóstico Digital Gratuito
-                  </PremiumButton>
-                  <Link to="/contato" className="btn-outline-gold w-full justify-center text-sm">
-                    Enviar Mensagem <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-                <p className="mt-4 text-[10px] text-[#71717A]">
-                  Mais de 12 empresas em Franca-SP já confiam • Resposta em até 24h
-                </p>
-              </div>
+        <LuxuryDivider />
+
+        {/* Final CTA */}
+        <Reveal>
+          <div className="text-center">
+            <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
+              Transforme Seu Negócio em uma{' '}
+              <span className="text-gradient-gold">Máquina de Vendas Digitais</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-sm text-[#A1A1AA]">
+              Mais de 12 empresas em Franca-SP já confiam. Agende uma conversa sem compromisso.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <PremiumButton
+                href={BRAND.whatsapp}
+                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Quero Minha Infraestrutura Digital
+              </PremiumButton>
+              <Link to="/contato" className="btn-outline-gold text-sm">
+                Enviar Mensagem
+              </Link>
             </div>
-          </Reveal>
-        </div>
-      </div>
-    </motion.div>
-  </SectionWrapper>
-  );
-};
-
-/* ─── FAQ ─── */
-const FaqSection = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const sectionY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-
-  return (
-  <SectionWrapper>
-    <motion.div
-      ref={ref}
-      style={{ y: sectionY }}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto max-w-7xl px-4 sm:px-6"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <SectionHeading
-          label="FAQ"
-          title="Perguntas"
-          highlight="frequentes"
-        />
-      </motion.div>
-
-      <div className="mx-auto max-w-3xl">
-        <motion.div
-          variants={staggerContainer} initial="hidden" whileInView="visible"
-          viewport={{ once: true, margin: '-30px' }}
-          className="space-y-3 stagger-children"
-        >
-          {faq.map((item) => (
-            <motion.details
-              key={item.q} variants={staggerItem}
-              className="glass-card group rounded-xl overflow-hidden transition-all duration-300 hover:border-[rgba(214,168,79,0.2)] hover-lift"
-            >
-              <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-medium text-white transition-colors hover:text-[#D6A84F] list-none">
-                {item.q}
-                <svg className="h-4 w-4 text-[#D6A84F] transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6"/></svg>
-              </summary>
-              <div className="px-5 pb-4">
-                <p className="text-sm leading-relaxed text-[#A1A1AA]">{item.r}</p>
-              </div>
-            </motion.details>
-          ))}
-        </motion.div>
-      </div>
-
-      <LuxuryDivider />
-
-      {/* Final CTA */}
-      <Reveal>
-        <div className="text-center">
-          <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
-            Transforme Seu Negócio em uma{' '}
-            <span className="text-gradient-gold">Máquina de Vendas Digitais</span>
-          </h2>
-          <p className="mt-3 text-sm text-[#A1A1AA] max-w-lg mx-auto">
-            Mais de 12 empresas em Franca-SP já confiam. Agende uma conversa sem compromisso.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" />
-              Quero Minha Infraestrutura Digital
-            </PremiumButton>
-            <Link to="/contato" className="btn-outline-gold text-sm">
-              Enviar Mensagem
-            </Link>
           </div>
-        </div>
-      </Reveal>
-    </motion.div>
-  </SectionWrapper>
+        </Reveal>
+      </div>
+    </SectionWrapper>
   );
-};
+}
 
-/* ─── CTA Banner Reutilizável ─── */
-const CtaBanner = ({ variant = 'dark' }: { variant?: 'dark' | 'light' }) => (
-  <SectionWrapper dark={variant === 'dark'}>
-    <div className="mx-auto max-w-7xl px-4 sm:px-6">
-      <Reveal>
+/* ─── SECTION 12: CTA Final Banner (Gold / Form + WhatsApp) ─── */
+function CtaFinalSection() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#D6A84F] to-[#B88932] py-20 sm:py-28">
+      {/* Gold particles overlay */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-[10%] -top-[10%] h-[300px] w-[300px] rounded-full bg-[rgba(255,255,255,0.1)] blur-[120px]" />
+        <div className="absolute -bottom-[10%] -right-[10%] h-[250px] w-[250px] rounded-full bg-[rgba(255,255,255,0.08)] blur-[100px]" />
+      </div>
+
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center"
         >
-          <LuxuryDivider />
-          <h3 className="font-serif mt-8 text-xl font-bold text-white sm:text-2xl">
-            Transforme seu negócio em uma{' '}
-            <span className="text-gradient-gold">máquina de vendas digital</span>?
-          </h3>
-          <p className="mt-3 text-sm text-[#A1A1AA] max-w-md mx-auto">
-            Diagnóstico gratuito • Projeto sob medida • Mais de 12 empresas em Franca-SP confiam
+          <span className="inline-block rounded-full bg-[rgba(3,3,3,0.1)] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgba(3,3,3,0.7)]">
+            Comece Hoje
+          </span>
+
+          <h2 className="font-serif mt-6 text-3xl font-bold leading-tight text-[#030303] sm:text-4xl md:text-5xl">
+            Pronto para dar o próximo passo?
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[rgba(3,3,3,0.7)]">
+            Diagnóstico gratuito. Projeto sob medida. Mais de 12 empresas em Franca-SP já confiam no Rei das Vendas.
           </p>
-          <div className="mt-6">
-            <PremiumButton href={BRAND.whatsapp} size="lg" target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" />
-              Quero Minha Infraestrutura Digital
-            </PremiumButton>
+
+          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <a
+              href={BRAND.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-[#030303] px-8 py-3 text-sm font-bold text-white shadow-xl transition-all hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(3,3,3,0.3)] active:scale-[0.98]"
+            >
+              <MessageCircle className="h-5 w-5" />
+              Fale Conosco pelo WhatsApp
+            </a>
+            <Link
+              to="/contato"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border-2 border-[rgba(3,3,3,0.25)] px-8 py-3 text-sm font-bold text-[#030303] transition-all hover:bg-[rgba(3,3,3,0.06)] hover:shadow-[0_0_30px_rgba(3,3,3,0.1)] active:scale-[0.98]"
+            >
+              Enviar E-mail
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          {/* Trust indicators */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-[rgba(3,3,3,0.5)]">
+            <span className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5" />
+              Resposta em até 24h
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Shield className="h-3.5 w-3.5" />
+              Diagnóstico sem compromisso
+            </span>
+            <span className="flex items-center gap-1.5">
+              <MapPin className="h-3.5 w-3.5" />
+              Franca-SP
+            </span>
           </div>
         </motion.div>
-      </Reveal>
-    </div>
-  </SectionWrapper>
-);
+      </div>
+    </section>
+  );
+}
+
+/* ─── CTA Banner Reutilizável ─── */
+function CtaBanner({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
+  return (
+    <SectionWrapper dark={variant === 'dark'}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center"
+          >
+            <LuxuryDivider />
+            <h3 className="font-serif mt-8 text-xl font-bold text-white sm:text-2xl">
+              Transforme seu negócio em uma{' '}
+              <span className="text-gradient-gold">máquina de vendas digital</span>
+            </h3>
+            <p className="mx-auto mt-3 max-w-md text-sm text-[#A1A1AA]">
+              Diagnóstico gratuito • Projeto sob medida • Mais de 12 empresas em Franca-SP confiam
+            </p>
+            <div className="mt-6">
+              <PremiumButton
+                href={BRAND.whatsapp}
+                size="lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Quero Minha Infraestrutura Digital
+              </PremiumButton>
+            </div>
+          </motion.div>
+        </Reveal>
+      </div>
+    </SectionWrapper>
+  );
+}
 
 /* ─── MAIN PAGE ─── */
 export default function Home() {
   return (
     <main>
       <HeroSection />
-      <ProblemaSection />
-      <ValorSection />
-      <CtaBanner />
-      <SolucaoSection />
-      <VideoSection />
-      <SolucoesDetalhadas />
+      <StatBarSection />
+      <CategoryTabsSection />
+      <TemplateCarouselSection />
+      <FeaturesSection />
       <SegmentosSection />
-      <CtaBanner />
       <FounderSection />
       <ProvaSection />
       <ProcessoSection />
+      <PricingSection />
       <FaqSection />
-      <CtaBanner variant="light" />
+      <CtaFinalSection />
     </main>
   );
 }
