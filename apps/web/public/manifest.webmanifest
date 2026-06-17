@@ -1,14 +1,17 @@
 {
-  "name": "Rei das Vendas — Infraestrutura Digital",
+  "name": "Rei das Vendas — Infraestrutura Digital Franca-SP",
   "short_name": "Rei das Vendas",
-  "description": "Sites premium, aplicativos, automações e dashboards para empresas em Franca-SP. Infraestrutura digital completa que faz seu negócio vender todos os dias.",
+  "description": "Criação de sites profissionais, aplicativos sob medida, automação com IA e infraestrutura digital para empresas em Franca-SP, Ribeirão Preto e região.",
   "start_url": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
   "orientation": "portrait-primary",
   "background_color": "#030303",
   "theme_color": "#030303",
   "scope": "/",
   "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "reidasvendas-com-br",
   "icons": [
     {
       "src": "/pwa-192.svg",

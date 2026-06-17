@@ -9,9 +9,6 @@ import { PremiumButton } from '@/components/PremiumButton';
 const NAV = [
   { to: '/', label: 'Home' },
   { to: '/servicos', label: 'Serviços' },
-  { to: '/portfolio', label: 'Portfólio' },
-  { to: '/planos', label: 'Planos' },
-  { to: '/blog', label: 'Blog' },
   { to: '/contato', label: 'Contato' },
 ];
 

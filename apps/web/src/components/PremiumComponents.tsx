@@ -33,12 +33,12 @@ export function SectionHeading({
 }
 
 export function FeatureCard({
-  icon, title, description,
+  icon, title, description, className = '',
 }: {
-  icon: React.ReactNode; title: string; description: string;
+  icon: React.ReactNode; title: string; description: string; className?: string;
 }) {
   return (
-    <div className="glass-card group rounded-2xl p-6 sm:p-7 shine-effect hover:border-[rgba(214,168,79,0.3)] transition-all">
+    <div className={`glass-card group rounded-2xl p-6 sm:p-7 shine-effect hover:border-[rgba(214,168,79,0.3)] transition-all ${className}`}>
       <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F] transition-all duration-300 group-hover:bg-[rgba(214,168,79,0.18)] group-hover:scale-110">
         {icon}
       </div>

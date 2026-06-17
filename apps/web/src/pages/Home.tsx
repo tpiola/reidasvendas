@@ -4,8 +4,8 @@ import {
   MessageCircle, CheckCircle2, MapPin, Quote,
   TrendingUp, Shield, Zap, Target, Layers,
 } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring, animate, useInView } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 import { BRAND } from '@/lib/brand';
 import { springTransition, springSoft, springGentle, SectionWrapper, staggerContainer, staggerItem, Reveal, SectionLabel, SectionTitle } from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
@@ -13,6 +13,36 @@ import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
 import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { FounderSection } from '@/components/FounderSection';
+
+/* ─── Counter Animation Hook ─── */
+function useCounter(end: number, duration = 2) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-50px' });
+  useEffect(() => {
+    if (!inView) return;
+    const node = ref.current;
+    if (!node) return;
+    const controls = animate(0, end, {
+      duration,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => { node.textContent = Math.round(v).toLocaleString('pt-BR') + (end > 100 ? '%' : ''); },
+    });
+    return () => controls.stop();
+  }, [inView, end, duration]);
+  return ref;
+}
+
+/* ─── Smooth Counter (non-numeric) ─── */
+function useCounterText(end: string) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-50px' });
+  useEffect(() => {
+    if (inView && ref.current) {
+      ref.current.textContent = end;
+    }
+  }, [inView, end]);
+  return ref;
+}
 
 /* ─── DATA ─── */
 
@@ -122,6 +152,7 @@ const HeroSection = () => {
         <div className="absolute -left-[20%] -top-[20%] h-[60%] w-[60%] rounded-full bg-[rgba(214,168,79,0.06)] blur-[150px]" />
         <div className="absolute -bottom-[20%] -right-[20%] h-[50%] w-[50%] rounded-full bg-[rgba(214,168,79,0.04)] blur-[120px]" />
         <div className="absolute left-[20%] top-[30%] h-[200px] w-[200px] rounded-full bg-[rgba(214,168,79,0.03)] blur-[80px] animate-float-slow" />
+        <div className="absolute right-[15%] top-[60%] h-[120px] w-[120px] rounded-full bg-[rgba(214,168,79,0.03)] blur-[60px] animate-float" />
       </div>
 
       {/* Grid pattern */}
@@ -327,7 +358,13 @@ const ValorSection = () => {
         ].map((item) => (
           <GlassCard key={item.label} hover glow>
             <div className="text-center py-6 px-4">
-              <span className="block font-serif text-5xl font-bold text-[#D6A84F] mb-2">{item.stat}</span>
+              {item.stat.endsWith('%') || item.stat.endsWith('x') ? (
+                <span className="block font-serif text-5xl font-bold mb-2">
+                  <span className="text-gradient-animated">{item.stat}</span>
+                </span>
+              ) : (
+                <span className="block font-serif text-5xl font-bold text-[#D6A84F] mb-2">{item.stat}</span>
+              )}
               <h3 className="font-serif text-base font-semibold text-white mb-2">{item.label}</h3>
               <p className="text-sm leading-relaxed text-[#A1A1AA]">{item.desc}</p>
             </div>
@@ -391,10 +428,10 @@ const SolucaoSection = () => {
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 stagger-children"
       >
         {servicos.map((s) => (
-          <GlassCard key={s.title} hover glow>
+          <GlassCard key={s.title} hover glow className="hover-lift hover-glow-gold">
             <div className="relative h-36 overflow-hidden rounded-xl mb-4">
               <video
                 autoPlay muted loop playsInline
@@ -523,10 +560,10 @@ const SolucoesDetalhadas = () => {
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
       >
         {diferenciais.map((d) => (
-          <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" />} title={d.title} description={d.desc} />
+          <FeatureCard key={d.title} icon={<d.icon className="h-5 w-5" />} title={d.title} description={d.desc} className="hover-lift" />
         ))}
       </motion.div>
     </motion.div>
@@ -571,12 +608,12 @@ const SegmentosSection = () => {
       <motion.div
         variants={staggerContainer} initial="hidden" whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
+        className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 stagger-children"
       >
         {nichos.map((n) => (
           <motion.div
             key={n.nome} variants={staggerItem}
-            className="group relative h-52 overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)] cursor-pointer"
+            className="group relative h-52 overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)] cursor-pointer hover-lift"
           >
             <img src={n.img} alt={n.nome} loading="lazy"
               className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110" />
@@ -642,14 +679,14 @@ const ProvaSection = () => {
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid gap-6 md:grid-cols-3 mb-12"
+          className="grid gap-6 md:grid-cols-3 mb-12 stagger-children"
         >
           {[
             { number: '12+', label: 'Projetos Entregues', desc: 'Sites, apps, automações e dashboards — cada um feito sob medida.' },
             { number: '98%', label: 'Satisfação', desc: 'Taxa de aprovação baseada em feedback pós-entrega.' },
             { number: 'Franca-SP', label: 'Atendimento Local', desc: 'Conhecemos o mercado da cidade. Presencial quando precisar.' },
           ].map((stat) => (
-            <GlassCard key={stat.label} glow>
+            <GlassCard key={stat.label} glow className="hover-lift">
               <div className="text-center py-6">
                 <span className="block font-serif text-4xl font-bold text-[#D6A84F] mb-1">{stat.number}</span>
                 <h3 className="font-serif text-base font-semibold text-white mb-1">{stat.label}</h3>
@@ -835,12 +872,12 @@ const FaqSection = () => {
         <motion.div
           variants={staggerContainer} initial="hidden" whileInView="visible"
           viewport={{ once: true, margin: '-30px' }}
-          className="space-y-3"
+          className="space-y-3 stagger-children"
         >
           {faq.map((item) => (
             <motion.details
               key={item.q} variants={staggerItem}
-              className="glass-card group rounded-xl overflow-hidden transition-all duration-300 hover:border-[rgba(214,168,79,0.2)]"
+              className="glass-card group rounded-xl overflow-hidden transition-all duration-300 hover:border-[rgba(214,168,79,0.2)] hover-lift"
             >
               <summary className="flex cursor-pointer items-center justify-between px-5 py-4 text-sm font-medium text-white transition-colors hover:text-[#D6A84F] list-none">
                 {item.q}
