@@ -19,7 +19,7 @@ export default {
         text: {
           primary: '#F5F5F5',
           secondary: '#A1A1AA',
-          muted: '#71717A',
+          muted: '#8A8A92',
         },
         glass: 'rgba(255,255,255,0.035)',
       },

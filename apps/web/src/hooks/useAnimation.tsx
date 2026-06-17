@@ -1,42 +1,53 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 
+/* ─── Spring config (Design+Code style) ─── */
+const springSoft = { type: 'spring' as const, stiffness: 120, damping: 20, mass: 1 };
+const springBouncy = { type: 'spring' as const, stiffness: 180, damping: 14, mass: 0.8 };
+const springGentle = { type: 'spring' as const, stiffness: 80, damping: 22, mass: 1 };
+
 /* ─── Scroll Reveal Variants ─── */
 export const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: springSoft },
 };
 
 export const fadeInDown: Variants = {
   hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, y: 0, transition: springGentle },
 };
 
 export const fadeInLeft: Variants = {
   hidden: { opacity: 0, x: -40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, x: 0, transition: springSoft },
 };
 
 export const fadeInRight: Variants = {
   hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, x: 0, transition: springSoft },
 };
 
 export const scaleIn: Variants = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+  visible: { opacity: 1, scale: 1, transition: springBouncy },
 };
 
 /* ─── Stagger ─── */
 export const staggerContainer: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: springSoft },
 };
+
+/* ─── Spring transition helper ─── */
+export const springTransition = { type: 'spring' as const, stiffness: 100, damping: 20 };
+
+/* ─── Exported spring configs for direct use ─── */
+export { springSoft, springBouncy, springGentle };
 
 /* ─── Card 3D Tilt ─── */
 export function useTilt(degree = 6) {
@@ -123,7 +134,7 @@ export function SectionWrapper({
   children: React.ReactNode; className?: string; dark?: boolean;
 }) {
   return (
-    <section className={`relative py-20 sm:py-28 ${dark ? 'bg-background' : ''} ${className}`}>
+    <section className={`relative py-24 sm:py-32 lg:py-40 ${dark ? 'bg-background' : ''} ${className}`}>
       {children}
     </section>
   );

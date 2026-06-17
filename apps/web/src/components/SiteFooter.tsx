@@ -32,7 +32,7 @@ export function SiteFooter() {
         <div className="absolute -bottom-[30%] left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-[rgba(214,168,79,0.04)] blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
         {/* Top section */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}

@@ -37,13 +37,13 @@ export function SiteHeader() {
           : 'bg-transparent'
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
         {/* Logo — mesmo do rodapé */}
         <Link to="/" className="flex items-start group" aria-label="Rei das Vendas - Home">
           <img
             src="/logo-original.png"
             alt="Rei das Vendas"
-            className="h-9 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
+            className="h-10 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
           />
         </Link>
 

@@ -130,27 +130,8 @@ const FAQ = [
   },
 ];
 
-/* ─── Depoimentos (placeholder) ─── */
-const DEPOIMENTOS = [
-  {
-    nome: 'Carlos M.',
-    empresa: 'Loja do Carlos — Franca, SP',
-    texto: 'Em 7 dias meu site estava no ar. Em 30 dias, minhas vendas online já pagavam o investimento de 6 meses. O melhor custo-benefício que já fiz.',
-    estrelas: 5,
-  },
-  {
-    nome: 'Ana Paula S.',
-    empresa: 'Clínica Bem Estar — Ribeirão Preto, SP',
-    texto: 'O dashboard em tempo real transformou minha gestão. Agora vejo exatamente de onde vêm meus pacientes, quais horários têm mais procura e já automatizei 80% dos lembretes.',
-    estrelas: 5,
-  },
-  {
-    nome: 'Ricardo O.',
-    empresa: 'Tech Solutions — Franca, SP',
-    texto: 'Começamos com o plano Digital e em 3 meses migramos para o Enterprise. O app transformou a relação com nossos clientes. Suporte nota 10, sempre resolvendo rápido.',
-    estrelas: 5,
-  },
-];
+/* ─── Depoimentos (em breve) ─── */
+const DEPOIMENTOS: { nome: string; empresa: string; texto: string; estrelas: number }[] = [];
 
 /* ─── FAQ Accordion ─── */
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {

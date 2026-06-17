@@ -16,10 +16,23 @@
   --rdv-gold-border: rgba(214,168,79,0.22);
   --rdv-white: #F5F5F5;
   --rdv-text-secondary: #A1A1AA;
-  --rdv-text-muted: #71717A;
+  --rdv-text-muted: #8A8A92; /* increased from #71717A for WCAG AA contrast ~4.5:1 */
   --rdv-glass: rgba(255,255,255,0.035);
   --rdv-border: rgba(255,255,255,0.06);
   --rdv-border-gold: rgba(214,168,79,0.22);
+  /* Spacing scale (8px grid × multiplier) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

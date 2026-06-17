@@ -49,12 +49,6 @@ const servicosDetalhados = [
   },
 ];
 
-const casosDeSucesso = [
-  { nome: 'Cliente A', descricao: 'Aumento de 340% nas vendas online em 3 meses', link: '/portfolio' },
-  { nome: 'Cliente B', descricao: 'Redução de 60% no custo de aquisição de clientes', link: '/portfolio' },
-  { nome: 'Cliente C', descricao: 'De 0 a R$ 50k/mês em vendas digitais em 90 dias', link: '/portfolio' },
-];
-
 export default function Servicos() {
   return (
     <main>
@@ -143,41 +137,34 @@ export default function Servicos() {
         </div>
       </section>
 
-      {/* Casos de Sucesso */}
+      {/* Casos de Sucesso - em breve */}
       <section className="border-t border-[rgba(214,168,79,0.1)] py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal className="text-center">
-            <SectionLabel>Casos de Sucesso</SectionLabel>
+            <SectionLabel>Depoimentos</SectionLabel>
             <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">
               Resultados que <span className="text-gradient-gold">Falam por Si</span>
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm text-[#A1A1AA]">
-              Conheça empresas que transformaram seus resultados com nossas soluções.
+              Estamos coletando os primeiros depoimentos e cases dos projetos entregues. 
+              Acompanhe nossos resultados no Instagram ou entre em contato para saber mais.
             </p>
           </Reveal>
-          <motion.div
-            variants={staggerContainer} initial="hidden" whileInView="visible"
-            viewport={{ once: true }}
-            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {casosDeSucesso.map((caso) => (
-              <motion.div key={caso.nome} variants={staggerItem}>
-                <Link
-                  to={caso.link}
-                  className="glass-card group block rounded-2xl p-6 transition-all hover:border-[rgba(214,168,79,0.3)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-lg font-bold text-[#D6A84F]">
-                    {caso.nome.charAt(0)}
-                  </div>
-                  <h3 className="mt-4 font-serif text-lg font-semibold text-white">{caso.nome}</h3>
-                  <p className="mt-2 text-sm text-[#A1A1AA]">{caso.descricao}</p>
-                  <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#D6A84F] transition-all group-hover:gap-2">
-                    Ver caso completo <ArrowRight className="h-3 w-3" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+          <Reveal delay={0.1}>
+            <div className="mt-10 text-center">
+              <div className="glass-card mx-auto max-w-md rounded-2xl p-8">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.06)]">
+                  <MessageCircle className="h-6 w-6 text-[#D6A84F]" />
+                </div>
+                <p className="text-sm leading-relaxed text-[#A1A1AA]">
+                  Em breve publicaremos cases reais com resultados documentados dos nossos clientes em Franca-SP.
+                </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F]">
+                  @reidasvendas
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

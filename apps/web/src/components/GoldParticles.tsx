@@ -5,7 +5,7 @@ interface Particle {
   size: number; opacity: number; life: number; maxLife: number;
 }
 
-export function GoldParticles({ count = 40 }: { count?: number }) {
+export function GoldParticles({ count = 15 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -25,16 +25,16 @@ export function GoldParticles({ count = 40 }: { count?: number }) {
     window.addEventListener('resize', resize);
 
     // Init particles
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < Math.min(count, 20); i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3 - 0.1,
-        size: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.6 + 0.1,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2 - 0.05,
+        size: Math.random() * 1.5 + 0.3,
+        opacity: Math.random() * 0.4 + 0.05,
         life: 0,
-        maxLife: Math.random() * 300 + 200,
+        maxLife: Math.random() * 400 + 300,
       });
     }
 
@@ -45,34 +45,34 @@ export function GoldParticles({ count = 40 }: { count?: number }) {
         p.x += p.vx;
         p.y += p.vy;
         p.life++;
-        p.opacity = Math.max(0, p.opacity - 0.0005);
+        p.opacity = Math.max(0, p.opacity - 0.0003);
 
         // Fade in/out
-        const fade = p.life < 60 ? p.life / 60 : p.life > p.maxLife - 60 ? (p.maxLife - p.life) / 60 : 1;
-        const alpha = p.opacity * fade * 0.7;
+        const fade = p.life < 80 ? p.life / 80 : p.life > p.maxLife - 80 ? (p.maxLife - p.life) / 80 : 1;
+        const alpha = p.opacity * fade * 0.5;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(214, 168, 79, ${alpha})`;
         ctx.fill();
 
-        // Glow
-        if (p.size > 1.5) {
+        // Glow (only for larger particles, very subtle)
+        if (p.size > 1) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(214, 168, 79, ${alpha * 0.15})`;
+          ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(214, 168, 79, ${alpha * 0.08})`;
           ctx.fill();
         }
 
         // Respawn
         if (p.life > p.maxLife || p.y < -10 || p.x < -10 || p.x > canvas.width + 10) {
           p.x = Math.random() * canvas.width;
-          p.y = canvas.height + 10;
-          p.vx = (Math.random() - 0.5) * 0.3;
-          p.vy = (Math.random() - 0.5) * 0.3 - 0.15;
+          p.y = canvas.height + 5;
+          p.vx = (Math.random() - 0.5) * 0.2;
+          p.vy = (Math.random() - 0.5) * 0.2 - 0.08;
           p.life = 0;
-          p.opacity = Math.random() * 0.5 + 0.1;
-          p.maxLife = Math.random() * 300 + 200;
+          p.opacity = Math.random() * 0.3 + 0.05;
+          p.maxLife = Math.random() * 400 + 300;
         }
       });
 

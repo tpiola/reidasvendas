@@ -7,10 +7,7 @@ import {
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { BRAND } from '@/lib/brand';
-import {
-  staggerContainer, staggerItem,
-  Reveal, SectionLabel, SectionTitle, SectionWrapper,
-} from '@/hooks/useAnimation';
+import { springTransition, springSoft, springGentle, SectionWrapper, staggerContainer, staggerItem, Reveal, SectionLabel, SectionTitle } from '@/hooks/useAnimation';
 import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
@@ -128,27 +125,13 @@ const HeroSection = () => {
       </div>
 
       {/* Grid pattern */}
-      <div className="absolute inset-0 bg-grid-lg opacity-[0.4]" />
-
-      {/* Floating geometric elements */}
-      <motion.div className="absolute left-[8%] top-[25%] hidden h-14 w-14 border border-[rgba(214,168,79,0.15)] rounded-lg md:block"
-        animate={{ rotate: 360, y: [0, -15, 0] }}
-        transition={{ rotate: { duration: 50, repeat: Infinity, ease: 'linear' }, y: { duration: 5, repeat: Infinity, ease: 'easeInOut' } }}
-      />
-      <motion.div className="absolute right-[12%] top-[30%] hidden h-6 w-6 bg-[rgba(214,168,79,0.08)] rounded-full md:block"
-        animate={{ y: [0, -25, 0], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div className="absolute left-[18%] bottom-[35%] hidden h-8 w-8 border border-[rgba(214,168,79,0.08)] rounded-full md:block"
-        animate={{ y: [0, -12, 0], opacity: [0.2, 0.4, 0.2] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
-      />
+      <div className="absolute inset-0 bg-grid-lg opacity-[0.3]" />
 
       {/* Content */}
       <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div className="max-w-3xl">
           {/* Gold line + badge */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={springGentle}>
             <div className="mb-4">
               <div className="h-px w-6 bg-[#D6A84F] opacity-60 mb-3" />
               <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D6A84F]">
@@ -161,7 +144,7 @@ const HeroSection = () => {
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ ...springGentle, delay: 0.15 }}
             className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] leading-[1.02] font-extrabold tracking-[-0.03em] text-white"
           >
             Sua Empresa Precisa de uma{' '}
@@ -172,7 +155,7 @@ const HeroSection = () => {
           {/* Sub */}
           <motion.p
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ ...springGentle, delay: 0.25 }}
             className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
           >
             Enquanto você toca o negócio, a gente constrói a máquina de vendas que trabalha 24h por dia, 7 dias por semana — sites, apps, automações e dashboards que realmente entregam resultado em Franca-SP.
@@ -181,7 +164,7 @@ const HeroSection = () => {
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ ...springGentle, delay: 0.35 }}
             className="mt-8 flex flex-wrap gap-4"
           >
             <motion.div
@@ -203,7 +186,8 @@ const HeroSection = () => {
           {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ ...springGentle, delay: 0.45 }}
+
             className="mt-14"
           >
             <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
@@ -253,7 +237,7 @@ const ProblemaSection = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="grid gap-6 md:grid-cols-3"
+        className="grid gap-8 md:grid-cols-3"
       >
         {[
           { icon: Target, title: 'Sem Infraestrutura', desc: 'Site genérico, processo manual, dados espalhados. Falta uma base digital sólida para crescer com consistência.' },
@@ -675,18 +659,15 @@ const ProvaSection = () => {
           ))}
         </motion.div>
 
-        {/* Client logos placeholder */}
+        {/* Social proof - em breve */}
         <Reveal>
           <div className="mb-12 text-center">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#A1A1AA] mb-6">Empresas que confiam</p>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-50">
-              {['Logo 1', 'Logo 2', 'Logo 3', 'Logo 4', 'Logo 5'].map((logo) => (
-                <div key={logo} className="flex h-12 w-28 items-center justify-center rounded-lg border border-[rgba(214,168,79,0.1)] bg-[rgba(214,168,79,0.03)] px-4">
-                  <span className="text-xs font-semibold text-[#71717A]">{logo}</span>
-                </div>
-              ))}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <div className="rounded-xl border border-[rgba(214,168,79,0.08)] bg-[rgba(214,168,79,0.02)] px-6 py-4">
+                <p className="text-xs text-[#8A8A92] italic">Adicione aqui os logotipos reais dos seus clientes</p>
+              </div>
             </div>
-            <p className="mt-3 text-[10px] text-[#71717A] italic">Logotipos reais em breve</p>
           </div>
         </Reveal>
 
