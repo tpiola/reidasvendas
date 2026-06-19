@@ -71,10 +71,7 @@ export const TestimonialCarouselBlock: ComponentConfig<TestimonialCarouselProps>
   defaultProps: {
     label: 'DEPOIMENTOS',
     headline: 'O que nossos clientes dizem',
-    testimonials: [
-      { quote: 'A infraestrutura digital que montaram para nós transformou completamente nosso processo de vendas. Resultado em 30 dias.', author: 'Maria Santos', role: 'Diretora Comercial', company: 'TechStore', avatarUrl: '', rating: 5 },
-      { quote: 'Projeto entregue antes do prazo com uma qualidade que superou nossas expectativas.', author: 'Carlos Oliveira', role: 'Founder', company: 'Oliveira & Cia', avatarUrl: '', rating: 5 },
-    ],
+    testimonials: [],
     autoplaySpeed: 5000,
     variant: 'glass-cards',
   },

@@ -197,14 +197,7 @@ const categorias: Category[] = [
   },
 ];
 
-const templates: ProjectTemplate[] = [
-  { title: 'Calçados King', category: 'Site Premium', image: BRAND.images.nichos.calcadista, tags: ['E-commerce', 'Franca-SP'] },
-  { title: 'Clínica Vitalis', category: 'App Saúde', image: BRAND.images.nichos.saude, tags: ['App', 'Agendamento'] },
-  { title: 'Delícias do Chef', category: 'App Delivery', image: BRAND.images.nichos.comercio, tags: ['Delivery', 'Mobile'] },
-  { title: 'TechSolution', category: 'Dashboard', image: BRAND.images.nichos.industria, tags: ['Painel', 'Tempo Real'] },
-  { title: 'Escola Genius', category: 'Plataforma', image: BRAND.images.nichos.educacao, tags: ['Educação', 'CRM'] },
-  { title: 'OfficePlus', category: 'Automação', image: BRAND.images.nichos.servicos, tags: ['BPM', 'Workflow'] },
-];
+const templates: ProjectTemplate[] = [];
 
 const diferenciais = [
   { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecemos o mercado local. Atendimento presencial quando e onde precisar.' },
@@ -423,7 +416,7 @@ function HeroSection() {
             <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
               <TrendingUp className="h-5 w-5 text-[#D6A84F]" />
               <span className="text-sm font-semibold text-[#A1A1AA]">
-                12+ projetos entregues • 98% satisfação • Franca-SP
+                Franca-SP
               </span>
             </div>
           </motion.div>
@@ -639,9 +632,6 @@ function TemplateCarouselSection() {
 
 /* ─── SECTION 4: Stat Bar ─── */
 function StatBarSection() {
-  const projectsRef = useCounter(12);
-  const satisfactionRef = useCounter(98);
-  const clientsRef = useCounter(50);
   const cityRef = useRef<HTMLSpanElement>(null);
   const inViewCity = useInView(cityRef, { once: true });
   useEffect(() => {
@@ -655,9 +645,6 @@ function StatBarSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {[
-            { ref: projectsRef, number: '', label: 'Projetos Entregues', suffix: '+' },
-            { ref: satisfactionRef, number: '', label: 'Satisfação', suffix: '%' },
-            { ref: clientsRef, number: '', label: 'Clientes Atendidos', suffix: '+' },
             { ref: cityRef, number: '', label: 'Atendimento Local', suffix: '' },
           ].map((stat, i) => (
             <motion.div
@@ -804,8 +791,6 @@ function ProvaSection() {
           className="mb-12 grid gap-6 md:grid-cols-3 stagger-children"
         >
           {[
-            { number: '12+', label: 'Projetos Entregues', desc: 'Sites, apps, automações e dashboards — cada um feito sob medida.' },
-            { number: '98%', label: 'Satisfação', desc: 'Taxa de aprovação baseada em feedback pós-entrega.' },
             { number: 'Franca-SP', label: 'Atendimento Local', desc: 'Conhecemos o mercado da cidade. Presencial quando precisar.' },
           ].map((stat) => (
             <GlassCard key={stat.label} glow className="hover-lift">
@@ -817,22 +802,6 @@ function ProvaSection() {
             </GlassCard>
           ))}
         </motion.div>
-
-        {/* Social proof logos */}
-        <Reveal>
-          <div className="mb-12 text-center">
-            <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.2em] text-[#A1A1AA]">
-              Empresas que confiam
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <div className="rounded-xl border border-[rgba(214,168,79,0.08)] bg-[rgba(214,168,79,0.02)] px-6 py-4">
-                <p className="text-xs italic text-[#8A8A92]">
-                  Adicione aqui os logotipos reais dos seus clientes
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
 
         {/* Depoimentos */}
         <motion.div
@@ -892,7 +861,7 @@ function ProcessoSection() {
                 Como construímos sua infraestrutura em 4
               </SectionTitle>
               <p className="mt-3 max-w-md text-sm text-[#A1A1AA]">
-                Metodologia proprietária testada em dezenas de projetos. Cada etapa tem entregáveis claros e validação antes de avançar.
+                Metodologia proprietária. Cada etapa tem entregáveis claros e validação antes de avançar.
               </p>
             </Reveal>
 
@@ -944,7 +913,7 @@ function ProcessoSection() {
                     </Link>
                   </div>
                   <p className="mt-4 text-[10px] text-[#71717A]">
-                    Mais de 12 empresas em Franca-SP já confiam • Resposta em até 24h
+                    Resposta em até 24h
                   </p>
                 </div>
               </div>
