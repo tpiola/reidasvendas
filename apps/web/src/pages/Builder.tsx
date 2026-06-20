@@ -1,14 +1,26 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Sparkles, MessageCircle, MousePointerClick, Globe,
   CheckCircle2, Zap, Palette, Layout, Smartphone, Search, Shield,
-  Bot, Wifi,
+  Bot, Wifi, Loader2, AlertCircle, RotateCcw, Building2, Target,
+  Eye, RefreshCw,
 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { PremiumButton } from '@/components/PremiumButton';
 import { FeatureCard } from '@/components/PremiumComponents';
 import { GoldParticles } from '@/components/GoldParticles';
+
+/* ─── Types ─── */
+type BuilderStatus = 'idle' | 'loading' | 'success' | 'error';
+
+interface GeneratedSite {
+  hero: { title: string; subtitle: string; cta: string };
+  sections: { title: string; description: string }[];
+  palette: { primary: string; secondary: string; accent: string; background: string };
+  summary: string;
+}
 
 /* ─── Fluxo do Builder ─── */
 const FLOW = [
@@ -137,7 +149,97 @@ const BUILDER_FEATURES = [
   },
 ];
 
+/* ─── Setores disponíveis ─── */
+const SECTORS = [
+  { value: '', label: 'Selecione o setor' },
+  { value: 'Saúde', label: 'Saúde' },
+  { value: 'Calçados', label: 'Calçados' },
+  { value: 'Comércio', label: 'Comércio' },
+  { value: 'Serviços', label: 'Serviços' },
+  { value: 'Educação', label: 'Educação' },
+  { value: 'Outro', label: 'Outro' },
+];
+
 export default function Builder() {
+  /* ─── Estados ─── */
+  const [status, setStatus] = useState<BuilderStatus>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [deploying, setDeploying] = useState(false);
+  const [generatedSite, setGeneratedSite] = useState<GeneratedSite | null>(null);
+
+  /* ─── Form State ─── */
+  const [companyName, setCompanyName] = useState('');
+  const [sector, setSector] = useState('');
+  const [primaryColor, setPrimaryColor] = useState('#D6A84F');
+  const [description, setDescription] = useState('');
+
+  /* ─── Handlers ─── */
+  const handleGenerate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+
+    try {
+      const res = await fetch('/api/generate-site', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ companyName, sector, primaryColor, description }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || `Erro ${res.status}: não foi possível gerar o site`);
+      }
+
+      const data: GeneratedSite = await res.json();
+      setGeneratedSite(data);
+      setStatus('success');
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : 'Ocorreu um erro inesperado ao gerar o site');
+      setStatus('error');
+    }
+  };
+
+  const handleDeploy = async () => {
+    if (!generatedSite) return;
+    setDeploying(true);
+
+    try {
+      const res = await fetch('/api/deploy-site', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ companyName, sector, generatedSite }),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || `Erro ${res.status}: não foi possível publicar o site`);
+      }
+
+      const data = await res.json();
+      // Abre o link do site publicado em nova aba
+      if (data.url) {
+        window.open(data.url, '_blank');
+      }
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : 'Ocorreu um erro ao publicar o site');
+      setStatus('error');
+    } finally {
+      setDeploying(false);
+    }
+  };
+
+  const handleRefine = () => {
+    setStatus('idle');
+    setGeneratedSite(null);
+  };
+
+  const handleReset = () => {
+    setStatus('idle');
+    setErrorMessage('');
+    setGeneratedSite(null);
+  };
+
   return (
     <main>
       <GoldParticles count={25} />
@@ -189,6 +291,268 @@ export default function Builder() {
               <span className="flex items-center gap-1.5">
                 <Shield className="h-3.5 w-3.5 text-[#D6A84F]" /> Grátis por 14 Dias
               </span>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════ FORMULÁRIO DE ENTRADA ═══════ */}
+      <section className="border-t border-[rgba(214,168,79,0.08)] py-20 sm:py-28">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <Reveal className="text-center">
+            <SectionLabel>Gerar Site com IA</SectionLabel>
+            <h2 className="mt-4 font-serif text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+              Conte-nos sobre{' '}
+              <span className="text-gradient-gold">Sua Marca</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-sm text-[#A1A1AA]">
+              Preencha os dados abaixo e nossa IA criará um site profissional para seu negócio em segundos.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div className="mt-12">
+              {status === 'idle' && (
+                <form onSubmit={handleGenerate} className="space-y-6">
+                  {/* Nome da empresa */}
+                  <div className="group">
+                    <label className="mb-2 block text-xs font-bold uppercase tracking-[0.15em] text-[#A1A1AA]">
+                      <Building2 className="mr-1.5 inline-block h-3.5 w-3.5 text-[#D6A84F]" />
+                      Nome da Empresa / Marca
+                    </label>
+                    <input
+                      type="text"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      placeholder="Ex: Clínica Sorriso Perfeito"
+                      required
+                      className="w-full rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(255,255,255,0.02)] px-5 py-3.5 text-sm text-white placeholder:text-[#52525B] outline-none transition-all duration-300 focus:border-[#D6A84F] focus:bg-[rgba(214,168,79,0.03)] focus:shadow-[0_0_20px_rgba(214,168,79,0.06)]"
+                    />
+                  </div>
+
+                  {/* Setor */}
+                  <div className="group">
+                    <label className="mb-2 block text-xs font-bold uppercase tracking-[0.15em] text-[#A1A1AA]">
+                      <Target className="mr-1.5 inline-block h-3.5 w-3.5 text-[#D6A84F]" />
+                      Setor / Indústria
+                    </label>
+                    <select
+                      value={sector}
+                      onChange={(e) => setSector(e.target.value)}
+                      required
+                      className="w-full rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(255,255,255,0.02)] px-5 py-3.5 text-sm text-white outline-none transition-all duration-300 focus:border-[#D6A84F] focus:bg-[rgba(214,168,79,0.03)] focus:shadow-[0_0_20px_rgba(214,168,79,0.06)]"
+                      style={{ color: sector ? '#fff' : '#52525B' }}
+                    >
+                      {SECTORS.map((opt) => (
+                        <option key={opt.value} value={opt.value} className="bg-[#080808] text-white">
+                          {opt.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Cor Primária */}
+                  <div className="group">
+                    <label className="mb-2 block text-xs font-bold uppercase tracking-[0.15em] text-[#A1A1AA]">
+                      <Palette className="mr-1.5 inline-block h-3.5 w-3.5 text-[#D6A84F]" />
+                      Cor Primária
+                    </label>
+                    <div className="flex items-center gap-4">
+                      <input
+                        type="color"
+                        value={primaryColor}
+                        onChange={(e) => setPrimaryColor(e.target.value)}
+                        className="h-12 w-12 cursor-pointer rounded-xl border border-[rgba(214,168,79,0.15)] bg-transparent p-1 transition-all duration-300 hover:border-[#D6A84F]"
+                      />
+                      <span className="text-sm font-mono text-[#A1A1AA]">{primaryColor}</span>
+                      <div
+                        className="h-8 w-8 rounded-full border border-[rgba(255,255,255,0.1)]"
+                        style={{ backgroundColor: primaryColor }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Descrição */}
+                  <div className="group">
+                    <label className="mb-2 block text-xs font-bold uppercase tracking-[0.15em] text-[#A1A1AA]">
+                      <MessageCircle className="mr-1.5 inline-block h-3.5 w-3.5 text-[#D6A84F]" />
+                      Descrição do Negócio
+                    </label>
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Descreva seu negócio em 3 a 5 frases. Fale sobre seus clientes, o que você oferece, seu diferencial..."
+                      required
+                      rows={5}
+                      className="w-full resize-none rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(255,255,255,0.02)] px-5 py-3.5 text-sm text-white placeholder:text-[#52525B] outline-none transition-all duration-300 focus:border-[#D6A84F] focus:bg-[rgba(214,168,79,0.03)] focus:shadow-[0_0_20px_rgba(214,168,79,0.06)]"
+                    />
+                    <p className="mt-1.5 text-[10px] text-[#52525B]">
+                      {description.split(' ').filter(Boolean).length} palavras (recomendado: 30-100)
+                    </p>
+                  </div>
+
+                  {/* Submit */}
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="group relative inline-flex w-full items-center justify-center gap-2.5 overflow-hidden rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-8 py-3.5 text-sm font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35),0_0_80px_rgba(214,168,79,0.12)] hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Gerar Site com IA{' '}
+                      <Sparkles className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {/* ═══════ LOADING ═══════ */}
+              {status === 'loading' && (
+                <div className="flex flex-col items-center justify-center py-16">
+                  <div className="relative mb-8">
+                    <div className="h-20 w-20 animate-spin rounded-full border-2 border-[rgba(214,168,79,0.1)] border-t-[#D6A84F]" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Sparkles className="h-7 w-7 text-[#D6A84F] animate-pulse" />
+                    </div>
+                  </div>
+                  <Reveal>
+                    <h3 className="font-serif text-2xl font-bold text-white">Criando seu site...</h3>
+                    <p className="mt-2 text-sm text-[#A1A1AA]">
+                      Nossa IA está analisando sua marca e gerando um site profissional.
+                    </p>
+                    <div className="mt-6 flex items-center gap-2">
+                      <div className="h-1 w-32 overflow-hidden rounded-full bg-[rgba(214,168,79,0.1)]">
+                        <motion.div
+                          className="h-full rounded-full bg-gradient-to-r from-[#D6A84F] to-[#F2D38A]"
+                          animate={{ x: ['-100%', '200%'] }}
+                          transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+                        />
+                      </div>
+                      <span className="text-[10px] text-[#71717A]">Processando...</span>
+                    </div>
+                  </Reveal>
+                </div>
+              )}
+
+              {/* ═══════ SUCCESS ═══════ */}
+              {status === 'success' && generatedSite && (
+                <div className="space-y-8">
+                  {/* Badge de sucesso */}
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(34,197,94,0.12)]">
+                      <CheckCircle2 className="h-5 w-5 text-green-400" />
+                    </div>
+                    <span className="text-sm font-semibold text-green-400">Site gerado com sucesso!</span>
+                  </div>
+
+                  {/* Preview do Site Gerado */}
+                  <div className="rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(255,255,255,0.02)] p-6 sm:p-8">
+                    <h3 className="mb-1 font-serif text-xl font-bold text-white">
+                      {generatedSite.hero.title}
+                    </h3>
+                    <p className="text-sm text-[#A1A1AA]">{generatedSite.hero.subtitle}</p>
+                    <p className="mt-3 text-xs text-[#D6A84F] font-semibold">
+                      CTA: {generatedSite.hero.cta}
+                    </p>
+
+                    {/* Seções */}
+                    <div className="mt-6 space-y-3">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#71717A]">
+                        Seções do Site
+                      </h4>
+                      {generatedSite.sections.map((section, idx) => (
+                        <div
+                          key={idx}
+                          className="rounded-xl border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.015)] p-4 transition-all hover:border-[rgba(214,168,79,0.12)]"
+                        >
+                          <h5 className="text-sm font-semibold text-white">{section.title}</h5>
+                          <p className="mt-1 text-xs text-[#A1A1AA]">{section.description}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Paleta de Cores */}
+                    <div className="mt-6">
+                      <h4 className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#71717A]">
+                        Paleta de Cores Sugerida
+                      </h4>
+                      <div className="flex flex-wrap gap-3">
+                        {Object.entries(generatedSite.palette).map(([name, color]) => (
+                          <div key={name} className="flex items-center gap-2">
+                            <div
+                              className="h-7 w-7 rounded-lg border border-[rgba(255,255,255,0.08)]"
+                              style={{ backgroundColor: color }}
+                            />
+                            <span className="text-[10px] font-mono text-[#A1A1AA] capitalize">
+                              {name}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Summary */}
+                    <div className="mt-6 rounded-xl bg-[rgba(214,168,79,0.04)] p-4">
+                      <p className="text-xs leading-relaxed text-[#A1A1AA]">{generatedSite.summary}</p>
+                    </div>
+                  </div>
+
+                  {/* Ações */}
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <button
+                      onClick={handleDeploy}
+                      disabled={deploying}
+                      className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-6 py-3 text-sm font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35),0_0_80px_rgba(214,168,79,0.12)] hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    >
+                      {deploying ? (
+                        <>
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                          Publicando...
+                        </>
+                      ) : (
+                        <>
+                          Publicar Site <Globe className="h-4 w-4" />
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={handleRefine}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[rgba(214,168,79,0.22)] px-6 py-3 text-sm font-semibold text-[#F5F5F5] transition-all duration-400 hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]"
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      Refinar com IA
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* ═══════ ERROR ═══════ */}
+              {status === 'error' && (
+                <div className="flex flex-col items-center justify-center py-12">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(239,68,68,0.1)]">
+                    <AlertCircle className="h-7 w-7 text-red-400" />
+                  </div>
+                  <Reveal>
+                    <h3 className="font-serif text-xl font-bold text-white">Algo deu errado</h3>
+                    <p className="mt-2 max-w-md text-center text-sm text-[#A1A1AA]">
+                      {errorMessage}
+                    </p>
+                    <div className="mt-6 flex flex-wrap justify-center gap-3">
+                      <button
+                        onClick={handleGenerate}
+                        className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-6 py-2.5 text-sm font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35)]"
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                        Tentar Novamente
+                      </button>
+                      <button
+                        onClick={handleReset}
+                        className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.22)] px-6 py-2.5 text-sm font-semibold text-[#F5F5F5] transition-all duration-400 hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]"
+                      >
+                        Voltar ao Formulário
+                      </button>
+                    </div>
+                  </Reveal>
+                </div>
+              )}
             </div>
           </Reveal>
         </div>
@@ -372,7 +736,7 @@ export default function Builder() {
                 rel="noopener noreferrer"
                 className="btn-outline-gold text-sm group inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.22)] px-6 py-2.5 font-semibold text-[#F5F5F5] transition-all duration-400 hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]"
               >
-                Ver Demonstração <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                Ver Demonstração <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
           </Reveal>
