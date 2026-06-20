@@ -27,6 +27,11 @@ export const BRAND = {
     dark: '#030303',
     surface: '#080808',
   },
+  altColors: {
+    azulProfundo: '#0A2540',
+    verdeSaude: '#0D9488',
+    acento: '#F97316',
+  },
   images: {
     hero: '/videos/hero-noaudio.mp4',
     og: '/imagens/og-default.jpg',

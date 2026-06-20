@@ -21,6 +21,9 @@ const Portfolio = lazy(() => import('@/pages/Portfolio'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
+const Builder = lazy(() => import('@/pages/Builder'));
+const Templates = lazy(() => import('@/pages/Templates'));
+const Extensions = lazy(() => import('@/pages/Extensions'));
 
 /* ─── Error Boundary ─── */
 interface ErrorBoundaryProps {
@@ -167,6 +170,9 @@ function SiteLayout() {
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
+              <Route path="/builder" element={<PageTransition><Builder /></PageTransition>} />
+              <Route path="/templates" element={<PageTransition><Templates /></PageTransition>} />
+              <Route path="/extensions" element={<PageTransition><Extensions /></PageTransition>} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>

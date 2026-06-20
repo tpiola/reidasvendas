@@ -22,6 +22,9 @@ export default {
           muted: '#8A8A92',
         },
         glass: 'rgba(255,255,255,0.035)',
+        'azul-profundo': '#0A2540',
+        'verde-saude': '#0D9488',
+        acento: '#F97316',
       },
       fontFamily: {
         sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Inter', 'sans-serif'],
