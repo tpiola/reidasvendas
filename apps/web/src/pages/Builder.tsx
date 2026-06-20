@@ -13,13 +13,20 @@ import { FeatureCard } from '@/components/PremiumComponents';
 import { GoldParticles } from '@/components/GoldParticles';
 
 /* ─── Types ─── */
-type BuilderStatus = 'idle' | 'loading' | 'success' | 'error';
+type BuilderStatus = 'idle' | 'loading' | 'success' | 'deployed' | 'error';
 
 interface GeneratedSite {
   hero: { title: string; subtitle: string; cta: string };
   sections: { title: string; description: string }[];
   palette: { primary: string; secondary: string; accent: string; background: string };
   summary: string;
+}
+
+interface DeployResult {
+  url: string;
+  id: string;
+  companyName: string;
+  message: string;
 }
 
 /* ─── Fluxo do Builder ─── */
@@ -166,6 +173,7 @@ export default function Builder() {
   const [errorMessage, setErrorMessage] = useState('');
   const [deploying, setDeploying] = useState(false);
   const [generatedSite, setGeneratedSite] = useState<GeneratedSite | null>(null);
+  const [deployResult, setDeployResult] = useState<DeployResult | null>(null);
 
   /* ─── Form State ─── */
   const [companyName, setCompanyName] = useState('');
@@ -183,7 +191,12 @@ export default function Builder() {
       const res = await fetch('/api/generate-site', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ companyName, sector, primaryColor, description }),
+        body: JSON.stringify({
+          brandName: companyName,
+          industry: sector,
+          colors: primaryColor,
+          description,
+        }),
       });
 
       if (!res.ok) {
@@ -203,6 +216,7 @@ export default function Builder() {
   const handleDeploy = async () => {
     if (!generatedSite) return;
     setDeploying(true);
+    setErrorMessage('');
 
     try {
       const res = await fetch('/api/deploy-site', {
@@ -213,10 +227,12 @@ export default function Builder() {
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData.message || `Erro ${res.status}: não foi possível publicar o site`);
+        throw new Error(errData.error || `Erro ${res.status}: não foi possível publicar o site`);
       }
 
-      const data = await res.json();
+      const data: DeployResult = await res.json();
+      setDeployResult(data);
+      setStatus('deployed');
       // Abre o link do site publicado em nova aba
       if (data.url) {
         window.open(data.url, '_blank');
@@ -432,7 +448,7 @@ export default function Builder() {
                 </div>
               )}
 
-              {/* ═══════ SUCCESS ═══════ */}
+              {/* ═══════ SUCCESS (pré-visualizar) ═══════ */}
               {status === 'success' && generatedSite && (
                 <div className="space-y-8">
                   {/* Badge de sucesso */}
@@ -521,6 +537,71 @@ export default function Builder() {
                       Refinar com IA
                     </button>
                   </div>
+                </div>
+              )}
+
+              {/* ═══════ DEPLOYED (publicado) ═══════ */}
+              {status === 'deployed' && deployResult && (
+                <div className="space-y-8">
+                  {/* Badge de deployed */}
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[rgba(34,197,94,0.12)]">
+                      <CheckCircle2 className="h-5 w-5 text-green-400" />
+                    </div>
+                    <span className="text-sm font-semibold text-green-400">Site publicado com sucesso!</span>
+                  </div>
+
+                  {/* Card de URL */}
+                  <div className="rounded-2xl border border-[rgba(34,197,94,0.15)] bg-[rgba(34,197,94,0.03)] p-6 sm:p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Globe className="h-6 w-6 text-green-400" />
+                      <h3 className="font-serif text-xl font-bold text-white">
+                        {deployResult.companyName}
+                      </h3>
+                    </div>
+
+                    <a
+                      href={deployResult.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 rounded-xl border border-[rgba(34,197,94,0.12)] bg-[rgba(34,197,94,0.04)] p-4 text-green-400 transition-all duration-300 hover:bg-[rgba(34,197,94,0.08)] hover:border-green-400/30"
+                    >
+                      <Globe className="h-4 w-4 shrink-0" />
+                      <span className="truncate text-sm font-semibold underline underline-offset-2 decoration-green-400/30 group-hover:decoration-green-400/60">
+                        {deployResult.url}
+                      </span>
+                      <ArrowRight className="h-4 w-4 shrink-0 ml-auto transition-transform group-hover:translate-x-1" />
+                    </a>
+
+                    <p className="mt-4 text-xs text-[#A1A1AA] leading-relaxed">
+                      Seu site está no ar! Compartilhe o link com seus clientes.
+                      Domínio personalizado disponível nos planos premium.
+                    </p>
+                  </div>
+
+                  {/* Ações pós-deploy */}
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <a
+                      href={deployResult.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] px-6 py-3 text-sm font-bold text-[#030303] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35)] hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Visitar Site <ArrowRight className="h-4 w-4" />
+                    </a>
+                    <button
+                      onClick={handleRefine}
+                      className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[rgba(214,168,79,0.22)] px-6 py-3 text-sm font-semibold text-[#F5F5F5] transition-all duration-400 hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]"
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                      Criar Novo Site
+                    </button>
+                  </div>
+
+                  {/* Share hint */}
+                  <p className="text-center text-[10px] text-[#52525B]">
+                    {deployResult.url} • Publicado via Rei das Vendas AI Builder
+                  </p>
                 </div>
               )}
 

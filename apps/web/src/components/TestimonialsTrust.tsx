@@ -31,8 +31,8 @@ const testimonials = [
 
 export function TestimonialsTrust() {
   return (
-    <SectionWrapper dark id="testimonials">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionWrapper dark>
+        <div id="testimonials" className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <SectionLabel>Trust & Results</SectionLabel>
           <h2 className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">

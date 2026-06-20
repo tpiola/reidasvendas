@@ -35,8 +35,8 @@ const templates = [
 
 export function TemplateShowcase() {
   return (
-    <SectionWrapper id="portfolio">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionWrapper>
+        <div id="portfolio" className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <SectionLabel>Portfólio Premium</SectionLabel>
           <h2 className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">

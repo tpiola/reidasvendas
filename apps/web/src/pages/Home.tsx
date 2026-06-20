@@ -1,35 +1,35 @@
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, Monitor, Smartphone, Bot, BarChart3, GraduationCap,
-  MessageCircle, CheckCircle2, MapPin, Quote,
+  MessageCircle, CheckCircle2, MapPin,
   TrendingUp, Shield, Zap, Target, Layers,
-  Star, ChevronRight, ChevronLeft, Globe, ShoppingBag,
-  Building2, HeartPulse, BookOpen, Briefcase, Play,
-  Check, Sparkles, CreditCard, ArrowUpRight, ChevronDown,
-  Users, Clock, DollarSign,
+  Star, Globe, ShoppingBag,
+  Building2, HeartPulse, BookOpen, Briefcase,
+  Check, Sparkles, ArrowUpRight, ChevronDown,
+  Users,
 } from 'lucide-react';
 import {
-  motion, useScroll, useTransform, useSpring, animate, useInView,
+  motion, useInView,
   AnimatePresence,
 } from 'framer-motion';
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { BRAND } from '@/lib/brand';
 import {
-  springTransition, springSoft, springGentle,
   SectionWrapper, staggerContainer, staggerItem,
   Reveal, SectionLabel, SectionTitle,
 } from '@/hooks/useAnimation';
-import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { GlassCard } from '@/components/GlassCard';
-import { LuxuryDivider, SectionHeading, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
+import { LuxuryDivider, FeatureCard, ProcessStep } from '@/components/PremiumComponents';
 import { FounderSection } from '@/components/FounderSection';
+import { HeroPremium } from '@/components/HeroPremium';
+import { AIBrandLearning } from '@/components/AIBrandLearning';
+import { EnterpriseFeatures } from '@/components/EnterpriseFeatures';
+import { TemplateShowcase } from '@/components/TemplateShowcase';
+import { TestimonialsTrust } from '@/components/TestimonialsTrust';
+import { EnterpriseCTA } from '@/components/EnterpriseCTA';
 
-/* ─── Types ─── */
-interface VideoSlide {
-  src: string;
-  poster?: string;
-}
+/* ─── DATA ─── */
 
 interface Category {
   id: string;
@@ -42,13 +42,6 @@ interface Category {
     desc: string;
     cta: string;
   }[];
-}
-
-interface ProjectTemplate {
-  title: string;
-  category: string;
-  image: string;
-  tags: string[];
 }
 
 interface PricingPlan {
@@ -65,35 +58,6 @@ interface FaqItem {
   q: string;
   r: string;
 }
-
-/* ─── Counter Animation Hook ─── */
-function useCounter(end: number, duration = 2) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
-  useEffect(() => {
-    if (!inView) return;
-    const node = ref.current;
-    if (!node) return;
-    const controls = animate(0, end, {
-      duration,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => {
-        node.textContent = Math.round(v).toLocaleString('pt-BR') + (end > 100 ? '%' : '');
-      },
-    });
-    return () => controls.stop();
-  }, [inView, end, duration]);
-  return ref;
-}
-
-/* ─── DATA ─── */
-
-const heroVideos: VideoSlide[] = [
-  { src: '/videos/sentinela/7.mp4' },
-  { src: '/videos/sentinela/4.mp4' },
-  { src: '/videos/sentinela/8.mp4' },
-  { src: '/videos/sentinela/10.mp4' },
-];
 
 const servicosData = [
   {
@@ -197,7 +161,7 @@ const categorias: Category[] = [
   },
 ];
 
-const templates: ProjectTemplate[] = [];
+const templates: { title: string; category: string; image: string; tags: string[] }[] = [];
 
 const diferenciais = [
   { icon: MapPin, title: 'Raiz de Franca-SP', desc: 'Conhecemos o mercado local. Atendimento presencial quando e onde precisar.' },
@@ -283,167 +247,8 @@ const faq: FaqItem[] = [
   { q: 'E depois da entrega?', r: 'Todo projeto inclui suporte. Planos de governança contínua: melhorias, segurança, funcionalidades novas. Seu projeto não morre na entrega.' },
 ];
 
-/* ─── SECTION 1: HERO with Video Carousel ─── */
-function HeroSection() {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
-  const scale = useTransform(scrollY, [0, 600], [1, 1.1]);
-
-  const [currentVideo, setCurrentVideo] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentVideo((prev) => (prev + 1) % heroVideos.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <section className="relative flex min-h-[100dvh] items-center overflow-hidden bg-[#030303]">
-      <GoldParticles count={50} />
-
-      {/* Video Carousel Background */}
-      <motion.div style={{ y: heroY, scale }} className="absolute inset-0">
-        <AnimatePresence mode="wait">
-          <motion.video
-            key={currentVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster="/videos/hero-preview.jpg"
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.3]"
-            preload="auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <source src={heroVideos[currentVideo].src} type="video/mp4" />
-          </motion.video>
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-[#030303]/85 to-[#030303]" />
-      </motion.div>
-
-      {/* Gold glow gradients */}
-      <div className="absolute inset-0">
-        <div className="absolute -left-[20%] -top-[20%] h-[60%] w-[60%] rounded-full bg-[rgba(214,168,79,0.06)] blur-[150px]" />
-        <div className="absolute -bottom-[20%] -right-[20%] h-[50%] w-[50%] rounded-full bg-[rgba(214,168,79,0.04)] blur-[120px]" />
-      </div>
-
-      {/* Content */}
-      <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <div className="max-w-3xl">
-          {/* Gold line + badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...springGentle }}
-          >
-            <div className="mb-4">
-              <div className="mb-3 h-px w-6 bg-[#D6A84F] opacity-60" />
-              <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-[#D6A84F]">
-                <MapPin className="mr-1.5 inline-block h-3 w-3" />
-                Infraestrutura Digital • Franca-SP
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...springGentle, delay: 0.15 }}
-            className="mt-8 font-serif text-[clamp(2.8rem,7.5vw,5.5rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-white"
-          >
-            Sua Empresa Precisa de uma{' '}
-            <span className="text-gradient-premium">Infraestrutura Digital</span>
-            <span className="block text-white">Não de um Site.</span>
-          </motion.h1>
-
-          {/* Sub */}
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...springGentle, delay: 0.25 }}
-            className="mt-5 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg"
-          >
-            Enquanto você toca o negócio, a gente constrói a máquina de vendas que trabalha 24h por dia, 7 dias por semana — sites, apps, automações e dashboards que realmente entregam resultado.
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...springGentle, delay: 0.35 }}
-            className="mt-8 flex flex-wrap gap-4"
-          >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 20px rgba(214,168,79,0.2)',
-                  '0 0 40px rgba(214,168,79,0.4)',
-                  '0 0 20px rgba(214,168,79,0.2)',
-                ],
-              }}
-              transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="rounded-full"
-            >
-              <PremiumButton
-                href={BRAND.whatsapp}
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Diagnóstico Digital Gratuito
-              </PremiumButton>
-            </motion.div>
-            <Link to="/servicos" className="btn-outline-gold group text-sm sm:text-base">
-              Ver Soluções
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
-
-          {/* Stats Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ ...springGentle, delay: 0.45 }}
-            className="mt-14"
-          >
-            <div className="inline-flex items-center gap-3 rounded-2xl border border-[rgba(214,168,79,0.12)] bg-[rgba(214,168,79,0.03)] px-6 py-4 backdrop-blur-sm">
-              <TrendingUp className="h-5 w-5 text-[#D6A84F]" />
-              <span className="text-sm font-semibold text-[#A1A1AA]">
-                Franca-SP
-              </span>
-            </div>
-          </motion.div>
-
-          {/* Video Carousel Indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="mt-6 flex items-center gap-2"
-          >
-            {heroVideos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentVideo(i)}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  i === currentVideo ? 'w-8 bg-[#D6A84F]' : 'w-1.5 bg-[rgba(214,168,79,0.3)]'
-                }`}
-                aria-label={`Slide ${i + 1}`}
-              />
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
+/* ─── SECTION 1: Premium Hero ─── */
+// HeroPremium imported above
 
 /* ─── SECTION 2: Category Tabs ─── */
 function CategoryTabsSection() {
@@ -514,117 +319,6 @@ function CategoryTabsSection() {
             </div>
           </motion.div>
         </AnimatePresence>
-      </div>
-    </SectionWrapper>
-  );
-}
-
-/* ─── SECTION 3: Template Carousel ─── */
-function TemplateCarouselSection() {
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const itemsPerView = 3;
-  const maxIdx = Math.max(0, templates.length - itemsPerView);
-
-  const next = useCallback(() => {
-    setCurrentIdx((prev) => Math.min(prev + 1, maxIdx));
-  }, [maxIdx]);
-
-  const prev = useCallback(() => {
-    setCurrentIdx((prev) => Math.max(prev - 1, 0));
-  }, []);
-
-  return (
-    <SectionWrapper>
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-          <SectionLabel>Portfólio</SectionLabel>
-          <SectionTitle highlight="reais">
-            Projetos que entregamos para clientes
-          </SectionTitle>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
-            Cada projeto é único — construído do zero para resolver problemas reais de empresas em Franca-SP.
-          </p>
-        </Reveal>
-
-        {/* Carousel */}
-        <div className="relative">
-          {/* Navigation Arrows */}
-          <button
-            onClick={prev}
-            disabled={currentIdx === 0}
-            className="absolute -left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[#030303] text-[#D6A84F] transition-all hover:bg-[rgba(214,168,79,0.1)] hover:shadow-[0_0_20px_rgba(214,168,79,0.15)] disabled:cursor-not-allowed disabled:opacity-30"
-            aria-label="Anterior"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <button
-            onClick={next}
-            disabled={currentIdx >= maxIdx}
-            className="absolute -right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[#030303] text-[#D6A84F] transition-all hover:bg-[rgba(214,168,79,0.1)] hover:shadow-[0_0_20px_rgba(214,168,79,0.15)] disabled:cursor-not-allowed disabled:opacity-30"
-            aria-label="Próximo"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
-
-          {/* Cards Track */}
-          <div className="overflow-hidden">
-            <motion.div
-              animate={{ x: `-${currentIdx * (100 / itemsPerView)}%` }}
-              transition={{ type: 'spring', stiffness: 80, damping: 25 }}
-              className="flex gap-6"
-            >
-              {templates.map((t, i) => (
-                <motion.div
-                  key={i}
-                  className="min-w-[calc(33.333%-16px)] shrink-0"
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="group relative h-72 overflow-hidden rounded-2xl border border-[rgba(214,168,79,0.1)]">
-                    <img
-                      src={t.image}
-                      alt={t.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-all duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/50 to-transparent" />
-                    <div className="absolute inset-0 bg-[rgba(214,168,79,0.06)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <span className="mb-2 inline-block rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-[#D6A84F] backdrop-blur-sm">
-                        {t.category}
-                      </span>
-                      <h3 className="font-serif mt-2 text-lg font-semibold text-white">{t.title}</h3>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {t.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-[rgba(255,255,255,0.05)] px-2.5 py-0.5 text-[10px] text-[#A1A1AA]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Dots */}
-          <div className="mt-8 flex items-center justify-center gap-2">
-            {Array.from({ length: maxIdx + 1 }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIdx(i)}
-                className={`h-2 rounded-full transition-all duration-500 ${
-                  i === currentIdx ? 'w-8 bg-[#D6A84F]' : 'w-2 bg-[rgba(214,168,79,0.2)]'
-                }`}
-                aria-label={`Slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </SectionWrapper>
   );
@@ -760,92 +454,6 @@ function SegmentosSection() {
 
 /* ─── SECTION 7: Founder (imported) ─── */
 // FounderSection imported above
-
-/* ─── SECTION 8: Prova Social (Depoimentos + Números) ─── */
-function ProvaSection() {
-  const depoimentos: {
-    texto: string;
-    resultado: string;
-    contexto: string;
-  }[] = [];
-
-  return (
-    <SectionWrapper dark>
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-          <SectionLabel>Prova Social</SectionLabel>
-          <SectionTitle highlight="falam por si">
-            Resultados que
-          </SectionTitle>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
-            Números, cases e depoimentos de quem já construiu a infraestrutura digital conosco.
-          </p>
-        </Reveal>
-
-        {/* Stats row */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="mb-12 grid gap-6 md:grid-cols-3 stagger-children"
-        >
-          {[
-            { number: 'Franca-SP', label: 'Atendimento Local', desc: 'Conhecemos o mercado da cidade. Presencial quando precisar.' },
-          ].map((stat) => (
-            <GlassCard key={stat.label} glow className="hover-lift">
-              <div className="py-6 text-center">
-                <span className="mb-1 block font-serif text-4xl font-bold text-[#D6A84F]">{stat.number}</span>
-                <h3 className="mb-1 font-serif text-base font-semibold text-white">{stat.label}</h3>
-                <p className="text-xs text-[#A1A1AA]">{stat.desc}</p>
-              </div>
-            </GlassCard>
-          ))}
-        </motion.div>
-
-        {/* Depoimentos */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="grid gap-6 md:grid-cols-1"
-        >
-          {depoimentos.length > 0 ? (
-            depoimentos.map((d) => (
-              <GlassCard key={d.texto.slice(0, 30)} glow>
-                <Quote className="absolute right-4 top-4 h-8 w-8 text-[rgba(214,168,79,0.1)]" />
-                <p className="text-sm leading-relaxed text-[#A1A1AA]">&ldquo;{d.texto}&rdquo;</p>
-                <div className="my-3 flex items-center gap-2 text-sm font-bold text-[#D6A84F]">
-                  <CheckCircle2 className="h-4 w-4" />
-                  {d.resultado}
-                </div>
-                <div className="border-t border-[rgba(255,255,255,0.06)] pt-3">
-                  <p className="text-xs text-[#71717A]">{d.contexto}</p>
-                </div>
-              </GlassCard>
-            ))
-          ) : (
-            <GlassCard glow>
-              <div className="py-8 text-center">
-                <Quote className="mx-auto mb-4 h-10 w-10 text-[rgba(214,168,79,0.15)]" />
-                <p className="mx-auto max-w-md text-sm leading-relaxed text-[#A1A1AA]">
-                  Estamos coletando depoimentos dos primeiros projetos. Enquanto isso, veja nossos cases em andamento no Instagram.
-                </p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] px-4 py-1.5 text-xs font-semibold text-[#D6A84F]">
-                  <MapPin className="h-3 w-3" />
-                  @reidasvendas
-                </div>
-              </div>
-            </GlassCard>
-          )}
-        </motion.div>
-
-        <LuxuryDivider />
-      </div>
-    </SectionWrapper>
-  );
-}
 
 /* ─── SECTION 9: Processo (Timeline 4 etapas) ─── */
 function ProcessoSection() {
@@ -1142,131 +750,24 @@ function FaqSection() {
   );
 }
 
-/* ─── SECTION 12: CTA Final Banner (Gold / Form + WhatsApp) ─── */
-function CtaFinalSection() {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#D6A84F] to-[#B88932] py-20 sm:py-28">
-      {/* Gold particles overlay */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-[10%] -top-[10%] h-[300px] w-[300px] rounded-full bg-[rgba(255,255,255,0.1)] blur-[120px]" />
-        <div className="absolute -bottom-[10%] -right-[10%] h-[250px] w-[250px] rounded-full bg-[rgba(255,255,255,0.08)] blur-[100px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-4xl px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center"
-        >
-          <span className="inline-block rounded-full bg-[rgba(3,3,3,0.1)] px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[rgba(3,3,3,0.7)]">
-            Comece Hoje
-          </span>
-
-          <h2 className="font-serif mt-6 text-3xl font-bold leading-tight text-[#030303] sm:text-4xl md:text-5xl">
-            Pronto para dar o próximo passo?
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-[rgba(3,3,3,0.7)]">
-            Diagnóstico gratuito. Projeto sob medida. Mais de 12 empresas em Franca-SP já confiam no Rei das Vendas.
-          </p>
-
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <a
-              href={BRAND.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-[#030303] px-8 py-3 text-sm font-bold text-white shadow-xl transition-all hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(3,3,3,0.3)] active:scale-[0.98]"
-            >
-              <MessageCircle className="h-5 w-5" />
-              Fale Conosco pelo WhatsApp
-            </a>
-            <Link
-              to="/contato"
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border-2 border-[rgba(3,3,3,0.25)] px-8 py-3 text-sm font-bold text-[#030303] transition-all hover:bg-[rgba(3,3,3,0.06)] hover:shadow-[0_0_30px_rgba(3,3,3,0.1)] active:scale-[0.98]"
-            >
-              Enviar E-mail
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {/* Trust indicators */}
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-xs text-[rgba(3,3,3,0.5)]">
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5" />
-              Resposta em até 24h
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Shield className="h-3.5 w-3.5" />
-              Diagnóstico sem compromisso
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
-              Franca-SP
-            </span>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── CTA Banner Reutilizável ─── */
-function CtaBanner({ variant = 'dark' }: { variant?: 'dark' | 'light' }) {
-  return (
-    <SectionWrapper dark={variant === 'dark'}>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center"
-          >
-            <LuxuryDivider />
-            <h3 className="font-serif mt-8 text-xl font-bold text-white sm:text-2xl">
-              Transforme seu negócio em uma{' '}
-              <span className="text-gradient-gold">máquina de vendas digital</span>
-            </h3>
-            <p className="mx-auto mt-3 max-w-md text-sm text-[#A1A1AA]">
-              Diagnóstico gratuito • Projeto sob medida • Mais de 12 empresas em Franca-SP confiam
-            </p>
-            <div className="mt-6">
-              <PremiumButton
-                href={BRAND.whatsapp}
-                size="lg"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Quero Minha Infraestrutura Digital
-              </PremiumButton>
-            </div>
-          </motion.div>
-        </Reveal>
-      </div>
-    </SectionWrapper>
-  );
-}
-
 /* ─── MAIN PAGE ─── */
 export default function Home() {
   return (
     <main>
-      <HeroSection />
+      <HeroPremium />
+      <AIBrandLearning />
+      <EnterpriseFeatures />
+      <TemplateShowcase />
       <StatBarSection />
       <CategoryTabsSection />
-      <TemplateCarouselSection />
       <FeaturesSection />
       <SegmentosSection />
       <FounderSection />
-      <ProvaSection />
+      <TestimonialsTrust />
       <ProcessoSection />
       <PricingSection />
       <FaqSection />
-      <CtaFinalSection />
+      <EnterpriseCTA />
     </main>
   );
 }

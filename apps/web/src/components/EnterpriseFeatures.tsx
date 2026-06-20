@@ -46,8 +46,8 @@ const enterpriseFeatures = [
 
 export function EnterpriseFeatures() {
   return (
-    <SectionWrapper dark id="enterprise-features">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionWrapper dark>
+      <div id="enterprise-features" className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[rgba(212,175,55,0.2)] bg-[rgba(212,175,55,0.06)] px-4 py-1.5 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />

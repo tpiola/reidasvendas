@@ -28,8 +28,8 @@ const steps = [
 
 export function AIBrandLearning() {
   return (
-    <SectionWrapper dark id="ai-brand">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <SectionWrapper dark>
+          <div id="ai-brand" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <SectionLabel>AI Brand Learning</SectionLabel>
           <h2 className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">

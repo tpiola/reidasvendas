@@ -243,10 +243,37 @@ export default async function handler(req: Req, res: Res) {
       return json(res, 502, { ok: false, error: 'invalid_ai_response' });
     }
 
-    return json(res, 200, {
-      ok: true,
-      site: data,
-    });
+    // Transform to Builder.tsx format
+    const d = data as {
+      structure: Record<string, unknown>;
+      copy: Record<string, unknown>;
+      palette: Record<string, unknown>;
+      sections: Array<Record<string, unknown>>;
+    };
+    const s = d.structure;
+    const hero = s.hero as Record<string, unknown> | undefined;
+    const extracted = {
+      hero: {
+        title: (d.copy?.heroTitle as string) || (hero?.headline as string) || parsed.value.brandName,
+        subtitle: (d.copy?.heroSubtitle as string) || (hero?.subheadline as string) || 'Site Profissional',
+        cta: (hero?.cta as Record<string, string> | undefined)?.text || 'Fale Conosco',
+      },
+      sections: d.sections.map((sec: Record<string, unknown>) => ({
+        title: sec.title as string || '',
+        description: sec.content as string || '',
+      })),
+      palette: {
+        primary: (d.palette?.primary as string) || '#D6A84F',
+        secondary: (d.palette?.secondary as string) || '#0A2540',
+        accent: (d.palette?.accent as string) || '#F97316',
+        background: (d.palette?.background as string) || '#030303',
+      },
+      summary: (d.copy?.ctaDescription as string) ||
+               (d.copy?.featuresIntro as string) ||
+               `Site profissional para ${parsed.value.brandName} no setor de ${parsed.value.industry}.`,
+    };
+
+    return json(res, 200, extracted);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'unknown_error';
     return json(res, 502, { ok: false, error: message });
