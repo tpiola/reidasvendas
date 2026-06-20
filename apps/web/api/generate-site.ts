@@ -10,8 +10,8 @@ type Req = { method?: string; headers?: Record<string, string | undefined>; body
 type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
 
 const MAX_BODY_BYTES = 65_536;
-const OMNIROUTE_URL = 'http://localhost:20128/v1/chat/completions';
-const OMNIROUTE_MODEL = 'oc/deepseek-v4-flash-free';
+const OMNIROUTE_URL = process.env.OMNIROUTE_URL || 'http://localhost:20128/v1/chat/completions';
+const OMNIROUTE_MODEL = process.env.OMNIROUTE_MODEL || 'oc/deepseek-v4-flash-free';
 
 type GenerateSitePayload = {
   brandName: string;
@@ -52,9 +52,37 @@ function parseGenerateSiteBody(input: unknown): { ok: true; value: GenerateSiteP
 }
 
 function json(res: Res, status: number, body: unknown) {
-  res.statusCode = status;
-  res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
-  res.end?.(JSON.stringify(body));
+  if (typeof (res as any).status === 'function') {
+    // Express/Vercel style
+    (res as any).status(status).json(body);
+    return;
+  }
+  // Raw Node.js style
+  try { res.statusCode = status; } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Content-Type', 'application/json; charset=utf-8'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Origin', '*'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
+  try { res.end?.(JSON.stringify(body)); } catch { /* ignore */ }
+}
+
+function parseBody(req: Req, rawBody?: string): unknown {
+  // Already parsed by Vercel helpers or body is an object
+  if (isObject(req.body)) return req.body;
+
+  // String body that needs parsing
+  if (typeof req.body === 'string') {
+    if (req.body.length > MAX_BODY_BYTES) return null;
+    try { return JSON.parse(req.body); } catch { return null; }
+  }
+
+  // Raw body buffer/string from request
+  if (typeof rawBody === 'string') {
+    if (rawBody.length > MAX_BODY_BYTES) return null;
+    try { return JSON.parse(rawBody); } catch { return null; }
+  }
+
+  return null;
 }
 
 function buildSystemPrompt(): string {
@@ -130,6 +158,7 @@ async function callDeepSeek(systemPrompt: string, userPrompt: string): Promise<s
         { role: 'user', content: userPrompt },
       ],
       max_tokens: 3000,
+      stream: false,
     }),
   });
 
@@ -139,6 +168,7 @@ async function callDeepSeek(systemPrompt: string, userPrompt: string): Promise<s
   }
 
   const data = (await response.json()) as {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     choices?: Array<{ message?: { content?: string } }>;
   };
 
@@ -186,10 +216,14 @@ function extractJsonFromResponse(text: string): unknown {
 }
 
 function validateSiteData(data: unknown): data is {
-  structure: Record<string, unknown>;
-  copy: Record<string, unknown>;
-  palette: Record<string, unknown>;
-  sections: Array<Record<string, unknown>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  structure: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  copy: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  palette: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sections: Array<Record<string, any>>;
 } {
   if (!isObject(data)) return false;
   return (
@@ -202,34 +236,55 @@ function validateSiteData(data: unknown): data is {
 
 export default async function handler(req: Req, res: Res) {
   /* ─── CORS ─────────────────────────────── */
-  res.setHeader?.('Access-Control-Allow-Origin', '*');
-  res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') return json(res, 204, {});
-
-  if (req.method !== 'POST') {
-    res.setHeader?.('Allow', 'POST');
-    return json(res, 405, { ok: false, error: 'method_not_allowed' });
+  if (req.method === 'OPTIONS') {
+    json(res, 204, {});
+    return;
   }
 
-  /* ─── Parse body ───────────────────────── */
-  let bodyUnknown: unknown = req.body;
+  if (req.method !== 'POST') {
+    json(res, 405, { ok: false, error: 'method_not_allowed' });
+    return;
+  }
+
+  /* ─── Parse body (Vercel runtime: read from stream) ─── */
+  let bodyStr = '';
   if (typeof req.body === 'string') {
-    if (req.body.length > MAX_BODY_BYTES) {
-      return json(res, 413, { ok: false, error: 'payload_too_large' });
-    }
+    bodyStr = req.body;
+  } else if (isObject(req.body)) {
+    bodyStr = JSON.stringify(req.body);
+  } else if (typeof (req as any).on === 'function') {
+    // Read from stream
     try {
-      bodyUnknown = JSON.parse(req.body);
+      bodyStr = await new Promise<string>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        (req as any).on('data', (chunk: Buffer) => chunks.push(chunk));
+        (req as any).on('end', () => resolve(Buffer.concat(chunks).toString()));
+        (req as any).on('error', reject);
+        // Timeout safety
+        setTimeout(() => reject(new Error('body_read_timeout')), 10000);
+      });
     } catch {
-      return json(res, 400, { ok: false, error: 'invalid_json' });
+      json(res, 400, { ok: false, error: 'body_read_error' });
+      return;
     }
+  }
+
+  let bodyUnknown: unknown;
+  if (bodyStr.length > MAX_BODY_BYTES) {
+    json(res, 413, { ok: false, error: 'payload_too_large' });
+    return;
+  }
+  try {
+    bodyUnknown = JSON.parse(bodyStr);
+  } catch {
+    json(res, 400, { ok: false, error: 'invalid_json' });
+    return;
   }
 
   const parsed = parseGenerateSiteBody(bodyUnknown);
   if (!parsed.ok) {
-    const err = (parsed as { ok: false; error: string }).error;
-    return json(res, 400, { ok: false, error: err });
+    json(res, 400, { ok: false, error: (parsed as { error: string }).error });
+    return;
   }
 
   /* ─── Call DeepSeek via OmniRoute ───────── */
@@ -240,27 +295,25 @@ export default async function handler(req: Req, res: Res) {
     const data = extractJsonFromResponse(rawContent);
 
     if (!validateSiteData(data)) {
-      return json(res, 502, { ok: false, error: 'invalid_ai_response' });
+      json(res, 502, { ok: false, error: 'invalid_ai_response' });
+      return;
     }
 
-    // Transform to Builder.tsx format
-    const d = data as {
-      structure: Record<string, unknown>;
-      copy: Record<string, unknown>;
-      palette: Record<string, unknown>;
-      sections: Array<Record<string, unknown>>;
-    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const d = data as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const s = d.structure;
-    const hero = s.hero as Record<string, unknown> | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const hero = s.hero as Record<string, any> | undefined;
     const extracted = {
       hero: {
         title: (d.copy?.heroTitle as string) || (hero?.headline as string) || parsed.value.brandName,
         subtitle: (d.copy?.heroSubtitle as string) || (hero?.subheadline as string) || 'Site Profissional',
         cta: (hero?.cta as Record<string, string> | undefined)?.text || 'Fale Conosco',
       },
-      sections: d.sections.map((sec: Record<string, unknown>) => ({
-        title: sec.title as string || '',
-        description: sec.content as string || '',
+      sections: d.sections.map((sec: Record<string, string>) => ({
+        title: sec.title || '',
+        description: sec.content || '',
       })),
       palette: {
         primary: (d.palette?.primary as string) || '#D6A84F',
@@ -273,9 +326,9 @@ export default async function handler(req: Req, res: Res) {
                `Site profissional para ${parsed.value.brandName} no setor de ${parsed.value.industry}.`,
     };
 
-    return json(res, 200, extracted);
+    json(res, 200, extracted);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'unknown_error';
-    return json(res, 502, { ok: false, error: message });
+    json(res, 502, { ok: false, error: message });
   }
 }

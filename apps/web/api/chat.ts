@@ -1,6 +1,13 @@
+/* ═══════════════════════════════════════════
+   API CHAT.TS — Rei das Vendas
+   Chat IA via OmniRoute (DeepSeek)
+═══════════════════════════════════════════ */
+
 type ApiRequest = {
   method?: string;
   body?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  on?: (event: string, cb: (...args: any[]) => void) => void;
 };
 
 type ApiResponse = {
@@ -9,78 +16,100 @@ type ApiResponse = {
   end: (body?: string) => void;
 };
 
+const MAX_BODY_BYTES = 16_384;
+
 function json(res: ApiResponse, status: number, body: unknown) {
-  res.statusCode = status;
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  res.end(JSON.stringify(body));
+  try { res.statusCode = status; } catch { /* ignore */ }
+  try { res.setHeader('Content-Type', 'application/json; charset=utf-8'); } catch { /* ignore */ }
+  try { res.setHeader('Access-Control-Allow-Origin', '*'); } catch { /* ignore */ }
+  try { res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
+  try { res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
+  try { res.end(JSON.stringify(body)); } catch { /* ignore */ }
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
 
-function extractText(data: unknown): string {
-  if (!isObject(data)) return '';
-  const output = data.output;
-  if (!Array.isArray(output)) return '';
-
-  const parts: string[] = [];
-  for (const item of output) {
-    if (!isObject(item)) continue;
-    const content = item.content;
-    if (!Array.isArray(content)) continue;
-    for (const c of content) {
-      if (!isObject(c)) continue;
-      const t = c.text;
-      if (typeof t === 'string' && t.trim()) parts.push(t);
-    }
-  }
-  return parts.join('\n');
-}
-
 export default async function handler(req: unknown, res: unknown) {
   const request = req as ApiRequest;
   const response = res as ApiResponse;
 
+  if (request.method === 'OPTIONS') return json(response, 204, {});
   if (request.method !== 'POST') {
-    response.setHeader('Allow', 'POST');
+    try { response.setHeader('Allow', 'POST'); } catch { /* ignore */ }
     return json(response, 405, { ok: false, error: 'method_not_allowed' });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) return json(response, 500, { ok: false, error: 'missing_openai_key' });
+  /* ─── Parse body from stream ─── */
+  let bodyStr = '';
+  if (typeof request.body === 'string') {
+    bodyStr = request.body;
+  } else if (isObject(request.body)) {
+    bodyStr = JSON.stringify(request.body);
+  } else if (typeof request.on === 'function') {
+    try {
+      bodyStr = await new Promise<string>((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const chunks: any[] = [];
+        request.on('data', (chunk: Buffer) => chunks.push(chunk));
+        request.on('end', () => resolve(Buffer.concat(chunks).toString()));
+        request.on('error', reject);
+        setTimeout(() => reject(new Error('timeout')), 10_000);
+      });
+    } catch {
+      return json(response, 400, { ok: false, error: 'body_read_error' });
+    }
+  }
 
-  const body = request.body;
-  const message =
-    isObject(body) && typeof body.message === 'string' ? body.message.trim() : '';
+  if (bodyStr.length > MAX_BODY_BYTES) {
+    return json(response, 413, { ok: false, error: 'payload_too_large' });
+  }
 
+  let bodyParsed: Record<string, unknown>;
+  try {
+    bodyParsed = JSON.parse(bodyStr || '{}');
+  } catch {
+    return json(response, 400, { ok: false, error: 'invalid_json' });
+  }
+
+  const message = typeof bodyParsed.message === 'string' ? bodyParsed.message.trim() : '';
   if (!message) return json(response, 400, { ok: false, error: 'missing_message' });
 
-  const model = process.env.OPENAI_MODEL ?? 'gpt-4o-mini';
+  /* ─── Call OmniRoute ─── */
+  const OMNIROUTE_URL = process.env.OMNIROUTE_URL || 'http://localhost:20128/v1/chat/completions';
+  const OMNIROUTE_MODEL = process.env.OMNIROUTE_MODEL || 'oc/deepseek-v4-flash-free';
 
-  const r = await fetch('https://api.openai.com/v1/responses', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model,
-      input: [
-        {
-          role: 'system',
-          content:
-            'You are Rei das Vendas Assistant. Tone: formal, concise, decision-grade. Never claim integrations are live. Ask one clarifying question when needed. Keep responses under 120 words.',
-        },
-        { role: 'user', content: message },
-      ],
-    }),
-  });
+  try {
+    const r = await fetch(OMNIROUTE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: OMNIROUTE_MODEL,
+        messages: [
+          {
+            role: 'system',
+            content: 'Você é o assistente do Rei das Vendas. Tom: formal, conciso, focado em decisão. Responda em português brasileiro. Máximo 120 palavras.',
+          },
+          { role: 'user', content: message },
+        ],
+        max_tokens: 500,
+        stream: false,
+      }),
+    });
 
-  if (!r.ok) return json(response, 502, { ok: false, error: 'openai_failed' });
+    if (!r.ok) {
+      return json(response, 502, { ok: false, error: 'omniroute_failed' });
+    }
 
-  const data = (await r.json()) as unknown;
-  const text = extractText(data);
+    const data = (await r.json()) as {
+      choices?: Array<{ message?: { content?: string } }>;
+    };
 
-  return json(response, 200, { ok: true, text: text || 'Obrigado. Como posso ajudar?' });
+    const text = data?.choices?.[0]?.message?.content || 'Obrigado. Como posso ajudar?';
+    return json(response, 200, { ok: true, text: text.trim() });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'unknown_error';
+    return json(response, 502, { ok: false, error: message });
+  }
 }

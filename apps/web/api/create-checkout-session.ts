@@ -55,16 +55,46 @@ export default async function handler(req: unknown, res: unknown) {
     return json(response, 405, { ok: false, error: 'method_not_allowed' });
   }
 
-  /* ─── Validar body ─────────────────────── */
+  /* ─── Parse body from stream ─── */
+  let bodyStr = '';
+  if (typeof (request.body) === 'string') {
+    bodyStr = request.body;
+  } else if (isObject(request.body)) {
+    bodyStr = JSON.stringify(request.body);
+  } else if (typeof (req as any).on === 'function') {
+    try {
+      bodyStr = await new Promise<string>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        (req as any).on('data', (chunk: Buffer) => chunks.push(chunk));
+        (req as any).on('end', () => resolve(Buffer.concat(chunks).toString()));
+        (req as any).on('error', reject);
+        setTimeout(() => reject(new Error('timeout')), 10000);
+      });
+    } catch {
+      return json(response, 400, { ok: false, error: 'body_read_error' });
+    }
+  }
+
+  if (bodyStr.length > 65536) {
+    return json(response, 413, { ok: false, error: 'payload_too_large' });
+  }
+
+  let bodyObj: Record<string, unknown>;
+  try {
+    bodyObj = JSON.parse(bodyStr || '{}');
+  } catch {
+    return json(response, 400, { ok: false, error: 'invalid_json' });
+  }
+
+  /* ─── Validar campos ─────────────────────── */
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
     return json(response, 500, { ok: false, error: 'missing_stripe_key' });
   }
 
-  const body = isObject(request.body) ? request.body : {};
-  const planId = sanitizeString(body.planId);
-  const email = sanitizeString(body.email);
-  const name = sanitizeString(body.name);
+  const planId = sanitizeString(bodyObj.planId);
+  const email = sanitizeString(bodyObj.email);
+  const name = sanitizeString(bodyObj.name);
 
   if (!planId) return json(response, 400, { ok: false, error: 'planId_required' });
   if (!email) return json(response, 400, { ok: false, error: 'email_required' });

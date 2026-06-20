@@ -1,34 +1,26 @@
 /* ═══════════════════════════════════════════
    API LEAD.TS — Rei das Vendas
-   Captura leads de formulários e SuporteBot
-   Encaminha para webhook (Notion → Make)
+   Captura leads via n8n webhook
 ═══════════════════════════════════════════ */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown };
+type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown; on?: (event: string, cb: (...args: any[]) => void) => void };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
 
-const MAX_BODY_BYTES = 65_536;
+const MAX_BODY_BYTES = 16_384;
 
 type LeadPayload = {
-  nome: string;
+  name: string;
   email: string;
-  whatsapp: string;
-  ramo?: string;
-  origem: string;
-  visitorId?: string;
-  consent?: boolean;
-  mensagem?: string;
-  utm?: Record<string, string | undefined>;
+  phone: string;
+  company?: string;
+  message?: string;
+  source?: string;
 };
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
-}
-
-function isEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
 function sanitizeString(value: unknown, maxLen = 500): string {
@@ -36,109 +28,120 @@ function sanitizeString(value: unknown, maxLen = 500): string {
   return value.trim().slice(0, maxLen);
 }
 
+function isEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
 function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok: false; error: string } {
   if (!isObject(input)) return { ok: false, error: 'invalid_body' };
 
-  const nome = sanitizeString(input.nome || input.name);
-  const email = sanitizeString(input.email);
-  const whatsapp = sanitizeString(input.whatsapp || input.phone);
-  const ramo = sanitizeString(input.ramo || input.company);
-  const origem = sanitizeString(input.origem || input.source, 100) || 'form';
-  const visitorId = sanitizeString(input.visitorId, 100) || undefined;
-  const consent = typeof input.consent === 'boolean' ? input.consent : origem === 'suporte-bot';
-  const mensagem = sanitizeString(input.mensagem, 2000) || undefined;
-  const utmRaw = isObject(input.utm) ? input.utm : undefined;
-  const utm = utmRaw
-    ? (Object.fromEntries(
-        Object.entries(utmRaw).map(([k, v]) => [k, typeof v === 'string' ? v : undefined]),
-      ) as Record<string, string | undefined>)
-    : undefined;
+  const name = sanitizeString(input.name, 200);
+  const email = sanitizeString(input.email, 320);
+  const phone = sanitizeString(input.phone, 30);
+  const company = sanitizeString(input.company, 200) || undefined;
+  const message = sanitizeString(input.message, 2000) || undefined;
+  const source = sanitizeString(input.source, 100) || 'reidasvendas.com.br';
 
-  if (!nome) return { ok: false, error: 'nome_required' };
+  if (!name) return { ok: false, error: 'name_required' };
   if (!email) return { ok: false, error: 'email_required' };
-  if (!whatsapp) return { ok: false, error: 'whatsapp_required' };
+  if (!isEmail(email)) return { ok: false, error: 'invalid_email' };
+  if (!phone) return { ok: false, error: 'phone_required' };
 
   return {
     ok: true,
-    value: { nome, email, whatsapp, ramo, origem, visitorId, consent, mensagem, utm },
+    value: { name, email, phone, company, message, source },
   };
 }
 
 function json(res: Res, status: number, body: unknown) {
-  res.statusCode = status;
-  res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
-  res.end?.(JSON.stringify(body));
+  try { if (typeof (res as any).status === 'function') { (res as any).status(status).json(body); return; } } catch { /* ignore */ }
+  try { res.statusCode = status; } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Content-Type', 'application/json; charset=utf-8'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Origin', '*'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
+  try { (res as any).setHeader?.('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
+  try { res.end?.(JSON.stringify(body)); } catch { /* ignore */ }
 }
 
 export default async function handler(req: Req, res: Res) {
   /* ─── CORS ─────────────────────────────── */
-  res.setHeader?.('Access-Control-Allow-Origin', '*');
-  res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') return json(res, 204, {});
-
-  if (req.method !== 'POST') {
-    res.setHeader?.('Allow', 'POST');
-    return json(res, 405, { ok: false, error: 'method_not_allowed' });
+  if (req.method === 'OPTIONS') {
+    json(res, 204, {});
+    return;
   }
 
-  /* ─── Parse body ───────────────────────── */
-  let bodyUnknown: unknown = req.body;
+  if (req.method !== 'POST') {
+    json(res, 405, { ok: false, error: 'method_not_allowed' });
+    return;
+  }
+
+  /* ─── Parse body (Vercel runtime: read from stream) ─── */
+  let bodyStr = '';
   if (typeof req.body === 'string') {
-    if (req.body.length > MAX_BODY_BYTES) {
-      return json(res, 413, { ok: false, error: 'payload_too_large' });
+    bodyStr = req.body;
+  } else if (isObject(req.body)) {
+    bodyStr = JSON.stringify(req.body);
+  } else if (typeof req.on === 'function') {
+    try {
+      bodyStr = await new Promise<string>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        req.on('data', (chunk: Buffer) => chunks.push(chunk));
+        req.on('end', () => resolve(Buffer.concat(chunks).toString()));
+        req.on('error', reject);
+        setTimeout(() => reject(new Error('body_read_timeout')), 10000);
+      });
+    } catch {
+      json(res, 400, { ok: false, error: 'body_read_error' });
+      return;
     }
-    try { bodyUnknown = JSON.parse(req.body); }
-    catch { return json(res, 400, { ok: false, error: 'invalid_json' }); }
+  }
+
+  if (bodyStr.length > MAX_BODY_BYTES) {
+    json(res, 413, { ok: false, error: 'payload_too_large' });
+    return;
+  }
+
+  let bodyUnknown: unknown;
+  try {
+    bodyUnknown = JSON.parse(bodyStr);
+  } catch {
+    json(res, 400, { ok: false, error: 'invalid_json' });
+    return;
   }
 
   const parsed = parseLeadBody(bodyUnknown);
   if (!parsed.ok) {
-    const err = (parsed as { ok: false; error: string }).error;
-    return json(res, 400, { ok: false, error: err });
-  }
-  if (!isEmail(parsed.value.email)) return json(res, 400, { ok: false, error: 'invalid_email' });
-
-  const payload = {
-    ...parsed.value,
-    receivedAt: new Date().toISOString(),
-    page: req.headers?.['referer'] || '',
-  };
-
-  /* ─── Webhook principal ────────────────── */
-  const webhookUrl = process.env.LEAD_WEBHOOK_URL;
-  const webhookResults: string[] = [];
-
-  if (webhookUrl) {
-    try {
-      const r = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      webhookResults.push(`webhook:${r.ok ? 'ok' : `fail_${r.status}`}`);
-    } catch {
-      webhookResults.push('webhook:error');
-    }
+    json(res, 400, { ok: false, error: (parsed as { error: string }).error });
+    return;
   }
 
-  /* ─── Google Sheets (fallback) ─────────── */
-  const sheetsUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (sheetsUrl?.startsWith('https://script.google.com/')) {
-    void fetch(sheetsUrl, {
+  /* ─── Send to n8n webhook ──────────────── */
+  const n8nUrl = process.env.N8N_WEBHOOK_URL || 'https://n8n.thiagolab.com/webhook/lead';
+  const apiKey = process.env.N8N_API_KEY || '';
+
+  try {
+    const webhookRes = await fetch(n8nUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        nome: payload.nome,
-        email: payload.email,
-        whatsapp: payload.whatsapp,
-        ramo: payload.ramo ?? '',
-        origem: payload.origem,
-        receivedAt: payload.receivedAt,
-      }),
-    }).catch(() => undefined);
-  }
+      headers: {
+        'Content-Type': 'application/json',
+        ...(apiKey ? { 'Authorization': `Bearer ${apiKey}` } : {}),
+      },
+      body: JSON.stringify(parsed.value),
+    });
 
-  return json(res, 200, { ok: true, ref: payload.receivedAt });
+    json(res, 200, {
+      ok: true,
+      message: 'Lead capturado com sucesso',
+      data: parsed.value,
+      webhookStatus: webhookRes.status,
+    });
+  } catch (err) {
+    // n8n offline — still accept the lead
+    console.error('[lead] n8n webhook error:', err);
+    json(res, 200, {
+      ok: true,
+      message: 'Lead capturado (webhook offline)',
+      data: parsed.value,
+    });
+  }
 }

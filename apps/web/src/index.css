@@ -867,3 +867,149 @@ img, video { max-width: 100%; height: auto; display: block; }
     -webkit-backdrop-filter: blur(20px) saturate(140%);
   }
 }
+
+/* ═══════════════════════════════════════
+   PREMIUM ANIMATION CLASSES — added by agent
+   ═══════════════════════════════════════ */
+
+/* ─── Gold Text (gradient text gold) ─── */
+.gold-text {
+  background: linear-gradient(135deg, var(--rdv-gold-light), var(--rdv-gold), var(--rdv-gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glass Card Gold ─── */
+.glass-card-gold {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(214,168,79,0.2);
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 0 30px rgba(214,168,79,0.04);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-gold:hover {
+  border-color: rgba(214,168,79,0.4);
+  box-shadow: 0 16px 60px rgba(0,0,0,0.85), 0 0 40px rgba(214,168,79,0.08);
+}
+
+/* ─── Parallax Section ─── */
+.parallax-section {
+  overflow: hidden;
+  perspective: 1px;
+  transform-style: preserve-3d;
+}
+
+/* ─── Reveal Fade (ativado via IntersectionObserver com classe .visible) ─── */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Reveal Scale ─── */
+.reveal-scale-visible {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-scale-visible.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Floating Mockup ─── */
+.floating-mockup {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ─── Gold Pulse ─── */
+.gold-pulse {
+  animation: goldPulse 3s ease-in-out infinite;
+}
+
+/* ─── Noise BG (grain overlay via ::after) ─── */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  animation: noise-anim 8s ease-in-out infinite;
+}
+
+/* ─── Marquee (scroll infinito) ─── */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-content {
+  display: flex;
+  gap: 1.5rem;
+  animation: marquee 30s linear infinite;
+}
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Keyframe: goldPulse ─── */
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(214,168,79,0.3), 0 0 20px rgba(214,168,79,0.1);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(214,168,79,0.6), 0 0 40px rgba(214,168,79,0.2);
+  }
+}
+
+/* ─── Keyframe: marquee ─── */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Ativar reveal existente com .visible também ─── */
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Reduced motion: keep .visible compat ─── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade, .reveal-scale-visible,
+  .reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+    opacity: 1;
+    transform: none;
+  }
+}

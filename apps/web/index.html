@@ -498,5 +498,61 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- IntersectionObserver: ativa .visible nos elementos reveal ao scroll -->
+    <script>
+      (function() {
+        'use strict';
+        if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+        var revealSelectors = [
+          '.reveal-fade',
+          '.reveal-scale-visible',
+          '.reveal',
+          '.reveal-left',
+          '.reveal-right',
+          '.reveal-scale'
+        ];
+
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '0px 0px -60px 0px',
+          threshold: 0.1
+        });
+
+        function observeRevealElements() {
+          revealSelectors.forEach(function(sel) {
+            document.querySelectorAll(sel).forEach(function(el) {
+              if (!el.classList.contains('visible')) {
+                observer.observe(el);
+              }
+            });
+          });
+        }
+
+        // Run on initial load
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', observeRevealElements);
+        } else {
+          observeRevealElements();
+        }
+
+        // Re-run if new content is dynamically added (SPA-friendly)
+        var _origPushState = history.pushState;
+        history.pushState = function() {
+          _origPushState.apply(this, arguments);
+          setTimeout(observeRevealElements, 100);
+        };
+        window.addEventListener('popstate', function() {
+          setTimeout(observeRevealElements, 100);
+        });
+      })();
+    </script>
   </body>
 </html>

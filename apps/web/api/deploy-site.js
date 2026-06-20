@@ -1,76 +1,71 @@
-/* ═══════════════════════════════════════════
-   API DEPLOY-SITE.TS — Rei das Vendas
-   Publica site gerado por IA na Vercel em tempo real
-═══════════════════════════════════════════ */
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
-
-const MAX_BODY_BYTES = 128_000;
-const VERCEL_API = 'https://api.vercel.com';
-const VERIFIER = 'reidasvendas.com.br';
-
-type DeployPayload = {
-  companyName: string;
-  sector: string;
-  generatedSite: {
-    hero: { title: string; subtitle: string; cta: string };
-    sections: { title: string; description: string }[];
-    palette: { primary: string; secondary: string; accent: string; background: string };
-    summary: string;
-  };
-  email?: string;
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
 };
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-function isObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
+// api/deploy-site.ts
+var deploy_site_exports = {};
+__export(deploy_site_exports, {
+  default: () => handler
+});
+module.exports = __toCommonJS(deploy_site_exports);
+var MAX_BODY_BYTES = 128e3;
+var VERCEL_API = "https://api.vercel.com";
+function isObject(value) {
+  return typeof value === "object" && value !== null;
 }
-
-function sanitizeString(value: unknown, maxLen = 2000): string {
-  if (typeof value !== 'string') return '';
+function sanitizeString(value, maxLen = 2e3) {
+  if (typeof value !== "string") return "";
   return value.trim().slice(0, maxLen);
 }
-
-function sanitizeHex(value: unknown, fallback: string): string {
-  if (typeof value !== 'string') return fallback;
+function sanitizeHex(value, fallback) {
+  if (typeof value !== "string") return fallback;
   return /^#[0-9a-fA-F]{6}$/.test(value) ? value : fallback;
 }
-
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 40);
+function slugify(text) {
+  return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
 }
-
-function sanitizeDomain(text: string): string {
+function sanitizeDomain(text) {
   const slug = slugify(text);
-  return slug || 'site-gerado';
+  return slug || "site-gerado";
 }
-
-function parseDeployBody(input: unknown): { ok: true; value: DeployPayload } | { ok: false; error: string } {
-  if (!isObject(input)) return { ok: false, error: 'invalid_body' };
-
+function parseDeployBody(input) {
+  if (!isObject(input)) return { ok: false, error: "invalid_body" };
   const companyName = sanitizeString(input.companyName, 200);
   const sector = sanitizeString(input.sector, 200);
-  const email = sanitizeString(input.email, 320) || undefined;
-
+  const email = sanitizeString(input.email, 320) || void 0;
   const gs = input.generatedSite;
-  if (!isObject(gs)) return { ok: false, error: 'generatedSite_required' };
-
-  const hero = isObject(gs.hero) ? gs.hero as Record<string, unknown> : null;
+  if (!isObject(gs)) return { ok: false, error: "generatedSite_required" };
+  const hero = isObject(gs.hero) ? gs.hero : null;
   const sections = Array.isArray(gs.sections) ? gs.sections : [];
-  const palette = isObject(gs.palette) ? gs.palette as Record<string, unknown> : null;
-  const summary = sanitizeString(gs.summary, 2000);
-
-  if (!companyName) return { ok: false, error: 'companyName_required' };
-  if (!hero) return { ok: false, error: 'hero_required' };
-  if (!palette) return { ok: false, error: 'palette_required' };
-
+  const palette = isObject(gs.palette) ? gs.palette : null;
+  const summary = sanitizeString(gs.summary, 2e3);
+  if (!companyName) return { ok: false, error: "companyName_required" };
+  if (!hero) return { ok: false, error: "hero_required" };
+  if (!palette) return { ok: false, error: "palette_required" };
   return {
     ok: true,
     value: {
@@ -79,60 +74,52 @@ function parseDeployBody(input: unknown): { ok: true; value: DeployPayload } | {
       generatedSite: {
         hero: {
           title: sanitizeString(hero.title, 200) || companyName,
-          subtitle: sanitizeString(hero.subtitle, 500) || 'Site Profissional',
-          cta: sanitizeString(hero.cta, 200) || 'Fale Conosco',
+          subtitle: sanitizeString(hero.subtitle, 500) || "Site Profissional",
+          cta: sanitizeString(hero.cta, 200) || "Fale Conosco"
         },
-        sections: sections.slice(0, 8).map((s: unknown) => {
-          const sec = isObject(s) ? s as Record<string, unknown> : {};
+        sections: sections.slice(0, 8).map((s) => {
+          const sec = isObject(s) ? s : {};
           return {
             title: sanitizeString(sec.title, 200),
-            description: sanitizeString(sec.description, 1000),
+            description: sanitizeString(sec.description, 1e3)
           };
         }),
         palette: {
-          primary: sanitizeHex(palette.primary, '#D6A84F'),
-          secondary: sanitizeHex(palette.secondary, '#0A2540'),
-          accent: sanitizeHex(palette.accent, '#F97316'),
-          background: sanitizeHex(palette.background, '#030303'),
+          primary: sanitizeHex(palette.primary, "#D6A84F"),
+          secondary: sanitizeHex(palette.secondary, "#0A2540"),
+          accent: sanitizeHex(palette.accent, "#F97316"),
+          background: sanitizeHex(palette.background, "#030303")
         },
-        summary,
+        summary
       },
-      email,
-    },
+      email
+    }
   };
 }
-
-function json(res: Res, status: number, body: unknown) {
+function json(res, status, body) {
   res.statusCode = status;
-  res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
-  res.setHeader?.('Access-Control-Allow-Origin', '*');
-  res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader?.("Content-Type", "application/json; charset=utf-8");
+  res.setHeader?.("Access-Control-Allow-Origin", "*");
+  res.setHeader?.("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader?.("Access-Control-Allow-Headers", "Content-Type");
   res.end?.(JSON.stringify(body));
 }
-
-/* ─── Gera HTML completo do site ─── */
-function generateSiteHtml(payload: DeployPayload): string {
+function generateSiteHtml(payload) {
   const { companyName, sector, generatedSite: site } = payload;
   const p = site.palette;
   const domainName = `${sanitizeDomain(companyName)}.vercel.app`;
-
-  const featuresHtml = site.sections
-    .slice(0, 6)
-    .map(
-      (s, i) => `
+  const featuresHtml = site.sections.slice(0, 6).map(
+    (s, i) => `
       <div class="feature-card" style="animation-delay: ${i * 0.1}s">
-        <div class="feature-icon" style="background: ${p.primary}22; color: ${p.primary}">✦</div>
+        <div class="feature-icon" style="background: ${p.primary}22; color: ${p.primary}">\u2726</div>
         <h3>${s.title}</h3>
         <p>${s.description}</p>
       </div>`
-    )
-    .join('');
-
+  ).join("");
   const testimonialHtml = `
       <div class="testimonial">
         <div class="quote">"</div>
-        <p>A ${companyName} transformou completamente nossa presença digital. Resultados excepcionais em apenas semanas.</p>
+        <p>A ${companyName} transformou completamente nossa presen\xE7a digital. Resultados excepcionais em apenas semanas.</p>
         <div class="author">
           <div class="avatar" style="background: ${p.primary}33; color: ${p.primary}">C</div>
           <div>
@@ -141,13 +128,12 @@ function generateSiteHtml(payload: DeployPayload): string {
           </div>
         </div>
       </div>`;
-
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${companyName} — ${sector} | Site Profissional</title>
+  <title>${companyName} \u2014 ${sector} | Site Profissional</title>
   <meta name="description" content="${site.hero.subtitle.slice(0, 160)}">
   <meta name="generator" content="Rei das Vendas AI Builder">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -320,30 +306,30 @@ function generateSiteHtml(payload: DeployPayload): string {
   <nav>
     <div class="inner">
       <div class="logo">${companyName}</div>
-      <a href="#contato" class="cta-btn">${site.hero.cta} →</a>
+      <a href="#contato" class="cta-btn">${site.hero.cta} \u2192</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">✦ ${sector}</div>
+      <div class="hero-badge">\u2726 ${sector}</div>
       <h1>${site.hero.title}</h1>
       <p>${site.hero.subtitle}</p>
       <div class="hero-buttons">
-        <a href="#contato" class="btn-primary">${site.hero.cta} →</a>
-        <a href="#servicos" class="btn-outline">Ver Serviços</a>
+        <a href="#contato" class="btn-primary">${site.hero.cta} \u2192</a>
+        <a href="#servicos" class="btn-outline">Ver Servi\xE7os</a>
       </div>
     </div>
   </section>
 
-  <!-- Serviços -->
+  <!-- Servi\xE7os -->
   <section id="servicos">
-    <div class="section-label">Nossos Serviços</div>
-    <h2 class="section-title">Soluções ${sector} de Alto Nível</h2>
-    <p class="section-subtitle">Oferecemos o que há de melhor em ${sector.toLowerCase()} para transformar resultados.</p>
+    <div class="section-label">Nossos Servi\xE7os</div>
+    <h2 class="section-title">Solu\xE7\xF5es ${sector} de Alto N\xEDvel</h2>
+    <p class="section-subtitle">Oferecemos o que h\xE1 de melhor em ${sector.toLowerCase()} para transformar resultados.</p>
     <div class="features-grid">
-      ${featuresHtml || '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted)">Soluções personalizadas para sua necessidade.</p>'}
+      ${featuresHtml || '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted)">Solu\xE7\xF5es personalizadas para sua necessidade.</p>'}
     </div>
   </section>
 
@@ -351,7 +337,7 @@ function generateSiteHtml(payload: DeployPayload): string {
   <section id="depoimentos">
     <div class="section-label" style="text-align: center">Depoimentos</div>
     <h2 class="section-title" style="text-align: center">O Que Nossos Clientes Dizem</h2>
-    <p class="section-subtitle" style="text-align: center; margin-left: auto; margin-right: auto">A confiança de quem já transformou seu negócio conosco.</p>
+    <p class="section-subtitle" style="text-align: center; margin-left: auto; margin-right: auto">A confian\xE7a de quem j\xE1 transformou seu neg\xF3cio conosco.</p>
     ${testimonialHtml}
   </section>
 
@@ -359,9 +345,9 @@ function generateSiteHtml(payload: DeployPayload): string {
   <section id="contato" class="cta-section">
     <div class="inner">
       <div class="section-label">Entre em Contato</div>
-      <h2>Vamos Transformar seu Negócio</h2>
+      <h2>Vamos Transformar seu Neg\xF3cio</h2>
       <p>Agende uma conversa sem compromisso e descubra como podemos ajudar sua empresa a crescer.</p>
-      <a href="#" class="btn-primary" style="font-size: 1.05rem">Falar com Consultor →</a>
+      <a href="#" class="btn-primary" style="font-size: 1.05rem">Falar com Consultor \u2192</a>
     </div>
   </section>
 
@@ -369,7 +355,7 @@ function generateSiteHtml(payload: DeployPayload): string {
   <footer>
     <div class="inner">
       <div class="logo" style="font-size: 1.1rem; margin-bottom: 8px">${companyName}</div>
-      <p style="color: var(--text-muted); font-size: 0.85rem">${site.summary || `${sector} de excelência — compromisso com resultado.`}</p>
+      <p style="color: var(--text-muted); font-size: 0.85rem">${site.summary || `${sector} de excel\xEAncia \u2014 compromisso com resultado.`}</p>
       <p class="powered">
         Site criado com <a href="https://reidasvendas.com.br" target="_blank" rel="noopener">Rei das Vendas AI Builder</a>
       </p>
@@ -379,36 +365,35 @@ function generateSiteHtml(payload: DeployPayload): string {
 </body>
 </html>`;
 }
-
-/* ─── Deploy na Vercel ─── */
-async function deployToVercel(html: string, companyName: string): Promise<{ url: string; id: string }> {
-  let token: string;
-
-  if (typeof process !== 'undefined' && process.env?.VERCEL_TOKEN) {
+async function deployToVercel(html, companyName) {
+  const tokenFile = "/opt/data/tokens/vercel-token";
+  let token;
+  if (typeof process !== "undefined" && process.env?.VERCEL_TOKEN) {
     token = process.env.VERCEL_TOKEN;
   } else {
-    throw new Error('VERCEL_TOKEN env var not set');
+    const fs = await import("node:fs");
+    token = fs.readFileSync(tokenFile, "utf-8").trim();
   }
-
-  // Generate files — single page site
   const files = [
     {
-      file: 'index.html',
-      data: html,
+      file: "index.html",
+      data: Buffer.from(html).toString("base64")
     },
     {
-      file: '_headers',
-      data: `/*\n  X-Frame-Options: SAMEORIGIN\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n`,
-    },
+      file: "_headers",
+      data: Buffer.from(`/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+`).toString("base64")
+    }
   ];
-
   const projectName = `site-${sanitizeDomain(companyName)}-${Date.now().toString(36)}`;
-
   const response = await fetch(`${VERCEL_API}/v13/deployments`, {
-    method: 'POST',
+    method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       name: projectName.slice(0, 50),
@@ -418,115 +403,58 @@ async function deployToVercel(html: string, companyName: string): Promise<{ url:
         devCommand: null,
         installCommand: null,
         buildCommand: null,
-        outputDirectory: '.',
+        outputDirectory: "."
       },
-      target: 'production',
-    }),
+      target: "production"
+    })
   });
-
   if (!response.ok) {
-    const errorBody = await response.text().catch(() => 'unknown');
+    const errorBody = await response.text().catch(() => "unknown");
     throw new Error(`Vercel deploy failed (${response.status}): ${errorBody}`);
   }
-
-  const result = (await response.json()) as { url?: string; id?: string; name?: string };
-  const url = result.url
-    ? `https://${result.url}`
-    : `https://${projectName}.vercel.app`;
-
-  // Disable SSO protection for the new project so it's publicly accessible
-  try {
-    const projectId = result.id || '';
-    const teamId = process.env.VERCEL_TEAM_ID || (typeof process !== 'undefined' ? process.env.VERCEL_TEAM_ID : 'team_X4bKucsxm1xNovRCzLleI3JC');
-    if (projectId && token) {
-      await fetch(
-        `https://api.vercel.com/v9/projects/${projectId}?teamId=${teamId}`,
-        {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ ssoProtection: null }),
-        }
-      );
-    }
-  } catch {
-    // Non-critical — site still works with auth
-    console.error('[deploy-site] Failed to disable SSO protection');
-  }
-
-  return { url, id: result.id || 'unknown' };
+  const result = await response.json();
+  const url = result.url ? `https://${result.url}` : `https://${projectName}.vercel.app`;
+  return { url, id: result.id || "unknown" };
 }
-
-/* ─── Handler ─── */
-export default async function handler(req: Req, res: Res) {
-  /* CORS */
-  res.setHeader?.('Access-Control-Allow-Origin', '*');
-  res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') return json(res, 204, {});
-
-  if (req.method !== 'POST') {
-    res.setHeader?.('Allow', 'POST');
-    return json(res, 405, { ok: false, error: 'method_not_allowed' });
+async function handler(req, res) {
+  res.setHeader?.("Access-Control-Allow-Origin", "*");
+  res.setHeader?.("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader?.("Access-Control-Allow-Headers", "Content-Type");
+  if (req.method === "OPTIONS") return json(res, 204, {});
+  if (req.method !== "POST") {
+    res.setHeader?.("Allow", "POST");
+    return json(res, 405, { ok: false, error: "method_not_allowed" });
   }
-
-  /* ─── Parse body ─── */
-  let bodyStr = '';
-  if (typeof req.body === 'string') {
-    bodyStr = req.body;
-  } else if (isObject(req.body)) {
-    bodyStr = JSON.stringify(req.body);
-  } else if (typeof (req as any).on === 'function') {
+  let bodyUnknown = req.body;
+  if (typeof req.body === "string") {
+    if (req.body.length > MAX_BODY_BYTES) {
+      return json(res, 413, { ok: false, error: "payload_too_large" });
+    }
     try {
-      bodyStr = await new Promise<string>((resolve, reject) => {
-        const chunks: Buffer[] = [];
-        (req as any).on('data', (chunk: Buffer) => chunks.push(chunk));
-        (req as any).on('end', () => resolve(Buffer.concat(chunks).toString()));
-        (req as any).on('error', reject);
-        setTimeout(() => reject(new Error('body_read_timeout')), 10000);
-      });
+      bodyUnknown = JSON.parse(req.body);
     } catch {
-      return json(res, 400, { ok: false, error: 'body_read_error' });
+      return json(res, 400, { ok: false, error: "invalid_json" });
     }
   }
-
-  let bodyUnknown: unknown;
-  if (bodyStr.length > MAX_BODY_BYTES) {
-    return json(res, 413, { ok: false, error: 'payload_too_large' });
-  }
-  try {
-    bodyUnknown = JSON.parse(bodyStr);
-  } catch {
-    return json(res, 400, { ok: false, error: 'invalid_json' });
-  }
-
   const parsed = parseDeployBody(bodyUnknown);
   if (!parsed.ok) {
-    const err = (parsed as { ok: false; error: string }).error;
+    const err = parsed.error;
     return json(res, 400, { ok: false, error: err });
   }
-
-  /* Generate HTML */
   const html = generateSiteHtml(parsed.value);
-
-  /* Deploy to Vercel */
   try {
     const deployResult = await deployToVercel(html, parsed.value.companyName);
-
     return json(res, 200, {
       ok: true,
       url: deployResult.url,
       id: deployResult.id,
       companyName: parsed.value.companyName,
       sector: parsed.value.sector,
-      message: `Site publicado com sucesso em ${deployResult.url}`,
+      message: `Site publicado com sucesso em ${deployResult.url}`
     });
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'unknown_error';
-    console.error('[deploy-site] Error:', message);
+    const message = err instanceof Error ? err.message : "unknown_error";
+    console.error("[deploy-site] Error:", message);
     return json(res, 502, { ok: false, error: message });
   }
 }
