@@ -8,7 +8,8 @@
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", "build/**", "storybook-static/**"]
+      "outputs": ["dist/**", "build/**", "storybook-static/**"],
+      "env": ["OMNIROUTE_URL"]
     },
     "lint": {
       "dependsOn": ["^lint"]
