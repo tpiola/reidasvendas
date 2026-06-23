@@ -41,7 +41,7 @@ export function SiteFooter() {
               <img
                 src="/logo-original.png"
                 alt="Rei das Vendas"
-                className="h-16 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#71717A]">

@@ -67,7 +67,7 @@ export function SiteHeader() {
           <img
             src="/logo-original.png"
             alt="Rei das Vendas"
-            className="h-10 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
+            className="h-14 w-auto object-contain transition-all duration-300 group-hover:opacity-90"
           />
         </Link>
 
