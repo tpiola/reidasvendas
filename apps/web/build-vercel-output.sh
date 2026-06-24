@@ -40,6 +40,10 @@ cat > "${OUTPUT_DIR}/config.json" << 'CONFIGEOF'
       "dest": "/api/chat"
     },
     {
+      "src": "^/api/health$",
+      "dest": "/api/health"
+    },
+    {
       "src": "^/api/create-checkout-session$",
       "dest": "/api/create-checkout-session"
     },
@@ -105,6 +109,7 @@ compile_function "deploy-site"
 compile_function "lead"
 compile_function "chat"
 compile_function "create-checkout-session"
+compile_function "health"
 
 echo ""
 echo "✓ Build Output API v3 gerado em ${OUTPUT_DIR}"

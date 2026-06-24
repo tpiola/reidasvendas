@@ -8,6 +8,12 @@
       "dependabot/**": false
     }
   },
+  "functions": {
+    "apps/web/api/*.js": {
+      "runtime": "nodejs22.x",
+      "includeFiles": "apps/web/api/**"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
