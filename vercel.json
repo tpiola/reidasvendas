@@ -10,7 +10,7 @@
   },
   "functions": {
     "apps/web/api/*.js": {
-      "runtime": "nodejs22.x",
+      "runtime": "nodejs20.x",
       "includeFiles": "apps/web/api/**"
     }
   },
