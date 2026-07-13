@@ -3,9 +3,6 @@
   "outputDirectory": "dist",
   "installCommand": "exit 0",
   "buildCommand": "exit 0",
-  "functions": {
-    "api/*.js": { "runtime": "nodejs22.x" }
-  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
