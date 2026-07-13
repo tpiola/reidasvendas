@@ -5,7 +5,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown; on?: (event: string, cb: (...args: any[]) => void) => void };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
 
 const MAX_BODY_BYTES = 16_384;

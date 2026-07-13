@@ -4,9 +4,9 @@
    via OmniRoute (localhost:20128)
 ═══════════════════════════════════════════ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+ 
 type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
 
 const MAX_BODY_BYTES = 65_536;
@@ -168,7 +168,7 @@ async function callDeepSeek(systemPrompt: string, userPrompt: string): Promise<s
   }
 
   const data = (await response.json()) as {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     choices?: Array<{ message?: { content?: string } }>;
   };
 
@@ -301,7 +301,7 @@ export default async function handler(req: Req, res: Res) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const s = d.structure;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hero = s.hero as Record<string, any> | undefined;
