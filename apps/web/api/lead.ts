@@ -3,10 +3,21 @@
    Captura leads via n8n webhook
 ═══════════════════════════════════════════ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Req = { method?: string; headers?: Record<string, string | undefined>; body?: unknown; on?: (event: string, cb: (...args: any[]) => void) => void };
- 
-type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; end?: (d: unknown) => void };
+type RequestListener = (value?: unknown) => void;
+
+type Req = {
+  method?: string;
+  headers?: Record<string, string | undefined>;
+  body?: unknown;
+  on?: (event: string, listener: RequestListener) => void;
+};
+
+type Res = {
+  statusCode?: number;
+  setHeader?: (key: string, value: string) => void;
+  end?: (data?: string) => void;
+  status?: (code: number) => { json: (body: unknown) => void };
+};
 
 const MAX_BODY_BYTES = 16_384;
 
@@ -54,12 +65,16 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
 }
 
 function json(res: Res, status: number, body: unknown) {
-  try { if (typeof (res as any).status === 'function') { (res as any).status(status).json(body); return; } } catch { /* ignore */ }
-  try { res.statusCode = status; } catch { /* ignore */ }
-  try { (res as any).setHeader?.('Content-Type', 'application/json; charset=utf-8'); } catch { /* ignore */ }
-  try { (res as any).setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
-  try { (res as any).setHeader?.('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
-  try { res.end?.(JSON.stringify(body)); } catch { /* ignore */ }
+  if (res.status) {
+    res.status(status).json(body);
+    return;
+  }
+
+  res.statusCode = status;
+  res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
+  res.end?.(JSON.stringify(body));
 }
 
 export default async function handler(req: Req, res: Res) {
@@ -81,12 +96,16 @@ export default async function handler(req: Req, res: Res) {
   } else if (isObject(req.body)) {
     bodyStr = JSON.stringify(req.body);
   } else if (typeof req.on === 'function') {
+    const on = req.on;
     try {
       bodyStr = await new Promise<string>((resolve, reject) => {
         const chunks: Buffer[] = [];
-        req.on('data', (chunk: Buffer) => chunks.push(chunk));
-        req.on('end', () => resolve(Buffer.concat(chunks).toString()));
-        req.on('error', reject);
+        on('data', (chunk) => {
+          if (Buffer.isBuffer(chunk)) chunks.push(chunk);
+          else if (chunk !== undefined) chunks.push(Buffer.from(String(chunk)));
+        });
+        on('end', () => resolve(Buffer.concat(chunks).toString()));
+        on('error', (error) => reject(error));
         setTimeout(() => reject(new Error('body_read_timeout')), 10000);
       });
     } catch {
@@ -110,7 +129,7 @@ export default async function handler(req: Req, res: Res) {
 
   const parsed = parseLeadBody(bodyUnknown);
   if (!parsed.ok) {
-    json(res, 400, { ok: false, error: (parsed as { error: string }).error });
+    json(res, 400, { ok: false, error: parsed.error });
     return;
   }
 
