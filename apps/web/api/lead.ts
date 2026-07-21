@@ -57,7 +57,6 @@ function json(res: Res, status: number, body: unknown) {
   try { if (typeof (res as any).status === 'function') { (res as any).status(status).json(body); return; } } catch { /* ignore */ }
   try { res.statusCode = status; } catch { /* ignore */ }
   try { (res as any).setHeader?.('Content-Type', 'application/json; charset=utf-8'); } catch { /* ignore */ }
-  try { (res as any).setHeader?.('Access-Control-Allow-Origin', '*'); } catch { /* ignore */ }
   try { (res as any).setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
   try { (res as any).setHeader?.('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
   try { res.end?.(JSON.stringify(body)); } catch { /* ignore */ }
@@ -116,32 +115,37 @@ export default async function handler(req: Req, res: Res) {
   }
 
   /* ─── Send to n8n webhook ──────────────── */
-  const n8nUrl = process.env.N8N_WEBHOOK_URL || 'https://n8n.thiagolab.com/webhook/lead';
-  const apiKey = process.env.N8N_API_KEY || '';
+  const n8nUrl = process.env.LEAD_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
+  const webhookSecret = process.env.LEAD_WEBHOOK_SECRET || process.env.N8N_API_KEY || '';
+
+  if (!n8nUrl) {
+    console.error('[lead] webhook is not configured');
+    json(res, 503, { ok: false, error: 'lead_service_unavailable' });
+    return;
+  }
 
   try {
     const webhookRes = await fetch(n8nUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(apiKey ? { 'Authorization': `Bearer ${apiKey}` } : {}),
+        ...(webhookSecret ? { 'Authorization': `Bearer ${webhookSecret}` } : {}),
       },
       body: JSON.stringify(parsed.value),
     });
 
-    json(res, 200, {
+    if (!webhookRes.ok) {
+      console.error('[lead] webhook rejected request:', webhookRes.status);
+      json(res, 502, { ok: false, error: 'lead_delivery_failed' });
+      return;
+    }
+
+    json(res, 202, {
       ok: true,
-      message: 'Lead capturado com sucesso',
-      data: parsed.value,
-      webhookStatus: webhookRes.status,
+      message: 'Lead recebido para processamento',
     });
   } catch (err) {
-    // n8n offline — still accept the lead
-    console.error('[lead] n8n webhook error:', err);
-    json(res, 200, {
-      ok: true,
-      message: 'Lead capturado (webhook offline)',
-      data: parsed.value,
-    });
+    console.error('[lead] webhook request failed:', err);
+    json(res, 502, { ok: false, error: 'lead_delivery_failed' });
   }
 }
