@@ -128,7 +128,7 @@ export default async function handler(req: Req, res: Res) {
   }
 
   const parsed = parseLeadBody(bodyUnknown);
-  if (!parsed.ok) {
+  if (parsed.ok === false) {
     json(res, 400, { ok: false, error: parsed.error });
     return;
   }
