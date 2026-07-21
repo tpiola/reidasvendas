@@ -14,30 +14,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-test:
+  quality:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-        # version is read from "packageManager" in package.json (pnpm@9.15.0)
-
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
       - run: pnpm check
-
       - name: Lint
         run: |
           set -o pipefail
           pnpm lint 2>&1 | tee lint.log
-
       - name: Upload lint diagnostics
         if: failure()
         uses: actions/upload-artifact@v4
@@ -46,15 +38,43 @@ jobs:
           path: lint.log
           retention-days: 1
 
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - run: pnpm test
 
-      - name: Build web (necessário para preview/E2E)
-        run: pnpm build:web
-
-      - name: Install Playwright Browsers
-        run: pnpm -C apps/web exec playwright install --with-deps chromium
-
-      - name: E2E (Playwright)
-        run: pnpm -C apps/web e2e
-
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build:web
+      - run: pnpm -C apps/web exec playwright install --with-deps chromium
+      - run: pnpm -C apps/web e2e
