@@ -4,7 +4,7 @@ import {
   ArrowRight, Sparkles, MessageCircle, MousePointerClick, Globe,
   CheckCircle2, Zap, Palette, Layout, Smartphone, Search, Shield,
   Bot, Wifi, Loader2, AlertCircle, RotateCcw, Building2, Target,
-  Eye, RefreshCw,
+  RefreshCw,
 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
