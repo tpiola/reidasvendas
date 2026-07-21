@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight, FileText, Download, CheckCircle2, Search, MessageCircle,
+  ArrowRight, Download, CheckCircle2,
   BookOpen, ClipboardList, PenTool, BarChart3, Puzzle, ChevronDown,
   Star, Shield, Zap, Globe,
 } from 'lucide-react';
