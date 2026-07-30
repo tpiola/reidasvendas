@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './HomeSovereign.css';
 
@@ -35,11 +36,31 @@ const models = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    const elements = document.querySelectorAll<HTMLElement>('.sv-reveal');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="sv-home">
       <section className="sv-hero">
         <div className="sv-shell sv-hero-grid">
-          <div className="sv-hero-copy">
+          <div className="sv-hero-copy sv-hero-enter">
             <p className="sv-kicker"><span /> Sites profissionais para negócios locais · Franca e região</p>
             <h1>Seu negócio merece ser encontrado.<br/><strong>E causar uma ótima primeira impressão.</strong></h1>
             <p className="sv-lead">Criamos o site da sua empresa e organizamos sua presença online para que seus clientes encontrem informações corretas, conheçam seus serviços e falem com você com facilidade.</p>
@@ -52,7 +73,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="sv-visual" aria-label="Demonstração de uma presença online organizada">
+          <div className="sv-visual sv-visual-enter" aria-label="Demonstração de uma presença online organizada">
             <div className="sv-browser">
               <div className="sv-browser-bar"><i/><i/><i/><span>negocio.com.br</span></div>
               <div className="sv-browser-page">
@@ -69,7 +90,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sv-statement">
+      <section className="sv-statement sv-reveal">
         <div className="sv-shell">
           <p className="sv-kicker">O QUE MUDA</p>
           <h2>Não é apenas uma página bonita.<br/>É uma presença que <span>reduz dúvida.</span></h2>
@@ -77,7 +98,26 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="metodo" className="sv-section">
+      <section className="sv-showcase sv-reveal" aria-labelledby="showcase-title">
+        <div className="sv-shell sv-showcase-grid">
+          <div className="sv-showcase-copy">
+            <p className="sv-kicker">DA BUSCA AO CONTATO</p>
+            <h2 id="showcase-title">Sua presença trabalhando como uma experiência única.</h2>
+            <p>O cliente encontra sua empresa, entende o que você oferece e chega ao contato sem se perder pelo caminho.</p>
+            <div className="sv-showcase-steps" aria-label="Etapas da experiência">
+              <span>01 · Encontrar</span><span>02 · Confiar</span><span>03 · Conversar</span>
+            </div>
+          </div>
+          <div className="sv-video-frame">
+            <video autoPlay loop muted playsInline preload="metadata" aria-label="Demonstração visual de site, busca local e contato">
+              <source src="/showcase-rei-das-vendas.mp4" type="video/mp4" />
+            </video>
+            <span className="sv-video-live"><i /> Demonstração</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="metodo" className="sv-section sv-reveal">
         <div className="sv-shell">
           <header className="sv-section-head">
             <div><p className="sv-kicker">PRESENÇA COMPLETA</p><h2>Um processo. Quatro fundamentos.</h2></div>
@@ -89,7 +129,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sv-audit">
+      <section className="sv-audit sv-reveal">
         <div className="sv-shell sv-audit-grid">
           <div className="sv-audit-copy">
             <p className="sv-kicker">ANÁLISE ANTES DA PROPOSTA</p>
@@ -103,7 +143,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sv-project-section">
+      <section className="sv-project-section sv-reveal">
         <div className="sv-shell">
           <header className="sv-section-head">
             <div><p className="sv-kicker">PROJETOS SELECIONADOS</p><h2>Capacidade que você pode abrir.</h2></div>
@@ -119,7 +159,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sv-segments">
+      <section className="sv-segments sv-reveal">
         <div className="sv-shell">
           <p className="sv-kicker">MODELOS POR SEGMENTO</p>
           <h2>Cada mercado pede uma forma diferente de apresentar e convencer.</h2>
@@ -130,7 +170,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sv-cta">
+      <section className="sv-cta sv-reveal">
         <div className="sv-shell">
           <p className="sv-kicker">PRÓXIMO PASSO</p>
           <h2>Sua empresa já tem valor. O site precisa deixar isso evidente.</h2>
