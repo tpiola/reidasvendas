@@ -12,6 +12,7 @@
     "a11y": "turbo run a11y",
     "storybook": "turbo run storybook",
     "format": "prettier -w .",
+    "design:lint": "pnpm dlx @google/design.md lint DESIGN.md",
     "ci": "pnpm check && pnpm lint && pnpm test && pnpm build:web && pnpm -C apps/web e2e",
     "build:web": "turbo run build --filter=web"
   },

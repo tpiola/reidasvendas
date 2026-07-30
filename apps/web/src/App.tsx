@@ -5,7 +5,6 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { SuporteBot } from '@/components/SuporteBot';
-import { GoldParticles } from '@/components/GoldParticles';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
@@ -152,7 +151,6 @@ function SiteLayout() {
   return (
     <>
       <RouteChangeListener />
-      <GoldParticles count={20} />
       <SiteHeader />
       <div className="page-offset">
         <Suspense fallback={<Loading />}>
@@ -203,12 +201,6 @@ export default function App() {
             foundingDate: '2023',
             founder: { '@type': 'Person', name: 'Thiago B. G. Piola' },
             address: { '@type': 'PostalAddress', addressLocality: 'Franca', addressRegion: 'SP', addressCountry: 'BR' },
-            contactPoint: [{
-              '@type': 'ContactPoint',
-              telephone: '+551****9999',
-              contactType: 'customer support',
-              availableLanguage: ['Portuguese'],
-            }],
             makesOffer: [
               { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Criação de Sites Profissionais' }},
               { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desenvolvimento de Aplicativos' }},
