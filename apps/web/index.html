@@ -1,558 +1,74 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
   <head>
-    <script>
-      (function () {
-        try {
-          var t = localStorage.getItem('theme');
-          document.documentElement.classList.add(
-            t === 'light' || t === 'dark' ? t : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-          );
-        } catch (e) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="format-detection" content="telephone=no" />
+    <meta name="theme-color" content="#030303" />
+    <meta name="color-scheme" content="dark" />
 
-    <!-- Theme -->
-    <meta name="theme-color" content="#030303" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#D6A84F" media="(prefers-color-scheme: light)" />
-    <meta name="color-scheme" content="dark light" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-    <!-- Hreflang / Language -->
-    <link rel="alternate" href="https://reidasvendas.com.br/" hreflang="pt-BR" />
-    <link rel="alternate" href="https://reidasvendas.com.br/" hreflang="x-default" />
-    <link rel="alternate" href="https://reidasvendas.com.br/en" hreflang="en" />
-
-    <!-- Next / Prev (Blog pagination placeholder — update dynamically per page) -->
-    <link rel="next" href="https://reidasvendas.com.br/blog?page=2" />
-    <link rel="prev" href="https://reidasvendas.com.br/blog?page=1" />
-
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-    <link rel="preconnect" href="https://videos.pexels.com" crossorigin />
-
-    <!-- Preload Hero Media (LCP) -->
-    <link rel="preload" as="image" href="/videos/hero-preview.jpg" imagesrcset="" imagesizes="" />
-    <link rel="preload" as="fetch" href="/videos/sentinela/7.mp4" crossorigin="anonymous" />
-
-    <!-- Favicons & PWA -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
-    <link rel="alternate icon" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/pwa-192.svg" />
-    <link rel="apple-touch-icon" sizes="512x512" href="/pwa-512.svg" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-
-    <!-- ============================================================ -->
-    <!--  SEO — Meta Tags Supercarregadas para Franca e Região         -->
-    <!-- ============================================================ -->
-
-    <title>Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP e Região</title>
-
-    <meta name="description" content="Sites profissionais, apps sob medida e automação com IA em Franca SP. Infraestrutura digital que faz seu negócio vender todos os dias." />
-
-    <meta name="keywords" content="criação de sites Franca SP, site profissional Franca, desenvolvimento web Franca, aplicativo Franca, automação comercial Franca, infraestrutura digital Franca, marketing digital Franca SP, loja virtual Franca, site para empresa Franca, agência digital Franca, programador web Franca, criar site Ribeirão Preto, desenvolvimento web interior SP, site institucional Franca, ecommerce Franca, aplicativo delivery Franca, sistema web Franca, consultoria digital Franca, SEO Franca SP, Google Ads Franca, automação de marketing Franca, dashboard empresarial Franca, soluções digitais Franca, site para pequenas empresas Franca, transformação digital Franca" />
-
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <title>Rei das Vendas — Sites profissionais para negócios locais em Franca</title>
+    <meta
+      name="description"
+      content="Criamos sites profissionais para negócios locais e organizamos os pontos essenciais da presença online para facilitar buscas, orçamentos, agendamentos e contatos."
+    />
+    <meta
+      name="keywords"
+      content="criação de sites Franca, site profissional Franca SP, sites para negócios locais, site para empresa, site responsivo, presença online"
+    />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <link rel="canonical" href="https://reidasvendas.com.br/" />
 
-    <!-- Google Business Profile / Local SEO Meta Tags -->
     <meta name="geo.region" content="BR-SP" />
     <meta name="geo.placename" content="Franca" />
-    <meta name="geo.position" content="-20.5395;-47.4017" />
-    <meta name="ICBM" content="-20.5395, -47.4017" />
-    <meta name="DC.title" content="Rei das Vendas — Infraestrutura Digital" />
-    <meta name="DC.language" content="pt" />
-    <meta name="DC.creator" content="Rei das Vendas" />
-    <meta name="DC.description" content="Criação de sites, aplicativos e automações para empresas em Franca-SP e região." />
-    <meta name="DC.coverage" content="Franca, SP, Brasil" />
-    <meta name="business:contact_data:street_address" content="Franca, SP" />
     <meta name="business:contact_data:locality" content="Franca" />
     <meta name="business:contact_data:region" content="SP" />
     <meta name="business:contact_data:country_name" content="Brasil" />
 
-    <!-- Open Graph -->
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Rei das Vendas" />
-    <meta property="og:title" content="Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP e Região" />
-    <meta property="og:description" content="Criação de sites profissionais, aplicativos sob medida, automação com IA e dashboards em tempo real para empresas em Franca-SP, Ribeirão Preto e região. Infraestrutura digital completa que faz seu negócio vender todos os dias." />
+    <meta property="og:title" content="Rei das Vendas — Sites profissionais para negócios locais" />
+    <meta
+      property="og:description"
+      content="Sua empresa bem apresentada, fácil de encontrar e pronta para receber novos clientes."
+    />
     <meta property="og:url" content="https://reidasvendas.com.br/" />
     <meta property="og:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rei das Vendas — Infraestrutura digital em Franca-SP" />
-    <meta property="og:locale:alternate" content="pt_BR" />
-    <meta property="og:phone_number" content="+5516XXXXXXXX" />
-    <meta property="og:email" content="contato@reidasvendas.com.br" />
-    <meta property="og:street_address" content="Franca, SP" />
+    <meta property="og:image:alt" content="Rei das Vendas — sites profissionais para negócios locais" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@reidasvendas" />
-    <meta name="twitter:creator" content="@thiagopiola" />
-    <meta name="twitter:title" content="Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP" />
-    <meta name="twitter:description" content="Criação de sites, aplicativos, automações e dashboards para empresas em Franca-SP e região. Infraestrutura digital que faz seu negócio vender todos os dias." />
+    <meta name="twitter:title" content="Rei das Vendas — Sites profissionais para negócios locais" />
+    <meta
+      name="twitter:description"
+      content="Sua empresa bem apresentada, fácil de encontrar e pronta para receber novos clientes."
+    />
     <meta name="twitter:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
-    <meta name="twitter:image:alt" content="Rei das Vendas — Infraestrutura digital em Franca-SP" />
 
-    <!-- Fonts -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/pwa-192.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload" as="style"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap"
-    />
-    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap"
-      media="print"
-      onload="this.media='all'"
     />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" />
-    </noscript>
 
-    <!-- Critical CSS inline -->
     <style>
-      *,::before,::after{box-sizing:border-box}
-      html{scroll-behavior:smooth;scrollbar-gutter:stable;scroll-padding-top:calc(4.25rem + env(safe-area-inset-top,0px))}
-      body{margin:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-      html.dark body{background-color:#030303;color:#F5F5F5}
-      html.light body{background-color:#f4f4f6;color:#0a0a0b}
-      #root{min-height:100dvh;min-height:100svh}
-
-      /* ── Hero above-the-fold critical ── */
-      .hero-section{position:relative;display:flex;min-height:100dvh;align-items:center;overflow:hidden;background-color:#030303}
-      .hero-bg{position:absolute;inset:0}
-      .hero-video{position:absolute;inset:0;height:100%;width:100%;object-fit:cover;opacity:0.3}
-      .hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,#030303,#030303/rgba(3,3,3,0.85),#030303)}
-      .hero-grid{position:absolute;inset:0;opacity:0.04}
-      .hero-glow-1{position:absolute;left:-20%;top:-20%;height:60%;width:60%;border-radius:9999px;background:rgba(214,168,79,0.06);filter:blur(150px)}
-      .hero-glow-2{position:absolute;bottom:-20%;right:-20%;height:50%;width:50%;border-radius:9999px;background:rgba(214,168,79,0.04);filter:blur(120px)}
-      .hero-content{position:relative;margin:0 auto;width:100%;max-width:1280px;padding:0 1rem}
-      @media(min-width:640px){.hero-content{padding:0 1.5rem}}
-      .hero-headline{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.8rem,7.5vw,5.5rem);line-height:1.02;font-weight:800;letter-spacing:-0.03em;color:#fff;margin-top:2rem}
-      .text-gradient-premium{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-      .hero-sub{max-width:36rem;margin-top:1.25rem;font-size:1rem;line-height:1.625;color:#A1A1AA}
-      @media(min-width:640px){.hero-sub{font-size:1.125rem}}
-
-      /* ── Typography base ── */
-      .font-serif{font-family:'Playfair Display',Georgia,serif}
-      .text-gradient-gold{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-      .text-gradient-premium{background:linear-gradient(135deg,#D6A84F,#F2D38A,#D6A84F);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-      .btn-outline-gold{display:inline-flex;align-items:center;gap:.5rem;border-radius:9999px;border:1px solid rgba(214,168,79,0.3);padding:.75rem 1.75rem;font-weight:600;color:#D6A84F;transition:all .3s;text-decoration:none}
-      .btn-outline-gold:hover{background:rgba(214,168,79,0.1);border-color:rgba(214,168,79,0.5)}
-      .section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3em;color:#D6A84F}
-
-      /* ── Gold line decorative ── */
-      .gold-line{height:1px;width:1.5rem;background:#D6A84F;opacity:.6;margin-bottom:.75rem}
-
-      /* ── Scroll progress bar ── */
-      .scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#D6A84F,#F2D38A);z-index:9999;width:var(--scroll,0%);transition:width .1s;will-change:width}
+      *,*::before,*::after{box-sizing:border-box}
+      html{background:#030303;color:#f5f5f5;scrollbar-gutter:stable}
+      body{margin:0;min-width:320px;background:#030303;color:#f5f5f5;font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+      #root{min-height:100dvh}
     </style>
-
-    <!-- JSON-LD Structured Data (Supercarregado) -->
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": ["Organization", "LocalBusiness"],
-      "@id": "https://reidasvendas.com.br/#organization",
-      "name": "Rei das Vendas",
-      "alternateName": "Rei das Vendas Infraestrutura Digital",
-      "url": "https://reidasvendas.com.br/",
-      "logo": "https://reidasvendas.com.br/logo.svg",
-      "image": "https://reidasvendas.com.br/imagens/og-default.jpg",
-      "telephone": "+5516XXXXXXXX",
-      "email": "contato@reidasvendas.com.br",
-      "description": "Infraestrutura digital de vendas para empresas em Franca-SP e região. Criação de sites profissionais, aplicativos sob medida, automação com IA, dashboards em tempo real e governança de resultados.",
-      "priceRange": "R$",
-      "foundingDate": "2023",
-      "founder": { "@type": "Person", "name": "Thiago B. G. Piola" },
-      "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 10 },
-      "currenciesAccepted": "BRL",
-      "paymentAccepted": ["Pix", "Boleto", "Cartão de Crédito", "Transferência Bancária"],
-      "areaServed": [
-        { "@type": "City", "name": "Franca", "sameAs": "https://pt.wikipedia.org/wiki/Franca" },
-        { "@type": "City", "name": "Ribeirão Preto", "sameAs": "https://pt.wikipedia.org/wiki/Ribeir%C3%A3o_Preto" },
-        { "@type": "City", "name": "São Joaquim da Barra", "sameAs": "https://pt.wikipedia.org/wiki/S%C3%A3o_Joaquim_da_Barra" },
-        { "@type": "City", "name": "Ituverava", "sameAs": "https://pt.wikipedia.org/wiki/Ituverava" },
-        { "@type": "City", "name": "Batatais", "sameAs": "https://pt.wikipedia.org/wiki/Batatais" },
-        { "@type": "City", "name": "Pedregulho", "sameAs": "https://pt.wikipedia.org/wiki/Pedregulho" },
-        { "@type": "City", "name": "Igarapava", "sameAs": "https://pt.wikipedia.org/wiki/Igarapava" },
-        { "@type": "City", "name": "Cristais Paulista", "sameAs": "https://pt.wikipedia.org/wiki/Cristais_Paulista" },
-        { "@type": "City", "name": "Restinga", "sameAs": "https://pt.wikipedia.org/wiki/Restinga" },
-        { "@type": "City", "name": "Patrocínio Paulista", "sameAs": "https://pt.wikipedia.org/wiki/Patroc%C3%ADnio_Paulista" },
-        { "@type": "City", "name": "Nuporanga", "sameAs": "https://pt.wikipedia.org/wiki/Nuporanga" },
-        { "@type": "City", "name": "Orlândia", "sameAs": "https://pt.wikipedia.org/wiki/Orl%C3%A2ndia" },
-        { "@type": "City", "name": "Guairá", "sameAs": "https://pt.wikipedia.org/wiki/Guair%C3%A1" },
-        { "@type": "City", "name": "Cajuru", "sameAs": "https://pt.wikipedia.org/wiki/Cajuru" },
-        { "@type": "State", "name": "São Paulo" }
-      ],
-      "areaServed": {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": -20.5395,
-          "longitude": -47.4017
-        },
-        "geoRadius": "50000"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Franca",
-        "addressRegion": "SP",
-        "addressCountry": "BR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": -20.5395,
-        "longitude": -47.4017
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
-      ],
-      "sameAs": [
-        "https://www.instagram.com/reidasvendasoficial",
-        "https://www.linkedin.com/company/reidasvendas",
-        "https://twitter.com/reidasvendas",
-        "https://www.facebook.com/reidasvendasoficial"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://reidasvendas.com.br/#website",
-      "url": "https://reidasvendas.com.br/",
-      "name": "Rei das Vendas",
-      "inLanguage": "pt-BR",
-      "description": "Infraestrutura digital para empresas em Franca-SP. Sites premium, aplicativos, automações e dashboards.",
-      "publisher": { "@id": "https://reidasvendas.com.br/#organization" },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://reidasvendas.com.br/search?q={search_term_string}"
-        },
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://reidasvendas.com.br/#webpage",
-      "url": "https://reidasvendas.com.br/",
-      "name": "Rei das Vendas — Infraestrutura Digital para Empresas em Franca-SP e Região",
-      "description": "Criação de sites profissionais em Franca SP, aplicativos sob medida, automação comercial com IA e infraestrutura digital para empresas. Atendimento em Franca, Ribeirão Preto, São Joaquim da Barra e toda região.",
-      "inLanguage": "pt-BR",
-      "isPartOf": { "@id": "https://reidasvendas.com.br/#website" },
-      "about": { "@id": "https://reidasvendas.com.br/#organization" },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "url": "https://reidasvendas.com.br/imagens/og-default.jpg",
-        "width": 1200,
-        "height": 630
-      },
-      "breadcrumb": { "@id": "https://reidasvendas.com.br/#breadcrumb" },
-      "dateModified": "2025-06-17",
-      "dateCreated": "2023-01-01",
-      "significantLink": [
-        "https://reidasvendas.com.br/",
-        "https://reidasvendas.com.br/servicos",
-        "https://reidasvendas.com.br/portfolio",
-        "https://reidasvendas.com.br/contato",
-        "https://reidasvendas.com.br/blog"
-      ],
-      "audience": {
-        "@type": "BusinessAudience",
-        "geographicArea": {
-          "@type": "AdministrativeArea",
-          "name": "Franca e Região - SP"
-        }
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://reidasvendas.com.br/#breadcrumb",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://reidasvendas.com.br/" },
-        { "@type": "ListItem", "position": 2, "name": "Serviços", "item": "https://reidasvendas.com.br/servicos" },
-        { "@type": "ListItem", "position": 3, "name": "Portfólio", "item": "https://reidasvendas.com.br/portfolio" },
-        { "@type": "ListItem", "position": 4, "name": "Blog", "item": "https://reidasvendas.com.br/blog" },
-        { "@type": "ListItem", "position": 5, "name": "Contato", "item": "https://reidasvendas.com.br/contato" }
-      ]
-    },
-    {
-      "@type": "SiteNavigationElement",
-      "@id": "https://reidasvendas.com.br/#navigation",
-      "name": [
-        "Início",
-        "Serviços",
-        "Portfólio",
-        "Blog",
-        "Contato"
-      ],
-      "url": [
-        "https://reidasvendas.com.br/",
-        "https://reidasvendas.com.br/servicos",
-        "https://reidasvendas.com.br/portfolio",
-        "https://reidasvendas.com.br/blog",
-        "https://reidasvendas.com.br/contato"
-      ]
-    },
-    {
-      "@type": ["Service", "ProfessionalService"],
-      "@id": "https://reidasvendas.com.br/#service",
-      "name": "Infraestrutura Digital para Empresas",
-      "serviceType": [
-        "Criação de Sites",
-        "Desenvolvimento de Aplicativos",
-        "Automação Comercial",
-        "Marketing Digital",
-        "Dashboards Empresariais",
-        "Consultoria Digital"
-      ],
-      "provider": { "@id": "https://reidasvendas.com.br/#organization" },
-      "description": "Soluções completas de infraestrutura digital para empresas em Franca-SP e região: criação de sites profissionais, aplicativos sob medida, automação de processos com IA, dashboards em tempo real e marketing digital.",
-      "areaServed": [
-        { "@type": "City", "name": "Franca", "sameAs": "https://pt.wikipedia.org/wiki/Franca" },
-        { "@type": "City", "name": "Ribeirão Preto", "sameAs": "https://pt.wikipedia.org/wiki/Ribeir%C3%A3o_Preto" },
-        { "@type": "City", "name": "São Joaquim da Barra", "sameAs": "https://pt.wikipedia.org/wiki/S%C3%A3o_Joaquim_da_Barra" },
-        { "@type": "City", "name": "Ituverava", "sameAs": "https://pt.wikipedia.org/wiki/Ituverava" },
-        { "@type": "City", "name": "Batatais", "sameAs": "https://pt.wikipedia.org/wiki/Batatais" },
-        { "@type": "City", "name": "Pedregulho", "sameAs": "https://pt.wikipedia.org/wiki/Pedregulho" },
-        { "@type": "City", "name": "Igarapava", "sameAs": "https://pt.wikipedia.org/wiki/Igarapava" },
-        { "@type": "City", "name": "Cristais Paulista", "sameAs": "https://pt.wikipedia.org/wiki/Cristais_Paulista" },
-        { "@type": "City", "name": "Restinga", "sameAs": "https://pt.wikipedia.org/wiki/Restinga" },
-        { "@type": "City", "name": "Patrocínio Paulista", "sameAs": "https://pt.wikipedia.org/wiki/Patroc%C3%ADnio_Paulista" },
-        { "@type": "City", "name": "Nuporanga", "sameAs": "https://pt.wikipedia.org/wiki/Nuporanga" },
-        { "@type": "City", "name": "Orlândia", "sameAs": "https://pt.wikipedia.org/wiki/Orl%C3%A2ndia" },
-        { "@type": "City", "name": "Guairá", "sameAs": "https://pt.wikipedia.org/wiki/Guair%C3%A1" },
-        { "@type": "City", "name": "Cajuru", "sameAs": "https://pt.wikipedia.org/wiki/Cajuru" },
-        { "@type": "State", "name": "São Paulo" }
-      ],
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "PriceSpecification",
-          "priceCurrency": "BRL"
-        },
-        "eligibleRegion": {
-          "@type": "GeoCircle",
-          "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -20.5395, "longitude": -47.4017 },
-          "geoRadius": "50000"
-        }
-      },
-      "keywords": "criação de sites Franca SP, site profissional Franca, desenvolvimento web Franca, aplicativo Franca, automação comercial Franca, marketing digital Franca SP"
-    },
-    {
-      "@type": ["Product", "Service"],
-      "@id": "https://reidasvendas.com.br/#product-sites",
-      "name": "Criação de Sites Profissionais",
-      "category": "Desenvolvimento Web",
-      "description": "Sites premium com design exclusivo, performance e SEO para empresas em Franca-SP e região. Sites institucionais, landing pages, e-commerce e portais.",
-      "brand": { "@type": "Brand", "name": "Rei das Vendas" },
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "BRL" },
-        "eligibleRegion": { "@type": "GeoCircle", "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -20.5395, "longitude": -47.4017 }, "geoRadius": "50000" }
-      },
-      "audience": { "@type": "BusinessAudience", "geographicArea": { "name": "Franca e Região - SP" } }
-    },
-    {
-      "@type": ["Product", "Service"],
-      "@id": "https://reidasvendas.com.br/#product-apps",
-      "name": "Desenvolvimento de Aplicativos",
-      "category": "Desenvolvimento Mobile",
-      "description": "Aplicativos sob medida para empresas em Franca-SP. Apps delivery, marketplaces, sistemas internos e soluções mobile para alavancar seu negócio.",
-      "brand": { "@type": "Brand", "name": "Rei das Vendas" },
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "BRL" },
-        "eligibleRegion": { "@type": "GeoCircle", "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -20.5395, "longitude": -47.4017 }, "geoRadius": "50000" }
-      },
-      "audience": { "@type": "BusinessAudience", "geographicArea": { "name": "Franca e Região - SP" } }
-    },
-    {
-      "@type": ["Product", "Service"],
-      "@id": "https://reidasvendas.com.br/#product-automation",
-      "name": "Automação Comercial com IA",
-      "category": "Automação",
-      "description": "Automação inteligente de processos comerciais para empresas em Franca-SP: chatbots, CRM automatizado, disparo de mensagens, nutrição de leads e integrações.",
-      "brand": { "@type": "Brand", "name": "Rei das Vendas" },
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceSpecification": { "@type": "PriceSpecification", "priceCurrency": "BRL" },
-        "eligibleRegion": { "@type": "GeoCircle", "geoMidpoint": { "@type": "GeoCoordinates", "latitude": -20.5395, "longitude": -47.4017 }, "geoRadius": "50000" }
-      },
-      "audience": { "@type": "BusinessAudience", "geographicArea": { "name": "Franca e Região - SP" } }
-    },
-    {
-      "@type": "Review",
-      "@id": "https://reidasvendas.com.br/#review-1",
-      "author": { "@type": "Person", "name": "Carlos Mendes" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "Contratei a criação de site para minha loja em Franca e o resultado superou expectativas. Design moderno, entrega rápida e suporte excelente.",
-      "itemReviewed": { "@id": "https://reidasvendas.com.br/#organization" },
-      "publisher": { "@type": "Organization", "name": "Rei das Vendas" }
-    },
-    {
-      "@type": "Review",
-      "@id": "https://reidasvendas.com.br/#review-2",
-      "author": { "@type": "Person", "name": "Ana Lúcia Ferreira" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "O aplicativo que desenvolveram para minha empresa em Ribeirão Preto transformou a forma como meus clientes fazem pedidos. Recomendo.",
-      "itemReviewed": { "@id": "https://reidasvendas.com.br/#organization" },
-      "publisher": { "@type": "Organization", "name": "Rei das Vendas" }
-    },
-    {
-      "@type": "Review",
-      "@id": "https://reidasvendas.com.br/#review-3",
-      "author": { "@type": "Person", "name": "Marcos Oliveira" },
-      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
-      "reviewBody": "A automação com IA que implementaram no meu negócio em Franca economiza horas do meu dia. Melhor investimento digital que já fiz.",
-      "itemReviewed": { "@id": "https://reidasvendas.com.br/#organization" },
-      "publisher": { "@type": "Organization", "name": "Rei das Vendas" }
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://reidasvendas.com.br/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "Por que eu preciso de um site se tenho Instagram?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Instagram é aluguel. Você não controla o algoritmo, não é dono dos seus seguidores e a plataforma muda as regras quando quer. Um site é seu — você controla, aparece no Google e os leads vão direto pro seu WhatsApp. Instagram complementa. Site é base."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quanto custa criar um site profissional em Franca SP?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cada projeto é único — o valor depende da complexidade, número de páginas, funcionalidades e integrações. Mas o diagnóstico é gratuito e sem compromisso. Oferecemos desde landing pages a portais completos com dashboard, CRM e automação. Empresas em Franca e região com site profissional vendem até 3x mais."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Quanto tempo leva para criar um site ou aplicativo?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Diagnóstico em 48h. Projeto de infraestrutura digital: 2 a 8 semanas, dependendo da complexidade. Entrega incremental — você vê resultado em cada sprint. Sites institucionais mais simples podem ficar prontos em 2 a 3 semanas."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vocês atendem empresas fora de Franca?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim! Atendemos empresas em toda a região de Franca, incluindo Ribeirão Preto, São Joaquim da Barra, Ituverava, Batatais, Pedregulho, Igarapava, Cristais Paulista, Restinga, Patrocínio Paulista, Nuporanga, Orlândia, Guairá e Cajuru. Também atendemos todo o interior de São Paulo e Brasil remotamente."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "O que é infraestrutura digital e por que minha empresa precisa?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Infraestrutura digital é o conjunto de ferramentas que faz seu negócio vender online: site profissional, aplicativo, automação de processos, dashboards de desempenho e marketing digital. Empresas com infraestrutura digital completa têm mais previsibilidade, vendem mais e dependem menos de redes sociais."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Vocês fazem aplicativo de delivery para restaurantes em Franca?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sim! Desenvolvemos aplicativos de delivery personalizados para restaurantes, lanchonetes e mercados em Franca e região. O app é seu — sem taxas abusivas de iFood, sem depender de terceiros. Integração com WhatsApp e pagamentos online."
-          }
-        }
-      ]
-    }
-  ]
-}
-    </script>
   </head>
   <body>
+    <noscript>Este site precisa do JavaScript ativado para exibir as páginas e formulários.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-
-    <!-- IntersectionObserver: ativa .visible nos elementos reveal ao scroll -->
-    <script>
-      (function() {
-        'use strict';
-        if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
-
-        var revealSelectors = [
-          '.reveal-fade',
-          '.reveal-scale-visible',
-          '.reveal',
-          '.reveal-left',
-          '.reveal-right',
-          '.reveal-scale'
-        ];
-
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, {
-          rootMargin: '0px 0px -60px 0px',
-          threshold: 0.1
-        });
-
-        function observeRevealElements() {
-          revealSelectors.forEach(function(sel) {
-            document.querySelectorAll(sel).forEach(function(el) {
-              if (!el.classList.contains('visible')) {
-                observer.observe(el);
-              }
-            });
-          });
-        }
-
-        // Run on initial load
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', observeRevealElements);
-        } else {
-          observeRevealElements();
-        }
-
-        // Re-run if new content is dynamically added (SPA-friendly)
-        var _origPushState = history.pushState;
-        history.pushState = function() {
-          _origPushState.apply(this, arguments);
-          setTimeout(observeRevealElements, 100);
-        };
-        window.addEventListener('popstate', function() {
-          setTimeout(observeRevealElements, 100);
-        });
-      })();
-    </script>
   </body>
 </html>
