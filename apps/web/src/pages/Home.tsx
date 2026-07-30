@@ -1,124 +1,130 @@
 import { Link } from 'react-router-dom';
 import './HomeSovereign.css';
 
-const systems = [
-  ['01', 'Diagnóstico de presença', 'Site, Google, Maps, reputação, mobile e conversão avaliados como um único sistema.'],
-  ['02', 'Arquitetura local', 'Páginas por serviço, dados estruturados e rotas claras para busca, IA e decisão humana.'],
-  ['03', 'Engenharia de conversão', 'Oferta, prova, WhatsApp e formulários conectados para reduzir atrito e registrar origem.'],
-  ['04', 'Operação protegida', 'Deploy gerenciado, segurança, monitoramento e evolução sem depender de improvisos.'],
+const foundations = [
+  ['Descoberta local', 'Google, Maps, páginas de serviço e dados estruturados trabalhando juntos.'],
+  ['Experiência que convence', 'Hierarquia clara, texto legível e decisões desenhadas primeiro para o celular.'],
+  ['Contato mensurável', 'WhatsApp, formulário e origem do lead conectados sem criar atrito.'],
+  ['Operação estável', 'Deploy, segurança, velocidade e evolução contínua sob uma única responsabilidade.'],
 ];
 
 const audit = [
-  ['Descoberta', 'Google Business Profile, Maps, consistência local e indexação'],
-  ['Experiência', 'Mobile-first, acessibilidade, clareza e velocidade percebida'],
-  ['Conversão', 'Oferta, prova, CTA, WhatsApp, formulários e rastreamento'],
-  ['Infraestrutura', 'SSL, headers, deploy, recuperação e estabilidade operacional'],
+  ['01', 'Presença', 'Site, Google Business Profile, Maps e consistência das informações.'],
+  ['02', 'Experiência', 'Mobile, acessibilidade, clareza da oferta e velocidade percebida.'],
+  ['03', 'Conversão', 'Prova, CTAs, WhatsApp, formulários e rastreamento.'],
+  ['04', 'Infraestrutura', 'SSL, SEO técnico, deploy, proteção e recuperação.'],
 ];
 
 const projects = [
-  ['SaúdeGPT', 'Produto de inteligência em saúde', 'https://saudegpt.com'],
-  ['Sentinela Saúde Ambiental', 'Sistema de vigilância e indicadores', 'https://sentinelasaudeambiental.com.br'],
-  ['Thiago Piola', 'Autoridade profissional e portfólio', 'https://thiagopiola.com.br'],
+  ['SaúdeGPT', 'Produto digital de saúde', 'https://saudegpt.com', 'Produto'],
+  ['Sentinela', 'Vigilância e indicadores', 'https://sentinelasaudeambiental.com.br', 'Plataforma'],
+  ['Thiago Piola', 'Autoridade e portfólio', 'https://thiagopiola.com.br', 'Presença'],
 ];
 
-const segments = [
-  'Calçados & indústria', 'Estética & beleza', 'Odontologia & saúde',
-  'Varejo & farmácia', 'Gastronomia', 'Serviços profissionais',
-];
+const segments = ['Saúde', 'Estética', 'Gastronomia', 'Varejo', 'Indústria', 'Serviços'];
 
 export default function Home() {
   return (
     <main className="sv-home">
-      <section className="sv-hero sv-shell">
-        <div className="sv-hero-copy">
-          <p className="sv-kicker"><span /> Unidade Externa de Tecnologia · Franca, SP</p>
-          <h1>Não entregamos uma página.<br/><em>Instalamos presença.</em></h1>
-          <p className="sv-lead">
-            Sites para negócios locais tratados como infraestrutura de aquisição:
-            Google, Maps, velocidade, mobile e conversão sob uma única governança.
-          </p>
-          <div className="sv-actions">
-            <Link className="sv-button" to="/contato">Solicitar diagnóstico <b>↗</b></Link>
-            <a className="sv-link" href="#metodo">Ver o que analisamos <span>↓</span></a>
+      <section className="sv-hero">
+        <div className="sv-shell sv-hero-grid">
+          <div className="sv-hero-copy">
+            <p className="sv-kicker"><span /> Tecnologia para negócios locais · Franca, SP</p>
+            <h1>Seu negócio já é real.<br/><strong>O digital precisa provar.</strong></h1>
+            <p className="sv-lead">Criamos sites rápidos, encontráveis e preparados para transformar uma busca local em uma conversa comercial.</p>
+            <div className="sv-actions">
+              <Link className="sv-button" to="/contato">Solicitar diagnóstico <span>↗</span></Link>
+              <a className="sv-link" href="#metodo">Conhecer o método <span>↓</span></a>
+            </div>
+            <div className="sv-trust">
+              <span>Mobile first</span><span>SEO + GEO</span><span>Google Maps</span><span>Deploy gerenciado</span>
+            </div>
           </div>
-          <p className="sv-hero-note">Investimento a partir de R$ 1.000 · escopo definido após diagnóstico</p>
+
+          <div className="sv-visual" aria-label="Demonstração de uma presença digital integrada">
+            <div className="sv-browser">
+              <div className="sv-browser-bar"><i/><i/><i/><span>negocio.com.br</span></div>
+              <div className="sv-browser-page">
+                <div className="sv-browser-nav"><b>MARCA</b><span>Serviços&nbsp;&nbsp; Sobre&nbsp;&nbsp; Contato</span></div>
+                <p>ATENDIMENTO EM FRANCA</p>
+                <h2>Clareza para ser<br/>a próxima escolha.</h2>
+                <button>Agendar atendimento</button>
+                <div className="sv-browser-cards"><i/><i/><i/></div>
+              </div>
+            </div>
+            <div className="sv-map-card"><span className="sv-status"/> <b>Presença local ativa</b><small>Google · Maps · Site</small></div>
+            <div className="sv-score"><strong>92</strong><span>Experiência<br/>mobile</span></div>
+          </div>
         </div>
-        <aside className="sv-console" aria-label="Escopo do diagnóstico digital">
-          <div className="sv-console-head"><span>DIAGNÓSTICO RDV / 01</span><i>ANÁLISE INDIVIDUAL</i></div>
-          <div className="sv-console-body">
-            <p>O que o empresário recebe</p>
-            <ol>
-              <li><span>01</span><div><strong>Leitura executiva</strong><small>Onde a presença atual perde confiança e contato.</small></div></li>
-              <li><span>02</span><div><strong>Prioridades por impacto</strong><small>O que corrigir primeiro, sem lista genérica.</small></div></li>
-              <li><span>03</span><div><strong>Arquitetura recomendada</strong><small>Páginas, conteúdo, integrações e infraestrutura.</small></div></li>
-              <li><span>04</span><div><strong>Escopo transparente</strong><small>Entregáveis, dependências e próximos movimentos.</small></div></li>
-            </ol>
-          </div>
-          <div className="sv-console-foot"><span>FRANCA · SP</span><span>MOBILE FIRST</span><span>SEO LOCAL</span></div>
-        </aside>
       </section>
 
-      <div className="sv-strip"><div className="sv-shell">
-        <span>GOOGLE BUSINESS</span><i>◆</i><span>MAPS</span><i>◆</i><span>SEO + GEO</span><i>◆</i>
-        <span>CORE WEB VITALS</span><i>◆</i><span>WHATSAPP</span>
-      </div></div>
-
-      <section className="sv-light"><div className="sv-shell sv-intro">
-        <div><p className="sv-kicker">O CUSTO DO SITE ERRADO</p><h2>Estar online não significa<br/>ser <em>escolhido.</em></h2></div>
-        <div>
-          <p>Quando a oferta é confusa, o mobile é lento ou o Google encontra informações inconsistentes, a empresa perde a oportunidade antes da conversa começar.</p>
-          <p>O site precisa confirmar a reputação, explicar por que escolher o negócio e criar o caminho mais curto até a ação.</p>
+      <section className="sv-statement">
+        <div className="sv-shell">
+          <p className="sv-kicker">O QUE MUDA</p>
+          <h2>Não é uma página bonita.<br/>É uma presença que <span>reduz dúvida.</span></h2>
+          <p>Quando alguém encontra sua empresa, cada segundo precisa confirmar três coisas: você é a escolha certa, está perto e é fácil entrar em contato.</p>
         </div>
-      </div></section>
-
-      <section id="metodo" className="sv-section sv-shell">
-        <header className="sv-section-head">
-          <div><p className="sv-kicker">SOLUÇÃO COMPLETA DIGITAL</p><h2>Quatro sistemas.<br/>Uma presença.</h2></div>
-          <p>Cada implementação nasce do negócio real. A base técnica é padronizada; marca, oferta, comunicação e jornada permanecem exclusivas.</p>
-        </header>
-        <div className="sv-solutions">{systems.map(([n,t,d])=>
-          <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>
-        )}</div>
       </section>
 
-      <section className="sv-method"><div className="sv-shell sv-method-grid">
-        <div><p className="sv-kicker">RELATÓRIO DE OPORTUNIDADE</p><h2>O valor fica visível<br/>antes da proposta.</h2><p>O relatório traduz problemas técnicos em impacto comercial. Sem jargão vazio e sem prometer posição, faturamento ou resultado garantido.</p></div>
-        <div className="sv-steps">{audit.map(([t,d],index)=><article key={t}><span>0{index + 1}</span><div><h3>{t}</h3><p>{d}</p></div></article>)}</div>
-      </div></section>
+      <section id="metodo" className="sv-section">
+        <div className="sv-shell">
+          <header className="sv-section-head">
+            <div><p className="sv-kicker">ARQUITETURA COMPLETA</p><h2>Um sistema. Quatro fundamentos.</h2></div>
+            <p>O visual nasce da identidade do negócio. A engenharia por trás segue um padrão rigoroso de busca, experiência, conversão e estabilidade.</p>
+          </header>
+          <div className="sv-foundations">{foundations.map(([title, text], index) =>
+            <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>
+          )}</div>
+        </div>
+      </section>
 
-      <section className="sv-work"><div className="sv-shell">
-        <header className="sv-section-head">
-          <div><p className="sv-kicker">PROJETOS SELECIONADOS</p><h2>Trabalho real.<br/>Curadoria curta.</h2></div>
-          <p>A home mostra apenas uma seleção. A vitrine completa organiza projetos aprovados por objetivo e segmento, sem transformar o início em catálogo.</p>
-        </header>
-        <div className="sv-projects">{projects.map(([name,type,url],index)=>
-          <a href={url} target="_blank" rel="noopener noreferrer" key={name}>
-            <span>0{index + 1}</span><div><h3>{name}</h3><p>{type}</p></div><b aria-hidden="true">↗</b>
-          </a>
-        )}</div>
-        <Link className="sv-text-button" to="/portfolio">Abrir vitrine de projetos <span>→</span></Link>
-      </div></section>
+      <section className="sv-audit">
+        <div className="sv-shell sv-audit-grid">
+          <div className="sv-audit-copy">
+            <p className="sv-kicker">DIAGNÓSTICO ANTES DO ESCOPO</p>
+            <h2>O investimento começa com uma leitura honesta.</h2>
+            <p>Você recebe prioridades claras, impacto comercial e a arquitetura recomendada. Sem métricas inventadas, sem prometer posição no Google.</p>
+            <Link className="sv-link" to="/contato">Analisar minha presença <span>↗</span></Link>
+          </div>
+          <div className="sv-audit-list">{audit.map(([n, title, text]) =>
+            <article key={title}><span>{n}</span><div><h3>{title}</h3><p>{text}</p></div><b>✓</b></article>
+          )}</div>
+        </div>
+      </section>
 
-      <section className="sv-segments"><div className="sv-shell">
-        <header className="sv-section-head">
-          <div><p className="sv-kicker">ECONOMIA LOCAL</p><h2>Arquitetura muda.<br/>O padrão não.</h2></div>
-          <p>Saúde exige segurança. Gastronomia exige desejo. Indústria exige capacidade. A comunicação nasce da lógica de decisão de cada mercado.</p>
-        </header>
-        <div className="sv-segment-list">{segments.map((segment,index)=><Link to="/segmentos" key={segment}><span>0{index + 1}</span><h3>{segment}</h3><b>↗</b></Link>)}</div>
-      </div></section>
+      <section className="sv-project-section">
+        <div className="sv-shell">
+          <header className="sv-section-head">
+            <div><p className="sv-kicker">PROJETOS SELECIONADOS</p><h2>Capacidade que você pode abrir.</h2></div>
+            <p>Uma seleção curta de produtos e presenças digitais reais. A vitrine completa organiza os projetos por objetivo.</p>
+          </header>
+          <div className="sv-projects">{projects.map(([name, text, url, label], index) =>
+            <a href={url} target="_blank" rel="noopener noreferrer" key={name}>
+              <div className={`sv-project-preview sv-project-${index + 1}`}><span>{label}</span><strong>{name}</strong><i>↗</i></div>
+              <div><h3>{name}</h3><p>{text}</p></div>
+            </a>
+          )}</div>
+          <Link className="sv-button sv-button-light" to="/portfolio">Ver todos os projetos <span>→</span></Link>
+        </div>
+      </section>
 
-      <section className="sv-proof"><div className="sv-shell">
-        <p className="sv-kicker">BASE TÉCNICA OBRIGATÓRIA</p>
-        <div className="sv-proof-grid"><div><strong>Encontrável</strong><span>Metadados, schema e presença local coerente</span></div><div><strong>Rápido</strong><span>Mídia otimizada, CDN e orçamento de performance</span></div><div><strong>Mensurável</strong><span>Eventos, origem, consentimento e melhoria contínua</span></div></div>
-      </div></section>
+      <section className="sv-segments">
+        <div className="sv-shell">
+          <p className="sv-kicker">NEGÓCIOS LOCAIS</p>
+          <h2>Cada mercado pede uma decisão diferente.</h2>
+          <div className="sv-segment-list">{segments.map(segment => <Link to="/segmentos" key={segment}>{segment}<span>↗</span></Link>)}</div>
+        </div>
+      </section>
 
-      <section className="sv-cta"><div className="sv-shell">
-        <p className="sv-kicker">PRÓXIMO MOVIMENTO</p>
-        <h2>Primeiro, diagnosticamos.<br/><em>Depois, construímos.</em></h2>
-        <p>Envie o site atual ou o perfil no Google. Se houver uma oportunidade real, você recebe a leitura inicial e o escopo recomendado.</p>
-        <Link className="sv-button" to="/contato">Solicitar análise <b>↗</b></Link>
-        <small>Análise individual · Sem promessa artificial · Escopo transparente</small>
-      </div></section>
+      <section className="sv-cta">
+        <div className="sv-shell">
+          <p className="sv-kicker">PRÓXIMO MOVIMENTO</p>
+          <h2>Vamos descobrir o que seu digital ainda não prova.</h2>
+          <p>Envie seu site atual ou perfil no Google. A primeira conversa começa pelo diagnóstico, não pela venda de um pacote.</p>
+          <Link className="sv-button" to="/contato">Solicitar diagnóstico <span>↗</span></Link>
+          <small>Investimento a partir de R$ 1.000 · Escopo transparente</small>
+        </div>
+      </section>
     </main>
   );
 }
