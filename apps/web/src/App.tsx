@@ -5,6 +5,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { SuporteBot } from '@/components/SuporteBot';
+import { BRAND } from '@/lib/brand';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
@@ -24,133 +25,143 @@ const Builder = lazy(() => import('@/pages/Builder'));
 const Templates = lazy(() => import('@/pages/Templates'));
 const Extensions = lazy(() => import('@/pages/Extensions'));
 
-/* ─── Error Boundary ─── */
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
+
 interface ErrorBoundaryState {
   hasError: boolean;
-  error: Error | null;
 }
+
 class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
+
+  static getDerivedStateFromError(): ErrorBoundaryState {
+    return { hasError: true };
   }
+
   handleRetry = () => {
-    this.setState({ hasError: false, error: null });
+    this.setState({ hasError: false });
   };
+
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-6 text-center" role="alert">
-          <div className="text-4xl">⚠️</div>
-          <h2 className="font-serif text-2xl font-bold text-white">Algo deu errado</h2>
-          <p className="max-w-md text-sm text-[#A1A1AA]">
-            Ocorreu um erro inesperado ao carregar esta página. Tente novamente.
-          </p>
-          <button
-            onClick={this.handleRetry}
-            className="btn-gold mt-2"
-            type="button"
-          >
-            Tentar novamente
-          </button>
+        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 bg-[#030303] px-6 text-center" role="alert">
+          <h1 className="font-serif text-3xl font-bold text-white">Não foi possível carregar esta página.</h1>
+          <p className="max-w-md text-sm leading-6 text-[#A1A1AA]">Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
+          <button onClick={this.handleRetry} className="btn-gold mt-2" type="button">Tentar novamente</button>
         </div>
       );
     }
+
     return this.props.children;
   }
 }
 
-/* ─── Premium Loading Spinner ─── */
 function Loading() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center" aria-live="polite" aria-busy="true">
+    <div className="flex min-h-[50vh] items-center justify-center bg-[#030303]" aria-live="polite" aria-busy="true">
       <div className="loading-gold" />
+      <span className="sr-only">Carregando página</span>
     </div>
   );
 }
 
-/* ─── Page Transition (spring sofisticado + parallax sutil) ─── */
 const pageTransitionVariants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-    scale: 0.98,
-  },
+  initial: { opacity: 0, y: 12 },
   animate: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 80,
-      damping: 18,
-      mass: 0.8,
-    },
+    transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] as const },
   },
   exit: {
     opacity: 0,
-    y: -12,
-    scale: 0.98,
-    filter: 'blur(2px)',
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 20,
-      mass: 0.6,
-    },
+    y: -8,
+    transition: { duration: 0.18, ease: [0.4, 0, 1, 1] as const },
   },
 };
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   return (
-    <motion.div
-      variants={pageTransitionVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      layout
-    >
+    <motion.div variants={pageTransitionVariants} initial="initial" animate="animate" exit="exit">
       {children}
     </motion.div>
   );
 }
 
-/* ─── Route Change Listener: scroll to top + analytics ─── */
-function RouteChangeListener() {
+const META_BY_PATH: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: BRAND.seo.title,
+    description: BRAND.seo.description,
+  },
+  '/servicos': {
+    title: 'Sites profissionais para negócios locais | Rei das Vendas',
+    description: 'Sites profissionais, responsivos e preparados para facilitar buscas, orçamentos, agendamentos e contatos de empresas locais.',
+  },
+  '/templates': {
+    title: 'Modelos de sites por segmento | Rei das Vendas',
+    description: 'Conheça arquiteturas demonstrativas para clínicas, dedetizadoras, restaurantes, estética, academias, oficinas, pet shops, advocacia, imobiliárias e escolas.',
+  },
+  '/portfolio': {
+    title: 'Projetos publicados | Rei das Vendas',
+    description: 'Conheça projetos digitais desenvolvidos para diferentes objetivos, públicos e negócios.',
+  },
+  '/sobre': {
+    title: 'Sobre o Rei das Vendas | Sites para negócios locais',
+    description: 'Conheça a forma de trabalho do Rei das Vendas na criação de sites profissionais para empresas locais.',
+  },
+  '/contato': {
+    title: 'Solicitar análise do meu negócio | Rei das Vendas',
+    description: 'Envie seu site atual ou perfil da empresa no Google para receber uma análise inicial da presença online.',
+  },
+  '/planos': {
+    title: 'Investimento e proposta | Rei das Vendas',
+    description: 'Entenda como o escopo e o investimento de um site profissional são definidos para cada negócio.',
+  },
+  '/politica': {
+    title: 'Política de privacidade | Rei das Vendas',
+    description: 'Saiba como o Rei das Vendas trata dados enviados pelos visitantes do site.',
+  },
+};
+
+function upsertMeta(name: string, content: string) {
+  let element = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.name = name;
+    document.head.appendChild(element);
+  }
+  element.content = content;
+}
+
+function RouteMetadata() {
   const location = useLocation();
 
   useEffect(() => {
-    // Scroll to top on route change (instant, not animated)
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    const metadata = META_BY_PATH[location.pathname] ?? {
+      title: BRAND.seo.title,
+      description: BRAND.seo.description,
+    };
 
-    // Analytics hook — dispatch custom event for any analytics service
-    window.dispatchEvent(
-      new CustomEvent('route-change', {
-        detail: {
-          pathname: location.pathname,
-          search: location.search,
-          hash: location.hash,
-          timestamp: Date.now(),
-        },
-      })
-    );
-  }, [location]);
+    document.title = metadata.title;
+    upsertMeta('description', metadata.description);
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    window.dispatchEvent(new CustomEvent('route-change', { detail: { pathname: location.pathname, search: location.search, timestamp: Date.now() } }));
+  }, [location.pathname, location.search]);
 
   return null;
 }
 
-/* ─── Site Layout ─── */
 function SiteLayout() {
   const location = useLocation();
+
   return (
     <>
-      <RouteChangeListener />
+      <RouteMetadata />
       <SiteHeader />
       <div className="page-offset">
         <Suspense fallback={<Loading />}>
@@ -183,44 +194,60 @@ function SiteLayout() {
   );
 }
 
-/* ─── App Root ─── */
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['LocalBusiness', 'ProfessionalService'],
+      '@id': 'https://reidasvendas.com.br/#organization',
+      name: BRAND.name,
+      description: BRAND.seo.description,
+      url: 'https://reidasvendas.com.br',
+      email: BRAND.email,
+      telephone: `+${BRAND.phone}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: BRAND.seo.geo.city,
+        addressRegion: BRAND.seo.geo.state,
+        addressCountry: BRAND.seo.geo.country,
+      },
+      areaServed: BRAND.seo.geo.areaServed,
+      sameAs: [BRAND.instagram, BRAND.linkedin],
+      priceRange: '$$',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Sites profissionais para negócios locais',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: 'Criação de sites profissionais',
+              description: 'Planejamento, design, desenvolvimento, revisão e publicação de sites para negócios locais.',
+              areaServed: BRAND.seo.geo.areaServed,
+            },
+          },
+        ],
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://reidasvendas.com.br/#website',
+      url: 'https://reidasvendas.com.br',
+      name: BRAND.name,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
+    },
+  ],
+};
+
 export default function App() {
   return (
     <Router>
-      {/* JSON-LD global */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': ['LocalBusiness', 'ProfessionalService'],
-            name: 'Rei das Vendas',
-            description: 'Sites premium, aplicativos sob medida, automações inteligentes e dashboards em tempo real para empresas locais em Franca-SP. Infraestrutura digital completa.',
-            areaServed: ['Franca', 'Ribeirão Preto', 'São Paulo', 'Brasil'],
-            url: 'https://reidasvendas.com.br',
-            foundingDate: '2023',
-            founder: { '@type': 'Person', name: 'Thiago B. G. Piola' },
-            address: { '@type': 'PostalAddress', addressLocality: 'Franca', addressRegion: 'SP', addressCountry: 'BR' },
-            makesOffer: [
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Criação de Sites Profissionais' }},
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Desenvolvimento de Aplicativos' }},
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Automação Comercial' }},
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Dashboards em Tempo Real' }},
-              { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mentoria Digital' }},
-            ],
-            knowsAbout: ['Web Design', 'Desenvolvimento de Software', 'Automação de Marketing', 'CRM', 'Inteligência Artificial', 'SEO'],
-            priceRange: '$$',
-          }),
-        }}
-      />
-
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Routes>
         <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="*" element={
-          <PageErrorBoundary>
-            <SiteLayout />
-          </PageErrorBoundary>
-        } />
+        <Route path="*" element={<PageErrorBoundary><SiteLayout /></PageErrorBoundary>} />
       </Routes>
     </Router>
   );
