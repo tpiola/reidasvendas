@@ -108,7 +108,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/portfolio': {
     title: 'Projetos publicados | Rei das Vendas',
-    description: 'Conheça projetos digitais desenvolvidos para diferentes objetivos, públicos e negócios.',
+    description: 'Site de alta conversão, automação de WhatsApp, aplicativos sob medida e diagnóstico de erros operacionais. Conheça projetos reais e publicados.',
   },
   '/sobre': {
     title: 'Sobre o Rei das Vendas | Sites para negócios locais',
