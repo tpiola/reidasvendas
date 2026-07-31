@@ -162,11 +162,12 @@ export default function Portfolio() {
           </p>
 
           <div className="sv-pf-pillar-grid">
-            {PILLARS.map((pillar) => (
+            {PILLARS.map((pillar, index) => (
               <article key={pillar.title} className="sv-pf-pillar-card">
                 <div className="sv-pf-pillar-media">
                   <img src={pillar.img} alt={pillar.title} loading="lazy" />
-                  <span>{pillar.tag}</span>
+                  <span className="sv-pf-pillar-tag">{pillar.tag}</span>
+                  <span className="sv-pf-pillar-num" aria-hidden="true">0{index + 1}</span>
                 </div>
                 <div className="sv-pf-pillar-body">
                   <h3>{pillar.title}</h3>
@@ -175,6 +176,13 @@ export default function Portfolio() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ─── QUEBRA ─── */}
+      <section className="sv-pf-statement sv-reveal">
+        <div className="sv-shell">
+          <p><span>Se um template resolvesse,</span> seu concorrente já teria comprado o mesmo. Cada projeto é desenhado a partir do seu negócio — nunca o contrário.</p>
         </div>
       </section>
 
@@ -225,15 +233,15 @@ export default function Portfolio() {
             </div>
             <p>Sem promessas vagas — você acompanha exatamente o que está sendo construído e por quê.</p>
           </header>
-          <div className="sv-foundations">
+          <div className="sv-pf-timeline">
             {PROCESS.map(([n, title, text]) => (
-              <article key={title}>
-                <span>{n}</span>
+              <div className="sv-pf-t-item" key={title}>
+                <span className="sv-pf-t-num">{n}</span>
                 <div>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>
