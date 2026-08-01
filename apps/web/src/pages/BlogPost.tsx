@@ -1,6 +1,58 @@
+import { Fragment, type ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { Reveal } from '@/hooks/useAnimation';
+
+function renderInline(text: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
+    }
+    return <Fragment key={i}>{part}</Fragment>;
+  });
+}
+
+function renderMarkdown(content: string): ReactNode {
+  const lines = content.split('\n');
+  const blocks: ReactNode[] = [];
+  let listItems: ReactNode[] = [];
+  let listType: 'ul' | 'ol' | null = null;
+
+  const flushList = () => {
+    if (!listItems.length || !listType) return;
+    const ListTag = listType;
+    blocks.push(
+      <ListTag key={`list-${blocks.length}`} className={`mb-4 ml-4 space-y-2 ${listType === 'ol' ? 'list-decimal' : 'list-disc'}`}>
+        {listItems}
+      </ListTag>
+    );
+    listItems = [];
+    listType = null;
+  };
+
+  lines.forEach((line, i) => {
+    if (line.startsWith('## ')) {
+      flushList();
+      blocks.push(<h2 key={i} className="font-serif text-2xl font-bold text-white mt-10 mb-4">{renderInline(line.replace('## ', ''))}</h2>);
+    } else if (/^\d+\.\s/.test(line)) {
+      if (listType !== 'ol') flushList();
+      listType = 'ol';
+      listItems.push(<li key={i} className="text-[#A1A1AA]">{renderInline(line.replace(/^\d+\.\s/, ''))}</li>);
+    } else if (line.startsWith('- ')) {
+      if (listType !== 'ul') flushList();
+      listType = 'ul';
+      listItems.push(<li key={i} className="text-[#A1A1AA]">{renderInline(line.replace('- ', ''))}</li>);
+    } else if (line.trim() === '') {
+      flushList();
+    } else {
+      flushList();
+      blocks.push(<p key={i} className="text-[#A1A1AA] leading-relaxed mb-4">{renderInline(line)}</p>);
+    }
+  });
+  flushList();
+
+  return blocks;
+}
 
 const posts = {
   'soberania-digital-o-que-e': {
@@ -84,14 +136,7 @@ export default function BlogPost() {
               prose-ul:space-y-2
               prose-a:text-[#D6A84F] prose-a:no-underline hover:prose-a:underline
             ">
-              {post.content.split('\n').map((line, i) => {
-                if (line.startsWith('## ')) return <h2 key={i} className="font-serif text-2xl font-bold text-white mt-10 mb-4">{line.replace('## ', '')}</h2>;
-                if (line.startsWith('**')) return <strong key={i} className="block text-white font-semibold mt-4 mb-2">{line.replace(/\*\*/g, '')}</strong>;
-                if (line.startsWith('- ')) return <li key={i} className="text-[#A1A1AA] ml-4">{line.replace('- ', '')}</li>;
-                if (line.trim() === '') return <br key={i} />;
-                if (line.startsWith('1. ')) return <li key={i} className="text-[#A1A1AA] ml-4 list-decimal">{line.replace(/^\d+\.\s/, '')}</li>;
-                return <p key={i} className="text-[#A1A1AA] leading-relaxed mb-4">{line}</p>;
-              })}
+              {renderMarkdown(post.content)}
             </article>
           </Reveal>
         </div>

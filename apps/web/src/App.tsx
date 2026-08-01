@@ -1,5 +1,5 @@
 import { lazy, Suspense, Component, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -16,14 +16,11 @@ const Politica = lazy(() => import('@/pages/Politica'));
 const Planos = lazy(() => import('@/pages/Planos'));
 const Sobre = lazy(() => import('@/pages/Sobre'));
 const Recursos = lazy(() => import('@/pages/Recursos'));
-const Segmentos = lazy(() => import('@/pages/Segmentos'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const Builder = lazy(() => import('@/pages/Builder'));
 const Templates = lazy(() => import('@/pages/Templates'));
-const Extensions = lazy(() => import('@/pages/Extensions'));
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -108,7 +105,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/portfolio': {
     title: 'Projetos publicados | Rei das Vendas',
-    description: 'Conheça projetos digitais desenvolvidos para diferentes objetivos, públicos e negócios.',
+    description: 'Site de alta conversão, automação de WhatsApp, aplicativos sob medida e diagnóstico de erros operacionais. Conheça projetos reais e publicados.',
   },
   '/sobre': {
     title: 'Sobre o Rei das Vendas | Sites para negócios locais',
@@ -175,13 +172,13 @@ function SiteLayout() {
               <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
               <Route path="/recursos" element={<PageTransition><Recursos /></PageTransition>} />
-              <Route path="/segmentos" element={<PageTransition><Segmentos /></PageTransition>} />
+              <Route path="/segmentos" element={<Navigate to="/templates" replace />} />
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
-              <Route path="/builder" element={<PageTransition><Builder /></PageTransition>} />
+              <Route path="/builder" element={<Navigate to="/servicos" replace />} />
               <Route path="/templates" element={<PageTransition><Templates /></PageTransition>} />
-              <Route path="/extensions" element={<PageTransition><Extensions /></PageTransition>} />
+              <Route path="/extensions" element={<Navigate to="/servicos" replace />} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
