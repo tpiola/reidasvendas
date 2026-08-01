@@ -16,6 +16,12 @@ body:has(.sv-portfolio) .rdv-wordmark-subtitle{color:#2458e6!important}
 .sv-pf-hero h1 strong{font-weight:760;color:var(--sv-blue)}
 .sv-pf-lead{max-width:640px;margin:24px 0 0;font-size:17px;line-height:1.65;color:var(--sv-muted)}
 
+/* ─── CTA em destaque (pulso sutil que chama atenção sem irritar) ─── */
+.sv-pf-pulse-wrap{position:relative;display:inline-flex;border-radius:9999px}
+.sv-pf-pulse-wrap::before{content:"";position:absolute;inset:0;border-radius:9999px;background:var(--sv-blue);animation:sv-pf-cta-pulse 2.6s cubic-bezier(.25,1,.5,1) infinite;z-index:-1}
+@keyframes sv-pf-cta-pulse{0%{opacity:.55;transform:scale(1)}80%,100%{opacity:0;transform:scale(1.14)}}
+@media(prefers-reduced-motion:reduce){.sv-pf-pulse-wrap::before{animation:none;display:none}}
+
 /* ─── WhatsApp automation mockup ─── */
 .sv-pf-phone{position:relative;margin-left:auto;width:min(320px,86vw);border-radius:28px;border:1px solid #d8dde5;background:#fff;box-shadow:0 30px 70px rgba(27,38,66,.16);overflow:hidden}
 .sv-pf-phone-bar{display:flex;align-items:center;gap:10px;padding:16px 18px 12px;border-bottom:1px solid #eef0f4}

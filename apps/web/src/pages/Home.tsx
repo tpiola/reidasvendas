@@ -108,10 +108,24 @@ export default function Home() {
               <span>01 · Encontrar</span><span>02 · Confiar</span><span>03 · Conversar</span>
             </div>
           </div>
-          <div className="sv-video-frame">
-            <video autoPlay loop muted playsInline preload="metadata" aria-label="Demonstração visual de site, busca local e contato">
-              <source src="/showcase-rei-das-vendas.mp4" type="video/mp4" />
-            </video>
+          <div className="sv-video-frame" role="img" aria-label="Demonstração animada: busca no Google, site confiável e conversa no WhatsApp">
+            <div className="sv-demo-cycle">
+              <div className="sv-demo-frame sv-demo-1">
+                <div className="sv-demo-search"><span /><i /></div>
+                <div className="sv-demo-result is-hit"><b /><small /></div>
+                <div className="sv-demo-result"><b /><small /></div>
+                <div className="sv-demo-result"><b /><small /></div>
+              </div>
+              <div className="sv-demo-frame sv-demo-2">
+                <div className="sv-demo-site-nav"><i /><i /><i /></div>
+                <div className="sv-demo-site-hero" />
+                <div className="sv-demo-site-badges"><span /><span /><span /></div>
+              </div>
+              <div className="sv-demo-frame sv-demo-3">
+                <div className="sv-demo-chat-bubble is-in">Vocês atendem hoje?</div>
+                <div className="sv-demo-chat-bubble is-out">Sim! Posso te ajudar agora mesmo 👋</div>
+              </div>
+            </div>
             <span className="sv-video-live"><i /> Demonstração</span>
           </div>
         </div>

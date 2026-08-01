@@ -1,33 +1,68 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import './HomeSovereign.css';
 import './PortfolioSovereign.css';
 
+function CountUp({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState('0');
+  const target = parseInt(value, 10);
+  const suffix = value.replace(/^[0-9]+/, '');
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || Number.isNaN(target)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(String(target));
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      const duration = 1100;
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min(1, (now - start) / duration);
+        const eased = 1 - (1 - progress) ** 3;
+        setDisplay(String(Math.round(eased * target)));
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target]);
+
+  return <span ref={ref}>{display}{suffix}</span>;
+}
+
 const PILLARS = [
   {
     tag: 'Site',
     title: 'Site de alta conversão',
-    text: 'Projetado para transformar visita em contato: hierarquia clara, prova social e caminhos diretos para orçamento ou agendamento.',
+    text: 'Hierarquia clara e caminho direto para orçamento ou agendamento.',
     img: BRAND.images.services.sites,
   },
   {
     tag: 'Automação',
     title: 'Automação de WhatsApp',
-    text: 'Respostas automáticas, confirmação de agendamento e triagem de leads — sua empresa atende mesmo fora do horário comercial.',
+    text: 'Responde, agenda e triagem leads mesmo fora do horário comercial.',
     img: BRAND.images.services.automations,
   },
   {
     tag: 'Aplicativo',
     title: 'Aplicativos sob medida',
-    text: 'Quando um site não resolve, construímos o sistema certo: agendamento, catálogo ou painel interno para a operação do negócio.',
+    text: 'Quando o site não basta: agendamento, catálogo ou painel interno.',
     img: BRAND.images.services.apps,
   },
   {
     tag: 'Diagnóstico',
     title: 'Diagnóstico de erros operacionais',
-    text: 'Analisamos onde sua empresa perde clientes hoje — informações erradas, atendimento lento, processos que travam a venda.',
+    text: 'Encontramos onde sua empresa perde clientes hoje.',
     img: BRAND.images.services.dashboards,
   },
 ];
@@ -37,38 +72,38 @@ const CASES = [
     name: 'SaúdeGPT',
     meta: 'Produto de IA · Ao vivo',
     tags: ['IA generativa', 'React', 'Node.js'],
-    text: 'Plataforma de inteligência artificial especializada em saúde, com respostas orientadas por diretrizes clínicas. Prova de que construímos software complexo, não apenas páginas.',
+    text: 'IA especializada em saúde, com respostas orientadas por diretrizes clínicas. Software complexo, não só uma página.',
     href: 'https://saudegpt.com',
   },
   {
     name: 'Sentinela Saúde Ambiental',
     meta: 'Sistema de gestão · Ao vivo',
     tags: ['Dashboard', 'TypeScript', 'Automação de dados'],
-    text: 'Sistema de monitoramento para vigilância ambiental em saúde pública, com indicadores em tempo real e relatórios automatizados — o mesmo tipo de painel que aplicamos a operações comerciais.',
+    text: 'Vigilância ambiental em saúde pública com indicadores em tempo real e relatórios automáticos.',
     href: 'https://sentinelasaudeambiental.com.br',
   },
   {
     name: 'Thiago Piola — Vitrine profissional',
     meta: 'Site premium · Ao vivo',
     tags: ['Presença digital', 'Performance', 'SEO local'],
-    text: 'Site de autoridade profissional publicado com o mesmo padrão de construção usado nos projetos de clientes: rápido, responsivo e preparado para buscas.',
+    text: 'Mesmo padrão de construção dos projetos de clientes: rápido, responsivo e preparado para buscas.',
     href: 'https://thiagopiola.com.br',
   },
   {
     name: 'Rei das Vendas — infraestrutura própria',
     meta: 'Captação e automação · Em operação',
     tags: ['Captação de leads', 'Automação de resposta', 'Painel interno'],
-    text: 'O próprio Rei das Vendas roda sobre a estrutura que vendemos: captação automática de leads e roteamento de contato sem intervenção manual.',
+    text: 'Este site roda sobre a mesma estrutura que vendemos: captação e roteamento automático de leads.',
     href: 'https://www.reidasvendas.com.br',
   },
 ];
 
 const PROCESS = [
-  ['01', 'Diagnóstico', 'Analisamos seu site atual, seu perfil no Google e os pontos que hoje travam o atendimento ou a venda.'],
-  ['02', 'Plano da solução', 'Definimos o que resolve de verdade: site, automação de WhatsApp, aplicativo ou uma combinação dos três.'],
-  ['03', 'Construção', 'Desenvolvemos com padrão premium, revisando cada etapa antes de qualquer publicação.'],
-  ['04', 'Publicação e automação', 'Colocamos no ar, ligamos os canais de contato e ativamos as automações combinadas.'],
-  ['05', 'Acompanhamento', 'Suporte contínuo e ajustes com base no uso real — sua presença evolui junto com o negócio.'],
+  ['01', 'Diagnóstico', 'Analisamos seu site, seu Google e onde hoje trava a venda.'],
+  ['02', 'Plano da solução', 'Site, automação, aplicativo — ou os três juntos.'],
+  ['03', 'Construção', 'Padrão premium, revisado antes de publicar.'],
+  ['04', 'Publicação', 'No ar, canais conectados, automações ativas.'],
+  ['05', 'Acompanhamento', 'Suporte e ajustes com base no uso real.'],
 ];
 
 export default function Portfolio() {
@@ -103,27 +138,29 @@ export default function Portfolio() {
               Não vendemos um site pronto. <strong>Vendemos a solução que faz seu negócio vender mais.</strong>
             </h1>
             <p className="sv-pf-lead">
-              Site de alta conversão, automação de WhatsApp, aplicativos sob medida e diagnóstico dos erros
-              operacionais que hoje afastam clientes — tudo construído em torno do seu negócio, nunca um template genérico.
+              Site de alta conversão, automação de WhatsApp, aplicativo sob medida e diagnóstico dos erros
+              que hoje afastam clientes. Sempre desenhado a partir do seu negócio — nunca de um template.
             </p>
             <div className="sv-actions">
-              <a className="sv-button" href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer">
-                Solicitar análise do meu negócio <span>↗</span>
-              </a>
+              <span className="sv-pf-pulse-wrap">
+                <a className="sv-button" href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer">
+                  Solicitar análise do meu negócio <span>↗</span>
+                </a>
+              </span>
               <Link className="sv-link" to="/templates">Ver modelos por segmento <span>→</span></Link>
             </div>
 
             <div className="sv-pf-stats">
               <div>
-                <strong>{BRAND.stats.projects}</strong>
+                <strong><CountUp value={BRAND.stats.projects} /></strong>
                 <span>Projetos entregues</span>
               </div>
               <div>
-                <strong>{BRAND.stats.satisfaction}</strong>
+                <strong><CountUp value={BRAND.stats.satisfaction} /></strong>
                 <span>Satisfação dos clientes</span>
               </div>
               <div>
-                <strong>{BRAND.stats.years}</strong>
+                <strong><CountUp value={BRAND.stats.years} /></strong>
                 <span>Anos de experiência</span>
               </div>
             </div>
@@ -158,7 +195,7 @@ export default function Portfolio() {
             Quatro frentes. Uma única solução para vender mais.
           </h2>
           <p style={{ maxWidth: 560, marginTop: 16, color: 'var(--sv-muted)', lineHeight: 1.7 }}>
-            Cada projeto combina o que o negócio realmente precisa — nunca um pacote fechado de template.
+            Sempre a combinação certa para o seu negócio — nunca um pacote fechado.
           </p>
 
           <div className="sv-pf-pillar-grid">
@@ -194,7 +231,7 @@ export default function Portfolio() {
             Projetos reais, publicados e em operação.
           </h2>
           <p style={{ maxWidth: 580, marginTop: 16, color: 'var(--sv-muted)', lineHeight: 1.7 }}>
-            Sem cases inventados e sem números sem comprovação. Cada projeto abaixo está no ar — visite e confira.
+            Sem cases inventados. Cada link abaixo está no ar agora — clique e confira.
           </p>
 
           <div className="sv-pf-case-list">
@@ -231,7 +268,7 @@ export default function Portfolio() {
               <p className="sv-kicker"><span /> Como funciona</p>
               <h2>Um processo. Cinco etapas até o resultado.</h2>
             </div>
-            <p>Sem promessas vagas — você acompanha exatamente o que está sendo construído e por quê.</p>
+            <p>Você acompanha cada etapa — sem promessas vagas.</p>
           </header>
           <div className="sv-pf-timeline">
             {PROCESS.map(([n, title, text]) => (
