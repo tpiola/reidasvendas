@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Home, Briefcase, Layout, Mail, Search, Smile } from 'lucide-react';
+import { ArrowLeft, Home, Briefcase, Layout, Mail, Search, Smile, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion } from 'framer-motion';
 import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
+import { BRAND } from '@/lib/brand';
 
 const sugestoes = [
   { icon: Home, label: 'Home', path: '/', desc: 'Voltar ao início' },
+  { icon: ClipboardCheck, label: 'Diagnóstico gratuito', path: '/diagnostico', desc: 'Analise sua presença digital' },
   { icon: Briefcase, label: 'Serviços', path: '/servicos', desc: 'Conheça nossas soluções' },
   { icon: Layout, label: 'Portfólio', path: '/portfolio', desc: 'Veja nossos projetos' },
-  { icon: Mail, label: 'Contato', path: '/contato', desc: 'Fale conosco' },
 ];
 
 export default function NotFound() {
@@ -33,14 +34,13 @@ export default function NotFound() {
 
         <Reveal delay={0.1}>
           <h1 className="font-serif text-2xl font-bold text-white sm:text-3xl">
-            Erro 404: Esta página não existe <span className="text-gradient-gold">(ainda)</span>
+            Esta página não está disponível. Mas podemos resolver seu problema digital <span className="text-gradient-gold">agora</span>.
           </h1>
         </Reveal>
 
         <Reveal delay={0.15}>
           <p className="mx-auto mt-3 max-w-md text-sm text-[#A1A1AA]">
-            Parece que você encontrou um link quebrado ou digitou um endereço errado. 
-            Enquanto isso, que tal explorar o que já temos de incrível?
+            Use os atalhos abaixo ou fale com um especialista. Se chegou aqui procurando por presença digital, o diagnóstico gratuito é o melhor caminho.
           </p>
         </Reveal>
 
@@ -80,11 +80,14 @@ export default function NotFound() {
         </motion.div>
 
         <Reveal delay={0.3}>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <PremiumButton href="/">
               <ArrowLeft className="h-4 w-4" />
               Voltar para Home
             </PremiumButton>
+            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
+              <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
+            </a>
           </div>
         </Reveal>
       </div>

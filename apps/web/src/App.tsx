@@ -1,5 +1,5 @@
 import { lazy, Suspense, Component, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -9,6 +9,7 @@ import { BRAND } from '@/lib/brand';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
+const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Contato = lazy(() => import('@/pages/Contato'));
@@ -17,7 +18,10 @@ const Planos = lazy(() => import('@/pages/Planos'));
 const Sobre = lazy(() => import('@/pages/Sobre'));
 const Recursos = lazy(() => import('@/pages/Recursos'));
 const Segmentos = lazy(() => import('@/pages/Segmentos'));
+const SegmentoDetalhe = lazy(() => import('@/pages/SegmentoDetalhe'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
+const Solucoes = lazy(() => import('@/pages/Solucoes'));
+const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
@@ -93,10 +97,27 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Redirect 301-level para consolidar rotas antigas (evita duplicidade e perda de SEO). */
+function RedirectTo({ to }: { to: string }) {
+  useEffect(() => {
+    // Compatibilidade com SEO: registra o redirect como clique (tentar trocar para 301 real no server).
+    window.dispatchEvent(new CustomEvent('route-redirect', { detail: { to, timestamp: Date.now() } }));
+  }, [to]);
+  return <Navigate to={to} replace />;
+}
+
 const META_BY_PATH: Record<string, { title: string; description: string }> = {
   '/': {
     title: BRAND.seo.title,
     description: BRAND.seo.description,
+  },
+  '/solucoes': {
+    title: 'Soluções digitais para negócios locais em Franca | Rei das Vendas',
+    description: 'Sites, funis, automações e aplicativos construídos negócio a negócio para empresas locais venderem mais. Receba um diagnóstico gratuito.',
+  },
+  '/diagnostico': {
+    title: 'Diagnóstico gratuito para negócios locais | Rei das Vendas',
+    description: 'Receba uma análise clara do seu site, Google, WhatsApp e funil. Diagnóstico gratuito para negócios locais em Franca e região.',
   },
   '/servicos': {
     title: 'Sites profissionais para negócios locais | Rei das Vendas',
@@ -168,7 +189,12 @@ function SiteLayout() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/solucoes" element={<PageTransition><Solucoes /></PageTransition>} />
+              <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
               <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
+              <Route path="/servicos/:slug" element={<PageTransition><ServicoDetalhe /></PageTransition>} />
+              <Route path="/modelos" element={<RedirectTo to="/segmentos" />} />
+              <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
               <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
               <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
               <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
@@ -176,6 +202,7 @@ function SiteLayout() {
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
               <Route path="/recursos" element={<PageTransition><Recursos /></PageTransition>} />
               <Route path="/segmentos" element={<PageTransition><Segmentos /></PageTransition>} />
+              <Route path="/segmentos/:slug" element={<PageTransition><SegmentoDetalhe /></PageTransition>} />
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
