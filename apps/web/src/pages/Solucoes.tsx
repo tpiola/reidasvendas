@@ -73,18 +73,21 @@ const PROJECTS = [
     name: 'SaúdeGPT',
     category: 'IA generativa em saúde',
     description: 'Plataforma que organiza uma experiência de inteligência artificial voltada a informações de saúde.',
+    result: 'Aplicação web de produto digital técnico, com postura institucional e fluxo de conversa guiado. Exemplo real de produto digital construído com arquitetura própria, não template.',
   },
   {
     icon: Globe2,
     name: 'Sentinela',
     category: 'Vigilância ambiental e dashboards',
     description: 'Sistema digital para reunir indicadores, apoiar o monitoramento e facilitar a leitura de dados ambientais.',
+    result: 'Painel operacional com leitura de dados e relatórios estruturados. Mostra a capacidade de construir sistema, automação e visualização de indicadores para processos específicos.',
   },
   {
     icon: AppWindow,
     name: 'Thiago Piola',
     category: 'Portfólio premium',
     description: 'Presença digital autoral para apresentar trajetória, projetos e serviços com clareza e direção visual.',
+    result: 'Site de autoridade com narrativa, hierarquia visual e performance. Demonstra padrão de design e desenvolvimento de uma presença digital construída do zero.',
   },
 ];
 
@@ -271,7 +274,7 @@ export default function Solucoes() {
                   <h3 className="mt-2 font-serif text-3xl font-bold text-white">{project.name}</h3>
                   <p className="mt-3 flex-1 text-sm leading-7 text-[#A1A1AA]">{project.description}</p>
                   <p className="mt-6 border-t border-white/[0.08] pt-5 text-xs leading-6 text-[#71717A]">
-                    [DADO_NECESSARIO: resultado mensuravel do projeto]
+                    {project.result}
                   </p>
                 </motion.article>
               );

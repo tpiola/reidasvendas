@@ -13,6 +13,7 @@ type Segmento = {
   solucaoRecomendada: string[];
   arquiteturaRef: string;
   faq: FAQ[];
+  prova?: string;
 };
 
 const SEGMENTOS: Segmento[] = [
@@ -41,6 +42,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'É possível apresentar profissionais e especialidades?', a: 'Sim. Organizamos formação, registros, áreas de atuação e informações autorizadas pela clínica, observando as regras de comunicação aplicáveis.' },
       { q: 'A automação substitui a recepção?', a: 'Não. Ela pode confirmar o contato e organizar o encaminhamento, enquanto dúvidas clínicas e situações sensíveis permanecem com profissionais responsáveis.' },
     ],
+    prova: 'Referência de abordagem: para clínicas e saúde, o padrão prioriza confiança (profissionais, registros, diferenciais), contato facilitado e fluxo de agendamento sem fricção, sempre observando regras de comunicação em saúde.',
   },
   {
     slug: 'odontologia',
@@ -67,6 +69,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O site integra com a agenda da clínica?', a: 'A integração pode ser avaliada conforme o sistema utilizado e as APIs disponíveis. Quando não houver integração adequada, estruturamos um fluxo de solicitação de horário.' },
       { q: 'O projeto inclui presença local?', a: 'Podemos alinhar site, localização e dados públicos para reduzir inconsistências. Isso melhora a clareza da presença local, mas não representa garantia de posicionamento.' },
     ],
+    prova: 'Referência de abordagem: para odontologia, o padrão organiza autoridade, especialidades, estrutura do consultório e um caminho de agendamento/contato simples, priorizando a experiência no celular e a presença local.',
   },
   {
     slug: 'estetica',
@@ -93,6 +96,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'Vocês ajudam a organizar os serviços?', a: 'Sim. Estruturamos categorias e textos a partir de informações reais, que devem ser revisadas pelos responsáveis técnicos do negócio.' },
       { q: 'É possível automatizar lembretes?', a: 'É possível em cenários compatíveis com as ferramentas utilizadas e com o consentimento do contato. O escopo é validado no diagnóstico.' },
     ],
+    prova: 'Referência de abordagem: para estética, o padrão equilibra apresentação de serviços, portfólio visual, diferenciais e agendamento online, com cuidado para não prometer resultados.',
   },
   {
     slug: 'restaurantes',
@@ -119,6 +123,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O site substitui os aplicativos de delivery?', a: 'Não necessariamente. Ele pode centralizar informações e conectar canais próprios ou parceiros, conforme a estratégia e a operação do restaurante.' },
       { q: 'É possível receber reservas online?', a: 'Sim. O fluxo pode registrar uma solicitação ou integrar uma agenda. A confirmação deve seguir a capacidade e as regras definidas pelo restaurante.' },
     ],
+    prova: 'Referência de abordagem: para restaurantes, o padrão reúne cardápio, fotos, horários, endereço, rota e canais de pedido/reserva em um só lugar claro, reduzindo dúvidas que hoje afastam clientes.',
   },
   {
     slug: 'oficinas-mecanicas',
@@ -145,6 +150,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'Podemos separar clientes novos de acompanhamentos?', a: 'Sim. O fluxo pode classificar o assunto e encaminhar cada conversa, reduzindo a mistura de demandas no atendimento.' },
       { q: 'O site pode mostrar marcas atendidas?', a: 'Sim, desde que as informações sejam verdadeiras e não sugiram vínculo oficial inexistente com fabricantes.' },
     ],
+    prova: 'Referência de abordagem: para oficinas, o padrão organiza os serviços, como funciona o orçamento e o contato pelo WhatsApp, deixando claro o que é analisado antes de qualquer proposta.',
   },
   {
     slug: 'pet-shop',
@@ -171,6 +177,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O cliente recebe lembrete?', a: 'Podemos configurar lembretes em ferramentas compatíveis, respeitando consentimento, políticas do canal e possibilidade de reagendamento.' },
       { q: 'Podemos apresentar todos os serviços?', a: 'Sim. Organizamos os serviços por categoria e registramos requisitos, limites e orientações fornecidos pela equipe responsável.' },
     ],
+    prova: 'Referência de abordagem: para pet shops e petshops, o padrão apresenta serviços (banho, tosa, produtos), diferenciais de cuidado e um caminho simples para agendamento e contato.',
   },
   {
     slug: 'advocacia',
@@ -197,6 +204,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O formulário pode receber documentos?', a: 'A necessidade deve ser avaliada com cuidado. Priorizamos coleta mínima, segurança e um canal apropriado; anexos não são habilitados por padrão.' },
       { q: 'A resposta automática oferece orientação jurídica?', a: 'Não. A automação apenas confirma o contato e informa o próximo passo. A análise jurídica permanece com o profissional habilitado.' },
     ],
+    prova: 'Referência de abordagem: para escritórios de advocacia, o padrão constrói autoridade com conteúdo responsável e áreas de atuação claras, mantendo um contato com coleta mínima e encaminhamento ético.',
   },
   {
     slug: 'imobiliarias',
@@ -223,6 +231,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'É possível captar proprietários e compradores?', a: 'Sim. Criamos jornadas e formulários diferentes para cada intenção, evitando misturar demandas e permitindo encaminhamento adequado.' },
       { q: 'O site mantém a disponibilidade automaticamente?', a: 'Somente quando há uma fonte integrada e confiável. Sem integração, definimos uma rotina de atualização e sinalizamos a necessidade de confirmação.' },
     ],
+    prova: 'Referência de abordagem: para imobiliárias, o padrão organiza vitrine de imóveis, filtros, informações de processo e captação de interessados com clareza sobre disponibilidade e próximos passos.',
   },
   {
     slug: 'escolas-e-cursos',
@@ -249,6 +258,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O projeto pode incluir área do aluno?', a: 'Sim. Perfis, conteúdos, integrações e requisitos de segurança precisam ser especificados para estimar o escopo adequado.' },
       { q: 'Podemos separar contatos por curso ou unidade?', a: 'Sim. Formulários e WhatsApp podem preservar essa origem e encaminhar o contato ao responsável correspondente.' },
     ],
+    prova: 'Referência de abordagem: para escolas e cursos, o padrão facilita a matrícula, apresenta a grade e diferenciais, e oferece canais claros para famílias e alunos obterem respostas.',
   },
   {
     slug: 'servicos-locais',
@@ -275,6 +285,7 @@ const SEGMENTOS: Segmento[] = [
       { q: 'O cliente pode enviar informações para orçamento?', a: 'Sim. Definimos campos úteis para o tipo de serviço e evitamos solicitar dados desnecessários no primeiro contato.' },
       { q: 'Atendo várias cidades. Isso pode ser mostrado?', a: 'Sim. A área atendida pode ser apresentada de forma honesta, com páginas regionais apenas quando houver conteúdo real e útil para cada localidade.' },
     ],
+    prova: 'Referência de abordagem: para serviços locais, o padrão deixa claro o que você faz, para quem, como orçar e como iniciar o contato — reduzindo a fricção entre busca e mensagem.',
   },
 ];
 
@@ -397,8 +408,10 @@ export default function SegmentoDetalhe() {
           <Reveal className="rounded-3xl border border-white/[0.08] bg-[#0C0C0C] p-7 sm:p-10">
             <SectionLabel>Prova</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Referência para este segmento.</h2>
-            <p className="mt-6 font-mono text-sm leading-7 text-[#F2D38A]">[DADO_NECESSARIO: case ou projeto de referencia para o segmento]</p>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#A1A1AA]">Não publicamos resultados ou métricas sem uma fonte real e autorização. O diagnóstico pode incluir referências de abordagem compatíveis com o contexto do negócio.</p>
+            <p className="mt-6 text-sm leading-7 text-[#F2D38A]">
+              {segmento.prova || 'Referência de abordagem: aplicamos o mesmo padrão de diagnóstico, arquitetura e integração, adaptado à realidade deste segmento. Os detalhes específicos são definidos no diagnóstico do negócio real.'}
+            </p>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#A1A1AA]">Não publicamos métricas ou depoimentos sem fonte real e autorização. O que apresentamos aqui é a referência de estrutura e processo — os números concretos do seu caso surgem no diagnóstico.</p>
           </Reveal>
         </div>
       </section>
