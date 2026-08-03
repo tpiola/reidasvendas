@@ -2,7 +2,7 @@
 <html lang="pt-BR" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#030303" />
     <meta name="color-scheme" content="dark" />
@@ -11,10 +11,6 @@
     <meta
       name="description"
       content="Criamos sites profissionais para negócios locais e organizamos os pontos essenciais da presença online para facilitar buscas, orçamentos, agendamentos e contatos."
-    />
-    <meta
-      name="keywords"
-      content="criação de sites Franca, site profissional Franca SP, sites para negócios locais, site para empresa, site responsivo, presença online"
     />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
@@ -52,17 +48,27 @@
     <link rel="apple-touch-icon" href="/pwa-192.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
+    <!-- Fontes: preload + swap. Removido @import duplicado do CSS (causava FOUC e dupla carga). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      />
+    </noscript>
 
+    <!-- Critical CSS inline: fundo escuro imediato, sem flash de cor, sem scrollbar shift. -->
     <style>
       *,*::before,*::after{box-sizing:border-box}
-      html{background:#030303;color:#f5f5f5;scrollbar-gutter:stable}
-      body{margin:0;min-width:320px;background:#030303;color:#f5f5f5;font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+      html,body{background:#030303;color:#f5f5f5;margin:0;min-width:320px}
+      body{font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
       #root{min-height:100dvh}
     </style>
   </head>
