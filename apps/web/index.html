@@ -22,6 +22,56 @@
     <meta name="business:contact_data:region" content="SP" />
     <meta name="business:contact_data:country_name" content="Brasil" />
 
+    <!-- Structured data (JSON-LD) inline no HTML inicial => processamento rapido pelo Google
+         (recomendado por skill seo-schema: JSON-LD server-rendered evita atraso do JS). -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["LocalBusiness", "ProfessionalService"],
+          "@id": "https://reidasvendas.com.br/#organization",
+          "name": "Rei das Vendas",
+          "description": "Criamos sites profissionais para negócios locais e organizamos os pontos essenciais da presença online para facilitar buscas, orçamentos, agendamentos e contatos.",
+          "url": "https://reidasvendas.com.br",
+          "email": "contato@reidasvendas.com.br",
+          "telephone": "+5516992333344",
+          "priceRange": "$$",
+          "image": "https://reidasvendas.com.br/imagens/og-default.jpg",
+          "logo": "https://reidasvendas.com.br/favicon.svg",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Franca",
+            "addressRegion": "SP",
+            "addressCountry": "BR"
+          },
+          "areaServed": ["Franca", "Região de Franca", "Brasil"],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -20.5389,
+            "longitude": -47.4016
+          },
+          "sameAs": [
+            "https://instagram.com/reidasvendas",
+            "https://linkedin.com/company/reidasvendas"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Thiago B. G. Piola"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://reidasvendas.com.br/#website",
+          "url": "https://reidasvendas.com.br",
+          "name": "Rei das Vendas",
+          "inLanguage": "pt-BR",
+          "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
+        }
+      ]
+    }
+    </script>
+
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Rei das Vendas" />
