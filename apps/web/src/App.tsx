@@ -147,6 +147,26 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
     title: 'Política de privacidade | Rei das Vendas',
     description: 'Saiba como o Rei das Vendas trata dados enviados pelos visitantes do site.',
   },
+  '/termos': {
+    title: 'Termos de uso | Rei das Vendas',
+    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
+  },
+  '/blog': {
+    title: 'Blog | Rei das Vendas — sites e presença digital para negócios locais',
+    description: 'Conteúdo sobre sites profissionais, presença digital, automação e design para negócios locais de Franca e região.',
+  },
+  '/segmentos': {
+    title: 'Modelos de sites por segmento | Rei das Vendas',
+    description: 'Arquiteturas de site por segmento: atendimento, saúde, comércio, restaurantes e profissionais. Veja qual se encaixa no seu negócio.',
+  },
+  '/recursos': {
+    title: 'Recursos | Rei das Vendas',
+    description: 'Recursos e ferramentas para negócios locais melhorarem a presença digital e a conversão online.',
+  },
+  '/obrigado': {
+    title: 'Mensagem enviada | Rei das Vendas',
+    description: 'Recebemos sua solicitação. Em breve retornamos com a análise da presença digital do seu negócio.',
+  },
 };
 
 function upsertMeta(name: string, content: string) {
