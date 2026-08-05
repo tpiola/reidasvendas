@@ -15,33 +15,33 @@ const projetos = [
     segment: 'Saúde / Inteligência Artificial',
     client: 'Solução própria',
     description:
-      'Plataforma de IA generativa especializada em saúde, oferecendo respostas inteligentes baseadas em diretrizes clínicas e literatura médica validada.',
+      'Plataforma de IA generativa especializada em saúde, com respostas baseadas em diretrizes clínicas e literatura médica. Inclui área de resposta, histórico e recursos de apoio à decisão.',
     cover: '/imagens/portfolio/saudegpt.jpg',
     techs: ['React', 'Node.js', 'OpenAI', 'PostgreSQL', 'Supabase'],
     href: 'https://saudegpt.com',
-    metrics: 'Em breve',
+    metrics: '',
   },
   {
     name: 'Sentinela Saúde Ambiental',
-    segment: 'Saúde Pública / Vigilância Ambiental',
-    client: 'Secretaria Municipal de Saúde',
+    segment: 'Dedetização / Controle de pragas',
+    client: 'Negócio local de Franca',
     description:
-      'Sistema de monitoramento e gestão para vigilância ambiental em saúde pública, com dashboards de indicadores e relatórios automatizados.',
+      'Site local de dedetização e controle de pragas, com páginas por serviço, áreas atendidas, diferenciais e contato direto por WhatsApp. Presença local consistente para captação de orçamentos.',
     cover: '/imagens/portfolio/sentinela.jpg',
     techs: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Chart.js'],
     href: 'https://sentinelasaudeambiental.com.br',
-    metrics: 'Em breve',
+    metrics: '',
   },
   {
     name: 'Thiago Piola',
     segment: 'Profissional / Portfólio Pessoal',
     client: 'Thiago B. G. Piola',
     description:
-      'Site pessoal e portfólio profissional do Founder do Rei das Vendas, apresentando trajetória, projetos e serviços com design premium.',
+      'Site pessoal e portfólio profissional, com trajetória, projetos e serviços. Vitrine do fundador e porta de entrada para propostas de criação de presença digital.',
     cover: '/imagens/portfolio/thiagopiola.jpg',
     techs: ['React', 'Next.js', 'Tailwind', 'Framer Motion', 'Vercel'],
     href: 'https://thiagopiola.com.br',
-    metrics: 'Em breve',
+    metrics: '',
   },
 ];
 
@@ -63,13 +63,13 @@ const passos = [
     number: '03',
     title: 'Criação',
     description:
-      'Desenvolvemos o produto com design premium, código limpo e performance obsessiva — revisões inclusas.',
+      'Desenvolvemos o site ou produto com layout responsivo, conteúdo e caminhos de contato. Revisões inclusas até a aprovação.',
   },
   {
     number: '04',
     title: 'Deploy',
     description:
-      'Publicamos em produção com infraestrutura escalável, SSL, domínio próprio e otimização completa de performance.',
+      'Publicamos em produção com SSL, domínio próprio e preparação para buscas. Verificamos funcionamento em celular e desktop.',
   },
   {
     number: '05',
@@ -128,15 +128,13 @@ export default function Portfolio() {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-4 font-serif text-4xl font-bold text-white sm:text-5xl md:text-6xl">
-              Projetos que Transformam{' '}
-              <span className="text-gradient-gold">Negócios em Franca-SP</span>
+              Projetos entregues para negócios locais e produtos digitais
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#A1A1AA]">
-              Cada projeto é fruto de um processo estruturado: diagnóstico preciso, estratégia sob medida e execução
-              com padrão premium. Conheça o trabalho real que já entregamos — de plataformas de IA a sistemas de
-              vigilância em saúde pública.
+              Cada projeto nasce de um diagnóstico e segue um processo de estratégia, criação e publicação.
+              Conheça sites e plataformas já no ar, com escopo, tecnologias e canal de contato definidos.
             </p>
           </Reveal>
         </div>
@@ -216,7 +214,7 @@ export default function Portfolio() {
                   <div className="mt-4 flex items-center justify-between border-t border-[rgba(214,168,79,0.08)] pt-4">
                     <span className="flex items-center gap-1.5 text-[11px] text-[#71717A]">
                       <BarChart3 className="h-3.5 w-3.5 text-[#D6A84F]" />
-                      Resultados: {proj.metrics}
+                      {proj.metrics ? `Resultados: ${proj.metrics}` : 'Projeto publicado e no ar'}
                     </span>
                     <a
                       href={proj.href}
@@ -276,7 +274,7 @@ export default function Portfolio() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-[#A1A1AA]">
-              Soluções digitais adaptadas para diferentes segmentos — sempre com o mesmo padrão premium.
+              Soluções digitais adaptadas a diferentes segmentos — do varejo à indústria, com entrega sob medida para cada operação.
             </p>
           </Reveal>
 
