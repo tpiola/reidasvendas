@@ -86,6 +86,28 @@ Grid editorial amplo, ritmo alternando grupos densos e pausas generosas. A home 
 
 Profundidade vem de contraste, bordas finas e sobreposição funcional. Evitar glassmorphism, brilhos contínuos, partículas e sombras decorativas. Motion orienta causa, decisão ou mudança de estado.
 
+## Motion & Timing (padrão premium)
+
+- Easing consistente (ex: cubic-bezier 0.16,1,0.3,1); nunca linear puro.
+- Durações: entrada 0.6-0.9s, hover 0.2-0.3s, transição de página 0.4-0.5s. Sentimento "caro".
+- Stagger em cascata 50-90ms. Um "momento wow" por página, o resto contido.
+- `prefers-reduced-motion` respeitado (desliga/atrofia animações). Mobile-first.
+- Motion não atrasa acesso a telefone/WhatsApp/agendamento.
+
+## QA de precisão (antes de qualquer entrega)
+
+- Pixel-perfect em 1440/1024/768/390/320 (sem overflow/clip/CLS).
+- CWV campo p75: LCP≤2.5s, INP≤200ms, CLS≤0.1. Lighthouse ≥ 95.
+- Animações 60fps; console sem erros JS.
+- Agendar WhatsApp, formulário e telefone testados ponta-a-ponta.
+- Título único por página, 1 h1, alt text, schema JSON-LD válido.
+
+## Anti-AI-slop (regra de qualidade)
+
+- Nunca usar frases genéricas: "padrão premium", "performance obsessiva", "transformam negócios", "diagnóstico preciso", "estratégia sob medida", "Resultados: Em breve".
+- Substituir por observação específica, prova real ou decisão visual com intenção.
+- Copy só pode pertencer àquele negócio (teste: apague o nome, se serve a 5 concorrentes, está genérico).
+
 ## Shapes
 
 Raios discretos. Controles podem usar 8 px; superfícies institucionais preferem 0–2 px. Círculos são reservados a ícones e indicadores legítimos.
