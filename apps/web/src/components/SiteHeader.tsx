@@ -9,11 +9,11 @@ import { BrandLockup } from '@/components/BrandLockup';
 
 const NAV = [
   { to: '/', label: 'Início', end: true },
-  { to: '/servicos', label: 'Sites' },
-  { to: '/templates', label: 'Modelos' },
+  { to: '/solucoes', label: 'Soluções' },
+  { to: '/templates', label: 'Possibilidades' },
   { to: '/portfolio', label: 'Projetos' },
-  { to: '/sobre', label: 'Sobre' },
-  { to: '/contato', label: 'Dúvidas' },
+  { to: '/sobre', label: 'Governança' },
+  { to: '/diagnostico', label: 'Diagnóstico' },
 ];
 
 export function SiteHeader() {
@@ -75,7 +75,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Solicitar análise
+            Solicitar diagnóstico
           </PremiumButton>
         </nav>
 
@@ -125,7 +125,7 @@ export function SiteHeader() {
                 rel="noopener noreferrer"
                 className="mt-2 flex min-h-12 items-center justify-center rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#F2D38A] px-5 text-sm font-bold text-[#030303]"
               >
-                Solicitar análise do meu negócio
+                Solicitar diagnóstico do meu negócio
               </a>
             </nav>
           </motion.div>
