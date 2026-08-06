@@ -5,8 +5,8 @@ import { BrandLockup } from '@/components/BrandLockup';
 
 const FOOTER_LINKS = {
   Soluções: [
-    { label: 'Sites profissionais', to: '/servicos' },
-    { label: 'Modelos por segmento', to: '/templates' },
+    { label: 'Solução Completa Digital', to: '/solucoes' },
+    { label: 'Biblioteca de possibilidades', to: '/templates' },
     { label: 'Projetos publicados', to: '/portfolio' },
   ],
   Negócios: [
@@ -16,8 +16,8 @@ const FOOTER_LINKS = {
     { label: 'Escolas e profissionais', to: '/templates' },
   ],
   Empresa: [
-    { label: 'Sobre', to: '/sobre' },
-    { label: 'Dúvidas e contato', to: '/contato' },
+    { label: 'Governança', to: '/sobre' },
+    { label: 'Diagnóstico', to: '/diagnostico' },
     { label: 'Política de privacidade', to: '/politica' },
   ],
 };
