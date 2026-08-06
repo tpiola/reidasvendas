@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 import './HomeSovereign.css';
 
 const foundations = [
-  ['Ser encontrado', 'Site, Google, mapa e páginas de serviço trabalhando com informações consistentes.'],
-  ['Transmitir confiança', 'Hierarquia clara, texto legível e decisões desenhadas primeiro para o celular.'],
-  ['Facilitar o contato', 'WhatsApp, formulário, telefone e rotas organizados sem criar atrito.'],
-  ['Manter tudo estável', 'Publicação, segurança, velocidade e suporte sob uma responsabilidade clara.'],
+  ['Mapeamento de Perfil Diamante', 'Leitura do negócio, oferta, público e pontos de atrito antes de definir qualquer arquitetura.'],
+  ['Arquitetura exclusiva', 'Site, páginas, fluxos e integrações desenhados para a realidade de cada empresa, sem solução genérica.'],
+  ['Engenharia de conversão', 'Hierarquia, conteúdo e caminhos de contato organizados para reduzir dúvida e facilitar a próxima decisão.'],
+  ['Governança contínua', 'Publicação, estabilidade, segurança, medição e evolução sob uma responsabilidade técnica clara.'],
 ];
 
 const audit = [
-  ['01', 'Presença', 'Site, perfil da empresa no Google, mapa e consistência das informações.'],
-  ['02', 'Experiência', 'Celular, acessibilidade, clareza dos serviços e velocidade percebida.'],
-  ['03', 'Contato', 'Provas, botões, WhatsApp, formulários e caminhos para pedir orçamento.'],
-  ['04', 'Configuração', 'Segurança, preparação para buscas, publicação e recuperação.'],
+  ['01', 'Presença', 'Site, busca local, mapa, identidade e consistência das informações públicas.'],
+  ['02', 'Conversão', 'Oferta, prova, clareza, CTAs, formulários e caminhos até o contato.'],
+  ['03', 'Tecnologia', 'Performance, responsividade, acessibilidade, segurança e integrações essenciais.'],
+  ['04', 'Governança', 'Medição, continuidade, documentação, publicação e prioridades de evolução.'],
 ];
 
 const projects = [
@@ -61,58 +61,58 @@ export default function Home() {
       <section className="sv-hero">
         <div className="sv-shell sv-hero-grid">
           <div className="sv-hero-copy sv-hero-enter">
-            <p className="sv-kicker"><span /> Sites profissionais para negócios locais · Franca e região</p>
-            <h1>Seu negócio merece ser encontrado.<br/><strong>E causar uma ótima primeira impressão.</strong></h1>
-            <p className="sv-lead">Criamos o site da sua empresa e organizamos sua presença online para que seus clientes encontrem informações corretas, conheçam seus serviços e falem com você com facilidade.</p>
+            <p className="sv-kicker"><span /> Soberania Digital · Tecnologia e Governança</p>
+            <h1>Infraestrutura digital para empresas que <strong>não podem depender de improviso.</strong></h1>
+            <p className="sv-lead">O Rei das Vendas atua como Unidade Externa de Tecnologia e Governança de Resultados: organiza presença, experiência, conversão e evolução digital em uma execução independente, mensurável e orientada ao negócio.</p>
             <div className="sv-actions">
-              <Link className="sv-button" to="/contato">Solicitar análise do meu negócio <span>↗</span></Link>
-              <Link className="sv-link" to="/templates">Ver modelos por segmento <span>→</span></Link>
+              <Link className="sv-button" to="/diagnostico">Solicitar mapeamento estratégico <span>↗</span></Link>
+              <Link className="sv-link" to="/solucoes">Conhecer a solução completa <span>→</span></Link>
             </div>
             <div className="sv-trust">
-              <span>Funciona no celular</span><span>Preparado para buscas</span><span>Google e mapa</span><span>Publicação acompanhada</span>
+              <span>Arquitetura exclusiva</span><span>Governança de resultados</span><span>Entrega técnica</span><span>Continuidade operacional</span>
             </div>
           </div>
 
-          <div className="sv-visual sv-visual-enter" aria-label="Demonstração de uma presença online organizada">
+          <div className="sv-visual sv-visual-enter" aria-label="Demonstração de uma infraestrutura digital organizada">
             <div className="sv-browser">
-              <div className="sv-browser-bar"><i/><i/><i/><span>negocio.com.br</span></div>
+              <div className="sv-browser-bar"><i/><i/><i/><span>empresa.com.br</span></div>
               <div className="sv-browser-page">
-                <div className="sv-browser-nav"><b>MARCA</b><span>Serviços&nbsp;&nbsp; Sobre&nbsp;&nbsp; Contato</span></div>
-                <p>ATENDIMENTO EM FRANCA</p>
-                <h2>Clareza para ser<br/>a próxima escolha.</h2>
-                <button>Agendar atendimento</button>
+                <div className="sv-browser-nav"><b>MARCA</b><span>Soluções&nbsp;&nbsp; Autoridade&nbsp;&nbsp; Contato</span></div>
+                <p>ARQUITETURA SOB MEDIDA</p>
+                <h2>Clareza para decidir.<br/>Estrutura para crescer.</h2>
+                <button>Iniciar diagnóstico</button>
                 <div className="sv-browser-cards"><i/><i/><i/></div>
               </div>
             </div>
-            <div className="sv-map-card"><span className="sv-status"/> <b>Presença local ativa</b><small>Google · Mapa · Site</small></div>
-            <div className="sv-score"><strong>✓</strong><span>Experiência<br/>revisada</span></div>
+            <div className="sv-map-card"><span className="sv-status"/> <b>Operação digital ativa</b><small>Presença · Conversão · Dados</small></div>
+            <div className="sv-score"><strong>✓</strong><span>Governança<br/>verificada</span></div>
           </div>
         </div>
       </section>
 
       <section className="sv-statement sv-reveal">
         <div className="sv-shell">
-          <p className="sv-kicker">O QUE MUDA</p>
-          <h2>Não é apenas uma página bonita.<br/>É uma presença que <span>reduz dúvida.</span></h2>
-          <p>Quando alguém encontra sua empresa, cada detalhe precisa confirmar três coisas: você é uma escolha confiável, está acessível e é fácil entrar em contato.</p>
+          <p className="sv-kicker">O FORMATO</p>
+          <h2>Não é agência. Não é pacote pronto.<br/>É uma <span>unidade externa de tecnologia.</span></h2>
+          <p>Uma estrutura terceirizada e independente que entra no negócio para mapear prioridades, construir a solução e manter a evolução digital conectada a indicadores reais.</p>
         </div>
       </section>
 
       <section className="sv-showcase sv-reveal" aria-labelledby="showcase-title">
         <div className="sv-shell sv-showcase-grid">
           <div className="sv-showcase-copy">
-            <p className="sv-kicker">DA BUSCA AO CONTATO</p>
-            <h2 id="showcase-title">Sua presença trabalhando como uma experiência única.</h2>
-            <p>O cliente encontra sua empresa, entende o que você oferece e chega ao contato sem se perder pelo caminho.</p>
+            <p className="sv-kicker">ENGENHARIA DE FLUXO ININTERRUPTO</p>
+            <h2 id="showcase-title">Da descoberta à decisão, cada ponto trabalha como parte do mesmo sistema.</h2>
+            <p>Busca, site, oferta, prova, formulário e contato deixam de ser peças isoladas e passam a formar uma experiência contínua.</p>
             <div className="sv-showcase-steps" aria-label="Etapas da experiência">
-              <span>01 · Encontrar</span><span>02 · Confiar</span><span>03 · Conversar</span>
+              <span>01 · Atrair</span><span>02 · Qualificar</span><span>03 · Converter</span><span>04 · Medir</span>
             </div>
           </div>
           <div className="sv-video-frame">
-            <video autoPlay loop muted playsInline preload="metadata" aria-label="Demonstração visual de site, busca local e contato">
+            <video autoPlay loop muted playsInline preload="metadata" aria-label="Demonstração visual da infraestrutura digital">
               <source src="/showcase-rei-das-vendas.mp4" type="video/mp4" />
             </video>
-            <span className="sv-video-live"><i /> Demonstração</span>
+            <span className="sv-video-live"><i /> Arquitetura demonstrativa</span>
           </div>
         </div>
       </section>
@@ -120,8 +120,8 @@ export default function Home() {
       <section id="metodo" className="sv-section sv-reveal">
         <div className="sv-shell">
           <header className="sv-section-head">
-            <div><p className="sv-kicker">PRESENÇA COMPLETA</p><h2>Um processo. Quatro fundamentos.</h2></div>
-            <p>O visual nasce da identidade do negócio. A construção segue um padrão rigoroso de busca, experiência, contato e estabilidade.</p>
+            <div><p className="sv-kicker">SOLUÇÃO COMPLETA DIGITAL</p><h2>Uma execução. Quatro camadas de soberania.</h2></div>
+            <p>A tecnologia é consequência do diagnóstico. Primeiro vem a hierarquia do negócio; depois, os componentes, integrações e a governança necessária para sustentar o resultado.</p>
           </header>
           <div className="sv-foundations">{foundations.map(([title, text], index) =>
             <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>
@@ -132,10 +132,10 @@ export default function Home() {
       <section className="sv-audit sv-reveal">
         <div className="sv-shell sv-audit-grid">
           <div className="sv-audit-copy">
-            <p className="sv-kicker">ANÁLISE ANTES DA PROPOSTA</p>
-            <h2>O investimento começa com uma leitura honesta.</h2>
-            <p>Você recebe prioridades claras, impacto comercial e a estrutura recomendada. Sem métricas inventadas e sem prometer primeira posição no Google.</p>
-            <Link className="sv-link" to="/contato">Analisar minha presença online <span>↗</span></Link>
+            <p className="sv-kicker">DIAGNÓSTICO ANTES DA EXECUÇÃO</p>
+            <h2>Decisão técnica começa com leitura fria do cenário.</h2>
+            <p>Mapeamos o que existe, onde há atrito e o que realmente merece prioridade. Sem urgência artificial, sem promessa vazia e sem métrica inventada.</p>
+            <Link className="sv-link" to="/diagnostico">Iniciar Mapeamento de Perfil Diamante <span>↗</span></Link>
           </div>
           <div className="sv-audit-list">{audit.map(([n, title, text]) =>
             <article key={title}><span>{n}</span><div><h3>{title}</h3><p>{text}</p></div><b>✓</b></article>
@@ -146,8 +146,8 @@ export default function Home() {
       <section className="sv-project-section sv-reveal">
         <div className="sv-shell">
           <header className="sv-section-head">
-            <div><p className="sv-kicker">PROJETOS SELECIONADOS</p><h2>Capacidade que você pode abrir.</h2></div>
-            <p>Uma seleção curta de sites e produtos reais. Cada projeto foi organizado conforme o objetivo e o público do negócio.</p>
+            <div><p className="sv-kicker">PROJETOS EM PRODUÇÃO</p><h2>Capacidade demonstrada em produtos e operações reais.</h2></div>
+            <p>Uma seleção curta de soluções publicadas. Cada arquitetura responde ao objetivo, ao público e ao estágio específico do projeto.</p>
           </header>
           <div className="sv-projects">{projects.map(([name, text, url, label], index) =>
             <a href={url} target="_blank" rel="noopener noreferrer" key={name}>
@@ -155,28 +155,28 @@ export default function Home() {
               <div><h3>{name}</h3><p>{text}</p></div>
             </a>
           )}</div>
-          <Link className="sv-button sv-button-light" to="/portfolio">Ver todos os projetos <span>→</span></Link>
+          <Link className="sv-button sv-button-light" to="/portfolio">Ver arquiteturas publicadas <span>→</span></Link>
         </div>
       </section>
 
       <section className="sv-segments sv-reveal">
         <div className="sv-shell">
-          <p className="sv-kicker">MODELOS POR SEGMENTO</p>
-          <h2>Cada mercado pede uma forma diferente de apresentar e convencer.</h2>
+          <p className="sv-kicker">BIBLIOTECA DE POSSIBILIDADES</p>
+          <h2>Referências demonstrativas por segmento. A solução final continua exclusiva.</h2>
           <div className="sv-segment-list">{models.map(([model, slug]) =>
             <Link to={`/contato?modelo=${slug}`} key={model}>{model}<span>↗</span></Link>
           )}</div>
-          <Link className="sv-button sv-models-button" to="/templates">Conhecer todos os modelos <span>→</span></Link>
+          <Link className="sv-button sv-models-button" to="/templates">Explorar possibilidades <span>→</span></Link>
         </div>
       </section>
 
       <section className="sv-cta sv-reveal">
         <div className="sv-shell">
-          <p className="sv-kicker">PRÓXIMO PASSO</p>
-          <h2>Sua empresa já tem valor. O site precisa deixar isso evidente.</h2>
-          <p>Envie seu site atual ou o perfil da empresa no Google. A primeira conversa começa pela análise do que realmente precisa ser melhorado.</p>
-          <Link className="sv-button" to="/contato">Solicitar análise do meu negócio <span>↗</span></Link>
-          <small>Escopo transparente, projeto personalizado e tudo explicado com clareza.</small>
+          <p className="sv-kicker">PRÓXIMO MOVIMENTO</p>
+          <h2>Antes de construir mais tecnologia, descubra o que merece ser construído.</h2>
+          <p>Envie sua presença atual. O processo começa pelo mapeamento do cenário, dos gargalos e das prioridades que podem sustentar uma solução completa digital.</p>
+          <Link className="sv-button" to="/diagnostico">Solicitar diagnóstico estratégico <span>↗</span></Link>
+          <small>Escopo transparente · Arquitetura exclusiva · Governança independente</small>
         </div>
       </section>
     </main>
