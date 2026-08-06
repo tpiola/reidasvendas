@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Rei das Vendas',
-  tagline: 'Sites profissionais para negócios locais',
-  subtitle: 'Sua empresa bem apresentada, fácil de encontrar e pronta para receber novos clientes.',
+  tagline: 'Unidade Externa de Tecnologia e Governança de Resultados',
+  subtitle: 'Soberania Digital para transformar presença, tecnologia e conversão em uma operação governável.',
   phone: '5516992333344',
   whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
@@ -52,8 +52,8 @@ export const BRAND = {
     },
   },
   seo: {
-    title: 'Rei das Vendas — Sites profissionais para negócios locais em Franca',
-    description: 'Criamos sites profissionais para negócios locais e organizamos os pontos essenciais da presença online para facilitar buscas, orçamentos, agendamentos e contatos.',
+    title: 'Rei das Vendas — Tecnologia e Governança de Resultados',
+    description: 'Unidade Externa de Tecnologia e Governança de Resultados para empresas que precisam organizar presença, conversão e evolução digital com arquitetura exclusiva.',
     keywords: [
       'site profissional Franca SP',
       'criação de sites Franca',
