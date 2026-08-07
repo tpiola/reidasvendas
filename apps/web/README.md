@@ -1,24 +1,27 @@
-# apps/web — Site Rei das Vendas
+# Rei das Vendas
 
-SPA em **Vite 6** + **React 18** + **Tailwind**. Deploy na Vercel com funções em `api/`.
+Landing pública do Rei das Vendas para negócios locais: vídeo, site, criativos e otimização do Perfil da Empresa no Google em um fluxo concentrado de entrega.
 
-## Scripts
+## Stack
 
-| Comando | Descrição |
-|---------|-----------|
-| `pnpm dev` | Dev server (porta Vite padrão) |
-| `pnpm build` | `tsc` + `vite build` → `dist/` |
-| `pnpm check` | Typecheck |
-| `pnpm e2e` | Playwright (home, links, a11y) |
+- Next.js 15 App Router
+- React 19 + TypeScript strict
+- Tailwind CSS 4
+- Framer Motion 11
+- Plausible Analytics
+- Vercel
 
-## Pastas relevantes
+## Ambiente
 
-- `src/pages/` — rotas ativas (`Home`, `Projetos`, `Contato`, …)
-- `src/components/` — header, footer, logo, formulário
-- `src/lib/` — SEO, brand, conteúdo da home
-- `public/` — favicon, sitemap, robots
-- `api/` — `lead.ts`, `chat.ts` (serverless)
+Copie `.env.example` para `.env.local` e configure os canais oficiais. Nenhum contato é hardcoded em componente.
 
-## Tema
+## Validação
 
-Dark/light via `ThemeProvider` (`src/hooks/useTheme.tsx`). Preferência em `localStorage`.
+```bash
+npm install
+npm run validate
+npm run typecheck
+npm run build
+```
+
+O gate de integridade bloqueia placeholders, claims não verificados marcados como tal, armadilhas conhecidas do App Router e inconsistências de prazo.
