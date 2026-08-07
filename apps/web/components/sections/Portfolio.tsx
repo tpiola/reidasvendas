@@ -1,0 +1,11 @@
+"use client";
+
+import { whatsappUrl } from "@/lib/constants";
+import { CTAButton } from "@/components/ui/CTAButton";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+
+export default function Portfolio() {
+  return <section id="portfolio" className="px-6 py-20 md:px-12 md:py-28 xl:px-20 xl:py-[120px]"><div className="mx-auto max-w-[1280px]"><ScrollReveal><SectionHeading overline="Arquitetura demonstrativa" title="ANTES E DEPOIS" subtitle="Uma simulação visual mostra a diferença de direção, hierarquia e percepção. Não é apresentada como case de cliente."/></ScrollReveal><div className="grid gap-6 md:grid-cols-2"><div className="rounded-2xl border border-white/8 bg-[#111] p-7 saturate-0"><p className="font-mono text-xs text-[#7d7770]">ANTES · Exemplo ilustrativo</p><div className="mt-6 aspect-[16/10] rounded-lg border border-white/8 bg-[linear-gradient(#222,#161616)] p-6"><div className="h-5 w-2/5 bg-white/10"/><div className="mt-8 h-9 w-4/5 bg-white/10"/><div className="mt-3 h-3 w-3/5 bg-white/8"/></div></div><GlassCard className="border-[#d4a853]/25 p-7 shadow-[0_0_60px_rgba(212,168,83,.05)]"><p className="font-mono text-xs text-[#d4a853]">DEPOIS · Exemplo ilustrativo</p><div className="mt-6 aspect-[16/10] rounded-lg border border-[#d4a853]/15 bg-[radial-gradient(circle_at_25%_20%,rgba(212,168,83,.16),transparent_30%),linear-gradient(150deg,#18130c,#090909)] p-6"><div className="h-2 w-1/4 bg-[#d4a853]/40"/><div className="mt-8 h-10 w-3/4 bg-[#f5f0e8]/20"/><div className="mt-3 h-10 w-1/2 bg-[#d4a853]/20"/><div className="mt-8 h-8 w-28 rounded-lg bg-[#d4a853]/50"/></div></GlassCard></div><div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">{[1,2,3].map((item) => <div className="group relative aspect-video overflow-hidden rounded-xl border border-white/8 bg-[linear-gradient(145deg,#241b10,#0b0b0b)]" key={item}><span className="absolute inset-0 grid place-items-center text-[#d4a853]">▶</span><span className="absolute bottom-2 left-3 text-[10px] text-[#a89f8f]">Exemplo ilustrativo</span></div>)}</div><div className="mt-9"><CTAButton href={whatsappUrl()} dataCta="whatsapp-portfolio" section="portfolio">Quero uma transformação assim</CTAButton></div></div></section>;
+}
