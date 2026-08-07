@@ -1,0 +1,8 @@
+"use client";
+
+import { BRAND, NAV_ITEMS, emailUrl, whatsappUrl } from "@/lib/constants";
+import { track } from "@/lib/utils";
+
+export function Footer() {
+  return <footer className="border-t border-white/8 bg-[#0a0a0a] px-6 py-16 md:px-12 xl:px-20"><div className="mx-auto grid max-w-[1280px] gap-12 md:grid-cols-3"><div><div className="mb-4 font-display text-2xl text-[#f5f0e8]">{BRAND.name}</div><p className="max-w-xs text-sm leading-6 text-[#7d7770]">{BRAND.tagline}. Presença local, ativos digitais e execução rápida.</p></div><div><p className="mb-4 font-mono text-xs uppercase tracking-[.15em] text-[#7d7770]">Navegação</p><div className="grid gap-2">{NAV_ITEMS.map((item) => <a className="min-h-11 py-2 text-sm text-[#a89f8f] hover:text-[#f5f0e8]" href={item.href} key={item.href}>{item.label}</a>)}</div></div><div><p className="mb-4 font-mono text-xs uppercase tracking-[.15em] text-[#7d7770]">Contato</p><div className="grid gap-2"><a href={whatsappUrl()} onClick={() => track("CTA WhatsApp", { section: "footer" })} className="min-h-11 py-2 text-sm text-[#a89f8f]">WhatsApp</a><a href={emailUrl()} onClick={() => track("CTA Email", { section: "footer" })} className="min-h-11 py-2 text-sm text-[#a89f8f]">Email</a></div></div></div><div className="mx-auto mt-12 flex max-w-[1280px] flex-col gap-4 border-t border-white/8 pt-6 text-xs text-[#7d7770] md:flex-row md:items-center md:justify-between"><span>© 2026 Rei das Vendas. Todos os direitos reservados.</span><div className="flex gap-5"><a href="/politica-de-privacidade">Política de privacidade</a><a href="/termos-de-uso">Termos de uso</a></div></div></footer>;
+}
