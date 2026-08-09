@@ -8,6 +8,7 @@
   --color-gold-strong: #85540b;
   --color-positive: #315f45;
   --color-negative: #9e3f2f;
+  --color-on-accent: #fffdf8;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --space-1: 0.5rem;
@@ -39,4 +40,5 @@ html[data-theme='dark'] {
   --color-gold-strong: #f2d38a;
   --color-positive: #80b995;
   --color-negative: #e18a7b;
+  --color-on-accent: #0b0d10;
 }
