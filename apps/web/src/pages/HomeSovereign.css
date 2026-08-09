@@ -19,7 +19,7 @@
 .sv-lead { max-width: 38rem; margin: 1.75rem 0 0; color: var(--color-ink-soft); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.7; }
 .sv-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
 .sv-button, .sv-link { display: inline-flex; min-height: 3.25rem; align-items: center; justify-content: space-between; gap: 2rem; font-size: .9rem; font-weight: 700; }
-.sv-button { padding: .85rem 1.15rem; border: 1px solid var(--color-gold); border-radius: var(--radius-sm); background: var(--color-gold); color: #fffdf8 !important; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.sv-button { padding: .85rem 1.15rem; border: 1px solid var(--color-gold); border-radius: var(--radius-sm); background: var(--color-gold); color: var(--color-on-accent) !important; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
 .sv-button:hover { border-color: var(--color-gold-strong); background: var(--color-gold-strong); transform: translateY(-2px); }
 .sv-button:active { transform: translateY(0); }
 .sv-link { padding: .8rem 0; border-bottom: 1px solid var(--color-ink); }
