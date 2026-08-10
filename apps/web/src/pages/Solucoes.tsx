@@ -7,10 +7,8 @@ import {
   CheckCircle2,
   ClipboardCheck,
   Globe2,
-  MapPin,
   MessageCircle,
   MonitorSmartphone,
-  Search,
   ShieldCheck,
   Zap,
 } from 'lucide-react';
