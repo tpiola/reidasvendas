@@ -1,6 +1,15 @@
 [
   {
     "date": "2026-08-09",
+    "macrostructure": "Workbench",
+    "theme": "custom",
+    "theme_axes": "dark / geometric-sans / chromatic-phosphor + warm-neutral",
+    "vibe": "operational direct local measurable",
+    "enrichment": "live product panel",
+    "brief": "Recurring revenue landing with static vertical routes and visible pricing"
+  },
+  {
+    "date": "2026-08-09",
     "macrostructure": "Diagnostic Table",
     "theme": "custom",
     "theme_axes": "warm-paper / editorial-serif / antique-gold",
