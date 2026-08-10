@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#F6F2E9" />
     <meta name="color-scheme" content="light dark" />
 
@@ -130,11 +129,50 @@
       html[data-theme="dark"],html[data-theme="dark"] body{background:#0b0d10;color:#f4efe5}
       body{font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
       #root{min-height:100dvh}
+      .initial-home{min-height:100dvh;padding:8rem max(1rem,calc((100vw - 82rem)/2)) 4rem;background:#f6f2e9;color:#102033}
+      .initial-home__grid{display:grid;gap:3rem;align-items:start}
+      .initial-home__kicker{margin:0 0 1.25rem;color:#9a6b23;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+      .initial-home h1{max-width:14ch;margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(3.1rem,6.1vw,6rem);font-weight:600;line-height:.91;letter-spacing:-.035em}
+      .initial-home h1 strong{color:#9a6b23;font-weight:inherit}
+      .initial-home__lead{max-width:38rem;color:#4f5e6d;font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.7}
+      .initial-home__actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+      .initial-home__actions a{display:inline-flex;min-height:3.25rem;align-items:center;padding:.85rem 1.15rem;border:1px solid #9a6b23;color:#102033;font-weight:700;text-decoration:none}
+      .initial-home__actions a:first-child{background:#9a6b23;color:#fff}
+      .initial-home__panel{padding:1.5rem;border:1px solid #d6cdbd;background:#fbf8f1}
+      .initial-home__panel small{color:#9a6b23;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+      .initial-home__panel h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2rem,4vw,3rem);line-height:1}
+      .initial-home__panel a{display:block;padding:1rem 0;border-top:1px solid #d6cdbd;color:inherit;font-weight:700;text-decoration:none}
+      html[data-theme="dark"] .initial-home{background:#0b0d10;color:#f4efe5}
+      html[data-theme="dark"] .initial-home__lead{color:#b4ad9f}
+      html[data-theme="dark"] .initial-home__panel{border-color:#30343a;background:#111419}
+      html[data-theme="dark"] .initial-home__panel a{border-color:#30343a}
+      @media(min-width:64rem){.initial-home__grid{grid-template-columns:.95fr 1.05fr;gap:4.5rem}}
     </style>
   </head>
   <body>
-    <noscript>Este site precisa do JavaScript ativado para exibir as páginas e formulários.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <main class="initial-home" id="main-content">
+        <div class="initial-home__grid">
+          <div>
+            <p class="initial-home__kicker">Engenharia de crescimento para negócios locais</p>
+            <h1>Engenharia que transforma presença digital em <strong>decisão comercial.</strong></h1>
+            <p class="initial-home__lead">O Rei das Vendas organiza posicionamento, experiência, conversão e tecnologia em uma operação clara, mensurável e construída para a realidade do seu negócio.</p>
+            <div class="initial-home__actions">
+              <a href="/diagnostico">Iniciar diagnóstico →</a>
+              <a href="/solucoes">Ver soluções ↗</a>
+            </div>
+          </div>
+          <section class="initial-home__panel" aria-labelledby="initial-diagnostic">
+            <small>Diagnóstico Rei das Vendas</small>
+            <h2 id="initial-diagnostic">Qual é o estágio atual do seu negócio?</h2>
+            <a href="/diagnostico?estagio=inicio">01 · Começando agora →</a>
+            <a href="/diagnostico?estagio=evolucao">02 · Já tenho algo no ar →</a>
+            <a href="/diagnostico?estagio=escala">03 · Negócio estabelecido →</a>
+          </section>
+        </div>
+      </main>
+    </div>
+    <noscript><p style="padding:1rem;text-align:center">O conteúdo principal está disponível. Ative o JavaScript para usar o diagnóstico interativo.</p></noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
