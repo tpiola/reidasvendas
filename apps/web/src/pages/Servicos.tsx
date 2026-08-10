@@ -10,7 +10,6 @@ import {
   MonitorSmartphone,
   Search,
   ShieldCheck,
-  Sparkles,
 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- legacy Node/Vercel runtime adapters */
 /* ═══════════════════════════════════════════
    API CREATE-CHECKOUT-SESSION — Rei das Vendas
    Cria sessão de checkout no Stripe via API REST

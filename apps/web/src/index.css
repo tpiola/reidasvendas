@@ -1,3 +1,4 @@
+@import './tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -1030,3 +1031,49 @@ img, video { max-width: 100%; height: auto; display: block; }
     transform: none;
   }
 }
+
+
+/* Rei das Vendas · light-first semantic bridge */
+html { color-scheme: light; overflow-x: clip; background: var(--color-paper); }
+html[data-theme='dark'] { color-scheme: dark; }
+body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip; transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out); }
+::selection { background: var(--color-gold); color: var(--color-on-accent); }
+:focus-visible { outline-color: var(--color-gold); }
+.rdv-header { position: fixed; inset: 0 0 auto; z-index: 100; border-bottom: 1px solid transparent; color: var(--color-ink); transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out); }
+.rdv-header.is-scrolled { border-color: var(--color-rule); background: color-mix(in srgb, var(--color-paper) 94%, transparent); backdrop-filter: blur(14px); }
+.rdv-header-inner { width: min(100% - 2rem, 82rem); min-height: 5rem; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.rdv-brand-link { min-width: 0; }
+.rdv-wordmark { color: var(--color-ink) !important; font-family: var(--font-display) !important; }
+.rdv-wordmark-subtitle { color: var(--color-gold) !important; }
+.rdv-desktop-nav { display: flex; align-items: center; gap: 1.4rem; }
+.rdv-nav-link { color: var(--color-ink-soft); font-size: .82rem; font-weight: 650; white-space: nowrap; }
+.rdv-nav-link:hover, .rdv-nav-link.is-active { color: var(--color-ink); }
+.rdv-header-cta { display: inline-flex; min-height: 2.75rem; align-items: center; padding: .65rem .9rem; border: 1px solid var(--color-gold); border-radius: var(--radius-sm); background: var(--color-gold); color: var(--color-on-accent); font-size: .8rem; font-weight: 750; white-space: nowrap; }
+.rdv-theme-toggle, .rdv-menu-button { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-paper-raised); color: var(--color-ink); cursor: pointer; }
+.rdv-theme-toggle svg, .rdv-menu-button svg { width: 1rem; height: 1rem; }
+.rdv-mobile-actions { display: none; align-items: center; gap: .5rem; }
+.rdv-mobile-nav { display: none; overflow: hidden; border-top: 1px solid var(--color-rule); background: var(--color-paper); padding: 1rem; }
+.rdv-mobile-nav a { display: flex; min-height: 3rem; align-items: center; border-bottom: 1px solid var(--color-rule); color: var(--color-ink); white-space: nowrap; }
+.rdv-mobile-nav .rdv-header-cta { justify-content: center; margin-top: 1rem; border-bottom: 1px solid var(--color-gold); }
+html[data-theme='light'] [class*="bg-[#030303]"], html[data-theme='light'] [class*="bg-[#090909]"], html[data-theme='light'] [class*="bg-[#0D0D0D]"] { background-color: var(--color-paper) !important; }
+html[data-theme='light'] .text-white { color: var(--color-ink) !important; }
+html[data-theme='light'] [class*="text-[#A1A1AA]"], html[data-theme='light'] [class*="text-[#D4D4D8]"], html[data-theme='light'] [class*="text-[#71717A]"] { color: var(--color-ink-soft) !important; }
+html[data-theme='light'] [class*="border-white"] { border-color: var(--color-rule) !important; }
+@media (max-width: 900px) {
+  .rdv-desktop-nav { display: none; }
+  .rdv-mobile-actions { display: flex; }
+  .rdv-mobile-nav { display: grid; }
+}
+@media (prefers-reduced-motion: reduce) { body, .rdv-header { transition: none; } }
+
+.rdv-cookie { position: fixed; left: 1.5rem; bottom: 1.5rem; z-index: 9998; width: min(calc(100% - 3rem), 24rem); padding: 1.15rem; border: 1px solid var(--color-rule); border-radius: var(--radius-md); background: var(--color-paper-raised); color: var(--color-ink); box-shadow: 0 1rem 3rem color-mix(in srgb, var(--color-ink) 16%, transparent); }
+.rdv-cookie-head, .rdv-cookie-head > div, .rdv-cookie-actions { display: flex; align-items: center; }
+.rdv-cookie-head { justify-content: space-between; gap: 1rem; }
+.rdv-cookie-head > div { gap: .55rem; }
+.rdv-cookie-head svg { width: 1rem; height: 1rem; color: var(--color-gold); }
+.rdv-cookie-head button { display: grid; width: 2.25rem; height: 2.25rem; place-items: center; border: 0; background: transparent; color: var(--color-ink-soft); cursor: pointer; }
+.rdv-cookie p { margin: .85rem 0 1rem; color: var(--color-ink-soft); font-size: .8rem; line-height: 1.6; }
+.rdv-cookie p a { color: var(--color-gold-strong); text-decoration: underline; text-underline-offset: .18em; }
+.rdv-cookie-actions { gap: .5rem; }
+.rdv-cookie-actions button, .rdv-cookie-actions > a { display: inline-flex; min-height: 2.6rem; flex: 1; align-items: center; justify-content: center; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: transparent; color: var(--color-ink); font-size: .75rem; font-weight: 750; cursor: pointer; white-space: nowrap; }
+.rdv-cookie-actions .is-primary { border-color: var(--color-gold); background: var(--color-gold); color: var(--color-on-accent); }
