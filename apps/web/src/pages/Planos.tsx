@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel } from '@/hooks/useAnimation';
