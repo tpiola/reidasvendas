@@ -1,136 +1,123 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BRAND } from '@/lib/brand';
 import './HomeSovereign.css';
 
-const stages = [
-  ['Começando agora', 'Ainda não tenho uma presença digital consistente.', 'inicio'],
-  ['Já tenho algo no ar', 'Tenho site ou redes, mas os resultados oscilam.', 'evolucao'],
-  ['Negócio estabelecido', 'Quero previsibilidade, escala e governança.', 'escala'],
+type PanelData = {
+  conversations: number | null;
+  appointments: number | null;
+  lastResponse: string | null;
+  firstContact: string | null;
+};
+
+const PANEL: PanelData = {
+  conversations: null,
+  appointments: null,
+  lastResponse: null,
+  firstContact: null,
+};
+
+const cases = [
+  { name: 'Sentinela Saúde Ambiental', before: 'Atendimento e apresentação digital dispersos.', running: 'Site comercial publicado, com rotas claras para os serviços e contato.', href: 'https://sentinelasaudeambiental.com.br' },
+  { name: 'Better Controle de Pragas', before: 'Presença digital sem uma jornada comercial central.', running: 'Estrutura digital entregue para apresentar serviços e receber solicitações.' },
+  { name: 'Farmácia Sete Lírios', before: 'Operação sem uma plataforma própria de gestão.', running: 'Plataforma de gestão construída para apoiar a rotina da empresa.' },
+  { name: 'Elisa Regina', before: 'Atendimento terapêutico sem fluxo digital de agenda.', running: 'Presença profissional com agendamento integrado.' },
 ];
 
-const foundations = [
-  ['Mapeamento de Perfil Diamante', 'Leitura do negócio, oferta, público e pontos de atrito antes de definir qualquer arquitetura.'],
-  ['Arquitetura exclusiva', 'Site, páginas, fluxos e integrações desenhados para a realidade de cada empresa.'],
-  ['Engenharia de conversão', 'Hierarquia, conteúdo e caminhos de contato organizados para facilitar a próxima decisão.'],
-  ['Governança contínua', 'Publicação, estabilidade, segurança, medição e evolução sob responsabilidade técnica clara.'],
+const plans = [
+  { name: 'Presença ativa', monthly: 'R$ 747', setup: 'R$ 1.497', description: 'Para transformar visitas em conversas sem deixar o cliente esperando.', items: ['Site comercial estático e indexável', 'WhatsApp com respostas essenciais', 'Painel mensal de contatos', 'Hospedagem e manutenção'] },
+  { name: 'Captação contínua', monthly: 'R$ 1.097', setup: 'R$ 1.997', description: 'Para organizar atendimento, agenda e acompanhamento em uma operação única.', items: ['Tudo do plano Presença ativa', 'Automação de atendimento', 'Agenda ou triagem integrada', 'Painel operacional atualizado'] },
+  { name: 'Operação completa', monthly: 'R$ 1.497', setup: 'R$ 2.497', description: 'Para negócios que precisam medir, corrigir e ampliar a captação todos os meses.', items: ['Tudo do plano Captação contínua', 'Rotas por serviço ou campanha', 'Integrações sob escopo', 'Revisão mensal de desempenho'] },
 ];
 
-const audit = [
-  ['01', 'Presença', 'Site, busca local, mapa, identidade e consistência das informações públicas.'],
-  ['02', 'Conversão', 'Oferta, prova, clareza, CTAs, formulários e caminhos até o contato.'],
-  ['03', 'Tecnologia', 'Performance, responsividade, acessibilidade, segurança e integrações essenciais.'],
-  ['04', 'Governança', 'Medição, continuidade, documentação, publicação e prioridades de evolução.'],
+const verticals = [
+  { name: 'Odontologia', href: '/odontologia', pain: 'Responde dúvidas, filtra urgências e leva o paciente até o agendamento.' },
+  { name: 'Advocacia', href: '/advocacia', pain: 'Organiza a primeira conversa sem prometer resultado e sem perder o histórico.' },
+  { name: 'Imobiliária', href: '/imobiliaria', pain: 'Identifica interesse, faixa de valor e região antes do corretor assumir.' },
+  { name: 'Estética', href: '/estetica', pain: 'Apresenta procedimentos, tira dúvidas recorrentes e encaminha para a agenda.' },
 ];
 
-const projects = [
-  ['SaúdeGPT', 'Produto digital de saúde', 'https://saudegpt.com', 'Produto'],
-  ['Sentinela', 'Saúde ambiental e controle de pragas', 'https://sentinelasaudeambiental.com.br', 'Site local'],
-  ['Thiago Piola', 'Autoridade e portfólio profissional', 'https://thiagopiola.com.br', 'Presença'],
-];
+function Metric({ label, value, empty }: { label: string; value: string | number | null; empty: string }) {
+  return (
+    <div className="rv-metric">
+      <dt>{label}</dt>
+      <dd className={value === null ? 'is-empty' : 'has-value'}>{value ?? '—'}</dd>
+      {value === null && <small>{empty}</small>}
+    </div>
+  );
+}
 
-const models = [
-  ['Clínica odontológica', 'odontologia'], ['Dedetização', 'dedetizacao'],
-  ['Restaurante e delivery', 'restaurante'], ['Estética e beleza', 'estetica'],
-  ['Academia e studio', 'academia'], ['Oficina mecânica', 'oficina'],
-  ['Pet shop', 'pet-shop'], ['Advocacia', 'advocacia'],
-  ['Imobiliária', 'imobiliaria'], ['Escola e cursos', 'escola'],
-];
+export function LivePanel({ data = PANEL }: { data?: PanelData }) {
+  const [clock, setClock] = useState('');
+  useEffect(() => {
+    const tick = () => setClock(new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(new Date()));
+    tick();
+    const timer = window.setInterval(tick, 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+  return (
+    <section className="rv-panel" aria-label="Exemplo do painel entregue ao cliente">
+      <header className="rv-panel-head">
+        <div><span className="rv-status" /> Operação online</div>
+        <time dateTime={new Date().toISOString()}>{clock || '00:00:00'}</time>
+      </header>
+      <dl className="rv-metrics">
+        <Metric label="Conversas atendidas hoje" value={data.conversations} empty="A primeira conversa aparece aqui." />
+        <Metric label="Agendamentos confirmados" value={data.appointments} empty="Conecte sua agenda para começar." />
+        <Metric label="Última resposta automática" value={data.lastResponse} empty="Nenhuma resposta enviada ainda." />
+        <Metric label="Tempo até o primeiro contato" value={data.firstContact} empty="O tempo será medido no primeiro lead." />
+      </dl>
+      <footer className="rv-panel-foot"><span>Dados do atendimento</span><span>Atualização contínua</span></footer>
+    </section>
+  );
+}
 
 export default function Home() {
-  useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.sv-reveal');
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      elements.forEach((element) => element.classList.add('is-visible'));
-      return;
-    }
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, []);
-
+  const whatsapp = `${BRAND.whatsapp}&text=${encodeURIComponent(' Quero ver como a operação mensal funciona para o meu negócio.')}`;
   return (
-    <main className="sv-home" id="main-content">
-      <section className="sv-hero" aria-labelledby="home-title">
-        <div className="sv-shell sv-hero-layout">
-          <div className="sv-hero-copy">
-            <p className="sv-kicker">Engenharia de crescimento para negócios locais</p>
-            <h1 id="home-title">Engenharia que transforma presença digital em <strong>decisão comercial.</strong></h1>
-            <p className="sv-lead">O Rei das Vendas organiza posicionamento, experiência, conversão e tecnologia em uma operação clara, mensurável e construída para a realidade do seu negócio.</p>
-            <div className="sv-actions">
-              <Link className="sv-button" to="/diagnostico">Iniciar diagnóstico <span aria-hidden="true">→</span></Link>
-              <Link className="sv-link" to="/solucoes">Ver soluções <span aria-hidden="true">↗</span></Link>
+    <main className="rv-home" id="main-content">
+      <section className="rv-hero">
+        <div className="rv-shell rv-hero-grid">
+          <div className="rv-hero-intro">
+            <p className="rv-overline">Atendimento e captação para negócios locais</p>
+            <h1>Seu atendimento continua quando você para.</h1>
+            <p>Este painel é o produto. O site vem junto.</p>
+            <div className="rv-actions">
+              <a className="rv-button" href={whatsapp} target="_blank" rel="noopener noreferrer">Ver no WhatsApp <span aria-hidden="true">↗</span></a>
+              <a className="rv-text-link" href={`mailto:${BRAND.email}?subject=Operação mensal Rei das Vendas`}>Enviar e-mail</a>
             </div>
-            <dl className="sv-proof-list">
-              <div><dt>Processo documentado</dt><dd>Decisões, critérios e responsáveis definidos.</dd></div>
-              <div><dt>Escopo validado</dt><dd>Prioridades alinhadas antes da execução.</dd></div>
-              <div><dt>Entrega acompanhada</dt><dd>Visibilidade do início à evolução.</dd></div>
-            </dl>
           </div>
+          <LivePanel />
+        </div>
+      </section>
 
-          <div className="sv-diagnostic" aria-labelledby="diagnostic-title">
-            <div className="sv-diagnostic-head">
-              <div><p>Diagnóstico Rei das Vendas</p><h2 id="diagnostic-title">Qual é o estágio atual do seu negócio?</h2></div>
-              <span>Passo 1 de 2</span>
-            </div>
-            <p className="sv-diagnostic-intro">Escolha o ponto de partida para receber uma análise coerente com o seu momento.</p>
-            <div className="sv-stage-list">
-              {stages.map(([title, text, stage], index) => (
-                <Link key={stage} to={`/diagnostico?estagio=${stage}`}>
-                  <span>0{index + 1}</span><div><strong>{title}</strong><small>{text}</small></div><b aria-hidden="true">→</b>
-                </Link>
-              ))}
-            </div>
-            <p className="sv-privacy">Suas respostas são usadas somente para preparar o diagnóstico.</p>
+      <section className="rv-one-line"><div className="rv-shell"><p>Seu WhatsApp responde às 22h de sábado, registra cada conversa e mostra o que virou oportunidade.</p></div></section>
+
+      <section className="rv-section" id="prova">
+        <div className="rv-shell">
+          <header className="rv-section-head"><h2>O que já colocamos para rodar.</h2><p>Sem números decorativos. Quando uma métrica não está confirmada, mostramos apenas a entrega verificável.</p></header>
+          <div className="rv-cases">
+            {cases.map((item) => {
+              const content = <><h3>{item.name}</h3><dl><div><dt>Antes</dt><dd>{item.before}</dd></div><div><dt>Passou a rodar</dt><dd>{item.running}</dd></div></dl><p>Métrica pública confirmada: <strong>não informada</strong></p></>;
+              return item.href ? <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className="rv-case">{content}<span aria-hidden="true">↗</span></a> : <article key={item.name} className="rv-case">{content}</article>;
+            })}
           </div>
         </div>
-        <div className="sv-shell sv-hero-media">
-          <img src="/imagens/rei-das-vendas-hero.webp" alt="Ambiente de um negócio local preparado para receber clientes" width="1344" height="768" fetchPriority="high" />
-          <p><strong>Negócios reais exigem presença profissional.</strong><span>Imagem editorial ilustrativa produzida para o Rei das Vendas.</span></p>
+      </section>
+
+      <section className="rv-section rv-pricing" id="precos">
+        <div className="rv-shell">
+          <header className="rv-section-head"><h2>Mensalidade clara. Operação contínua.</h2><p>Setup coloca tudo no ar. Mensalidade mantém atendimento, painel e evolução funcionando.</p></header>
+          <div className="rv-plans">
+            {plans.map((plan) => <article className="rv-plan" key={plan.name}><header><h3>{plan.name}</h3><p>{plan.description}</p></header><div className="rv-price"><strong>{plan.monthly}</strong><span>/mês</span></div><p className="rv-setup">Setup único <b>{plan.setup}</b></p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href={`${whatsapp}&text=${encodeURIComponent(` Tenho interesse no plano ${plan.name}.`)}`} target="_blank" rel="noopener noreferrer">Conversar sobre este plano <span aria-hidden="true">→</span></a></article>)}
+          </div>
         </div>
       </section>
 
-      <section id="solucoes" className="sv-statement sv-reveal">
-        <div className="sv-shell">
-          <p className="sv-kicker">O formato</p>
-          <h2>Não é pacote pronto. É uma <span>unidade externa de tecnologia e governança.</span></h2>
-          <p>Uma estrutura terceirizada e independente que mapeia prioridades, constrói a solução e mantém a evolução digital conectada a indicadores verificáveis.</p>
-        </div>
-      </section>
+      <section className="rv-section" id="segmentos"><div className="rv-shell"><header className="rv-section-head"><h2>A operação muda com o seu balcão.</h2><p>Cada rota fala da dor real do setor e entrega HTML indexável sem depender do JavaScript.</p></header><div className="rv-verticals">{verticals.map(item => <a href={item.href} key={item.name}><h3>{item.name}</h3><p>{item.pain}</p><span>Ver operação para {item.name.toLowerCase()} →</span></a>)}</div></div></section>
 
-      <section id="metodo" className="sv-section sv-reveal">
-        <div className="sv-shell">
-          <header className="sv-section-head"><div><p className="sv-kicker">Solução completa digital</p><h2>Uma execução. Quatro camadas de soberania.</h2></div><p>A tecnologia vem depois do diagnóstico. Primeiro organizamos a hierarquia do negócio; depois, os componentes, integrações e a governança necessários.</p></header>
-          <div className="sv-foundations">{foundations.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
-        </div>
-      </section>
+      <section className="rv-section rv-entry"><div className="rv-shell"><header className="rv-section-head"><h2>Entrada curta. Rotina visível.</h2></header><div className="rv-entry-grid"><article><h3>Mapeamos o atendimento</h3><p>Perguntas, horários, serviços e o ponto em que uma pessoa precisa assumir.</p></article><article><h3>Colocamos a operação no ar</h3><p>Site, WhatsApp, agenda e painel entram em funcionamento com um escopo fechado.</p></article><article><h3>Você acompanha o número</h3><p>Conversas, agendamentos e tempo de resposta ficam visíveis para orientar a próxima decisão.</p></article></div></div></section>
 
-      <section className="sv-audit sv-reveal">
-        <div className="sv-shell sv-audit-grid">
-          <div><p className="sv-kicker">Diagnóstico antes da execução</p><h2>Decisão técnica começa com uma leitura fria do cenário.</h2><p>Mapeamos o que existe, onde há atrito e o que realmente merece prioridade. Sem urgência artificial e sem métrica inventada.</p><Link className="sv-link" to="/diagnostico">Iniciar diagnóstico <span aria-hidden="true">↗</span></Link></div>
-          <div className="sv-audit-list">{audit.map(([number, title, text]) => <article key={title}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></article>)}</div>
-        </div>
-      </section>
-
-      <section className="sv-project-section sv-reveal">
-        <div className="sv-shell">
-          <header className="sv-section-head"><div><p className="sv-kicker">Projetos em produção</p><h2>Capacidade demonstrada em operações publicadas.</h2></div><p>Cada arquitetura responde ao objetivo, ao público e ao estágio específico do projeto.</p></header>
-          <div className="sv-projects">{projects.map(([name, text, url, label]) => <a href={url} target="_blank" rel="noopener noreferrer" key={name}><span>{label}</span><h3>{name}</h3><p>{text}</p><b aria-hidden="true">↗</b></a>)}</div>
-          <Link className="sv-button sv-button-inline" to="/portfolio">Ver arquiteturas publicadas <span aria-hidden="true">→</span></Link>
-        </div>
-      </section>
-
-      <section className="sv-segments sv-reveal">
-        <div className="sv-shell"><p className="sv-kicker">Biblioteca de possibilidades</p><h2>Referências por segmento. A solução final continua exclusiva.</h2><div className="sv-segment-list">{models.map(([model, slug]) => <Link to={`/contato?modelo=${slug}`} key={model}>{model}<span aria-hidden="true">↗</span></Link>)}</div><Link className="sv-button sv-button-inline" to="/templates">Explorar possibilidades <span aria-hidden="true">→</span></Link></div>
-      </section>
-
-      <section className="sv-cta sv-reveal">
-        <div className="sv-shell"><p className="sv-kicker">Próximo movimento</p><h2>Antes de construir mais tecnologia, descubra o que merece ser construído.</h2><p>O processo começa pelo cenário, pelos gargalos e pelas prioridades capazes de sustentar uma solução digital completa.</p><Link className="sv-button sv-button-inline" to="/diagnostico">Iniciar diagnóstico <span aria-hidden="true">↗</span></Link><small>Escopo transparente · Arquitetura exclusiva · Governança independente</small></div>
-      </section>
+      <section className="rv-close"><div className="rv-shell"><p>Quer ver essa operação aplicada ao seu negócio?</p><a className="rv-button" href={whatsapp} target="_blank" rel="noopener noreferrer">Abrir conversa no WhatsApp <span aria-hidden="true">↗</span></a></div></section>
     </main>
   );
 }
