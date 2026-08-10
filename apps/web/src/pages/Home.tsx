@@ -72,7 +72,7 @@ export function LivePanel({ data = PANEL }: { data?: PanelData }) {
 }
 
 export default function Home() {
-  const whatsapp = `${BRAND.whatsapp}&text=${encodeURIComponent(' Quero ver como a operação mensal funciona para o meu negócio.')}`;
+  const whatsapp = `https://wa.me/${BRAND.phone}?text=${encodeURIComponent('Olá! Quero ver como a operação mensal funciona para o meu negócio.')}`;
   return (
     <main className="rv-home" id="main-content">
       <section className="rv-hero">
@@ -108,7 +108,7 @@ export default function Home() {
         <div className="rv-shell">
           <header className="rv-section-head"><h2>Mensalidade clara. Operação contínua.</h2><p>Setup coloca tudo no ar. Mensalidade mantém atendimento, painel e evolução funcionando.</p></header>
           <div className="rv-plans">
-            {plans.map((plan) => <article className="rv-plan" key={plan.name}><header><h3>{plan.name}</h3><p>{plan.description}</p></header><div className="rv-price"><strong>{plan.monthly}</strong><span>/mês</span></div><p className="rv-setup">Setup único <b>{plan.setup}</b></p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href={`${whatsapp}&text=${encodeURIComponent(` Tenho interesse no plano ${plan.name}.`)}`} target="_blank" rel="noopener noreferrer">Conversar sobre este plano <span aria-hidden="true">→</span></a></article>)}
+            {plans.map((plan) => <article className="rv-plan" key={plan.name}><header><h3>{plan.name}</h3><p>{plan.description}</p></header><div className="rv-price"><strong>{plan.monthly}</strong><span>/mês</span></div><p className="rv-setup">Setup único <b>{plan.setup}</b></p><ul>{plan.items.map(item => <li key={item}>{item}</li>)}</ul><a href={`https://wa.me/${BRAND.phone}?text=${encodeURIComponent(`Olá! Tenho interesse no plano ${plan.name}.`)}`} target="_blank" rel="noopener noreferrer">Conversar sobre este plano <span aria-hidden="true">→</span></a></article>)}
           </div>
         </div>
       </section>
