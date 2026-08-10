@@ -28,6 +28,7 @@ const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Builder = lazy(() => import('@/pages/Builder'));
 const Templates = lazy(() => import('@/pages/Templates'));
 const Extensions = lazy(() => import('@/pages/Extensions'));
+const VerticalLanding = lazy(() => import('@/pages/VerticalLanding'));
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -110,6 +111,10 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   '/': {
     title: BRAND.seo.title,
     description: BRAND.seo.description,
+  },
+  '/odontologia': {
+    title: 'Atendimento e captação para odontologia em Franca | Rei das Vendas',
+    description: 'Operação mensal para clínicas odontológicas com resposta fora do horário, triagem, agenda e painel de resultado.',
   },
   '/solucoes': {
     title: 'Soluções digitais para negócios locais em Franca | Rei das Vendas',
@@ -209,6 +214,10 @@ function SiteLayout() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/odontologia" element={<PageTransition><VerticalLanding /></PageTransition>} />
+              <Route path="/advocacia" element={<PageTransition><VerticalLanding sector="Advocacia" /></PageTransition>} />
+              <Route path="/imobiliaria" element={<PageTransition><VerticalLanding sector="Imobiliária" /></PageTransition>} />
+              <Route path="/estetica" element={<PageTransition><VerticalLanding sector="Estética" /></PageTransition>} />
               <Route path="/solucoes" element={<PageTransition><Solucoes /></PageTransition>} />
               <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
               <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
@@ -263,14 +272,19 @@ const structuredData = {
       priceRange: '$$',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Sites profissionais para negócios locais',
+        name: 'Operação mensal de atendimento e captação',
         itemListElement: [
           {
             '@type': 'Offer',
             itemOffered: {
               '@type': 'Service',
-              name: 'Criação de sites profissionais',
-              description: 'Planejamento, design, desenvolvimento, revisão e publicação de sites para negócios locais.',
+              name: 'Operação mensal de atendimento e captação',
+              description: 'Atendimento, captação, site indexável e painel de resultado para negócios locais.',
+              offers: [
+                { '@type': 'Offer', price: '747', priceCurrency: 'BRL' },
+                { '@type': 'Offer', price: '1097', priceCurrency: 'BRL' },
+                { '@type': 'Offer', price: '1497', priceCurrency: 'BRL' },
+              ],
               areaServed: BRAND.seo.geo.areaServed,
             },
           },
