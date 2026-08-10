@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Rei das Vendas',
-  tagline: 'Unidade Externa de Tecnologia e Governança de Resultados',
-  subtitle: 'Soberania Digital para transformar presença, tecnologia e conversão em uma operação governável.',
+  tagline: 'Atendimento e captação que rodam todos os dias',
+  subtitle: 'WhatsApp, site, agenda e painel de resultado em uma operação mensal.',
   phone: '5516992333344',
   whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
@@ -52,8 +52,8 @@ export const BRAND = {
     },
   },
   seo: {
-    title: 'Rei das Vendas — Tecnologia e Governança de Resultados',
-    description: 'Unidade Externa de Tecnologia e Governança de Resultados para empresas que precisam organizar presença, conversão e evolução digital com arquitetura exclusiva.',
+    title: 'Atendimento e captação mensal em Franca | Rei das Vendas',
+    description: 'Operação mensal de atendimento, captação e painel de resultado para negócios locais em Franca e região. Planos de R$ 747 a R$ 1.497 por mês.',
     keywords: [
       'site profissional Franca SP',
       'criação de sites Franca',
