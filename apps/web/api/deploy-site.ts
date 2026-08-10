@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- legacy Node/Vercel runtime adapters */
 /* ═══════════════════════════════════════════
    API DEPLOY-SITE.TS — Rei das Vendas
    Publica site gerado por IA na Vercel em tempo real
@@ -10,7 +11,6 @@ type Res = { statusCode?: number; setHeader?: (k: string, v: string) => void; en
 
 const MAX_BODY_BYTES = 128_000;
 const VERCEL_API = 'https://api.vercel.com';
-const VERIFIER = 'reidasvendas.com.br';
 
 type DeployPayload = {
   companyName: string;
@@ -115,7 +115,6 @@ function json(res: Res, status: number, body: unknown) {
 function generateSiteHtml(payload: DeployPayload): string {
   const { companyName, sector, generatedSite: site } = payload;
   const p = site.palette;
-  const domainName = `${sanitizeDomain(companyName)}.vercel.app`;
 
   const featuresHtml = site.sections
     .slice(0, 6)
