@@ -89,7 +89,7 @@ export default function Home() {
           </div>
         </div>
         <div className="sv-shell sv-hero-media">
-          <img src="/imagens/rei-das-vendas-hero.webp" alt="Ambiente de um negócio local preparado para receber clientes" width="1344" height="768" fetchPriority="high" />
+          <img src="/imagens/rei-das-vendas-hero.webp" alt="Ambiente de um negócio local preparado para receber clientes" width="1344" height="768" loading="lazy" decoding="async" />
           <p><strong>Negócios reais exigem presença profissional.</strong><span>Imagem editorial ilustrativa produzida para o Rei das Vendas.</span></p>
         </div>
       </section>
