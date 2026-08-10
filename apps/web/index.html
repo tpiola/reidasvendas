@@ -1,140 +1,23 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="theme-color" content="#F6F2E9" />
-    <meta name="color-scheme" content="light dark" />
-
-    <title>Rei das Vendas — Tecnologia e Governança de Resultados</title>
-    <meta
-      name="description"
-      content="Unidade Externa de Tecnologia e Governança de Resultados para empresas que precisam organizar presença, conversão e evolução digital com arquitetura exclusiva."
-    />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <link rel="canonical" href="https://reidasvendas.com.br/" />
-
-    <meta name="geo.region" content="BR-SP" />
-    <meta name="geo.placename" content="Franca" />
-    <meta name="business:contact_data:locality" content="Franca" />
-    <meta name="business:contact_data:region" content="SP" />
-    <meta name="business:contact_data:country_name" content="Brasil" />
-
-    <!-- Structured data (JSON-LD) inline no HTML inicial => processamento rapido pelo Google
-         (recomendado por skill seo-schema: JSON-LD server-rendered evita atraso do JS). -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": ["LocalBusiness", "ProfessionalService"],
-          "@id": "https://reidasvendas.com.br/#organization",
-          "name": "Rei das Vendas",
-          "description": "Unidade Externa de Tecnologia e Governança de Resultados para empresas que precisam organizar presença, conversão e evolução digital com arquitetura exclusiva.",
-          "url": "https://reidasvendas.com.br",
-          "email": "contato@reidasvendas.com.br",
-          "telephone": "+5516992333344",
-          "priceRange": "$$",
-          "image": "https://reidasvendas.com.br/imagens/og-default.jpg",
-          "logo": "https://reidasvendas.com.br/favicon.svg",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Franca",
-            "addressRegion": "SP",
-            "addressCountry": "BR"
-          },
-          "areaServed": ["Franca", "Região de Franca", "Brasil"],
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": -20.5389,
-            "longitude": -47.4016
-          },
-          "sameAs": [
-            "https://instagram.com/reidasvendas",
-            "https://linkedin.com/company/reidasvendas"
-          ],
-          "founder": {
-            "@type": "Person",
-            "name": "Thiago B. G. Piola"
-          }
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://reidasvendas.com.br/#website",
-          "url": "https://reidasvendas.com.br",
-          "name": "Rei das Vendas",
-          "inLanguage": "pt-BR",
-          "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
-        }
-      ]
-    }
-    </script>
-
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Rei das Vendas" />
-    <meta property="og:title" content="Rei das Vendas — Soberania Digital e Governança de Resultados" />
-    <meta
-      property="og:description"
-      content="Arquitetura, tecnologia e governança para transformar presença digital em uma operação mensurável e orientada ao negócio."
-    />
-    <meta property="og:url" content="https://reidasvendas.com.br/" />
-    <meta property="og:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rei das Vendas — Soberania Digital e Governança de Resultados" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rei das Vendas — Soberania Digital e Governança de Resultados" />
-    <meta
-      name="twitter:description"
-      content="Arquitetura, tecnologia e governança para transformar presença digital em uma operação mensurável e orientada ao negócio."
-    />
-    <meta name="twitter:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/pwa-192.svg" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-
-    <!-- Fontes: preload + swap. Removido @import duplicado do CSS (causava FOUC e dupla carga). -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-      />
-    </noscript>
-
-    <script>
-      (() => {
-        const theme = localStorage.getItem('rdv-theme') === 'dark' ? 'dark' : 'light';
-        document.documentElement.dataset.theme = theme;
-        document.documentElement.classList.toggle('dark', theme === 'dark');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0B0D10' : '#F6F2E9');
-      })();
-    </script>
-
-    <!-- Critical CSS inline: tema aplicado antes do React, sem flash de cor. -->
-    <style>
-      *,*::before,*::after{box-sizing:border-box}
-      html,body{background:#f6f2e9;color:#102033;margin:0;min-width:320px}
-      html[data-theme="dark"],html[data-theme="dark"] body{background:#0b0d10;color:#f4efe5}
-      body{font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
-      #root{min-height:100dvh}
-    </style>
-  </head>
-  <body>
-    <noscript>Este site precisa do JavaScript ativado para exibir as páginas e formulários.</noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0A0A0A" />
+  <title>Atendimento e captação mensal em Franca | Rei das Vendas</title>
+  <meta name="description" content="Operação mensal de atendimento, captação e painel de resultado para negócios locais em Franca e região. Planos de R$ 747 a R$ 1.497 por mês." />
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large" />
+  <link rel="canonical" href="https://reidasvendas.com.br/" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["LocalBusiness","ProfessionalService"],"@id":"https://reidasvendas.com.br/#business","name":"Rei das Vendas","url":"https://reidasvendas.com.br/","telephone":"+5516992333344","email":"contato@reidasvendas.com.br","address":{"@type":"PostalAddress","addressLocality":"Franca","addressRegion":"SP","addressCountry":"BR"},"areaServed":["Franca","Região de Franca"],"priceRange":"R$ 747–R$ 1.497/mês"},{"@type":"Service","name":"Operação mensal de atendimento e captação","provider":{"@id":"https://reidasvendas.com.br/#business"},"areaServed":["Franca","Região de Franca"],"offers":[{"@type":"Offer","name":"Presença ativa","price":"747","priceCurrency":"BRL"},{"@type":"Offer","name":"Captação contínua","price":"1097","priceCurrency":"BRL"},{"@type":"Offer","name":"Operação completa","price":"1497","priceCurrency":"BRL"}]}]}</script>
+  <style>*{box-sizing:border-box}html,body{margin:0;background:#0a0a0a;color:#f2f0e9;font-family:Satoshi,sans-serif}#root{min-height:100dvh}.static-first{width:min(100% - 2rem,82rem);margin:auto;padding:9rem 0}.static-first h1{max-width:10ch;margin:0;font-family:'Clash Display',sans-serif;font-size:clamp(3.5rem,9vw,8rem);line-height:.82;letter-spacing:-.06em}.static-first p{max-width:42rem;color:#aaa79d;line-height:1.7}.static-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:3rem;border:1px solid #2a2925}.static-panel div{min-height:8rem;padding:1rem;border:1px solid #2a2925}.static-panel strong{display:block;color:#a56d42;font:600 2.5rem 'JetBrains Mono',monospace}@media(max-width:480px){.static-panel{grid-template-columns:1fr}}</style>
+</head>
+<body>
+  <div id="root"><main class="static-first"><p>Atendimento e captação para negócios locais</p><h1>Seu atendimento continua quando você para.</h1><p>Este painel é o produto. O site vem junto. Seu WhatsApp responde fora do expediente, registra cada conversa e mostra o que virou oportunidade.</p><section class="static-panel" aria-label="Painel entregue ao cliente"><div>Conversas atendidas hoje<strong>—</strong>O primeiro contato aparece aqui.</div><div>Agendamentos confirmados<strong>—</strong>Conecte sua agenda para começar.</div><div>Última resposta automática<strong>—</strong>Nenhuma resposta ainda.</div><div>Tempo até o primeiro contato<strong>—</strong>Medido no primeiro lead.</div></section><h2>Planos mensais</h2><p>Presença ativa: R$ 747/mês. Captação contínua: R$ 1.097/mês. Operação completa: R$ 1.497/mês.</p><a href="https://wa.me/5516992333344">Conversar pelo WhatsApp</a></main></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
 </html>
