@@ -1,12 +1,19 @@
 # Design QA — Rei das Vendas
 
 - Reference: selected light-first diagnostic-table mockup
-- Prototype capture: unavailable until a branch preview is created
-- Functional source review: completed
-- Production-site interaction audit: completed with one observed accordion interaction timeout in automated browser control
+- Preview: Vercel branch deployment
+- Desktop visual comparison: passed
+- Light theme default: passed
+- Dark theme toggle and persistence: passed
+- Primary navigation and diagnostic routes: passed
+- Editorial image loading: passed
+- Cookie consent privacy route: passed after correction
+- GitHub CI: passed on implementation build
+- Console: no application-owned blocking errors observed
 
-## Blocking gate
+## Verified routes
 
-The branch has not been opened in a runnable preview, so visual comparison at matching desktop and mobile viewports cannot be completed honestly.
+`/`, `/solucoes`, `/templates`, `/portfolio`, `/sobre`, `/diagnostico`,
+`/diagnostico?estagio=evolucao`, `/contato?modelo=odontologia`, `/politica`.
 
-**final result: blocked**
+**final result: passed**
