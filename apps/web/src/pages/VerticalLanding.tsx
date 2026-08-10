@@ -4,7 +4,7 @@ import '@/pages/HomeSovereign.css';
 
 export default function VerticalLanding({ sector = 'Odontologia' }: { sector?: string }) {
   const isDentistry = sector === 'Odontologia';
-  const whatsapp = `${BRAND.whatsapp}&text=${encodeURIComponent(` Quero ver a operação mensal para ${sector.toLowerCase()}.`)}`;
+  const whatsapp = `https://wa.me/${BRAND.phone}?text=${encodeURIComponent(`Olá! Quero ver a operação mensal para ${sector.toLowerCase()}.`)}`;
   return (
     <main className="rv-home rv-vertical-page" id="main-content">
       <section className="rv-hero"><div className="rv-shell rv-hero-grid"><div className="rv-hero-intro"><p className="rv-overline">Operação mensal para {sector.toLowerCase()}</p><h1>{isDentistry ? 'Paciente respondido. Agenda preenchida.' : `Atendimento ativo para ${sector.toLowerCase()}.`}</h1><p>{isDentistry ? 'O paciente pergunta preço, horário ou urgência. A operação responde, organiza a intenção e encaminha para a agenda — inclusive fora do expediente.' : 'Atendimento, triagem e acompanhamento em uma rotina que continua funcionando depois que a equipe encerra o dia.'}</p><div className="rv-actions"><a className="rv-button" href={whatsapp} target="_blank" rel="noopener noreferrer">Ver no WhatsApp <span aria-hidden="true">↗</span></a></div></div><LivePanel /></div></section>
