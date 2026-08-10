@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- legacy Node/Vercel runtime adapters */
 /* ═══════════════════════════════════════════
    API GENERATE-SITE.TS — Rei das Vendas
    Gera estrutura e copy de site com DeepSeek
@@ -64,25 +65,6 @@ function json(res: Res, status: number, body: unknown) {
   try { (res as any).setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS'); } catch { /* ignore */ }
   try { (res as any).setHeader?.('Access-Control-Allow-Headers', 'Content-Type'); } catch { /* ignore */ }
   try { res.end?.(JSON.stringify(body)); } catch { /* ignore */ }
-}
-
-function parseBody(req: Req, rawBody?: string): unknown {
-  // Already parsed by Vercel helpers or body is an object
-  if (isObject(req.body)) return req.body;
-
-  // String body that needs parsing
-  if (typeof req.body === 'string') {
-    if (req.body.length > MAX_BODY_BYTES) return null;
-    try { return JSON.parse(req.body); } catch { return null; }
-  }
-
-  // Raw body buffer/string from request
-  if (typeof rawBody === 'string') {
-    if (rawBody.length > MAX_BODY_BYTES) return null;
-    try { return JSON.parse(rawBody); } catch { return null; }
-  }
-
-  return null;
 }
 
 function buildSystemPrompt(): string {
