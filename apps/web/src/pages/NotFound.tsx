@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Home, Briefcase, Layout, Mail, Search, Smile, MessageCircle, ClipboardCheck } from 'lucide-react';
+import { ArrowLeft, Home, Briefcase, Layout, Search, Smile, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion } from 'framer-motion';
 import { GoldParticles } from '@/components/GoldParticles';
