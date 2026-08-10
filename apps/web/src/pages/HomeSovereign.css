@@ -14,7 +14,7 @@
 
 .sv-hero { padding: 7.5rem 0 4rem; border-bottom: var(--rule-thin) solid var(--color-rule); }
 .sv-hero-layout { display: grid; gap: 3rem; align-items: start; }
-.sv-hero-copy h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 7vw, 6.75rem); font-weight: 600; line-height: .88; text-wrap: balance; }
+.sv-hero-copy h1 { max-width: 14ch; margin: 0; font-size: clamp(3.1rem, 6.1vw, 6rem); font-weight: 600; line-height: .91; text-wrap: balance; }
 .sv-hero-copy h1 strong { color: var(--color-gold); font-weight: inherit; }
 .sv-lead { max-width: 38rem; margin: 1.75rem 0 0; color: var(--color-ink-soft); font-size: clamp(1rem, 1.5vw, 1.18rem); line-height: 1.7; }
 .sv-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
@@ -112,6 +112,22 @@ body:has(.sv-home) .page-offset { padding-top: 0; }
   .sv-hero-layout { grid-template-columns: .95fr 1.05fr; gap: 4.5rem; }
   .sv-audit-grid { grid-template-columns: .9fr 1.1fr; gap: 6rem; }
   .sv-segment-list { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 64rem) and (max-height: 54rem) {
+  .sv-hero { padding-top: 6.25rem; }
+  .sv-hero-copy h1 { font-size: clamp(3.35rem, 5.35vw, 5rem); }
+  .sv-lead { margin-top: 1.25rem; line-height: 1.6; }
+  .sv-actions { margin-top: 1.4rem; }
+  .sv-proof-list { margin-top: 1.75rem; }
+  .sv-stage-list a { min-height: 5.4rem; }
+}
+
+body:has(.sv-home) .rdv-cookie {
+  left: 1rem;
+  bottom: 1rem;
+  width: min(calc(100% - 2rem), 21rem);
+  padding: 1rem;
 }
 
 @media (max-width: 47.99rem) {
