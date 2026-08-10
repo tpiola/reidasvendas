@@ -12,16 +12,16 @@ function applyTheme(theme: Theme) {
   root.style.colorScheme = theme;
   document.querySelector('meta[name="theme-color"]')?.setAttribute(
     'content',
-    theme === 'dark' ? '#0B0D10' : '#F6F2E9'
+    theme === 'dark' ? '#0A0A0A' : '#F1EEE5'
   );
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark');
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    const initial: Theme = saved === 'dark' ? 'dark' : 'light';
+    const initial: Theme = saved === 'light' ? 'light' : 'dark';
     setTheme(initial);
     applyTheme(initial);
   }, []);
