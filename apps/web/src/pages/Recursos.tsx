@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import {
   ArrowRight, Download, CheckCircle2,
   BookOpen, ClipboardList, PenTool, BarChart3, Puzzle, ChevronDown,
-  Star, Shield, Zap, Globe,
+  Star, Shield, Zap,
 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
