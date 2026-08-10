@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
+import Home from '@/pages/Home';
 import { SuporteBot } from '@/components/SuporteBot';
 import { BRAND } from '@/lib/brand';
 
-const Home = lazy(() => import('@/pages/Home'));
 const Servicos = lazy(() => import('@/pages/Servicos'));
 const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
