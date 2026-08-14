@@ -1,5 +1,5 @@
 {
-  "name": "altiq",
+  "name": "reidasvendas",
   "private": true,
   "packageManager": "pnpm@9.15.0",
   "scripts": {
@@ -12,8 +12,9 @@
     "a11y": "turbo run a11y",
     "storybook": "turbo run storybook",
     "format": "prettier -w .",
+    "format:check": "prettier -c .",
     "design:lint": "pnpm dlx @google/design.md lint DESIGN.md",
-    "ci": "pnpm check && pnpm lint && pnpm test && pnpm build:web && pnpm -C apps/web e2e",
+    "ci": "pnpm check && pnpm lint && pnpm test && pnpm build:web && pnpm -C apps/web e2e && pnpm a11y",
     "build:web": "turbo run build --filter=web"
   },
   "devDependencies": {

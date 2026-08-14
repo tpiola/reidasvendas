@@ -1,27 +1,31 @@
 # Contribuindo
 
-## Fluxo
+## Fluxo oficial
 
-- `main`: produção
-- `develop`: integração
-- `feat/*` e `fix/*`: branches curtas por mudança
+- `main`: produção, sempre estável e protegida;
+- `feat/*`: funcionalidades;
+- `fix/*`: correções;
+- `chore/*`: manutenção, infraestrutura e governança;
+- branches devem ser curtas e removidas após o merge.
 
-## Padrão de commits
+Não existe branch permanente de integração. Toda alteração entra por pull request com CI aprovado.
+
+## Commits
+
+Use Conventional Commits:
 
 - `feat: ...`
 - `fix: ...`
 - `chore: ...`
 - `docs: ...`
 - `test: ...`
+- `ci: ...`
 
-## Antes de abrir PR
+## Antes de abrir um PR
 
 ```bash
-pnpm check
-pnpm lint
-pnpm test
-pnpm build
-pnpm e2e
-pnpm a11y
+pnpm install --frozen-lockfile
+pnpm ci
 ```
 
+O PR deve explicar objetivo, risco, evidência de teste e plano de rollback quando afetar produção.
