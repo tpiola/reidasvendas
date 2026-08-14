@@ -15,13 +15,13 @@ colors:
 typography:
   display:
     fontFamily: "Georgia"
-    fontSize: "clamp(3rem, 7vw, 7rem)"
+    fontSize: "7rem"
     fontWeight: 400
     lineHeight: 0.98
     letterSpacing: "-0.045em"
   heading:
     fontFamily: "Georgia"
-    fontSize: "clamp(2.5rem, 5vw, 4.75rem)"
+    fontSize: "4.75rem"
     fontWeight: 400
     lineHeight: 1
     letterSpacing: "-0.035em"
