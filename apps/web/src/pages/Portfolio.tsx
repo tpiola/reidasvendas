@@ -43,6 +43,17 @@ const projetos = [
     href: 'https://thiagopiola.com.br',
     metrics: '',
   },
+  {
+    name: 'Keeus',
+    segment: 'E-commerce / Moda e Calçados',
+    client: 'Marca própria de chinelos premium',
+    description:
+      'Loja virtual de chinelos e slides premium, com catálogo por modelo, fotos reais em vários ângulos, guia de tamanhos e checkout parcelado. Case usado como exemplo de e-commerce enxuto e rápido de lançar.',
+    cover: '/imagens/portfolio/keeus.jpg',
+    techs: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    href: 'https://valdecikeeus.vercel.app',
+    metrics: '',
+  },
 ];
 
 /* ─── Processo ─── */
