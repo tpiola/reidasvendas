@@ -22,7 +22,7 @@
     "@types/node": "^22.15.30",
     "axe-core": "^4.10.3",
     "prettier": "^3.5.3",
-    "turbo": "^2.9.14"
+    "turbo": "^2.10.10"
   },
   "pnpm": {
     "overrides": {
