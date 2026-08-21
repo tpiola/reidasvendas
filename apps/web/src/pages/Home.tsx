@@ -29,9 +29,15 @@ const audit = [
 ];
 
 const projects = [
-  ['SaúdeGPT', 'Produto digital de saúde', 'https://saudegpt.com', 'Produto'],
-  ['Sentinela', 'Saúde ambiental e controle de pragas', 'https://sentinelasaudeambiental.com.br', 'Site local'],
-  ['Thiago Piola', 'Autoridade e portfólio profissional', 'https://thiagopiola.com.br', 'Presença'],
+  ['SaúdeGPT', 'Produto digital de saúde', 'https://saudegpt.com', 'Produto', '/imagens/portfolio/saudegpt.jpg'],
+  ['Sentinela', 'Saúde ambiental e controle de pragas', 'https://sentinelasaudeambiental.com.br', 'Site local', '/imagens/portfolio/sentinela.jpg'],
+  ['Thiago Piola', 'Autoridade e portfólio profissional', 'https://thiagopiola.com.br', 'Presença', '/imagens/portfolio/thiagopiola.jpg'],
+];
+
+const segmentImages = [
+  ['/imagens/nichos/saude.jpg', 'Tecnologia aplicada a uma operação de saúde'],
+  ['/imagens/nichos/servicos.jpg', 'Equipe de serviços usando processos digitais'],
+  ['/imagens/nichos/comercio.jpg', 'Operação comercial conectada por tecnologia'],
 ];
 
 const models = [
@@ -97,7 +103,7 @@ export default function Home() {
         <div className="sv-shell sv-ai-stage" aria-label="Sistema de inteligência operacional Rei das Vendas">
           <div className="sv-ai-grid" aria-hidden="true" />
           <div className="sv-ai-orbit" aria-hidden="true"><i /><i /><i /></div>
-          <img src="/logo-sovereign.png" alt="Rei das Vendas" width="560" height="560" decoding="async" />
+          <img src="/favicon.svg" alt="Símbolo Rei das Vendas" width="560" height="560" decoding="async" />
           <div className="sv-ai-status"><span>RDV / INTELLIGENCE CORE</span><strong>SISTEMA ATIVO</strong></div>
           <dl><div><dt>Camada 01</dt><dd>Estratégia</dd></div><div><dt>Camada 02</dt><dd>Inteligência</dd></div><div><dt>Camada 03</dt><dd>Execução</dd></div></dl>
         </div>
@@ -136,13 +142,13 @@ export default function Home() {
       <section className="sv-project-section sv-reveal">
         <div className="sv-shell">
           <header className="sv-section-head"><div><p className="sv-kicker">Projetos em produção</p><h2>Capacidade demonstrada em operações publicadas.</h2></div><p>Cada arquitetura responde ao objetivo, ao público e ao estágio específico do projeto.</p></header>
-          <div className="sv-projects">{projects.map(([name, text, url, label]) => <a href={url} target="_blank" rel="noopener noreferrer" key={name}><span>{label}</span><h3>{name}</h3><p>{text}</p><b aria-hidden="true">↗</b></a>)}</div>
+          <div className="sv-projects">{projects.map(([name, text, url, label, image]) => <a href={url} target="_blank" rel="noopener noreferrer" key={name}><img src={image} alt={`Projeto ${name}`} width="720" height="480" loading="lazy" decoding="async" /><div><span>{label}</span><h3>{name}</h3><p>{text}</p><b aria-hidden="true">↗</b></div></a>)}</div>
           <Link className="sv-button sv-button-inline" to="/portfolio">Ver arquiteturas publicadas <span aria-hidden="true">→</span></Link>
         </div>
       </section>
 
       <section className="sv-segments sv-reveal">
-        <div className="sv-shell"><p className="sv-kicker">Biblioteca de possibilidades</p><h2>Referências por segmento. A solução final continua exclusiva.</h2><div className="sv-segment-list">{models.map(([model, slug]) => <Link to={`/contato?modelo=${slug}`} key={model}>{model}<span aria-hidden="true">↗</span></Link>)}</div><Link className="sv-button sv-button-inline" to="/templates">Explorar possibilidades <span aria-hidden="true">→</span></Link></div>
+        <div className="sv-shell"><p className="sv-kicker">Biblioteca de possibilidades</p><h2>Referências por segmento. A solução final continua exclusiva.</h2><div className="sv-segment-visuals" aria-label="Operações atendidas">{segmentImages.map(([src, alt]) => <figure key={src}><img src={src} alt={alt} width="720" height="540" loading="lazy" decoding="async" /></figure>)}</div><div className="sv-segment-list">{models.map(([model, slug]) => <Link to={`/contato?modelo=${slug}`} key={model}>{model}<span aria-hidden="true">↗</span></Link>)}</div><Link className="sv-button sv-button-inline" to="/templates">Explorar possibilidades <span aria-hidden="true">→</span></Link></div>
       </section>
 
       <section className="sv-cta sv-reveal">

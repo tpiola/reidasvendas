@@ -10,10 +10,10 @@ export function BrandLockup({ compact = false, className, wordmarkClassName }: B
   return (
     <span className={cn('inline-flex min-w-0 items-center', compact ? 'gap-2.5' : 'gap-3.5', className)}>
       <img
-        src="/logo-sovereign.png"
+        src="/favicon.svg"
         alt=""
         aria-hidden="true"
-        className={cn('shrink-0 object-contain drop-shadow-[0_8px_24px_rgba(184,154,94,.18)]', compact ? 'h-12 w-12 sm:h-14 sm:w-14' : 'h-20 w-20 sm:h-24 sm:w-24')}
+        className={cn('shrink-0 object-contain drop-shadow-[0_8px_24px_rgba(200,255,53,.12)]', compact ? 'h-11 w-11 sm:h-12 sm:w-12' : 'h-16 w-16 sm:h-20 sm:w-20')}
       />
       <span className="min-w-0 leading-none">
         <span className={cn('rdv-wordmark block whitespace-nowrap font-semibold tracking-[-0.035em]', compact ? 'text-[1.35rem] sm:text-[1.55rem]' : 'text-3xl sm:text-4xl', wordmarkClassName)}>
