@@ -103,7 +103,7 @@ export default function Home() {
         <div className="sv-shell sv-ai-stage" aria-label="Sistema de inteligência operacional Rei das Vendas">
           <div className="sv-ai-grid" aria-hidden="true" />
           <div className="sv-ai-orbit" aria-hidden="true"><i /><i /><i /></div>
-          <img src="/favicon.svg" alt="Símbolo Rei das Vendas" width="560" height="560" decoding="async" />
+          <img src="/logo-mark.svg" alt="Símbolo Rei das Vendas" width="560" height="560" decoding="async" />
           <div className="sv-ai-status"><span>RDV / INTELLIGENCE CORE</span><strong>SISTEMA ATIVO</strong></div>
           <dl><div><dt>Camada 01</dt><dd>Estratégia</dd></div><div><dt>Camada 02</dt><dd>Inteligência</dd></div><div><dt>Camada 03</dt><dd>Execução</dd></div></dl>
         </div>
