@@ -163,7 +163,8 @@ body:has(.sv-home) .rdv-cookie {
 
 /* Home navigation inherits the flagship dark/chrome language before scroll. */
 body:has(.sv-home) .rdv-header:not(.is-scrolled) { color: #f4f1e8; }
-body:has(.sv-home) .rdv-header:not(.is-scrolled) .rdv-wordmark-subtitle { color: rgba(244,241,232,.58); }
+body:has(.sv-home) .rdv-header:not(.is-scrolled) .rdv-wordmark { color: #f4f1e8 !important; text-shadow: 0 0 1.5rem rgba(244,241,232,.12); }
+body:has(.sv-home) .rdv-header:not(.is-scrolled) .rdv-wordmark-subtitle { color: #c8ff35 !important; }
 body:has(.sv-home) .rdv-header:not(.is-scrolled) .rdv-header-cta { border-color: #c8ff35; background: #c8ff35; color: #030303; }
 body:has(.sv-home) .rdv-header:not(.is-scrolled) button { color: #f4f1e8; }
 body:has(.sv-home) .rdv-support-trigger { border-color: rgba(200,255,53,.45); background: #11130d; color: #c8ff35; }
