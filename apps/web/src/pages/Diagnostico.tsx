@@ -82,14 +82,20 @@ export default function Diagnostico() {
       return;
     }
 
-    const heading = stageHeadingRef.current;
-    if (!heading) return;
+    const animationFrame = window.requestAnimationFrame(() => {
+      const heading = stageHeadingRef.current;
+      if (!heading) return;
 
-    heading.focus({ preventScroll: true });
-    heading.scrollIntoView({
-      block: 'center',
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      const headerOffset = 112;
+      const top = Math.max(0, window.scrollY + heading.getBoundingClientRect().top - headerOffset);
+      heading.focus({ preventScroll: true });
+      window.scrollTo({
+        top,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
     });
+
+    return () => window.cancelAnimationFrame(animationFrame);
   }, [etapa, sucesso]);
 
   const updateField = (field: keyof FormData, value: string | boolean) => {
