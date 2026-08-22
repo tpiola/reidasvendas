@@ -4,12 +4,15 @@
 
 ### Fluxo
 - O frontend envia o formulário para `POST /api/lead`.
-- A API valida payload e encaminha para `LEAD_WEBHOOK_URL`.
-- O n8n recebe via Webhook e aplica validação/normalização.
+- A API valida nome, e-mail, WhatsApp, contexto comercial e atribuição.
+- Com `LEAD_WEBHOOK_URL` ou `N8N_WEBHOOK_URL`, a API encaminha o lead ao webhook e responde com `delivery: "webhook"` apenas após a entrega confirmada.
+- Sem webhook configurado, a API responde com `delivery: "whatsapp_handoff"`; a interface informa que o diagnóstico ainda precisa ser enviado e libera uma mensagem contextualizada no WhatsApp.
+- O encaminhamento por WhatsApp não simula armazenamento automático: o registro chega à equipe quando o visitante confirma o envio da mensagem.
 
 ### Variáveis
 - `LEAD_WEBHOOK_URL` (server-side): URL do webhook do n8n (produção)
-- `LEAD_WEBHOOK_SECRET` (server-side, opcional): enviado em `X-Altiq-Webhook-Secret`
+- `N8N_WEBHOOK_URL` (server-side, opcional): alternativa para instalações existentes
+- `LEAD_WEBHOOK_SECRET` (server-side, opcional): enviado como `Authorization: Bearer <segredo>`
 
 ### n8n (import)
 - Importar: `n8n/workflows/ALTHIQ-Leads-Intake-v1.json`
@@ -34,6 +37,8 @@ O tracking é opt-in por variáveis de ambiente do Vite:
 - `VITE_GSC_VERIFICATION` (opcional)
 
 Eventos já instrumentados:
+- `form_start`, `diagnostic_step`, `form_submit` e `form_error`
+- `thank_you_view` e `whatsapp_open`
 - `social_click` (header/footer)
 - `whatsapp_click` (FAB)
 

@@ -20,6 +20,8 @@ type FormData = {
   consentimento: boolean;
 };
 
+type DeliveryMode = 'webhook' | 'whatsapp_handoff';
+
 const initialData: FormData = {
   nome: '',
   whatsapp: '',
@@ -50,15 +52,20 @@ export default function Diagnostico() {
   const [etapa, setEtapa] = useState<1 | 2>(1);
   const [dados, setDados] = useState<FormData>(() => ({ ...initialData, solucao: searchParams.get('solucao') || '' }));
   const [sucesso, setSucesso] = useState(false);
+  const [entrega, setEntrega] = useState<DeliveryMode>('webhook');
   const [formStarted, setFormStarted] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState('');
 
   const whatsappMessage = [
     'Olá! Acabei de concluir o Mapeamento de Perfil Diamante.',
+    `Nome: ${dados.nome}.`,
+    `E-mail: ${dados.email}.`,
+    `WhatsApp para retorno: ${dados.whatsapp}.`,
     `Negócio: ${dados.segmento}.`,
     `Necessidade: ${dados.solucao}.`,
     `Problema: ${dados.problema}.`,
+    `Objetivo comercial: ${dados.objetivo}.`,
     `Faixa de investimento: ${dados.investimento}.`,
   ].join('\n');
   const contextualWhatsapp = `https://wa.me/${BRAND.phone}?text=${encodeURIComponent(whatsappMessage)}`;
@@ -133,9 +140,11 @@ export default function Diagnostico() {
       const body = await response.json().catch(() => ({}));
       if (body.ok === false) throw new Error('lead_delivery_failed');
 
-      trackEvent('form_submit', { form: 'diagnostico', service: dados.solucao, investment: dados.investimento, segment: dados.segmento });
+      const delivery: DeliveryMode = body.delivery === 'whatsapp_handoff' ? 'whatsapp_handoff' : 'webhook';
+      setEntrega(delivery);
+      trackEvent('form_submit', { form: 'diagnostico', service: dados.solucao, investment: dados.investimento, segment: dados.segmento, delivery });
       setSucesso(true);
-      trackEvent('thank_you_view', { service: dados.solucao });
+      trackEvent('thank_you_view', { service: dados.solucao, delivery });
     } catch {
       setErro('Não foi possível registrar o diagnóstico agora. Revise sua conexão e tente novamente.');
       trackEvent('form_error', { form: 'diagnostico', service: dados.solucao });
@@ -345,10 +354,14 @@ export default function Diagnostico() {
                     <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#D6A84F]/30 bg-[#D6A84F]/10 text-[#F2D38A]">
                       <CheckCircle2 size={32} aria-hidden="true" />
                     </div>
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">Diagnóstico registrado</p>
+                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
+                      {entrega === 'whatsapp_handoff' ? 'Diagnóstico preparado para envio' : 'Diagnóstico registrado'}
+                    </p>
                     <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">Agora sua conversa começa com contexto.</h2>
                     <p className="mt-4 max-w-lg leading-relaxed text-[#A1A1AA]">
-                      Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.
+                      {entrega === 'whatsapp_handoff'
+                        ? 'Seu diagnóstico está organizado, mas ainda precisa ser enviado. Abra o WhatsApp e confirme o envio da mensagem para a nossa equipe.'
+                        : 'Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.'}
                     </p>
                     <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
                       <PremiumButton

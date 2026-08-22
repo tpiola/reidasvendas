@@ -5,6 +5,8 @@ describe('arquitetura de aquisição soberana', () => {
   it('mantém páginas comerciais únicas e canônicas', () => {
     const paths = GROWTH_SEO.map((entry) => entry.path);
     expect(new Set(paths).size).toBe(paths.length);
+    expect(paths).toContain('/solucoes');
+    expect(paths).toContain('/diagnostico');
     expect(paths).toContain('/solucoes/catalogo-para-representantes');
     expect(paths).toContain('/alternativas/wix');
     expect(paths).toContain('/ferramentas/calculadora-roi');

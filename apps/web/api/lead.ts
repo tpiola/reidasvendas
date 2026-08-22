@@ -170,8 +170,11 @@ export default async function handler(req: Req, res: Res) {
   const webhookSecret = process.env.LEAD_WEBHOOK_SECRET || process.env.N8N_API_KEY || '';
 
   if (!n8nUrl) {
-    console.error('[lead] webhook is not configured');
-    json(res, 503, { ok: false, error: 'lead_service_unavailable' });
+    json(res, 202, {
+      ok: true,
+      delivery: 'whatsapp_handoff',
+      message: 'Diagnóstico validado. Finalize o envio pelo WhatsApp.',
+    });
     return;
   }
 
@@ -193,6 +196,7 @@ export default async function handler(req: Req, res: Res) {
 
     json(res, 202, {
       ok: true,
+      delivery: 'webhook',
       message: 'Lead recebido para processamento',
     });
   } catch (err) {

@@ -61,6 +61,29 @@ test('diagnóstico mantém WhatsApp atrás do gate de qualificação', async ({ 
   await expect(page.getByLabel('O que você precisa?')).toHaveValue('catalogo-para-representantes');
 });
 
+test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não existe webhook', async ({ page }) => {
+  await page.route('**/api/lead', async (route) => {
+    await route.fulfill({ status: 202, json: { ok: true, delivery: 'whatsapp_handoff' } });
+  });
+  await page.goto('/diagnostico?solucao=catalogo-para-representantes');
+  await page.getByLabel('Nome').fill('Pessoa de teste');
+  await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
+  await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
+  await page.getByRole('button', { name: 'Continuar' }).click();
+  await page.getByLabel('Faixa de investimento disponível').selectOption('5000-10000');
+  await page.getByLabel('WhatsApp para retorno').fill('16999999999');
+  await page.getByLabel('E-mail').fill('teste@example.com');
+  await page.getByLabel('Principal objetivo comercial').selectOption('vender-mais');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: /registrar meu diagnóstico/i }).click();
+
+  await expect(page.getByText('Diagnóstico preparado para envio')).toBeVisible();
+  await expect(page.getByText(/ainda precisa ser enviado/i)).toBeVisible();
+  const whatsapp = page.getByRole('link', { name: /abrir conversa qualificada/i });
+  await expect(whatsapp).toBeVisible();
+  expect(decodeURIComponent((await whatsapp.getAttribute('href')) || '')).toContain('Organizar pedidos enviados pelo WhatsApp.');
+});
+
 test('demonstração comercial permite filtrar e selecionar produtos', async ({ page }) => {
   await page.goto('/demonstracoes/representacao-comercial');
   await page.getByRole('button', { name: 'Linha premium' }).click();
