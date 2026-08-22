@@ -532,6 +532,28 @@ export const DEMONSTRATIONS: Demonstration[] = [
 export type SeoEntry = { path: string; title: string; description: string; category: string; headings: string[]; questions: Faq[] };
 
 export const GROWTH_SEO: SeoEntry[] = [
+  {
+    path: '/solucoes',
+    title: 'Soluções digitais por segmento e operação | Rei das Vendas',
+    description: 'Sites, landing pages, catálogos, aplicativos, sistemas e automações desenhados para o problema real de cada operação.',
+    category: 'CollectionPage',
+    headings: SOLUTIONS.map((item) => item.title),
+    questions: [],
+  },
+  {
+    path: '/diagnostico',
+    title: 'Mapeamento de Perfil Diamante | Rei das Vendas',
+    description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
+    category: 'WebPage',
+    headings: [
+      'Qual é o seu negócio?',
+      'Qual solução sua operação precisa?',
+      'Qual problema comercial deve ser resolvido?',
+      'Qual é a faixa de investimento prevista?',
+      'Qual é o WhatsApp para continuidade do atendimento?',
+    ],
+    questions: [],
+  },
   ...SOLUTIONS.map((item) => ({ path: `/solucoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Service', headings: item.architecture.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
   ...LOCAL_PAGES.map((item) => ({ path: `/solucoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.context, category: 'Service', headings: item.priorities, questions: [] })),
   ...COMPARISONS.map((item) => ({ path: `/alternativas/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Article', headings: item.considerations.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
