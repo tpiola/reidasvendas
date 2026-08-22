@@ -7,6 +7,8 @@ import { CookieConsent } from '@/components/CookieConsent';
 import Home from '@/pages/Home';
 import { SuporteBot } from '@/components/SuporteBot';
 import { BRAND } from '@/lib/brand';
+import { captureAttribution, trackEvent } from '@/lib/analytics';
+import { GUIDES, SEO_BY_PATH, SOLUTIONS } from '@/lib/growth';
 
 const Servicos = lazy(() => import('@/pages/Servicos'));
 const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
@@ -28,6 +30,13 @@ const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Builder = lazy(() => import('@/pages/Builder'));
 const Templates = lazy(() => import('@/pages/Templates'));
 const Extensions = lazy(() => import('@/pages/Extensions'));
+const SolutionDetail = lazy(() => import('@/pages/SolutionDetail'));
+const ComparisonDetail = lazy(() => import('@/pages/ComparisonDetail'));
+const IntentGuide = lazy(() => import('@/pages/IntentGuide'));
+const Tools = lazy(() => import('@/pages/Tools'));
+const ToolDetail = lazy(() => import('@/pages/ToolDetail'));
+const Demonstrations = lazy(() => import('@/pages/Demonstrations'));
+const DemoExperience = lazy(() => import('@/pages/DemoExperience'));
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -112,12 +121,12 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
     description: BRAND.seo.description,
   },
   '/solucoes': {
-    title: 'Soluções digitais para negócios locais em Franca | Rei das Vendas',
-    description: 'Sites, funis, automações e aplicativos construídos negócio a negócio para empresas locais venderem mais. Receba um diagnóstico gratuito.',
+    title: 'Soluções digitais por segmento e operação | Rei das Vendas',
+    description: 'Sites, landing pages, catálogos, aplicativos, sistemas e automações desenhados para o problema real de cada operação.',
   },
   '/diagnostico': {
-    title: 'Diagnóstico gratuito para negócios locais | Rei das Vendas',
-    description: 'Receba uma análise clara do seu site, Google, WhatsApp e funil. Diagnóstico gratuito para negócios locais em Franca e região.',
+    title: 'Mapeamento de Perfil Diamante | Rei das Vendas',
+    description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
   },
   '/servicos': {
     title: 'Sites profissionais para negócios locais | Rei das Vendas',
@@ -179,17 +188,77 @@ function upsertMeta(name: string, content: string) {
   element.content = content;
 }
 
+function upsertProperty(property: string, content: string) {
+  let element = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute('property', property);
+    document.head.appendChild(element);
+  }
+  element.content = content;
+}
+
+function updateCanonical(url: string) {
+  let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = url;
+}
+
 function RouteMetadata() {
   const location = useLocation();
 
   useEffect(() => {
-    const metadata = META_BY_PATH[location.pathname] ?? {
+    const growthMetadata = SEO_BY_PATH.get(location.pathname);
+    const metadata = growthMetadata ?? META_BY_PATH[location.pathname] ?? {
       title: BRAND.seo.title,
       description: BRAND.seo.description,
     };
+    const canonical = `https://reidasvendas.com.br${location.pathname === '/' ? '/' : location.pathname}`;
 
     document.title = metadata.title;
     upsertMeta('description', metadata.description);
+    upsertMeta('twitter:title', metadata.title);
+    upsertMeta('twitter:description', metadata.description);
+    upsertProperty('og:title', metadata.title);
+    upsertProperty('og:description', metadata.description);
+    upsertProperty('og:url', canonical);
+    updateCanonical(canonical);
+
+    const previousSchema = document.getElementById('rdv-route-schema');
+    previousSchema?.remove();
+    if (growthMetadata) {
+      const schema = document.createElement('script');
+      schema.id = 'rdv-route-schema';
+      schema.type = 'application/ld+json';
+      schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': growthMetadata.category,
+            name: metadata.title,
+            description: metadata.description,
+            url: canonical,
+            provider: { '@id': 'https://reidasvendas.com.br/#organization' },
+          },
+          ...(growthMetadata.questions.length ? [{
+            '@type': 'FAQPage',
+            mainEntity: growthMetadata.questions.map((question) => ({
+              '@type': 'Question',
+              name: question.question,
+              acceptedAnswer: { '@type': 'Answer', text: question.answer },
+            })),
+          }] : []),
+        ],
+      }).replace(/</g, '\\u003c');
+      document.head.appendChild(schema);
+    }
+
+    captureAttribution();
+    trackEvent('page_view', { page_title: metadata.title });
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
     window.dispatchEvent(new CustomEvent('route-change', { detail: { pathname: location.pathname, search: location.search, timestamp: Date.now() } }));
   }, [location.pathname, location.search]);
@@ -210,6 +279,13 @@ function SiteLayout() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
               <Route path="/solucoes" element={<PageTransition><Solucoes /></PageTransition>} />
+              <Route path="/solucoes/:slug" element={<PageTransition><SolutionDetail /></PageTransition>} />
+              <Route path="/alternativas/:slug" element={<PageTransition><ComparisonDetail /></PageTransition>} />
+              <Route path="/ferramentas" element={<PageTransition><Tools /></PageTransition>} />
+              <Route path="/ferramentas/:slug" element={<PageTransition><ToolDetail /></PageTransition>} />
+              <Route path="/demonstracoes" element={<PageTransition><Demonstrations /></PageTransition>} />
+              <Route path="/demonstracoes/:slug" element={<PageTransition><DemoExperience /></PageTransition>} />
+              {GUIDES.map((guide) => <Route key={guide.slug} path={`/${guide.slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
               <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
               <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
               <Route path="/servicos/:slug" element={<PageTransition><ServicoDetalhe /></PageTransition>} />
@@ -263,18 +339,17 @@ const structuredData = {
       priceRange: '$$',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Sites profissionais para negócios locais',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Criação de sites profissionais',
-              description: 'Planejamento, design, desenvolvimento, revisão e publicação de sites para negócios locais.',
-              areaServed: BRAND.seo.geo.areaServed,
-            },
+        name: 'Arquiteturas digitais e governança de resultados',
+        itemListElement: SOLUTIONS.map((solution) => ({
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: solution.title,
+            description: solution.summary,
+            url: `https://reidasvendas.com.br/solucoes/${solution.slug}`,
+            areaServed: BRAND.seo.geo.areaServed,
           },
-        ],
+        })),
       },
     },
     {

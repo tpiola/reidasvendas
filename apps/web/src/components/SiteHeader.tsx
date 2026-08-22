@@ -8,17 +8,17 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 
 const NAV = [
   { to: '/solucoes', label: 'Soluções' },
-  { to: '/templates', label: 'Possibilidades' },
-  { to: '/portfolio', label: 'Projetos' },
-  { to: '/sobre', label: 'Governança' },
+  { to: '/demonstracoes', label: 'Demonstrações' },
+  { to: '/ferramentas', label: 'Ferramentas' },
+  { to: '/portfolio', label: 'Projetos reais' },
 ];
 
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const [openAtPath, setOpenAtPath] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const open = openAtPath === location.pathname;
 
-  useEffect(() => setOpen(false), [location.pathname]);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -41,12 +41,12 @@ export function SiteHeader() {
             </NavLink>
           ))}
           <ThemeToggle />
-          <Link className="rdv-header-cta" to="/diagnostico">Iniciar diagnóstico</Link>
+          <Link className="rdv-header-cta" to="/diagnostico">Mapear minha operação</Link>
         </nav>
 
         <div className="rdv-mobile-actions">
           <ThemeToggle />
-          <button type="button" onClick={() => setOpen((value) => !value)} className="rdv-menu-button" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} aria-controls="mobile-navigation">
+          <button type="button" onClick={() => setOpenAtPath(open ? null : location.pathname)} className="rdv-menu-button" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} aria-controls="mobile-navigation">
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
@@ -56,7 +56,7 @@ export function SiteHeader() {
         {open && (
           <motion.nav id="mobile-navigation" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: .2 }} className="rdv-mobile-nav" aria-label="Navegação móvel">
             {NAV.map((item) => <NavLink key={item.to} to={item.to}>{item.label}</NavLink>)}
-            <Link className="rdv-header-cta" to="/diagnostico">Iniciar diagnóstico</Link>
+            <Link className="rdv-header-cta" to="/diagnostico">Mapear minha operação</Link>
           </motion.nav>
         )}
       </AnimatePresence>

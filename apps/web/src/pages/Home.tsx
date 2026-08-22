@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '@/lib/analytics';
+import { DEMONSTRATIONS, TOOLS } from '@/lib/growth';
 import './HomeSovereign.css';
 
 const stages = [
@@ -41,12 +43,22 @@ const segmentImages = [
 ];
 
 const models = [
-  ['Clínica odontológica', 'odontologia'], ['Dedetização', 'dedetizacao'],
-  ['Restaurante e delivery', 'restaurante'], ['Estética e beleza', 'estetica'],
-  ['Academia e studio', 'academia'], ['Oficina mecânica', 'oficina'],
-  ['Pet shop', 'pet-shop'], ['Advocacia', 'advocacia'],
-  ['Imobiliária', 'imobiliaria'], ['Escola e cursos', 'escola'],
+  ['Clínica odontológica', 'site-para-dentistas'], ['Clínicas e consultórios', 'site-para-clinicas'],
+  ['Restaurante e delivery', 'site-para-restaurantes'], ['Representação comercial', 'catalogo-para-representantes'],
+  ['Comércio e distribuição', 'catalogo-digital'], ['Contabilidade', 'site-para-contadores'],
+  ['Advocacia', 'site-para-advogados'], ['Imobiliária', 'site-para-imobiliarias'],
+  ['Operação empresarial', 'app-para-empresas'], ['Processos recorrentes', 'sistema-sob-medida'],
 ];
+
+const capabilities = [
+  ['01', 'Sites de alta conversão', 'site-para-clinicas', 'Presença institucional que organiza intenção, prova e contato.'],
+  ['02', 'Landing pages', 'landing-page', 'Uma oferta, uma decisão comercial e um caminho claro.'],
+  ['03', 'Catálogos digitais', 'catalogo-digital', 'Produtos consultáveis, atualizáveis e preparados para orçamento.'],
+  ['04', 'Apps para empresas', 'app-para-empresas', 'Interfaces enxutas desenhadas a partir do processo real.'],
+  ['05', 'SaaS e sistemas', 'sistema-sob-medida', 'Soluções próprias quando a demanda foi validada.'],
+  ['06', 'Automações', 'automacao-whatsapp', 'Contexto e continuidade entre formulário, equipe e WhatsApp.'],
+  ['07', 'Infraestrutura digital', 'infraestrutura-digital', 'Publicação, rastreamento, estabilidade e governança.'],
+] as const;
 
 export default function Home() {
   useEffect(() => {
@@ -70,11 +82,11 @@ export default function Home() {
       <section className="sv-hero" aria-labelledby="home-title">
         <div className="sv-shell sv-hero-layout">
           <div className="sv-hero-copy">
-            <p className="sv-kicker">Unidade externa de inteligência e tecnologia</p>
+            <p className="sv-kicker">Unidade Externa de Tecnologia e Governança de Resultados</p>
             <h1 id="home-title">Sua empresa não precisa de mais software. Precisa de <strong>inteligência operacional.</strong></h1>
             <p className="sv-lead">O Rei das Vendas projeta sites, sistemas, agentes de IA e automações como uma única infraestrutura: cada ponto captura sinais, conduz decisões e sustenta crescimento com controle.</p>
             <div className="sv-actions">
-              <Link className="sv-button" to="/diagnostico">Mapear minha operação <span aria-hidden="true">→</span></Link>
+              <Link className="sv-button" to="/diagnostico" onClick={() => trackEvent('hero_cta', { position: 'home-hero', destination: 'diagnostico' })}>Mapear minha operação <span aria-hidden="true">→</span></Link>
               <Link className="sv-link" to="/solucoes">Explorar arquiteturas <span aria-hidden="true">↗</span></Link>
             </div>
             <dl className="sv-proof-list">
@@ -117,6 +129,14 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="sv-capabilities sv-reveal" aria-labelledby="capabilities-title">
+        <div className="sv-shell">
+          <header className="sv-section-head"><div><p className="sv-kicker">Arquiteturas de solução</p><h2 id="capabilities-title">A entrada certa para o problema certo.</h2></div><p>Sete camadas de solução. Nenhuma começa pela ferramenta. Todas começam pelo contexto comercial e operacional da empresa.</p></header>
+          <div className="sv-capability-list">{capabilities.map(([number, title, slug, description]) => <Link key={slug} to={`/solucoes/${slug}`} onClick={() => trackEvent('category_select', { service: slug, origin: 'home' })}><span>{number}</span><div><h3>{title}</h3><p>{description}</p></div><b aria-hidden="true">↗</b></Link>)}</div>
+          <Link className="sv-button sv-button-inline" to="/solucoes">Explorar todas as arquiteturas <span aria-hidden="true">→</span></Link>
+        </div>
+      </section>
+
       <section className="sv-intelligence sv-reveal" aria-labelledby="intelligence-title">
         <div className="sv-shell">
           <header><p className="sv-kicker">Inteligência aplicada ao negócio</p><h2 id="intelligence-title">A IA só cria vantagem quando entende <span>o que precisa mover.</span></h2><p>Não instalamos automação por aparência. Desenhamos uma camada operacional que observa, responde e executa dentro do fluxo comercial da empresa.</p></header>
@@ -148,11 +168,19 @@ export default function Home() {
       </section>
 
       <section className="sv-segments sv-reveal">
-        <div className="sv-shell"><p className="sv-kicker">Biblioteca de possibilidades</p><h2>Referências por segmento. A solução final continua exclusiva.</h2><div className="sv-segment-visuals" aria-label="Operações atendidas">{segmentImages.map(([src, alt]) => <figure key={src}><img src={src} alt={alt} width="720" height="540" loading="lazy" decoding="async" /></figure>)}</div><div className="sv-segment-list">{models.map(([model, slug]) => <Link to={`/contato?modelo=${slug}`} key={model}>{model}<span aria-hidden="true">↗</span></Link>)}</div><Link className="sv-button sv-button-inline" to="/templates">Explorar possibilidades <span aria-hidden="true">→</span></Link></div>
+        <div className="sv-shell"><p className="sv-kicker">Biblioteca de possibilidades</p><h2>Referências por segmento. A solução final continua exclusiva.</h2><div className="sv-segment-visuals" aria-label="Operações atendidas">{segmentImages.map(([src, alt]) => <figure key={src}><img src={src} alt={alt} width="720" height="540" loading="lazy" decoding="async" /></figure>)}</div><div className="sv-segment-list">{models.map(([model, slug]) => <Link to={`/solucoes/${slug}`} key={model} onClick={() => trackEvent('category_select', { service: slug, origin: 'home-segments' })}>{model}<span aria-hidden="true">↗</span></Link>)}</div><Link className="sv-button sv-button-inline" to="/demonstracoes">Abrir arquiteturas demonstrativas <span aria-hidden="true">→</span></Link></div>
+      </section>
+
+      <section className="sv-lab sv-reveal" aria-labelledby="lab-title">
+        <div className="sv-shell">
+          <header className="sv-section-head"><div><p className="sv-kicker">Inteligência operacional aplicada</p><h2 id="lab-title">Nós não recomendamos infraestrutura digital. Operamos sobre ela.</h2></div><p>Demonstrações funcionais, ferramentas próprias e a mesma jornada de aquisição que estruturamos para cada operação.</p></header>
+          <div className="sv-lab-grid"><article><span>Arquiteturas demonstrativas</span><h3>Explore a solução funcionando.</h3><ul>{DEMONSTRATIONS.slice(0, 4).map((demo) => <li key={demo.slug}><Link to={`/demonstracoes/${demo.slug}`}>{demo.title} <b aria-hidden="true">↗</b></Link></li>)}</ul></article><article><span>Ferramentas de inteligência</span><h3>Simule antes de decidir.</h3><ul>{TOOLS.slice(0, 4).map((tool) => <li key={tool.slug}><Link to={`/ferramentas/${tool.slug}`}>{tool.title} <b aria-hidden="true">↗</b></Link></li>)}</ul></article></div>
+          <ol className="sv-flywheel" aria-label="Jornada de aquisição"><li>Intenção</li><li>Arquitetura</li><li>Diagnóstico</li><li>WhatsApp</li><li>Operação</li></ol>
+        </div>
       </section>
 
       <section className="sv-cta sv-reveal">
-        <div className="sv-shell"><p className="sv-kicker">Próximo movimento</p><h2>Antes de construir mais tecnologia, descubra o que merece ser construído.</h2><p>O processo começa pelo cenário, pelos gargalos e pelas prioridades capazes de sustentar uma solução digital completa.</p><Link className="sv-button sv-button-inline" to="/diagnostico">Iniciar diagnóstico <span aria-hidden="true">↗</span></Link><small>Escopo transparente · Arquitetura exclusiva · Governança independente</small></div>
+        <div className="sv-shell"><p className="sv-kicker">Próximo movimento</p><h2>Antes de construir mais tecnologia, descubra o que merece ser construído.</h2><p>O processo começa pelo cenário, pelos gargalos e pelas prioridades capazes de sustentar uma solução digital completa.</p><Link className="sv-button sv-button-inline" to="/diagnostico">Mapear minha operação <span aria-hidden="true">↗</span></Link><small>Escopo transparente · Arquitetura exclusiva · Governança independente</small></div>
       </section>
     </main>
   );

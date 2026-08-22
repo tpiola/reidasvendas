@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   ClipboardCheck,
   Globe2,
-  MessageCircle,
   MonitorSmartphone,
   ShieldCheck,
   Zap,
@@ -15,6 +14,8 @@ import {
 import { PremiumButton } from '@/components/PremiumButton';
 import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { BRAND } from '@/lib/brand';
+import { trackEvent } from '@/lib/analytics';
+import { COMPARISONS, DEMONSTRATIONS, GUIDES, LOCAL_PAGES, SOLUTIONS, TOOLS } from '@/lib/growth';
 
 // GA4 tracking: view_page:"/solucoes"
 
@@ -71,7 +72,7 @@ const PROJECTS = [
     name: 'SaúdeGPT',
     category: 'IA generativa em saúde',
     description: 'Plataforma que organiza uma experiência de inteligência artificial voltada a informações de saúde.',
-    result: 'Aplicação web de produto digital técnico, com postura institucional e fluxo de conversa guiado. Exemplo real de produto digital construído com arquitetura própria, não template.',
+    result: 'Aplicação web de produto digital técnico, com postura institucional e fluxo de conversa guiado. Exemplo real de produto digital construído com arquitetura própria.',
   },
   {
     icon: Globe2,
@@ -95,28 +96,53 @@ export default function Solucoes() {
       <section className="relative overflow-hidden border-b border-white/[0.06] pb-16 pt-32 sm:pb-20 sm:pt-36">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(214,168,79,0.14),transparent_44%)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
-          <Reveal><SectionLabel>Soluções sob medida</SectionLabel></Reveal>
+          <Reveal><SectionLabel>Biblioteca de soluções e arquiteturas</SectionLabel></Reveal>
           <Reveal delay={0.08}>
             <h1 className="mx-auto mt-4 max-w-5xl font-serif text-4xl font-bold leading-[1.04] text-white sm:text-5xl md:text-6xl">
-              Soluções digitais completas para negócios locais. Construídas negócio a negócio.
+              Uma arquitetura para cada problema real da operação.
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-[#A1A1AA] sm:text-lg">
-              Não entregamos apenas um site. Construímos a infraestrutura digital que faz sua empresa ser encontrada, gerar confiança, receber contatos e vender com mais previsibilidade.
+              Sites de alta conversão, landing pages, catálogos, aplicativos, SaaS, automações e infraestrutura digital. Cada solução começa pelo contexto do negócio.
             </p>
           </Reveal>
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <PremiumButton href="/diagnostico" size="lg">
-                Receber diagnóstico gratuito <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Mapear minha operação <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </PremiumButton>
-              <PremiumButton href="/portfolio" variant="outline" size="lg">Ver projetos reais</PremiumButton>
+              <PremiumButton href="/demonstracoes" variant="outline" size="lg">Explorar demonstrações</PremiumButton>
             </div>
             <p className="mt-4 text-xs leading-5 text-[#71717A]">
               Você envia o contexto do negócio; nós analisamos e indicamos as prioridades. Sem compromisso.
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="border-b border-white/[0.06] py-16 sm:py-24" aria-labelledby="solution-library-title">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal className="max-w-3xl">
+            <SectionLabel>Arquiteturas por problema e segmento</SectionLabel>
+            <h2 id="solution-library-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-white sm:text-5xl">Encontre a solução compatível com sua operação.</h2>
+            <p className="mt-5 text-base leading-8 text-[#A1A1AA]">Cada página apresenta contexto, gargalo, arquitetura possível, perguntas relevantes e um diagnóstico específico.</p>
+          </Reveal>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {SOLUTIONS.map((solution) => (
+              <Link
+                key={solution.slug}
+                to={`/solucoes/${solution.slug}`}
+                onClick={() => trackEvent('category_select', { service: solution.slug, category: solution.category })}
+                className="group grid min-h-52 gap-4 rounded-2xl border border-white/[0.08] bg-[#090909] p-6 transition hover:border-[rgba(214,168,79,0.4)] hover:bg-[#0D0B08]"
+              >
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">{solution.category}</span>
+                <h3 className="font-serif text-2xl font-semibold leading-tight text-white">{solution.title}</h3>
+                <p className="text-sm leading-7 text-[#A1A1AA]">{solution.summary}</p>
+                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#F2D38A]">Ver arquitetura <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" /></span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -222,7 +248,7 @@ export default function Solucoes() {
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[rgba(214,168,79,0.18)] bg-[rgba(214,168,79,0.08)] text-[#F2D38A]">
               <Zap className="h-6 w-6" aria-hidden="true" />
             </span>
-            <SectionTitle>Não é template. É infraestrutura construída para o seu negócio.</SectionTitle>
+            <SectionTitle>Arquitetura exclusiva. Infraestrutura construída para o seu negócio.</SectionTitle>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="rounded-3xl border border-white/[0.08] bg-[#090909] p-6 sm:p-8">
@@ -286,6 +312,27 @@ export default function Solucoes() {
         </div>
       </section>
 
+      <section className="border-y border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal className="max-w-3xl"><SectionLabel>Demonstrações e ferramentas</SectionLabel><SectionTitle>Experimente antes de avançar para o diagnóstico.</SectionTitle></Reveal>
+          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            <article className="rounded-3xl border border-white/[0.08] bg-[#090909] p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#D6A84F]">Arquiteturas demonstrativas</span><h3 className="mt-4 font-serif text-3xl font-bold text-white">Fluxos interativos por segmento.</h3><ul className="mt-5 space-y-3">{DEMONSTRATIONS.map((demo) => <li key={demo.slug}><Link className="inline-flex items-center gap-2 text-sm text-[#D4D4D8] transition hover:text-[#F2D38A]" to={`/demonstracoes/${demo.slug}`}>{demo.title} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></li>)}</ul></article>
+            <article className="rounded-3xl border border-white/[0.08] bg-[#090909] p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-[#D6A84F]">Ferramentas de diagnóstico</span><h3 className="mt-4 font-serif text-3xl font-bold text-white">Simulações e clareza operacional.</h3><ul className="mt-5 space-y-3">{TOOLS.map((tool) => <li key={tool.slug}><Link className="inline-flex items-center gap-2 text-sm text-[#D4D4D8] transition hover:text-[#F2D38A]" to={`/ferramentas/${tool.slug}`}>{tool.title} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></li>)}</ul></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal className="max-w-3xl"><SectionLabel>Intenção comercial e contexto local</SectionLabel><SectionTitle>Informação útil para quem já precisa decidir.</SectionTitle></Reveal>
+          <div className="mt-10 grid gap-8 lg:grid-cols-3">
+            <article><h3 className="font-serif text-2xl font-bold text-white">Comparar alternativas</h3><ul className="mt-5 space-y-4">{COMPARISONS.map((comparison) => <li key={comparison.slug}><Link className="text-sm leading-7 text-[#A1A1AA] hover:text-[#F2D38A]" to={`/alternativas/${comparison.slug}`}>{comparison.title}</Link></li>)}</ul></article>
+            <article><h3 className="font-serif text-2xl font-bold text-white">Entender antes de contratar</h3><ul className="mt-5 space-y-4">{GUIDES.map((guide) => <li key={guide.slug}><Link className="text-sm leading-7 text-[#A1A1AA] hover:text-[#F2D38A]" to={`/${guide.slug}`}>{guide.title}</Link></li>)}</ul></article>
+            <article><h3 className="font-serif text-2xl font-bold text-white">Intenções locais específicas</h3><ul className="mt-5 space-y-4">{LOCAL_PAGES.map((local) => <li key={local.slug}><Link className="text-sm leading-7 text-[#A1A1AA] hover:text-[#F2D38A]" to={`/solucoes/${local.slug}`}>{local.title}</Link></li>)}</ul></article>
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-white/[0.06] bg-[#0A0A0A] py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <Reveal>
@@ -296,15 +343,12 @@ export default function Solucoes() {
             </p>
             <div className="mt-8">
               <PremiumButton href="/diagnostico" size="lg">
-                Receber diagnóstico gratuito <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Mapear minha operação <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </PremiumButton>
             </div>
             <p className="mx-auto mt-4 max-w-xl text-xs leading-5 text-[#71717A]">
-              Depois do envio, a equipe da {BRAND.name} revisa o contexto e retorna com os próximos passos pelo canal informado. Se preferir, escreva para{' '}
-              <a className="text-[#D6A84F] hover:text-[#F2D38A]" href={`mailto:${BRAND.email}`}>{BRAND.email}</a> ou{' '}
-              <a className="inline-flex items-center gap-1 text-[#D6A84F] hover:text-[#F2D38A]" href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer">
-                fale no WhatsApp <MessageCircle className="h-3 w-3" aria-hidden="true" />
-              </a>.
+              Depois do envio, a equipe da {BRAND.name} revisa o contexto e libera uma conversa contextual pelo WhatsApp. Dúvidas institucionais podem ser enviadas para{' '}
+              <a className="text-[#D6A84F] hover:text-[#F2D38A]" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>.
             </p>
           </Reveal>
         </div>
