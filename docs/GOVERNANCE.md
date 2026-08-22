@@ -7,7 +7,10 @@
 | Repositório GitHub | `tpiola/reidasvendas` |
 | Branch de produção | `main` |
 | Projeto Vercel | `reidasvendas` |
+| ID do projeto Vercel | `prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL` |
+| Equipe Vercel | `thiagopiola` |
 | Domínio público | `reidasvendas.com.br` |
+| Alias canônico | `www.reidasvendas.com.br` → `reidasvendas.com.br` |
 | Diretório da aplicação | `apps/web` |
 
 Nenhum segundo projeto Vercel deve acompanhar este repositório. Ambientes temporários são previews do projeto canônico, nunca projetos permanentes paralelos.
@@ -27,7 +30,7 @@ A branch `main` deve exigir pull request e os checks de qualidade, testes, build
 
 ## Domínio e deploy
 
-O domínio `reidasvendas.com.br` pertence somente ao projeto Vercel `reidasvendas`. URLs `.vercel.app` são técnicas e não devem ser divulgadas como domínio institucional.
+Os domínios `reidasvendas.com.br` e `www.reidasvendas.com.br` pertencem somente ao projeto Vercel `reidasvendas`. O endereço sem `www` é canônico; `www` deve redirecionar para ele. URLs `.vercel.app` são técnicas e não devem ser divulgadas como domínio institucional.
 
 ## Higiene
 

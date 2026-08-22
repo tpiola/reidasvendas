@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, Loader2, MessageCircle, ShieldCheck } from 'lucide-react';
 import { PremiumButton } from '@/components/PremiumButton';
@@ -56,6 +56,8 @@ export default function Diagnostico() {
   const [formStarted, setFormStarted] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState('');
+  const stageHeadingRef = useRef<HTMLHeadingElement>(null);
+  const stageTransitionReady = useRef(false);
 
   const whatsappMessage = [
     'Olá! Acabei de concluir o Mapeamento de Perfil Diamante.',
@@ -73,6 +75,28 @@ export default function Diagnostico() {
   useEffect(() => {
     trackEvent('view_diagnostico', { service: searchParams.get('solucao') || undefined, origin: searchParams.get('origem') || undefined });
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!stageTransitionReady.current) {
+      stageTransitionReady.current = true;
+      return;
+    }
+
+    const animationFrame = window.requestAnimationFrame(() => {
+      const heading = stageHeadingRef.current;
+      if (!heading) return;
+
+      const headerOffset = 112;
+      const top = Math.max(0, window.scrollY + heading.getBoundingClientRect().top - headerOffset);
+      heading.focus({ preventScroll: true });
+      window.scrollTo({
+        top,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    });
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [etapa, sucesso]);
 
   const updateField = (field: keyof FormData, value: string | boolean) => {
     setDados((current) => ({ ...current, [field]: value }));
@@ -182,7 +206,7 @@ export default function Diagnostico() {
                         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
                           Etapa {etapa} de 2
                         </p>
-                        <h2 className="mt-2 font-serif text-2xl font-bold text-white sm:text-3xl">
+                        <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-2 font-serif text-2xl font-bold text-white outline-none sm:text-3xl">
                           {etapa === 1 ? 'Qual é o contexto da sua operação?' : 'Como devemos encaminhar seu diagnóstico?'}
                         </h2>
                       </div>
@@ -357,7 +381,7 @@ export default function Diagnostico() {
                     <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
                       {entrega === 'whatsapp_handoff' ? 'Diagnóstico preparado para envio' : 'Diagnóstico registrado'}
                     </p>
-                    <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">Agora sua conversa começa com contexto.</h2>
+                    <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-3 font-serif text-3xl font-bold text-white outline-none sm:text-4xl">Agora sua conversa começa com contexto.</h2>
                     <p className="mt-4 max-w-lg leading-relaxed text-[#A1A1AA]">
                       {entrega === 'whatsapp_handoff'
                         ? 'Seu diagnóstico está organizado, mas ainda precisa ser enviado. Abra o WhatsApp e confirme o envio da mensagem para a nossa equipe.'

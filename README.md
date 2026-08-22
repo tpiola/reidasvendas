@@ -45,7 +45,7 @@ A integração Git da Vercel publica:
 
 Consulte [docs/DEPLOY_VERCEL.md](docs/DEPLOY_VERCEL.md) e [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
 
-Variável obrigatória em produção: `LEAD_WEBHOOK_URL`. Segredos nunca devem ser registrados no Git.
+Integração recomendada para registro automático: `LEAD_WEBHOOK_URL`. Sem ela, o diagnóstico continua funcional com encaminhamento contextualizado pelo WhatsApp. Segredos nunca devem ser registrados no Git.
 
 ## Licença
 
