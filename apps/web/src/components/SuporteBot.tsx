@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { MessageCircle, X, Send, ChevronDown, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BRAND } from '@/lib/brand';
+import { captureAttribution, trackEvent } from '@/lib/analytics';
 
 type Step = 'form' | 'chat';
 type Field = 'nome' | 'email' | 'whatsapp';
@@ -115,6 +116,7 @@ export function SuporteBot() {
   const [typing, setTyping] = useState(false);
   const [leadSent, setLeadSent] = useState(false);
   const [sendingLead, setSendingLead] = useState(false);
+  const [leadError, setLeadError] = useState('');
   const chatEnd = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -124,7 +126,6 @@ export function SuporteBot() {
 
   useEffect(() => {
     if (open && step === 'chat' && messages.length === 0) {
-      setTyping(true);
       const delay = TYPING_DELAY_MIN + Math.random() * (TYPING_DELAY_MAX - TYPING_DELAY_MIN);
       setTimeout(() => {
         setMessages([{ role: 'bot', text: BOT_REPLIES.saudacao.text }]);
@@ -152,8 +153,9 @@ export function SuporteBot() {
   const sendLead = useCallback(async () => {
     if (!fields.nome || !fields.email || !fields.whatsapp) return;
     setSendingLead(true);
+    setLeadError('');
     try {
-      await fetch('/api/lead', {
+      const response = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -161,16 +163,24 @@ export function SuporteBot() {
           email: fields.email,
           whatsapp: fields.whatsapp,
           mensagem: 'Lead do SuporteBot - Rei das Vendas',
+          origem: 'suporte-bot',
+          consent: true,
+          utm: captureAttribution(),
           pagina: window.location.pathname,
           timestamp: new Date().toISOString(),
         }),
       });
+      if (!response.ok) throw new Error('lead_delivery_failed');
+      setTyping(true);
+      setLeadSent(true);
+      setStep('chat');
+      trackEvent('form_submit', { form: 'suporte-bot' });
     } catch {
-      // Silently fail - lead is still captured
+      setLeadError('Não foi possível registrar seu contato. Tente novamente.');
+      trackEvent('form_error', { form: 'suporte-bot' });
+    } finally {
+      setSendingLead(false);
     }
-    setLeadSent(true);
-    setSendingLead(false);
-    setStep('chat');
   }, [fields]);
 
   const handleFieldSubmit = () => {
@@ -277,6 +287,7 @@ export function SuporteBot() {
                     )}
                     <Send className="h-3.5 w-3.5" />
                   </button>
+                  {leadError ? <p role="alert" className="text-xs leading-5 text-red-200">{leadError}</p> : null}
                 </div>
               )}
 
@@ -350,15 +361,13 @@ export function SuporteBot() {
             {/* Lead sent in chat */}
             {leadSent && step === 'chat' && messages.filter(m => m.role === 'bot').length > 2 && (
               <div className="border-t border-[rgba(255,255,255,0.06)] px-4 py-3">
-                <a
-                  href={BRAND.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/diagnostico?origem=suporte-bot"
                   className="flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] py-3 text-sm font-semibold text-white transition hover:bg-[#1da851]"
                 >
                   <MessageCircle className="h-4 w-4" />
- Falar pelo WhatsApp
-                </a>
+ Completar diagnóstico
+                </Link>
               </div>
             )}
           </motion.div>

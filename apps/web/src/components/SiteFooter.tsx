@@ -5,19 +5,21 @@ import { BrandLockup } from '@/components/BrandLockup';
 
 const FOOTER_LINKS = {
   Soluções: [
-    { label: 'Solução Completa Digital', to: '/solucoes' },
-    { label: 'Biblioteca de possibilidades', to: '/templates' },
-    { label: 'Projetos publicados', to: '/portfolio' },
+    { label: 'Arquiteturas digitais', to: '/solucoes' },
+    { label: 'Catálogo para representantes', to: '/solucoes/catalogo-para-representantes' },
+    { label: 'Landing pages', to: '/solucoes/landing-page' },
+    { label: 'Automação de WhatsApp', to: '/solucoes/automacao-whatsapp' },
   ],
   Negócios: [
-    { label: 'Clínicas e consultórios', to: '/templates' },
-    { label: 'Restaurantes e delivery', to: '/templates' },
-    { label: 'Comércio e serviços', to: '/templates' },
-    { label: 'Escolas e profissionais', to: '/templates' },
+    { label: 'Clínicas e consultórios', to: '/solucoes/site-para-clinicas' },
+    { label: 'Restaurantes e delivery', to: '/solucoes/site-para-restaurantes' },
+    { label: 'Advogados e escritórios', to: '/solucoes/site-para-advogados' },
+    { label: 'Imobiliárias e corretores', to: '/solucoes/site-para-imobiliarias' },
   ],
   Empresa: [
-    { label: 'Governança', to: '/sobre' },
-    { label: 'Diagnóstico', to: '/diagnostico' },
+    { label: 'Arquiteturas demonstrativas', to: '/demonstracoes' },
+    { label: 'Ferramentas de diagnóstico', to: '/ferramentas' },
+    { label: 'Mapear minha operação', to: '/diagnostico' },
     { label: 'Política de privacidade', to: '/politica' },
   ],
 };
@@ -36,8 +38,8 @@ export function SiteFooter() {
               <BrandLockup />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#A1A1AA]">
-              Sites profissionais para negócios locais. Sua empresa bem apresentada,
-              fácil de encontrar e pronta para receber novos clientes.
+              Unidade Externa de Tecnologia e Governança de Resultados. Arquiteturas digitais
+              exclusivas, diagnóstico comercial e evolução operacional mensurável.
             </p>
             <div className="mt-6 flex gap-3">
               <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] transition-all hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:text-[#D6A84F]" aria-label="Instagram">

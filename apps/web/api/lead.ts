@@ -28,6 +28,12 @@ type LeadPayload = {
   company?: string;
   message?: string;
   source?: string;
+  service?: string;
+  problem?: string;
+  investment?: string;
+  landingPage?: string;
+  consent?: boolean;
+  utm?: Record<string, string>;
 };
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -46,12 +52,25 @@ function isEmail(value: string): boolean {
 function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok: false; error: string } {
   if (!isObject(input)) return { ok: false, error: 'invalid_body' };
 
-  const name = sanitizeString(input.name, 200);
+  const name = sanitizeString(input.name || input.nome, 200);
   const email = sanitizeString(input.email, 320);
-  const phone = sanitizeString(input.phone, 30);
-  const company = sanitizeString(input.company, 200) || undefined;
-  const message = sanitizeString(input.message, 2000) || undefined;
-  const source = sanitizeString(input.source, 100) || 'reidasvendas.com.br';
+  const phone = sanitizeString(input.phone || input.whatsapp, 30);
+  const company = sanitizeString(input.company || input.ramo, 200) || undefined;
+  const message = sanitizeString(input.message || input.mensagem, 2000) || undefined;
+  const source = sanitizeString(input.source || input.origem, 100) || 'reidasvendas.com.br';
+  const service = sanitizeString(input.service, 150) || undefined;
+  const problem = sanitizeString(input.problem, 1000) || undefined;
+  const investment = sanitizeString(input.investment, 100) || undefined;
+  const landingPage = sanitizeString(input.landingPage, 300) || undefined;
+  const consent = typeof input.consent === 'boolean' ? input.consent : undefined;
+  const attributionInput = isObject(input.utm) ? input.utm : undefined;
+  const utm = attributionInput
+    ? Object.fromEntries(
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'landing_page', 'referrer']
+        .map((key) => [key, sanitizeString(attributionInput[key], 200)] as const)
+        .filter(([, value]) => Boolean(value)),
+    )
+    : undefined;
 
   if (!name) return { ok: false, error: 'name_required' };
   if (!email) return { ok: false, error: 'email_required' };
@@ -60,7 +79,20 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
 
   return {
     ok: true,
-    value: { name, email, phone, company, message, source },
+    value: {
+      name,
+      email,
+      phone,
+      company,
+      message,
+      source,
+      service,
+      problem,
+      investment,
+      landingPage,
+      consent,
+      ...(utm && Object.keys(utm).length ? { utm } : {}),
+    },
   };
 }
 

@@ -1,10 +1,11 @@
-// GA4: view_diagnostico, form_start, form_submit, whatsapp_click, thank_you_view
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, MessageCircle, ShieldCheck } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Loader2, MessageCircle, ShieldCheck } from 'lucide-react';
 import { PremiumButton } from '@/components/PremiumButton';
 import { Reveal, SectionLabel } from '@/hooks/useAnimation';
 import { BRAND } from '@/lib/brand';
+import { captureAttribution, trackEvent } from '@/lib/analytics';
+import { SOLUTIONS } from '@/lib/growth';
 
 type FormData = {
   nome: string;
@@ -13,6 +14,10 @@ type FormData = {
   email: string;
   presencaDigital: string;
   objetivo: string;
+  solucao: string;
+  problema: string;
+  investimento: string;
+  consentimento: boolean;
 };
 
 const initialData: FormData = {
@@ -22,6 +27,10 @@ const initialData: FormData = {
   email: '',
   presencaDigital: '',
   objetivo: '',
+  solucao: '',
+  problema: '',
+  investimento: '',
+  consentimento: false,
 };
 
 const inputClass =
@@ -29,45 +38,110 @@ const inputClass =
 const labelClass = 'mb-2 block text-xs font-medium text-[#A1A1AA]';
 
 const trustItems = [
-  'Diagnostico sem compromisso',
-  'Analise feita por especialista',
+  'Diagnóstico antes de qualquer proposta',
+  'Análise feita a partir do contexto informado',
   'Foco em prioridades reais',
   'Sem promessa de primeiro lugar no Google',
-  'Atendimento em Franca e regiao',
+  'WhatsApp liberado somente após a qualificação',
 ];
 
 export default function Diagnostico() {
+  const [searchParams] = useSearchParams();
   const [etapa, setEtapa] = useState<1 | 2>(1);
-  const [dados, setDados] = useState<FormData>(initialData);
+  const [dados, setDados] = useState<FormData>(() => ({ ...initialData, solucao: searchParams.get('solucao') || '' }));
   const [sucesso, setSucesso] = useState(false);
   const [formStarted, setFormStarted] = useState(false);
+  const [enviando, setEnviando] = useState(false);
+  const [erro, setErro] = useState('');
+
+  const whatsappMessage = [
+    'Olá! Acabei de concluir o Mapeamento de Perfil Diamante.',
+    `Negócio: ${dados.segmento}.`,
+    `Necessidade: ${dados.solucao}.`,
+    `Problema: ${dados.problema}.`,
+    `Faixa de investimento: ${dados.investimento}.`,
+  ].join('\n');
+  const contextualWhatsapp = `https://wa.me/${BRAND.phone}?text=${encodeURIComponent(whatsappMessage)}`;
 
   useEffect(() => {
-    console.log('GA4: view_diagnostico');
-  }, []);
+    trackEvent('view_diagnostico', { service: searchParams.get('solucao') || undefined, origin: searchParams.get('origem') || undefined });
+  }, [searchParams]);
 
-  const updateField = (field: keyof FormData, value: string) => {
+  const updateField = (field: keyof FormData, value: string | boolean) => {
     setDados((current) => ({ ...current, [field]: value }));
   };
 
   const handleFormStart = () => {
     if (formStarted) return;
     setFormStarted(true);
-    console.log('GA4: form_start');
+    trackEvent('form_start', { form: 'diagnostico', service: dados.solucao || undefined });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErro('');
 
     if (etapa === 1) {
       setEtapa(2);
+      trackEvent('diagnostic_step', { step: 2, service: dados.solucao });
       return;
     }
 
-    console.log('GA4: form_submit', dados);
-    console.log('Dados do diagnostico:', dados);
-    setSucesso(true);
-    console.log('GA4: thank_you_view');
+    if (!dados.consentimento) {
+      setErro('Confirme o uso dos seus dados para responder ao diagnóstico.');
+      return;
+    }
+
+    setEnviando(true);
+    const attribution = captureAttribution();
+    const mensagem = [
+      `Segmento: ${dados.segmento}`,
+      `Solução: ${dados.solucao}`,
+      `Problema: ${dados.problema}`,
+      `Objetivo: ${dados.objetivo || 'Não informado'}`,
+      `Investimento: ${dados.investimento}`,
+      `Presença digital: ${dados.presencaDigital || 'Não informada'}`,
+      `Estágio: ${searchParams.get('estagio') || 'Não informado'}`,
+    ].join('\n');
+
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: dados.nome,
+          nome: dados.nome,
+          email: dados.email,
+          phone: dados.whatsapp,
+          whatsapp: dados.whatsapp,
+          company: dados.segmento,
+          ramo: dados.segmento,
+          source: 'diagnostico-soberano',
+          origem: 'diagnostico-soberano',
+          message: mensagem,
+          mensagem,
+          service: dados.solucao,
+          problem: dados.problema,
+          investment: dados.investimento,
+          landingPage: attribution.landing_page,
+          consent: true,
+          utm: attribution,
+        }),
+      });
+
+      if (!response.ok) throw new Error('lead_delivery_failed');
+      const body = await response.json().catch(() => ({}));
+      if (body.ok === false) throw new Error('lead_delivery_failed');
+
+      trackEvent('form_submit', { form: 'diagnostico', service: dados.solucao, investment: dados.investimento, segment: dados.segmento });
+      setSucesso(true);
+      trackEvent('thank_you_view', { service: dados.solucao });
+    } catch {
+      setErro('Não foi possível registrar o diagnóstico agora. Revise sua conexão e tente novamente.');
+      trackEvent('form_error', { form: 'diagnostico', service: dados.solucao });
+    } finally {
+      setEnviando(false);
+    }
   };
 
   return (
@@ -79,13 +153,13 @@ export default function Diagnostico() {
         />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal className="mx-auto max-w-4xl text-center">
-            <SectionLabel>Diagnostico gratuito</SectionLabel>
+            <SectionLabel>Mapeamento de Perfil Diamante</SectionLabel>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-7xl">
-              Receba um diagnostico gratuito da presenca digital do seu negocio.
+              Antes de recomendar tecnologia, entendemos a sua operação.
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
-              Analisamos seu site, Google, celular, WhatsApp e funil. Voce recebe prioridades claras,
-              sem promessa vazia e sem metrica inventada.
+              Informe seu negócio, a necessidade, o problema e a faixa de investimento. Depois do envio,
+              você recebe acesso a uma conversa contextualizada pelo WhatsApp.
             </p>
           </Reveal>
 
@@ -100,7 +174,7 @@ export default function Diagnostico() {
                           Etapa {etapa} de 2
                         </p>
                         <h2 className="mt-2 font-serif text-2xl font-bold text-white sm:text-3xl">
-                          {etapa === 1 ? 'Conte sobre o seu negocio' : 'Onde podemos gerar mais impacto?'}
+                          {etapa === 1 ? 'Qual é o contexto da sua operação?' : 'Como devemos encaminhar seu diagnóstico?'}
                         </h2>
                       </div>
                       <div className="flex gap-2" aria-label={`Etapa ${etapa} de 2`}>
@@ -126,27 +200,12 @@ export default function Diagnostico() {
                               required
                               value={dados.nome}
                               onChange={(event) => updateField('nome', event.target.value)}
-                              placeholder="Como podemos chamar voce?"
+                              placeholder="Como podemos chamar você?"
                               className={inputClass}
                             />
                           </div>
                           <div>
-                            <label htmlFor="whatsapp" className={labelClass}>WhatsApp</label>
-                            <input
-                              id="whatsapp"
-                              name="whatsapp"
-                              type="tel"
-                              inputMode="tel"
-                              autoComplete="tel"
-                              required
-                              value={dados.whatsapp}
-                              onChange={(event) => updateField('whatsapp', event.target.value)}
-                              placeholder="(16) 99999-9999"
-                              className={inputClass}
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="segmento" className={labelClass}>Segmento</label>
+                            <label htmlFor="segmento" className={labelClass}>Qual é o seu negócio?</label>
                             <select
                               id="segmento"
                               name="segmento"
@@ -156,19 +215,33 @@ export default function Diagnostico() {
                               className={inputClass}
                             >
                               <option value="" disabled>Selecione seu segmento</option>
-                              <option value="clinica-saude">Clinica / saude</option>
-                              <option value="estetica">Estetica</option>
+                              <option value="clinica-saude">Clínica / saúde</option>
+                              <option value="estetica">Estética</option>
                               <option value="restaurante-delivery">Restaurante / delivery</option>
                               <option value="oficina">Oficina</option>
                               <option value="pet-shop">Pet shop</option>
                               <option value="advocacia">Advocacia</option>
-                              <option value="imobiliaria">Imobiliaria</option>
+                              <option value="imobiliaria">Imobiliária</option>
+                              <option value="contabilidade">Contabilidade</option>
+                              <option value="representacao-comercial">Representação comercial</option>
                               <option value="escola-curso">Escola / curso</option>
-                              <option value="servico-local">Servico local</option>
-                              <option value="industria-distribuidora">Industria / distribuidora</option>
+                              <option value="servico-local">Serviço local</option>
+                              <option value="industria-distribuidora">Indústria / distribuidora</option>
                               <option value="profissional-liberal">Profissional liberal</option>
                               <option value="outro">Outro</option>
                             </select>
+                          </div>
+                          <div>
+                            <label htmlFor="solucao" className={labelClass}>O que você precisa?</label>
+                            <select id="solucao" name="solucao" required value={dados.solucao} onChange={(event) => updateField('solucao', event.target.value)} className={inputClass}>
+                              <option value="" disabled>Selecione a necessidade principal</option>
+                              {SOLUTIONS.map((solution) => <option key={solution.slug} value={solution.slug}>{solution.title}</option>)}
+                              <option value="ainda-nao-sei">Ainda preciso entender a melhor solução</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label htmlFor="problema" className={labelClass}>Qual problema você quer resolver?</label>
+                            <textarea id="problema" name="problema" required rows={3} maxLength={1000} value={dados.problema} onChange={(event) => updateField('problema', event.target.value)} placeholder="Explique onde a operação perde oportunidades ou exige esforço manual." className={inputClass} />
                           </div>
                           <button
                             type="submit"
@@ -179,6 +252,22 @@ export default function Diagnostico() {
                         </>
                       ) : (
                         <>
+                          <div>
+                            <label htmlFor="investimento" className={labelClass}>Faixa de investimento disponível</label>
+                            <select id="investimento" name="investimento" required value={dados.investimento} onChange={(event) => updateField('investimento', event.target.value)} className={inputClass}>
+                              <option value="" disabled>Selecione uma faixa aproximada</option>
+                              <option value="ate-2500">Até R$ 2.500</option>
+                              <option value="2500-5000">R$ 2.500 a R$ 5.000</option>
+                              <option value="5000-10000">R$ 5.000 a R$ 10.000</option>
+                              <option value="10000-25000">R$ 10.000 a R$ 25.000</option>
+                              <option value="acima-25000">Acima de R$ 25.000</option>
+                              <option value="preciso-definir">Ainda preciso definir</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label htmlFor="whatsapp" className={labelClass}>WhatsApp para retorno</label>
+                            <input id="whatsapp" name="whatsapp" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} value={dados.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} placeholder="(16) 99999-9999" className={inputClass} />
+                          </div>
                           <div>
                             <label htmlFor="email" className={labelClass}>E-mail</label>
                             <input
@@ -208,7 +297,7 @@ export default function Diagnostico() {
                             />
                           </div>
                           <div>
-                            <label htmlFor="objetivo" className={labelClass}>Principal objetivo</label>
+                            <label htmlFor="objetivo" className={labelClass}>Principal objetivo comercial</label>
                             <select
                               id="objetivo"
                               name="objetivo"
@@ -223,9 +312,11 @@ export default function Diagnostico() {
                               <option value="vender-mais">Vender mais</option>
                               <option value="automatizar-atendimento">Automatizar o atendimento</option>
                               <option value="sistema-app">Criar um sistema ou app</option>
-                              <option value="nao-sei">Nao sei ainda</option>
+                              <option value="nao-sei">Ainda preciso entender</option>
                             </select>
                           </div>
+                          <label className="flex items-start gap-3 text-xs leading-5 text-[#A1A1AA]"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-[#D6A84F]" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
+                          {erro ? <p role="alert" className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100">{erro}</p> : null}
                           <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
                             <button
                               type="button"
@@ -236,16 +327,17 @@ export default function Diagnostico() {
                             </button>
                             <button
                               type="submit"
+                              disabled={enviando}
                               className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] px-6 py-3.5 font-bold text-[#030303] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#D6A84F] focus:ring-offset-2 focus:ring-offset-[#090909]"
                             >
-                              Quero meu diagnostico <ArrowRight size={18} aria-hidden="true" />
+                              {enviando ? <>Registrando diagnóstico <Loader2 size={18} className="animate-spin" aria-hidden="true" /></> : <>Registrar meu diagnóstico <ArrowRight size={18} aria-hidden="true" /></>}
                             </button>
                           </div>
                         </>
                       )}
                     </form>
                     <p className="mt-5 text-center text-xs leading-relaxed text-[#71717A]">
-                      Seus dados serao usados somente para responder a esta solicitacao.
+                      Seus dados são usados somente para analisar e responder a esta solicitação.
                     </p>
                   </>
                 ) : (
@@ -253,23 +345,23 @@ export default function Diagnostico() {
                     <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#D6A84F]/30 bg-[#D6A84F]/10 text-[#F2D38A]">
                       <CheckCircle2 size={32} aria-hidden="true" />
                     </div>
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">Solicitacao recebida</p>
-                    <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">Recebido! Vamos analisar.</h2>
+                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">Diagnóstico registrado</p>
+                    <h2 className="mt-3 font-serif text-3xl font-bold text-white sm:text-4xl">Agora sua conversa começa com contexto.</h2>
                     <p className="mt-4 max-w-lg leading-relaxed text-[#A1A1AA]">
-                      O proximo passo e revisar as informacoes enviadas. Nossa equipe entrara em contato pelo WhatsApp para alinhar o contexto e apresentar as prioridades encontradas.
+                      Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.
                     </p>
                     <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
                       <PremiumButton
-                        href={BRAND.whatsapp}
+                        href={contextualWhatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
                         size="lg"
-                        onClick={() => console.log('GA4: whatsapp_click')}
+                        onClick={() => trackEvent('whatsapp_open', { service: dados.solucao, investment: dados.investimento, origin: 'diagnostico-concluido' })}
                       >
-                        <MessageCircle size={18} aria-hidden="true" /> Chamar no WhatsApp
+                        <MessageCircle size={18} aria-hidden="true" /> Abrir conversa qualificada
                       </PremiumButton>
                       <Link to="/blog" className="btn-outline-gold inline-flex items-center justify-center rounded-full px-8 py-3 font-semibold">
-                        Ver conteudos do blog
+                        Ver conteúdos do blog
                       </Link>
                     </div>
                   </div>
@@ -286,7 +378,7 @@ export default function Diagnostico() {
                   Clareza para decidir o que fazer primeiro.
                 </h2>
                 <p className="mt-4 leading-relaxed text-[#A1A1AA]">
-                  Voce recebe ate 5 prioridades para melhorar presenca, conversao e atendimento.
+                  A leitura considera presença, conversão, tecnologia, investimento e o estágio operacional informado.
                 </p>
                 <ul className="mt-7 space-y-4">
                   {trustItems.map((item) => (
@@ -299,17 +391,7 @@ export default function Diagnostico() {
                   ))}
                 </ul>
                 <div className="mt-8 border-t border-white/[0.08] pt-7">
-                  <p className="text-sm text-[#A1A1AA]">Prefere falar agora?</p>
-                  <PremiumButton
-                    href={BRAND.whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="outline"
-                    className="mt-3 w-full"
-                    onClick={() => console.log('GA4: whatsapp_click')}
-                  >
-                    <MessageCircle size={18} aria-hidden="true" /> Chamar no WhatsApp
-                  </PremiumButton>
+                  <p className="text-sm leading-7 text-[#A1A1AA]">O contato pelo WhatsApp é liberado somente depois do registro do diagnóstico. Assim, o atendimento começa com informações reais da operação.</p>
                 </div>
               </aside>
             </Reveal>
