@@ -61,6 +61,18 @@ test('diagnóstico mantém WhatsApp atrás do gate de qualificação', async ({ 
   await expect(page.getByLabel('O que você precisa?')).toHaveValue('catalogo-para-representantes');
 });
 
+test('diagnóstico reposiciona e anuncia a próxima etapa', async ({ page }) => {
+  await page.goto('/diagnostico?solucao=catalogo-para-representantes');
+  await page.getByLabel('Nome').fill('Pessoa de teste');
+  await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
+  await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
+  await page.getByRole('button', { name: 'Continuar' }).click();
+
+  const nextStepHeading = page.getByRole('heading', { level: 2, name: /como devemos encaminhar seu diagnóstico/i });
+  await expect(nextStepHeading).toBeInViewport();
+  await expect(nextStepHeading).toBeFocused();
+});
+
 test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não existe webhook', async ({ page }) => {
   await page.route('**/api/lead', async (route) => {
     await route.fulfill({ status: 202, json: { ok: true, delivery: 'whatsapp_handoff' } });

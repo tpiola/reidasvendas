@@ -46,7 +46,7 @@ Copiar de [`apps/web/.env.example`](../apps/web/.env.example). Configurar em **P
 
 | Variável | Obrigatória | Efeito se ausente |
 |----------|-------------|-------------------|
-| `LEAD_WEBHOOK_URL` | Sim (formulários) | `POST /api/lead` → 500 `missing_webhook` |
+| `LEAD_WEBHOOK_URL` | Não (recomendado) | Sem webhook, `POST /api/lead` responde `202` com `delivery: "whatsapp_handoff"` |
 | `LEAD_WEBHOOK_SECRET` | Não | Header opcional para n8n |
 | `OPENAI_API_KEY` | Só com chat | Chat desabilitado ou erro |
 | `VITE_GA4_ID` / `VITE_GTM_ID` | Não | Site funciona; analytics off |
@@ -58,8 +58,10 @@ Detalhes: [`docs/INTEGRATIONS.md`](INTEGRATIONS.md).
 
 ## Domínios
 
-- Produção: https://reidasvendas.com.br/ (e aliases `*.vercel.app`)
-- SEO/canonical no código: `reidasvendas.com` — alinhar DNS e redirects no painel se necessário
+- Produção canônica: https://reidasvendas.com.br/
+- Alias obrigatório: https://www.reidasvendas.com.br/ → https://reidasvendas.com.br/
+- URLs `*.vercel.app` são técnicas e protegidas; não divulgar como endereço institucional.
+- SEO/canonical no código: `reidasvendas.com.br` — manter DNS e redirects alinhados no painel
 
 ## Validação local (antes do push)
 
@@ -77,9 +79,10 @@ Preview com funções serverless: deploy Preview na Vercel (`vite preview` local
 
 - [ ] Build Vercel **Ready** (branch `main`)
 - [ ] Home e `/contato` retornam 200; refresh em rota interna não dá 404
-- [ ] `POST /api/lead` com payload válido → 200 (requer `LEAD_WEBHOOK_URL`)
-- [ ] `LEAD_WEBHOOK_URL` configurado no projeto `v0-rei-das-vendas`
+- [ ] `POST /api/lead` com payload válido → `202` e `delivery: "webhook"` ou `delivery: "whatsapp_handoff"`
+- [ ] Se o registro automático for esperado, `LEAD_WEBHOOK_URL` está configurado no projeto `reidasvendas`
 - [ ] Domínio custom resolvendo (se aplicável)
+- [ ] `www.reidasvendas.com.br` redireciona para o domínio canônico sem erro de certificado
 - [ ] Lighthouse mobile > 80 (meta orientativa)
 
 ## Smoke test (produção)
@@ -98,11 +101,13 @@ curl -sS -X POST https://reidasvendas.com.br/api/lead \
 |-------|-----------|
 | Deploy servindo build velho de `public/` na raiz | Pasta `/public/` no `.gitignore`; output `apps/web/dist` |
 | APIs não deployam | Root Directory = `apps/web` |
-| Formulário quebra em prod | `LEAD_WEBHOOK_URL` no painel |
+| Registro automático indisponível | Configurar `LEAD_WEBHOOK_URL`; o fallback honesto por WhatsApp permanece funcional |
 | CSP bloqueia GTM/GA4 | Ajustar `script-src` em `apps/web/vercel.json` quando IDs forem ativados |
 
 ## Projeto Vercel
 
-- **Nome:** `v0-rei-das-vendas`
+- **Nome:** `reidasvendas`
+- **ID:** `prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL`
+- **Equipe:** `thiagopiola`
 - **Repositório:** `tpiola/reidasvendas`
 - Deploy automático via integração GitHub em push/merge em `main`
