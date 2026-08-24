@@ -38,8 +38,8 @@ export function SiteFooter() {
               <BrandLockup />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#A1A1AA]">
-              Unidade Externa de Tecnologia e Governança de Resultados. Arquiteturas digitais
-              exclusivas, diagnóstico comercial e evolução operacional mensurável.
+              Sites premium + IA pra negócios locais. A gente cria sites rápidos e bonitos que
+              fazem seu negócio aparecer no Google e vender mais em Franca e região.
             </p>
             <div className="mt-6 flex gap-3">
               <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(214,168,79,0.15)] text-[#A1A1AA] transition-all hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:text-[#D6A84F]" aria-label="Instagram">

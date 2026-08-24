@@ -26,11 +26,10 @@ export function FinalCta() {
                 Próximo movimento
               </span>
               <h2 id="cta-title" className="font-serif mt-6 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-                Antes de construir mais tecnologia, descubra o que <span className="text-gradient-premium">merece ser construído.</span>
+                Pronto pra <span className="text-gradient-premium">lotar sua agenda?</span>
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#A1A1AA] sm:text-base">
-                O processo começa pelo cenário, pelos gargalos e pelas prioridades capazes de sustentar uma
-                solução digital completa. Fale direto com a equipe.
+                Manda uma mensagem no WhatsApp que a gente analisa seu negócio e te mostra o que dá pra melhorar.
               </p>
 
               <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -70,7 +69,7 @@ export function FinalCta() {
               </div>
 
               <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8A8A92]">
-                Escopo transparente · Arquitetura exclusiva · Governança independente
+                Site rápido · IA que vende · Suporte próximo
               </p>
             </div>
           </div>

@@ -20,7 +20,7 @@ export function BrandLockup({ compact = false, className, wordmarkClassName }: B
           Rei das Vendas
         </span>
         <span className={cn('rdv-wordmark-subtitle mt-1 block whitespace-nowrap font-sans font-semibold uppercase tracking-[0.18em]', compact ? 'text-[0.48rem] sm:text-[0.55rem]' : 'text-[0.6rem] sm:text-[0.68rem]')}>
-          Soberania digital
+          Sites premium + IA
         </span>
       </span>
     </span>

@@ -18,8 +18,8 @@ type Service = {
 const services: Service[] = [
   {
     key: 'sites',
-    title: 'Sites',
-    description: 'Presença institucional que organiza intenção, prova e contato — responsiva e preparada para a busca local.',
+    title: 'Sites Premium',
+    description: 'Site rápido e bonito que transforma visita em cliente.',
     to: '/servicos',
     icon: Globe,
     image: BRAND.images.services.sites,
@@ -29,7 +29,7 @@ const services: Service[] = [
   {
     key: 'apps',
     title: 'Aplicativos',
-    description: 'Interfaces enxutas desenhadas a partir do processo real da operação.',
+    description: 'App pro seu cliente falar com você sem fricção.',
     to: '/solucoes/app-para-empresas',
     icon: Smartphone,
     image: BRAND.images.services.apps,
@@ -37,8 +37,8 @@ const services: Service[] = [
   },
   {
     key: 'automations',
-    title: 'Automações',
-    description: 'Contexto e continuidade entre formulário, equipe e WhatsApp.',
+    title: 'Automações com IA',
+    description: 'Chatbot e automação que respondem e agendam por você.',
     to: '/solucoes/automacao-whatsapp',
     icon: Workflow,
     image: BRAND.images.services.automations,
@@ -47,7 +47,7 @@ const services: Service[] = [
   {
     key: 'dashboards',
     title: 'Dashboards',
-    description: 'Painéis que transformam sinais dispersos em prioridades operacionais e decisão.',
+    description: 'Veja em números o que está vendendo.',
     to: '/solucoes/sistema-sob-medida',
     icon: BarChart3,
     image: BRAND.images.services.dashboards,
@@ -56,7 +56,7 @@ const services: Service[] = [
   {
     key: 'mentoria',
     title: 'Mentoria',
-    description: 'Estrutura vendas online, marketing digital e presença digital do zero à escala.',
+    description: 'Aprenda a vender online com quem faz.',
     to: '/diagnostico',
     icon: GraduationCap,
     image: BRAND.images.services.mentoria,

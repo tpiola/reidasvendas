@@ -32,7 +32,7 @@ export default function Home() {
             <div className="lg:col-span-7">
               <GoldBadge>
                 <Sparkles className="h-3 w-3" aria-hidden="true" />
-                {BRAND.tagline}
+                Franca · SP — Sites que vendem
               </GoldBadge>
 
               <h1
@@ -41,34 +41,36 @@ export default function Home() {
               >
                 <SplitText
                   as="span"
-                  text="Sua empresa não precisa de mais software."
+                  text="Seu negócio local merece"
                   className="block text-white"
                   staggerMs={46}
                 />
                 <SplitText
                   as="span"
-                  text="Precisa de inteligência operacional."
+                  text="um site que vende."
                   className="mt-2 block text-white"
-                  highlightWords={['inteligência', 'operacional']}
+                  highlightWords={['vende']}
                   staggerMs={46}
                   delay={0.55}
                 />
               </h1>
 
               <p className="mt-7 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
-                O Rei das Vendas projeta sites, sistemas, agentes de IA e automações como uma única
-                infraestrutura: cada ponto captura sinais, conduz decisões e sustenta crescimento com controle.
+                A gente cria sites premium e usa inteligência artificial pra colocar você na frente de quem
+                procura o que você vende — em Franca e região.
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <Link
-                  to="/diagnostico"
-                  onClick={() => trackEvent('hero_cta', { position: 'home-hero', destination: 'diagnostico' })}
+                <a
+                  href={BRAND.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('hero_cta', { position: 'home-hero', destination: 'whatsapp' })}
                   className="btn-gold w-full sm:w-auto"
                 >
-                  Mapear minha operação
+                  Quero um site que vende
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+                </a>
                 <Link
                   to="/solucoes"
                   onClick={() => trackEvent('hero_cta_secondary', { position: 'home-hero', destination: 'solucoes' })}
@@ -112,7 +114,7 @@ export default function Home() {
       {/* ─── Marquee de nichos ─── */}
       <section className="relative py-14 sm:py-16" aria-label="Segmentos atendidos">
         <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A8A92]">
-          Operações atendidas em seis frentes
+          Quem a gente atende
         </p>
         <NicheMarquee />
       </section>
@@ -124,7 +126,7 @@ export default function Home() {
             <div>
               <span className="section-label">O que construímos</span>
               <h2 id="services-title" className="font-serif mt-4 max-w-2xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-                Cinco frentes de solução. <span className="text-gradient-gold">Uma única infraestrutura.</span>
+                Cinco serviços. <span className="text-gradient-gold">Um só objetivo: vender mais.</span>
               </h2>
             </div>
             <Link
@@ -132,7 +134,7 @@ export default function Home() {
               onClick={() => trackEvent('services_view_all', { origin: 'home-bento' })}
               className="btn-outline-gold w-fit shrink-0"
             >
-              Ver todas as arquiteturas
+              Ver todos os serviços
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

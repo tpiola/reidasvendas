@@ -4,23 +4,23 @@ import { motion } from 'framer-motion';
 const pillars = [
   {
     n: '01',
-    title: 'Diagnóstico antes da tecnologia',
-    text: 'A tecnologia começa no gargalo, não na ferramenta. Mapeamos o que existe antes de propor o que construir.',
+    title: 'Feito pro seu negócio, não template',
+    text: 'Nada de site genérico. Cada site é desenhado pro seu público, seu bairro e seu jeito de vender.',
   },
   {
     n: '02',
-    title: 'Arquitetura exclusiva',
-    text: 'Cada fluxo responde à operação real da empresa — não a um template ou a um pacote pronto.',
+    title: 'IA que trabalha pra vender',
+    text: 'Chatbot que responde, automação que agenda, sistema que qualifica lead — enquanto você atende.',
   },
   {
     n: '03',
-    title: 'Governança verificável',
-    text: 'Escopo, critérios e próximos movimentos visíveis. Sem métrica inventada e sem urgência artificial.',
+    title: 'Foco em negócio local',
+    text: 'A gente entende o comércio de Franca e região. Site que aparece pra quem procura perto de mim.',
   },
   {
     n: '04',
-    title: 'Unidade externa, não fornecedor',
-    text: 'Uma estrutura independente que mapeia prioridades, constrói a solução e mantém a evolução conectada a indicadores.',
+    title: 'Rápido e no celular',
+    text: 'PageSpeed acima de 90. Seu cliente abre no celular e não espera.',
   },
 ];
 
@@ -31,11 +31,10 @@ export function WhyUs() {
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <span className="section-label">Por que o Rei das Vendas</span>
           <h2 id="why-us-title" className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-            Não é pacote pronto. É uma <span className="text-gradient-gold">unidade externa de tecnologia e governança.</span>
+            Não é template. É <span className="text-gradient-gold">feito pro seu negócio.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
-            Uma estrutura terceirizada e independente que mapeia prioridades, constrói a solução e mantém a
-            evolução digital conectada a indicadores verificáveis.
+            Quatro coisas que a gente garante em cada projeto — pra você vender mais, sem dor de cabeça.
           </p>
         </Reveal>
 
