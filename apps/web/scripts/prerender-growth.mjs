@@ -70,7 +70,7 @@ function staticContent(entry) {
 
   const questions = entry.questions.map((item) => `<section><h2>${escapeHtml(item.question)}</h2><p>${escapeHtml(item.answer)}</p></section>`).join('');
 
-  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">Unidade Externa de Tecnologia e Governança de Resultados</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><div class="initial-home__actions"><a href="/diagnostico">Mapear minha operação →</a><a href="/solucoes">Explorar arquiteturas ↗</a></div></article><aside class="initial-home__panel"><small>Arquitetura orientada ao contexto</small>${sections}${questions}</aside></div></main>`;
+  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">Sites premium + IA pra negócios locais</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><div class="initial-home__actions"><a href="/diagnostico">Mapear minha operação →</a><a href="/solucoes">Explorar arquiteturas ↗</a></div></article><aside class="initial-home__panel"><small>Presença digital sob medida</small>${sections}${questions}</aside></div></main>`;
 }
 
 function prerenderDocument(template, entry) {
