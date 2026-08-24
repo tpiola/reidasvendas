@@ -106,7 +106,7 @@ export default function Home() {
           <div className="lg:pl-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#D6A84F]">Fundador</p>
             <p className="mt-2 font-serif text-2xl font-bold leading-tight text-white sm:text-3xl">{BRAND.founder.name}</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A1A1AA]">{BRAND.founder.crf} · responsabilidade técnica</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A1A1AA]">Franca · SP · negócios locais</p>
           </div>
         </div>
       </section>

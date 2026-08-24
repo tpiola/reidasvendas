@@ -83,8 +83,7 @@ export default function Sobre() {
               <p className="mt-6 text-sm leading-7 text-[#A1A1AA]">{BRAND.founder.bio}</p>
               <div className="mt-6 flex flex-wrap gap-3 text-xs text-[#D4D4D8]">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2"><MapPin className="h-3.5 w-3.5 text-[#D6A84F]" /> Franca, SP</span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 px-3 py-2">{BRAND.founder.crf}</span>
-              </div>
+                              </div>
             </aside>
           </Reveal>
         </div>

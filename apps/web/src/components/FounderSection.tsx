@@ -48,7 +48,7 @@ export function FounderSection() {
                 </Reveal>
                 <Reveal delay={0.15}>
                   <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-[#D6A84F]">
-                    {BRAND.founder.title} • {BRAND.founder.crf}
+                    {BRAND.founder.title}
                   </p>
                 </Reveal>
                 <Reveal delay={0.2}>

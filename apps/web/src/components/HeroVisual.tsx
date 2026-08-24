@@ -37,11 +37,11 @@ export function HeroVisual() {
       {/* Card: credencial */}
       <div className="rdv-float-card glass-premium absolute bottom-4 left-6 z-20 flex items-center gap-3 rounded-2xl px-4 py-3 sm:bottom-10 sm:left-8">
         <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.08)] text-[10px] font-bold text-[#D6A84F]">
-          CRF
+          SP
         </span>
         <div>
-          <p className="text-xs font-semibold text-white">{BRAND.founder.crf}</p>
-          <p className="text-[10px] text-[#A1A1AA]">responsabilidade técnica</p>
+          <p className="text-xs font-semibold text-white">Franca · SP</p>
+          <p className="text-[10px] text-[#A1A1AA]">negócio local</p>
         </div>
       </div>
     </div>

@@ -11,9 +11,8 @@ export const BRAND = {
   founder: {
     name: 'Thiago B. G. Piola',
     title: 'Founder & Diretor de Estratégia Digital',
-    crf: 'CRF-SP 58.519',
     site: 'https://thiagopiola.com.br',
-    bio: 'Farmacêutico, web designer e estrategista digital. Une experiência prática de atendimento, organização comercial e produção de tecnologia para construir sites claros, confiáveis e preparados para negócios locais.',
+    bio: 'Web designer e estrategista digital. Une experiência prática de atendimento, organização comercial e produção de tecnologia para construir sites claros, confiáveis e preparados para negócios locais.',
   },
   stats: {
     projects: '12+',
