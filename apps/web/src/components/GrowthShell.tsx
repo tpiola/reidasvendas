@@ -32,7 +32,7 @@ export function GrowthHero({ label, title, description, solution, secondary }: H
           </div>
         </div>
         <aside className="ge-signal" aria-label="Princípios de execução">
-          <span className="ge-signal-label">RDV · GOVERNANÇA OPERACIONAL</span>
+          <span className="ge-signal-label">RDV · FOCO EM RESULTADO</span>
           <strong>Diagnóstico antes da tecnologia.</strong>
           <ul>
             <li><Check size={15} aria-hidden="true" /> Contexto comercial identificado</li>
@@ -89,7 +89,7 @@ export function GrowthClosing({ solution, title = 'Sua operação merece uma arq
         >
           Mapear minha operação <ArrowRight size={17} aria-hidden="true" />
         </Link>
-        <small>Escopo proporcional · Contexto preservado · Governança independente</small>
+        <small>Escopo proporcional · Contexto preservado · Acompanhamento independente</small>
       </div>
     </section>
   );

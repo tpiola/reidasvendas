@@ -10,9 +10,9 @@ const categorias = ['Todas', 'Estratégia', 'Tecnologia', 'Automação', 'Design
 
 const posts = [
   {
-    slug: 'soberania-digital-o-que-e',
-    title: 'Soberania Digital: O que é e por que sua empresa precisa',
-    excerpt: 'Entenda o conceito de soberania digital e como ele pode transformar a forma como sua empresa vende online.',
+    slug: 'presenca-digital-o-que-e',
+    title: 'Presença Digital: O que é e por que sua empresa precisa',
+    excerpt: 'Entenda o conceito de presença digital e como ele pode transformar a forma como sua empresa vende online.',
     date: '15 Jun 2026',
     category: 'Estratégia',
     readTime: '5 min',
@@ -70,7 +70,7 @@ export default function Blog() {
           <Reveal delay={0.1}>
             <h1 className="mt-4 font-serif text-4xl font-bold text-white sm:text-5xl md:text-6xl">
               Conteúdo sobre{' '}
-              <span className="text-gradient-gold">Soberania Digital</span>
+              <span className="text-gradient-gold">Presença Digital</span>
             </h1>
           </Reveal>
           <Reveal delay={0.2}>

@@ -27,7 +27,7 @@ export function DashboardHeader() {
         <div className="flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.06)] px-4 py-1.5">
           <Crown className="h-3.5 w-3.5 text-[#D6A84F]" />
           <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#D6A84F]">
-            Soberania
+            Premium
           </span>
         </div>
       </div>

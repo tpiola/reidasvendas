@@ -3,19 +3,19 @@ import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import { Reveal } from '@/hooks/useAnimation';
 
 const posts = {
-  'soberania-digital-o-que-e': {
-    title: 'Soberania Digital: O que é e por que sua empresa precisa',
+  'presenca-digital-o-que-e': {
+    title: 'Presença Digital: O que é e por que sua empresa precisa',
     date: '15 Jun 2026', category: 'Estratégia', readTime: '5 min',
     content: `No cenário digital atual, a maioria das empresas depende de plataformas de terceiros para vender: Instagram, Facebook, marketplaces. O problema? Você não controla o algoritmo, as regras mudam do dia para a noite, e seu negócio fica refém.
 
-**Soberania digital** é a capacidade da sua empresa ter controle total sobre sua infraestrutura de vendas — dados, processos, automações — sem depender exclusivamente de plataformas que você não governa.
+**Presença digital** é a capacidade da sua empresa ter controle total sobre sua infraestrutura de vendas — dados, processos, automações — sem depender exclusivamente de plataformas que você não controla.
 
-## Os pilares da soberania digital
+## Os pilares da presença digital
 
 1. **Propriedade dos dados** — Seus leads, clientes e métricas são seus. Não de uma plataforma.
 2. **Infraestrutura própria** — Site, aplicativo, CRM e automações que você controla.
 3. **Independência de algoritmo** — Seu tráfego orgânico não depende de mudanças de terceiros.
-4. **Governança de resultados** — Métricas claras e previsíveis sobre o que funciona.
+4. **Foco em resultado** — Métricas claras e previsíveis sobre o que funciona.
 
 ## Por que isso importa agora?
 
@@ -24,7 +24,7 @@ Empresas que investem em infraestrutura digital própria têm:
 - **Menor custo de aquisição** no longo prazo
 - **Ativo digital** que valoriza com o tempo (diferente de tráfego pago que acaba quando o budget acaba)
 
-A soberania digital não é um luxo — é o novo padrão de mercado para empresas que querem crescer com consistência.`,
+A presença digital não é um luxo — é o novo padrão de mercado para empresas que querem crescer com consistência.`,
   },
 };
 

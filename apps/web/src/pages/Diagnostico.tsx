@@ -60,7 +60,7 @@ export default function Diagnostico() {
   const stageTransitionReady = useRef(false);
 
   const whatsappMessage = [
-    'Olá! Acabei de concluir o Mapeamento de Perfil Diamante.',
+    'Olá! Acabei de concluir o mapeamento do perfil do seu negócio.',
     `Nome: ${dados.nome}.`,
     `E-mail: ${dados.email}.`,
     `WhatsApp para retorno: ${dados.whatsapp}.`,
@@ -147,8 +147,8 @@ export default function Diagnostico() {
           whatsapp: dados.whatsapp,
           company: dados.segmento,
           ramo: dados.segmento,
-          source: 'diagnostico-soberano',
-          origem: 'diagnostico-soberano',
+          source: 'diagnostico',
+          origem: 'diagnostico',
           message: mensagem,
           mensagem,
           service: dados.solucao,
@@ -186,7 +186,7 @@ export default function Diagnostico() {
         />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal className="mx-auto max-w-4xl text-center">
-            <SectionLabel>Mapeamento de Perfil Diamante</SectionLabel>
+            <SectionLabel>Mapeamento do perfil do seu negócio</SectionLabel>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-7xl">
               Antes de recomendar tecnologia, entendemos a sua operação.
             </h1>

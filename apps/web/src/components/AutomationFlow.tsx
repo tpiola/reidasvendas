@@ -6,7 +6,7 @@ const flowSteps = [
   { label: 'Design', icon: '🎯', desc: 'Interface premium e identidade' },
   { label: 'Desenvolvimento', icon: '⚡', desc: 'Tecnologia de ponta' },
   { label: 'Automação', icon: '🤖', desc: 'Processos inteligentes' },
-  { label: 'Governança', icon: '📊', desc: 'Métricas e resultados' },
+  { label: 'Acompanhamento', icon: '📊', desc: 'Métricas e resultados' },
 ];
 
 export function AutomationFlow() {

@@ -30,7 +30,7 @@ export const SOLUTIONS: Solution[] = [
       { title: 'Áreas de atuação com contexto', detail: 'Páginas próprias para demandas empresariais, trabalhistas, familiares ou outras especialidades efetivamente atendidas.' },
       { title: 'Triagem antes da conversa', detail: 'Formulário que identifica assunto, cidade e estágio da demanda antes do encaminhamento ao WhatsApp.' },
       { title: 'Presença local verificável', detail: 'Informações institucionais consistentes, localização e conteúdo informativo, sujeitos à revisão das regras profissionais aplicáveis.' },
-      { title: 'Governança editorial', detail: 'Comunicação revisável, sem alegações de êxito garantido, sem exposição indevida e sem dados sensíveis desnecessários.' },
+      { title: 'Revisão editorial', detail: 'Comunicação revisável, sem alegações de êxito garantido, sem exposição indevida e sem dados sensíveis desnecessários.' },
     ],
     questions: [
       { question: 'Um escritório pode ter páginas separadas por área de atuação?', answer: 'Sim, desde que o conteúdo seja institucional e informativo, reflita atividades reais e seja revisado conforme as normas profissionais aplicáveis.' },
@@ -117,7 +117,7 @@ export const SOLUTIONS: Solution[] = [
       { title: 'Busca por intenção', detail: 'Filtros por finalidade, tipo, região e faixa de valor, conforme o inventário disponível.' },
       { title: 'Ficha de imóvel utilizável', detail: 'Fotos, características, contexto e próximos passos claros sem inflar disponibilidade.' },
       { title: 'Pedido de visita contextual', detail: 'Interesse, imóvel e contato chegam juntos à equipe responsável pelo atendimento.' },
-      { title: 'Governança do catálogo', detail: 'Processo de atualização do inventário e responsabilidades definidas desde o diagnóstico.' },
+      { title: 'Gestão do catálogo', detail: 'Processo de atualização do inventário e responsabilidades definidas desde o diagnóstico.' },
     ],
     questions: [
       { question: 'O catálogo pode integrar um sistema imobiliário existente?', answer: 'Pode, quando a plataforma disponibiliza integração compatível. A viabilidade é confirmada antes da definição do escopo.' },
@@ -245,7 +245,7 @@ export const SOLUTIONS: Solution[] = [
     architecture: [
       { title: 'Diagnóstico operacional', detail: 'Mapeamento de entradas, responsáveis, aprovações, exceções e resultado esperado.' },
       { title: 'Arquitetura proporcional', detail: 'Interface, dados, segurança e integrações dimensionados para o estágio atual da operação.' },
-      { title: 'Governança e continuidade', detail: 'Critérios de publicação, monitoramento, acesso e manutenção definidos com transparência.' },
+      { title: 'Publicação e continuidade', detail: 'Critérios de publicação, monitoramento, acesso e manutenção definidos com transparência.' },
       { title: 'Validação antes de virar SaaS', detail: 'Uma demanda interna só se transforma em produto recorrente quando o padrão é comprovado entre usuários reais.' },
     ],
     questions: [
@@ -277,7 +277,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'infraestrutura-digital',
-    title: 'Infraestrutura digital e governança operacional',
+    title: 'Infraestrutura digital e gestão da operação',
     category: 'Infraestrutura',
     audience: 'Empresas que precisam de domínio, estabilidade, segurança e responsabilidade técnica',
     summary: 'Uma base operacional que conecta domínio, publicação, rastreamento, formulários e critérios de continuidade.',
@@ -359,11 +359,11 @@ export const COMPARISONS: Comparison[] = [
     slug: 'wix',
     name: 'Wix',
     title: 'Alternativa ao Wix para empresas',
-    summary: 'Compare uma plataforma de criação autônoma com uma arquitetura sob medida acompanhada por uma unidade externa de tecnologia.',
+    summary: 'Compare uma plataforma de criação autônoma com uma arquitetura sob medida acompanhada por uma equipe externa de tecnologia.',
     platformFit: 'O Wix pode atender bem quem deseja montar e administrar uma presença digital usando os recursos disponibilizados pela própria plataforma.',
-    customFit: 'Uma arquitetura exclusiva faz sentido quando posicionamento, jornada comercial, integrações e responsabilidade operacional precisam refletir um processo específico.',
+    customFit: 'Um site sob medida faz sentido quando posicionamento, jornada comercial, integrações e responsabilidade operacional precisam refletir um processo específico.',
     considerations: [
-      { title: 'Autonomia ou execução acompanhada', detail: 'Avalie se a equipe pretende construir sozinha ou precisa de direção, implementação e governança.' },
+      { title: 'Autonomia ou execução acompanhada', detail: 'Avalie se a equipe pretende construir sozinha ou precisa de direção, implementação e acompanhamento.' },
       { title: 'Recursos disponíveis ou fluxo específico', detail: 'Compare as funções atuais da plataforma com as necessidades reais de captação e operação.' },
       { title: 'Custo total e responsabilidade', detail: 'Considere assinatura, tempo interno, integrações e manutenção. Consulte os valores diretamente na fonte oficial.' },
     ],
@@ -374,7 +374,7 @@ export const COMPARISONS: Comparison[] = [
     slug: 'wordpress',
     name: 'WordPress',
     title: 'Alternativa ao WordPress para empresas',
-    summary: 'Entenda quando um CMS aberto resolve a necessidade e quando uma arquitetura própria com governança definida é mais adequada.',
+    summary: 'Entenda quando um CMS aberto resolve a necessidade e quando uma arquitetura própria com responsabilidades definidas é mais adequada.',
     platformFit: 'O WordPress é um software aberto com extensibilidade, gestão de conteúdo e ampla disponibilidade de plugins e temas.',
     customFit: 'Uma solução sob medida pode ser preferível quando o objetivo central envolve um fluxo comercial específico e uma operação técnica coordenada.',
     considerations: [
@@ -493,7 +493,7 @@ export const GUIDES: Guide[] = [
     ],
     solution: 'landing-page',
     tool: 'calculadora-roi',
-    questions: [{ question: 'Uma landing page pode ficar dentro do domínio principal?', answer: 'Sim. Uma rota específica pode concentrar uma oferta enquanto aproveita identidade, governança e mensuração do domínio central.' }],
+    questions: [{ question: 'Uma landing page pode ficar dentro do domínio principal?', answer: 'Sim. Uma rota específica pode concentrar uma oferta enquanto aproveita identidade, estrutura e mensuração do domínio central.' }],
   },
   {
     slug: 'catalogo-digital-ou-pdf',
@@ -542,7 +542,7 @@ export const GROWTH_SEO: SeoEntry[] = [
   },
   {
     path: '/diagnostico',
-    title: 'Mapeamento de Perfil Diamante | Rei das Vendas',
+    title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
     description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
     category: 'WebPage',
     headings: [

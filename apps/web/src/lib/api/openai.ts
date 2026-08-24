@@ -57,7 +57,7 @@ export async function generateCopy(
 
   const tones = {
     direct: 'Tom direto, frases curtas, resposta direta. Venda.',
-    premium: 'Tom institucional, luxo, autoridade. Soberania digital.',
+    premium: 'Tom institucional, luxo, autoridade. Presença digital.',
     urgency: 'Urgência controlada, escassez real sem dark pattern.',
   };
 
