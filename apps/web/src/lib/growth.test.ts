@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { COMPARISONS, DEMONSTRATIONS, GROWTH_SEO, GUIDES, LOCAL_PAGES, SOLUTIONS, TOOLS } from './growth';
 
-describe('arquitetura de aquisição soberana', () => {
+describe('arquitetura de aquisição digital', () => {
   it('mantém páginas comerciais únicas e canônicas', () => {
     const paths = GROWTH_SEO.map((entry) => entry.path);
     expect(new Set(paths).size).toBe(paths.length);

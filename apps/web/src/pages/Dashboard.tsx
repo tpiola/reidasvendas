@@ -53,7 +53,7 @@ const topPages = [
   { label: '/', value: '8.240 visitas', change: '+5.2%', positive: true },
   { label: '/servicos', value: '3.120 visitas', change: '+12.8%', positive: true },
   { label: '/contato', value: '1.890 visitas', change: '-2.1%', positive: false },
-  { label: '/blog/soberania-digital', value: '1.450 visitas', change: '+45.3%', positive: true },
+  { label: '/blog/presenca-digital-o-que-e', value: '1.450 visitas', change: '+45.3%', positive: true },
   { label: '/blog/infraestrutura-vendas', value: '980 visitas', change: '+28.7%', positive: true },
 ];
 

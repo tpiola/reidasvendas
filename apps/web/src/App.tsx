@@ -125,7 +125,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
     description: 'Sites, landing pages, catálogos, aplicativos, sistemas e automações desenhados para o problema real de cada operação.',
   },
   '/diagnostico': {
-    title: 'Mapeamento de Perfil Diamante | Rei das Vendas',
+    title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
     description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
   },
   '/servicos': {
@@ -339,7 +339,7 @@ const structuredData = {
       priceRange: '$$',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Arquiteturas digitais e governança de resultados',
+        name: 'Arquiteturas digitais e foco em resultado',
         itemListElement: SOLUTIONS.map((solution) => ({
           '@type': 'Offer',
           itemOffered: {

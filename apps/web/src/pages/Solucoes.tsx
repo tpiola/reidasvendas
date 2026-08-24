@@ -176,7 +176,7 @@ export default function Solucoes() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <Reveal className="max-w-3xl">
             <SectionLabel>Método</SectionLabel>
-            <SectionTitle>Como construímos uma solução exclusiva</SectionTitle>
+            <SectionTitle>Como construímos uma solução sob medida</SectionTitle>
             <p className="mt-5 text-base leading-8 text-[#A1A1AA]">
               Cada decisão parte do diagnóstico. O processo conecta estratégia, comunicação, tecnologia e operação sem empurrar módulos que o negócio não precisa.
             </p>
@@ -248,7 +248,7 @@ export default function Solucoes() {
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[rgba(214,168,79,0.18)] bg-[rgba(214,168,79,0.08)] text-[#F2D38A]">
               <Zap className="h-6 w-6" aria-hidden="true" />
             </span>
-            <SectionTitle>Arquitetura exclusiva. Infraestrutura construída para o seu negócio.</SectionTitle>
+            <SectionTitle>Site sob medida. Infraestrutura construída para o seu negócio.</SectionTitle>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="rounded-3xl border border-white/[0.08] bg-[#090909] p-6 sm:p-8">
