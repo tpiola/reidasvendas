@@ -35,7 +35,7 @@ export function Accordion({
   };
 
   const containerClass = cn(
-    variant === 'bordered' && 'divide-y divide-[rgba(255,255,255,0.06)]',
+    variant === 'bordered' && 'divide-y divide-[rgba(28,25,20,0.06)]',
     variant === 'glass' && 'space-y-3',
     className
   );
@@ -50,11 +50,11 @@ export function Accordion({
             className={cn(
               'overflow-hidden transition-all duration-300',
               variant === 'glass' &&
-                'rounded-2xl border border-[rgba(214,168,79,0.1)] bg-[rgba(255,255,255,0.02)] backdrop-blur-sm',
-              variant === 'default' && 'border-b border-[rgba(255,255,255,0.06)] last:border-b-0',
+                'rounded-2xl border border-[rgba(166,111,24,0.1)] bg-[rgba(28,25,20,0.02)] backdrop-blur-sm',
+              variant === 'default' && 'border-b border-line last:border-b-0',
               isOpen &&
                 variant === 'glass' &&
-                'border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.03)]'
+                'border-[rgba(166,111,24,0.2)] bg-[rgba(166,111,24,0.03)]'
             )}
           >
             <button
@@ -69,7 +69,7 @@ export function Accordion({
               <span
                 className={cn(
                   'text-base font-semibold transition-colors duration-300',
-                  isOpen ? 'text-[#D6A84F]' : 'text-white'
+                  isOpen ? 'text-gold' : 'text-text-primary'
                 )}
               >
                 {item.title}
@@ -80,8 +80,8 @@ export function Accordion({
                 className={cn(
                   'flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-colors',
                   isOpen
-                    ? 'text-[#D6A84F]'
-                    : 'text-[#A1A1AA]'
+                    ? 'text-gold'
+                    : 'text-text-secondary'
                 )}
               >
                 <ChevronDown className="h-4 w-4" />
@@ -103,7 +103,7 @@ export function Accordion({
                 >
                   <div
                     className={cn(
-                      'pb-5 text-sm leading-relaxed text-[#A1A1AA]',
+                      'pb-5 text-sm leading-relaxed text-text-secondary',
                       variant === 'glass' ? 'px-5' : 'px-1'
                     )}
                   >

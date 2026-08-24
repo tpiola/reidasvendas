@@ -63,9 +63,9 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 bg-[#030303] px-6 text-center" role="alert">
-          <h1 className="font-serif text-3xl font-bold text-white">Não foi possível carregar esta página.</h1>
-          <p className="max-w-md text-sm leading-6 text-[#A1A1AA]">Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
+        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 bg-background px-6 text-center" role="alert">
+          <h1 className="font-serif text-3xl font-bold text-text-primary">Não foi possível carregar esta página.</h1>
+          <p className="max-w-md text-sm leading-6 text-text-secondary">Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
           <button onClick={this.handleRetry} className="btn-gold mt-2" type="button">Tentar novamente</button>
         </div>
       );
@@ -77,7 +77,7 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
 
 function Loading() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center bg-[#030303]" aria-live="polite" aria-busy="true">
+    <div className="flex min-h-[50vh] items-center justify-center bg-background" aria-live="polite" aria-busy="true">
       <div className="loading-gold" />
       <span className="sr-only">Carregando página</span>
     </div>

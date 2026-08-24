@@ -36,7 +36,7 @@ export default function BlogPost() {
     return (
       <main className="pt-28 pb-20">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <h1 className="font-serif text-3xl font-bold text-white">Artigo não encontrado</h1>
+          <h1 className="font-serif text-3xl font-bold text-text-primary">Artigo não encontrado</h1>
           <Link to="/blog" className="btn-outline-gold inline-flex mt-6">
             <ArrowLeft className="h-4 w-4" /> Voltar ao Blog
           </Link>
@@ -48,23 +48,23 @@ export default function BlogPost() {
   return (
     <main>
       <section className="relative pt-28 pb-16">
-        <div className="absolute inset-0 bg-[#030303]" />
+        <div className="absolute inset-0 bg-background" />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
           <Reveal>
-            <Link to="/blog" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#D6A84F] transition-all hover:gap-3 mb-8">
+            <Link to="/blog" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-gold transition-all hover:gap-3 mb-8">
               <ArrowLeft className="h-3 w-3" /> Voltar ao Blog
             </Link>
           </Reveal>
           <Reveal delay={0.1}>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D6A84F] backdrop-blur-sm">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(166,111,24,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gold backdrop-blur-sm">
               <Tag className="h-3 w-3" />{post.category}
             </span>
           </Reveal>
           <Reveal delay={0.15}>
-            <h1 className="mt-4 font-serif text-3xl font-bold text-white sm:text-4xl">{post.title}</h1>
+            <h1 className="mt-4 font-serif text-3xl font-bold text-text-primary sm:text-4xl">{post.title}</h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="mt-3 flex items-center gap-4 text-xs font-medium text-[#71717A]">
+            <div className="mt-3 flex items-center gap-4 text-xs font-medium text-text-muted">
               <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{post.date}</span>
               <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.readTime}</span>
             </div>
@@ -76,21 +76,21 @@ export default function BlogPost() {
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <Reveal>
             <article className="prose prose-invert max-w-none 
-              prose-headings:font-serif prose-headings:text-white prose-headings:font-bold
+              prose-headings:font-serif prose-headings:text-text-primary prose-headings:font-bold
               prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-              prose-p:text-[#A1A1AA] prose-p:leading-relaxed
-              prose-strong:text-white
-              prose-li:text-[#A1A1AA]
+              prose-p:text-text-secondary prose-p:leading-relaxed
+              prose-strong:text-text-primary
+              prose-li:text-text-secondary
               prose-ul:space-y-2
-              prose-a:text-[#D6A84F] prose-a:no-underline hover:prose-a:underline
+              prose-a:text-gold prose-a:no-underline hover:prose-a:underline
             ">
               {post.content.split('\n').map((line, i) => {
-                if (line.startsWith('## ')) return <h2 key={i} className="font-serif text-2xl font-bold text-white mt-10 mb-4">{line.replace('## ', '')}</h2>;
-                if (line.startsWith('**')) return <strong key={i} className="block text-white font-semibold mt-4 mb-2">{line.replace(/\*\*/g, '')}</strong>;
-                if (line.startsWith('- ')) return <li key={i} className="text-[#A1A1AA] ml-4">{line.replace('- ', '')}</li>;
+                if (line.startsWith('## ')) return <h2 key={i} className="font-serif text-2xl font-bold text-text-primary mt-10 mb-4">{line.replace('## ', '')}</h2>;
+                if (line.startsWith('**')) return <strong key={i} className="block text-text-primary font-semibold mt-4 mb-2">{line.replace(/\*\*/g, '')}</strong>;
+                if (line.startsWith('- ')) return <li key={i} className="text-text-secondary ml-4">{line.replace('- ', '')}</li>;
                 if (line.trim() === '') return <br key={i} />;
-                if (line.startsWith('1. ')) return <li key={i} className="text-[#A1A1AA] ml-4 list-decimal">{line.replace(/^\d+\.\s/, '')}</li>;
-                return <p key={i} className="text-[#A1A1AA] leading-relaxed mb-4">{line}</p>;
+                if (line.startsWith('1. ')) return <li key={i} className="text-text-secondary ml-4 list-decimal">{line.replace(/^\d+\.\s/, '')}</li>;
+                return <p key={i} className="text-text-secondary leading-relaxed mb-4">{line}</p>;
               })}
             </article>
           </Reveal>

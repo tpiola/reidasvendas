@@ -121,7 +121,7 @@ export function SectionTitle({
   children: React.ReactNode; highlight?: string;
 }) {
   return (
-    <h2 className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+    <h2 className="font-serif mt-4 text-3xl font-bold leading-tight text-text-primary sm:text-4xl md:text-5xl">
       {children}{' '}
       {highlight && <span className="text-gradient-gold">{highlight}</span>}
     </h2>

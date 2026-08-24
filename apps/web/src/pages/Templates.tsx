@@ -130,20 +130,20 @@ export default function Templates() {
     : MODELS.filter((model) => model.category === activeCategory);
 
   return (
-    <main className="min-h-screen bg-[#030303]">
-      <section className="relative overflow-hidden border-b border-white/[0.06] pb-16 pt-32 sm:pb-20 sm:pt-36">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(214,168,79,0.14),transparent_42%)]" aria-hidden="true" />
+    <main className="min-h-screen bg-background">
+      <section className="relative overflow-hidden border-b border-line pb-16 pt-32 sm:pb-20 sm:pt-36">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.14),transparent_42%)]" aria-hidden="true" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
           <Reveal>
             <SectionLabel>Modelos por segmento</SectionLabel>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="mx-auto mt-4 max-w-4xl font-serif text-4xl font-bold leading-[1.04] text-white sm:text-5xl md:text-6xl">
+            <h1 className="mx-auto mt-4 max-w-4xl font-serif text-4xl font-bold leading-[1.04] text-text-primary sm:text-5xl md:text-6xl">
               Uma arquitetura diferente para cada tipo de negócio.
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#A1A1AA] sm:text-lg">
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-text-secondary sm:text-lg">
               Estes modelos mostram como organizamos conteúdo, confiança e contato em cada mercado.
               O projeto final é adaptado à empresa, à cidade, ao público e aos serviços reais.
             </p>
@@ -158,13 +158,13 @@ export default function Templates() {
               </Link>
             </div>
           </Reveal>
-          <p className="mx-auto mt-6 max-w-xl text-xs leading-5 text-[#8A8A92]">
+          <p className="mx-auto mt-6 max-w-xl text-xs leading-5 text-text-muted">
             Modelos demonstrativos não representam clientes nem resultados específicos.
           </p>
         </div>
       </section>
 
-      <section className="border-b border-white/[0.06] py-7" aria-label="Filtrar modelos">
+      <section className="border-b border-line py-7" aria-label="Filtrar modelos">
         <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-2 px-4 sm:px-6">
           {CATEGORIES.map((category) => {
             const Icon = category.icon;
@@ -177,8 +177,8 @@ export default function Templates() {
                 aria-pressed={selected}
                 className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   selected
-                    ? 'border-[#D6A84F] bg-[rgba(214,168,79,0.12)] text-[#F2D38A]'
-                    : 'border-white/10 text-[#A1A1AA] hover:border-[rgba(214,168,79,0.35)] hover:text-white'
+                    ? 'border-gold bg-[rgba(166,111,24,0.12)] text-gold-light'
+                    : 'border-text-primary/10 text-text-secondary hover:border-[rgba(166,111,24,0.35)] hover:text-text-primary'
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -210,15 +210,15 @@ export default function Templates() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97 }}
                     transition={{ duration: 0.28 }}
-                    className="group flex min-h-[440px] flex-col overflow-hidden rounded-3xl border border-white/[0.08] bg-[#090909] transition-colors hover:border-[rgba(214,168,79,0.32)]"
+                    className="group flex min-h-[440px] flex-col overflow-hidden rounded-3xl border border-text-primary/[0.08] bg-surface-2 transition-colors hover:border-[rgba(166,111,24,0.32)]"
                   >
-                    <div className="relative min-h-44 overflow-hidden border-b border-white/[0.06] bg-[linear-gradient(145deg,#111,#070707)] p-6">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(214,168,79,0.14),transparent_45%)]" aria-hidden="true" />
+                    <div className="relative min-h-44 overflow-hidden border-b border-line bg-[linear-gradient(145deg,#111,#070707)] p-6">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(166,111,24,0.14),transparent_45%)]" aria-hidden="true" />
                       <div className="relative flex items-start justify-between">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D6A84F]">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold">
                           Modelo {String(index + 1).padStart(2, '0')}
                         </span>
-                        <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.08)] text-[#F2D38A]">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(166,111,24,0.2)] bg-[rgba(166,111,24,0.08)] text-gold-light">
                           <Icon className="h-5 w-5" aria-hidden="true" />
                         </span>
                       </div>
@@ -227,24 +227,24 @@ export default function Templates() {
                           <span className="block h-3 w-4/5 rounded-full bg-white/20" />
                           <span className="block h-2 w-full rounded-full bg-white/10" />
                           <span className="block h-2 w-3/4 rounded-full bg-white/10" />
-                          <span className="mt-4 block h-8 w-28 rounded-lg bg-[#D6A84F]" />
+                          <span className="mt-4 block h-8 w-28 rounded-lg bg-gold" />
                         </div>
                         <div className="rounded-2xl border border-white/10 bg-white/[0.04]" />
                       </div>
                     </div>
 
                     <div className="flex flex-1 flex-col p-6">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D6A84F]">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-gold">
                         {category?.label}
                       </p>
-                      <h2 className="mt-3 font-serif text-2xl font-bold text-white">{model.name}</h2>
-                      <p className="mt-3 text-sm font-semibold leading-6 text-[#F5F5F5]">{model.objective}</p>
-                      <p className="mt-2 text-sm leading-6 text-[#A1A1AA]">{model.description}</p>
+                      <h2 className="mt-3 font-serif text-2xl font-bold text-text-primary">{model.name}</h2>
+                      <p className="mt-3 text-sm font-semibold leading-6 text-text-primary">{model.objective}</p>
+                      <p className="mt-2 text-sm leading-6 text-text-secondary">{model.description}</p>
 
-                      <ul className="mt-5 grid gap-2 text-xs text-[#D4D4D8]" aria-label={`Estrutura sugerida para ${model.name}`}>
+                      <ul className="mt-5 grid gap-2 text-xs text-text-secondary" aria-label={`Estrutura sugerida para ${model.name}`}>
                         {model.structure.map((item) => (
                           <li key={item} className="flex items-center gap-2">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#D6A84F]" aria-hidden="true" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
                             {item}
                           </li>
                         ))}
@@ -252,7 +252,7 @@ export default function Templates() {
 
                       <Link
                         to={`/contato?modelo=${model.id}`}
-                        className="mt-auto inline-flex min-h-12 items-center justify-between border-t border-white/[0.08] pt-5 text-sm font-semibold text-[#F2D38A] transition-colors hover:text-white"
+                        className="mt-auto inline-flex min-h-12 items-center justify-between border-t border-text-primary/[0.08] pt-5 text-sm font-semibold text-gold-light transition-colors hover:text-text-primary"
                       >
                         Quero uma análise para este segmento
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -266,13 +266,13 @@ export default function Templates() {
         </div>
       </section>
 
-      <section className="border-t border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-t border-line bg-surface py-16 sm:py-24">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <SectionLabel>Projeto personalizado</SectionLabel>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-white sm:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold text-text-primary sm:text-5xl">
             O modelo organiza o raciocínio. A sua empresa define o resultado final.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-[#A1A1AA]">
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary">
             Avaliamos serviços, público, concorrência, cidade, provas e canais de contato antes de construir cada página.
           </p>
           <div className="mt-8">

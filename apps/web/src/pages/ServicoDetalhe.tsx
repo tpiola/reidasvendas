@@ -174,19 +174,19 @@ const containerClass = 'mx-auto max-w-7xl px-4 sm:px-6';
 
 function ServicoFallback() {
   return (
-    <main className="min-h-screen bg-[#030303] pb-24 pt-32 text-white">
+    <main className="min-h-screen bg-background pb-24 pt-32 text-text-primary">
       <div className={containerClass}>
         <Reveal><SectionLabel>Serviço não encontrado</SectionLabel></Reveal>
         <Reveal delay={0.08}>
           <h1 className="mt-5 max-w-3xl font-serif text-4xl font-bold sm:text-6xl">Conheça as soluções disponíveis.</h1>
-          <p className="mt-5 max-w-2xl leading-7 text-[#A1A1AA]">O endereço acessado não corresponde a um serviço publicado. Escolha uma das opções abaixo ou solicite um diagnóstico para identificar a prioridade do seu negócio.</p>
+          <p className="mt-5 max-w-2xl leading-7 text-text-secondary">O endereço acessado não corresponde a um serviço publicado. Escolha uma das opções abaixo ou solicite um diagnóstico para identificar a prioridade do seu negócio.</p>
         </Reveal>
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           {SERVICOS.map((item) => (
-            <Link key={item.slug} to={`/servicos/${item.slug}`} className="group rounded-2xl border border-white/[0.08] bg-[#090909] p-6 transition hover:border-[#D6A84F]/50">
-              <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#D6A84F]">{item.categoria}</span>
+            <Link key={item.slug} to={`/servicos/${item.slug}`} className="group rounded-2xl border border-text-primary/[0.08] bg-surface-2 p-6 transition hover:border-gold/50">
+              <span className="text-xs font-bold uppercase tracking-[0.18em] text-gold">{item.categoria}</span>
               <h2 className="mt-3 font-serif text-2xl font-bold">{item.titulo}</h2>
-              <span className="mt-5 inline-flex items-center gap-2 text-sm text-[#F2D38A]">Ver detalhes <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm text-gold-light">Ver detalhes <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
             </Link>
           ))}
         </div>
@@ -207,16 +207,16 @@ export default function ServicoDetalhe() {
   if (!servico) return <ServicoFallback />;
 
   return (
-    <main className="min-h-screen bg-[#030303] text-white">
-      <section className="relative overflow-hidden border-b border-white/[0.06] pb-20 pt-32 sm:pb-24 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(214,168,79,0.15),transparent_45%)]" aria-hidden="true" />
+    <main className="min-h-screen bg-background text-text-primary">
+      <section className="relative overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-40">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.15),transparent_45%)]" aria-hidden="true" />
         <div className={`relative ${containerClass}`}>
           <Reveal><SectionLabel>{servico.categoria}</SectionLabel></Reveal>
           <Reveal delay={0.08}>
             <h1 className="mt-5 max-w-5xl font-serif text-4xl font-bold leading-[1.06] sm:text-6xl lg:text-7xl">{servico.titulo}</h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-[#A1A1AA] sm:text-lg">{servico.sub}</p>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">{servico.sub}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <PremiumButton href="/diagnostico">Receber diagnóstico gratuito <ArrowRight className="h-4 w-4" /></PremiumButton>
               <PremiumButton href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" variant="outline"><MessageCircle className="h-4 w-4" /> Falar no WhatsApp</PremiumButton>
@@ -230,25 +230,25 @@ export default function ServicoDetalhe() {
           <Reveal>
             <SectionLabel>O problema</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">O que costuma travar o próximo passo.</h2>
-            <p className="mt-5 text-base leading-8 text-[#A1A1AA]">{servico.problema}</p>
+            <p className="mt-5 text-base leading-8 text-text-secondary">{servico.problema}</p>
           </Reveal>
-          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(214,168,79,0.18)] bg-[rgba(214,168,79,0.05)] p-7 sm:p-9">
+          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(166,111,24,0.18)] bg-[rgba(166,111,24,0.05)] p-7 sm:p-9">
             <SectionLabel>Como resolvemos</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-4xl">Estratégia antes da ferramenta.</h2>
-            <p className="mt-5 text-base leading-8 text-[#A1A1AA]">{servico.solucao}</p>
+            <p className="mt-5 text-base leading-8 text-text-secondary">{servico.solucao}</p>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-y border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-y border-line bg-surface py-16 sm:py-24">
         <div className={containerClass}>
           <SectionLabel>Entregáveis</SectionLabel>
           <h2 className="mt-4 max-w-3xl font-serif text-3xl font-bold sm:text-5xl">Um escopo claro, definido antes do início.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {servico.entregaveis.map((item, index) => (
-              <Reveal key={item} delay={index * 0.04} className="rounded-2xl border border-white/[0.08] bg-[#0C0C0C] p-6">
-                <CheckCircle2 className="h-5 w-5 text-[#D6A84F]" aria-hidden="true" />
-                <p className="mt-4 leading-7 text-[#D4D4D8]">{item}</p>
+              <Reveal key={item} delay={index * 0.04} className="rounded-2xl border border-text-primary/[0.08] bg-surface-3 p-6">
+                <CheckCircle2 className="h-5 w-5 text-gold" aria-hidden="true" />
+                <p className="mt-4 leading-7 text-text-secondary">{item}</p>
               </Reveal>
             ))}
           </div>
@@ -261,23 +261,23 @@ export default function ServicoDetalhe() {
             <SectionLabel>Benefícios</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">O que o projeto ajuda a organizar.</h2>
           </div>
-          <ul className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
-            {servico.beneficios.map((item) => <li key={item} className="flex gap-3 py-5 text-[#D4D4D8]"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D6A84F]" aria-hidden="true" />{item}</li>)}
+          <ul className="divide-y divide-text-primary/[0.08] border-y border-text-primary/[0.08]">
+            {servico.beneficios.map((item) => <li key={item} className="flex gap-3 py-5 text-text-secondary"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />{item}</li>)}
           </ul>
         </div>
       </section>
 
-      <section className="border-y border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-y border-line bg-surface py-16 sm:py-24">
         <div className={`${containerClass} grid gap-5 md:grid-cols-2`}>
-          <article className="rounded-3xl border border-[rgba(214,168,79,0.18)] bg-[#0C0C0C] p-7 sm:p-9">
-            <CheckCircle2 className="h-7 w-7 text-[#D6A84F]" aria-hidden="true" />
+          <article className="rounded-3xl border border-[rgba(166,111,24,0.18)] bg-surface-3 p-7 sm:p-9">
+            <CheckCircle2 className="h-7 w-7 text-gold" aria-hidden="true" />
             <h2 className="mt-5 font-serif text-3xl font-bold">Para quem é</h2>
-            <p className="mt-4 leading-8 text-[#A1A1AA]">{servico.paraQuem}</p>
+            <p className="mt-4 leading-8 text-text-secondary">{servico.paraQuem}</p>
           </article>
-          <article className="rounded-3xl border border-white/[0.08] bg-[#0C0C0C] p-7 sm:p-9">
-            <XCircle className="h-7 w-7 text-[#71717A]" aria-hidden="true" />
+          <article className="rounded-3xl border border-text-primary/[0.08] bg-surface-3 p-7 sm:p-9">
+            <XCircle className="h-7 w-7 text-text-muted" aria-hidden="true" />
             <h2 className="mt-5 font-serif text-3xl font-bold">Para quem não é</h2>
-            <p className="mt-4 leading-8 text-[#A1A1AA]">{servico.paraQuemNao}</p>
+            <p className="mt-4 leading-8 text-text-secondary">{servico.paraQuemNao}</p>
           </article>
         </div>
       </section>
@@ -288,38 +288,38 @@ export default function ServicoDetalhe() {
           <h2 className="mt-4 max-w-3xl font-serif text-3xl font-bold sm:text-5xl">Quatro etapas para avançar com clareza.</h2>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {servico.processo.map((etapa) => (
-              <article key={etapa.num} className="rounded-2xl border border-white/[0.08] bg-[#090909] p-6">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#D6A84F]">{etapa.num}</span>
+              <article key={etapa.num} className="rounded-2xl border border-text-primary/[0.08] bg-surface-2 p-6">
+                <span className="text-xs font-bold tracking-[0.2em] text-gold">{etapa.num}</span>
                 <h3 className="mt-5 font-serif text-2xl font-bold">{etapa.titulo}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#A1A1AA]">{etapa.texto}</p>
+                <p className="mt-3 text-sm leading-7 text-text-secondary">{etapa.texto}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-t border-line bg-surface py-16 sm:py-24">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">
           <SectionLabel>Perguntas frequentes</SectionLabel>
           <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Antes de começar.</h2>
-          <div className="mt-9 divide-y divide-white/[0.1] border-y border-white/[0.1]">
+          <div className="mt-9 divide-y divide-text-primary/[0.1] border-y border-text-primary/[0.1]">
             {servico.faq.map((item) => (
               <details key={item.q} className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-serif text-lg font-bold marker:content-none sm:text-xl">
-                  {item.q}<span className="text-2xl font-light text-[#D6A84F] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                  {item.q}<span className="text-2xl font-light text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
                 </summary>
-                <p className="max-w-3xl pb-2 pt-4 text-sm leading-7 text-[#A1A1AA] sm:text-base">{item.a}</p>
+                <p className="max-w-3xl pb-2 pt-4 text-sm leading-7 text-text-secondary sm:text-base">{item.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-white/[0.06] py-20 sm:py-28">
+      <section className="border-t border-line py-20 sm:py-28">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <SectionLabel>Próximo passo</SectionLabel>
           <h2 className="mt-5 font-serif text-3xl font-bold sm:text-5xl">Entenda o que faz sentido para o seu negócio.</h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-[#A1A1AA]">O diagnóstico inicial ajuda a identificar prioridades, dependências e o escopo adequado antes de qualquer proposta.</p>
+          <p className="mx-auto mt-5 max-w-2xl leading-7 text-text-secondary">O diagnóstico inicial ajuda a identificar prioridades, dependências e o escopo adequado antes de qualquer proposta.</p>
           <div className="mt-8"><PremiumButton href="/diagnostico" size="lg">Receber diagnóstico gratuito <ArrowRight className="h-4 w-4" /></PremiumButton></div>
         </div>
       </section>

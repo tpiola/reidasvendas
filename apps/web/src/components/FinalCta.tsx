@@ -25,10 +25,10 @@ export function FinalCta() {
                 <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
                 Próximo movimento
               </span>
-              <h2 id="cta-title" className="font-serif mt-6 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+              <h2 id="cta-title" className="font-serif mt-6 text-3xl font-bold leading-tight text-text-primary sm:text-4xl md:text-5xl">
                 Pronto pra <span className="text-gradient-premium">lotar sua agenda?</span>
               </h2>
-              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-[#A1A1AA] sm:text-base">
+              <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-text-secondary sm:text-base">
                 Manda uma mensagem no WhatsApp que a gente analisa seu negócio e te mostra o que dá pra melhorar.
               </p>
 
@@ -53,22 +53,22 @@ export function FinalCta() {
                 </a>
               </div>
 
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-[#A1A1AA]">
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-text-secondary">
                 <span className="inline-flex items-center gap-2">
-                  <MessageCircle className="h-3.5 w-3.5 text-[#D6A84F]" aria-hidden="true" />
+                  <MessageCircle className="h-3.5 w-3.5 text-gold" aria-hidden="true" />
                   {formatPhone(BRAND.phone)}
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <MapPin className="h-3.5 w-3.5 text-[#D6A84F]" aria-hidden="true" />
+                  <MapPin className="h-3.5 w-3.5 text-gold" aria-hidden="true" />
                   {BRAND.address}
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <Mail className="h-3.5 w-3.5 text-[#D6A84F]" aria-hidden="true" />
+                  <Mail className="h-3.5 w-3.5 text-gold" aria-hidden="true" />
                   {BRAND.email}
                 </span>
               </div>
 
-              <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8A8A92]">
+              <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.2em] text-text-muted">
                 Site rápido · IA que vende · Suporte próximo
               </p>
             </div>

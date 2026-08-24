@@ -53,14 +53,14 @@ export function GoldParticles({ count = 15 }: { count?: number }) {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(214, 168, 79, ${alpha})`;
+        ctx.fillStyle = `rgba(166, 111, 24, ${alpha})`;
         ctx.fill();
 
         // Glow (only for larger particles, very subtle)
         if (p.size > 1) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.size * 2.5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(214, 168, 79, ${alpha * 0.08})`;
+          ctx.fillStyle = `rgba(166, 111, 24, ${alpha * 0.08})`;
           ctx.fill();
         }
 

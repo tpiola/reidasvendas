@@ -15,7 +15,7 @@ function NicheRow() {
       {niches.map((niche) => (
         <div key={niche.label} className="rdv-niche-item">
           <img src={niche.image} alt="" loading="lazy" decoding="async" width={36} height={36} />
-          <span className="font-serif text-lg font-semibold text-[#F5F5F5] sm:text-xl">{niche.label}</span>
+          <span className="font-serif text-lg font-semibold text-text-primary sm:text-xl">{niche.label}</span>
           <span className="rdv-niche-dot" aria-hidden="true" />
         </div>
       ))}

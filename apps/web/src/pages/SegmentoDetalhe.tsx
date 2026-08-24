@@ -294,19 +294,19 @@ const sectionClass = 'py-16 sm:py-24';
 
 function SegmentoFallback() {
   return (
-    <main className="min-h-screen bg-[#030303] pb-24 pt-32 text-white">
+    <main className="min-h-screen bg-background pb-24 pt-32 text-text-primary">
       <div className={containerClass}>
         <Reveal><SectionLabel>Segmento não encontrado</SectionLabel></Reveal>
         <Reveal delay={0.08}>
           <h1 className="mt-5 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-6xl">Encontre uma solução para o seu tipo de negócio.</h1>
-          <p className="mt-5 max-w-2xl leading-7 text-[#A1A1AA]">O endereço acessado não corresponde a um segmento publicado. Escolha uma opção ou solicite um diagnóstico para avaliarmos o seu contexto.</p>
+          <p className="mt-5 max-w-2xl leading-7 text-text-secondary">O endereço acessado não corresponde a um segmento publicado. Escolha uma opção ou solicite um diagnóstico para avaliarmos o seu contexto.</p>
         </Reveal>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SEGMENTOS.map((item, index) => (
             <Reveal key={item.slug} delay={index * 0.03}>
-              <Link to={`/segmentos/${item.slug}`} className="group flex h-full items-center justify-between gap-4 rounded-2xl border border-white/[0.08] bg-[#090909] p-6 transition hover:border-[#D6A84F]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6A84F]">
+              <Link to={`/segmentos/${item.slug}`} className="group flex h-full items-center justify-between gap-4 rounded-2xl border border-text-primary/[0.08] bg-surface-2 p-6 transition hover:border-gold/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold">
                 <span className="font-serif text-xl font-bold">{item.nome}</span>
-                <ArrowRight className="h-5 w-5 shrink-0 text-[#D6A84F] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight className="h-5 w-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </Link>
             </Reveal>
           ))}
@@ -332,16 +332,16 @@ export default function SegmentoDetalhe() {
   if (!segmento) return <SegmentoFallback />;
 
   return (
-    <main className="min-h-screen bg-[#030303] text-white">
-      <section className="relative overflow-hidden border-b border-white/[0.06] pb-20 pt-32 sm:pb-24 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(214,168,79,0.16),transparent_48%)]" aria-hidden="true" />
+    <main className="min-h-screen bg-background text-text-primary">
+      <section className="relative overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-40">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.16),transparent_48%)]" aria-hidden="true" />
         <div className={`relative ${containerClass}`}>
           <Reveal><SectionLabel>Solução por segmento</SectionLabel></Reveal>
           <Reveal delay={0.08}>
-            <h1 className="mt-5 max-w-5xl font-serif text-4xl font-bold leading-[1.07] sm:text-6xl lg:text-7xl">Infraestrutura digital para <span className="text-[#F2D38A]">{segmento.nome}</span> em Franca e região.</h1>
+            <h1 className="mt-5 max-w-5xl font-serif text-4xl font-bold leading-[1.07] sm:text-6xl lg:text-7xl">Infraestrutura digital para <span className="text-gold-light">{segmento.nome}</span> em Franca e região.</h1>
           </Reveal>
           <Reveal delay={0.16}>
-            <p className="mt-6 max-w-3xl text-base leading-8 text-[#A1A1AA] sm:text-lg">Site, funil, WhatsApp e automação construídos para transformar pesquisas em agendamentos, orçamentos ou vendas.</p>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">Site, funil, WhatsApp e automação construídos para transformar pesquisas em agendamentos, orçamentos ou vendas.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <PremiumButton href="/diagnostico" size="lg">Receber diagnóstico para {segmento.nome} <ArrowRight className="h-4 w-4" /></PremiumButton>
               <PremiumButton href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" variant="outline" size="lg"><MessageCircle className="h-4 w-4" /> Falar no WhatsApp</PremiumButton>
@@ -355,14 +355,14 @@ export default function SegmentoDetalhe() {
           <Reveal>
             <SectionLabel>Diagnóstico do cenário</SectionLabel>
             <h2 className="mt-4 max-w-4xl font-serif text-3xl font-bold sm:text-5xl">A dor do {segmento.nome}.</h2>
-            <p className="mt-5 max-w-3xl leading-7 text-[#A1A1AA]">Pontos de atrito comuns que precisam ser validados no contexto de cada operação.</p>
+            <p className="mt-5 max-w-3xl leading-7 text-text-secondary">Pontos de atrito comuns que precisam ser validados no contexto de cada operação.</p>
           </Reveal>
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {segmento.dor.map((item, index) => (
               <Reveal key={item} delay={index * 0.05} className="h-full">
-                <article className="flex h-full gap-4 rounded-2xl border border-white/[0.08] bg-[#090909] p-6">
-                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#D6A84F]" aria-hidden="true" />
-                  <p className="leading-7 text-[#D4D4D8]">{item}</p>
+                <article className="flex h-full gap-4 rounded-2xl border border-text-primary/[0.08] bg-surface-2 p-6">
+                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
+                  <p className="leading-7 text-text-secondary">{item}</p>
                 </article>
               </Reveal>
             ))}
@@ -370,19 +370,19 @@ export default function SegmentoDetalhe() {
         </div>
       </section>
 
-      <section className="border-y border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-y border-line bg-surface py-16 sm:py-24">
         <div className={containerClass}>
           <Reveal>
             <SectionLabel>Escopo consultivo</SectionLabel>
             <h2 className="mt-4 max-w-4xl font-serif text-3xl font-bold sm:text-5xl">Solução recomendada.</h2>
-            <p className="mt-5 max-w-3xl leading-7 text-[#A1A1AA]">A composição final depende do diagnóstico, das ferramentas existentes e da rotina real da equipe.</p>
+            <p className="mt-5 max-w-3xl leading-7 text-text-secondary">A composição final depende do diagnóstico, das ferramentas existentes e da rotina real da equipe.</p>
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {segmento.solucaoRecomendada.map((item, index) => (
               <Reveal key={item} delay={index * 0.035} className="h-full">
-                <article className="h-full rounded-2xl border border-white/[0.08] bg-[#0C0C0C] p-6">
-                  <CheckCircle2 className="h-5 w-5 text-[#D6A84F]" aria-hidden="true" />
-                  <p className="mt-4 text-sm leading-7 text-[#D4D4D8]">{item}</p>
+                <article className="h-full rounded-2xl border border-text-primary/[0.08] bg-surface-3 p-6">
+                  <CheckCircle2 className="h-5 w-5 text-gold" aria-hidden="true" />
+                  <p className="mt-4 text-sm leading-7 text-text-secondary">{item}</p>
                 </article>
               </Reveal>
             ))}
@@ -396,22 +396,22 @@ export default function SegmentoDetalhe() {
             <SectionLabel>Estrutura sugerida</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Arquitetura de referência.</h2>
           </Reveal>
-          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(214,168,79,0.2)] bg-[rgba(214,168,79,0.05)] p-7 sm:p-10">
-            <p className="text-base leading-8 text-[#D4D4D8] sm:text-lg">{segmento.arquiteturaRef}</p>
-            <p className="mt-5 border-t border-white/[0.08] pt-5 text-sm leading-7 text-[#A1A1AA]">Esta é uma referência inicial, não um escopo fechado. Integrações, dados, responsabilidades e critérios de aceite são confirmados antes do projeto.</p>
+          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(166,111,24,0.2)] bg-[rgba(166,111,24,0.05)] p-7 sm:p-10">
+            <p className="text-base leading-8 text-text-secondary sm:text-lg">{segmento.arquiteturaRef}</p>
+            <p className="mt-5 border-t border-text-primary/[0.08] pt-5 text-sm leading-7 text-text-secondary">Esta é uma referência inicial, não um escopo fechado. Integrações, dados, responsabilidades e critérios de aceite são confirmados antes do projeto.</p>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-y border-white/[0.06] bg-[#080808] py-16 sm:py-24">
+      <section className="border-y border-line bg-surface py-16 sm:py-24">
         <div className={containerClass}>
-          <Reveal className="rounded-3xl border border-white/[0.08] bg-[#0C0C0C] p-7 sm:p-10">
+          <Reveal className="rounded-3xl border border-text-primary/[0.08] bg-surface-3 p-7 sm:p-10">
             <SectionLabel>Prova</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Referência para este segmento.</h2>
-            <p className="mt-6 text-sm leading-7 text-[#F2D38A]">
+            <p className="mt-6 text-sm leading-7 text-gold-light">
               {segmento.prova || 'Referência de abordagem: aplicamos o mesmo padrão de diagnóstico, arquitetura e integração, adaptado à realidade deste segmento. Os detalhes específicos são definidos no diagnóstico do negócio real.'}
             </p>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#A1A1AA]">Não publicamos métricas ou depoimentos sem fonte real e autorização. O que apresentamos aqui é a referência de estrutura e processo — os números concretos do seu caso surgem no diagnóstico.</p>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-text-secondary">Não publicamos métricas ou depoimentos sem fonte real e autorização. O que apresentamos aqui é a referência de estrutura e processo — os números concretos do seu caso surgem no diagnóstico.</p>
           </Reveal>
         </div>
       </section>
@@ -422,26 +422,26 @@ export default function SegmentoDetalhe() {
             <SectionLabel>Perguntas frequentes</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Antes de definir o projeto.</h2>
           </Reveal>
-          <div className="mt-9 divide-y divide-white/[0.1] border-y border-white/[0.1]">
+          <div className="mt-9 divide-y divide-text-primary/[0.1] border-y border-text-primary/[0.1]">
             {segmento.faq.map((item) => (
               <details key={item.q} className="group py-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-serif text-lg font-bold marker:content-none sm:text-xl">
                   {item.q}
-                  <span className="text-2xl font-light text-[#D6A84F] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                  <span className="text-2xl font-light text-gold transition-transform group-open:rotate-45" aria-hidden="true">+</span>
                 </summary>
-                <p className="max-w-3xl pb-2 pt-4 text-sm leading-7 text-[#A1A1AA] sm:text-base">{item.a}</p>
+                <p className="max-w-3xl pb-2 pt-4 text-sm leading-7 text-text-secondary sm:text-base">{item.a}</p>
               </details>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-white/[0.06] py-20 sm:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(214,168,79,0.12),transparent_52%)]" aria-hidden="true" />
+      <section className="relative overflow-hidden border-t border-line py-20 sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(166,111,24,0.12),transparent_52%)]" aria-hidden="true" />
         <Reveal className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
           <SectionLabel>Próximo passo</SectionLabel>
           <h2 className="mt-5 font-serif text-3xl font-bold leading-tight sm:text-5xl">Receber diagnóstico gratuito para seu negócio em {segmento.nome}.</h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-[#A1A1AA]">Vamos avaliar presença atual, jornada de contato e prioridades antes de recomendar ferramentas ou escopo.</p>
+          <p className="mx-auto mt-5 max-w-2xl leading-7 text-text-secondary">Vamos avaliar presença atual, jornada de contato e prioridades antes de recomendar ferramentas ou escopo.</p>
           <div className="mt-8"><PremiumButton href="/diagnostico" size="lg">Receber diagnóstico gratuito <ArrowRight className="h-4 w-4" /></PremiumButton></div>
         </Reveal>
       </section>

@@ -23,7 +23,7 @@ export function ProcessTimeline({
     return (
       <div className={cn('relative', className)}>
         {/* Connector line */}
-        <div className="absolute left-0 right-0 top-8 h-px bg-gradient-to-r from-transparent via-[rgba(214,168,79,0.3)] to-transparent" />
+        <div className="absolute left-0 right-0 top-8 h-px bg-gradient-to-r from-transparent via-[rgba(166,111,24,0.3)] to-transparent" />
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {steps.map((step, i) => (
@@ -36,17 +36,17 @@ export function ProcessTimeline({
               className="relative flex flex-col items-center text-center"
             >
               {/* Step number circle */}
-              <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-[rgba(214,168,79,0.2)] bg-[rgba(3,3,3,0.8)] backdrop-blur-sm">
+              <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border border-[rgba(166,111,24,0.2)] bg-[rgba(3,3,3,0.8)] backdrop-blur-sm">
                 {step.icon ? (
-                  <span className="text-[#D6A84F]">{step.icon}</span>
+                  <span className="text-gold">{step.icon}</span>
                 ) : (
-                  <span className="font-serif text-lg font-bold text-[#D6A84F]">
+                  <span className="font-serif text-lg font-bold text-gold">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 )}
               </div>
-              <h4 className="mt-4 text-sm font-bold text-white">{step.title}</h4>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#A1A1AA]">
+              <h4 className="mt-4 text-sm font-bold text-text-primary">{step.title}</h4>
+              <p className="mt-1.5 text-xs leading-relaxed text-text-secondary">
                 {step.description}
               </p>
             </motion.div>
@@ -60,7 +60,7 @@ export function ProcessTimeline({
   return (
     <div className={cn('relative', className)}>
       {/* Vertical line */}
-      <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-[rgba(214,168,79,0.3)] via-[rgba(214,168,79,0.15)] to-transparent" />
+      <div className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-[rgba(166,111,24,0.3)] via-[rgba(166,111,24,0.15)] to-transparent" />
 
       <div className="space-y-10">
         {steps.map((step, i) => (
@@ -79,23 +79,23 @@ export function ProcessTimeline({
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: 'spring', stiffness: 300, damping: 18, delay: i * 0.1 + 0.2 }}
-                className="h-5 w-5 rounded-full border-2 border-[#D6A84F] bg-[#030303]"
+                className="h-5 w-5 rounded-full border-2 border-gold bg-background"
               />
-              <div className="absolute h-3 w-3 rounded-full bg-[#D6A84F] opacity-40 blur-sm" />
+              <div className="absolute h-3 w-3 rounded-full bg-gold opacity-40 blur-sm" />
             </div>
 
             {/* Content */}
             <div className="flex-1">
               <div className="mb-1 flex items-center gap-3">
                 {step.icon && (
-                  <span className="text-[#D6A84F]">{step.icon}</span>
+                  <span className="text-gold">{step.icon}</span>
                 )}
-                <span className="text-xs font-bold uppercase tracking-[0.15em] text-[rgba(214,168,79,0.5)]">
+                <span className="text-xs font-bold uppercase tracking-[0.15em] text-[rgba(166,111,24,0.5)]">
                   Passo {String(i + 1).padStart(2, '0')}
                 </span>
               </div>
-              <h4 className="text-lg font-bold text-white">{step.title}</h4>
-              <p className="mt-1 text-sm leading-relaxed text-[#A1A1AA]">
+              <h4 className="text-lg font-bold text-text-primary">{step.title}</h4>
+              <p className="mt-1 text-sm leading-relaxed text-text-secondary">
                 {step.description}
               </p>
             </div>

@@ -63,18 +63,18 @@ export default function Blog() {
 
       {/* Hero */}
       <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="absolute inset-0 bg-[#030303]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(214,168,79,0.06)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
           <Reveal><SectionLabel>Blog</SectionLabel></Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-4 font-serif text-4xl font-bold text-white sm:text-5xl md:text-6xl">
+            <h1 className="mt-4 font-serif text-4xl font-bold text-text-primary sm:text-5xl md:text-6xl">
               Conteúdo sobre{' '}
               <span className="text-gradient-gold">Presença Digital</span>
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-4 max-w-xl text-base text-[#A1A1AA]">
+            <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary">
               Artigos, análises e guias sobre infraestrutura digital, automação, design premium e tecnologia para negócios.
             </p>
           </Reveal>
@@ -82,14 +82,14 @@ export default function Blog() {
           {/* Search Bar */}
           <Reveal delay={0.25}>
             <div className="mx-auto mt-8 max-w-md">
-              <div className="flex items-center gap-2 rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(3,3,3,0.6)] px-4 py-2.5 backdrop-blur-sm transition-all focus-within:border-[rgba(214,168,79,0.4)]">
-                <Search className="h-4 w-4 shrink-0 text-[#71717A]" />
+              <div className="flex items-center gap-2 rounded-xl border border-[rgba(166,111,24,0.15)] bg-[rgba(3,3,3,0.6)] px-4 py-2.5 backdrop-blur-sm transition-all focus-within:border-[rgba(166,111,24,0.4)]">
+                <Search className="h-4 w-4 shrink-0 text-text-muted" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar artigos..."
-                  className="w-full bg-transparent text-sm text-white placeholder-[#71717A] outline-none"
+                  className="w-full bg-transparent text-sm text-text-primary placeholder:text-text-muted outline-none"
                 />
               </div>
             </div>
@@ -104,8 +104,8 @@ export default function Blog() {
                   onClick={() => setActiveCategoria(cat)}
                   className={`rounded-full border px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] transition-all ${
                     activeCategoria === cat
-                      ? 'border-[#D6A84F] bg-[rgba(214,168,79,0.12)] text-[#D6A84F]'
-                      : 'border-[rgba(214,168,79,0.15)] text-[#71717A] hover:border-[rgba(214,168,79,0.3)] hover:text-white'
+                      ? 'border-gold bg-[rgba(166,111,24,0.12)] text-gold'
+                      : 'border-[rgba(166,111,24,0.15)] text-text-muted hover:border-[rgba(166,111,24,0.3)] hover:text-text-primary'
                   }`}
                 >
                   {cat}
@@ -121,7 +121,7 @@ export default function Blog() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           {filteredPosts.length === 0 ? (
             <div className="py-16 text-center">
-              <p className="text-sm text-[#71717A]">Nenhum artigo encontrado para esta busca.</p>
+              <p className="text-sm text-text-muted">Nenhum artigo encontrado para esta busca.</p>
             </div>
           ) : (
             <motion.div
@@ -131,26 +131,26 @@ export default function Blog() {
             >
               {filteredPosts.map((post) => (
                 <motion.div key={post.slug} variants={staggerItem}>
-                  <Link to={`/blog/${post.slug}`} className="glass-card group block overflow-hidden rounded-2xl transition-all hover:border-[rgba(214,168,79,0.3)]">
+                  <Link to={`/blog/${post.slug}`} className="glass-card group block overflow-hidden rounded-2xl transition-all hover:border-[rgba(166,111,24,0.3)]">
                     <div className="relative h-48 overflow-hidden">
                       <img src={post.image} alt={post.title} loading="lazy"
                         className="h-full w-full object-cover transition-all duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent" />
                       <div className="absolute bottom-3 left-4">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(214,168,79,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D6A84F] backdrop-blur-sm">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(166,111,24,0.3)] bg-[rgba(3,3,3,0.6)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-gold backdrop-blur-sm">
                           <Tag className="h-3 w-3" />
                           {post.category}
                         </span>
                       </div>
                     </div>
                     <div className="p-5 sm:p-6">
-                      <div className="mb-2 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.12em] text-[#71717A]">
+                      <div className="mb-2 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.12em] text-text-muted">
                         <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{post.date}</span>
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{post.readTime}</span>
                       </div>
-                      <h2 className="font-serif text-lg font-semibold text-white transition-colors group-hover:text-[#D6A84F]">{post.title}</h2>
-                      <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{post.excerpt}</p>
-                      <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#D6A84F] transition-all group-hover:gap-2">
+                      <h2 className="font-serif text-lg font-semibold text-text-primary transition-colors group-hover:text-gold">{post.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-text-secondary">{post.excerpt}</p>
+                      <div className="mt-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.15em] text-gold transition-all group-hover:gap-2">
                         Ler artigo <ArrowRight className="h-3 w-3" />
                       </div>
                     </div>
@@ -163,15 +163,15 @@ export default function Blog() {
       </section>
 
       {/* Guest CTA */}
-      <section className="border-t border-[rgba(214,168,79,0.1)] py-16">
+      <section className="border-t border-[rgba(166,111,24,0.1)] py-16">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <Reveal>
-            <h2 className="font-serif text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="font-serif text-2xl font-bold text-text-primary sm:text-3xl">
               Quer aparecer <span className="text-gradient-gold">aqui</span>?
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-3 text-sm text-[#A1A1AA]">
+            <p className="mt-3 text-sm text-text-secondary">
               Tem um case, insight ou expertise para compartilhar? Escreva como convidado no blog da Rei das Vendas e alcance empreendedores de todo o Brasil.
             </p>
           </Reveal>

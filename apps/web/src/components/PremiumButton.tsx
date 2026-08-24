@@ -20,11 +20,11 @@ const sizes: Record<string, string> = {
 };
 const variants: Record<string, string> = {
   primary:
-    'bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] bg-[length:200%_auto] text-[#030303] font-bold hover:bg-right hover:shadow-[0_0_40px_rgba(214,168,79,0.35),0_0_80px_rgba(214,168,79,0.12)] hover:scale-[1.02] active:scale-[0.98]',
+    'bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] text-[#FFFDF8] font-bold hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35),0_0_80px_rgba(166,111,24,0.12)] hover:scale-[1.02] active:scale-[0.98]',
   outline:
-    'border border-[rgba(214,168,79,0.22)] text-[#F5F5F5] hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)] hover:shadow-[0_0_30px_rgba(214,168,79,0.1)] hover:-translate-y-0.5 active:scale-[0.98]',
+    'border border-[rgba(166,111,24,0.22)] text-text-primary hover:border-gold hover:bg-[rgba(166,111,24,0.08)] hover:shadow-[0_0_30px_rgba(166,111,24,0.1)] hover:-translate-y-0.5 active:scale-[0.98]',
   ghost:
-    'text-[#A1A1AA] hover:text-[#F5F5F5] hover:bg-white/5',
+    'text-text-secondary hover:text-text-primary hover:bg-text-primary/5',
 };
 
 export function PremiumButton(props: Props) {

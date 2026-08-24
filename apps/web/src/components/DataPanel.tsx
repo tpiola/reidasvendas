@@ -9,7 +9,7 @@ export function DataPanel({ items, title }: DataPanelProps) {
   return (
     <div className="glass-premium rounded-2xl p-6 sm:p-8">
       {title && (
-        <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-[#D6A84F] mb-5">
+        <h3 className="font-sans text-xs font-semibold uppercase tracking-[0.2em] text-gold mb-5">
           {title}
         </h3>
       )}
@@ -23,8 +23,8 @@ export function DataPanel({ items, title }: DataPanelProps) {
             transition={{ delay: i * 0.1, duration: 0.5 }}
           >
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-medium text-[#A1A1AA]">{item.label}</span>
-              <span className="text-xs font-bold text-[#F2D38A]">{item.value}</span>
+              <span className="text-xs font-medium text-text-secondary">{item.label}</span>
+              <span className="text-xs font-bold text-gold-light">{item.value}</span>
             </div>
             <div className="data-bar">
               <motion.div

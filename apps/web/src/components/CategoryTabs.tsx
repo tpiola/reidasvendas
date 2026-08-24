@@ -26,7 +26,7 @@ export function CategoryTabs({
     <div
       className={cn(
         'flex flex-wrap gap-2',
-        variant === 'underline' ? 'border-b border-[rgba(255,255,255,0.06)]' : '',
+        variant === 'underline' ? 'border-b border-line' : '',
         className
       )}
       role="tablist"
@@ -44,16 +44,16 @@ export function CategoryTabs({
               variant === 'pill'
                 ? 'rounded-full px-5 py-2.5'
                 : 'border-b-2 px-3 pb-3 pt-2',
-              variant === 'pill' && isActive && 'text-[#030303]',
-              variant === 'pill' && !isActive && 'text-[#A1A1AA] hover:text-white',
-              variant === 'underline' && isActive && 'border-[#D6A84F] text-[#D6A84F]',
-              variant === 'underline' && !isActive && 'border-transparent text-[#A1A1AA] hover:text-white'
+              variant === 'pill' && isActive && 'text-[#FFFDF8]',
+              variant === 'pill' && !isActive && 'text-text-secondary hover:text-text-primary',
+              variant === 'underline' && isActive && 'border-gold text-gold',
+              variant === 'underline' && !isActive && 'border-transparent text-text-secondary hover:text-text-primary'
             )}
           >
             {isActive && variant === 'pill' && (
               <motion.span
                 layoutId="category-tab-bg"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-[#D6A84F] to-[#F2D38A]"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-gold to-gold-light"
                 transition={{ type: 'spring', stiffness: 300, damping: 28 }}
               />
             )}

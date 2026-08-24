@@ -135,7 +135,7 @@ export default function Contato() {
           <div
             className={`flex items-center gap-2.5 rounded-xl border px-5 py-3 shadow-2xl backdrop-blur-xl ${
               toastMessage.type === 'success'
-                ? 'border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.1)] text-[#D6A84F]'
+                ? 'border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.1)] text-gold'
                 : 'border-red-500/30 bg-red-500/10 text-red-400'
             }`}
           >
@@ -151,17 +151,17 @@ export default function Contato() {
 
       {/* Hero */}
       <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="absolute inset-0 bg-[#030303]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(214,168,79,0.06)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
           <Reveal><span className="section-label">Contato</span></Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-4 font-serif text-4xl font-bold text-white sm:text-5xl">
+            <h1 className="mt-4 font-serif text-4xl font-bold text-text-primary sm:text-5xl">
               Vamos{' '}<span className="text-gradient-gold">Conversar</span>
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-4 max-w-xl text-base text-[#A1A1AA]">
+            <p className="mx-auto mt-4 max-w-xl text-base text-text-secondary">
               Preencha o formulário ou fale diretamente pelo WhatsApp. Respondemos em até 24h.
             </p>
           </Reveal>
@@ -176,11 +176,11 @@ export default function Contato() {
             <Reveal className="rounded-2xl p-6 sm:p-8 glass-card">
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-10 text-center">
-                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(214,168,79,0.1)] text-[#D6A84F]">
+                  <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(166,111,24,0.1)] text-gold">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  <h3 className="font-serif text-xl font-semibold text-white">Mensagem Enviada!</h3>
-                  <p className="mt-2 text-sm text-[#A1A1AA]">Recebemos seu contato e responderemos em breve.</p>
+                  <h3 className="font-serif text-xl font-semibold text-text-primary">Mensagem Enviada!</h3>
+                  <p className="mt-2 text-sm text-text-secondary">Recebemos seu contato e responderemos em breve.</p>
                   <PremiumButton href={BRAND.whatsapp} className="mt-6" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="h-4 w-4" />
                     Falar pelo WhatsApp
@@ -189,8 +189,8 @@ export default function Contato() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   {planoParam && (
-                    <div className="rounded-xl border border-[rgba(214,168,79,0.15)] bg-[rgba(214,168,79,0.04)] px-4 py-3">
-                      <p className="text-xs font-medium text-[#D6A84F]">
+                    <div className="rounded-xl border border-[rgba(166,111,24,0.15)] bg-[rgba(166,111,24,0.04)] px-4 py-3">
+                      <p className="text-xs font-medium text-gold">
                         Contratando plano{' '}
                         <strong>
                           {planoParam === 'digital' ? 'Digital'
@@ -248,27 +248,27 @@ export default function Contato() {
             <div className="space-y-6">
               <Reveal delay={0.1}>
                 <div className="glass-card rounded-2xl p-6 sm:p-8">
-                  <h3 className="font-serif text-lg font-semibold text-white">Informações de Contato</h3>
+                  <h3 className="font-serif text-lg font-semibold text-text-primary">Informações de Contato</h3>
                   <div className="mt-6 space-y-4">
-                    <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-[#A1A1AA] transition hover:text-white">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><MessageCircle className="h-5 w-5" /></span>
+                    <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-text-secondary transition hover:text-text-primary">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(166,111,24,0.1)] text-gold"><MessageCircle className="h-5 w-5" /></span>
                       <div>
-                        <p className="font-medium text-white">WhatsApp</p>
-                        <p className="text-[#71717A]">Resposta em até 1h em horário comercial</p>
+                        <p className="font-medium text-text-primary">WhatsApp</p>
+                        <p className="text-text-muted">Resposta em até 1h em horário comercial</p>
                       </div>
                     </a>
-                    <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-[#A1A1AA] transition hover:text-white">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><Mail className="h-5 w-5" /></span>
+                    <a href={`mailto:${BRAND.email}`} className="flex items-center gap-3 text-sm text-text-secondary transition hover:text-text-primary">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(166,111,24,0.1)] text-gold"><Mail className="h-5 w-5" /></span>
                       <div>
-                        <p className="font-medium text-white">E-mail</p>
-                        <p className="text-[#71717A]">{BRAND.email}</p>
+                        <p className="font-medium text-text-primary">E-mail</p>
+                        <p className="text-text-muted">{BRAND.email}</p>
                       </div>
                     </a>
-                    <div className="flex items-center gap-3 text-sm text-[#A1A1AA]">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.1)] text-[#D6A84F]"><MapPin className="h-5 w-5" /></span>
+                    <div className="flex items-center gap-3 text-sm text-text-secondary">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgba(166,111,24,0.1)] text-gold"><MapPin className="h-5 w-5" /></span>
                       <div>
-                        <p className="font-medium text-white">Localização</p>
-                        <p className="text-[#71717A]">{BRAND.address}</p>
+                        <p className="font-medium text-text-primary">Localização</p>
+                        <p className="text-text-muted">{BRAND.address}</p>
                       </div>
                     </div>
                   </div>
@@ -277,11 +277,11 @@ export default function Contato() {
 
               <Reveal delay={0.15}>
                 <div className="glass-card rounded-2xl p-6 sm:p-8">
-                  <h3 className="font-serif text-lg font-semibold text-white">Horários</h3>
-                  <div className="mt-4 space-y-2 text-sm text-[#71717A]">
+                  <h3 className="font-serif text-lg font-semibold text-text-primary">Horários</h3>
+                  <div className="mt-4 space-y-2 text-sm text-text-muted">
                     <p>Segunda a Sexta: 9h às 18h</p>
                     <p>Sábado: 9h às 13h</p>
-                    <p className="mt-3 text-[#D6A84F]">
+                    <p className="mt-3 text-gold">
                       <MessageCircle className="-mt-0.5 mr-1 inline h-3 w-3" />
                       WhatsApp disponível 24h — respondemos em até 1h em horário comercial
                     </p>

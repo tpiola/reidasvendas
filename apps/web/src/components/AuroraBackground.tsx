@@ -5,7 +5,7 @@ export function AuroraBackground() {
       <div className="rdv-aurora-blob rdv-aurora-blob--2" />
       <div className="rdv-aurora-blob rdv-aurora-blob--3" />
       <div className="absolute inset-0 bg-grid-subtle opacity-40" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_8%,#030303_84%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_90%_20%,rgba(166,111,24,0.08),transparent_60%)]" />
     </div>
   );
 }

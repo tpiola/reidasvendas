@@ -36,8 +36,8 @@ const initialData: FormData = {
 };
 
 const inputClass =
-  'w-full rounded-xl border border-white/10 bg-[#0D0D0D] px-4 py-3 text-white placeholder:text-[#52525B] focus:border-[#D6A84F] focus:outline-none';
-const labelClass = 'mb-2 block text-xs font-medium text-[#A1A1AA]';
+  'w-full rounded-xl border border-text-primary/10 bg-surface-3 px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-gold focus:outline-none';
+const labelClass = 'mb-2 block text-xs font-medium text-text-secondary';
 
 const trustItems = [
   'Diagnóstico antes de qualquer proposta',
@@ -178,19 +178,19 @@ export default function Diagnostico() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#030303] text-white">
+    <main className="min-h-screen overflow-hidden bg-background text-text-primary">
       <section className="relative overflow-hidden pb-20 pt-32 sm:pt-36 lg:pb-28">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(214,168,79,0.16),transparent_34%),radial-gradient(circle_at_85%_70%,rgba(242,211,138,0.08),transparent_30%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(166,111,24,0.16),transparent_34%),radial-gradient(circle_at_85%_70%,rgba(214,180,105,0.08),transparent_30%)]"
         />
         <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           <Reveal className="mx-auto max-w-4xl text-center">
             <SectionLabel>Mapeamento do perfil do seu negócio</SectionLabel>
-            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-7xl">
+            <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-text-primary sm:text-5xl lg:text-7xl">
               Antes de recomendar tecnologia, entendemos a sua operação.
             </h1>
-            <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
               Informe seu negócio, a necessidade, o problema e a faixa de investimento. Depois do envio,
               você recebe acesso a uma conversa contextualizada pelo WhatsApp.
             </p>
@@ -198,15 +198,15 @@ export default function Diagnostico() {
 
           <div className="mt-14 grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)] lg:gap-12">
             <Reveal>
-              <div className="rounded-3xl border border-white/[0.08] bg-[#090909] p-6 shadow-2xl shadow-black/40 sm:p-8">
+              <div className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 shadow-2xl shadow-black/40 sm:p-8">
                 {!sucesso ? (
                   <>
                     <div className="mb-8 flex items-center justify-between gap-4">
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
+                        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
                           Etapa {etapa} de 2
                         </p>
-                        <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-2 font-serif text-2xl font-bold text-white outline-none sm:text-3xl">
+                        <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-2 font-serif text-2xl font-bold text-text-primary outline-none sm:text-3xl">
                           {etapa === 1 ? 'Qual é o contexto da sua operação?' : 'Como devemos encaminhar seu diagnóstico?'}
                         </h2>
                       </div>
@@ -214,7 +214,7 @@ export default function Diagnostico() {
                         {[1, 2].map((item) => (
                           <span
                             key={item}
-                            className={`h-1.5 w-10 rounded-full ${item <= etapa ? 'bg-[#D6A84F]' : 'bg-white/10'}`}
+                            className={`h-1.5 w-10 rounded-full ${item <= etapa ? 'bg-gold' : 'bg-text-primary/10'}`}
                           />
                         ))}
                       </div>
@@ -278,7 +278,7 @@ export default function Diagnostico() {
                           </div>
                           <button
                             type="submit"
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] px-6 py-3.5 font-bold text-[#030303] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#D6A84F] focus:ring-offset-2 focus:ring-offset-[#090909]"
+                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold px-6 py-3.5 font-bold text-[#FFFDF8] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-surface-2"
                           >
                             Continuar <ArrowRight size={18} aria-hidden="true" />
                           </button>
@@ -317,7 +317,7 @@ export default function Diagnostico() {
                           </div>
                           <div>
                             <label htmlFor="presenca-digital" className={labelClass}>
-                              Site ou perfil do Google <span className="text-[#71717A]">(opcional)</span>
+                              Site ou perfil do Google <span className="text-text-muted">(opcional)</span>
                             </label>
                             <input
                               id="presenca-digital"
@@ -348,20 +348,20 @@ export default function Diagnostico() {
                               <option value="nao-sei">Ainda preciso entender</option>
                             </select>
                           </div>
-                          <label className="flex items-start gap-3 text-xs leading-5 text-[#A1A1AA]"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-[#D6A84F]" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
+                          <label className="flex items-start gap-3 text-xs leading-5 text-text-secondary"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-gold" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
                           {erro ? <p role="alert" className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100">{erro}</p> : null}
                           <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
                             <button
                               type="button"
                               onClick={() => setEtapa(1)}
-                              className="flex items-center justify-center gap-2 rounded-xl border border-white/10 px-5 py-3.5 font-semibold text-[#D4D4D8] transition hover:border-[#D6A84F]/50 hover:text-white focus:outline-none focus:ring-2 focus:ring-[#D6A84F]"
+                              className="flex items-center justify-center gap-2 rounded-xl border border-text-primary/10 px-5 py-3.5 font-semibold text-text-secondary transition hover:border-gold/50 hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-gold"
                             >
                               <ArrowLeft size={18} aria-hidden="true" /> Voltar
                             </button>
                             <button
                               type="submit"
                               disabled={enviando}
-                              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#D6A84F] via-[#F2D38A] to-[#D6A84F] px-6 py-3.5 font-bold text-[#030303] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#D6A84F] focus:ring-offset-2 focus:ring-offset-[#090909]"
+                              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold px-6 py-3.5 font-bold text-[#FFFDF8] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-surface-2"
                             >
                               {enviando ? <>Registrando diagnóstico <Loader2 size={18} className="animate-spin" aria-hidden="true" /></> : <>Registrar meu diagnóstico <ArrowRight size={18} aria-hidden="true" /></>}
                             </button>
@@ -369,20 +369,20 @@ export default function Diagnostico() {
                         </>
                       )}
                     </form>
-                    <p className="mt-5 text-center text-xs leading-relaxed text-[#71717A]">
+                    <p className="mt-5 text-center text-xs leading-relaxed text-text-muted">
                       Seus dados são usados somente para analisar e responder a esta solicitação.
                     </p>
                   </>
                 ) : (
                   <div className="flex min-h-[460px] flex-col items-center justify-center text-center" role="status" aria-live="polite">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#D6A84F]/30 bg-[#D6A84F]/10 text-[#F2D38A]">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold-light">
                       <CheckCircle2 size={32} aria-hidden="true" />
                     </div>
-                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-[#D6A84F]">
+                    <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-gold">
                       {entrega === 'whatsapp_handoff' ? 'Diagnóstico preparado para envio' : 'Diagnóstico registrado'}
                     </p>
-                    <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-3 font-serif text-3xl font-bold text-white outline-none sm:text-4xl">Agora sua conversa começa com contexto.</h2>
-                    <p className="mt-4 max-w-lg leading-relaxed text-[#A1A1AA]">
+                    <h2 ref={stageHeadingRef} tabIndex={-1} className="mt-3 font-serif text-3xl font-bold text-text-primary outline-none sm:text-4xl">Agora sua conversa começa com contexto.</h2>
+                    <p className="mt-4 max-w-lg leading-relaxed text-text-secondary">
                       {entrega === 'whatsapp_handoff'
                         ? 'Seu diagnóstico está organizado, mas ainda precisa ser enviado. Abra o WhatsApp e confirme o envio da mensagem para a nossa equipe.'
                         : 'Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.'}
@@ -407,28 +407,28 @@ export default function Diagnostico() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <aside className="glass-card rounded-3xl border border-white/[0.08] bg-white/[0.025] p-6 sm:p-8">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#D6A84F]/20 bg-[#D6A84F]/10 text-[#F2D38A]">
+              <aside className="glass-card rounded-3xl border border-text-primary/[0.08] bg-text-primary/[0.025] p-6 sm:p-8">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10 text-gold-light">
                   <ShieldCheck size={25} aria-hidden="true" />
                 </div>
-                <h2 className="mt-6 font-serif text-3xl font-bold leading-tight text-white">
+                <h2 className="mt-6 font-serif text-3xl font-bold leading-tight text-text-primary">
                   Clareza para decidir o que fazer primeiro.
                 </h2>
-                <p className="mt-4 leading-relaxed text-[#A1A1AA]">
+                <p className="mt-4 leading-relaxed text-text-secondary">
                   A leitura considera presença, conversão, tecnologia, investimento e o estágio operacional informado.
                 </p>
                 <ul className="mt-7 space-y-4">
                   {trustItems.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-[#D4D4D8]">
-                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#D6A84F]/10 text-[#F2D38A]">
+                    <li key={item} className="flex items-start gap-3 text-sm text-text-secondary">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold-light">
                         <Check size={13} strokeWidth={2.5} aria-hidden="true" />
                       </span>
                       {item}
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 border-t border-white/[0.08] pt-7">
-                  <p className="text-sm leading-7 text-[#A1A1AA]">O contato pelo WhatsApp é liberado somente depois do registro do diagnóstico. Assim, o atendimento começa com informações reais da operação.</p>
+                <div className="mt-8 border-t border-text-primary/[0.08] pt-7">
+                  <p className="text-sm leading-7 text-text-secondary">O contato pelo WhatsApp é liberado somente depois do registro do diagnóstico. Assim, o atendimento começa com informações reais da operação.</p>
                 </div>
               </aside>
             </Reveal>

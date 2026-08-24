@@ -42,20 +42,20 @@ export default function Home() {
                 <SplitText
                   as="span"
                   text="Seu negócio local merece"
-                  className="block text-white"
+                  className="block text-text-primary"
                   staggerMs={46}
                 />
                 <SplitText
                   as="span"
                   text="um site que vende."
-                  className="mt-2 block text-white"
+                  className="mt-2 block text-text-primary"
                   highlightWords={['vende']}
                   staggerMs={46}
                   delay={0.55}
                 />
               </h1>
 
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
+              <p className="mt-7 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
                 A gente cria sites premium e usa inteligência artificial pra colocar você na frente de quem
                 procura o que você vende — em Franca e região.
               </p>
@@ -91,29 +91,29 @@ export default function Home() {
 
         {/* Scroll hint */}
         <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 hidden justify-center sm:flex" aria-hidden="true">
-          <div className="flex h-10 w-6 items-start justify-center rounded-full border border-[rgba(214,168,79,0.3)] p-1.5">
-            <span className="h-2 w-1 animate-bounce rounded-full bg-[#D6A84F]" />
+          <div className="flex h-10 w-6 items-start justify-center rounded-full border border-[rgba(166,111,24,0.3)] p-1.5">
+            <span className="h-2 w-1 animate-bounce rounded-full bg-gold" />
           </div>
         </div>
       </section>
 
       {/* ─── Stats band ─── */}
-      <section className="relative border-y border-[rgba(255,255,255,0.06)] bg-[#080808]/60" aria-label="Números do Rei das Vendas">
+      <section className="relative border-y border-line bg-surface/60" aria-label="Números do Rei das Vendas">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:py-16">
-          <StatCounter value={12} suffix="+" label="Projetos entregues" className="lg:border-r lg:border-[rgba(255,255,255,0.06)] lg:pl-4" />
-          <StatCounter value={98} suffix="%" label="Satisfação" className="lg:border-r lg:border-[rgba(255,255,255,0.06)] lg:pl-4" />
-          <StatCounter value={3} label="Anos de operação" className="lg:border-r lg:border-[rgba(255,255,255,0.06)] lg:pl-4" />
+          <StatCounter value={12} suffix="+" label="Projetos entregues" className="lg:border-r lg:border-line lg:pl-4" />
+          <StatCounter value={98} suffix="%" label="Satisfação" className="lg:border-r lg:border-line lg:pl-4" />
+          <StatCounter value={3} label="Anos de operação" className="lg:border-r lg:border-line lg:pl-4" />
           <div className="lg:pl-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#D6A84F]">Fundador</p>
-            <p className="mt-2 font-serif text-2xl font-bold leading-tight text-white sm:text-3xl">{BRAND.founder.name}</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#A1A1AA]">Franca · SP · negócios locais</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gold">Fundador</p>
+            <p className="mt-2 font-serif text-2xl font-bold leading-tight text-text-primary sm:text-3xl">{BRAND.founder.name}</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary">Franca · SP · negócios locais</p>
           </div>
         </div>
       </section>
 
       {/* ─── Marquee de nichos ─── */}
       <section className="relative py-14 sm:py-16" aria-label="Segmentos atendidos">
-        <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A8A92]">
+        <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-text-muted">
           Quem a gente atende
         </p>
         <NicheMarquee />
@@ -125,7 +125,7 @@ export default function Home() {
           <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <span className="section-label">O que construímos</span>
-              <h2 id="services-title" className="font-serif mt-4 max-w-2xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+              <h2 id="services-title" className="font-serif mt-4 max-w-2xl text-3xl font-bold leading-tight text-text-primary sm:text-4xl md:text-5xl">
                 Cinco serviços. <span className="text-gradient-gold">Um só objetivo: vender mais.</span>
               </h2>
             </div>

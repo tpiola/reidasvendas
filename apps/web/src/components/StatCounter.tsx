@@ -63,7 +63,7 @@ export function StatCounter({
         {formatted}
         {suffix}
       </div>
-      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#A1A1AA]">{label}</p>
+      <p className="mt-3 text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary">{label}</p>
     </div>
   );
 }

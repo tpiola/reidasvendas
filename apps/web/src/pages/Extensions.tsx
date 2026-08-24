@@ -25,7 +25,7 @@ const EXTENSIONS = [
     icon: BarChart3,
     description: 'Painel analítico completo com métricas de tráfego, conversão, comportamento do usuário e relatórios exportáveis.',
     badge: 'Premium',
-    badgeColor: 'text-[#D6A84F] border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.08)]',
+    badgeColor: 'text-gold border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.08)]',
     category: 'Dados',
     features: ['Tempo real', 'Funil de conversão', 'Exportação CSV/PDF'],
   },
@@ -43,7 +43,7 @@ const EXTENSIONS = [
     icon: CreditCard,
     description: 'Receba pagamentos via PIX, cartão de crédito e boleto. Checkout transparente, parcelamento e conciliação automática.',
     badge: 'Premium',
-    badgeColor: 'text-[#D6A84F] border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.08)]',
+    badgeColor: 'text-gold border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.08)]',
     category: 'Pagamentos',
     features: ['PIX integrado', 'Parcelamento', 'Conciliação'],
   },
@@ -70,7 +70,7 @@ const EXTENSIONS = [
     icon: Database,
     description: 'Banco de dados gerenciado na nuvem com backup automático, replicação e escalonamento sob demanda.',
     badge: 'Premium',
-    badgeColor: 'text-[#D6A84F] border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.08)]',
+    badgeColor: 'text-gold border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.08)]',
     category: 'Infraestrutura',
     features: ['Backup diário', 'Replicação', 'Escalonamento'],
   },
@@ -79,7 +79,7 @@ const EXTENSIONS = [
     icon: Shield,
     description: 'Proteção completa contra ameaças: firewall, anti-malware, proteção DDoS e monitoramento de segurança 24/7.',
     badge: 'Premium',
-    badgeColor: 'text-[#D6A84F] border-[rgba(214,168,79,0.3)] bg-[rgba(214,168,79,0.08)]',
+    badgeColor: 'text-gold border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.08)]',
     category: 'Segurança',
     features: ['Firewall', 'Anti-malware', 'Monitoramento 24/7'],
   },
@@ -101,34 +101,34 @@ export default function Extensions() {
 
       {/* ═══════ HERO ═══════ */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
-        <div className="absolute inset-0 bg-[#030303]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(214,168,79,0.08)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(166,111,24,0.08)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
           <Reveal>
             <SectionLabel>Marketplace de Apps</SectionLabel>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
+            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-text-primary sm:text-5xl md:text-6xl">
               Expanda o Poder do{' '}
               <span className="text-gradient-gold">Seu Site</span>
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-[#A1A1AA] sm:text-lg">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
               Integre apps e extensões poderosas ao seu site com um clique. Automatização,
               analytics, CRM, pagamentos e muito mais — tudo integrado.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#71717A]">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-text-muted">
               <span className="flex items-center gap-1.5">
-                <Zap className="h-3.5 w-3.5 text-[#D6A84F]" /> Integração com 1 Clique
+                <Zap className="h-3.5 w-3.5 text-gold" /> Integração com 1 Clique
               </span>
               <span className="flex items-center gap-1.5">
-                <RefreshCw className="h-3.5 w-3.5 text-[#D6A84F]" /> Atualizações Automáticas
+                <RefreshCw className="h-3.5 w-3.5 text-gold" /> Atualizações Automáticas
               </span>
               <span className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-[#D6A84F]" /> Apps Verificados
+                <Shield className="h-3.5 w-3.5 text-gold" /> Apps Verificados
               </span>
             </div>
           </Reveal>
@@ -151,11 +151,11 @@ export default function Extensions() {
                 <motion.div
                   key={app.name}
                   variants={staggerItem}
-                  className="glass-card group flex flex-col rounded-2xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.02)] p-6 transition-all duration-500 hover:border-[rgba(214,168,79,0.25)] hover:bg-[rgba(214,168,79,0.02)]"
+                  className="glass-card group flex flex-col rounded-2xl border border-line bg-[rgba(28,25,20,0.02)] p-6 transition-all duration-500 hover:border-[rgba(166,111,24,0.25)] hover:bg-[rgba(166,111,24,0.02)]"
                 >
                   {/* Header */}
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(214,168,79,0.08)] text-[#D6A84F] transition-all duration-300 group-hover:bg-[rgba(214,168,79,0.15)] group-hover:scale-110">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(166,111,24,0.08)] text-gold transition-all duration-300 group-hover:bg-[rgba(166,111,24,0.15)] group-hover:scale-110">
                       <Icon className="h-6 w-6" />
                     </div>
                     <span
@@ -166,16 +166,16 @@ export default function Extensions() {
                   </div>
 
                   {/* Info */}
-                  <h3 className="mt-4 font-serif text-lg font-bold text-white">{app.name}</h3>
-                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-[#A1A1AA]">
+                  <h3 className="mt-4 font-serif text-lg font-bold text-text-primary">{app.name}</h3>
+                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-text-secondary">
                     {app.description}
                   </p>
 
                   {/* Features */}
                   <div className="mt-4 space-y-1.5">
                     {app.features.map((feat) => (
-                      <div key={feat} className="flex items-center gap-2 text-xs text-[#71717A]">
-                        <CheckCircle2 className="h-3 w-3 text-[#D6A84F]" />
+                      <div key={feat} className="flex items-center gap-2 text-xs text-text-muted">
+                        <CheckCircle2 className="h-3 w-3 text-gold" />
                         {feat}
                       </div>
                     ))}
@@ -183,14 +183,14 @@ export default function Extensions() {
 
                   {/* Category tag */}
                   <div className="mt-3">
-                    <span className="rounded-md bg-[rgba(255,255,255,0.04)] px-2 py-0.5 text-[10px] text-[#71717A]">
+                    <span className="rounded-md bg-[rgba(28,25,20,0.04)] px-2 py-0.5 text-[10px] text-text-muted">
                       {app.category}
                     </span>
                   </div>
 
                   {/* CTA */}
-                  <div className="mt-4 pt-4 border-t border-[rgba(255,255,255,0.06)]">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#D6A84F] transition-all duration-300 group-hover:gap-2.5">
+                  <div className="mt-4 pt-4 border-t border-line">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold transition-all duration-300 group-hover:gap-2.5">
                       Instalar App <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -202,16 +202,16 @@ export default function Extensions() {
       </section>
 
       {/* ═══════ CTA FINAL ═══════ */}
-      <section className="relative overflow-hidden border-t border-[rgba(214,168,79,0.1)] py-20 sm:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(214,168,79,0.06)_0%,transparent_60%)]" />
+      <section className="relative overflow-hidden border-t border-[rgba(166,111,24,0.1)] py-20 sm:py-28">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
           <Reveal>
             <SectionLabel>Precisa de uma Integração Específica?</SectionLabel>
-            <h2 className="mt-4 font-serif text-3xl font-bold text-white sm:text-4xl md:text-5xl">
+            <h2 className="mt-4 font-serif text-3xl font-bold text-text-primary sm:text-4xl md:text-5xl">
               App Sob Medida para{' '}
               <span className="text-gradient-gold">Seu Negócio</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+            <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-text-secondary">
               Não encontrou o que precisa? Criamos extensões personalizadas para integrar
               seu site com qualquer sistema — ERP, API própria, sistemas legados e muito mais.
             </p>
@@ -225,25 +225,25 @@ export default function Extensions() {
                 href={BRAND.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-outline-gold text-sm group inline-flex items-center gap-2 rounded-full border border-[rgba(214,168,79,0.22)] px-6 py-2.5 font-semibold text-[#F5F5F5] transition-all duration-400 hover:border-[#D6A84F] hover:bg-[rgba(214,168,79,0.08)]"
+                className="btn-outline-gold text-sm group inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.22)] px-6 py-2.5 font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(166,111,24,0.08)]"
               >
                 Falar no WhatsApp <MessageCircle className="h-4 w-4" />
               </a>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-[#71717A]">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-text-muted">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#D6A84F]" /> Desenvolvimento Ágil
+                <CheckCircle2 className="h-3.5 w-3.5 text-gold" /> Desenvolvimento Ágil
               </span>
               <span className="flex items-center gap-1.5">
-                <Shield className="h-3.5 w-3.5 text-[#D6A84F]" /> Documentação Completa
+                <Shield className="h-3.5 w-3.5 text-gold" /> Documentação Completa
               </span>
               <span className="flex items-center gap-1.5">
-                <Zap className="h-3.5 w-3.5 text-[#D6A84F]" /> Entrega por Etapas
+                <Zap className="h-3.5 w-3.5 text-gold" /> Entrega por Etapas
               </span>
               <span className="flex items-center gap-1.5">
-                <Globe className="h-3.5 w-3.5 text-[#D6A84F]" /> Suporte Técnico
+                <Globe className="h-3.5 w-3.5 text-gold" /> Suporte Técnico
               </span>
             </div>
           </Reveal>

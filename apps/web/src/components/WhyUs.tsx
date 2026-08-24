@@ -30,10 +30,10 @@ export function WhyUs() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="mx-auto mb-14 max-w-3xl text-center">
           <span className="section-label">Por que o Rei das Vendas</span>
-          <h2 id="why-us-title" className="font-serif mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+          <h2 id="why-us-title" className="font-serif mt-4 text-3xl font-bold leading-tight text-text-primary sm:text-4xl md:text-5xl">
             Não é template. É <span className="text-gradient-gold">feito pro seu negócio.</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#A1A1AA]">
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-text-secondary">
             Quatro coisas que a gente garante em cada projeto — pra você vender mais, sem dor de cabeça.
           </p>
         </Reveal>
@@ -52,8 +52,8 @@ export function WhyUs() {
               className="glass-card group relative overflow-hidden rounded-2xl p-6 sm:p-8"
             >
               <span className="num-gold font-serif text-4xl font-bold leading-none sm:text-5xl">{pillar.n}</span>
-              <h3 className="font-serif mt-5 text-lg font-semibold text-white sm:text-xl">{pillar.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#A1A1AA]">{pillar.text}</p>
+              <h3 className="font-serif mt-5 text-lg font-semibold text-text-primary sm:text-xl">{pillar.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{pillar.text}</p>
             </motion.article>
           ))}
         </motion.div>
