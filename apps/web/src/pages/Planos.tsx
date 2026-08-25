@@ -36,7 +36,7 @@ export default function Planos() {
           </Reveal>
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <PremiumButton href="/contato">Solicitar análise <ArrowRight className="h-4 w-4" /></PremiumButton>
+              <PremiumButton href="/diagnostico">Solicitar análise <ArrowRight className="h-4 w-4" /></PremiumButton>
               <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
                 <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
               </a>
@@ -86,7 +86,7 @@ export default function Planos() {
           <h2 className="font-serif text-3xl font-bold text-text-primary sm:text-5xl">Comece pela análise, não pela escolha de um pacote.</h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary">Envie o site atual, o perfil da empresa no Google ou uma descrição do negócio. A recomendação será baseada no que precisa ser corrigido e construído.</p>
           <div className="mt-8">
-            <PremiumButton href="/contato">Quero solicitar uma análise <ArrowRight className="h-4 w-4" /></PremiumButton>
+            <PremiumButton href="/diagnostico">Quero solicitar uma análise <ArrowRight className="h-4 w-4" /></PremiumButton>
           </div>
           <p className="mt-5 text-xs leading-5 text-text-muted">A análise inicial não representa garantia de posicionamento, vendas ou resultados específicos.</p>
         </div>

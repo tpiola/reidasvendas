@@ -8,6 +8,30 @@
       "dependabot/**": false
     }
   },
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.reidasvendas.com.br" }],
+      "destination": "https://reidasvendas.com.br/:path*",
+      "permanent": true
+    },
+    { "source": "/contato", "destination": "/diagnostico", "permanent": true },
+    { "source": "/recursos", "destination": "/blog", "permanent": true },
+    { "source": "/servicos", "destination": "/solucoes", "permanent": true },
+    { "source": "/modelos", "destination": "/solucoes", "permanent": true },
+    { "source": "/segmentos", "destination": "/solucoes", "permanent": true },
+    { "source": "/planos", "destination": "/diagnostico", "permanent": true },
+    { "source": "/projetos", "destination": "/portfolio", "permanent": true },
+    { "source": "/templates", "destination": "/demonstracoes", "permanent": true },
+    { "source": "/termos", "destination": "/politica", "permanent": true },
+    { "source": "/blog/infraestrutura-de-vendas-digitais", "destination": "/blog/um-projeto-um-deploy-um-dominio", "permanent": true },
+    { "source": "/blog/automacao-inteligente-para-negocios-locais", "destination": "/blog/presenca-digital-o-que-e", "permanent": true },
+    { "source": "/blog/design-premium-ou-template", "destination": "/blog/presenca-digital-o-que-e", "permanent": true },
+    { "source": "/solucoes/site-para-dentistas-em-campinas", "destination": "/solucoes/site-para-dentistas", "permanent": true },
+    { "source": "/solucoes/site-para-dentistas-em-sorocaba", "destination": "/solucoes/site-para-dentistas", "permanent": true },
+    { "source": "/solucoes/site-para-clinicas-em-campinas", "destination": "/solucoes/site-para-clinicas", "permanent": true },
+    { "source": "/solucoes/landing-page-para-advogados-em-sao-paulo", "destination": "/solucoes/landing-page", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

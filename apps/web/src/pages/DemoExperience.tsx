@@ -24,8 +24,8 @@ const items: Record<string, DemoItem[]> = {
   'representacao-comercial': [
     { category: 'Linha essencial', title: 'Referência AL-101', detail: 'Produto demonstrativo · acabamento grafite · pedido mínimo sob consulta.', note: 'REF. AL-101' },
     { category: 'Linha essencial', title: 'Referência AL-208', detail: 'Produto demonstrativo · acabamento natural · disponibilidade ilustrativa.', note: 'REF. AL-208' },
-    { category: 'Linha premium', title: 'Referência PR-410', detail: 'Produto demonstrativo · apresentação premium · ficha comercial fictícia.', note: 'REF. PR-410' },
-    { category: 'Linha premium', title: 'Referência PR-522', detail: 'Produto demonstrativo · variações sob consulta · catálogo ilustrativo.', note: 'REF. PR-522' },
+    { category: 'Linha de produto', title: 'Referência PR-410', detail: 'Produto demonstrativo · ficha comercial fictícia.', note: 'REF. PR-410' },
+    { category: 'Linha de produto', title: 'Referência PR-522', detail: 'Produto demonstrativo · variações sob consulta · catálogo ilustrativo.', note: 'REF. PR-522' },
   ],
   'imobiliaria-premium': [
     { category: 'Apartamento', title: 'Apartamento central', detail: '2 dormitórios · 1 vaga · características exclusivamente ilustrativas.', note: 'Venda · imóvel fictício' },

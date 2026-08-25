@@ -1,9 +1,21 @@
 {
-  "date": "2026-08-09",
+  "date": "2026-08-25",
   "framework": "React + Vite + Tailwind",
-  "font_stack": ["Geist", "Cormorant Garamond"],
-  "motion": "framer-motion",
-  "spacing": "existing 8px scale",
-  "preserved": ["React Router routes", "brand name Rei das Vendas", "existing logo asset", "contact destinations"],
-  "introduced": ["semantic light/dark tokens", "diagnostic-table macrostructure", "editorial image", "persistent theme toggle"]
+  "font_stack": ["Barlow Condensed", "Archivo"],
+  "motion": "reduced and functional",
+  "spacing": "named 4px scale",
+  "preserved": [
+    "React Router routes",
+    "Rei das Vendas name",
+    "verified contact destinations",
+    "published project names",
+    "diagnostic form logic"
+  ],
+  "introduced": [
+    "single light visual system",
+    "Narrative Workflow macrostructure",
+    "operational decision map",
+    "one diagnostic conversion path",
+    "canonical article source"
+  ]
 }

@@ -12,19 +12,16 @@ type ButtonAsLink = SharedProps & AnchorHTMLAttributes<HTMLAnchorElement> & { hr
 
 type Props = ButtonAsButton | ButtonAsLink;
 
-const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-400';
+const base = 'rdv-action';
 const sizes: Record<string, string> = {
-  sm: 'px-5 py-2 text-xs tracking-wider',
-  md: 'px-6 py-2.5 text-sm',
-  lg: 'px-8 py-3 text-base',
+  sm: 'rdv-action--sm',
+  md: 'rdv-action--md',
+  lg: 'rdv-action--lg',
 };
 const variants: Record<string, string> = {
-  primary:
-    'bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] text-[#FFFDF8] font-bold hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35),0_0_80px_rgba(166,111,24,0.12)] hover:scale-[1.02] active:scale-[0.98]',
-  outline:
-    'border border-[rgba(166,111,24,0.22)] text-text-primary hover:border-gold hover:bg-[rgba(166,111,24,0.08)] hover:shadow-[0_0_30px_rgba(166,111,24,0.1)] hover:-translate-y-0.5 active:scale-[0.98]',
-  ghost:
-    'text-text-secondary hover:text-text-primary hover:bg-text-primary/5',
+  primary: 'rdv-action--primary',
+  outline: 'rdv-action--outline',
+  ghost: 'rdv-action--ghost',
 };
 
 export function PremiumButton(props: Props) {

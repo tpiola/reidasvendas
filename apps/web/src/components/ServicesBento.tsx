@@ -20,7 +20,7 @@ const services: Service[] = [
     key: 'sites',
     title: 'Sites Premium',
     description: 'Site rápido e bonito que transforma visita em cliente.',
-    to: '/servicos',
+    to: '/solucoes',
     icon: Globe,
     image: BRAND.images.services.sites,
     span: 'lg:col-span-4 lg:row-span-2',

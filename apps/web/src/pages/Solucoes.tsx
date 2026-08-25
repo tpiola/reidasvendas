@@ -1,356 +1,109 @@
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  AppWindow,
-  ArrowRight,
-  Bot,
-  CheckCircle2,
-  ClipboardCheck,
-  Globe2,
-  MonitorSmartphone,
-  ShieldCheck,
-  Zap,
-} from 'lucide-react';
-import { PremiumButton } from '@/components/PremiumButton';
-import { Reveal, SectionLabel, SectionTitle, staggerContainer, staggerItem } from '@/hooks/useAnimation';
-import { BRAND } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics';
-import { COMPARISONS, DEMONSTRATIONS, GUIDES, LOCAL_PAGES, SOLUTIONS, TOOLS } from '@/lib/growth';
-
-// GA4 tracking: view_page:"/solucoes"
-
-const PROBLEMS = [
-  'Site lento ou difícil de navegar',
-  'Oferta sem clareza para quem chega',
-  'Ausência de provas que sustentem a decisão',
-  'WhatsApp desorganizado e sem contexto',
-  'Leads sem acompanhamento ou follow-up',
-  'Informações inconsistentes no Google',
-  'Experiência ruim no celular',
-];
+import { COMPARISONS, DEMONSTRATIONS, GUIDES, SOLUTIONS, TOOLS } from '@/lib/growth';
 
 const METHOD = [
-  ['01', 'Diagnóstico do negócio', 'Entendemos oferta, público, objetivos, operação e o momento atual da empresa.'],
-  ['02', 'Análise da presença atual', 'Revisamos site, Google, canais de contato, concorrência e pontos de perda na jornada.'],
-  ['03', 'Definição da arquitetura', 'Organizamos páginas, mensagens, caminhos de conversão e integrações necessárias.'],
-  ['04', 'Construção do site/funil', 'Transformamos a estratégia em uma experiência clara, rápida e pensada para o celular.'],
-  ['05', 'Automação e integração', 'Conectamos formulários, WhatsApp e ferramentas para dar continuidade aos contatos.'],
-  ['06', 'Publicação e teste', 'Validamos conteúdo, responsividade, performance, segurança, eventos e canais de contato.'],
-  ['07', 'Otimização contínua', 'Acompanhamos dados reais para priorizar ajustes e evoluções com critério.'],
-];
-
-const MODULES = [
-  {
-    icon: MonitorSmartphone,
-    title: 'Site de Conversão Local',
-    description: 'Um site profissional que transforma visitas em contatos com uma experiência objetiva e confiável.',
-    items: ['Experiência mobile', 'Mensagem e oferta claras', 'WhatsApp bem posicionado', 'Estrutura para SEO local'],
-  },
-  {
-    icon: Bot,
-    title: 'Funil + Automação',
-    description: 'Uma estrutura para capturar, responder, organizar e acompanhar leads sem perder oportunidades.',
-    items: ['Captação estruturada', 'Respostas e direcionamentos', 'Organização dos contatos', 'Acompanhamento de leads'],
-  },
-  {
-    icon: AppWindow,
-    title: 'Aplicativos e SaaS',
-    description: 'Sistemas sob medida para reduzir atrito em processos importantes do negócio.',
-    items: ['Agendamento', 'Operação interna', 'Atendimento', 'Painéis e indicadores'],
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Infraestrutura Digital',
-    description: 'A base técnica para manter a presença digital estável, mensurável e preparada para evoluir.',
-    items: ['Domínio e hospedagem', 'Segurança e performance', 'Integrações', 'Analytics'],
-  },
+  ['Leitura do negócio', 'Oferta, público, canais, atendimento, restrições e responsáveis.'],
+  ['Análise da jornada', 'Onde a pessoa encontra, entende, age e perde continuidade.'],
+  ['Definição do corte', 'Qual ruptura merece ser resolvida antes das demais.'],
+  ['Arquitetura', 'Conteúdo, rotas, estados, dados e integrações necessários.'],
+  ['Construção', 'Interface e implementação sem módulos sem função.'],
+  ['Publicação', 'Domínio, eventos, formulários, acesso e recuperação conferidos.'],
+  ['Evolução', 'Mudanças priorizadas por uso e evidência disponível.'],
 ];
 
 const PROJECTS = [
-  {
-    icon: Bot,
-    name: 'SaúdeGPT',
-    category: 'IA generativa em saúde',
-    description: 'Plataforma que organiza uma experiência de inteligência artificial voltada a informações de saúde.',
-    result: 'Aplicação web de produto digital técnico, com postura institucional e fluxo de conversa guiado. Exemplo real de produto digital construído com arquitetura própria.',
-  },
-  {
-    icon: Globe2,
-    name: 'Sentinela',
-    category: 'Vigilância ambiental e dashboards',
-    description: 'Sistema digital para reunir indicadores, apoiar o monitoramento e facilitar a leitura de dados ambientais.',
-    result: 'Painel operacional com leitura de dados e relatórios estruturados. Mostra a capacidade de construir sistema, automação e visualização de indicadores para processos específicos.',
-  },
-  {
-    icon: AppWindow,
-    name: 'Thiago Piola',
-    category: 'Portfólio premium',
-    description: 'Presença digital autoral para apresentar trajetória, projetos e serviços com clareza e direção visual.',
-    result: 'Site de autoridade com narrativa, hierarquia visual e performance. Demonstra padrão de design e desenvolvimento de uma presença digital construída do zero.',
-  },
+  ['SaúdeGPT', 'Produto conversacional', 'Experiência guiada para informação de saúde, com postura institucional e limites explícitos.'],
+  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento reunidos no mesmo endereço.'],
+  ['Thiago Piola', 'Presença autoral', 'Trajetória, projetos e serviços organizados em uma narrativa própria.'],
 ];
 
 export default function Solucoes() {
   return (
-    <main className="min-h-screen bg-background">
-      <section className="relative overflow-hidden border-b border-line pb-16 pt-32 sm:pb-20 sm:pt-36">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.14),transparent_44%)]" aria-hidden="true" />
-        <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
-          <Reveal><SectionLabel>Biblioteca de soluções e arquiteturas</SectionLabel></Reveal>
-          <Reveal delay={0.08}>
-            <h1 className="mx-auto mt-4 max-w-5xl font-serif text-4xl font-bold leading-[1.04] text-text-primary sm:text-5xl md:text-6xl">
-              Uma arquitetura para cada problema real da operação.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-text-secondary sm:text-lg">
-              Sites de alta conversão, landing pages, catálogos, aplicativos, SaaS, automações e infraestrutura digital. Cada solução começa pelo contexto do negócio.
-            </p>
-          </Reveal>
-          <Reveal delay={0.22}>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <PremiumButton href="/diagnostico" size="lg">
-                Mapear minha operação <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </PremiumButton>
-              <PremiumButton href="/demonstracoes" variant="outline" size="lg">Explorar demonstrações</PremiumButton>
-            </div>
-            <p className="mt-4 text-xs leading-5 text-text-muted">
-              Você envia o contexto do negócio; nós analisamos e indicamos as prioridades. Sem compromisso.
-            </p>
-          </Reveal>
+    <main id="main-content" className="rdv-library">
+      <header className="rdv-library__hero">
+        <div className="rdv-shell">
+          <p className="rdv-kicker">Biblioteca de soluções</p>
+          <h1>O que construir depende do ponto exato de perda.</h1>
+          <p>As rotas abaixo não são pacotes. Cada uma mostra uma arquitetura possível, as perguntas que faltam e o que precisa ser confirmado antes do escopo.</p>
+          <Link className="rdv-primary-action" to="/diagnostico" onClick={() => trackEvent('diagnostic_start', { position: 'solutions-hero' })}>
+            Abrir diagnóstico <ArrowRight aria-hidden="true" />
+          </Link>
         </div>
-      </section>
+      </header>
 
-      <section className="border-b border-line py-16 sm:py-24" aria-labelledby="solution-library-title">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl">
-            <SectionLabel>Arquiteturas por problema e segmento</SectionLabel>
-            <h2 id="solution-library-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-text-primary sm:text-5xl">Encontre a solução compatível com sua operação.</h2>
-            <p className="mt-5 text-base leading-8 text-text-secondary">Cada página apresenta contexto, gargalo, arquitetura possível, perguntas relevantes e um diagnóstico específico.</p>
-          </Reveal>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section className="rdv-library__solutions" aria-labelledby="solution-index-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="solution-index-title">Comece pela situação mais próxima da sua.</h2>
+          </header>
+          <div className="rdv-solution-ledger">
             {SOLUTIONS.map((solution) => (
-              <Link
-                key={solution.slug}
-                to={`/solucoes/${solution.slug}`}
-                onClick={() => trackEvent('category_select', { service: solution.slug, category: solution.category })}
-                className="group grid min-h-52 gap-4 rounded-2xl border border-text-primary/[0.08] bg-surface-2 p-6 transition hover:border-[rgba(166,111,24,0.4)] hover:bg-surface-3"
-              >
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">{solution.category}</span>
-                <h3 className="font-serif text-2xl font-semibold leading-tight text-text-primary">{solution.title}</h3>
-                <p className="text-sm leading-7 text-text-secondary">{solution.summary}</p>
-                <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-gold-light">Ver arquitetura <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" /></span>
-              </Link>
+              <article key={solution.slug}>
+                <div>
+                  <p>{solution.category}</p>
+                  <h3><Link to={`/solucoes/${solution.slug}`} onClick={() => trackEvent('solution_open', { solution: solution.slug })}>{solution.title}</Link></h3>
+                  <p>{solution.summary}</p>
+                </div>
+                <Link className="rdv-ledger-link" to={`/solucoes/${solution.slug}`} aria-label={`Ver arquitetura: ${solution.title}`}>
+                  Ver arquitetura <ArrowRight aria-hidden="true" />
+                </Link>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
-          <Reveal>
-            <SectionLabel>O gargalo real</SectionLabel>
-            <SectionTitle>O problema não é falta de presença digital. É presença digital sem conversão.</SectionTitle>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-text-secondary">
-              Estar online não basta quando cada ponto de contato cria dúvida, atrito ou demora. Antes de adicionar ferramentas, identificamos onde a jornada perde clareza e continuidade.
-            </p>
-          </Reveal>
-          <motion.ul
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="grid gap-3 rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 sm:grid-cols-2 sm:p-8"
-          >
-            {PROBLEMS.map((problem) => (
-              <motion.li key={problem} variants={staggerItem} className="flex gap-3 text-sm leading-6 text-text-secondary">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" aria-hidden="true" />
-                {problem}
-              </motion.li>
+      <section className="rdv-library__method" aria-labelledby="library-method-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="library-method-title">Sete passagens, sem pular do pedido para a tela.</h2>
+          </header>
+          <ol>
+            {METHOD.map(([title, detail], index) => (
+              <li key={title}>
+                <h3><span>{String(index + 1).padStart(2, '0')}</span>{title}</h3>
+                <p>{detail}</p>
+              </li>
             ))}
-          </motion.ul>
+          </ol>
         </div>
       </section>
 
-      <section className="border-y border-line bg-surface py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl">
-            <SectionLabel>Método</SectionLabel>
-            <SectionTitle>Como construímos uma solução sob medida</SectionTitle>
-            <p className="mt-5 text-base leading-8 text-text-secondary">
-              Cada decisão parte do diagnóstico. O processo conecta estratégia, comunicação, tecnologia e operação sem empurrar módulos que o negócio não precisa.
-            </p>
-          </Reveal>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {METHOD.map(([number, title, text], index) => (
-              <motion.article
-                key={number}
-                variants={staggerItem}
-                className={`rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 ${index === METHOD.length - 1 ? 'lg:col-start-2' : ''}`}
-              >
-                <span className="text-xs font-bold tracking-[0.18em] text-gold">{number}</span>
-                <h3 className="mt-4 font-serif text-2xl font-bold text-text-primary">{title}</h3>
-                <p className="mt-3 text-sm leading-7 text-text-secondary">{text}</p>
-              </motion.article>
+      <section className="rdv-library__projects" aria-labelledby="library-projects-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="library-projects-title">A arquitetura muda quando o problema muda.</h2>
+          </header>
+          <div>
+            {PROJECTS.map(([name, type, detail]) => (
+              <article key={name}><h3>{name}</h3><p>{type}</p><p>{detail}</p></article>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl">
-            <SectionLabel>Módulos de solução</SectionLabel>
-            <SectionTitle>A estrutura certa para o estágio do seu negócio.</SectionTitle>
-            <p className="mt-5 text-base leading-8 text-text-secondary">
-              Os módulos podem funcionar juntos ou ser implementados por etapas, conforme as prioridades identificadas no diagnóstico.
-            </p>
-          </Reveal>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="mt-12 grid gap-5 lg:grid-cols-2"
-          >
-            {MODULES.map((module) => {
-              const Icon = module.icon;
-              return (
-                <motion.article key={module.title} variants={staggerItem} className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 sm:p-8">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(166,111,24,0.18)] bg-[rgba(166,111,24,0.08)] text-gold-light">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="mt-5 font-serif text-2xl font-bold text-text-primary sm:text-3xl">{module.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-text-secondary">{module.description}</p>
-                  <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                    {module.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2 text-sm text-text-secondary">
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-gold" aria-hidden="true" /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.article>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-surface py-16 sm:py-24">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-          <Reveal>
-            <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[rgba(166,111,24,0.18)] bg-[rgba(166,111,24,0.08)] text-gold-light">
-              <Zap className="h-6 w-6" aria-hidden="true" />
-            </span>
-            <SectionTitle>Site sob medida. Infraestrutura construída para o seu negócio.</SectionTitle>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 sm:p-8">
-              <p className="text-base leading-8 text-text-secondary">
-                Cada negócio tem público, oferta, objeções e uma jornada diferentes. Por isso, a solução é montada a partir de diagnóstico — não de uma lista pronta de páginas.
-              </p>
-              <ul className="mt-6 space-y-4">
-                {[
-                  'Design, copy, tecnologia e automação trabalham como um único sistema.',
-                  'As decisões respondem ao contexto comercial e operacional da empresa.',
-                  'O site deixa de ser apenas apresentação e passa a atuar como um ativo comercial.',
-                ].map((item) => (
-                  <li key={item} className="flex gap-3 text-sm leading-7 text-text-secondary">
-                    <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-gold" aria-hidden="true" /> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl">
-            <SectionLabel>Projetos reais</SectionLabel>
-            <SectionTitle>Estratégia aplicada a desafios diferentes.</SectionTitle>
-            <p className="mt-5 text-base leading-8 text-text-secondary">
-              Produtos e experiências digitais construídos para contextos específicos, sem atribuir resultados que ainda não foram medidos.
-            </p>
-          </Reveal>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            className="mt-12 grid gap-5 lg:grid-cols-3"
-          >
-            {PROJECTS.map((project) => {
-              const Icon = project.icon;
-              return (
-                <motion.article key={project.name} variants={staggerItem} className="flex flex-col rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[rgba(166,111,24,0.18)] bg-[rgba(166,111,24,0.08)] text-gold-light">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-gold">{project.category}</p>
-                  <h3 className="mt-2 font-serif text-3xl font-bold text-text-primary">{project.name}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-7 text-text-secondary">{project.description}</p>
-                  <p className="mt-6 border-t border-text-primary/[0.08] pt-5 text-xs leading-6 text-text-muted">
-                    {project.result}
-                  </p>
-                </motion.article>
-              );
-            })}
-          </motion.div>
-          <Reveal delay={0.1} className="mt-8">
-            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-semibold text-gold-light transition-colors hover:text-text-primary">
-              Conhecer os projetos em detalhes <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="border-y border-line bg-surface py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl"><SectionLabel>Demonstrações e ferramentas</SectionLabel><SectionTitle>Experimente antes de avançar para o diagnóstico.</SectionTitle></Reveal>
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            <article className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Arquiteturas demonstrativas</span><h3 className="mt-4 font-serif text-3xl font-bold text-text-primary">Fluxos interativos por segmento.</h3><ul className="mt-5 space-y-3">{DEMONSTRATIONS.map((demo) => <li key={demo.slug}><Link className="inline-flex items-center gap-2 text-sm text-text-secondary transition hover:text-gold-light" to={`/demonstracoes/${demo.slug}`}>{demo.title} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></li>)}</ul></article>
-            <article className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Ferramentas de diagnóstico</span><h3 className="mt-4 font-serif text-3xl font-bold text-text-primary">Simulações e clareza operacional.</h3><ul className="mt-5 space-y-3">{TOOLS.map((tool) => <li key={tool.slug}><Link className="inline-flex items-center gap-2 text-sm text-text-secondary transition hover:text-gold-light" to={`/ferramentas/${tool.slug}`}>{tool.title} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></li>)}</ul></article>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <Reveal className="max-w-3xl"><SectionLabel>Intenção comercial e contexto local</SectionLabel><SectionTitle>Informação útil para quem já precisa decidir.</SectionTitle></Reveal>
-          <div className="mt-10 grid gap-8 lg:grid-cols-3">
-            <article><h3 className="font-serif text-2xl font-bold text-text-primary">Comparar alternativas</h3><ul className="mt-5 space-y-4">{COMPARISONS.map((comparison) => <li key={comparison.slug}><Link className="text-sm leading-7 text-text-secondary hover:text-gold-light" to={`/alternativas/${comparison.slug}`}>{comparison.title}</Link></li>)}</ul></article>
-            <article><h3 className="font-serif text-2xl font-bold text-text-primary">Entender antes de contratar</h3><ul className="mt-5 space-y-4">{GUIDES.map((guide) => <li key={guide.slug}><Link className="text-sm leading-7 text-text-secondary hover:text-gold-light" to={`/${guide.slug}`}>{guide.title}</Link></li>)}</ul></article>
-            <article><h3 className="font-serif text-2xl font-bold text-text-primary">Intenções locais específicas</h3><ul className="mt-5 space-y-4">{LOCAL_PAGES.map((local) => <li key={local.slug}><Link className="text-sm leading-7 text-text-secondary hover:text-gold-light" to={`/solucoes/${local.slug}`}>{local.title}</Link></li>)}</ul></article>
+      <section className="rdv-library__directory" aria-labelledby="directory-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="directory-title">Compare, simule e examine antes da conversa.</h2>
+          </header>
+          <div className="rdv-directory">
+            <section aria-labelledby="directory-comparisons"><h3 id="directory-comparisons">Comparações</h3><div>{COMPARISONS.map((item) => <Link key={item.slug} to={`/alternativas/${item.slug}`}>{item.title}</Link>)}</div></section>
+            <section aria-labelledby="directory-guides"><h3 id="directory-guides">Guias de escopo</h3><div>{GUIDES.map((item) => <Link key={item.slug} to={`/${item.slug}`}>{item.title}</Link>)}</div></section>
+            <section aria-labelledby="directory-tools"><h3 id="directory-tools">Ferramentas</h3><div>{TOOLS.map((item) => <Link key={item.slug} to={`/ferramentas/${item.slug}`}>{item.title}</Link>)}</div></section>
+            <section aria-labelledby="directory-demos"><h3 id="directory-demos">Demonstrações</h3><div>{DEMONSTRATIONS.map((item) => <Link key={item.slug} to={`/demonstracoes/${item.slug}`}>{item.title}</Link>)}</div></section>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-line bg-surface-2 py-16 sm:py-24">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <Reveal>
-            <ClipboardCheck className="mx-auto h-10 w-10 text-gold" aria-hidden="true" />
-            <h2 className="mt-5 font-serif text-3xl font-bold text-text-primary sm:text-5xl">Antes de propor, nós entendemos.</h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-text-secondary">
-              Envie seu site atual, seu perfil do Google ou apenas conte seu momento. Você recebe uma leitura clara do que precisa ser prioridade.
-            </p>
-            <div className="mt-8">
-              <PremiumButton href="/diagnostico" size="lg">
-                Mapear minha operação <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </PremiumButton>
-            </div>
-            <p className="mx-auto mt-4 max-w-xl text-xs leading-5 text-text-muted">
-              Depois do envio, a equipe da {BRAND.name} revisa o contexto e libera uma conversa contextual pelo WhatsApp. Dúvidas institucionais podem ser enviadas para{' '}
-              <a className="text-gold hover:text-gold-light" href={`mailto:${BRAND.email}`}>{BRAND.email}</a>.
-            </p>
-          </Reveal>
+      <section className="rdv-library__closing" aria-labelledby="solutions-closing-title">
+        <div className="rdv-shell">
+          <div><p className="rdv-kicker">Próxima decisão</p><h2 id="solutions-closing-title">Qual ruptura vem primeiro?</h2></div>
+          <Link className="rdv-primary-action" to="/diagnostico" onClick={() => trackEvent('diagnostic_start', { position: 'solutions-closing' })}>
+            Registrar contexto <ArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </section>
     </main>

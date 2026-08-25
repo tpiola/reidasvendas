@@ -5,21 +5,16 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import Home from '@/pages/Home';
-import { SuporteBot } from '@/components/SuporteBot';
 import { BRAND } from '@/lib/brand';
+import { ARTICLE_BY_SLUG } from '@/lib/articles';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
 import { GUIDES, SEO_BY_PATH, SOLUTIONS } from '@/lib/growth';
 
-const Servicos = lazy(() => import('@/pages/Servicos'));
 const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Contato = lazy(() => import('@/pages/Contato'));
 const Politica = lazy(() => import('@/pages/Politica'));
-const Planos = lazy(() => import('@/pages/Planos'));
 const Sobre = lazy(() => import('@/pages/Sobre'));
-const Recursos = lazy(() => import('@/pages/Recursos'));
-const Segmentos = lazy(() => import('@/pages/Segmentos'));
 const SegmentoDetalhe = lazy(() => import('@/pages/SegmentoDetalhe'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
 const Solucoes = lazy(() => import('@/pages/Solucoes'));
@@ -28,7 +23,6 @@ const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Builder = lazy(() => import('@/pages/Builder'));
-const Templates = lazy(() => import('@/pages/Templates'));
 const Extensions = lazy(() => import('@/pages/Extensions'));
 const SolutionDetail = lazy(() => import('@/pages/SolutionDetail'));
 const ComparisonDetail = lazy(() => import('@/pages/ComparisonDetail'));
@@ -63,10 +57,11 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 bg-background px-6 text-center" role="alert">
-          <h1 className="font-serif text-3xl font-bold text-text-primary">Não foi possível carregar esta página.</h1>
-          <p className="max-w-md text-sm leading-6 text-text-secondary">Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
-          <button onClick={this.handleRetry} className="btn-gold mt-2" type="button">Tentar novamente</button>
+        <div className="rdv-system-state" role="alert">
+          <p className="rdv-kicker">Falha de carregamento</p>
+          <h1>Não foi possível abrir esta página.</h1>
+          <p>Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
+          <button onClick={this.handleRetry} className="rdv-action rdv-action--primary rdv-action--md" type="button">Tentar novamente</button>
         </div>
       );
     }
@@ -77,8 +72,8 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
 
 function Loading() {
   return (
-    <div className="flex min-h-[50vh] items-center justify-center bg-background" aria-live="polite" aria-busy="true">
-      <div className="loading-gold" />
+    <div className="rdv-loading" aria-live="polite" aria-busy="true">
+      <div className="rdv-loading__mark" />
       <span className="sr-only">Carregando página</span>
     </div>
   );
@@ -208,45 +203,73 @@ function updateCanonical(url: string) {
   canonical.href = url;
 }
 
+function DashboardRoute() {
+  useEffect(() => {
+    upsertMeta('robots', 'noindex, nofollow');
+    upsertMeta('googlebot', 'noindex, nofollow');
+    document.title = `Painel | ${BRAND.name}`;
+  }, []);
+
+  return <Dashboard />;
+}
+
 function RouteMetadata() {
   const location = useLocation();
 
   useEffect(() => {
+    const articleSlug = location.pathname.match(/^\/blog\/([^/]+)$/)?.[1];
+    const article = articleSlug ? ARTICLE_BY_SLUG.get(articleSlug) : undefined;
     const growthMetadata = SEO_BY_PATH.get(location.pathname);
-    const metadata = growthMetadata ?? META_BY_PATH[location.pathname] ?? {
+    const metadata = article ? { title: `${article.title} | Rei das Vendas`, description: article.description } : growthMetadata ?? META_BY_PATH[location.pathname] ?? {
       title: BRAND.seo.title,
       description: BRAND.seo.description,
     };
     const canonical = `https://reidasvendas.com.br${location.pathname === '/' ? '/' : location.pathname}`;
+    const noIndex = ['/obrigado', '/builder', '/extensions'].includes(location.pathname)
+      || (!article && !growthMetadata && !META_BY_PATH[location.pathname] && location.pathname !== '/');
 
     document.title = metadata.title;
     upsertMeta('description', metadata.description);
+    upsertMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
+    upsertMeta('googlebot', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
     upsertMeta('twitter:title', metadata.title);
     upsertMeta('twitter:description', metadata.description);
     upsertProperty('og:title', metadata.title);
     upsertProperty('og:description', metadata.description);
     upsertProperty('og:url', canonical);
+    upsertProperty('og:type', article ? 'article' : 'website');
     updateCanonical(canonical);
 
     const previousSchema = document.getElementById('rdv-route-schema');
     previousSchema?.remove();
-    if (growthMetadata) {
+    if (article || growthMetadata) {
       const schema = document.createElement('script');
       schema.id = 'rdv-route-schema';
       schema.type = 'application/ld+json';
-      schema.textContent = JSON.stringify({
+      schema.textContent = JSON.stringify(article ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: article.title,
+        description: article.description,
+        datePublished: article.published,
+        dateModified: article.published,
+        inLanguage: 'pt-BR',
+        mainEntityOfPage: canonical,
+        author: { '@id': 'https://reidasvendas.com.br/#founder' },
+        publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
+      } : {
         '@context': 'https://schema.org',
         '@graph': [
           {
-            '@type': growthMetadata.category,
+            '@type': growthMetadata!.category,
             name: metadata.title,
             description: metadata.description,
             url: canonical,
             provider: { '@id': 'https://reidasvendas.com.br/#organization' },
           },
-          ...(growthMetadata.questions.length ? [{
+          ...(growthMetadata!.questions.length ? [{
             '@type': 'FAQPage',
-            mainEntity: growthMetadata.questions.map((question) => ({
+            mainEntity: growthMetadata!.questions.map((question) => ({
               '@type': 'Question',
               name: question.question,
               acceptedAnswer: { '@type': 'Answer', text: question.answer },
@@ -287,23 +310,23 @@ function SiteLayout() {
               <Route path="/demonstracoes/:slug" element={<PageTransition><DemoExperience /></PageTransition>} />
               {GUIDES.map((guide) => <Route key={guide.slug} path={`/${guide.slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
               <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
-              <Route path="/servicos" element={<PageTransition><Servicos /></PageTransition>} />
+              <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/servicos/:slug" element={<PageTransition><ServicoDetalhe /></PageTransition>} />
-              <Route path="/modelos" element={<RedirectTo to="/segmentos" />} />
+              <Route path="/modelos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
               <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
               <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
-              <Route path="/contato" element={<PageTransition><Contato /></PageTransition>} />
-              <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
+              <Route path="/contato" element={<RedirectTo to="/diagnostico" />} />
+              <Route path="/planos" element={<RedirectTo to="/diagnostico" />} />
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
-              <Route path="/recursos" element={<PageTransition><Recursos /></PageTransition>} />
-              <Route path="/segmentos" element={<PageTransition><Segmentos /></PageTransition>} />
+              <Route path="/recursos" element={<RedirectTo to="/blog" />} />
+              <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/segmentos/:slug" element={<PageTransition><SegmentoDetalhe /></PageTransition>} />
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
               <Route path="/builder" element={<PageTransition><Builder /></PageTransition>} />
-              <Route path="/templates" element={<PageTransition><Templates /></PageTransition>} />
+              <Route path="/templates" element={<RedirectTo to="/demonstracoes" />} />
               <Route path="/extensions" element={<PageTransition><Extensions /></PageTransition>} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
@@ -312,7 +335,6 @@ function SiteLayout() {
       </div>
       <SiteFooter />
       <CookieConsent />
-      <SuporteBot />
     </>
   );
 }
@@ -321,7 +343,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': ['LocalBusiness', 'ProfessionalService'],
+      '@type': 'Organization',
       '@id': 'https://reidasvendas.com.br/#organization',
       name: BRAND.name,
       description: BRAND.seo.description,
@@ -336,7 +358,6 @@ const structuredData = {
       },
       areaServed: BRAND.seo.geo.areaServed,
       sameAs: [BRAND.instagram, BRAND.linkedin],
-      priceRange: '$$',
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Arquiteturas digitais e foco em resultado',
@@ -351,6 +372,13 @@ const structuredData = {
           },
         })),
       },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://reidasvendas.com.br/#founder',
+      name: BRAND.founder.name,
+      url: BRAND.founder.site,
+      worksFor: { '@id': 'https://reidasvendas.com.br/#organization' },
     },
     {
       '@type': 'WebSite',
@@ -368,7 +396,7 @@ export default function App() {
     <Router>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Routes>
-        <Route path="/dashboard/*" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<DashboardRoute />} />
         <Route path="*" element={<PageErrorBoundary><SiteLayout /></PageErrorBoundary>} />
       </Routes>
     </Router>

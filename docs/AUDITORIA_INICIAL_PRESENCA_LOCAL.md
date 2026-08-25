@@ -2,7 +2,7 @@
 
 ## Diagnóstico executivo
 
-A base técnica é madura, mas a experiência pública está dividida entre a nova home “Soberania Digital” e componentes internos de uma fase visual anterior. O maior risco não é falta de recursos; é excesso de mensagens, produtos e estilos disputando o posicionamento principal.
+A base técnica é madura, mas a experiência pública estava dividida entre a home recente e componentes internos de uma fase visual anterior. O maior risco não era falta de recursos; era excesso de mensagens, produtos e estilos disputando o posicionamento principal.
 
 ## Prioridades
 

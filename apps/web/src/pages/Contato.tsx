@@ -81,7 +81,7 @@ export default function Contato() {
       mensagem: form.mensagem,
       plano: planoParam || undefined,
       origem,
-      pagina: '/contato',
+      pagina: '/diagnostico',
       timestamp: new Date().toISOString(),
     };
 

@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Rei das Vendas',
-  tagline: 'Sites premium + IA pra negócios locais',
-  subtitle: 'Sites premium e inteligência artificial que fazem seu negócio local vender mais em Franca e região.',
+  tagline: 'Da busca à conversa, sem perder o fio',
+  subtitle: 'Mapeamento, arquitetura e implementação para organizar a jornada comercial de negócios locais.',
   phone: '5516992333344',
   whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
@@ -10,14 +10,9 @@ export const BRAND = {
   address: 'Franca, SP — Brasil',
   founder: {
     name: 'Thiago B. G. Piola',
-    title: 'Founder & Diretor de Estratégia Digital',
+    title: 'Fundador e diretor de projeto',
     site: 'https://thiagopiola.com.br',
     bio: 'Web designer e estrategista digital. Une experiência prática de atendimento, organização comercial e produção de tecnologia para construir sites claros, confiáveis e preparados para negócios locais.',
-  },
-  stats: {
-    projects: '12+',
-    satisfaction: '98%',
-    years: '3',
   },
   colors: {
     gold: '#D6A84F',
@@ -51,8 +46,8 @@ export const BRAND = {
     },
   },
   seo: {
-    title: 'Rei das Vendas — Sites premium + IA pra negócios locais',
-    description: 'Sites premium e inteligência artificial que fazem seu negócio local vender mais em Franca e região.',
+    title: 'Sites e sistemas para organizar a jornada de venda | Rei das Vendas',
+    description: 'Mapeamento, arquitetura e implementação para negócios que precisam transformar busca, interesse e atendimento em um único fluxo comercial.',
     keywords: [
       'site profissional Franca SP',
       'criação de sites Franca',

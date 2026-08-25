@@ -1,152 +1,152 @@
+import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
-import { BRAND } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics';
-import { AuroraBackground } from '@/components/AuroraBackground';
-import { HeroVisual } from '@/components/HeroVisual';
-import { StatCounter } from '@/components/StatCounter';
-import { NicheMarquee } from '@/components/NicheMarquee';
-import { ServicesBento } from '@/components/ServicesBento';
-import { WhyUs } from '@/components/WhyUs';
-import { FinalCta } from '@/components/FinalCta';
-import { SplitText } from '@/components/SplitText';
-import { GoldBadge } from '@/components/PremiumComponents';
-import './HomePremium.css';
+
+const DECISION_STAGES = [
+  ['01', 'Encontro', 'Busca, indicação, mapa ou campanha levam a pessoa ao lugar certo.'],
+  ['02', 'Entendimento', 'Oferta, recorte e prova respondem por que avançar.'],
+  ['03', 'Ação', 'O próximo passo pede apenas o contexto necessário.'],
+  ['04', 'Continuidade', 'Origem e intenção acompanham o contato até o atendimento.'],
+];
+
+const METHOD = [
+  ['Leitura', 'Reunimos domínio, canais, oferta, atendimento e dados disponíveis.'],
+  ['Corte', 'Localizamos a perda que merece ser resolvida antes das demais.'],
+  ['Construção', 'Escolhemos a peça compatível: página, catálogo, sistema ou automação.'],
+  ['Operação', 'Publicamos, medimos e deixamos responsáveis, acessos e retorno definidos.'],
+];
+
+const PROJECTS = [
+  ['SaúdeGPT', 'Produto conversacional', 'Conteúdo sensível, navegação guiada e postura institucional.'],
+  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento organizados no mesmo endereço.'],
+  ['Thiago Piola', 'Presença autoral', 'Trajetória, repertório e serviços articulados em uma narrativa própria.'],
+];
+
+const DECISIONS = [
+  ['A empresa não é encontrada', 'Consistência local, páginas úteis e base técnica rastreável.'],
+  ['A oferta não é entendida', 'Arquitetura de informação, linguagem e prova verificável.'],
+  ['O contato chega sem contexto', 'Diagnóstico curto, origem preservada e encaminhamento claro.'],
+  ['O retorno se perde', 'Integração, responsável e sequência de acompanhamento.'],
+];
 
 export default function Home() {
   return (
-    <main id="main-content" className="rdv-home relative overflow-x-clip">
-      {/* ─── Hero ─── */}
-      <section className="relative flex min-h-[100svh] items-center overflow-hidden" aria-labelledby="home-title">
-        <AuroraBackground />
-
-        {/* Partículas douradas */}
-        <span className="rdv-particle animate-float-slow left-[12%] top-[22%] h-1.5 w-1.5 opacity-70" aria-hidden="true" />
-        <span className="rdv-particle animate-float left-[80%] top-[16%] h-2 w-2 opacity-60" aria-hidden="true" />
-        <span className="rdv-particle animate-float-delayed left-[64%] top-[70%] h-1.5 w-1.5 opacity-50" aria-hidden="true" />
-        <span className="rdv-particle animate-float-slow left-[8%] top-[68%] h-2 w-2 opacity-40" aria-hidden="true" />
-
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-28 pb-16 sm:px-6 sm:pt-32">
-          <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-8">
-            {/* Copy */}
-            <div className="lg:col-span-7">
-              <GoldBadge>
-                <Sparkles className="h-3 w-3" aria-hidden="true" />
-                Franca · SP — Sites que vendem
-              </GoldBadge>
-
-              <h1
-                id="home-title"
-                className="mt-7 font-serif text-[2.6rem] font-bold leading-[1.04] tracking-[-0.02em] sm:text-6xl md:text-7xl xl:text-[5rem]"
-              >
-                <SplitText
-                  as="span"
-                  text="Seu negócio local merece"
-                  className="block text-text-primary"
-                  staggerMs={46}
-                />
-                <SplitText
-                  as="span"
-                  text="um site que vende."
-                  className="mt-2 block text-text-primary"
-                  highlightWords={['vende']}
-                  staggerMs={46}
-                  delay={0.55}
-                />
-              </h1>
-
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-text-secondary sm:text-lg">
-                A gente cria sites premium e usa inteligência artificial pra colocar você na frente de quem
-                procura o que você vende — em Franca e região.
-              </p>
-
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                <a
-                  href={BRAND.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackEvent('hero_cta', { position: 'home-hero', destination: 'whatsapp' })}
-                  className="btn-gold w-full sm:w-auto"
-                >
-                  Quero um site que vende
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <Link
-                  to="/solucoes"
-                  onClick={() => trackEvent('hero_cta_secondary', { position: 'home-hero', destination: 'solucoes' })}
-                  className="btn-outline-gold w-full sm:w-auto"
-                >
-                  Explorar soluções
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Visual */}
-            <div className="lg:col-span-5">
-              <HeroVisual />
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll hint */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 hidden justify-center sm:flex" aria-hidden="true">
-          <div className="flex h-10 w-6 items-start justify-center rounded-full border border-[rgba(166,111,24,0.3)] p-1.5">
-            <span className="h-2 w-1 animate-bounce rounded-full bg-gold" />
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Stats band ─── */}
-      <section className="relative border-y border-line bg-surface/60" aria-label="Números do Rei das Vendas">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:py-16">
-          <StatCounter value={12} suffix="+" label="Projetos entregues" className="lg:border-r lg:border-line lg:pl-4" />
-          <StatCounter value={98} suffix="%" label="Satisfação" className="lg:border-r lg:border-line lg:pl-4" />
-          <StatCounter value={3} label="Anos de operação" className="lg:border-r lg:border-line lg:pl-4" />
-          <div className="lg:pl-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-gold">Fundador</p>
-            <p className="mt-2 font-serif text-2xl font-bold leading-tight text-text-primary sm:text-3xl">{BRAND.founder.name}</p>
-            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary">Franca · SP · negócios locais</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Marquee de nichos ─── */}
-      <section className="relative py-14 sm:py-16" aria-label="Segmentos atendidos">
-        <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.3em] text-text-muted">
-          Quem a gente atende
-        </p>
-        <NicheMarquee />
-      </section>
-
-      {/* ─── Bento de serviços ─── */}
-      <section className="relative py-24 sm:py-32" aria-labelledby="services-title">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <span className="section-label">O que construímos</span>
-              <h2 id="services-title" className="font-serif mt-4 max-w-2xl text-3xl font-bold leading-tight text-text-primary sm:text-4xl md:text-5xl">
-                Cinco serviços. <span className="text-gradient-gold">Um só objetivo: vender mais.</span>
-              </h2>
-            </div>
+    <main id="main-content" className="rdv-dossier">
+      <section className="rdv-hero" aria-labelledby="home-title">
+        <div className="rdv-shell rdv-hero__grid">
+          <div className="rdv-hero__copy">
+            <p className="rdv-kicker">Projetos digitais · Franca, SP</p>
+            <h1 id="home-title">Antes de pedir outro site, descubra onde a venda está quebrando.</h1>
+            <p className="rdv-lede">
+              Mapeamos como a pessoa encontra, entende e aciona seu negócio. Depois decidimos o que precisa ser construído — site, catálogo, sistema ou automação.
+            </p>
             <Link
-              to="/solucoes"
-              onClick={() => trackEvent('services_view_all', { origin: 'home-bento' })}
-              className="btn-outline-gold w-fit shrink-0"
+              className="rdv-primary-action"
+              to="/diagnostico"
+              onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
             >
-              Ver todos os serviços
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              Abrir diagnóstico <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <ServicesBento />
+
+          <aside className="rdv-decision-map" aria-labelledby="decision-map-title">
+            <div className="rdv-decision-map__head">
+              <p>Mapa de uma decisão comercial</p>
+              <span>RDV / 01</span>
+            </div>
+            <h2 id="decision-map-title">O fio não pode se romper entre a busca e a conversa.</h2>
+            <ol>
+              {DECISION_STAGES.map(([number, title, detail]) => (
+                <li key={number}>
+                  <h3><span>{number}</span>{title}</h3>
+                  <p>{detail}</p>
+                </li>
+              ))}
+            </ol>
+          </aside>
         </div>
       </section>
 
-      {/* ─── Por que nós ─── */}
-      <WhyUs />
+      <section className="rdv-thesis" aria-label="Princípio de trabalho">
+        <div className="rdv-shell">
+          <p>O site só entra quando resolve um corte real da operação.</p>
+          <span>Diagnóstico antes de escopo</span>
+        </div>
+      </section>
 
-      {/* ─── CTA final ─── */}
-      <FinalCta />
+      <section className="rdv-method" aria-labelledby="method-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro">
+            <h2 id="method-title">Uma sequência com começo, responsável e critério de saída.</h2>
+            <p>Sem catálogo empurrado antes de entender a restrição comercial, técnica e operacional.</p>
+          </header>
+          <ol className="rdv-workflow">
+            {METHOD.map(([title, detail], index) => (
+              <li key={title}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
+                <p>{detail}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="rdv-proof" aria-labelledby="proof-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="proof-title">Três problemas diferentes. Nenhuma embalagem reaproveitada.</h2>
+          </header>
+          <div className="rdv-project-ledger" role="list">
+            {PROJECTS.map(([name, type, detail]) => (
+              <article key={name} role="listitem">
+                <h3>{name}</h3>
+                <p className="rdv-project-ledger__type">{type}</p>
+                <p>{detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rdv-decisions" aria-labelledby="decisions-title">
+        <div className="rdv-shell">
+          <header className="rdv-section-intro rdv-section-intro--compact">
+            <h2 id="decisions-title">Tecnologia é consequência da leitura.</h2>
+          </header>
+          <div className="rdv-decision-table">
+            <div className="rdv-decision-table__head" aria-hidden="true">
+              <span>Gargalo observado</span>
+              <span>Decisão de projeto</span>
+            </div>
+            {DECISIONS.map(([problem, response]) => (
+              <div className="rdv-decision-table__row" key={problem}>
+                <h3>{problem}</h3>
+                <p>{response}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rdv-closing" aria-labelledby="closing-title">
+        <div className="rdv-shell rdv-closing__grid">
+          <div>
+            <p className="rdv-kicker">O primeiro passo</p>
+            <h2 id="closing-title">Mostre onde a operação perde o fio.</h2>
+          </div>
+          <div>
+            <p>O diagnóstico reúne contexto, prioridade e faixa de investimento antes de abrir o WhatsApp.</p>
+            <Link
+              className="rdv-primary-action"
+              to="/diagnostico"
+              onClick={() => trackEvent('diagnostic_start', { position: 'home-closing' })}
+            >
+              Começar agora <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
