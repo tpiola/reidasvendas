@@ -166,7 +166,7 @@ function prerenderDocument(template, entry) {
   html = updateMeta(html, 'property', 'og:description', entry.description);
   html = updateMeta(html, 'property', 'og:url', url);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/i, `$1${escapeHtml(url)}$2`);
-  html = html.replace('</head>', `    <script id="rdv-static-schema" type="application/ld+json">${structuredData(entry, url)}</script>\n  </head>`);
+  html = html.replace('</head>', `    <script id="rdv-static-schema" data-path="${escapeHtml(entry.path)}" type="application/ld+json">${structuredData(entry, url)}</script>\n  </head>`);
 
   const rootOpening = '<div id="root">';
   const start = html.indexOf(rootOpening);
