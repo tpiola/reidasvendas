@@ -8,7 +8,7 @@ import Home from '@/pages/Home';
 import { BRAND } from '@/lib/brand';
 import { ARTICLE_BY_SLUG } from '@/lib/articles';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
-import { GUIDES, SEO_BY_PATH, SOLUTIONS } from '@/lib/growth';
+import { GUIDES, SEO_BY_PATH } from '@/lib/growth';
 
 const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
@@ -133,11 +133,11 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/portfolio': {
     title: 'Projetos publicados | Rei das Vendas',
-    description: 'Conheça projetos digitais desenvolvidos para diferentes objetivos, públicos e negócios.',
+    description: 'Projetos digitais construídos para produtos, monitoramento e presença autoral, com contexto e escopo explícitos.',
   },
   '/sobre': {
-    title: 'Sobre o Rei das Vendas | Sites para negócios locais',
-    description: 'Conheça a forma de trabalho do Rei das Vendas na criação de sites profissionais para empresas locais.',
+    title: 'Sobre o Rei das Vendas | Franca, SP',
+    description: 'Princípios, forma de trabalho e responsabilidade por projetos digitais conduzidos a partir de Franca, SP.',
   },
   '/contato': {
     title: 'Solicitar análise do meu negócio | Rei das Vendas',
@@ -149,15 +149,15 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/politica': {
     title: 'Política de privacidade | Rei das Vendas',
-    description: 'Saiba como o Rei das Vendas trata dados enviados pelos visitantes do site.',
+    description: 'Como informações enviadas pelo diagnóstico e dados de medição são tratados.',
   },
   '/termos': {
     title: 'Termos de uso | Rei das Vendas',
     description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
   },
   '/blog': {
-    title: 'Blog | Rei das Vendas — sites e presença digital para negócios locais',
-    description: 'Conteúdo sobre sites profissionais, presença digital, automação e design para negócios locais de Franca e região.',
+    title: 'Caderno de operação | Rei das Vendas',
+    description: 'Leituras sobre publicação, busca, atendimento e continuidade para decidir antes de construir.',
   },
   '/segmentos': {
     title: 'Modelos de sites por segmento | Rei das Vendas',
@@ -240,9 +240,13 @@ function RouteMetadata() {
     upsertProperty('og:type', article ? 'article' : 'website');
     updateCanonical(canonical);
 
+    const staticSchema = document.getElementById('rdv-static-schema');
+    const staticSchemaMatches = staticSchema?.getAttribute('data-path') === location.pathname;
+    if (!staticSchemaMatches) staticSchema?.remove();
+
     const previousSchema = document.getElementById('rdv-route-schema');
     previousSchema?.remove();
-    if (article || growthMetadata) {
+    if (!staticSchemaMatches && (article || growthMetadata)) {
       const schema = document.createElement('script');
       schema.id = 'rdv-route-schema';
       schema.type = 'application/ld+json';
@@ -339,62 +343,9 @@ function SiteLayout() {
   );
 }
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Organization',
-      '@id': 'https://reidasvendas.com.br/#organization',
-      name: BRAND.name,
-      description: BRAND.seo.description,
-      url: 'https://reidasvendas.com.br',
-      email: BRAND.email,
-      telephone: `+${BRAND.phone}`,
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: BRAND.seo.geo.city,
-        addressRegion: BRAND.seo.geo.state,
-        addressCountry: BRAND.seo.geo.country,
-      },
-      areaServed: BRAND.seo.geo.areaServed,
-      sameAs: [BRAND.instagram, BRAND.linkedin],
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Arquiteturas digitais e foco em resultado',
-        itemListElement: SOLUTIONS.map((solution) => ({
-          '@type': 'Offer',
-          itemOffered: {
-            '@type': 'Service',
-            name: solution.title,
-            description: solution.summary,
-            url: `https://reidasvendas.com.br/solucoes/${solution.slug}`,
-            areaServed: BRAND.seo.geo.areaServed,
-          },
-        })),
-      },
-    },
-    {
-      '@type': 'Person',
-      '@id': 'https://reidasvendas.com.br/#founder',
-      name: BRAND.founder.name,
-      url: BRAND.founder.site,
-      worksFor: { '@id': 'https://reidasvendas.com.br/#organization' },
-    },
-    {
-      '@type': 'WebSite',
-      '@id': 'https://reidasvendas.com.br/#website',
-      url: 'https://reidasvendas.com.br',
-      name: BRAND.name,
-      inLanguage: 'pt-BR',
-      publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
-    },
-  ],
-};
-
 export default function App() {
   return (
     <Router>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Routes>
         <Route path="/dashboard/*" element={<DashboardRoute />} />
         <Route path="*" element={<PageErrorBoundary><SiteLayout /></PageErrorBoundary>} />
