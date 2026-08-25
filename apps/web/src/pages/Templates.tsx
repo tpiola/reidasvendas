@@ -150,7 +150,7 @@ export default function Templates() {
           </Reveal>
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <PremiumButton href="/contato">
+              <PremiumButton href="/diagnostico">
                 Solicitar análise do meu negócio <ArrowRight className="h-4 w-4" />
               </PremiumButton>
               <Link to="/portfolio" className="btn-outline-gold">
@@ -251,7 +251,7 @@ export default function Templates() {
                       </ul>
 
                       <Link
-                        to={`/contato?modelo=${model.id}`}
+                        to={`/diagnostico?modelo=${model.id}`}
                         className="mt-auto inline-flex min-h-12 items-center justify-between border-t border-text-primary/[0.08] pt-5 text-sm font-semibold text-gold-light transition-colors hover:text-text-primary"
                       >
                         Quero uma análise para este segmento
@@ -276,7 +276,7 @@ export default function Templates() {
             Avaliamos serviços, público, concorrência, cidade, provas e canais de contato antes de construir cada página.
           </p>
           <div className="mt-8">
-            <PremiumButton href="/contato">
+            <PremiumButton href="/diagnostico">
               Solicitar análise do meu negócio <ArrowRight className="h-4 w-4" />
             </PremiumButton>
           </div>

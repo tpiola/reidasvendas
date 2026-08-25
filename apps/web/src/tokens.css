@@ -1,44 +1,69 @@
 :root {
-  --color-paper: #f6f2e9;
-  --color-paper-raised: #fffdf8;
-  --color-ink: #102033;
-  --color-ink-soft: #4f5b67;
-  --color-rule: #d8d0c1;
-  --color-gold: #a66f18;
-  --color-gold-strong: #85540b;
-  --color-positive: #315f45;
-  --color-negative: #9e3f2f;
-  --color-on-accent: #fffdf8;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-6: 3rem;
-  --space-8: 4rem;
+  --color-paper-rgb: 242 239 231;
+  --color-paper-raised-rgb: 250 248 242;
+  --color-surface-2-rgb: 226 222 212;
+  --color-surface-3-rgb: 214 209 198;
+  --color-ink-rgb: 21 32 35;
+  --color-ink-soft-rgb: 63 78 82;
+  --color-muted-rgb: 81 96 100;
+  --color-rule-rgb: 190 187 177;
+  --color-accent-rgb: 181 65 34;
+  --color-accent-strong-rgb: 146 53 28;
+  --color-positive-rgb: 46 101 72;
+  --color-negative-rgb: 157 55 42;
+
+  --color-paper: rgb(var(--color-paper-rgb));
+  --color-paper-raised: rgb(var(--color-paper-raised-rgb));
+  --color-surface-2: rgb(var(--color-surface-2-rgb));
+  --color-surface-3: rgb(var(--color-surface-3-rgb));
+  --color-ink: rgb(var(--color-ink-rgb));
+  --color-ink-soft: rgb(var(--color-ink-soft-rgb));
+  --color-muted: rgb(var(--color-muted-rgb));
+  --color-rule: rgb(var(--color-rule-rgb));
+  --color-accent: rgb(var(--color-accent-rgb));
+  --color-accent-strong: rgb(var(--color-accent-strong-rgb));
+  --color-accent-ink: var(--color-paper-raised);
+  --color-positive: rgb(var(--color-positive-rgb));
+  --color-negative: rgb(var(--color-negative-rgb));
+
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Archivo', 'Helvetica Neue', sans-serif;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 8rem;
+  --space-5xl: 10rem;
+
+  --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-display: clamp(3.25rem, 7vw, 5.5rem);
+  --text-section: clamp(2.5rem, 5vw, 4.25rem);
+
+  --measure-copy: 62ch;
+  --measure-narrow: 50ch;
+  --page-width: 82rem;
+  --banner-height: 4.5rem;
+
+  --radius-editorial: 0.125rem;
+  --radius-control: 0.5rem;
+  --radius-group: 1rem;
+
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --dur-fast: 140ms;
   --dur-base: 240ms;
-  --rule-thin: 1px;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-}
-
-html[data-theme='dark'] {
-  --color-paper: #0b0d10;
-  --color-paper-raised: #12161b;
-  --color-ink: #f4efe5;
-  --color-ink-soft: #b4bac1;
-  --color-rule: #303740;
-  --color-gold: #d6a84f;
-  --color-gold-strong: #f2d38a;
-  --color-positive: #80b995;
-  --color-negative: #e18a7b;
-  --color-on-accent: #0b0d10;
+  --z-sticky: 20;
+  --z-sticky-nav: 30;
 }

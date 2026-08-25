@@ -84,8 +84,8 @@ export default function Servicos() {
           </Reveal>
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <PremiumButton href="/contato">Solicitar análise <ArrowRight className="h-4 w-4" /></PremiumButton>
-              <Link to="/templates" className="btn-outline-gold">Ver modelos por segmento</Link>
+              <PremiumButton href="/diagnostico">Solicitar análise <ArrowRight className="h-4 w-4" /></PremiumButton>
+              <Link to="/demonstracoes" className="btn-outline-gold">Ver demonstrações</Link>
             </div>
           </Reveal>
         </div>
@@ -167,7 +167,7 @@ export default function Servicos() {
           <h2 className="mt-5 font-serif text-3xl font-bold text-text-primary sm:text-5xl">Descubra o que hoje pode estar afastando clientes.</h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-text-secondary">Analisamos como sua empresa aparece, como o site funciona no celular e se o visitante consegue entrar em contato sem dificuldade.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <PremiumButton href="/contato">Quero uma análise <ArrowRight className="h-4 w-4" /></PremiumButton>
+            <PremiumButton href="/diagnostico">Quero uma análise <ArrowRight className="h-4 w-4" /></PremiumButton>
             <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="btn-outline-gold">
               <MessageCircle className="h-4 w-4" /> Falar no WhatsApp
             </a>

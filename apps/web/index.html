@@ -3,14 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#F6F2E9" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#F2EFE7" />
+    <meta name="color-scheme" content="light" />
 
-    <title>Rei das Vendas — Sites premium + IA pra negócios locais</title>
-    <meta
-      name="description"
-      content="Sites premium e inteligência artificial que fazem seu negócio local vender mais em Franca e região."
-    />
+    <title>Sites e sistemas para organizar a jornada de venda | Rei das Vendas</title>
+    <meta name="description" content="Mapeamento, arquitetura e implementação para negócios que precisam transformar busca, interesse e atendimento em um único fluxo comercial." />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <link rel="canonical" href="https://reidasvendas.com.br/" />
@@ -21,154 +18,145 @@
     <meta name="business:contact_data:region" content="SP" />
     <meta name="business:contact_data:country_name" content="Brasil" />
 
-    <!-- Structured data (JSON-LD) inline no HTML inicial => processamento rapido pelo Google
-         (recomendado por skill seo-schema: JSON-LD server-rendered evita atraso do JS). -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": ["LocalBusiness", "ProfessionalService"],
-          "@id": "https://reidasvendas.com.br/#organization",
-          "name": "Rei das Vendas",
-          "description": "Sites premium e inteligência artificial que fazem seu negócio local vender mais em Franca e região.",
-          "url": "https://reidasvendas.com.br",
-          "email": "contato@reidasvendas.com.br",
-          "telephone": "+5516992333344",
-          "priceRange": "$$",
-          "image": "https://reidasvendas.com.br/imagens/og-default.jpg",
-          "logo": "https://reidasvendas.com.br/favicon.svg",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Franca",
-            "addressRegion": "SP",
-            "addressCountry": "BR"
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://reidasvendas.com.br/#organization",
+            "name": "Rei das Vendas",
+            "description": "Mapeamento, arquitetura e implementação para organizar a jornada comercial de negócios locais.",
+            "url": "https://reidasvendas.com.br/",
+            "email": "contato@reidasvendas.com.br",
+            "telephone": "+5516992333344",
+            "logo": "https://reidasvendas.com.br/logo-icon.svg",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Franca",
+              "addressRegion": "SP",
+              "addressCountry": "BR"
+            },
+            "areaServed": ["Franca", "Região de Franca", "Brasil"],
+            "sameAs": [
+              "https://instagram.com/reidasvendas",
+              "https://linkedin.com/company/reidasvendas"
+            ],
+            "founder": { "@id": "https://reidasvendas.com.br/#founder" }
           },
-          "areaServed": ["Franca", "Região de Franca", "Brasil"],
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": -20.5389,
-            "longitude": -47.4016
-          },
-          "sameAs": [
-            "https://instagram.com/reidasvendas",
-            "https://linkedin.com/company/reidasvendas"
-          ],
-          "founder": {
+          {
             "@type": "Person",
-            "name": "Thiago B. G. Piola"
+            "@id": "https://reidasvendas.com.br/#founder",
+            "name": "Thiago B. G. Piola",
+            "url": "https://thiagopiola.com.br",
+            "worksFor": { "@id": "https://reidasvendas.com.br/#organization" }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://reidasvendas.com.br/#website",
+            "url": "https://reidasvendas.com.br/",
+            "name": "Rei das Vendas",
+            "inLanguage": "pt-BR",
+            "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
           }
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://reidasvendas.com.br/#website",
-          "url": "https://reidasvendas.com.br",
-          "name": "Rei das Vendas",
-          "inLanguage": "pt-BR",
-          "publisher": { "@id": "https://reidasvendas.com.br/#organization" }
-        }
-      ]
-    }
+        ]
+      }
     </script>
 
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Rei das Vendas" />
-    <meta property="og:title" content="Rei das Vendas — Sites premium + IA pra negócios locais" />
-    <meta
-      property="og:description"
-      content="Arquitetura, tecnologia e governança para transformar presença digital em uma operação mensurável e orientada ao negócio."
-    />
+    <meta property="og:title" content="Sites e sistemas para organizar a jornada de venda | Rei das Vendas" />
+    <meta property="og:description" content="Mapeamento, arquitetura e implementação para transformar busca, interesse e atendimento em um único fluxo comercial." />
     <meta property="og:url" content="https://reidasvendas.com.br/" />
     <meta property="og:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rei das Vendas — Sites premium + IA pra negócios locais" />
+    <meta property="og:image:alt" content="Rei das Vendas — da busca à conversa, sem perder o fio" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rei das Vendas — Sites premium + IA pra negócios locais" />
-    <meta
-      name="twitter:description"
-      content="Arquitetura, tecnologia e governança para transformar presença digital em uma operação mensurável e orientada ao negócio."
-    />
+    <meta name="twitter:title" content="Sites e sistemas para organizar a jornada de venda | Rei das Vendas" />
+    <meta name="twitter:description" content="Mapeamento, arquitetura e implementação para transformar busca, interesse e atendimento em um único fluxo comercial." />
     <meta name="twitter:image" content="https://reidasvendas.com.br/imagens/og-default.jpg" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/pwa-192.svg" />
+    <link rel="apple-touch-icon" href="/logo-icon.svg" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- Fontes: preload + swap. Removido @import duplicado do CSS (causava FOUC e dupla carga). -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Geist:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-      />
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" />
     </noscript>
 
-    <script>
-      (() => {
-        const theme = localStorage.getItem('rdv-theme') === 'dark' ? 'dark' : 'light';
-        document.documentElement.dataset.theme = theme;
-        document.documentElement.classList.toggle('dark', theme === 'dark');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0B0D10' : '#F6F2E9');
-      })();
-    </script>
-
-    <!-- Critical CSS inline: tema aplicado antes do React, sem flash de cor. -->
     <style>
+      :root{--paper:#f2efe7;--paper-raised:#faf8f2;--surface:#d6d1c6;--ink:#152023;--ink-soft:#3f4e52;--muted:#516064;--rule:#bebbb1;--accent:#b54122;--accent-strong:#92351c;--display:"Barlow Condensed","Arial Narrow",sans-serif;--body:"Archivo","Helvetica Neue",sans-serif}
       *,*::before,*::after{box-sizing:border-box}
-      html,body{background:#f6f2e9;color:#102033;margin:0;min-width:320px}
-      html[data-theme="dark"],html[data-theme="dark"] body{background:#0b0d10;color:#f4efe5}
-      body{font-family:Geist,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+      html,body{margin:0;min-width:320px;overflow-x:clip;background:var(--paper);color:var(--ink)}
+      body{font-family:var(--body);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
       #root{min-height:100dvh}
-      .initial-home{min-height:100dvh;padding:8rem max(1rem,calc((100vw - 82rem)/2)) 4rem;background:#030303;color:#f4f1e8}
-      .initial-home__grid{display:grid;gap:3rem;align-items:start}
-      .initial-home__kicker{margin:0 0 1.25rem;color:#c8ff35;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-      .initial-home h1{max-width:14ch;margin:0;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(3.1rem,6.1vw,6rem);font-weight:600;line-height:.91;letter-spacing:-.035em}
-      .initial-home h1 strong{color:#c8ff35;font-weight:inherit}
-      .initial-home__lead{max-width:38rem;color:rgba(244,241,232,.68);font-size:clamp(1rem,1.5vw,1.18rem);line-height:1.7}
-      .initial-home__actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
-      .initial-home__actions a{display:inline-flex;min-height:3.25rem;align-items:center;padding:.85rem 1.15rem;border:1px solid #c8ff35;color:#f4f1e8;font-weight:700;text-decoration:none}
-      .initial-home__actions a:first-child{background:#c8ff35;color:#030303}
-      .initial-home__panel{padding:1.5rem;border:1px solid rgba(244,241,232,.16);background:#0b0c09}
-      .initial-home__panel small{color:#c8ff35;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-      .initial-home__panel h2{font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(2rem,4vw,3rem);line-height:1}
-      .initial-home__panel a{display:block;padding:1rem 0;border-top:1px solid #d6cdbd;color:inherit;font-weight:700;text-decoration:none}
-      html[data-theme="dark"] .initial-home{background:#0b0d10;color:#f4efe5}
-      html[data-theme="dark"] .initial-home__lead{color:#b4ad9f}
-      html[data-theme="dark"] .initial-home__panel{border-color:#30343a;background:#111419}
-      html[data-theme="dark"] .initial-home__panel a{border-color:#30343a}
-      @media(min-width:64rem){.initial-home__grid{grid-template-columns:.95fr 1.05fr;gap:4.5rem}}
+      .initial-header{border-bottom:1px solid var(--rule);background:var(--paper)}
+      .initial-header__inner{width:min(calc(100% - 2rem),82rem);min-height:4.5rem;margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+      .initial-brand{display:flex;align-items:center;gap:.75rem;color:var(--ink);text-decoration:none;line-height:1}
+      .initial-brand b{display:grid;width:2.5rem;height:2.5rem;place-items:center;border:1px solid var(--ink);font-family:var(--display);font-size:1.125rem}
+      .initial-brand span{display:grid;gap:.25rem}
+      .initial-brand strong{font-family:var(--display);font-size:1.375rem;line-height:.9}
+      .initial-brand small{color:var(--ink-soft);font-size:.75rem;font-weight:600}
+      .initial-header__action,.initial-home__action{display:inline-flex;min-height:2.75rem;align-items:center;justify-content:center;padding:.75rem 1rem;border:1px solid var(--accent);background:var(--accent);color:var(--paper-raised);font-size:.875rem;font-weight:700;line-height:1;text-decoration:none;white-space:nowrap}
+      .initial-home{padding-block:4rem 8rem;background:var(--ink);color:var(--paper)}
+      .initial-home__grid{width:min(calc(100% - 2rem),82rem);margin-inline:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start;gap:6rem}
+      .initial-home__kicker{margin:0;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+      .initial-home h1{max-width:18ch;margin:1.5rem 0 0;font-family:var(--display);font-size:clamp(3.25rem,7vw,5.5rem);font-weight:600;letter-spacing:-.025em;line-height:1;overflow-wrap:anywhere}
+      .initial-home__lead{max-width:62ch;margin:2rem 0 0;color:var(--surface);font-size:1.125rem}
+      .initial-home__action{margin-top:2rem;padding:1rem 1.5rem}
+      .initial-map{border:1px solid var(--muted);padding:2rem}
+      .initial-map__head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--muted);color:var(--surface);font-size:.75rem;font-weight:700;text-transform:uppercase}
+      .initial-map__head p{margin:0}
+      .initial-map h2{max-width:22ch;margin:2rem 0;font-family:var(--display);font-size:2.25rem;font-weight:600;line-height:1.05}
+      .initial-map ol{margin:0;padding:0;list-style:none}
+      .initial-map li{padding-block:1rem;border-top:1px solid var(--muted)}
+      .initial-map h3{display:flex;align-items:center;gap:1rem;margin:0;font-family:var(--display);font-size:1.375rem;line-height:1}
+      .initial-map h3 span{color:var(--surface);font-family:var(--body);font-size:.75rem}
+      .initial-map li p{margin:.5rem 0 0;color:var(--surface);font-size:.875rem;line-height:1.6}
+      @media(max-width:64rem){.initial-home__grid{grid-template-columns:minmax(0,1fr);gap:4rem}}
+      @media(max-width:48rem){.initial-brand small{display:none}.initial-home{padding-block:3rem 6rem}.initial-map{padding:1.5rem}.initial-header__action{font-size:.75rem}}
+      @media(max-width:23.5rem){.initial-brand strong{font-size:1.125rem}.initial-brand b{width:2.25rem;height:2.25rem}.initial-header__action{padding-inline:.75rem}}
     </style>
   </head>
   <body>
     <div id="root">
+      <header class="initial-header">
+        <div class="initial-header__inner">
+          <a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial">
+            <b aria-hidden="true">RV/</b><span><strong>Rei das Vendas</strong><small>Arquitetura comercial</small></span>
+          </a>
+          <a class="initial-header__action" href="/diagnostico">Abrir diagnóstico</a>
+        </div>
+      </header>
       <main class="initial-home" id="main-content">
         <div class="initial-home__grid">
-          <div>
-            <p class="initial-home__kicker">Sites premium + IA pra negócios locais</p>
-            <h1>Sua empresa não precisa de mais software. Precisa de <strong>inteligência operacional.</strong></h1>
-            <p class="initial-home__lead">Sites, sistemas, agentes de IA e automações projetados como uma única infraestrutura para sustentar crescimento com controle.</p>
-            <div class="initial-home__actions">
-              <a href="/diagnostico">Mapear minha operação →</a>
-              <a href="/solucoes">Explorar arquiteturas ↗</a>
-            </div>
-          </div>
-          <section class="initial-home__panel" aria-labelledby="initial-diagnostic">
-            <small>Diagnóstico Rei das Vendas</small>
-            <h2 id="initial-diagnostic">Qual é o estágio atual do seu negócio?</h2>
-            <a href="/diagnostico?estagio=inicio">01 · Começando agora →</a>
-            <a href="/diagnostico?estagio=evolucao">02 · Já tenho algo no ar →</a>
-            <a href="/diagnostico?estagio=escala">03 · Negócio estabelecido →</a>
-          </section>
+          <article>
+            <p class="initial-home__kicker">Projetos digitais · Franca, SP</p>
+            <h1>Antes de pedir outro site, descubra onde a venda está quebrando.</h1>
+            <p class="initial-home__lead">Mapeamos como a pessoa encontra, entende e aciona seu negócio. Depois decidimos o que precisa ser construído — site, catálogo, sistema ou automação.</p>
+            <a class="initial-home__action" href="/diagnostico">Abrir diagnóstico →</a>
+          </article>
+          <aside class="initial-map" aria-labelledby="initial-map-title">
+            <div class="initial-map__head"><p>Mapa de uma decisão comercial</p><span>RDV / 01</span></div>
+            <h2 id="initial-map-title">O fio não pode se romper entre a busca e a conversa.</h2>
+            <ol>
+              <li><h3><span>01</span>Encontro</h3><p>Busca, indicação, mapa ou campanha levam a pessoa ao lugar certo.</p></li>
+              <li><h3><span>02</span>Entendimento</h3><p>Oferta, recorte e prova respondem por que avançar.</p></li>
+              <li><h3><span>03</span>Ação</h3><p>O próximo passo pede apenas o contexto necessário.</p></li>
+              <li><h3><span>04</span>Continuidade</h3><p>Origem e intenção acompanham o contato até o atendimento.</p></li>
+            </ol>
+          </aside>
         </div>
       </main>
     </div>

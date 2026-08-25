@@ -26,18 +26,18 @@ export function GrowthHero({ label, title, description, solution, secondary }: H
               to={diagnosticUrl(solution, 'growth-hero')}
               onClick={() => trackEvent('hero_cta', { service: solution, destination: 'diagnostico' })}
             >
-              Mapear minha operação <ArrowRight size={17} aria-hidden="true" />
+              Abrir diagnóstico <ArrowRight size={17} aria-hidden="true" />
             </Link>
             {secondary ? <Link className="ge-link" to={secondary.to}>{secondary.label} <span aria-hidden="true">↗</span></Link> : null}
           </div>
         </div>
         <aside className="ge-signal" aria-label="Princípios de execução">
-          <span className="ge-signal-label">RDV · FOCO EM RESULTADO</span>
-          <strong>Diagnóstico antes da tecnologia.</strong>
+          <span className="ge-signal-label">RDV · ORDEM DE TRABALHO</span>
+          <strong>Diagnóstico antes do escopo.</strong>
           <ul>
-            <li><Check size={15} aria-hidden="true" /> Contexto comercial identificado</li>
-            <li><Check size={15} aria-hidden="true" /> Arquitetura definida pelo problema</li>
-            <li><Check size={15} aria-hidden="true" /> Atendimento humano com informação</li>
+            <li><Check size={15} aria-hidden="true" /> Origem e intenção identificadas</li>
+            <li><Check size={15} aria-hidden="true" /> Um corte priorizado</li>
+            <li><Check size={15} aria-hidden="true" /> Continuidade atribuída</li>
           </ul>
         </aside>
       </div>
@@ -75,7 +75,7 @@ export function GrowthFaq({ questions }: { questions: Faq[] }) {
   );
 }
 
-export function GrowthClosing({ solution, title = 'Sua operação merece uma arquitetura compatível com o problema real.' }: { solution?: string; title?: string }) {
+export function GrowthClosing({ solution, title = 'Registre o ponto de perda antes de falar sobre escopo.' }: { solution?: string; title?: string }) {
   return (
     <section className="ge-closing">
       <div className="ge-shell">
@@ -87,9 +87,9 @@ export function GrowthClosing({ solution, title = 'Sua operação merece uma arq
           to={diagnosticUrl(solution, 'growth-closing')}
           onClick={() => trackEvent('hero_cta', { service: solution, destination: 'diagnostico', position: 'closing' })}
         >
-          Mapear minha operação <ArrowRight size={17} aria-hidden="true" />
+          Abrir diagnóstico <ArrowRight size={17} aria-hidden="true" />
         </Link>
-        <small>Escopo proporcional · Contexto preservado · Acompanhamento independente</small>
+        <small>Origem registrada · Contexto preservado · Próximo passo explícito</small>
       </div>
     </section>
   );

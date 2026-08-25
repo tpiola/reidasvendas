@@ -3,6 +3,15 @@ type AnalyticsPayload = Record<string, AnalyticsValue>;
 
 const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as const;
 const ATTRIBUTION_KEY = 'rdv-acquisition-attribution';
+export const MEASUREMENT_CONSENT_KEY = 'reidasvendas:cookie-consent';
+
+function hasMeasurementConsent(): boolean {
+  try {
+    return window.localStorage.getItem(MEASUREMENT_CONSENT_KEY) === 'accepted';
+  } catch {
+    return false;
+  }
+}
 
 type Attribution = Partial<Record<(typeof ATTRIBUTION_KEYS)[number], string>> & {
   landing_page?: string;
@@ -53,11 +62,13 @@ export function trackEvent(event: string, payload: AnalyticsPayload = {}): void 
     ...payload,
   };
 
-  if (typeof window.gtag === 'function') {
+  const measurementAllowed = hasMeasurementConsent();
+
+  if (measurementAllowed && typeof window.gtag === 'function') {
     window.gtag('event', event, detail);
   }
 
-  if (Array.isArray(window.dataLayer)) {
+  if (measurementAllowed && Array.isArray(window.dataLayer)) {
     window.dataLayer.push(detail);
   }
 

@@ -25,7 +25,7 @@ const SEGMENTOS = [
   {
     icon: Wrench, title: 'Serviços', slug: 'servicos',
     desc: 'Para prestadores de serviços que querem profissionalizar a presença digital e atrair mais clientes com um site que mostra credibilidade e autoridade.',
-    features: ['Site institucional premium', 'Portfólio interativo', 'Orçamento online', 'Agenda de serviços', 'Avaliações de clientes'],
+    features: ['Site institucional', 'Portfólio interativo', 'Orçamento online', 'Agenda de serviços', 'Avaliações verificadas'],
   },
   {
     icon: Building2, title: 'Imobiliário', slug: 'imobiliario',
@@ -50,7 +50,7 @@ const SEGMENTOS = [
   {
     icon: Briefcase, title: 'Profissionais Liberais', slug: 'liberais',
     desc: 'Site profissional para médicos, advogados, arquitetos, engenheiros e outros profissionais. Portfólio, blog e captação de clientes.',
-    features: ['Site pessoal premium', 'Portfólio de projetos', 'Blog profissional', 'Captação de leads', 'Agendamento de consultas'],
+    features: ['Site pessoal', 'Portfólio de projetos', 'Blog profissional', 'Captação de contatos', 'Agendamento de consultas'],
   },
 ];
 
@@ -218,7 +218,7 @@ export default function Segmentos() {
                       {/* CTA */}
                       <div className="mt-5 pt-4 border-t border-line">
                         <Link
-                          to={`/contato?segmento=${segmento.slug}`}
+                          to={`/diagnostico?segmento=${segmento.slug}`}
                           className="inline-flex items-center gap-1.5 text-xs font-semibold text-gold transition-all duration-300 group-hover:gap-2.5"
                         >
                           Ver Solução <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
@@ -257,7 +257,7 @@ export default function Segmentos() {
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
-                to="/contato"
+                to="/diagnostico"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35)]"
               >
                 Solicitar Diagnóstico <ArrowRight className="h-4 w-4" />

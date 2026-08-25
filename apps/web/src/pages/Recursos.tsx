@@ -292,14 +292,14 @@ export default function Recursos() {
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
-                to="/contato"
+                to="/diagnostico"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35)]"
               >
                 <Download className="h-4 w-4" />
                 Baixar Guia Gratuito
               </Link>
               <Link
-                to="/planos"
+                to="/diagnostico"
                 className="inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.22)] px-8 py-3 text-base font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(166,111,24,0.08)]"
               >
                 Conhecer Planos <ArrowRight className="h-4 w-4" />

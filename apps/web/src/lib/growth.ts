@@ -523,10 +523,10 @@ export const TOOLS: ToolDefinition[] = [
 export type Demonstration = { slug: string; title: string; segment: string; solution: string; image: string; description: string };
 
 export const DEMONSTRATIONS: Demonstration[] = [
-  { slug: 'clinica-premium', title: 'Clínica premium', segment: 'Saúde e odontologia', solution: 'site-para-clinicas', image: '/imagens/nichos/saude.jpg', description: 'Especialidades, seleção de atendimento e simulação de pedido de avaliação.' },
-  { slug: 'restaurante-premium', title: 'Restaurante premium', segment: 'Gastronomia', solution: 'site-para-restaurantes', image: '/imagens/nichos/comercio.jpg', description: 'Cardápio filtrável, seleção de pratos e resumo de pedido demonstrativo.' },
+  { slug: 'clinica-premium', title: 'Clínica — fluxo de atendimento', segment: 'Saúde e odontologia', solution: 'site-para-clinicas', image: '/imagens/nichos/saude.jpg', description: 'Especialidades, seleção de atendimento e simulação de pedido de avaliação.' },
+  { slug: 'restaurante-premium', title: 'Restaurante — cardápio e pedido', segment: 'Gastronomia', solution: 'site-para-restaurantes', image: '/imagens/nichos/comercio.jpg', description: 'Cardápio filtrável, seleção de pratos e resumo de pedido demonstrativo.' },
   { slug: 'representacao-comercial', title: 'Representação comercial', segment: 'Catálogo e distribuição', solution: 'catalogo-para-representantes', image: '/imagens/nichos/industria.jpg', description: 'Busca por produto, filtro de categorias e montagem de uma cotação ilustrativa.' },
-  { slug: 'imobiliaria-premium', title: 'Imobiliária premium', segment: 'Mercado imobiliário', solution: 'site-para-imobiliarias', image: '/imagens/nichos/servicos.jpg', description: 'Filtros de busca e experiência de consulta a imóveis fictícios.' },
+  { slug: 'imobiliaria-premium', title: 'Imobiliária — busca e interesse', segment: 'Mercado imobiliário', solution: 'site-para-imobiliarias', image: '/imagens/nichos/servicos.jpg', description: 'Filtros de busca e experiência de consulta a imóveis fictícios.' },
 ];
 
 export type SeoEntry = { path: string; title: string; description: string; category: string; headings: string[]; questions: Faq[] };
@@ -555,7 +555,6 @@ export const GROWTH_SEO: SeoEntry[] = [
     questions: [],
   },
   ...SOLUTIONS.map((item) => ({ path: `/solucoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Service', headings: item.architecture.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
-  ...LOCAL_PAGES.map((item) => ({ path: `/solucoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.context, category: 'Service', headings: item.priorities, questions: [] })),
   ...COMPARISONS.map((item) => ({ path: `/alternativas/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Article', headings: item.considerations.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
   ...GUIDES.map((item) => ({ path: `/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Article', headings: item.sections.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
   ...TOOLS.map((item) => ({ path: `/ferramentas/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'WebApplication', headings: [item.result], questions: [] })),

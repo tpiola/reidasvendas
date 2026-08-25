@@ -218,7 +218,7 @@ export default function Extensions() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <PremiumButton href="/contato">
+              <PremiumButton href="/diagnostico">
                 Solicitar App Personalizado <ArrowRight className="h-4 w-4" />
               </PremiumButton>
               <a

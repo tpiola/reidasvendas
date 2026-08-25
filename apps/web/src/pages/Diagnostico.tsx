@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, Loader2, MessageCircle, ShieldCheck } from 'lucide-react';
-import { PremiumButton } from '@/components/PremiumButton';
 import { Reveal, SectionLabel } from '@/hooks/useAnimation';
 import { BRAND } from '@/lib/brand';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
@@ -35,9 +34,8 @@ const initialData: FormData = {
   consentimento: false,
 };
 
-const inputClass =
-  'w-full rounded-xl border border-text-primary/10 bg-surface-3 px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-gold focus:outline-none';
-const labelClass = 'mb-2 block text-xs font-medium text-text-secondary';
+const inputClass = 'rdv-field';
+const labelClass = 'rdv-field-label';
 
 const trustItems = [
   'Diagnóstico antes de qualquer proposta',
@@ -178,14 +176,10 @@ export default function Diagnostico() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-background text-text-primary">
-      <section className="relative overflow-hidden pb-20 pt-32 sm:pt-36 lg:pb-28">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_15%,rgba(166,111,24,0.16),transparent_34%),radial-gradient(circle_at_85%_70%,rgba(214,180,105,0.08),transparent_30%)]"
-        />
-        <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
-          <Reveal className="mx-auto max-w-4xl text-center">
+    <main id="main-content" className="rdv-diagnostic">
+      <section className="rdv-diagnostic__stage">
+        <div className="rdv-shell">
+          <Reveal className="rdv-diagnostic__intro">
             <SectionLabel>Mapeamento do perfil do seu negócio</SectionLabel>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-text-primary sm:text-5xl lg:text-7xl">
               Antes de recomendar tecnologia, entendemos a sua operação.
@@ -196,9 +190,9 @@ export default function Diagnostico() {
             </p>
           </Reveal>
 
-          <div className="mt-14 grid items-start gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)] lg:gap-12">
+          <div className="rdv-diagnostic__grid">
             <Reveal>
-              <div className="rounded-3xl border border-text-primary/[0.08] bg-surface-2 p-6 shadow-2xl shadow-black/40 sm:p-8">
+              <div className="rdv-diagnostic__form">
                 {!sucesso ? (
                   <>
                     <div className="mb-8 flex items-center justify-between gap-4">
@@ -278,7 +272,7 @@ export default function Diagnostico() {
                           </div>
                           <button
                             type="submit"
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold px-6 py-3.5 font-bold text-[#FFFDF8] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-surface-2"
+                            className="rdv-form-action"
                           >
                             Continuar <ArrowRight size={18} aria-hidden="true" />
                           </button>
@@ -349,19 +343,21 @@ export default function Diagnostico() {
                             </select>
                           </div>
                           <label className="flex items-start gap-3 text-xs leading-5 text-text-secondary"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-gold" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
-                          {erro ? <p role="alert" className="rounded-xl border border-red-400/40 bg-red-400/10 px-4 py-3 text-sm text-red-100">{erro}</p> : null}
+                          <div className="rdv-form-message">
+                            {erro ? <p role="alert">{erro}</p> : null}
+                          </div>
                           <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
                             <button
                               type="button"
                               onClick={() => setEtapa(1)}
-                              className="flex items-center justify-center gap-2 rounded-xl border border-text-primary/10 px-5 py-3.5 font-semibold text-text-secondary transition hover:border-gold/50 hover:text-text-primary focus:outline-none focus:ring-2 focus:ring-gold"
+                              className="rdv-form-back"
                             >
                               <ArrowLeft size={18} aria-hidden="true" /> Voltar
                             </button>
                             <button
                               type="submit"
                               disabled={enviando}
-                              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-gold via-gold-light to-gold px-6 py-3.5 font-bold text-[#FFFDF8] transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-surface-2"
+                              className="rdv-form-action"
                             >
                               {enviando ? <>Registrando diagnóstico <Loader2 size={18} className="animate-spin" aria-hidden="true" /></> : <>Registrar meu diagnóstico <ArrowRight size={18} aria-hidden="true" /></>}
                             </button>
@@ -388,18 +384,15 @@ export default function Diagnostico() {
                         : 'Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.'}
                     </p>
                     <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
-                      <PremiumButton
+                      <a
                         href={contextualWhatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
-                        size="lg"
+                        className="rdv-primary-action"
                         onClick={() => trackEvent('whatsapp_open', { service: dados.solucao, investment: dados.investimento, origin: 'diagnostico-concluido' })}
                       >
                         <MessageCircle size={18} aria-hidden="true" /> Abrir conversa qualificada
-                      </PremiumButton>
-                      <Link to="/blog" className="btn-outline-gold inline-flex items-center justify-center rounded-full px-8 py-3 font-semibold">
-                        Ver conteúdos do blog
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 )}
@@ -407,7 +400,7 @@ export default function Diagnostico() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <aside className="glass-card rounded-3xl border border-text-primary/[0.08] bg-text-primary/[0.025] p-6 sm:p-8">
+              <aside className="rdv-diagnostic__aside">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-gold/20 bg-gold/10 text-gold-light">
                   <ShieldCheck size={25} aria-hidden="true" />
                 </div>

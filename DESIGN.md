@@ -1,41 +1,41 @@
 ---
 version: "alpha"
-name: "The Sovereign Standard"
-description: "Sistema visual e editorial do Rei das Vendas para presença digital de negócios locais."
+name: "Rei das Vendas — Dossiê Operacional"
+description: "Sistema visual e editorial do Rei das Vendas para organizar decisões comerciais."
 colors:
-  primary: "#030303"
-  surface: "#0B0B0C"
-  titanium: "#A7A8AA"
-  mineral: "#F5F2EA"
-  gold: "#B89A5E"
-  success: "#42C77A"
-  danger: "#E05D5D"
-  on-primary: "#F5F2EA"
-  on-gold: "#030303"
+  primary: "#152023"
+  surface: "#FAF8F2"
+  titanium: "#516064"
+  mineral: "#F2EFE7"
+  oxide: "#B54122"
+  success: "#2E6548"
+  danger: "#9D372A"
+  on-primary: "#F2EFE7"
+  on-oxide: "#FAF8F2"
 typography:
   display:
-    fontFamily: "Georgia"
-    fontSize: "7rem"
-    fontWeight: 400
-    lineHeight: 0.98
-    letterSpacing: "-0.045em"
-  heading:
-    fontFamily: "Georgia"
-    fontSize: "4.75rem"
-    fontWeight: 400
+    fontFamily: "Barlow Condensed"
+    fontSize: "clamp(3.25rem, 7vw, 5.5rem)"
+    fontWeight: 600
     lineHeight: 1
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.025em"
+  heading:
+    fontFamily: "Barlow Condensed"
+    fontSize: "clamp(2.5rem, 5vw, 4.25rem)"
+    fontWeight: 600
+    lineHeight: 1.02
+    letterSpacing: "-0.02em"
   body:
-    fontFamily: "Geist"
+    fontFamily: "Archivo"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.7
   label:
-    fontFamily: "Geist"
-    fontSize: "0.6875rem"
+    fontFamily: "Archivo"
+    fontSize: "0.75rem"
     fontWeight: 700
     lineHeight: 1.2
-    letterSpacing: "0.18em"
+    letterSpacing: "0.08em"
 rounded:
   editorial: "2px"
   control: "8px"
@@ -52,14 +52,14 @@ spacing:
   5xl: "128px"
 components:
   button-primary:
-    backgroundColor: "{colors.gold}"
-    textColor: "{colors.on-gold}"
+    backgroundColor: "{colors.oxide}"
+    textColor: "{colors.on-oxide}"
     typography: "{typography.label}"
     rounded: "{rounded.editorial}"
     padding: "18px 24px"
   button-primary-hover:
-    backgroundColor: "#D0B878"
-    textColor: "{colors.on-gold}"
+    backgroundColor: "#92351C"
+    textColor: "{colors.on-oxide}"
   surface-dark:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
@@ -68,15 +68,15 @@ components:
 
 ## Overview
 
-O Rei das Vendas deve parecer uma unidade externa de tecnologia: independente, precisa e estável. A referência material é uma combinação de painel técnico, documento executivo e hospitalidade de primeira classe. Não é agência criativa, curso, marketplace de templates nem SaaS genérico.
+O Rei das Vendas deve parecer uma unidade externa de projeto: incisiva, precisa e estável. A referência material combina dossiê de trabalho, mapa operacional e oficina bem organizada. Não é agência criativa, curso, marketplace de modelos nem SaaS genérico.
 
 ## Colors
 
-Preto profundo sustenta autoridade e foco. Mineral cria pausas editoriais e legibilidade. Ouro fosco sinaliza decisão, nunca decoração em excesso. Uma cor temática pode representar cada cliente, mas não substitui a base institucional.
+Azul-grafite sustenta autoridade e foco. Mineral cria leitura e pausa. Óxido sinaliza decisão em uma área pequena; não funciona como decoração. Uma cor temática pode representar cada cliente, mas não substitui a base institucional.
 
 ## Typography
 
-Display serif comunica autoridade; Geist organiza interface, leitura e ação. Títulos são curtos e decisivos. Texto corrido deve permanecer abaixo de 65 caracteres por linha. Monospace fica restrita a dados técnicos reais.
+Barlow Condensed cria a voz curta e usinada; Archivo organiza interface, leitura e ação. Títulos são curtos e decisivos. Texto corrido fica entre 45 e 65 caracteres por linha. Monospace fica restrita a dados técnicos reais.
 
 ## Layout
 
@@ -86,7 +86,7 @@ Grid editorial amplo, ritmo alternando grupos densos e pausas generosas. A home 
 
 Profundidade vem de contraste, bordas finas e sobreposição funcional. Evitar glassmorphism, brilhos contínuos, partículas e sombras decorativas. Motion orienta causa, decisão ou mudança de estado.
 
-## Motion & Timing (padrão premium)
+## Motion & Timing (controle)
 
 - Easing consistente (ex: cubic-bezier 0.16,1,0.3,1); nunca linear puro.
 - Durações: entrada 0.6-0.9s, hover 0.2-0.3s, transição de página 0.4-0.5s. Sentimento "caro".

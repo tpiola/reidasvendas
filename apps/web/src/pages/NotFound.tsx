@@ -9,7 +9,7 @@ import { BRAND } from '@/lib/brand';
 const sugestoes = [
   { icon: Home, label: 'Home', path: '/', desc: 'Voltar ao início' },
   { icon: ClipboardCheck, label: 'Diagnóstico gratuito', path: '/diagnostico', desc: 'Analise sua presença digital' },
-  { icon: Briefcase, label: 'Serviços', path: '/servicos', desc: 'Conheça nossas soluções' },
+  { icon: Briefcase, label: 'Soluções', path: '/solucoes', desc: 'Conheça nossas soluções' },
   { icon: Layout, label: 'Portfólio', path: '/portfolio', desc: 'Veja nossos projetos' },
 ];
 

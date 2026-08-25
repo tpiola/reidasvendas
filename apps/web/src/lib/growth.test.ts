@@ -24,11 +24,12 @@ describe('arquitetura de aquisição digital', () => {
     }
   });
 
-  it('publica páginas locais curadas e contextualizadas', () => {
+  it('mantém páginas locais fora do índice até existir operação verificável', () => {
     expect(new Set(LOCAL_PAGES.map((entry) => entry.context)).size).toBe(LOCAL_PAGES.length);
     for (const location of LOCAL_PAGES) {
       expect(location.context).toContain(location.city);
       expect(location.priorities.length).toBeGreaterThanOrEqual(3);
+      expect(GROWTH_SEO.some((entry) => entry.path === `/solucoes/${location.slug}`)).toBe(false);
     }
   });
 
