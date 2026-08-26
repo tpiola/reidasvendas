@@ -38,6 +38,7 @@ export function SiteFooter() {
           <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
           <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={BRAND.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <span className="rdv-footer__built" title="Agente autônomo de desenvolvimento">Construído por Hermes Agent</span>
         </div>
       </div>
     </footer>
