@@ -19,9 +19,10 @@ const METHOD = [
 ];
 
 const PROJECTS = [
-  ['SaúdeGPT', 'Produto conversacional', 'Sistema de conversa pra saúde, com navegação guiada e postura institucional.'],
-  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento num lugar só.'],
-  ['Thiago Piola', 'Presença autoral', 'Trajetória, repertório e serviços contados de um jeito próprio.'],
+  { name: 'Sentinela Saúde Ambiental', type: 'Dedetizadora · Franca/SP', detail: 'Diagnóstico antes da aplicação e orçamento direto no WhatsApp.', image: '/imagens/portfolio/sentinela.webp' },
+  { name: 'Drogalar', type: 'Rede de farmácias', detail: 'Sete lojas, convênios e busca integrada no mesmo endereço.', image: '/imagens/portfolio/drogalar.webp' },
+  { name: 'TKA Esportes', type: 'Loja de artigos esportivos', detail: 'E-commerce com 30 anos de história e catálogo por categoria.', image: '/imagens/portfolio/tka-esportes.webp' },
+  { name: 'Keeus', type: 'Chinelos premium', detail: 'Loja de chinelos com foco em tamanho certo e compra consciente.', image: '/imagens/portfolio/keeus.webp' },
 ];
 
 const DECISIONS = [
@@ -116,12 +117,21 @@ export default function Home() {
             <p className="rdv-kicker">O que já fizemos</p>
             <h2 id="proof-title">Cada projeto é um problema diferente. Nada de template reusado.</h2>
           </header>
-          <div className="rdv-project-ledger" role="list">
-            {PROJECTS.map(([name, type, detail]) => (
-              <article key={name} role="listitem">
-                <h3>{name}</h3>
-                <p className="rdv-project-ledger__type">{type}</p>
-                <p>{detail}</p>
+          <div className="rdv-project-grid" role="list">
+            {PROJECTS.map((p) => (
+              <article key={p.name} role="listitem" className="rdv-project-card">
+                <img
+                  src={p.image}
+                  alt={`Site de ${p.name}`}
+                  loading="lazy"
+                  width="1200"
+                  height="750"
+                />
+                <div className="rdv-project-card__body">
+                  <p className="rdv-project-card__type">{p.type}</p>
+                  <h3>{p.name}</h3>
+                  <p>{p.detail}</p>
+                </div>
               </article>
             ))}
           </div>
