@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Rei das Vendas',
-  tagline: 'Da busca à conversa, sem perder o fio',
-  subtitle: 'Mapeamento, arquitetura e implementação para organizar a jornada comercial de negócios locais.',
+  tagline: 'Da busca à venda, sem perder ninguém no caminho',
+  subtitle: 'Sites que aparecem no Google, abrem rápido no celular e transformam visita em cliente.',
   phone: '5516992333344',
   whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
@@ -12,22 +12,9 @@ export const BRAND = {
     name: 'Thiago B. G. Piola',
     title: 'Fundador e diretor de projeto',
     site: 'https://thiagopiola.com.br',
-    bio: 'Web designer e estrategista digital. Une experiência prática de atendimento, organização comercial e produção de tecnologia para construir sites claros, confiáveis e preparados para negócios locais.',
-  },
-  colors: {
-    gold: '#D6A84F',
-    goldDark: '#B88932',
-    goldLight: '#F2D38A',
-    dark: '#030303',
-    surface: '#080808',
-  },
-  altColors: {
-    azulProfundo: '#0A2540',
-    verdeSaude: '#0D9488',
-    acento: '#F97316',
+    bio: 'Web designer e estrategista digital de Franca. Monta sites que aparecem no Google, abrem rápido no celular e transformam visita em cliente.',
   },
   images: {
-    hero: '/videos/hero-noaudio.mp4',
     og: '/imagens/og-default.jpg',
     services: {
       sites: '/imagens/services/sites.jpg',

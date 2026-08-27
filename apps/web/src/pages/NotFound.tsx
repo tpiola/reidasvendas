@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, Home, Briefcase, Layout, Search, Smile, MessageCircle, ClipboardCheck } from 'lucide-react';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion } from 'framer-motion';
-import { GoldParticles } from '@/components/GoldParticles';
 import { PremiumButton } from '@/components/PremiumButton';
 import { BRAND } from '@/lib/brand';
 
@@ -16,7 +15,6 @@ const sugestoes = [
 export default function NotFound() {
   return (
     <main className="relative flex min-h-[80vh] items-center justify-center overflow-hidden">
-      <GoldParticles count={20} />
       <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
 

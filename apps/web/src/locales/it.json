@@ -1,17 +1,17 @@
 {
   "nav.cta": "Voglio un sito che vende",
-  "hero.kicker": "Siti premium + IA · Franca, SP",
+  "hero.kicker": "Siti che vendono · Franca, SP",
   "hero.title.1": "Il tuo business locale",
   "hero.title.2": "merita un sito",
   "hero.title.3": "che vende.",
-  "hero.lede": "Creiamo siti veloci e belli e usiamo l'IA per metterti davanti a chi cerca ciò che vendi — a Franca e dintorni.",
+  "hero.lede": "Costruiamo il sito, lo rendiamo veloce sul cellulare e pronto a comparire su Google. Il cliente ti trova, capisce cosa fai e ti scrive su WhatsApp. Senza complicazioni.",
   "hero.cta": "Voglio un sito che vende",
-  "hero.cta.secondary": "Scopri come lavoriamo",
+  "hero.cta.secondary": "Vedi come funziona",
   "stats.verticals.value": "13",
   "stats.verticals.label": "verticali e soluzioni",
   "stats.whatsapp.value": "24h",
   "stats.whatsapp.label": "canale WhatsApp",
   "stats.radius.value": "40",
-  "stats.radius.label": "km di raggio d'azione",
-  "footer.built": "Costruito con Hermes Agent"
+  "stats.radius.label": "km di raggio",
+  "footer.built": "Creato da Hermes Agent"
 }

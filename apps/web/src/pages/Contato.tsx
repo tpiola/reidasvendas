@@ -3,7 +3,6 @@ import { Send, MessageCircle, Mail, MapPin, CheckCircle2, AlertCircle } from 'lu
 import { BRAND } from '@/lib/brand';
 import { Reveal } from '@/hooks/useAnimation';
 import { PremiumButton } from '@/components/PremiumButton';
-import { GoldParticles } from '@/components/GoldParticles';
 
 /* ─── N8N Webhook URL ─── */
 const N8N_WEBHOOK_URL = import.meta.env.VITE_N8N_WEBHOOK_URL || '';
@@ -127,8 +126,6 @@ export default function Contato() {
 
   return (
     <main>
-      <GoldParticles count={20} />
-
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-24 left-1/2 z-50 -translate-x-1/2 animate-fade-in">

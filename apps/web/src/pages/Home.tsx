@@ -3,31 +3,32 @@ import { Link } from 'react-router-dom';
 import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
-const DECISION_STAGES = [
-  ['01', 'Encontro', 'Busca, indicação, mapa ou campanha levam a pessoa ao lugar certo.'],
-  ['02', 'Entendimento', 'Oferta, recorte e prova respondem por que avançar.'],
-  ['03', 'Ação', 'O próximo passo pede apenas o contexto necessário.'],
-  ['04', 'Continuidade', 'Origem e intenção acompanham o contato até o atendimento.'],
+// A jornada do cliente, contada do jeito que o dono de negócio entende.
+const JOURNEY = [
+  ['01', 'Acha', 'A pessoa te procura no Google, no mapa ou por indicação.'],
+  ['02', 'Entende', 'Em segundos ela sabe o que você faz e por que escolher você.'],
+  ['03', 'Chama', 'Um toque e ela cai no seu WhatsApp com o contexto certo.'],
+  ['04', 'Fecha', 'A venda sai porque nada se perdeu no caminho.'],
 ];
 
 const METHOD = [
-  ['Leitura', 'Reunimos domínio, canais, oferta, atendimento e dados disponíveis.'],
-  ['Corte', 'Localizamos a perda que merece ser resolvida antes das demais.'],
-  ['Construção', 'Escolhemos a peça compatível: página, catálogo, sistema ou automação.'],
-  ['Operação', 'Publicamos, medimos e deixamos responsáveis, acessos e retorno definidos.'],
+  ['Leitura', 'A gente olha onde seu negócio aparece hoje e o que está te custando cliente.'],
+  ['Corte', 'Achamos o problema que mais dói e atacamos ele primeiro.'],
+  ['Construção', 'Montamos a peça certa: página, catálogo, sistema ou automação.'],
+  ['Operação', 'Publicamos, medimos e deixamos você no comando.'],
 ];
 
 const PROJECTS = [
-  ['SaúdeGPT', 'Produto conversacional', 'Conteúdo sensível, navegação guiada e postura institucional.'],
-  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento organizados no mesmo endereço.'],
-  ['Thiago Piola', 'Presença autoral', 'Trajetória, repertório e serviços articulados em uma narrativa própria.'],
+  ['SaúdeGPT', 'Produto conversacional', 'Sistema de conversa pra saúde, com navegação guiada e postura institucional.'],
+  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento num lugar só.'],
+  ['Thiago Piola', 'Presença autoral', 'Trajetória, repertório e serviços contados de um jeito próprio.'],
 ];
 
 const DECISIONS = [
-  ['A empresa não é encontrada', 'Consistência local, páginas úteis e base técnica rastreável.'],
-  ['A oferta não é entendida', 'Arquitetura de informação, linguagem e prova verificável.'],
-  ['O contato chega sem contexto', 'Diagnóstico curto, origem preservada e encaminhamento claro.'],
-  ['O retorno se perde', 'Integração, responsável e sequência de acompanhamento.'],
+  ['Você não aparece no Google', 'A gente acerta o básico local: páginas úteis, endereço certo, estrutura que o Google entende.'],
+  ['Quem chega não entende o que você faz', 'Organizamos a página pra responder na hora o que você vende e por que escolher você.'],
+  ['O contato chega sem contexto', 'Diagnóstico curto, origem preservada e encaminhamento certo.'],
+  ['O retorno se perde', 'Integração, responsável definido e acompanhamento.'],
 ];
 
 export default function Home() {
@@ -43,23 +44,28 @@ export default function Home() {
               <span className="rdv-hero__highlight">{t('hero.title.3')}</span>
             </h1>
             <p className="rdv-lede">{t('hero.lede')}</p>
-            <Link
-              className="rdv-primary-action"
-              to="/diagnostico"
-              onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
-            >
-              {t('hero.cta')} <ArrowRight aria-hidden="true" />
-            </Link>
+            <div className="rdv-hero__actions">
+              <Link
+                className="rdv-primary-action"
+                to="/diagnostico"
+                onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
+              >
+                {t('hero.cta')} <ArrowRight aria-hidden="true" />
+              </Link>
+              <a className="rdv-hero__ghost" href="#como-funciona">
+                {t('hero.cta.secondary')}
+              </a>
+            </div>
           </div>
 
           <aside className="rdv-decision-map" aria-labelledby="decision-map-title">
             <div className="rdv-decision-map__head">
-              <p>Mapa de uma decisão comercial</p>
+              <p>Onde o cliente some</p>
               <span>RDV / 01</span>
             </div>
-            <h2 id="decision-map-title">O fio não pode se romper entre a busca e a conversa.</h2>
+            <h2 id="decision-map-title">Da busca à venda, sem perder ninguém no caminho.</h2>
             <ol>
-              {DECISION_STAGES.map(([number, title, detail]) => (
+              {JOURNEY.map(([number, title, detail]) => (
                 <li key={number}>
                   <h3><span>{number}</span>{title}</h3>
                   <p>{detail}</p>
@@ -80,16 +86,17 @@ export default function Home() {
 
       <section className="rdv-thesis" aria-label="Princípio de trabalho">
         <div className="rdv-shell">
-          <p>O site só entra quando resolve um corte real da operação.</p>
+          <p>Site bonito não paga conta. Site que aparece e responde rápido, paga.</p>
           <span>Diagnóstico antes de escopo</span>
         </div>
       </section>
 
-      <section className="rdv-method" aria-labelledby="method-title">
+      <section className="rdv-method" id="como-funciona" aria-labelledby="method-title">
         <div className="rdv-shell">
           <header className="rdv-section-intro">
-            <h2 id="method-title">Uma sequência com começo, responsável e critério de saída.</h2>
-            <p>Sem catálogo empurrado antes de entender a restrição comercial, técnica e operacional.</p>
+            <p className="rdv-kicker">Como funciona</p>
+            <h2 id="method-title">Sem enrolação. Quatro passos e o site tá no ar.</h2>
+            <p>Nada de reunião infinita. A gente entende o problema, ataca o que dói e publica.</p>
           </header>
           <ol className="rdv-workflow">
             {METHOD.map(([title, detail], index) => (
@@ -106,7 +113,8 @@ export default function Home() {
       <section className="rdv-proof" aria-labelledby="proof-title">
         <div className="rdv-shell">
           <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="proof-title">Três problemas diferentes. Nenhuma embalagem reaproveitada.</h2>
+            <p className="rdv-kicker">O que já fizemos</p>
+            <h2 id="proof-title">Cada projeto é um problema diferente. Nada de template reusado.</h2>
           </header>
           <div className="rdv-project-ledger" role="list">
             {PROJECTS.map(([name, type, detail]) => (
@@ -123,12 +131,13 @@ export default function Home() {
       <section className="rdv-decisions" aria-labelledby="decisions-title">
         <div className="rdv-shell">
           <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="decisions-title">Tecnologia é consequência da leitura.</h2>
+            <p className="rdv-kicker">Onde a gente resolve</p>
+            <h2 id="decisions-title">Tecnologia vem depois. Primeiro a gente entende o problema.</h2>
           </header>
           <div className="rdv-decision-table">
             <div className="rdv-decision-table__head" aria-hidden="true">
-              <span>Gargalo observado</span>
-              <span>Decisão de projeto</span>
+              <span>Seu gargalo</span>
+              <span>O que a gente faz</span>
             </div>
             {DECISIONS.map(([problem, response]) => (
               <div className="rdv-decision-table__row" key={problem}>
@@ -144,10 +153,10 @@ export default function Home() {
         <div className="rdv-shell rdv-closing__grid">
           <div>
             <p className="rdv-kicker">O primeiro passo</p>
-            <h2 id="closing-title">Mostre onde a operação perde o fio.</h2>
+            <h2 id="closing-title">Mostra onde você está perdendo cliente.</h2>
           </div>
           <div>
-            <p>O diagnóstico reúne contexto, prioridade e faixa de investimento antes de abrir o WhatsApp.</p>
+            <p>O diagnóstico junta contexto, prioridade e faixa de investimento antes de abrir o WhatsApp.</p>
             <Link
               className="rdv-primary-action"
               to="/diagnostico"

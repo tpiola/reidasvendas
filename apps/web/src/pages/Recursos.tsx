@@ -8,7 +8,6 @@ import {
 } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal, SectionLabel, staggerContainer, staggerItem } from '@/hooks/useAnimation';
-import { GoldParticles } from '@/components/GoldParticles';
 
 /* ─── Cards de Recursos ─── */
 const RECURSOS = [
@@ -145,8 +144,6 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
 export default function Recursos() {
   return (
     <main>
-      <GoldParticles count={25} />
-
       {/* ═══════ HERO ═══════ */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="absolute inset-0 bg-background" />

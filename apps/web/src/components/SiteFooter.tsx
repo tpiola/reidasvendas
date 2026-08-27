@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BRAND } from '@/lib/brand';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { trackEvent } from '@/lib/analytics';
 
 const ROUTES = [
@@ -18,7 +19,7 @@ export function SiteFooter() {
         <div className="rdv-footer__statement">
           <div>
             <p>Rei das Vendas · Franca, SP</p>
-            <h2>Se existe perda entre a busca e a conversa, existe um trabalho a fazer.</h2>
+            <h2>Se cliente tá te procurando e não te acha, é isso que a gente resolve.</h2>
             <Link
               className="rdv-footer__action"
               to="/diagnostico"
@@ -39,6 +40,10 @@ export function SiteFooter() {
           <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
           <a href={BRAND.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
           <span className="rdv-footer__built" title="Agente autônomo de desenvolvimento">Construído por Hermes Agent</span>
+        </div>
+
+        <div className="rdv-footer__lang">
+          <LanguageSwitcher />
         </div>
       </div>
     </footer>

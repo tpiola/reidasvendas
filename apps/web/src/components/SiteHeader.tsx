@@ -13,7 +13,7 @@ export function SiteHeader() {
         <Link to="/" className="rdv-brand-link" aria-label="Rei das Vendas — página inicial">
           <BrandLockup compact />
         </Link>
-        <p className="rdv-header-context">Franca · estratégia, interface e operação</p>
+        <p className="rdv-header-context">Franca · sites que vendem</p>
         <div className="rdv-header-actions">
           <LanguageSwitcher />
           <nav aria-label="Ação principal">
@@ -22,7 +22,8 @@ export function SiteHeader() {
               to="/diagnostico"
               onClick={() => trackEvent('diagnostic_start', { position: 'header' })}
             >
-              {t('nav.cta')}
+              <span className="rdv-header-cta__full">{t('nav.cta')}</span>
+              <span className="rdv-header-cta__short">Diagnóstico</span>
             </Link>
           </nav>
         </div>

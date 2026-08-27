@@ -2,7 +2,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { CheckCircle2, ArrowRight, MessageCircle, Globe, Clock, Shield } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { Reveal } from '@/hooks/useAnimation';
-import { GoldParticles } from '@/components/GoldParticles';
 
 export default function Obrigado() {
   const [searchParams] = useSearchParams();
@@ -10,8 +9,6 @@ export default function Obrigado() {
 
   return (
     <main>
-      <GoldParticles count={25} />
-
       {/* Hero */}
       <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="absolute inset-0 bg-background" />
