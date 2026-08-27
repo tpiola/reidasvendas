@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { BrandLockup } from '@/components/BrandLockup';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
 export function SiteHeader() {
+  const { t } = useI18n();
   return (
     <header className="rdv-header">
       <a className="sr-only focus:not-sr-only" href="#main-content">Ir para o conteúdo</a>
@@ -11,15 +14,18 @@ export function SiteHeader() {
           <BrandLockup compact />
         </Link>
         <p className="rdv-header-context">Franca · estratégia, interface e operação</p>
-        <nav aria-label="Ação principal">
-          <Link
-            className="rdv-header-cta"
-            to="/diagnostico"
-            onClick={() => trackEvent('diagnostic_start', { position: 'header' })}
-          >
-            Abrir diagnóstico
-          </Link>
-        </nav>
+        <div className="rdv-header-actions">
+          <LanguageSwitcher />
+          <nav aria-label="Ação principal">
+            <Link
+              className="rdv-header-cta"
+              to="/diagnostico"
+              onClick={() => trackEvent('diagnostic_start', { position: 'header' })}
+            >
+              {t('nav.cta')}
+            </Link>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
 const DECISION_STAGES = [
@@ -30,22 +31,24 @@ const DECISIONS = [
 ];
 
 export default function Home() {
+  const { t } = useI18n();
   return (
     <main id="main-content" className="rdv-dossier">
       <section className="rdv-hero" aria-labelledby="home-title">
         <div className="rdv-shell rdv-hero__grid">
           <div className="rdv-hero__copy">
-            <p className="rdv-kicker">Projetos digitais · Franca, SP</p>
-            <h1 id="home-title">Antes de pedir outro site, descubra onde a venda está quebrando.</h1>
-            <p className="rdv-lede">
-              Mapeamos como a pessoa encontra, entende e aciona seu negócio. Depois decidimos o que precisa ser construído — site, catálogo, sistema ou automação.
-            </p>
+            <p className="rdv-kicker">{t('hero.kicker')}</p>
+            <h1 id="home-title">
+              {t('hero.title.1')} {t('hero.title.2')}{" "}
+              <span className="rdv-hero__highlight">{t('hero.title.3')}</span>
+            </h1>
+            <p className="rdv-lede">{t('hero.lede')}</p>
             <Link
               className="rdv-primary-action"
               to="/diagnostico"
               onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
             >
-              Abrir diagnóstico <ArrowRight aria-hidden="true" />
+              {t('hero.cta')} <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
@@ -69,9 +72,9 @@ export default function Home() {
 
       <section className="rdv-hero-stats" aria-label="Números do Rei das Vendas">
         <div className="rdv-shell rdv-hero-stats__grid">
-          <div><strong>13</strong><span>verticais e soluções</span></div>
-          <div><strong>24h</strong><span>canal de WhatsApp</span></div>
-          <div><strong>40</strong><span>km raio de atuação</span></div>
+          <div><strong>{t('stats.verticals.value')}</strong><span>{t('stats.verticals.label')}</span></div>
+          <div><strong>{t('stats.whatsapp.value')}</strong><span>{t('stats.whatsapp.label')}</span></div>
+          <div><strong>{t('stats.radius.value')}</strong><span>{t('stats.radius.label')}</span></div>
         </div>
       </section>
 
