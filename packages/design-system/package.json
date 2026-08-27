@@ -22,7 +22,7 @@
     "./tokens": "./src/tokens/index.js"
   },
   "dependencies": {
-    "style-dictionary": "^4.3.3"
+    "style-dictionary": "^5.4.4"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
