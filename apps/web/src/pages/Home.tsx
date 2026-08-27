@@ -67,6 +67,14 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="rdv-hero-stats" aria-label="Números do Rei das Vendas">
+        <div className="rdv-shell rdv-hero-stats__grid">
+          <div><strong>13</strong><span>verticais e soluções</span></div>
+          <div><strong>24h</strong><span>canal de WhatsApp</span></div>
+          <div><strong>40</strong><span>km raio de atuação</span></div>
+        </div>
+      </section>
+
       <section className="rdv-thesis" aria-label="Princípio de trabalho">
         <div className="rdv-shell">
           <p>O site só entra quando resolve um corte real da operação.</p>

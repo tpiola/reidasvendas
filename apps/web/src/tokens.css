@@ -1,16 +1,16 @@
 :root {
-  --color-paper-rgb: 242 239 231;
-  --color-paper-raised-rgb: 250 248 242;
-  --color-surface-2-rgb: 226 222 212;
-  --color-surface-3-rgb: 214 209 198;
-  --color-ink-rgb: 21 32 35;
-  --color-ink-soft-rgb: 63 78 82;
-  --color-muted-rgb: 81 96 100;
-  --color-rule-rgb: 190 187 177;
-  --color-accent-rgb: 181 65 34;
-  --color-accent-strong-rgb: 146 53 28;
-  --color-positive-rgb: 46 101 72;
-  --color-negative-rgb: 157 55 42;
+  --color-paper-rgb: 11 12 16;
+  --color-paper-raised-rgb: 16 18 22;
+  --color-surface-2-rgb: 22 24 30;
+  --color-surface-3-rgb: 28 30 36;
+  --color-ink-rgb: 255 255 255;
+  --color-ink-soft-rgb: 160 165 173;
+  --color-muted-rgb: 107 112 118;
+  --color-rule-rgb: 42 45 53;
+  --color-accent-rgb: 226 183 85;
+  --color-accent-strong-rgb: 212 175 55;
+  --color-positive-rgb: 22 199 100;
+  --color-negative-rgb: 240 82 82;
 
   --color-paper: rgb(var(--color-paper-rgb));
   --color-paper-raised: rgb(var(--color-paper-raised-rgb));
@@ -22,7 +22,7 @@
   --color-rule: rgb(var(--color-rule-rgb));
   --color-accent: rgb(var(--color-accent-rgb));
   --color-accent-strong: rgb(var(--color-accent-strong-rgb));
-  --color-accent-ink: var(--color-paper-raised);
+  --color-accent-ink: #141006;
   --color-positive: rgb(var(--color-positive-rgb));
   --color-negative: rgb(var(--color-negative-rgb));
 
