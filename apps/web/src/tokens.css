@@ -1,16 +1,16 @@
 :root {
-  --color-paper-rgb: 11 12 16;
-  --color-paper-raised-rgb: 16 18 22;
-  --color-surface-2-rgb: 22 24 30;
-  --color-surface-3-rgb: 28 30 36;
-  --color-ink-rgb: 255 255 255;
-  --color-ink-soft-rgb: 160 165 173;
+  --color-paper-rgb: 250 249 246;
+  --color-paper-raised-rgb: 255 255 255;
+  --color-surface-2-rgb: 241 239 234;
+  --color-surface-3-rgb: 233 230 223;
+  --color-ink-rgb: 26 28 30;
+  --color-ink-soft-rgb: 74 79 85;
   --color-muted-rgb: 107 112 118;
-  --color-rule-rgb: 42 45 53;
+  --color-rule-rgb: 229 226 218;
   --color-accent-rgb: 226 183 85;
-  --color-accent-strong-rgb: 212 175 55;
+  --color-accent-strong-rgb: 201 151 58;
   --color-positive-rgb: 22 199 100;
-  --color-negative-rgb: 240 82 82;
+  --color-negative-rgb: 217 58 58;
 
   --color-paper: rgb(var(--color-paper-rgb));
   --color-paper-raised: rgb(var(--color-paper-raised-rgb));
@@ -22,7 +22,7 @@
   --color-rule: rgb(var(--color-rule-rgb));
   --color-accent: rgb(var(--color-accent-rgb));
   --color-accent-strong: rgb(var(--color-accent-strong-rgb));
-  --color-accent-ink: #141006;
+  --color-accent-ink: #1A1508;
   --color-positive: rgb(var(--color-positive-rgb));
   --color-negative: rgb(var(--color-negative-rgb));
 
@@ -67,3 +67,18 @@
   --z-sticky: 20;
   --z-sticky-nav: 30;
 }
+
+/* Tema escuro (formato ChatGPT) */
+[data-theme="dark"] {
+  --color-paper-rgb: 11 12 16;
+  --color-paper-raised-rgb: 16 18 22;
+  --color-surface-2-rgb: 22 24 30;
+  --color-surface-3-rgb: 28 30 36;
+  --color-ink-rgb: 255 255 255;
+  --color-ink-soft-rgb: 160 165 173;
+  --color-rule-rgb: 42 45 53;
+  --color-accent-strong-rgb: 212 175 55;
+  --color-accent-ink: #141006;
+  --color-negative-rgb: 240 82 82;
+}
+
