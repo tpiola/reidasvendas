@@ -1,19 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" role="img" aria-label="Símbolo Rei das Vendas">
-  <defs>
-    <linearGradient id="rdv-mark" x1="28" y1="20" x2="132" y2="142" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F4F1E8"/>
-      <stop offset="0.42" stop-color="#C8FF35"/>
-      <stop offset="1" stop-color="#D8B965"/>
-    </linearGradient>
-    <filter id="rdv-glow" x="-35%" y="-35%" width="170%" height="170%">
-      <feGaussianBlur stdDeviation="2.4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <g stroke="url(#rdv-mark)" stroke-linejoin="round" filter="url(#rdv-glow)">
-    <path d="M80 20 94 55l32-12-19 35 27 15-54-8-54 8 27-15-19-35 32 12 14-35Z" stroke-width="4"/>
-    <path d="m80 20-14 35-13 23m27-58 14 35 13 23M66 55h28M53 78h54" stroke-width="2.2" opacity=".78"/>
-    <path d="M37 105h86M47 121h66M58 137h44" stroke-width="4" stroke-linecap="round"/>
-    <path d="M80 32v42" stroke-width="2" opacity=".62"/>
-  </g>
+  <rect x="4" y="4" width="152" height="152" rx="20" fill="#07090D" stroke="#302A1D" stroke-width="2"/>
+  <path d="M43 119V41h38c19 0 31 9.5 31 25.1C112 81.4 100 91 81 91H43m37.5 0L115 119" stroke="#E8C86F" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="m83 119 22-37 25-41" stroke="#F4E1A5" stroke-width="8" stroke-linecap="square"/>
+  <path d="M27 27h24M109 133h24" stroke="#8F7222" stroke-width="4"/>
 </svg>

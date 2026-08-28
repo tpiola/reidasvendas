@@ -60,6 +60,12 @@ export default function Diagnostico() {
   const [erro, setErro] = useState('');
   const stageHeadingRef = useRef<HTMLHeadingElement>(null);
   const stageTransitionReady = useRef(false);
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const submissionIdRef = useRef(
+    typeof crypto !== 'undefined' && 'randomUUID' in crypto
+      ? crypto.randomUUID()
+      : `lead-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+  );
 
   const whatsappMessage = [
     'Olá! Acabei de concluir o mapeamento do perfil do seu negócio.',
@@ -162,7 +168,10 @@ export default function Diagnostico() {
     try {
       const response = await fetch('/api/lead', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Idempotency-Key': submissionIdRef.current,
+        },
         body: JSON.stringify({
           name: dados.nome,
           nome: dados.nome,
@@ -180,6 +189,7 @@ export default function Diagnostico() {
           investment: dados.investimento,
           landingPage: attribution.landing_page,
           consent: true,
+          website: honeypotRef.current?.value || '',
           utm: attribution,
         }),
       });
@@ -241,6 +251,10 @@ export default function Diagnostico() {
                     </div>
 
                     <form onSubmit={handleSubmit} onFocus={handleFormStart} className="space-y-5">
+                      <div className="sr-only" aria-hidden="true">
+                        <label htmlFor="website">Não preencha este campo</label>
+                        <input ref={honeypotRef} id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                      </div>
                       {etapa === 1 ? (
                         <>
                           <div>

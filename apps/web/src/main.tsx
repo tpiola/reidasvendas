@@ -4,6 +4,7 @@ import App from './App';
 import { I18nProvider } from './lib/i18n';
 import './index.css';
 import './dossier.css';
+import './platform.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,9 +14,11 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 
-// Service Worker
-if ('serviceWorker' in navigator && import.meta.env.PROD) {
+// Remove o worker legado: chunks cacheados entre releases causavam falhas de entrada.
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
+    void navigator.serviceWorker.getRegistrations().then((registrations) =>
+      Promise.all(registrations.map((registration) => registration.unregister())),
+    ).catch(() => undefined);
   });
 }

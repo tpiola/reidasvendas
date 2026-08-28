@@ -382,11 +382,83 @@
   border-block: 1px solid var(--color-rule);
 }
 
-.ge-demo-promo > img {
-  width: 100%;
-  height: 100%;
+.ge-demo-art {
   min-height: 20rem;
-  object-fit: cover;
+  padding: clamp(1rem, 3vw, 2rem);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-right: 1px solid var(--color-rule);
+  background:
+    linear-gradient(rgba(232, 200, 111, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 200, 111, .07) 1px, transparent 1px),
+    radial-gradient(circle at 72% 22%, rgba(232, 200, 111, .18), transparent 34%),
+    #090c12;
+  background-size: 32px 32px, 32px 32px, auto, auto;
+}
+
+.ge-demo-art__bar {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  color: var(--color-accent-strong);
+  font-size: .75rem;
+  letter-spacing: .1em;
+}
+
+.ge-demo-art__bar > span {
+  width: .45rem;
+  height: .45rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.ge-demo-art__bar strong {
+  margin-left: auto;
+  font-weight: 600;
+}
+
+.ge-demo-art__screen {
+  align-self: center;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  border: 1px solid rgba(232, 200, 111, .22);
+  background: rgba(7, 9, 13, .82);
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, .3);
+}
+
+.ge-demo-art__screen > p {
+  margin: 0;
+  color: var(--color-accent-strong);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.ge-demo-art__screen > h3 {
+  max-width: 12ch;
+  margin: 1rem 0 2rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.6rem);
+  font-weight: 600;
+  line-height: .96;
+}
+
+.ge-demo-art__screen > div {
+  display: grid;
+}
+
+.ge-demo-art__screen > div > span {
+  padding: .8rem 0;
+  display: flex;
+  gap: .8rem;
+  border-top: 1px solid rgba(247, 243, 232, .12);
+  color: var(--color-ink-soft);
+  font-size: .875rem;
+}
+
+.ge-demo-art__screen b {
+  color: var(--color-accent-strong);
+  font-weight: 600;
 }
 
 .ge-demo-caption {
@@ -744,8 +816,10 @@
     grid-row: auto;
   }
 
-  .ge-demo-promo > img {
+  .ge-demo-art {
     min-height: 14rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-rule);
   }
 
   .ge-demo-topbar {

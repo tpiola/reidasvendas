@@ -34,7 +34,7 @@ describe('Hero', () => {
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => undefined);
   });
 
-  it('preserva a atribuição e pré-preenche o diagnóstico sem transmitir o e-mail', async () => {
+  it('preserva a atribuição ao abrir o diagnóstico sem coletar dados no hero', async () => {
     render(
       <BrowserRouter>
         <I18nProvider>
@@ -46,16 +46,13 @@ describe('Hero', () => {
       </BrowserRouter>,
     );
 
-    fireEvent.change(screen.getByLabelText('E-mail profissional'), {
-      target: { value: '  Comercial@Exemplo.com  ' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: 'Abrir diagnóstico' }));
+    fireEvent.click(screen.getByRole('link', { name: /mapear meu negócio/i }));
 
     const output = await screen.findByTestId('diagnostic-location');
     const query = new URLSearchParams(output.textContent ?? '');
 
-    expect(query.get('email')).toBe('comercial@exemplo.com');
-    expect(query.get('origem')).toBe('home-hero-email');
+    expect(query.get('email')).toBeNull();
+    expect(query.get('origem')).toBe('home-hero');
     expect(query.get('utm_source')).toBe('campanha-local');
   });
 });

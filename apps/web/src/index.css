@@ -7,21 +7,21 @@
 /* A tipografia do corpo é definida pelo dossier.css (--font-body). */
 
 :root {
-  --rdv-bg: #F6F2E9;
-  --rdv-surface: #FFFFFF;
-  --rdv-surface-2: #F0E9DB;
-  --rdv-surface-3: #E9E1D0;
-  --rdv-gold: #A66F18;
-  --rdv-gold-dark: #85540B;
-  --rdv-gold-light: #C99A4B;
-  --rdv-gold-glow: rgba(166,111,24,0.18);
-  --rdv-gold-border: rgba(166,111,24,0.28);
-  --rdv-white: #102033;
-  --rdv-text-secondary: #4F5B67;
-  --rdv-text-muted: #8A8170; /* increased from #71717A for WCAG AA contrast ~4.5:1 */
-  --rdv-glass: rgba(255,255,255,0.6);
-  --rdv-border: rgba(16,32,51,0.10);
-  --rdv-border-gold: rgba(166,111,24,0.28);
+  --rdv-bg: #07090D;
+  --rdv-surface: #0D1118;
+  --rdv-surface-2: #141923;
+  --rdv-surface-3: #1C2330;
+  --rdv-gold: #E8C86F;
+  --rdv-gold-dark: #D4B45D;
+  --rdv-gold-light: #F4E1A5;
+  --rdv-gold-glow: rgba(232,200,111,0.18);
+  --rdv-gold-border: rgba(232,200,111,0.28);
+  --rdv-white: #F7F3E8;
+  --rdv-text-secondary: #C0B9AA;
+  --rdv-text-muted: #9B9384;
+  --rdv-glass: rgba(13,17,24,0.82);
+  --rdv-border: rgba(247,243,232,0.10);
+  --rdv-border-gold: rgba(232,200,111,0.28);
   /* Spacing scale (8px grid × multiplier) */
   --space-1: 8px;
   --space-2: 16px;
@@ -35,7 +35,7 @@
   --space-12: 96px;
   --space-16: 128px;
   --space-20: 160px;
-  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-body);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -44,7 +44,7 @@
   scrollbar-gutter: stable;
 }
 
-html { color-scheme: light; }
+html { color-scheme: dark; }
 
 body::after {
   display: none;
@@ -192,7 +192,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   color: var(--rdv-white);
   outline: none;
   transition: all 0.2s;
-  font-family: 'Geist', sans-serif;
+  font-family: var(--font-body);
 }
 .input-field::placeholder { color: rgba(245,245,245,0.3); }
 .input-field:focus {
@@ -1030,9 +1030,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 }
 
 
-/* Rei das Vendas · light-first semantic bridge */
-html { color-scheme: light; overflow-x: clip; background: var(--color-paper); }
-html[data-theme='dark'] { color-scheme: dark; }
+/* Rei das Vendas · dark-only semantic bridge */
+html { color-scheme: dark; overflow-x: clip; background: var(--color-paper); }
 body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip; transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out); }
 ::selection { background: var(--color-gold); color: var(--color-on-accent); }
 :focus-visible { outline-color: var(--color-gold); }
@@ -1046,16 +1045,12 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-nav-link { color: var(--color-ink-soft); font-size: .82rem; font-weight: 650; white-space: nowrap; }
 .rdv-nav-link:hover, .rdv-nav-link.is-active { color: var(--color-ink); }
 .rdv-header-cta { display: inline-flex; min-height: 2.75rem; align-items: center; padding: .65rem .9rem; border: 1px solid var(--color-gold); border-radius: var(--radius-sm); background: var(--color-gold); color: var(--color-on-accent); font-size: .8rem; font-weight: 750; white-space: nowrap; }
-.rdv-theme-toggle, .rdv-menu-button { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: var(--color-paper-raised); color: var(--color-ink); cursor: pointer; }
-.rdv-theme-toggle svg, .rdv-menu-button svg { width: 1rem; height: 1rem; }
+.rdv-menu-button { display: inline-grid; width: 2.75rem; height: 2.75rem; place-items: center; border: 1px solid var(--color-rule); border-radius: var(--radius-control); background: var(--color-paper-raised); color: var(--color-ink); cursor: pointer; }
+.rdv-menu-button svg { width: 1rem; height: 1rem; }
 .rdv-mobile-actions { display: none; align-items: center; gap: .5rem; }
 .rdv-mobile-nav { display: none; overflow: hidden; border-top: 1px solid var(--color-rule); background: var(--color-paper); padding: 1rem; }
 .rdv-mobile-nav a { display: flex; min-height: 3rem; align-items: center; border-bottom: 1px solid var(--color-rule); color: var(--color-ink); white-space: nowrap; }
 .rdv-mobile-nav .rdv-header-cta { justify-content: center; margin-top: 1rem; border-bottom: 1px solid var(--color-gold); }
-html[data-theme='light'] [class*="bg-[#030303]"], html[data-theme='light'] [class*="bg-[#090909]"], html[data-theme='light'] [class*="bg-[#0D0D0D]"] { background-color: var(--color-paper) !important; }
-html[data-theme='light'] .text-white { color: var(--color-ink) !important; }
-html[data-theme='light'] [class*="text-[#A1A1AA]"], html[data-theme='light'] [class*="text-[#D4D4D8]"], html[data-theme='light'] [class*="text-[#71717A]"] { color: var(--color-ink-soft) !important; }
-html[data-theme='light'] [class*="border-white"] { border-color: var(--color-rule) !important; }
 @media (max-width: 900px) {
   .rdv-desktop-nav { display: none; }
   .rdv-mobile-actions { display: flex; }

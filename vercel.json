@@ -1,5 +1,7 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
+  "cleanUrls": true,
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm turbo run build --filter=web",
   "outputDirectory": "apps/web/dist",
@@ -15,14 +17,15 @@
       "destination": "https://reidasvendas.com.br/:path*",
       "permanent": true
     },
-    { "source": "/contato", "destination": "/diagnostico", "permanent": true },
     { "source": "/recursos", "destination": "/blog", "permanent": true },
     { "source": "/servicos", "destination": "/solucoes", "permanent": true },
     { "source": "/modelos", "destination": "/solucoes", "permanent": true },
     { "source": "/segmentos", "destination": "/solucoes", "permanent": true },
-    { "source": "/planos", "destination": "/diagnostico", "permanent": true },
     { "source": "/projetos", "destination": "/portfolio", "permanent": true },
     { "source": "/templates", "destination": "/demonstracoes", "permanent": true },
+    { "source": "/builder", "destination": "/solucoes", "permanent": true },
+    { "source": "/extensions", "destination": "/solucoes", "permanent": true },
+    { "source": "/dashboard/:path*", "destination": "/solucoes", "permanent": true },
     { "source": "/termos", "destination": "/politica", "permanent": true },
     { "source": "/blog/infraestrutura-de-vendas-digitais", "destination": "/blog/um-projeto-um-deploy-um-dominio", "permanent": true },
     { "source": "/blog/automacao-inteligente-para-negocios-locais", "destination": "/blog/presenca-digital-o-que-e", "permanent": true },
@@ -39,14 +42,10 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https: data: blob:; connect-src 'self' https: wss:; frame-ancestors 'self'; base-uri 'self'; form-action 'self'" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

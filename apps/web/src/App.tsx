@@ -21,9 +21,8 @@ const Solucoes = lazy(() => import('@/pages/Solucoes'));
 const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
-const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const Builder = lazy(() => import('@/pages/Builder'));
-const Extensions = lazy(() => import('@/pages/Extensions'));
+const Planos = lazy(() => import('@/pages/Planos'));
+const ContatoDireto = lazy(() => import('@/pages/ContatoDireto'));
 const SolutionDetail = lazy(() => import('@/pages/SolutionDetail'));
 const ComparisonDetail = lazy(() => import('@/pages/ComparisonDetail'));
 const IntentGuide = lazy(() => import('@/pages/IntentGuide'));
@@ -50,8 +49,13 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
     return { hasError: true };
   }
 
+  componentDidCatch(error: Error) {
+    trackEvent('client_error', { boundary: 'page', message: error.message.slice(0, 160) });
+    console.error(JSON.stringify({ level: 'error', event: 'page_render_failed', message: error.message }));
+  }
+
   handleRetry = () => {
-    this.setState({ hasError: false });
+    window.location.reload();
   };
 
   render() {
@@ -116,8 +120,8 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
     description: BRAND.seo.description,
   },
   '/solucoes': {
-    title: 'Soluções digitais por segmento e operação | Rei das Vendas',
-    description: 'Sites, landing pages, catálogos, aplicativos, sistemas e automações desenhados para o problema real de cada operação.',
+    title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
+    description: 'Explore 24 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais.',
   },
   '/diagnostico': {
     title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
@@ -133,19 +137,19 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/portfolio': {
     title: 'Projetos publicados | Rei das Vendas',
-    description: 'Projetos digitais construídos para produtos, monitoramento e presença autoral, com contexto e escopo explícitos.',
+    description: 'Sites, lojas e produtos digitais publicados, apresentados com contexto, escopo real e sem métricas inventadas.',
   },
   '/sobre': {
     title: 'Sobre o Rei das Vendas | Franca, SP',
     description: 'Princípios, forma de trabalho e responsabilidade por projetos digitais conduzidos a partir de Franca, SP.',
   },
   '/contato': {
-    title: 'Solicitar análise do meu negócio | Rei das Vendas',
-    description: 'Envie seu site atual ou perfil da empresa no Google para receber uma análise inicial da presença online.',
+    title: 'Contato | Rei das Vendas em Franca, SP',
+    description: 'Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.',
   },
   '/planos': {
-    title: 'Investimento e proposta | Rei das Vendas',
-    description: 'Entenda como o escopo e o investimento de um site profissional são definidos para cada negócio.',
+    title: 'Projeto individual e operação contínua | Rei das Vendas',
+    description: 'Compare entrega individual, assinatura operacional e ciclos de crescimento para sites, lojas, aplicativos, SaaS e automações.',
   },
   '/politica': {
     title: 'Política de privacidade | Rei das Vendas',
@@ -203,16 +207,6 @@ function updateCanonical(url: string) {
   canonical.href = url;
 }
 
-function DashboardRoute() {
-  useEffect(() => {
-    upsertMeta('robots', 'noindex, nofollow');
-    upsertMeta('googlebot', 'noindex, nofollow');
-    document.title = `Painel | ${BRAND.name}`;
-  }, []);
-
-  return <Dashboard />;
-}
-
 function RouteMetadata() {
   const location = useLocation();
 
@@ -246,7 +240,8 @@ function RouteMetadata() {
 
     const previousSchema = document.getElementById('rdv-route-schema');
     previousSchema?.remove();
-    if (!staticSchemaMatches && (article || growthMetadata)) {
+    const staticMetadata = META_BY_PATH[location.pathname];
+    if (!staticSchemaMatches && (article || growthMetadata || staticMetadata)) {
       const schema = document.createElement('script');
       schema.id = 'rdv-route-schema';
       schema.type = 'application/ld+json';
@@ -261,7 +256,7 @@ function RouteMetadata() {
         mainEntityOfPage: canonical,
         author: { '@id': 'https://reidasvendas.com.br/#founder' },
         publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
-      } : {
+      } : growthMetadata ? {
         '@context': 'https://schema.org',
         '@graph': [
           {
@@ -280,6 +275,14 @@ function RouteMetadata() {
             })),
           }] : []),
         ],
+      } : {
+        '@context': 'https://schema.org',
+        '@type': location.pathname === '/solucoes' || location.pathname === '/portfolio' ? 'CollectionPage' : 'WebPage',
+        name: metadata.title,
+        description: metadata.description,
+        url: canonical,
+        inLanguage: 'pt-BR',
+        isPartOf: { '@id': 'https://reidasvendas.com.br/#website' },
       }).replace(/</g, '\\u003c');
       document.head.appendChild(schema);
     }
@@ -320,8 +323,8 @@ function SiteLayout() {
               <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
               <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
               <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
-              <Route path="/contato" element={<RedirectTo to="/diagnostico" />} />
-              <Route path="/planos" element={<RedirectTo to="/diagnostico" />} />
+              <Route path="/contato" element={<PageTransition><ContatoDireto /></PageTransition>} />
+              <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
               <Route path="/recursos" element={<RedirectTo to="/blog" />} />
               <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
@@ -329,9 +332,9 @@ function SiteLayout() {
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
-              <Route path="/builder" element={<PageTransition><Builder /></PageTransition>} />
               <Route path="/templates" element={<RedirectTo to="/demonstracoes" />} />
-              <Route path="/extensions" element={<PageTransition><Extensions /></PageTransition>} />
+              <Route path="/builder" element={<RedirectTo to="/solucoes" />} />
+              <Route path="/extensions" element={<RedirectTo to="/solucoes" />} />
               <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
@@ -347,7 +350,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard/*" element={<DashboardRoute />} />
+        <Route path="/dashboard/*" element={<Navigate to="/solucoes" replace />} />
         <Route path="*" element={<PageErrorBoundary><SiteLayout /></PageErrorBoundary>} />
       </Routes>
     </Router>

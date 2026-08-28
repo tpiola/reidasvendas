@@ -1,69 +1,160 @@
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { ArrowRight, Search } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-import { COMPARISONS, DEMONSTRATIONS, GUIDES, SOLUTIONS, TOOLS } from '@/lib/growth';
+import { DEMONSTRATIONS } from '@/lib/growth';
+import {
+  FAMILY_LABELS,
+  MARKETPLACE_ITEMS,
+  type SolutionFamily,
+} from '@/lib/marketplace';
 
-const METHOD = [
-  ['Leitura do negócio', 'Oferta, público, canais, atendimento, restrições e responsáveis.'],
-  ['Análise da jornada', 'Onde a pessoa encontra, entende, age e perde continuidade.'],
-  ['Definição do corte', 'Qual ruptura merece ser resolvida antes das demais.'],
-  ['Arquitetura', 'Conteúdo, rotas, estados, dados e integrações necessários.'],
-  ['Construção', 'Interface e implementação sem módulos sem função.'],
-  ['Publicação', 'Domínio, eventos, formulários, acesso e recuperação conferidos.'],
-  ['Evolução', 'Mudanças priorizadas por uso e evidência disponível.'],
+type Filter = 'todas' | SolutionFamily;
+
+const FILTERS: Filter[] = [
+  'todas',
+  'presenca',
+  'comercio',
+  'atendimento',
+  'produto',
+  'distribuicao',
+  'operacao',
 ];
 
-const PROJECTS = [
-  ['SaúdeGPT', 'Produto conversacional', 'Experiência guiada para informação de saúde, com postura institucional e limites explícitos.'],
-  ['Sentinela Saúde Ambiental', 'Presença de serviço local', 'Serviços, áreas atendidas e caminho de orçamento reunidos no mesmo endereço.'],
-  ['Thiago Piola', 'Presença autoral', 'Trajetória, projetos e serviços organizados em uma narrativa própria.'],
+const FOUNDATION = [
+  ['Estratégia', 'Objetivo, público, oferta, jornada e corte comercial antes da interface.'],
+  ['Identidade', 'Direção visual, copy e sistema de componentes próprios para o negócio.'],
+  ['Engenharia', 'Código, dados, integrações e estados de falha dimensionados ao projeto.'],
+  ['Distribuição', 'Busca, canais, campanhas e conteúdo conectados ao destino adequado.'],
+  ['Medição', 'Eventos úteis, consentimento e leitura do funil sem números decorativos.'],
+  ['Continuidade', 'Domínio, acessos, publicação, segurança e responsabilidade documentados.'],
 ];
 
 export default function Solucoes() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialFamily = searchParams.get('categoria');
+  const [activeFilter, setActiveFilter] = useState<Filter>(
+    FILTERS.includes(initialFamily as Filter) ? (initialFamily as Filter) : 'todas',
+  );
+  const [query, setQuery] = useState('');
+
+  const visibleItems = useMemo(() => {
+    const normalizedQuery = query.trim().toLocaleLowerCase('pt-BR');
+    return MARKETPLACE_ITEMS.filter((item) => {
+      const matchesFamily = activeFilter === 'todas' || item.family === activeFilter;
+      const matchesQuery = !normalizedQuery || [item.title, item.description, item.format, item.outcome]
+        .join(' ')
+        .toLocaleLowerCase('pt-BR')
+        .includes(normalizedQuery);
+      return matchesFamily && matchesQuery;
+    });
+  }, [activeFilter, query]);
+
+  const selectFilter = (filter: Filter) => {
+    setActiveFilter(filter);
+    if (filter === 'todas') setSearchParams({}, { replace: true });
+    else setSearchParams({ categoria: filter }, { replace: true });
+    trackEvent('category_select', { category: filter, position: 'solution-marketplace' });
+  };
+
   return (
-    <main id="main-content" className="rdv-library">
-      <header className="rdv-library__hero">
+    <main id="main-content" className="rdv-marketplace">
+      <header className="rdv-marketplace__hero">
         <div className="rdv-shell">
-          <p className="rdv-kicker">Biblioteca de soluções</p>
-          <h1>O que construir depende do ponto exato de perda.</h1>
-          <p>As rotas abaixo não são pacotes. Cada uma mostra uma arquitetura possível, as perguntas que faltam e o que precisa ser confirmado antes do escopo.</p>
-          <Link className="rdv-primary-action" to="/diagnostico" onClick={() => trackEvent('diagnostic_start', { position: 'solutions-hero' })}>
-            Abrir diagnóstico <ArrowRight aria-hidden="true" />
-          </Link>
+          <p className="rdv-kicker">Biblioteca de possibilidades</p>
+          <h1>Comece pelo que precisa mudar no negócio.</h1>
+          <p>
+            Explore sites, lojas, aplicativos, produtos e operações digitais pelo resultado que você procura.
+            Cada item é um ponto de partida — a implementação final continua individual.
+          </p>
+          <div className="rdv-marketplace__hero-actions">
+            <a href="#catalogo" className="rdv-primary-action">Explorar catálogo <ArrowRight aria-hidden="true" /></a>
+            <Link to="/diagnostico?origem=marketplace-hero" className="rdv-marketplace__secondary">Ainda não sei o que preciso <span aria-hidden="true">↗</span></Link>
+          </div>
         </div>
       </header>
 
-      <section className="rdv-library__solutions" aria-labelledby="solution-index-title">
+      <section id="catalogo" className="rdv-marketplace__catalog" aria-labelledby="catalog-title">
         <div className="rdv-shell">
-          <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="solution-index-title">Comece pela situação mais próxima da sua.</h2>
-          </header>
-          <div className="rdv-solution-ledger">
-            {SOLUTIONS.map((solution) => (
-              <article key={solution.slug}>
-                <div>
-                  <p>{solution.category}</p>
-                  <h3><Link to={`/solucoes/${solution.slug}`} onClick={() => trackEvent('solution_open', { solution: solution.slug })}>{solution.title}</Link></h3>
-                  <p>{solution.summary}</p>
-                </div>
-                <Link className="rdv-ledger-link" to={`/solucoes/${solution.slug}`} aria-label={`Ver arquitetura: ${solution.title}`}>
-                  Ver arquitetura <ArrowRight aria-hidden="true" />
-                </Link>
-              </article>
+          <div className="rdv-marketplace__controls">
+            <div>
+              <p className="rdv-kicker">24 caminhos possíveis</p>
+              <h2 id="catalog-title">Filtre por objetivo.</h2>
+            </div>
+            <label className="rdv-marketplace__search">
+              <Search aria-hidden="true" />
+              <span className="sr-only">Buscar solução</span>
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Ex.: vender online, agendar, automatizar"
+              />
+            </label>
+          </div>
+
+          <div className="rdv-marketplace__filters" role="group" aria-label="Filtrar soluções por categoria">
+            {FILTERS.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                className={activeFilter === filter ? 'is-active' : ''}
+                aria-pressed={activeFilter === filter}
+                onClick={() => selectFilter(filter)}
+              >
+                {filter === 'todas' ? 'Todas' : FAMILY_LABELS[filter]}
+              </button>
             ))}
           </div>
+
+          <p className="rdv-marketplace__result" aria-live="polite">
+            {visibleItems.length} {visibleItems.length === 1 ? 'possibilidade encontrada' : 'possibilidades encontradas'}
+          </p>
+
+          {visibleItems.length ? (
+            <div className="rdv-marketplace__grid" role="list">
+              {visibleItems.map((item, index) => (
+                <article key={`${item.title}-${item.family}`} role="listitem" className="rdv-market-card">
+                  <div className="rdv-market-card__top">
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <p>{item.format}</p>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <dl>
+                    <div><dt>Objetivo</dt><dd>{item.outcome}</dd></div>
+                    <div><dt>Modelo</dt><dd>Projeto individual ou evolução contínua</dd></div>
+                  </dl>
+                  <Link
+                    to={`/solucoes/${item.solution}`}
+                    onClick={() => trackEvent('solution_open', { solution: item.solution, source: 'marketplace' })}
+                  >
+                    Configurar esta solução <ArrowRight aria-hidden="true" />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="rdv-marketplace__empty">
+              <h3>Nenhuma solução recebeu esse nome.</h3>
+              <p>Descreva o resultado no diagnóstico. A recomendação não depende de uma categoria pronta.</p>
+              <Link className="rdv-primary-action" to="/diagnostico?origem=marketplace-busca">Descrever meu problema <ArrowRight aria-hidden="true" /></Link>
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="rdv-library__method" aria-labelledby="library-method-title">
+      <section className="rdv-marketplace__foundation" aria-labelledby="foundation-title">
         <div className="rdv-shell">
-          <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="library-method-title">Sete passagens, sem pular do pedido para a tela.</h2>
+          <header>
+            <p className="rdv-kicker">O que acompanha a solução</p>
+            <h2 id="foundation-title">O digital funciona como sistema, não como arquivo entregue.</h2>
           </header>
           <ol>
-            {METHOD.map(([title, detail], index) => (
+            {FOUNDATION.map(([title, detail], index) => (
               <li key={title}>
-                <h3><span>{String(index + 1).padStart(2, '0')}</span>{title}</h3>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{title}</h3>
                 <p>{detail}</p>
               </li>
             ))}
@@ -71,39 +162,38 @@ export default function Solucoes() {
         </div>
       </section>
 
-      <section className="rdv-library__projects" aria-labelledby="library-projects-title">
+      <section className="rdv-marketplace__demos" aria-labelledby="demos-title">
         <div className="rdv-shell">
-          <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="library-projects-title">A arquitetura muda quando o problema muda.</h2>
+          <header>
+            <div>
+              <p className="rdv-kicker">Arquiteturas demonstrativas</p>
+              <h2 id="demos-title">Veja a jornada antes de discutir a ferramenta.</h2>
+            </div>
+            <p>Demonstrações usam dados fictícios identificados. Elas mostram possibilidades de experiência, não projetos de clientes nem templates para revenda.</p>
           </header>
           <div>
-            {PROJECTS.map(([name, type, detail]) => (
-              <article key={name}><h3>{name}</h3><p>{type}</p><p>{detail}</p></article>
+            {DEMONSTRATIONS.map((demo, index) => (
+              <Link key={demo.slug} to={`/demonstracoes/${demo.slug}`}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><p>{demo.segment}</p><h3>{demo.title}</h3></div>
+                <p>{demo.description}</p>
+                <ArrowRight aria-hidden="true" />
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="rdv-library__directory" aria-labelledby="directory-title">
+      <section className="rdv-marketplace__closing" aria-labelledby="marketplace-closing-title">
         <div className="rdv-shell">
-          <header className="rdv-section-intro rdv-section-intro--compact">
-            <h2 id="directory-title">Compare, simule e examine antes da conversa.</h2>
-          </header>
-          <div className="rdv-directory">
-            <section aria-labelledby="directory-comparisons"><h3 id="directory-comparisons">Comparações</h3><div>{COMPARISONS.map((item) => <Link key={item.slug} to={`/alternativas/${item.slug}`}>{item.title}</Link>)}</div></section>
-            <section aria-labelledby="directory-guides"><h3 id="directory-guides">Guias de escopo</h3><div>{GUIDES.map((item) => <Link key={item.slug} to={`/${item.slug}`}>{item.title}</Link>)}</div></section>
-            <section aria-labelledby="directory-tools"><h3 id="directory-tools">Ferramentas</h3><div>{TOOLS.map((item) => <Link key={item.slug} to={`/ferramentas/${item.slug}`}>{item.title}</Link>)}</div></section>
-            <section aria-labelledby="directory-demos"><h3 id="directory-demos">Demonstrações</h3><div>{DEMONSTRATIONS.map((item) => <Link key={item.slug} to={`/demonstracoes/${item.slug}`}>{item.title}</Link>)}</div></section>
+          <p className="rdv-kicker">Projeto individual</p>
+          <h2 id="marketplace-closing-title">Parta de uma possibilidade. Termine com algo que só faz sentido para o seu negócio.</h2>
+          <div>
+            <Link className="rdv-primary-action" to="/diagnostico?origem=marketplace-final" onClick={() => trackEvent('diagnostic_start', { position: 'marketplace-final' })}>
+              Configurar meu projeto <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link className="rdv-marketplace__secondary" to="/planos">Ver formas de contratação <span aria-hidden="true">↗</span></Link>
           </div>
-        </div>
-      </section>
-
-      <section className="rdv-library__closing" aria-labelledby="solutions-closing-title">
-        <div className="rdv-shell">
-          <div><p className="rdv-kicker">Próxima decisão</p><h2 id="solutions-closing-title">Qual ruptura vem primeiro?</h2></div>
-          <Link className="rdv-primary-action" to="/diagnostico" onClick={() => trackEvent('diagnostic_start', { position: 'solutions-closing' })}>
-            Registrar contexto <ArrowRight aria-hidden="true" />
-          </Link>
         </div>
       </section>
     </main>

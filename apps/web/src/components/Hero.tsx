@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect, useRef, useState, type FormEvent } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { useI18n } from '@/lib/i18n';
 
@@ -20,17 +20,18 @@ function ambientMotionAllowed(reducedMotion: boolean): boolean {
 }
 
 export default function Hero() {
-  const navigate = useNavigate();
   const { t } = useI18n();
+  const location = useLocation();
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const formStartedRef = useRef(false);
-  const [email, setEmail] = useState('');
   const [ambientMotion, setAmbientMotion] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const [documentVisible, setDocumentVisible] = useState(true);
   const animationActive = ambientMotion && heroInView && documentVisible;
+  const diagnosticSearch = new URLSearchParams(location.search);
+  diagnosticSearch.set('origem', 'home-hero');
+  const diagnosticPath = `/diagnostico?${diagnosticSearch.toString()}`;
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -67,28 +68,6 @@ export default function Hero() {
       video.pause();
     }
   }, [animationActive]);
-
-  const handleFormFocus = () => {
-    if (formStartedRef.current) return;
-    formStartedRef.current = true;
-    trackEvent('form_start', {
-      form: 'hero-diagnostico',
-      position: 'home-hero',
-    });
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const normalizedEmail = email.trim().toLowerCase();
-    const query = new URLSearchParams(window.location.search);
-    query.set('email', normalizedEmail);
-    query.set('origem', 'home-hero-email');
-    trackEvent('diagnostic_start', {
-      position: 'home-hero',
-      entry: 'email-prefill',
-    });
-    navigate(`/diagnostico?${query.toString()}`);
-  };
 
   return (
     <section
@@ -130,8 +109,8 @@ export default function Hero() {
         animate={{ opacity: 1, transform: 'scale(1)' }}
         transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
       >
-        <p className="rdv-hero__badge">
-          <Sparkles size={14} aria-hidden="true" />
+        <p className="rdv-hero__eyebrow">
+          <span aria-hidden="true" />
           {t('hero.premium.badge')}
         </p>
 
@@ -146,35 +125,29 @@ export default function Hero() {
           <strong>{t('hero.premium.lede.reception')}</strong> {t('hero.premium.lede.after')}
         </p>
 
-        <form className="rdv-hero__form" onFocus={handleFormFocus} onSubmit={handleSubmit}>
-          <label className="sr-only" htmlFor="hero-email">
-            {t('hero.premium.form.label')}
-          </label>
-          <input
-            id="hero-email"
-            name="email"
-            type="email"
-            inputMode="email"
-            autoComplete="email"
-            required
-            maxLength={254}
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder={t('hero.premium.form.placeholder')}
-            aria-describedby="hero-form-note"
-          />
-          <button className="rdv-hero__submit" type="submit">
+        <div className="rdv-hero__actions-v3">
+          <Link
+            className="rdv-hero__submit"
+            to="/solucoes"
+            onClick={() => trackEvent('hero_cta', { destination: 'solucoes' })}
+          >
             {t('hero.premium.cta')}
             <ArrowRight size={18} aria-hidden="true" />
-          </button>
-        </form>
-
-        <div className="rdv-hero__after-form">
-          <p id="hero-form-note">{t('hero.premium.form.note')}</p>
-          <Link to="/portfolio" onClick={() => trackEvent('hero_cta', { destination: 'portfolio' })}>
+          </Link>
+          <Link
+            className="rdv-hero__secondary"
+            to={diagnosticPath}
+            onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
+          >
             {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
           </Link>
         </div>
+
+        <ul className="rdv-hero__assurances" aria-label={t('hero.premium.assurances.label')}>
+          <li>{t('hero.premium.assurances.individual')}</li>
+          <li>{t('hero.premium.assurances.mobile')}</li>
+          <li>{t('hero.premium.assurances.operation')}</li>
+        </ul>
       </motion.div>
     </section>
   );

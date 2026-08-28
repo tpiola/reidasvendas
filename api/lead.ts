@@ -10,7 +10,7 @@ type RequestListener = (value?: unknown) => void;
 
 type Req = {
   method?: string;
-  headers?: Record<string, string | undefined>;
+  headers?: Record<string, string | string[] | undefined>;
   body?: unknown;
   on?: (event: string, listener: RequestListener) => void;
 };
@@ -23,6 +23,28 @@ type Res = {
 };
 
 const MAX_BODY_BYTES = 16_384;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT = 6;
+const IDEMPOTENCY_TTL_MS = 30 * 60 * 1000;
+
+const requestBuckets = new Map<string, number[]>();
+const processedRequests = new Map<string, { expiresAt: number; delivery: 'webhook' | 'whatsapp_handoff' }>();
+
+function pruneRequestState(now: number) {
+  if (requestBuckets.size > 1_000) {
+    for (const [key, timestamps] of requestBuckets) {
+      const recent = timestamps.filter((timestamp) => now - timestamp < RATE_WINDOW_MS);
+      if (recent.length) requestBuckets.set(key, recent);
+      else requestBuckets.delete(key);
+    }
+  }
+
+  if (processedRequests.size > 1_000) {
+    for (const [key, record] of processedRequests) {
+      if (record.expiresAt <= now) processedRequests.delete(key);
+    }
+  }
+}
 
 type LeadPayload = {
   name: string;
@@ -52,6 +74,57 @@ function isEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 }
 
+function headerValue(req: Req, name: string): string {
+  const value = req.headers?.[name] ?? req.headers?.[name.toLowerCase()];
+  return Array.isArray(value) ? value[0] || '' : value || '';
+}
+
+function requestOriginAllowed(req: Req): boolean {
+  const origin = headerValue(req, 'origin');
+  if (!origin) return true;
+
+  try {
+    const hostname = new URL(origin).hostname.toLowerCase();
+    return hostname === 'reidasvendas.com.br'
+      || hostname === 'www.reidasvendas.com.br'
+      || hostname === 'localhost'
+      || hostname.endsWith('.vercel.app');
+  } catch {
+    return false;
+  }
+}
+
+function requestAllowedByRate(req: Req): boolean {
+  const forwardedFor = headerValue(req, 'x-forwarded-for').split(',')[0]?.trim();
+  const key = forwardedFor || 'unknown';
+  const now = Date.now();
+  pruneRequestState(now);
+  const recent = (requestBuckets.get(key) || []).filter((timestamp) => now - timestamp < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    requestBuckets.set(key, recent);
+    return false;
+  }
+
+  recent.push(now);
+  requestBuckets.set(key, recent);
+  return true;
+}
+
+function getProcessedRequest(key: string): 'webhook' | 'whatsapp_handoff' | undefined {
+  const record = processedRequests.get(key);
+  if (!record) return undefined;
+  if (record.expiresAt <= Date.now()) {
+    processedRequests.delete(key);
+    return undefined;
+  }
+  return record.delivery;
+}
+
+function rememberProcessedRequest(key: string, delivery: 'webhook' | 'whatsapp_handoff') {
+  if (!key) return;
+  processedRequests.set(key, { delivery, expiresAt: Date.now() + IDEMPOTENCY_TTL_MS });
+}
+
 function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok: false; error: string } {
   if (!isObject(input)) return { ok: false, error: 'invalid_body' };
 
@@ -66,6 +139,7 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
   const investment = sanitizeString(input.investment, 100) || undefined;
   const landingPage = sanitizeString(input.landingPage, 300) || undefined;
   const consent = typeof input.consent === 'boolean' ? input.consent : undefined;
+  const honeypot = sanitizeString(input.website, 200);
   const attributionInput = isObject(input.utm) ? input.utm : undefined;
   const utm = attributionInput
     ? Object.fromEntries(
@@ -79,6 +153,9 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
   if (!email) return { ok: false, error: 'email_required' };
   if (!isEmail(email)) return { ok: false, error: 'invalid_email' };
   if (!phone) return { ok: false, error: 'phone_required' };
+  if (phone.replace(/\D/g, '').length < 10) return { ok: false, error: 'invalid_phone' };
+  if (consent !== true) return { ok: false, error: 'consent_required' };
+  if (honeypot) return { ok: false, error: 'request_rejected' };
 
   return {
     ok: true,
@@ -108,7 +185,7 @@ function json(res: Res, status: number, body: unknown) {
   res.statusCode = status;
   res.setHeader?.('Content-Type', 'application/json; charset=utf-8');
   res.setHeader?.('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader?.('Access-Control-Allow-Headers', 'Content-Type, X-Idempotency-Key');
   res.end?.(JSON.stringify(body));
 }
 
@@ -124,6 +201,29 @@ export default async function handler(req: Req, res: Res) {
     return;
   }
 
+  if (!requestOriginAllowed(req)) {
+    json(res, 403, { ok: false, error: 'origin_not_allowed' });
+    return;
+  }
+
+  if (!requestAllowedByRate(req)) {
+    res.setHeader?.('Retry-After', '600');
+    json(res, 429, { ok: false, error: 'rate_limit_exceeded' });
+    return;
+  }
+
+  const contentType = headerValue(req, 'content-type');
+  if (contentType && !contentType.toLowerCase().startsWith('application/json')) {
+    json(res, 415, { ok: false, error: 'unsupported_media_type' });
+    return;
+  }
+
+  const contentLength = Number(headerValue(req, 'content-length'));
+  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+    json(res, 413, { ok: false, error: 'payload_too_large' });
+    return;
+  }
+
   /* ─── Parse body (Vercel runtime: read from stream) ─── */
   let bodyStr = '';
   if (typeof req.body === 'string') {
@@ -135,16 +235,30 @@ export default async function handler(req: Req, res: Res) {
     try {
       bodyStr = await new Promise<string>((resolve, reject) => {
         const chunks: Buffer[] = [];
+        let totalBytes = 0;
+        const timer = setTimeout(() => reject(new Error('body_read_timeout')), 10_000);
         on('data', (chunk) => {
-          if (Buffer.isBuffer(chunk)) chunks.push(chunk);
-          else if (chunk !== undefined) chunks.push(Buffer.from(String(chunk)));
+          const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk ?? ''));
+          totalBytes += buffer.byteLength;
+          if (totalBytes > MAX_BODY_BYTES) {
+            clearTimeout(timer);
+            reject(new Error('payload_too_large'));
+            return;
+          }
+          chunks.push(buffer);
         });
-        on('end', () => resolve(Buffer.concat(chunks).toString()));
-        on('error', (error) => reject(error));
-        setTimeout(() => reject(new Error('body_read_timeout')), 10000);
+        on('end', () => {
+          clearTimeout(timer);
+          resolve(Buffer.concat(chunks).toString());
+        });
+        on('error', (error) => {
+          clearTimeout(timer);
+          reject(error);
+        });
       });
-    } catch {
-      json(res, 400, { ok: false, error: 'body_read_error' });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'body_read_error';
+      json(res, message === 'payload_too_large' ? 413 : 400, { ok: false, error: message });
       return;
     }
   }
@@ -168,11 +282,24 @@ export default async function handler(req: Req, res: Res) {
     return;
   }
 
+  const idempotencyKey = sanitizeString(headerValue(req, 'x-idempotency-key'), 120);
+  const previousDelivery = idempotencyKey ? getProcessedRequest(idempotencyKey) : undefined;
+  if (previousDelivery) {
+    json(res, 202, {
+      ok: true,
+      delivery: previousDelivery,
+      duplicate: true,
+      message: 'Solicitação já registrada.',
+    });
+    return;
+  }
+
   /* ─── Send to n8n webhook ──────────────── */
   const n8nUrl = process.env.LEAD_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
   const webhookSecret = process.env.LEAD_WEBHOOK_SECRET || process.env.N8N_API_KEY || '';
 
   if (!n8nUrl) {
+    rememberProcessedRequest(idempotencyKey, 'whatsapp_handoff');
     json(res, 202, {
       ok: true,
       delivery: 'whatsapp_handoff',
@@ -189,21 +316,27 @@ export default async function handler(req: Req, res: Res) {
         ...(webhookSecret ? { 'Authorization': `Bearer ${webhookSecret}` } : {}),
       },
       body: JSON.stringify(parsed.value),
+      signal: AbortSignal.timeout(8_000),
     });
 
     if (!webhookRes.ok) {
-      console.error('[lead] webhook rejected request:', webhookRes.status);
+      console.error(JSON.stringify({ level: 'error', event: 'lead_webhook_rejected', status: webhookRes.status }));
       json(res, 502, { ok: false, error: 'lead_delivery_failed' });
       return;
     }
 
+    rememberProcessedRequest(idempotencyKey, 'webhook');
     json(res, 202, {
       ok: true,
       delivery: 'webhook',
       message: 'Lead recebido para processamento',
     });
   } catch (err) {
-    console.error('[lead] webhook request failed:', err);
+    console.error(JSON.stringify({
+      level: 'error',
+      event: 'lead_webhook_failed',
+      message: err instanceof Error ? err.message : 'unknown_error',
+    }));
     json(res, 502, { ok: false, error: 'lead_delivery_failed' });
   }
 }

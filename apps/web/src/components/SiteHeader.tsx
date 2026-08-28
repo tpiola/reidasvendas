@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { BrandLockup } from '@/components/BrandLockup';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
@@ -14,9 +13,8 @@ export function SiteHeader() {
         <Link to="/" className="rdv-brand-link" aria-label="Rei das Vendas — página inicial">
           <BrandLockup compact />
         </Link>
-        <p className="rdv-header-context">Franca · sites que vendem</p>
+        <p className="rdv-header-context">Franca · presença · produto · operação</p>
         <div className="rdv-header-actions">
-          <ThemeToggle />
           <LanguageSwitcher />
           <nav aria-label="Ação principal">
             <Link

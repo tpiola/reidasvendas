@@ -13,21 +13,39 @@ const updateSource = process.argv.includes('--update-source');
 const staticEntries = [
   {
     path: '/',
-    title: 'Sites e sistemas para organizar a jornada de venda | Rei das Vendas',
-    description: 'Mapeamento, arquitetura e implementação para negócios que precisam transformar busca, interesse e atendimento em um único fluxo comercial.',
+    title: 'Sites, aplicativos e soluções digitais em Franca | Rei das Vendas',
+    description: 'Sites premium, e-commerce, aplicativos, SaaS, automações e operação digital sob medida para negócios locais e profissionais liberais em Franca, SP.',
     category: 'WebPage',
-    headings: ['Encontro', 'Entendimento', 'Ação', 'Continuidade'],
+    headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
     questions: [],
-    lastModified: '2026-08-25',
+    lastModified: '2026-08-28',
   },
   {
     path: '/portfolio',
     title: 'Projetos publicados | Rei das Vendas',
-    description: 'Projetos digitais construídos para produtos, monitoramento e presença autoral, com contexto e escopo explícitos.',
+    description: 'Sites, lojas e produtos digitais publicados, apresentados com contexto, escopo real e sem métricas inventadas.',
     category: 'CollectionPage',
-    headings: ['SaúdeGPT', 'Sentinela', 'Thiago Piola'],
+    headings: ['Sentinela Saúde Ambiental', 'TKA Esportes', 'Keeus', 'Thiago Piola', 'SaúdeGPT'],
     questions: [],
-    lastModified: '2026-08-22',
+    lastModified: '2026-08-28',
+  },
+  {
+    path: '/planos',
+    title: 'Projeto individual e operação contínua | Rei das Vendas',
+    description: 'Compare entrega individual, assinatura operacional e ciclos de crescimento para sites, lojas, aplicativos, SaaS e automações.',
+    category: 'WebPage',
+    headings: ['Entrega individual', 'Operação contínua', 'Crescimento e capilaridade', 'Proposta sem surpresa'],
+    questions: [],
+    lastModified: '2026-08-28',
+  },
+  {
+    path: '/contato',
+    title: 'Contato | Rei das Vendas em Franca, SP',
+    description: 'Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.',
+    category: 'ContactPage',
+    headings: ['WhatsApp', 'E-mail', 'Diagnóstico guiado'],
+    questions: [],
+    lastModified: '2026-08-28',
   },
   {
     path: '/sobre',
@@ -36,7 +54,7 @@ const staticEntries = [
     category: 'AboutPage',
     headings: ['Responsabilidade explícita', 'Critério de trabalho', 'Limite produtivo'],
     questions: [],
-    lastModified: '2026-08-22',
+    lastModified: '2026-08-28',
   },
   {
     path: '/blog',
@@ -45,7 +63,7 @@ const staticEntries = [
     category: 'CollectionPage',
     headings: ARTICLES.map((article) => article.title),
     questions: [],
-    lastModified: '2026-08-25',
+    lastModified: '2026-08-28',
   },
   {
     path: '/politica',
@@ -54,7 +72,7 @@ const staticEntries = [
     category: 'WebPage',
     headings: ['Informações', 'Finalidade', 'Operadores', 'Conservação', 'Medição', 'Seus pedidos'],
     questions: [],
-    lastModified: '2026-08-22',
+    lastModified: '2026-08-28',
   },
 ];
 
@@ -70,7 +88,7 @@ const articleEntries = ARTICLES.map((article) => ({
 }));
 
 const entryMap = new Map();
-for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: ['/solucoes', '/diagnostico'].includes(item.path) ? '2026-08-25' : '2026-08-22' })), ...articleEntries]) {
+for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: '2026-08-28' })), ...articleEntries]) {
   entryMap.set(entry.path, entry);
 }
 const entries = [...entryMap.values()];
@@ -133,7 +151,7 @@ function structuredData(entry, url) {
 }
 
 function initialHeader() {
-  return `<header class="initial-header"><div class="initial-header__inner"><a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial"><b aria-hidden="true">RV/</b><span><strong>Rei das Vendas</strong><small>Arquitetura comercial</small></span></a><a class="initial-header__action" href="/diagnostico">Abrir diagnóstico</a></div></header>`;
+  return `<header class="initial-header"><div class="initial-header__inner"><a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial"><b aria-hidden="true">R↗</b><span><strong>Rei das Vendas</strong><small>Negócios em movimento</small></span></a><a class="initial-header__action" href="/diagnostico">Mapear meu negócio</a></div></header>`;
 }
 
 function staticContent(entry) {
@@ -147,9 +165,9 @@ function staticContent(entry) {
 
   const questions = entry.questions.slice(0, 3).map((item, index) => `<li><h3><span>Q${index + 1}</span>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p></li>`).join('');
   const list = sections || questions;
-  const kicker = entry.category === 'Article' ? 'Caderno de operação' : 'Arquitetura comercial';
+  const kicker = entry.category === 'Article' ? 'Caderno de operação' : 'Infraestrutura digital para negócios locais';
 
-  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">${kicker}</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><a class="initial-home__action" href="/diagnostico">Abrir diagnóstico →</a></article><aside class="initial-map" aria-label="Conteúdo desta página"><div class="initial-map__head"><p>Leitura inicial</p><span>RDV / WEB</span></div><h2>O que esta página organiza</h2><ol>${list}</ol></aside></div></main>`;
+  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">${kicker}</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><a class="initial-home__action" href="/diagnostico">Mapear meu negócio →</a></article><aside class="initial-map" aria-label="Conteúdo desta página"><div class="initial-map__head"><p>Leitura inicial</p><span>RDV / 2026</span></div><h2>O que esta página organiza</h2><ol>${list}</ol></aside></div></main>`;
 }
 
 function prerenderDocument(template, entry) {
@@ -193,7 +211,7 @@ if (updateSource) {
 } else {
   const template = await readFile(join(distDirectory, 'index.html'), 'utf8');
   for (const entry of entries.filter((item) => item.path !== '/')) {
-    const output = join(distDirectory, entry.path.slice(1), 'index.html');
+    const output = join(distDirectory, `${entry.path.slice(1)}.html`);
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, prerenderDocument(template, entry));
   }

@@ -3,33 +3,25 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /antes de pedir outro site/i })).toBeVisible();
-  await expect(page.getByRole('button', { name: /abrir diagnóstico/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /ver casos reais/i })).toHaveAttribute('href', '/portfolio');
+  await expect(page.getByRole('heading', { level: 1, name: /da busca à venda/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /explorar possibilidades/i }).first()).toHaveAttribute('href', '/solucoes');
+  await expect(page.getByRole('link', { name: /mapear meu negócio/i }).first()).toHaveAttribute('href', /\/diagnostico/);
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
 });
 
-test('alternador oferece sistema, claro e escuro e persiste a preferência', async ({ page }) => {
+test('experiência permanece dark-only sem alternador de tema', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
-  await page.getByRole('button', { name: /tema do sistema ativo/i }).first().click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'light');
-  await page.getByRole('button', { name: /modo claro ativo/i }).first().click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.getByRole('button', { name: /modo (claro|escuro)|tema do sistema/i })).toHaveCount(0);
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await page.getByRole('button', { name: /modo escuro ativo/i }).first().click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
 });
 
-test('hero preserva atribuição e antecipa o e-mail no diagnóstico', async ({ page }) => {
+test('hero preserva atribuição ao abrir o diagnóstico', async ({ page }) => {
   await page.goto('/?utm_source=campanha-local');
-  await page.getByLabel('E-mail profissional').fill('comercial@example.com');
-  await page.getByRole('button', { name: /abrir diagnóstico/i }).click();
+  await page.locator('.rdv-hero').getByRole('link', { name: /mapear meu negócio/i }).click();
   await expect(page).toHaveURL(/\/diagnostico\?.*utm_source=campanha-local/);
-  await expect(page.getByLabel('E-mail')).toHaveValue('comercial@example.com');
 });
 
 test('navegação principal abre todas as rotas internas', async ({ page }) => {
@@ -46,15 +38,16 @@ test('HTML inicial entrega a proposta de valor sem depender de JavaScript', asyn
   const response = await request.get('/');
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
-  expect(html).toContain('Antes de pedir outro site');
-  expect(html).toContain('Abrir diagnóstico');
+  expect(html).toContain('Da busca à venda');
+  expect(html).toContain('Explorar possibilidades');
 });
 
 test('biblioteca conecta soluções, comparação e ferramentas', async ({ page }) => {
   await page.goto('/solucoes');
-  await expect(
-    page.getByRole('link', { name: /catálogo inteligente para representantes comerciais/i }).first(),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /comece pelo que precisa mudar/i })).toBeVisible();
+  await expect(page.getByText(/24 possibilidades encontradas/i)).toBeVisible();
+  await page.getByPlaceholder(/vender online/i).fill('representantes');
+  await expect(page.getByRole('heading', { level: 3, name: /catálogo para representantes/i })).toBeVisible();
   await page.goto('/solucoes/catalogo-para-representantes');
   await expect(
     page.getByRole('heading', { level: 1, name: /catálogo inteligente para representantes comerciais/i }),

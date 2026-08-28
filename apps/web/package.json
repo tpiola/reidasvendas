@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/prerender-growth.mjs",
+    "build": "tsc -b && vite build && node scripts/prerender-growth.mjs && node scripts/validate-production.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "check": "tsc -b --noEmit",

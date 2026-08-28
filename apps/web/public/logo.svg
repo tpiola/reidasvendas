@@ -1,42 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" fill="none" role="img" aria-label="Rei das Vendas">
-  <defs>
-    <linearGradient id="rg" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F2D38A"/>
-      <stop offset="35%" stop-color="#D6A84F"/>
-      <stop offset="75%" stop-color="#C4953A"/>
-      <stop offset="100%" stop-color="#9A7209"/>
-    </linearGradient>
-    <linearGradient id="rg2" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#FFF8E7"/>
-      <stop offset="50%" stop-color="#F2D38A"/>
-      <stop offset="100%" stop-color="#C4953A"/>
-    </linearGradient>
-    <linearGradient id="textg" x1="0" y1="0" x2="320" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#F2D38A"/>
-      <stop offset="40%" stop-color="#D6A84F"/>
-      <stop offset="100%" stop-color="#B88932"/>
-    </linearGradient>
-  </defs>
-  <g transform="translate(0,8)">
-    <!-- Crown points on top of R -->
-    <path d="M10 20 L22 6 L34 20" stroke="url(#rg)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <!-- Crown jewels -->
-    <circle cx="22" cy="10" r="2.5" fill="url(#rg2)"/>
-    <circle cx="12" cy="17" r="2" fill="url(#rg)"/>
-    <circle cx="32" cy="17" r="2" fill="url(#rg)"/>
-    <!-- R vertical stem -->
-    <path d="M17 18 L17 46" stroke="url(#rg)" stroke-width="4" stroke-linecap="round"/>
-    <!-- R bowl -->
-    <path d="M17 18 Q32 15 33 26 Q34 37 17 36" stroke="url(#rg)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-    <!-- R leg -->
-    <path d="M27 34 L38 45" stroke="url(#rg)" stroke-width="3.5" stroke-linecap="round"/>
-    <!-- Highlight -->
-    <path d="M17 18 L17 46" stroke="url(#rg2)" stroke-width="1.4" stroke-linecap="round" opacity="0.4" transform="translate(-2,0)"/>
-    <!-- Bowl inner highlight -->
-    <path d="M19 19 Q30 17 30 26" stroke="url(#rg2)" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.3"/>
-  </g>
-  <!-- R > decorative separator -->
-  <line x1="48" y1="32" x2="54" y2="32" stroke="url(#rg)" stroke-width="1.2" opacity="0.5"/>
-  <!-- Text -->
-  <text x="62" y="39" fill="url(#textg)" font-family="'Playfair Display', 'Cormorant Garamond', Georgia, serif" font-size="26" font-weight="700" letter-spacing="0.18em">REI DAS VENDAS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 72" fill="none" role="img" aria-label="Rei das Vendas">
+  <rect x="2" y="2" width="68" height="68" rx="10" fill="#07090D" stroke="#302A1D"/>
+  <path d="M20 53V19h16c8 0 13 4.1 13 10.8 0 6.6-5 10.7-13 10.7H20m15.8 0L51 53" stroke="#E8C86F" stroke-width="3.8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="m38 53 9.5-16L59 19" stroke="#F4E1A5" stroke-width="3.8" stroke-linecap="square"/>
+  <path d="M13 12h10M49 60h10" stroke="#8F7222" stroke-width="1.7"/>
+  <text x="90" y="33" fill="#F7F3E8" font-family="Archivo, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="1.2">REI DAS VENDAS</text>
+  <text x="90" y="52" fill="#B9AD91" font-family="Archivo, Arial, sans-serif" font-size="10" font-weight="600" letter-spacing="2">NEGÓCIOS EM MOVIMENTO</text>
 </svg>
