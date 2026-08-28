@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /da busca à venda/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /explorar possibilidades/i }).first()).toHaveAttribute('href', '/solucoes');
   await expect(page.getByRole('link', { name: /mapear meu negócio/i }).first()).toHaveAttribute('href', /\/diagnostico/);
   await expect(page.locator('#method-title')).toBeVisible();
@@ -38,7 +38,7 @@ test('HTML inicial entrega a proposta de valor sem depender de JavaScript', asyn
   const response = await request.get('/');
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
-  expect(html).toContain('Da busca à venda');
+  expect(html).toContain('Seu negócio precisa estar pronto');
   expect(html).toContain('Explorar possibilidades');
 });
 
@@ -69,7 +69,7 @@ test('diagnóstico reposiciona e anuncia a próxima etapa', async ({ page }) => 
   await page.getByLabel('Nome').fill('Pessoa de teste');
   await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
   await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
-  await page.getByRole('button', { name: 'Continuar' }).click();
+  await page.getByRole('button', { name: 'Continuar', exact: true }).click();
 
   const nextStepHeading = page.getByRole('heading', { level: 2, name: /como devemos encaminhar seu diagnóstico/i });
   await expect(nextStepHeading).toBeInViewport();
@@ -84,7 +84,7 @@ test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não ex
   await page.getByLabel('Nome').fill('Pessoa de teste');
   await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
   await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
-  await page.getByRole('button', { name: 'Continuar' }).click();
+  await page.getByRole('button', { name: 'Continuar', exact: true }).click();
   await page.getByLabel('Faixa de investimento disponível').selectOption('5000-10000');
   await page.getByLabel('WhatsApp para retorno').fill('16999999999');
   await page.getByLabel('E-mail').fill('teste@example.com');
@@ -103,8 +103,24 @@ test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não ex
 
 test('demonstração comercial permite filtrar e selecionar produtos', async ({ page }) => {
   await page.goto('/demonstracoes/representacao-comercial');
-  await page.getByRole('button', { name: 'Linha premium' }).click();
+  await page.getByRole('button', { name: 'Linha de produto' }).click();
   await expect(page.getByText('Referência PR-410')).toBeVisible();
   await page.getByRole('button', { name: 'Adicionar à cotação' }).first().click();
   await expect(page.getByText(/1 item selecionado/)).toBeVisible();
 });
+
+for (const viewport of [
+  { name: 'mobile', width: 360, height: 800 },
+  { name: 'tablet', width: 768, height: 1024 },
+  { name: 'desktop', width: 1440, height: 900 },
+]) {
+  test(`home não cria overflow em ${viewport.name}`, async ({ page }) => {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
+    const horizontalOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - window.innerWidth,
+    );
+    expect(horizontalOverflow).toBeLessThanOrEqual(1);
+  });
+}
