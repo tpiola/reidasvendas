@@ -209,7 +209,7 @@ export default function ServicoDetalhe() {
   return (
     <main className="min-h-screen bg-background text-text-primary">
       <section className="relative overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.15),transparent_45%)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(232,200,111,0.15),transparent_45%)]" aria-hidden="true" />
         <div className={`relative ${containerClass}`}>
           <Reveal><SectionLabel>{servico.categoria}</SectionLabel></Reveal>
           <Reveal delay={0.08}>
@@ -232,7 +232,7 @@ export default function ServicoDetalhe() {
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">O que costuma travar o próximo passo.</h2>
             <p className="mt-5 text-base leading-8 text-text-secondary">{servico.problema}</p>
           </Reveal>
-          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(166,111,24,0.18)] bg-[rgba(166,111,24,0.05)] p-7 sm:p-9">
+          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(232,200,111,0.18)] bg-[rgba(232,200,111,0.05)] p-7 sm:p-9">
             <SectionLabel>Como resolvemos</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-4xl">Estratégia antes da ferramenta.</h2>
             <p className="mt-5 text-base leading-8 text-text-secondary">{servico.solucao}</p>
@@ -269,7 +269,7 @@ export default function ServicoDetalhe() {
 
       <section className="border-y border-line bg-surface py-16 sm:py-24">
         <div className={`${containerClass} grid gap-5 md:grid-cols-2`}>
-          <article className="rounded-3xl border border-[rgba(166,111,24,0.18)] bg-surface-3 p-7 sm:p-9">
+          <article className="rounded-3xl border border-[rgba(232,200,111,0.18)] bg-surface-3 p-7 sm:p-9">
             <CheckCircle2 className="h-7 w-7 text-gold" aria-hidden="true" />
             <h2 className="mt-5 font-serif text-3xl font-bold">Para quem é</h2>
             <p className="mt-4 leading-8 text-text-secondary">{servico.paraQuem}</p>

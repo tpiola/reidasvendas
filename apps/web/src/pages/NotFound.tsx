@@ -16,14 +16,14 @@ export default function NotFound() {
   return (
     <main className="relative flex min-h-[80vh] items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(232,200,111,0.06)_0%,transparent_60%)]" />
 
       <div className="relative z-10 mx-auto max-w-2xl px-4 text-center">
         <Reveal>
           <div className="mb-6 flex items-center justify-center gap-2">
             <span className="text-8xl font-serif font-bold text-gradient-gold">4</span>
             <span className="relative flex h-20 w-20 items-center justify-center">
-              <span className="absolute inset-0 animate-pulse rounded-full border border-[rgba(166,111,24,0.3)]" />
+              <span className="absolute inset-0 animate-pulse rounded-full border border-[rgba(232,200,111,0.3)]" />
               <Smile className="h-10 w-10 text-gold" />
             </span>
             <span className="text-8xl font-serif font-bold text-gradient-gold">4</span>
@@ -43,7 +43,7 @@ export default function NotFound() {
         </Reveal>
 
         <Reveal delay={0.2}>
-          <div className="mx-auto mt-8 flex max-w-sm items-center gap-3 rounded-xl border border-[rgba(166,111,24,0.1)] bg-surface/60 px-5 py-3 backdrop-blur-sm">
+          <div className="mx-auto mt-8 flex max-w-sm items-center gap-3 rounded-xl border border-[rgba(232,200,111,0.1)] bg-surface/60 px-5 py-3 backdrop-blur-sm">
             <Search className="h-4 w-4 shrink-0 text-text-muted" />
             <p className="text-xs text-text-muted">
               <strong className="text-text-primary">Dica:</strong> Use o menu de navegação acima para encontrar o que procura.
@@ -62,9 +62,9 @@ export default function NotFound() {
               <motion.div key={s.path} variants={staggerItem}>
                 <Link
                   to={s.path}
-                  className="glass-card group flex items-center gap-4 rounded-xl p-4 transition-all hover:border-[rgba(166,111,24,0.3)]"
+                  className="glass-card group flex items-center gap-4 rounded-xl p-4 transition-all hover:border-[rgba(232,200,111,0.3)]"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[rgba(166,111,24,0.08)] text-gold transition-all group-hover:bg-[rgba(166,111,24,0.15)]">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[rgba(232,200,111,0.08)] text-gold transition-all group-hover:bg-[rgba(232,200,111,0.15)]">
                     <Icon className="h-4 w-4" />
                   </span>
                   <div className="text-left">

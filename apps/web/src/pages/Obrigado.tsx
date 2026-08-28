@@ -12,17 +12,17 @@ export default function Obrigado() {
       {/* Hero */}
       <section className="relative pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(166,111,24,0.08)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(232,200,111,0.08)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
           {/* Success Icon */}
           <Reveal>
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[rgba(166,111,24,0.1)]">
+            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[rgba(232,200,111,0.1)]">
               <CheckCircle2 className="h-10 w-10 text-gold" />
             </div>
           </Reveal>
 
           <Reveal delay={0.1}>
-            <span className="inline-block rounded-full bg-[rgba(166,111,24,0.1)] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gold">
+            <span className="inline-block rounded-full bg-[rgba(232,200,111,0.1)] px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-gold">
               Pagamento Confirmado
             </span>
           </Reveal>
@@ -44,7 +44,7 @@ export default function Obrigado() {
           {/* Session Info */}
           {sessionId && (
             <Reveal delay={0.25}>
-              <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.12)] bg-[rgba(166,111,24,0.03)] px-4 py-2">
+              <div className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-[rgba(232,200,111,0.12)] bg-[rgba(232,200,111,0.03)] px-4 py-2">
                 <span className="text-xs text-text-muted">
                   Referência:{' '}
                   <span className="font-mono text-text-secondary">{sessionId.slice(0, 12)}...</span>
@@ -74,7 +74,7 @@ export default function Obrigado() {
       <section className="pb-20 sm:pb-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <Reveal>
-            <div className="rounded-2xl border border-[rgba(166,111,24,0.12)] bg-[rgba(166,111,24,0.03)] p-6 sm:p-8">
+            <div className="rounded-2xl border border-[rgba(232,200,111,0.12)] bg-[rgba(232,200,111,0.03)] p-6 sm:p-8">
               <h2 className="font-serif text-xl font-semibold text-text-primary">
                 Próximos Passos
               </h2>
@@ -103,9 +103,9 @@ export default function Obrigado() {
                 ].map((item) => (
                   <div
                     key={item.step}
-                    className="flex items-start gap-4 rounded-xl border border-[rgba(28,25,20,0.05)] bg-[rgba(28,25,20,0.02)] p-4 transition-all duration-300 hover:border-[rgba(166,111,24,0.15)]"
+                    className="flex items-start gap-4 rounded-xl border border-[rgba(28,25,20,0.05)] bg-[rgba(28,25,20,0.02)] p-4 transition-all duration-300 hover:border-[rgba(232,200,111,0.15)]"
                   >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(166,111,24,0.1)] text-sm font-bold text-gold">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(232,200,111,0.1)] text-sm font-bold text-gold">
                       {item.step}
                     </span>
                     <div>
@@ -123,7 +123,7 @@ export default function Obrigado() {
             <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
                 to="/portfolio"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35),0_0_80px_rgba(166,111,24,0.12)] hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(232,200,111,0.35),0_0_80px_rgba(232,200,111,0.12)] hover:scale-[1.02] active:scale-[0.98]"
               >
                 Ver Portfolio
                 <ArrowRight className="h-4 w-4" />
@@ -132,7 +132,7 @@ export default function Obrigado() {
                 href={BRAND.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.22)] px-8 py-3 text-base font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(166,111,24,0.08)] hover:shadow-[0_0_30px_rgba(166,111,24,0.1)] hover:-translate-y-0.5 active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(232,200,111,0.22)] px-8 py-3 text-base font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(232,200,111,0.08)] hover:shadow-[0_0_30px_rgba(232,200,111,0.1)] hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 <MessageCircle className="h-4 w-4" />
                 Falar pelo WhatsApp

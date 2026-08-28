@@ -106,14 +106,14 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
       variants={staggerItem}
       className={`group cursor-pointer rounded-2xl border transition-all duration-300 ${
         open
-          ? 'border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.04)]'
-          : 'border-line bg-transparent hover:border-[rgba(166,111,24,0.15)]'
+          ? 'border-[rgba(232,200,111,0.3)] bg-[rgba(232,200,111,0.04)]'
+          : 'border-line bg-transparent hover:border-[rgba(232,200,111,0.15)]'
       }`}
       onClick={() => setOpen(!open)}
     >
       <div className="flex items-center justify-between gap-4 p-5 sm:p-6">
         <span className="flex items-start gap-3 text-sm font-semibold text-text-primary sm:text-base">
-          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[rgba(166,111,24,0.1)] text-xs font-bold text-gold">
+          <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[rgba(232,200,111,0.1)] text-xs font-bold text-gold">
             {String(index + 1).padStart(2, '0')}
           </span>
           {q}
@@ -147,7 +147,7 @@ export default function Recursos() {
       {/* ═══════ HERO ═══════ */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 sm:pb-20">
         <div className="absolute inset-0 bg-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(166,111,24,0.08)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(232,200,111,0.08)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6">
           <Reveal>
             <SectionLabel>Recursos</SectionLabel>
@@ -197,9 +197,9 @@ export default function Recursos() {
                 <motion.div
                   key={recurso.title}
                   variants={staggerItem}
-                  className="glass-card group flex flex-col rounded-2xl border border-line bg-[rgba(28,25,20,0.02)] p-6 transition-all duration-500 hover:border-[rgba(166,111,24,0.25)] hover:bg-[rgba(166,111,24,0.02)]"
+                  className="glass-card group flex flex-col rounded-2xl border border-line bg-[rgba(28,25,20,0.02)] p-6 transition-all duration-500 hover:border-[rgba(232,200,111,0.25)] hover:bg-[rgba(232,200,111,0.02)]"
                 >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(166,111,24,0.08)] text-gold transition-all duration-300 group-hover:bg-[rgba(166,111,24,0.15)] group-hover:scale-110">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[rgba(232,200,111,0.08)] text-gold transition-all duration-300 group-hover:bg-[rgba(232,200,111,0.15)] group-hover:scale-110">
                     <Icon className="h-6 w-6" />
                   </div>
                   <h3 className="font-serif text-lg font-bold text-text-primary">{recurso.title}</h3>
@@ -227,7 +227,7 @@ export default function Recursos() {
       </section>
 
       {/* ═══════ FAQ EXPANDIDO ═══════ */}
-      <section className="border-t border-[rgba(166,111,24,0.08)] py-20 sm:py-28">
+      <section className="border-t border-[rgba(232,200,111,0.08)] py-20 sm:py-28">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <Reveal className="text-center">
             <SectionLabel>Dúvidas Frequentes</SectionLabel>
@@ -273,8 +273,8 @@ export default function Recursos() {
       </section>
 
       {/* ═══════ CTA BANNER FINAL ═══════ */}
-      <section className="relative overflow-hidden border-t border-[rgba(166,111,24,0.08)] py-20 sm:py-28">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(166,111,24,0.06)_0%,transparent_60%)]" />
+      <section className="relative overflow-hidden border-t border-[rgba(232,200,111,0.08)] py-20 sm:py-28">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(232,200,111,0.06)_0%,transparent_60%)]" />
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
           <Reveal>
             <h2 className="font-serif text-3xl font-bold text-text-primary sm:text-4xl md:text-5xl">
@@ -290,14 +290,14 @@ export default function Recursos() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/diagnostico"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(166,111,24,0.35)]"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold bg-[length:200%_auto] px-8 py-3 text-base font-bold text-[#FFFDF8] transition-all duration-400 hover:bg-right hover:shadow-[0_0_40px_rgba(232,200,111,0.35)]"
               >
                 <Download className="h-4 w-4" />
                 Baixar Guia Gratuito
               </Link>
               <Link
                 to="/diagnostico"
-                className="inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.22)] px-8 py-3 text-base font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(166,111,24,0.08)]"
+                className="inline-flex items-center gap-2 rounded-full border border-[rgba(232,200,111,0.22)] px-8 py-3 text-base font-semibold text-text-primary transition-all duration-400 hover:border-gold hover:bg-[rgba(232,200,111,0.08)]"
               >
                 Conhecer Planos <ArrowRight className="h-4 w-4" />
               </Link>

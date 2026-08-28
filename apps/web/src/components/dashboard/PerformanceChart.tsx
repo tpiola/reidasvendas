@@ -17,7 +17,7 @@ export function PerformanceChart({ title, data, height = 200 }: PerformanceChart
 
   return (
     <div className="rounded-xl border border-[rgba(214,168,79,0.12)] bg-[rgba(255,255,255,0.02)] p-5 backdrop-blur-sm">
-      <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#D6A84F] mb-4">{title}</h3>
+      <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#E8C86F] mb-4">{title}</h3>
       <div className="flex items-end gap-3" style={{ height }}>
         {data.map((bar, i) => {
           const pct = (bar.value / maxValue) * 100;
@@ -29,7 +29,7 @@ export function PerformanceChart({ title, data, height = 200 }: PerformanceChart
                 transition={{ delay: i * 0.08, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 className="w-full rounded-t-sm transition-all duration-300 hover:opacity-80"
                 style={{
-                  background: bar.color || 'linear-gradient(180deg, #F2D38A, #D6A84F)',
+                  background: bar.color || 'linear-gradient(180deg, #F2D38A, #E8C86F)',
                   boxShadow: '0 0 12px rgba(214,168,79,0.15)',
                 }}
               />

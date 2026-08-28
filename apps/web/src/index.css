@@ -7,21 +7,23 @@
 /* A tipografia do corpo é definida pelo dossier.css (--font-body). */
 
 :root {
-  --rdv-bg: #07090D;
-  --rdv-surface: #0D1118;
-  --rdv-surface-2: #141923;
-  --rdv-surface-3: #1C2330;
-  --rdv-gold: #E8C86F;
-  --rdv-gold-dark: #D4B45D;
-  --rdv-gold-light: #F4E1A5;
-  --rdv-gold-glow: rgba(232,200,111,0.18);
-  --rdv-gold-border: rgba(232,200,111,0.28);
-  --rdv-white: #F7F3E8;
-  --rdv-text-secondary: #C0B9AA;
-  --rdv-text-muted: #9B9384;
-  --rdv-glass: rgba(13,17,24,0.82);
-  --rdv-border: rgba(247,243,232,0.10);
-  --rdv-border-gold: rgba(232,200,111,0.28);
+  /* Espelham tokens.css (fonte única de verdade) — mantidos como alias --rdv-*
+     porque dezenas de regras neste arquivo e em componentes já os referenciam. */
+  --rdv-bg: var(--color-paper);
+  --rdv-surface: var(--color-paper-raised);
+  --rdv-surface-2: var(--color-surface-2);
+  --rdv-surface-3: var(--color-surface-3);
+  --rdv-gold: var(--color-accent);
+  --rdv-gold-dark: var(--color-accent-deep);
+  --rdv-gold-light: var(--color-accent-strong);
+  --rdv-gold-glow: rgb(var(--color-accent-rgb) / 0.18);
+  --rdv-gold-border: rgb(var(--color-accent-rgb) / 0.28);
+  --rdv-white: var(--color-ink);
+  --rdv-text-secondary: var(--color-ink-soft);
+  --rdv-text-muted: var(--color-muted);
+  --rdv-glass: rgb(var(--color-paper-raised-rgb) / 0.82);
+  --rdv-border: rgb(var(--color-ink-rgb) / 0.10);
+  --rdv-border-gold: rgb(var(--color-accent-rgb) / 0.28);
   /* Spacing scale (8px grid × multiplier) */
   --space-1: 8px;
   --space-2: 16px;
@@ -97,7 +99,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
 }
 .glass-card:hover {
   background: rgba(255,255,255,0.045);
@@ -140,14 +142,14 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-weight: 700;
   font-size: 0.875rem;
   border-radius: 9999px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
   border: none;
   cursor: pointer;
   min-height: 44px;
 }
 .btn-gold:hover {
   background: var(--rdv-gold);
-  box-shadow: 0 4px 14px rgba(166,111,24,0.28);
+  box-shadow: 0 4px 14px rgba(232,200,111,0.28);
   transform: translateY(-1px);
 }
 .btn-gold:active {
@@ -166,7 +168,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-size: 0.875rem;
   border-radius: 9999px;
   border: 1px solid var(--rdv-gold-border);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
   cursor: pointer;
   min-height: 44px;
 }
@@ -284,7 +286,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   width: 50%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-  transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: left 0.8s var(--ease-out);
   pointer-events: none;
 }
 .shine-effect:hover::before {
@@ -343,7 +345,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   border-radius: 2px;
   background: linear-gradient(90deg, var(--rdv-gold-dark), var(--rdv-gold), var(--rdv-gold-light));
   box-shadow: 0 0 8px var(--rdv-gold-glow);
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 1.2s var(--ease-out);
 }
 
 /* ─── Automation flow lines ─── */
@@ -499,15 +501,15 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Utility: Slide Up ─── */
 .animate-slide-up {
-  animation: slide-up-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-up-reveal 0.7s var(--ease-out) forwards;
 }
 .animate-slide-up-slow {
-  animation: slide-up-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-up-reveal 1s var(--ease-out) forwards;
 }
 
 /* ─── Utility: Scale In ─── */
 .animate-scale-in {
-  animation: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scale-in 0.6s var(--ease-out) forwards;
 }
 
 /* ─── Scroll Reveal (base — ativado via JS ou Intersection Observer) ─── */
@@ -522,8 +524,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal.revealed {
   opacity: 1;
@@ -532,8 +534,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-left {
   opacity: 0;
   transform: translateX(-24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-left.revealed {
   opacity: 1;
@@ -542,8 +544,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-right {
   opacity: 0;
   transform: translateX(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-right.revealed {
   opacity: 1;
@@ -552,8 +554,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-scale {
   opacity: 0;
   transform: scale(0.92);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-scale.revealed {
   opacity: 1;
@@ -564,7 +566,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .stagger-children > * {
   opacity: 0;
   transform: translateY(16px);
-  animation: stagger-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: stagger-fade-in 0.5s var(--ease-out) forwards;
 }
 .stagger-children > *:nth-child(1)  { animation-delay: 0.05s; }
 .stagger-children > *:nth-child(2)  { animation-delay: 0.1s; }
@@ -605,10 +607,10 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s var(--ease-out),
+              backdrop-filter 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
   will-change: transform, box-shadow, border-color;
 }
 .glass-card:hover {
@@ -670,8 +672,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Hover Lift (micro-interação) ─── */
 .hover-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s var(--ease-out),
+              box-shadow 0.4s var(--ease-out);
   will-change: transform;
 }
 .hover-lift:hover {
@@ -684,7 +686,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Hover Glow (micro-interação) ─── */
 .hover-glow {
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.4s var(--ease-out);
 }
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(214,168,79,0.12), 0 0 60px rgba(214,168,79,0.06);
@@ -721,7 +723,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Magnetic (preparação para efeito magnético, sem JS) ─── */
 .magnetic {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.15s var(--ease-out);
   will-change: transform;
 }
 
@@ -746,7 +748,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   display: inline-block;
   opacity: 0;
   transform: translateY(100%);
-  animation: text-reveal-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: text-reveal-in 0.6s var(--ease-out) forwards;
 }
 @keyframes text-reveal-in {
   to {
@@ -783,7 +785,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .split-text-word {
   display: inline-block;
   opacity: 0;
-  animation: split-text-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: split-text-reveal 0.7s var(--ease-out) forwards;
 }
 .split-text-word:nth-child(1)  { animation-delay: 0.00s; }
 .split-text-word:nth-child(2)  { animation-delay: 0.06s; }
@@ -827,12 +829,12 @@ img, video { max-width: 100%; height: auto; display: block; }
   }
 }
 .card-lift {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out);
   will-change: transform;
 }
 .card-lift:hover {
-  animation: card-lift-hover 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: card-lift-hover 0.5s var(--ease-out) forwards;
 }
 
 /* ─── Scroll parallax (movimento sutil ao scroll) ─── */
@@ -902,7 +904,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 0 30px rgba(214,168,79,0.04);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
 }
 .glass-card-gold:hover {
   border-color: rgba(214,168,79,0.4);
@@ -920,8 +922,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-fade {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-fade.visible {
   opacity: 1;
@@ -932,8 +934,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-scale-visible {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-scale-visible.visible {
   opacity: 1;

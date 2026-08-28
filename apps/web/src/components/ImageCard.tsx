@@ -65,14 +65,14 @@ export function ImageCard({
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="mb-2 inline-block w-fit rounded-full bg-[rgba(214,168,79,0.12)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#D6A84F] backdrop-blur-sm"
+            className="mb-2 inline-block w-fit rounded-full bg-[rgba(214,168,79,0.12)] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[#E8C86F] backdrop-blur-sm"
           >
             {category}
           </motion.span>
         )}
 
         {label && (
-          <h3 className="text-lg font-bold text-white transition-all duration-300 group-hover:text-[#D6A84F]">
+          <h3 className="text-lg font-bold text-white transition-all duration-300 group-hover:text-[#E8C86F]">
             {label}
           </h3>
         )}
@@ -88,7 +88,7 @@ export function ImageCard({
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileHover={{ opacity: 1, y: 0 }}
-            className="mt-3 flex items-center gap-1 text-sm font-semibold text-[#D6A84F] opacity-0 transition-all duration-300 group-hover:opacity-100"
+            className="mt-3 flex items-center gap-1 text-sm font-semibold text-[#E8C86F] opacity-0 transition-all duration-300 group-hover:opacity-100"
           >
             Ver projeto
             <ArrowUpRight className="h-4 w-4" />

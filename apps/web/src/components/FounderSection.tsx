@@ -5,7 +5,7 @@ export function FounderSection() {
   return (
     <section className="relative py-20 sm:py-28 bg-background">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-[20%] top-[20%] h-[300px] w-[300px] rounded-full bg-[rgba(166,111,24,0.05)] blur-[100px]" />
+        <div className="absolute -right-[20%] top-[20%] h-[300px] w-[300px] rounded-full bg-[rgba(232,200,111,0.05)] blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
@@ -13,10 +13,10 @@ export function FounderSection() {
           <div className="founder-glow glass-premium rounded-2xl overflow-hidden">
             <div className="grid md:grid-cols-5">
               {/* Photo / Emblem side */}
-              <div className="relative flex items-center justify-center bg-gradient-to-b from-[rgba(166,111,24,0.08)] to-transparent p-8 md:col-span-2">
+              <div className="relative flex items-center justify-center bg-gradient-to-b from-[rgba(232,200,111,0.08)] to-transparent p-8 md:col-span-2">
                 <div className="text-center">
                   {/* Crown emblem */}
-                  <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border-2 border-[rgba(166,111,24,0.3)] bg-[rgba(166,111,24,0.06)]">
+                  <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border-2 border-[rgba(232,200,111,0.3)] bg-[rgba(232,200,111,0.06)]">
                     <svg width="36" height="36" viewBox="0 0 32 32" fill="none" aria-hidden="true">
                       <defs>
                         <linearGradient id="founder-gold" x1="6" y1="4" x2="26" y2="28" gradientUnits="userSpaceOnUse">
@@ -62,7 +62,7 @@ export function FounderSection() {
                       href={BRAND.founder.site}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-[rgba(166,111,24,0.22)] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-gold transition-all hover:bg-[rgba(166,111,24,0.08)] hover:shadow-[0_0_20px_rgba(166,111,24,0.1)]"
+                      className="inline-flex items-center gap-2 rounded-full border border-[rgba(232,200,111,0.22)] px-5 py-2 text-[10px] font-bold uppercase tracking-[0.15em] text-gold transition-all hover:bg-[rgba(232,200,111,0.08)] hover:shadow-[0_0_20px_rgba(232,200,111,0.1)]"
                     >
                       thiagopiola.com.br
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>

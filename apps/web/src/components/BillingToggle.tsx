@@ -65,7 +65,7 @@ export function BillingToggle({
           <motion.span
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
-            className="rounded-full bg-[rgba(166,111,24,0.12)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold"
+            className="rounded-full bg-[rgba(232,200,111,0.12)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gold"
           >
             {discountLabel}
           </motion.span>

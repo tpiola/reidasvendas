@@ -391,7 +391,9 @@ h3,
   place-items: center;
   overflow: hidden;
   padding: clamp(3.5rem, 8vh, 7rem) 0;
-  background: #03070d;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 32%, rgba(232, 200, 111, 0.04), transparent 70%),
+    var(--rdv-bg, #07090d);
   color: #f7f5f2;
 }
 
@@ -486,7 +488,7 @@ h3,
   letter-spacing: -0.035em;
   line-height: 0.93;
   text-wrap: balance;
-  filter: drop-shadow(0 12px 32px rgba(201, 162, 39, 0.1));
+  filter: drop-shadow(0 12px 32px rgba(232, 200, 111, 0.1));
 }
 
 .rdv-hero__accent {
@@ -594,7 +596,7 @@ h3,
   inset: -1px;
   z-index: -1;
   border-radius: inherit;
-  box-shadow: 0 0 0 12px rgba(201, 162, 39, 0.18);
+  box-shadow: 0 0 0 12px rgba(232, 200, 111, 0.18);
   content: "";
   opacity: 0.15;
   transform: scale(0.96);
@@ -653,7 +655,7 @@ h3,
 
 @media (hover: hover) and (pointer: fine) {
   .rdv-hero__submit:hover {
-    background: #e4b93c;
+    background: #f4e1a5;
     transform: translateY(-1px);
   }
 
@@ -662,7 +664,7 @@ h3,
   }
 
   .rdv-hero__after-form a:hover {
-    color: #f2d38a;
+    color: #f4e1a5;
   }
 }
 

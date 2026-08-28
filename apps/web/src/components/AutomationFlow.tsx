@@ -13,7 +13,7 @@ export function AutomationFlow() {
   return (
     <div className="relative mx-auto max-w-5xl">
       {/* Central line */}
-      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[rgba(166,111,24,0.3)] to-transparent" />
+      <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[rgba(232,200,111,0.3)] to-transparent" />
 
       <div className="relative grid gap-0">
         {flowSteps.map((step, i) => {
@@ -31,7 +31,7 @@ export function AutomationFlow() {
             >
               {/* Connector dot */}
               <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10`}>
-                <div className="h-3 w-3 rounded-full border-2 border-gold bg-background shadow-[0_0_10px_rgba(166,111,24,0.3)]" />
+                <div className="h-3 w-3 rounded-full border-2 border-gold bg-background shadow-[0_0_10px_rgba(232,200,111,0.3)]" />
               </div>
 
               {/* Card */}

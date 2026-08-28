@@ -13,7 +13,7 @@ export function GlassCard({ children, className = '', glow = false, hover = true
   return (
     <motion.div
       variants={staggerItem}
-      className={`glass-card rounded-2xl p-6 sm:p-7 ${hover ? 'shine-effect' : ''} ${glow ? 'hover:shadow-[0_0_40px_rgba(166,111,24,0.08)]' : ''} ${className}`}
+      className={`glass-card rounded-2xl p-6 sm:p-7 ${hover ? 'shine-effect' : ''} ${glow ? 'hover:shadow-[0_0_40px_rgba(232,200,111,0.08)]' : ''} ${className}`}
       transition={{ delay }}
     >
       {children}

@@ -50,11 +50,11 @@ export function Accordion({
             className={cn(
               'overflow-hidden transition-all duration-300',
               variant === 'glass' &&
-                'rounded-2xl border border-[rgba(166,111,24,0.1)] bg-[rgba(28,25,20,0.02)] backdrop-blur-sm',
+                'rounded-2xl border border-[rgba(232,200,111,0.1)] bg-[rgba(28,25,20,0.02)] backdrop-blur-sm',
               variant === 'default' && 'border-b border-line last:border-b-0',
               isOpen &&
                 variant === 'glass' &&
-                'border-[rgba(166,111,24,0.2)] bg-[rgba(166,111,24,0.03)]'
+                'border-[rgba(232,200,111,0.2)] bg-[rgba(232,200,111,0.03)]'
             )}
           >
             <button

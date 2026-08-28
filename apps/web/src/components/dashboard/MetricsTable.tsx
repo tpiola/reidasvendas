@@ -15,7 +15,7 @@ interface MetricsTableProps {
 export function MetricsTable({ title, data }: MetricsTableProps) {
   return (
     <div className="rounded-xl border border-[rgba(214,168,79,0.12)] bg-[rgba(255,255,255,0.02)] p-5 backdrop-blur-sm">
-      <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#D6A84F] mb-4">{title}</h3>
+      <h3 className="text-xs font-semibold uppercase tracking-[0.15em] text-[#E8C86F] mb-4">{title}</h3>
       <div className="space-y-1">
         {data.map((row, i) => (
           <motion.div

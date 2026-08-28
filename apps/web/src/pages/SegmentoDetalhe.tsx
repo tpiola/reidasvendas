@@ -334,7 +334,7 @@ export default function SegmentoDetalhe() {
   return (
     <main className="min-h-screen bg-background text-text-primary">
       <section className="relative overflow-hidden border-b border-line pb-20 pt-32 sm:pb-24 sm:pt-40">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(166,111,24,0.16),transparent_48%)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(232,200,111,0.16),transparent_48%)]" aria-hidden="true" />
         <div className={`relative ${containerClass}`}>
           <Reveal><SectionLabel>Solução por segmento</SectionLabel></Reveal>
           <Reveal delay={0.08}>
@@ -396,7 +396,7 @@ export default function SegmentoDetalhe() {
             <SectionLabel>Estrutura sugerida</SectionLabel>
             <h2 className="mt-4 font-serif text-3xl font-bold sm:text-5xl">Arquitetura de referência.</h2>
           </Reveal>
-          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(166,111,24,0.2)] bg-[rgba(166,111,24,0.05)] p-7 sm:p-10">
+          <Reveal delay={0.1} className="rounded-3xl border border-[rgba(232,200,111,0.2)] bg-[rgba(232,200,111,0.05)] p-7 sm:p-10">
             <p className="text-base leading-8 text-text-secondary sm:text-lg">{segmento.arquiteturaRef}</p>
             <p className="mt-5 border-t border-text-primary/[0.08] pt-5 text-sm leading-7 text-text-secondary">Esta é uma referência inicial, não um escopo fechado. Integrações, dados, responsabilidades e critérios de aceite são confirmados antes do projeto.</p>
           </Reveal>
@@ -437,7 +437,7 @@ export default function SegmentoDetalhe() {
       </section>
 
       <section className="relative overflow-hidden border-t border-line py-20 sm:py-28">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(166,111,24,0.12),transparent_52%)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(232,200,111,0.12),transparent_52%)]" aria-hidden="true" />
         <Reveal className="relative mx-auto max-w-4xl px-4 text-center sm:px-6">
           <SectionLabel>Próximo passo</SectionLabel>
           <h2 className="mt-5 font-serif text-3xl font-bold leading-tight sm:text-5xl">Receber diagnóstico gratuito para seu negócio em {segmento.nome}.</h2>

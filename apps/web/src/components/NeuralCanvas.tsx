@@ -32,7 +32,7 @@ type NavigatorWithPerformanceHints = Navigator & {
   deviceMemory?: number;
 };
 
-const GOLD = '214, 168, 79';
+const GOLD = '232, 200, 111';
 const MAX_DEVICE_PIXEL_RATIO = 2;
 const MOBILE_BREAKPOINT = 768;
 
