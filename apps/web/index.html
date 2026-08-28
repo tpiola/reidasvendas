@@ -38,7 +38,7 @@
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": ["Organization", "ProfessionalService"],
+            "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
             "@id": "https://reidasvendas.com.br/#organization",
             "name": "Rei das Vendas",
             "description": "Sites premium, e-commerce, aplicativos, SaaS, automações e operação digital sob medida para negócios locais e profissionais liberais.",
@@ -53,6 +53,15 @@
               "addressCountry": "BR"
             },
             "areaServed": ["Franca", "Região de Franca", "Brasil"],
+            "openingHoursSpecification": [
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" },
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+            ],
+            "sameAs": [
+              "https://instagram.com/reidasvendas",
+              "https://linkedin.com/company/reidasvendas",
+              "https://thiagopiola.com.br"
+            ],
             "knowsAbout": ["Sites profissionais", "E-commerce", "Aplicativos", "SaaS", "Automação de atendimento", "SEO local", "CRO"],
             "founder": { "@id": "https://reidasvendas.com.br/#founder" }
           },
@@ -61,6 +70,7 @@
             "@id": "https://reidasvendas.com.br/#founder",
             "name": "Thiago B. G. Piola",
             "url": "https://thiagopiola.com.br",
+            "sameAs": ["https://thiagopiola.com.br"],
             "worksFor": { "@id": "https://reidasvendas.com.br/#organization" }
           },
           {
