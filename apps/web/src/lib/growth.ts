@@ -9,7 +9,6 @@ export type Solution = {
   summary: string;
   pain: string;
   outcome: string;
-  image: string;
   demonstration?: string;
   architecture: ArchitectureItem[];
   questions: Faq[];
@@ -25,7 +24,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma presença institucional que organiza áreas de atuação, demonstra responsabilidade técnica e encaminha contatos com contexto.',
     pain: 'Quando a pessoa chega pelo Google e encontra apenas um perfil social, ela não entende sua especialidade, sua forma de atuação nem o próximo passo adequado.',
     outcome: 'Autoridade institucional, arquitetura informativa e triagem comercial sem transformar comunicação jurídica em promessa de resultado.',
-    image: '/imagens/nichos/servicos.jpg',
     architecture: [
       { title: 'Áreas de atuação com contexto', detail: 'Páginas próprias para demandas empresariais, trabalhistas, familiares ou outras especialidades efetivamente atendidas.' },
       { title: 'Triagem antes da conversa', detail: 'Formulário que identifica assunto, cidade e estágio da demanda antes do encaminhamento ao WhatsApp.' },
@@ -46,7 +44,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma arquitetura que apresenta especialidades, profissionais e critérios de atendimento com agendamento orientado e linguagem responsável.',
     pain: 'A agenda perde oportunidades quando especialidades, localização, formas de atendimento e canal de marcação aparecem fragmentados entre redes sociais e mensagens.',
     outcome: 'Uma jornada mais clara entre busca, confiança institucional, seleção da especialidade e pedido de agendamento.',
-    image: '/imagens/nichos/saude.jpg',
     demonstration: 'clinica-premium',
     architecture: [
       { title: 'Especialidades organizadas', detail: 'Cada área recebe informações institucionais próprias, perguntas frequentes e um encaminhamento compatível com o atendimento.' },
@@ -68,7 +65,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Presença digital que apresenta serviços odontológicos, orienta solicitações e facilita a decisão de agendar uma avaliação.',
     pain: 'Uma clínica perde contexto quando pacientes chegam ao atendimento sem entender quais procedimentos são oferecidos, onde fica a unidade ou como solicitar uma avaliação.',
     outcome: 'Mais clareza entre pesquisa local, apresentação institucional e encaminhamento responsável para a equipe da clínica.',
-    image: '/imagens/nichos/saude.jpg',
     demonstration: 'clinica-premium',
     architecture: [
       { title: 'Procedimentos com linguagem informativa', detail: 'Páginas organizadas por serviço efetivamente prestado, evitando promessas clínicas e informações sem revisão profissional.' },
@@ -90,7 +86,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma presença institucional que explica serviços, perfis atendidos e requisitos iniciais antes da conversa comercial.',
     pain: 'Empresários encontram descrições genéricas, não entendem se seu regime ou porte é atendido e chegam ao WhatsApp sem informações suficientes para uma proposta.',
     outcome: 'Posicionamento mais preciso, qualificação por perfil empresarial e encaminhamento comercial organizado.',
-    image: '/imagens/nichos/servicos.jpg',
     architecture: [
       { title: 'Serviços por perfil empresarial', detail: 'Arquiteturas específicas para abertura, rotinas contábeis, apoio fiscal e outros serviços realmente disponíveis.' },
       { title: 'Qualificação inicial', detail: 'Coleta de segmento, porte, momento e necessidade antes da transferência ao atendimento.' },
@@ -111,7 +106,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma vitrine filtrável que organiza imóveis, localização, perfil do interessado e solicitação de visita.',
     pain: 'O atendimento se torna improdutivo quando o interessado recebe PDFs soltos, encontra imóveis desatualizados ou inicia conversas sem informar sua necessidade.',
     outcome: 'Busca orientada, apresentação consistente dos imóveis e conversas iniciadas com critérios comerciais relevantes.',
-    image: '/imagens/nichos/comercio.jpg',
     demonstration: 'imobiliaria-premium',
     architecture: [
       { title: 'Busca por intenção', detail: 'Filtros por finalidade, tipo, região e faixa de valor, conforme o inventário disponível.' },
@@ -133,7 +127,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Cardápio digital organizado, informações de atendimento e uma jornada de pedido preparada para o canal da operação.',
     pain: 'Menus em imagem ou PDF desatualizado dificultam a escolha, aumentam dúvidas repetidas e transformam cada pedido em uma conversa do zero.',
     outcome: 'Um cardápio legível, categorias claras e um fluxo de interesse que chega ao atendimento com mais contexto.',
-    image: '/imagens/nichos/comercio.jpg',
     demonstration: 'restaurante-premium',
     architecture: [
       { title: 'Cardápio navegável', detail: 'Produtos agrupados por categoria, descrições objetivas, valores quando aprovados e adaptação ao celular.' },
@@ -155,7 +148,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma vitrine atualizável que organiza produtos, categorias e pedidos de orçamento sem depender de arquivos enviados manualmente.',
     pain: 'PDFs desatualizados, fotos espalhadas no WhatsApp e listas sem contexto consomem tempo e dificultam a comparação de opções.',
     outcome: 'Um catálogo centralizado, consultável pelo celular e preparado para encaminhar produtos de interesse com contexto.',
-    image: '/imagens/nichos/comercio.jpg',
     demonstration: 'representacao-comercial',
     architecture: [
       { title: 'Categorias e busca', detail: 'Organização de linhas, coleções ou famílias de produtos com pesquisa e filtragem relevantes.' },
@@ -177,7 +169,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma apresentação comercial que separa linhas, facilita a busca e transforma seleções em pedidos de cotação estruturados.',
     pain: 'Representantes perdem velocidade quando precisam atualizar vários PDFs, procurar referências em conversas antigas e remontar pedidos manualmente.',
     outcome: 'Um fluxo mais simples para apresentar produtos, identificar interesse e chegar ao atendimento com uma seleção organizada.',
-    image: '/imagens/nichos/industria.jpg',
     demonstration: 'representacao-comercial',
     architecture: [
       { title: 'Busca por referência e categoria', detail: 'Pesquisa desenhada para a linguagem comercial de quem consulta catálogo e precisa localizar produtos rapidamente.' },
@@ -199,7 +190,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma página concentrada em uma decisão comercial, com mensagem objetiva, argumentos verificáveis e diagnóstico antes do contato.',
     pain: 'Campanhas perdem eficiência quando levam todo visitante para uma página genérica, sem contexto da oferta, critério de qualificação ou próximo passo claro.',
     outcome: 'Uma jornada focalizada em intenção, proposta, evidência disponível e coleta do contexto necessário para o atendimento.',
-    image: '/imagens/services/sites.jpg',
     architecture: [
       { title: 'Uma oferta, uma decisão', detail: 'Headline, proposta, objeções e CTA organizados em torno de uma única ação econômica.' },
       { title: 'Prova contextual', detail: 'Somente exemplos, indicadores e resultados que possam ser demonstrados e autorizados.' },
@@ -220,7 +210,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Aplicações web planejadas a partir de um processo real: catálogo, agendamento, orçamento, atendimento ou operação interna.',
     pain: 'Planilhas dispersas e tarefas repetidas podem gerar retrabalho quando o processo exige uma interface própria e uma sequência de ações clara.',
     outcome: 'Um produto enxuto que resolve uma necessidade validada antes de acumular funcionalidades, integrações e custo operacional.',
-    image: '/imagens/services/apps.jpg',
     architecture: [
       { title: 'Mapeamento do processo', detail: 'Identificação de usuário, tarefa principal, dados necessários e pontos de decisão.' },
       { title: 'Primeira versão utilizável', detail: 'Escopo mínimo coerente com a operação, priorizando o fluxo que precisa funcionar primeiro.' },
@@ -241,7 +230,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Engenharia de uma aplicação proporcional ao problema, com fluxo, responsabilidades e indicadores definidos antes da implementação.',
     pain: 'Ferramentas generalistas podem aumentar a complexidade quando a equipe adapta sua rotina a menus, etapas ou cobranças que não resolvem o processo principal.',
     outcome: 'Uma solução dimensionada para o fluxo real, com evolução progressiva e responsabilidade técnica claramente estabelecida.',
-    image: '/imagens/services/dashboards.jpg',
     architecture: [
       { title: 'Diagnóstico operacional', detail: 'Mapeamento de entradas, responsáveis, aprovações, exceções e resultado esperado.' },
       { title: 'Arquitetura proporcional', detail: 'Interface, dados, segurança e integrações dimensionados para o estágio atual da operação.' },
@@ -262,7 +250,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Fluxos que coletam contexto, organizam a intenção e encaminham a conversa para o atendimento adequado.',
     pain: 'Mensagens sem origem, perguntas repetidas e encaminhamentos manuais fazem a equipe recomeçar o atendimento a cada novo contato.',
     outcome: 'Uma entrada mais organizada, com identificação da necessidade, rastreio de origem e transferência responsável para pessoas.',
-    image: '/imagens/services/automations.jpg',
     architecture: [
       { title: 'Gate antes da conversa', detail: 'Formulário registra negócio, solução, problema e faixa de investimento antes de abrir o WhatsApp.' },
       { title: 'Mensagem contextual', detail: 'O atendimento recebe uma síntese da intenção e da página de origem em vez de um contato genérico.' },
@@ -283,7 +270,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma base operacional que conecta domínio, publicação, rastreamento, formulários e critérios de continuidade.',
     pain: 'A empresa perde controle quando domínio, hospedagem, analytics e canais de captação ficam distribuídos sem responsável, documentação ou visão de conjunto.',
     outcome: 'Responsabilidade técnica identificada, ativos documentados e uma estrutura preparada para evoluir de forma controlada.',
-    image: '/imagens/services/dashboards.jpg',
     architecture: [
       { title: 'Identidade e publicação', detail: 'Domínio, hospedagem e ambientes associados ao ativo correto, sem projetos paralelos desnecessários.' },
       { title: 'Captação e continuidade', detail: 'Formulário, entrega do lead e canal de atendimento validados como uma única jornada.' },
@@ -304,7 +290,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Estratégia, conteúdo, design e engenharia reunidos em uma presença própria, rápida e preparada para busca, campanhas e atendimento.',
     pain: 'Quando a empresa depende apenas de redes sociais ou de uma página genérica, o cliente encontra informação fragmentada e não sabe por que escolher, onde ir ou como avançar.',
     outcome: 'Uma base digital exclusiva que apresenta o negócio, distribui intenção entre serviços e transforma procura em uma próxima ação mensurável.',
-    image: '/imagens/services/sites.jpg',
     architecture: [
       { title: 'Narrativa comercial própria', detail: 'Oferta, público, objeções e diferenciais reais organizados sem copiar linguagem de concorrentes ou templates.' },
       { title: 'Arquitetura para busca e decisão', detail: 'Páginas por serviço, contexto local, navegação móvel e caminhos de contato coerentes com a operação.' },
@@ -325,7 +310,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma presença autoral que transforma trajetória, especialidade e forma de atendimento em uma jornada clara para quem precisa decidir.',
     pain: 'Currículo, conteúdo e contato costumam ficar espalhados em perfis e mensagens, dificultando a compreensão do posicionamento e do próximo passo.',
     outcome: 'Autoridade organizada, linguagem adequada à profissão e uma entrada comercial compatível com a responsabilidade de cada atividade.',
-    image: '/imagens/nichos/servicos.jpg',
     architecture: [
       { title: 'Posicionamento sem personagem', detail: 'Uma voz reconhecível, baseada em repertório, método e serviços efetivamente prestados.' },
       { title: 'Páginas por intenção', detail: 'Especialidades e contextos de contratação recebem conteúdo próprio e encaminhamento adequado.' },
@@ -345,7 +329,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma loja construída ao redor da descoberta, escolha e compra — incluindo conteúdo, pagamento, mensuração e rotina comercial.',
     pain: 'Uma loja pode estar tecnicamente publicada e ainda perder venda por catálogo confuso, mobile lento, frete inesperado ou falta de continuidade depois do pedido.',
     outcome: 'Uma experiência de comércio preparada para campanhas, conteúdo, recuperação e evolução da operação, sem esconder dependências de plataforma ou meios de pagamento.',
-    image: '/imagens/services/apps.jpg',
     architecture: [
       { title: 'Descoberta e catálogo', detail: 'Categorias, busca, filtros, páginas de produto e conteúdo alinhados à forma real de compra.' },
       { title: 'Carrinho e checkout', detail: 'Pagamento, frete, políticas e estados de erro validados nos dispositivos prioritários.' },
@@ -365,7 +348,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma jornada curta que identifica necessidade, prioridade e contexto antes de entregar a conversa ao responsável certo.',
     pain: 'Quando todo contato começa com “quanto custa?”, a equipe repete perguntas, demora a responder e perde a origem da oportunidade.',
     outcome: 'Solicitações mais completas, resposta mais rápida e dados suficientes para priorizar sem criar um formulário interminável.',
-    image: '/imagens/services/automations.jpg',
     architecture: [
       { title: 'Perguntas mínimas', detail: 'Três ou quatro decisões iniciais revelam o problema sem exigir dados desnecessários.' },
       { title: 'Resultado parcial', detail: 'A pessoa entende a direção provável antes de informar contato ou abrir o WhatsApp.' },
@@ -385,7 +367,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Serviço, unidade, preferência e disponibilidade organizados em uma jornada móvel com confirmação explícita.',
     pain: 'Agendamentos se perdem quando disponibilidade, local, serviço e dados do interessado são combinados manualmente em várias mensagens.',
     outcome: 'Menos troca repetitiva, regras visíveis e um pedido de horário com informação suficiente para confirmar.',
-    image: '/imagens/services/apps.jpg',
     architecture: [
       { title: 'Escolha orientada', detail: 'Serviço, profissional ou unidade aparecem conforme a operação realmente oferece.' },
       { title: 'Disponibilidade conectável', detail: 'Integrações com agenda são avaliadas segundo API, regras e responsabilidade por atualização.' },
@@ -405,7 +386,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Estratégia, experiência e engenharia para transformar um processo validado em produto com acesso, cobrança e operação contínua.',
     pain: 'Funcionalidades demais antes de provar uso consomem orçamento e criam uma plataforma difícil de lançar, vender e sustentar.',
     outcome: 'Uma primeira versão utilizável, com hipótese comercial explícita, isolamento de dados, cobrança e observabilidade proporcionais ao estágio do produto.',
-    image: '/imagens/services/dashboards.jpg',
     architecture: [
       { title: 'Validação do problema', detail: 'Usuário, tarefa, frequência, disposição de pagamento e alternativa atual entram antes do roadmap.' },
       { title: 'Produto mínimo operável', detail: 'Autenticação, fluxo central, administração e estados de falha suficientes para uso real.' },
@@ -425,7 +405,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma área segura e reconhecível para centralizar relacionamento, entrega e autosserviço sem expor dados entre clientes.',
     pain: 'Documentos e atualizações distribuídos entre e-mail, mensagens e planilhas aumentam retrabalho e deixam o cliente sem visão do andamento.',
     outcome: 'Informação organizada por acesso, estados claros e menos dependência de atendimento para tarefas repetitivas.',
-    image: '/imagens/services/dashboards.jpg',
     architecture: [
       { title: 'Identidade e permissão', detail: 'Login, recuperação e acesso definidos por papel e pelo menor privilégio necessário.' },
       { title: 'Visão do relacionamento', detail: 'Pedidos, entregas, documentos ou serviços aparecem conforme o fluxo real.' },
@@ -445,7 +424,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Base técnica, conteúdo e consistência de informações para melhorar a compreensão do negócio em buscas locais.',
     pain: 'Nome, telefone, serviços e áreas atendidas divergentes entre site, perfil e diretórios reduzem confiança e tornam a jornada de busca confusa.',
     outcome: 'Uma presença coerente, com páginas úteis, dados estruturados compatíveis com o conteúdo e ativos preparados para verificação do proprietário.',
-    image: '/imagens/nichos/comercio.jpg',
     architecture: [
       { title: 'Elegibilidade e propriedade', detail: 'O perfil só é proposto quando o negócio atende às regras e permanece sob controle do proprietário.' },
       { title: 'Serviços e contexto local', detail: 'Páginas autorais explicam o que é prestado, para quem e onde, sem doorway pages em escala.' },
@@ -465,7 +443,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Uma arquitetura comum para distribuir ofertas entre Google, redes, e-mail e WhatsApp com páginas e eventos coerentes.',
     pain: 'Quando cada canal aponta para uma mensagem diferente e todo contato termina no mesmo link genérico, intenção e aprendizado se perdem.',
     outcome: 'Canais conectados a páginas adequadas, contexto preservado e um mapa de conversão capaz de orientar investimento.',
-    image: '/imagens/services/mentoria.jpg',
     architecture: [
       { title: 'Mensagem por intenção', detail: 'Cada campanha ou conteúdo leva à página que continua a promessa apresentada.' },
       { title: 'Origem preservada', detail: 'UTM, página, solução e ação acompanham o diagnóstico e o handoff comercial.' },
@@ -485,7 +462,6 @@ export const SOLUTIONS: Solution[] = [
     summary: 'Mensuração de eventos, leitura de comportamento e ciclos de otimização para reduzir atrito sem fabricar causalidade.',
     pain: 'Visitas, seguidores e cliques isolados não mostram onde a pessoa desistiu nem se o atendimento recebeu contexto suficiente.',
     outcome: 'Um funil observável, hipóteses priorizadas e releases pequenos capazes de comprovar ou rejeitar uma melhoria.',
-    image: '/imagens/services/dashboards.jpg',
     architecture: [
       { title: 'Eventos essenciais', detail: 'Origem, visualização relevante, início, avanço, envio e handoff são definidos com nomes e finalidade claros.' },
       { title: 'Privacidade e qualidade', detail: 'Consentimento, filtros internos e validação reduzem coleta desnecessária e dados enganosos.' },
@@ -721,13 +697,13 @@ export const TOOLS: ToolDefinition[] = [
   { slug: 'calculadora-roi', title: 'Calculadora de ROI comercial', summary: 'Simule retorno considerando investimento, leads, taxa de fechamento e ticket médio.', result: 'Cenário orientativo de retorno' },
 ];
 
-export type Demonstration = { slug: string; title: string; segment: string; solution: string; image: string; description: string };
+export type Demonstration = { slug: string; title: string; segment: string; solution: string; description: string };
 
 export const DEMONSTRATIONS: Demonstration[] = [
-  { slug: 'clinica-premium', title: 'Clínica — fluxo de atendimento', segment: 'Saúde e odontologia', solution: 'site-para-clinicas', image: '/imagens/nichos/saude.jpg', description: 'Especialidades, seleção de atendimento e simulação de pedido de avaliação.' },
-  { slug: 'restaurante-premium', title: 'Restaurante — cardápio e pedido', segment: 'Gastronomia', solution: 'site-para-restaurantes', image: '/imagens/nichos/comercio.jpg', description: 'Cardápio filtrável, seleção de pratos e resumo de pedido demonstrativo.' },
-  { slug: 'representacao-comercial', title: 'Representação comercial', segment: 'Catálogo e distribuição', solution: 'catalogo-para-representantes', image: '/imagens/nichos/industria.jpg', description: 'Busca por produto, filtro de categorias e montagem de uma cotação ilustrativa.' },
-  { slug: 'imobiliaria-premium', title: 'Imobiliária — busca e interesse', segment: 'Mercado imobiliário', solution: 'site-para-imobiliarias', image: '/imagens/nichos/servicos.jpg', description: 'Filtros de busca e experiência de consulta a imóveis fictícios.' },
+  { slug: 'clinica-premium', title: 'Clínica — fluxo de atendimento', segment: 'Saúde e odontologia', solution: 'site-para-clinicas', description: 'Especialidades, seleção de atendimento e simulação de pedido de avaliação.' },
+  { slug: 'restaurante-premium', title: 'Restaurante — cardápio e pedido', segment: 'Gastronomia', solution: 'site-para-restaurantes', description: 'Cardápio filtrável, seleção de pratos e resumo de pedido demonstrativo.' },
+  { slug: 'representacao-comercial', title: 'Representação comercial', segment: 'Catálogo e distribuição', solution: 'catalogo-para-representantes', description: 'Busca por produto, filtro de categorias e montagem de uma cotação ilustrativa.' },
+  { slug: 'imobiliaria-premium', title: 'Imobiliária — busca e interesse', segment: 'Mercado imobiliário', solution: 'site-para-imobiliarias', description: 'Filtros de busca e experiência de consulta a imóveis fictícios.' },
 ];
 
 export type SeoEntry = { path: string; title: string; description: string; category: string; headings: string[]; questions: Faq[] };
