@@ -61,11 +61,12 @@ export default function Solucoes() {
     <main id="main-content" className="rdv-marketplace">
       <header className="rdv-marketplace__hero">
         <div className="rdv-shell">
-          <p className="rdv-kicker">Biblioteca de possibilidades</p>
-          <h1>Comece pelo que precisa mudar no negócio.</h1>
+          <p className="rdv-kicker">Vitrine de soluções</p>
+          <h1>Pare de perder cliente para quem já resolveu o site.</h1>
           <p>
-            Explore sites, lojas, aplicativos, produtos e operações digitais pelo resultado que você procura.
-            Cada item é um ponto de partida — a implementação final continua individual.
+            Clínica, consultório, loja ou prestador de serviço: em segundos, quem pesquisa decide quem parece
+            confiável — e quem nem aparece. Escolha o resultado que seu negócio precisa agora; a implementação
+            continua individual, sob medida.
           </p>
           <div className="rdv-marketplace__hero-actions">
             <a href="#catalogo" className="rdv-primary-action">Explorar catálogo <ArrowRight aria-hidden="true" /></a>

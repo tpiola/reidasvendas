@@ -46,7 +46,7 @@ describe('Hero', () => {
       </BrowserRouter>,
     );
 
-    fireEvent.click(screen.getByRole('link', { name: /mapear meu negócio/i }));
+    fireEvent.click(screen.getByRole('link', { name: /perdendo cliente/i }));
 
     const output = await screen.findByTestId('diagnostic-location');
     const query = new URLSearchParams(output.textContent ?? '');
