@@ -1085,7 +1085,7 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 @media (max-width: 900px) {
   .rdv-desktop-nav { display: none; }
   .rdv-mobile-actions { display: flex; }
-  .rdv-mobile-nav { display: grid; }
+  .rdv-mobile-nav:not([hidden]) { display: grid; }
 }
 @media (prefers-reduced-motion: reduce) { body, .rdv-header { transition: none; } }
 
