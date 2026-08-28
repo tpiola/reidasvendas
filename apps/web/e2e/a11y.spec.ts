@@ -13,10 +13,12 @@ test('a11y: jornadas públicas sem violações sérias ou críticas', async ({ p
 
   for (const route of routes) {
     await page.goto(route, { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('main')).toBeVisible();
     await page.addStyleTag({
       content:
         '*{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;scroll-behavior:auto !important;}',
     });
+    await page.waitForTimeout(400);
     const results = await new AxeBuilder({ page }).analyze();
     blocking.push(
       ...results.violations

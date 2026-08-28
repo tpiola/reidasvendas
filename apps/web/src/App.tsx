@@ -103,7 +103,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       variants={pageTransitionVariants}
-      initial={shouldReduceMotion ? false : 'initial'}
+      initial={false}
       animate={shouldReduceMotion ? { opacity: 1, y: 0 } : 'animate'}
       exit={shouldReduceMotion ? undefined : 'exit'}
     >
