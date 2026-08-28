@@ -735,8 +735,8 @@ export type SeoEntry = { path: string; title: string; description: string; categ
 export const GROWTH_SEO: SeoEntry[] = [
   {
     path: '/solucoes',
-    title: 'Soluções digitais por segmento e operação | Rei das Vendas',
-    description: 'Sites, landing pages, catálogos, aplicativos, sistemas e automações desenhados para o problema real de cada operação.',
+    title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
+    description: 'Explore 24 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais.',
     category: 'CollectionPage',
     headings: SOLUTIONS.map((item) => item.title),
     questions: [],
