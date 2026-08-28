@@ -1,16 +1,8 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Hero from '@/components/Hero';
 import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
-
-// A jornada do cliente, contada do jeito que o dono de negócio entende.
-const JOURNEY = [
-  ['01', 'Acha', 'A pessoa te procura no Google, no mapa ou por indicação.'],
-  ['02', 'Entende', 'Em segundos ela sabe o que você faz e por que escolher você.'],
-  ['03', 'Chama', 'Um toque e ela cai no seu WhatsApp com o contexto certo.'],
-  ['04', 'Fecha', 'A venda sai porque nada se perdeu no caminho.'],
-];
-
 const METHOD = [
   ['Leitura', 'A gente olha onde seu negócio aparece hoje e o que está te custando cliente.'],
   ['Corte', 'Achamos o problema que mais dói e atacamos ele primeiro.'],
@@ -36,46 +28,7 @@ export default function Home() {
   const { t } = useI18n();
   return (
     <main id="main-content" className="rdv-dossier">
-      <section className="rdv-hero" aria-labelledby="home-title">
-        <div className="rdv-shell rdv-hero__grid">
-          <div className="rdv-hero__copy">
-            <p className="rdv-kicker">{t('hero.kicker')}</p>
-            <h1 id="home-title">
-              {t('hero.title.1')} {t('hero.title.2')}{" "}
-              <span className="rdv-hero__highlight">{t('hero.title.3')}</span>
-            </h1>
-            <p className="rdv-lede">{t('hero.lede')}</p>
-            <div className="rdv-hero__actions">
-              <Link
-                className="rdv-primary-action"
-                to="/diagnostico"
-                onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
-              >
-                {t('hero.cta')} <ArrowRight aria-hidden="true" />
-              </Link>
-              <a className="rdv-hero__ghost" href="#como-funciona">
-                {t('hero.cta.secondary')}
-              </a>
-            </div>
-          </div>
-
-          <aside className="rdv-decision-map" aria-labelledby="decision-map-title">
-            <div className="rdv-decision-map__head">
-              <p>Onde o cliente some</p>
-              <span>RDV / 01</span>
-            </div>
-            <h2 id="decision-map-title">Da busca à venda, sem perder ninguém no caminho.</h2>
-            <ol>
-              {JOURNEY.map(([number, title, detail]) => (
-                <li key={number}>
-                  <h3><span>{number}</span>{title}</h3>
-                  <p>{detail}</p>
-                </li>
-              ))}
-            </ol>
-          </aside>
-        </div>
-      </section>
+      <Hero />
 
       <section className="rdv-hero-stats" aria-label="Números do Rei das Vendas">
         <div className="rdv-shell rdv-hero-stats__grid">

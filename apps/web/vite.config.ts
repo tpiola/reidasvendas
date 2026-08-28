@@ -19,6 +19,13 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
+  optimizeDeps: {
+    // esbuild 0.28 no longer downlevels destructuring for Vite's legacy dev target.
+    // Production already ships `esnext`; keep dependency pre-bundling aligned.
+    esbuildOptions: {
+      target: 'esnext',
+    },
+  },
   plugins: [
     react({
       babel: {

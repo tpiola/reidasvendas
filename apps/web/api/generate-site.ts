@@ -198,13 +198,9 @@ function extractJsonFromResponse(text: string): unknown {
 }
 
 function validateSiteData(data: unknown): data is {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   structure: Record<string, any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   copy: Record<string, any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   palette: Record<string, any>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sections: Array<Record<string, any>>;
 } {
   if (!isObject(data)) return false;
@@ -281,11 +277,9 @@ export default async function handler(req: Req, res: Res) {
       return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const d = data as any;
      
     const s = d.structure;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hero = s.hero as Record<string, any> | undefined;
     const extracted = {
       hero: {

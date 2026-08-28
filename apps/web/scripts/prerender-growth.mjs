@@ -170,8 +170,9 @@ function prerenderDocument(template, entry) {
 
   const rootOpening = '<div id="root">';
   const start = html.indexOf(rootOpening);
-  const endMarker = '\n    </div>\n    <noscript>';
-  const end = html.indexOf(endMarker, start);
+  const rootBody = start >= 0 ? html.slice(start + rootOpening.length) : '';
+  const rootClosing = /\n\s*<\/div>\s*\n\s*(?=<noscript\b)/i.exec(rootBody);
+  const end = rootClosing ? start + rootOpening.length + rootClosing.index : -1;
   if (start < 0 || end < 0) throw new Error(`Unable to locate application root while rendering ${entry.path}`);
   return `${html.slice(0, start + rootOpening.length)}\n      ${initialHeader()}${staticContent(entry)}${html.slice(end)}`;
 }

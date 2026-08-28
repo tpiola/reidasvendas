@@ -30,7 +30,8 @@ StyleDictionary.registerTransform({
   name: 'name/css-custom',
   type: 'name',
   transform: (token) => {
-    return '--rdv-' + token.path.slice(1).join('-');
+    // Preserve the category so radius.sm, shadow.sm and blur.sm never collide.
+    return '--rdv-' + token.path.join('-');
   },
 });
 
@@ -181,7 +182,7 @@ StyleDictionary.registerFormat({
     const lightOverrides = [];
 
     dictionary.allTokens.forEach((token) => {
-      const varName = '--rdv-' + token.path.slice(1).join('-');
+      const varName = '--rdv-' + token.path.join('-');
       props.push(`  ${varName}: ${token.value};`);
 
       // Light mode overrides for semantic colors

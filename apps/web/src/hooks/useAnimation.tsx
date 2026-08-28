@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- this module intentionally co-locates reusable motion primitives */
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 

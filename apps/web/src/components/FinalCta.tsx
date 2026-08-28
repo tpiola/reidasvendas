@@ -4,7 +4,7 @@ import { BRAND } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics';
 
 function formatPhone(phone: string): string {
-  // 5516992333344 -> +55 16 99233-3344
+  // 5516993333344 -> +55 16 99333-3344
   const digits = phone.replace(/\D/g, '');
   const country = digits.slice(0, 2);
   const area = digits.slice(2, 4);

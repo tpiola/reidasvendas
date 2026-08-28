@@ -4,6 +4,7 @@ export default defineConfig({
   testDir: './e2e',
   use: {
     baseURL: 'http://localhost:4173',
+    locale: 'pt-BR',
     reducedMotion: 'reduce',
   },
   webServer: {
@@ -14,4 +15,3 @@ export default defineConfig({
     timeout: 120000,
   },
 });
-

@@ -1,7 +1,7 @@
 /* Service Worker — Rei das Vendas */
 /* Cache-first for static assets, network-first for navigation */
 
-const CACHE_NAME = 'reidasvendas-v1';
+const CACHE_NAME = 'reidasvendas-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -11,9 +11,10 @@ const STATIC_ASSETS = [
   '/pwa-192.svg',
   '/pwa-512.svg',
   '/manifest.webmanifest',
+  '/videos/hero-signal-poster.webp',
 ];
 
-const RUNTIME_CACHE = 'reidasvendas-runtime-v1';
+const RUNTIME_CACHE = 'reidasvendas-runtime-v2';
 
 /* ─── INSTALL ─── */
 self.addEventListener('install', (event) => {

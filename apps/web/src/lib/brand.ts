@@ -2,8 +2,8 @@ export const BRAND = {
   name: 'Rei das Vendas',
   tagline: 'Da busca à venda, sem perder ninguém no caminho',
   subtitle: 'Sites que aparecem no Google, abrem rápido no celular e transformam visita em cliente.',
-  phone: '5516992333344',
-  whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
+  phone: '5516993333344',
+  whatsapp: 'https://wa.me/5516993333344?text=Ol%C3%A1!%20Quero%20uma%20an%C3%A1lise%20da%20presen%C3%A7a%20online%20da%20minha%20empresa.',
   email: 'contato@reidasvendas.com.br',
   instagram: 'https://instagram.com/reidasvendas',
   linkedin: 'https://linkedin.com/company/reidasvendas',
@@ -15,6 +15,7 @@ export const BRAND = {
     bio: 'Web designer e estrategista digital de Franca. Monta sites que aparecem no Google, abrem rápido no celular e transformam visita em cliente.',
   },
   images: {
+    hero: '/videos/hero-signal-loop.mp4',
     og: '/imagens/og-default.jpg',
     services: {
       sites: '/imagens/services/sites.jpg',

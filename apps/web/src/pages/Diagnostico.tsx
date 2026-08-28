@@ -48,7 +48,11 @@ const trustItems = [
 export default function Diagnostico() {
   const [searchParams] = useSearchParams();
   const [etapa, setEtapa] = useState<1 | 2>(1);
-  const [dados, setDados] = useState<FormData>(() => ({ ...initialData, solucao: searchParams.get('solucao') || '' }));
+  const [dados, setDados] = useState<FormData>(() => ({
+    ...initialData,
+    email: searchParams.get('email') || '',
+    solucao: searchParams.get('solucao') || '',
+  }));
   const [sucesso, setSucesso] = useState(false);
   const [entrega, setEntrega] = useState<DeliveryMode>('webhook');
   const [formStarted, setFormStarted] = useState(false);
