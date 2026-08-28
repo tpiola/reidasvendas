@@ -13,8 +13,8 @@ const updateSource = process.argv.includes('--update-source');
 const staticEntries = [
   {
     path: '/',
-    title: 'Sites, aplicativos e soluções digitais em Franca | Rei das Vendas',
-    description: 'Sites premium, e-commerce, aplicativos, SaaS, automações e operação digital sob medida para negócios locais e profissionais liberais em Franca, SP.',
+    title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
+    description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
     category: 'WebPage',
     headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
     questions: [],
@@ -77,7 +77,7 @@ const staticEntries = [
   {
     path: '/termos',
     title: 'Termos de uso | Rei das Vendas',
-    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
+    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais e empresas em todo o Brasil.',
     category: 'WebPage',
     headings: ['Modelos de relação', 'Pagamento', 'Propriedade', 'Responsabilidade', 'Cancelamento', 'Fronteiras do escopo'],
     questions: [],
@@ -174,7 +174,7 @@ function staticContent(entry) {
 
   const questions = entry.questions.slice(0, 3).map((item, index) => `<li><h3><span>Q${index + 1}</span>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p></li>`).join('');
   const list = sections || questions;
-  const kicker = entry.category === 'Article' ? 'Caderno de operação' : 'Infraestrutura digital para negócios locais';
+  const kicker = entry.category === 'Article' ? 'Caderno de operação' : 'Franca/SP · negócios locais e todo o Brasil';
 
   return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">${kicker}</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><a class="initial-home__action" href="/diagnostico">Mapear meu negócio →</a></article><aside class="initial-map" aria-label="Conteúdo desta página"><div class="initial-map__head"><p>Leitura inicial</p><span>RDV / 2026</span></div><h2>O que esta página organiza</h2><ol>${list}</ol></aside></div></main>`;
 }

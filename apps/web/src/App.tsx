@@ -5,7 +5,6 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
-import { MagneticCursor } from '@/components/MagneticCursor';
 import Home from '@/pages/Home';
 import { BRAND } from '@/lib/brand';
 import { ARTICLE_BY_SLUG } from '@/lib/articles';
@@ -171,7 +170,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/solucoes': {
     title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
-    description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais.',
+    description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
   },
   '/diagnostico': {
     title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
@@ -199,7 +198,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/termos': {
     title: 'Termos de uso | Rei das Vendas',
-    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
+    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais e empresas em todo o Brasil.',
   },
   '/blog': {
     title: 'Caderno de operação | Rei das Vendas',
@@ -333,18 +332,6 @@ function RouteMetadata() {
 function SiteLayout() {
   const location = useLocation();
 
-  // Remove o boot loader estático do index.html assim que o app monta:
-  // fade-out de 420ms (CSS) revela o conteúdo já renderizado — sem "troca de página".
-  useEffect(() => {
-    const boot = document.getElementById('rdv-boot');
-    if (!boot) return;
-    const frame = requestAnimationFrame(() => {
-      boot.classList.add('is-leaving');
-      window.setTimeout(() => boot.remove(), 500);
-    });
-    return () => cancelAnimationFrame(frame);
-  }, []);
-
   return (
     <>
       <RouteMetadata />
@@ -390,7 +377,6 @@ function SiteLayout() {
       <SiteFooter />
       <WhatsAppFab />
       <CookieConsent />
-      <MagneticCursor />
     </>
   );
 }
