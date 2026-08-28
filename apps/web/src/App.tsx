@@ -15,6 +15,7 @@ const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Politica = lazy(() => import('@/pages/Politica'));
+const Termos = lazy(() => import('@/pages/Termos'));
 const Sobre = lazy(() => import('@/pages/Sobre'));
 const SegmentoDetalhe = lazy(() => import('@/pages/SegmentoDetalhe'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
@@ -340,6 +341,7 @@ function SiteLayout() {
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
+              <Route path="/termos" element={<PageTransition><Termos /></PageTransition>} />
               <Route path="/templates" element={<RedirectTo to="/demonstracoes" />} />
               <Route path="/builder" element={<RedirectTo to="/solucoes" />} />
               <Route path="/extensions" element={<RedirectTo to="/solucoes" />} />

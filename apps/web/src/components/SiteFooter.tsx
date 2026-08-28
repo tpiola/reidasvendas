@@ -1,9 +1,14 @@
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Instagram, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { BrandLockup } from '@/components/BrandLockup';
 import { BRAND } from '@/lib/brand';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { trackEvent } from '@/lib/analytics';
+
+const SOCIAL = [
+  { label: 'Instagram', href: BRAND.instagram, icon: Instagram },
+  { label: 'LinkedIn', href: BRAND.linkedin, icon: Linkedin },
+];
 
 const INDEX = [
   ['Possibilidades', '/solucoes'],
@@ -46,6 +51,20 @@ export function SiteFooter() {
           <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
           <span>Franca, SP · atendimento remoto</span>
           <span>Seg–sex 9h–18h · sáb 9h–13h</span>
+          <div className="rdv-footer-v3__social" aria-label="Redes sociais">
+            {SOCIAL.map(({ label, href, icon: Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${BRAND.name} no ${label}`}
+                onClick={() => trackEvent('social_click', { network: label.toLowerCase(), position: 'footer' })}
+              >
+                <Icon aria-hidden="true" />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -58,7 +77,7 @@ export function SiteFooter() {
 
       <div className="rdv-shell rdv-footer-v3__bottom">
         <p>© {new Date().getFullYear()} {BRAND.name}</p>
-        <div><Link to="/politica">Privacidade</Link><Link to="/contato">Contato</Link></div>
+        <div><Link to="/politica">Privacidade</Link><Link to="/termos">Termos de uso</Link><Link to="/contato">Contato</Link></div>
         <LanguageSwitcher />
         <p>Negócios em movimento · Franca/SP</p>
       </div>

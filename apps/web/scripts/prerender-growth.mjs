@@ -74,6 +74,15 @@ const staticEntries = [
     questions: [],
     lastModified: '2026-08-28',
   },
+  {
+    path: '/termos',
+    title: 'Termos de uso | Rei das Vendas',
+    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
+    category: 'WebPage',
+    headings: ['Modelos de relação', 'Pagamento', 'Propriedade', 'Responsabilidade', 'Cancelamento', 'Fronteiras do escopo'],
+    questions: [],
+    lastModified: '2026-08-28',
+  },
 ];
 
 const articleEntries = ARTICLES.map((article) => ({
