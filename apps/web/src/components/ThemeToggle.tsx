@@ -1,49 +1,79 @@
 import { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Monitor, Moon, Sun } from 'lucide-react';
 
-type Theme = 'light' | 'dark';
+type ThemePreference = 'system' | 'light' | 'dark';
+type ResolvedTheme = 'light' | 'dark';
 
 const STORAGE_KEY = 'rdv-theme';
+const ORDER: ThemePreference[] = ['system', 'light', 'dark'];
 
-function applyTheme(theme: Theme) {
+function getSavedPreference(): ThemePreference {
+  if (typeof window === 'undefined') return 'system';
+  const saved = window.localStorage.getItem(STORAGE_KEY);
+  return saved === 'light' || saved === 'dark' || saved === 'system' ? saved : 'system';
+}
+
+function resolveTheme(preference: ThemePreference): ResolvedTheme {
+  if (preference !== 'system') return preference;
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function applyTheme(preference: ThemePreference) {
+  const theme = resolveTheme(preference);
   const root = document.documentElement;
   root.dataset.theme = theme;
+  root.dataset.themePreference = preference;
   root.classList.toggle('dark', theme === 'dark');
   root.style.colorScheme = theme;
   document.querySelector('meta[name="theme-color"]')?.setAttribute(
     'content',
-    theme === 'dark' ? '#0B0D10' : '#F6F2E9'
+    theme === 'dark' ? '#0B0E14' : '#FAF9F6',
   );
 }
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [preference, setPreference] = useState<ThemePreference>(getSavedPreference);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    const initial: Theme = saved === 'dark' ? 'dark' : 'light';
-    setTheme(initial);
-    applyTheme(initial);
-  }, []);
+    applyTheme(preference);
 
-  const toggle = () => {
-    const next: Theme = theme === 'light' ? 'dark' : 'light';
-    setTheme(next);
+    if (preference !== 'system') return;
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const syncWithSystem = () => applyTheme('system');
+    media.addEventListener?.('change', syncWithSystem);
+    return () => media.removeEventListener?.('change', syncWithSystem);
+  }, [preference]);
+
+  const cycleTheme = () => {
+    const next = ORDER[(ORDER.indexOf(preference) + 1) % ORDER.length];
     window.localStorage.setItem(STORAGE_KEY, next);
-    applyTheme(next);
+    setPreference(next);
   };
+
+  const labels: Record<ThemePreference, string> = {
+    system: 'Tema do sistema ativo. Alterar para modo claro',
+    light: 'Modo claro ativo. Alterar para modo escuro',
+    dark: 'Modo escuro ativo. Alterar para tema do sistema',
+  };
+
+  const icons: Record<ThemePreference, typeof Monitor> = {
+    system: Monitor,
+    light: Sun,
+    dark: Moon,
+  };
+  const Icon = icons[preference];
 
   return (
     <button
       type="button"
       className="rdv-theme-toggle"
-      onClick={toggle}
-      aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
-      aria-pressed={theme === 'dark'}
-      title={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
+      onClick={cycleTheme}
+      aria-label={labels[preference]}
+      title={labels[preference]}
+      data-preference={preference}
     >
-      {theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}
-      <span className="sr-only">{theme === 'light' ? 'Modo claro ativo' : 'Modo escuro ativo'}</span>
+      <Icon aria-hidden="true" />
+      <span className="sr-only">{labels[preference]}</span>
     </button>
   );
 }

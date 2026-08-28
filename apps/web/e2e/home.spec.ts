@@ -10,13 +10,18 @@ test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await expect(page.locator('#proof-title')).toBeVisible();
 });
 
-test('alternador inicia claro, ativa escuro e persiste a preferência', async ({ page }) => {
+test('alternador oferece sistema, claro e escuro e persiste a preferência', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await page.getByRole('button', { name: 'Ativar modo escuro' }).first().click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
+  await page.getByRole('button', { name: /tema do sistema ativo/i }).first().click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'light');
+  await page.getByRole('button', { name: /modo claro ativo/i }).first().click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.getByRole('button', { name: /modo escuro ativo/i }).first().click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme-preference', 'system');
 });
 
 test('hero preserva atribuição e antecipa o e-mail no diagnóstico', async ({ page }) => {

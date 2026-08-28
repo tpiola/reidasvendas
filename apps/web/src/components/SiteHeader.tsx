@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BrandLockup } from '@/components/BrandLockup';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
@@ -15,6 +16,7 @@ export function SiteHeader() {
         </Link>
         <p className="rdv-header-context">Franca · sites que vendem</p>
         <div className="rdv-header-actions">
+          <ThemeToggle />
           <LanguageSwitcher />
           <nav aria-label="Ação principal">
             <Link
