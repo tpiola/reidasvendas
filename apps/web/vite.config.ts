@@ -8,8 +8,6 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
 const deprecatedPublicArtifacts = [
   'imagens/portfolio/drogalar.webp',
-  'imagens/nichos',
-  'imagens/services',
   'imagens/rei-das-vendas-hero.webp',
   'logo-original.png',
   'logo-sovereign.png',
