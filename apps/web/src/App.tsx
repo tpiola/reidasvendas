@@ -176,14 +176,6 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
     title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
     description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
   },
-  '/servicos': {
-    title: 'Sites profissionais para negócios locais | Rei das Vendas',
-    description: 'Sites profissionais, responsivos e preparados para facilitar buscas, orçamentos, agendamentos e contatos de empresas locais.',
-  },
-  '/templates': {
-    title: 'Modelos de sites por segmento | Rei das Vendas',
-    description: 'Conheça arquiteturas demonstrativas para clínicas, dedetizadoras, restaurantes, estética, academias, oficinas, pet shops, advocacia, imobiliárias e escolas.',
-  },
   '/portfolio': {
     title: 'Projetos publicados | Rei das Vendas',
     description: 'Sites, lojas e produtos digitais publicados, apresentados com contexto, escopo real e sem métricas inventadas.',
@@ -211,14 +203,6 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   '/blog': {
     title: 'Caderno de operação | Rei das Vendas',
     description: 'Leituras sobre publicação, busca, atendimento e continuidade para decidir antes de construir.',
-  },
-  '/segmentos': {
-    title: 'Modelos de sites por segmento | Rei das Vendas',
-    description: 'Arquiteturas de site por segmento: atendimento, saúde, comércio, restaurantes e profissionais. Veja qual se encaixa no seu negócio.',
-  },
-  '/recursos': {
-    title: 'Recursos | Rei das Vendas',
-    description: 'Recursos e ferramentas para negócios locais melhorarem a presença digital e a conversão online.',
   },
   '/obrigado': {
     title: 'Mensagem enviada | Rei das Vendas',

@@ -62,7 +62,7 @@ export default function Home() {
         <div className="rdv-motion-rail__track">
           {[...MARKETPLACE_ITEMS.slice(0, 12), ...MARKETPLACE_ITEMS.slice(0, 12)].map((item, index) => (
             <span key={`${item.title}-${index}`} aria-hidden={index >= 12 ? 'true' : undefined}>
-              {item.title}<i aria-hidden="true">↗</i>
+              {item.title}
             </span>
           ))}
         </div>
