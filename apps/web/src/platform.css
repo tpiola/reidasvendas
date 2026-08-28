@@ -64,7 +64,7 @@ body::after {
 }
 
 .rdv-brand-lockup__signal {
-  stroke: #947c35;
+  stroke: #a88d3e;
   stroke-width: 1;
 }
 
@@ -323,7 +323,7 @@ body::after {
 }
 
 .rdv-motion-rail__track i {
-  color: #947c35;
+  color: #a88d3e;
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-style: normal;
@@ -399,7 +399,7 @@ body::after {
 }
 
 .rdv-family-row__index {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.8125rem;
   font-variant-numeric: tabular-nums;
 }
@@ -782,7 +782,7 @@ body::after {
 }
 
 .rdv-method-v3 li > span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.8125rem;
 }
 
@@ -1193,7 +1193,7 @@ body::after {
 }
 
 .rdv-portfolio-v3__copy > span:last-child {
-  color: #817d74;
+  color: #8a857b;
 }
 
 .rdv-portfolio-v3__other {
@@ -1235,7 +1235,7 @@ body::after {
 }
 
 .rdv-portfolio-v3__other a > span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
 }
 
@@ -1377,7 +1377,7 @@ body::after {
 .rdv-footer-v3 nav > p,
 .rdv-footer-v3__contact > p {
   margin: 0 0 0.65rem;
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.09em;
@@ -1397,7 +1397,7 @@ body::after {
 }
 
 .rdv-footer-v3__contact span {
-  color: #817d74;
+  color: #8a857b;
   font-size: 0.75rem;
   line-height: 1.5;
 }
@@ -1451,7 +1451,7 @@ body::after {
   align-items: center;
   gap: 2rem;
   min-height: 5rem;
-  color: #817d74;
+  color: #8a857b;
   font-size: 0.75rem;
 }
 
@@ -1664,7 +1664,7 @@ body::after {
 }
 
 .rdv-contact-v3__context li span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
 }
 
@@ -1908,7 +1908,7 @@ body::after {
 }
 
 .rdv-offers__principles li span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
 }
 
@@ -2249,7 +2249,7 @@ body::after {
 }
 
 .rdv-market-card__top span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.8125rem;
 }
 
@@ -2296,7 +2296,7 @@ body::after {
 }
 
 .rdv-market-card dt {
-  color: #7f796f;
+  color: #8f8a81;
 }
 
 .rdv-market-card dd {
@@ -2378,7 +2378,7 @@ body::after {
 }
 
 .rdv-marketplace__foundation li > span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
 }
 
@@ -2435,7 +2435,7 @@ body::after {
 }
 
 .rdv-marketplace__demos a > span {
-  color: #947c35;
+  color: #a88d3e;
   font-size: 0.75rem;
 }
 

@@ -251,7 +251,7 @@ export default function Diagnostico() {
                     </div>
 
                     <form onSubmit={handleSubmit} onFocus={handleFormStart} className="space-y-5">
-                      <div className="sr-only" aria-hidden="true">
+                      <div hidden>
                         <label htmlFor="website">Não preencha este campo</label>
                         <input ref={honeypotRef} id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
                       </div>
