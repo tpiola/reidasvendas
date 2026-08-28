@@ -240,7 +240,15 @@ export default function Diagnostico() {
                           {etapa === 1 ? 'Qual é o contexto da sua operação?' : 'Como devemos encaminhar seu diagnóstico?'}
                         </h2>
                       </div>
-                      <div className="flex gap-2" aria-label={`Etapa ${etapa} de 2`}>
+                      <div
+                        className="flex gap-2"
+                        role="progressbar"
+                        aria-label="Progresso do diagnóstico"
+                        aria-valuemin={1}
+                        aria-valuemax={2}
+                        aria-valuenow={etapa}
+                        aria-valuetext={`Etapa ${etapa} de 2`}
+                      >
                         {[1, 2].map((item) => (
                           <span
                             key={item}
