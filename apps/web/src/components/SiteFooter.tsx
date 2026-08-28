@@ -1,5 +1,5 @@
 import { ArrowRight, Instagram, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { TransitionLink } from '@/components/TransitionLink';
 import { BrandLockup } from '@/components/BrandLockup';
 import { BRAND } from '@/lib/brand';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -29,18 +29,18 @@ export function SiteFooter() {
     <footer className="rdv-footer-v3">
       <div className="rdv-shell rdv-footer-v3__top">
         <div className="rdv-footer-v3__brand">
-          <Link to="/" aria-label="Rei das Vendas — página inicial"><BrandLockup /></Link>
+          <TransitionLink to="/" aria-label="Rei das Vendas — página inicial"><BrandLockup /></TransitionLink>
           <p>Dar ao negócio local a presença, os canais e a operação digital necessários para conquistar, atender e manter clientes com velocidade e clareza.</p>
         </div>
 
         <nav aria-label="Soluções e projetos">
           <p>Construir</p>
-          {INDEX.map(([label, to]) => <Link key={to} to={to}>{label}</Link>)}
+          {INDEX.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
         </nav>
 
         <nav aria-label="Conhecimento e empresa">
           <p>Decidir</p>
-          {KNOWLEDGE.map(([label, to]) => <Link key={to} to={to}>{label}</Link>)}
+          {KNOWLEDGE.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
         </nav>
 
         <div className="rdv-footer-v3__contact">
@@ -70,14 +70,14 @@ export function SiteFooter() {
 
       <div className="rdv-shell rdv-footer-v3__statement">
         <h2>Seu próximo canal precisa levar a algum lugar.</h2>
-        <Link to="/diagnostico?origem=footer" onClick={() => trackEvent('diagnostic_start', { position: 'footer' })}>
+        <TransitionLink to="/diagnostico?origem=footer" onClick={() => trackEvent('diagnostic_start', { position: 'footer' })}>
           Mapear meu negócio <ArrowRight aria-hidden="true" />
-        </Link>
+        </TransitionLink>
       </div>
 
       <div className="rdv-shell rdv-footer-v3__bottom">
         <p>© {new Date().getFullYear()} {BRAND.name}</p>
-        <div><Link to="/politica">Privacidade</Link><Link to="/termos">Termos de uso</Link><Link to="/contato">Contato</Link></div>
+        <div><TransitionLink to="/politica">Privacidade</TransitionLink><TransitionLink to="/termos">Termos de uso</TransitionLink><TransitionLink to="/contato">Contato</TransitionLink></div>
         <LanguageSwitcher />
         <p>Negócios em movimento · Franca/SP</p>
       </div>

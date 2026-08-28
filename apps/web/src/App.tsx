@@ -97,15 +97,23 @@ const pageTransitionVariants = {
   },
 };
 
+// Navegadores com View Transitions API nativo (Chromium, e React Router v7
+// via <Link viewTransition>) já cross-dissolvem a troca de rota no nível do
+// compositor — rodar a animação do Framer Motion por cima duplicaria o efeito
+// e brigaria com o snapshot do navegador. Nesses navegadores o Framer Motion
+// só entrega o estado final; nos demais, mantém o fade/slide de sempre.
+const supportsViewTransitions = typeof document !== 'undefined' && 'startViewTransition' in document;
+
 function PageTransition({ children }: { children: React.ReactNode }) {
   const shouldReduceMotion = useReducedMotion();
+  const skipMotion = shouldReduceMotion || supportsViewTransitions;
 
   return (
     <motion.div
       variants={pageTransitionVariants}
       initial={false}
-      animate={shouldReduceMotion ? { opacity: 1, y: 0 } : 'animate'}
-      exit={shouldReduceMotion ? undefined : 'exit'}
+      animate={skipMotion ? { opacity: 1, y: 0 } : 'animate'}
+      exit={skipMotion ? undefined : 'exit'}
     >
       {children}
     </motion.div>

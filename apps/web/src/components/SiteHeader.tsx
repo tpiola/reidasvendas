@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { TransitionLink } from '@/components/TransitionLink';
 import { Menu, X } from 'lucide-react';
 import { BrandLockup } from '@/components/BrandLockup';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
@@ -40,33 +41,33 @@ export function SiteHeader() {
     <header className="rdv-header">
       <a className="sr-only focus:not-sr-only" href="#main-content">Ir para o conteúdo</a>
       <div className="rdv-header-inner">
-        <Link to="/" className="rdv-brand-link" aria-label="Rei das Vendas — página inicial">
+        <TransitionLink to="/" className="rdv-brand-link" aria-label="Rei das Vendas — página inicial">
           <BrandLockup compact />
-        </Link>
+        </TransitionLink>
 
         <nav className="rdv-desktop-nav" aria-label="Navegação principal">
           {NAV_ITEMS.map((item) => (
-            <Link
+            <TransitionLink
               key={item.to}
               to={item.to}
               className={cn('rdv-nav-link', isActivePath(location.pathname, item.to) && 'is-active')}
               aria-current={isActivePath(location.pathname, item.to) ? 'page' : undefined}
             >
               {item.label}
-            </Link>
+            </TransitionLink>
           ))}
         </nav>
 
         <div className="rdv-header-actions">
           <LanguageSwitcher />
-          <Link
+          <TransitionLink
             className="rdv-header-cta"
             to="/diagnostico"
             onClick={() => trackEvent('diagnostic_start', { position: 'header' })}
           >
             <span className="rdv-header-cta__full">{t('nav.cta')}</span>
             <span className="rdv-header-cta__short">Diagnóstico</span>
-          </Link>
+          </TransitionLink>
         </div>
 
         <div className="rdv-mobile-actions">
@@ -86,22 +87,22 @@ export function SiteHeader() {
 
       <div id="rdv-mobile-nav" className="rdv-mobile-nav" hidden={!menuOpen}>
         {NAV_ITEMS.map((item) => (
-          <Link
+          <TransitionLink
             key={item.to}
             to={item.to}
             className={isActivePath(location.pathname, item.to) ? 'is-active' : undefined}
             aria-current={isActivePath(location.pathname, item.to) ? 'page' : undefined}
           >
             {item.label}
-          </Link>
+          </TransitionLink>
         ))}
-        <Link
+        <TransitionLink
           className="rdv-header-cta"
           to="/diagnostico"
           onClick={() => trackEvent('diagnostic_start', { position: 'header-mobile' })}
         >
           {t('nav.cta')}
-        </Link>
+        </TransitionLink>
       </div>
     </header>
   );

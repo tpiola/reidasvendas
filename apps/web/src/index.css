@@ -74,6 +74,28 @@ img, video { max-width: 100%; height: auto; display: block; }
 ::selection { background: rgba(214,168,79,0.25); color: #fff; }
 :focus-visible { outline: 2px solid var(--rdv-gold); outline-offset: 3px; border-radius: 4px; }
 
+/* ─── View Transitions (navegação entre rotas) ───
+   Ativado via <Link viewTransition> (React Router 7). Em navegadores sem
+   suporte, o atributo é ignorado e o fade do Framer Motion (App.tsx) assume
+   — nenhum navegador fica sem transição. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-out);
+}
+
+h1 {
+  view-transition-name: rdv-page-title;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--rdv-bg); }
 ::-webkit-scrollbar-thumb { background: rgba(214,168,79,0.3); border-radius: 2px; }
