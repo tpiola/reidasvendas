@@ -24,6 +24,12 @@
   --rdv-glass: rgb(var(--color-paper-raised-rgb) / 0.82);
   --rdv-border: rgb(var(--color-ink-rgb) / 0.10);
   --rdv-border-gold: rgb(var(--color-accent-rgb) / 0.28);
+  /* --color-gold/-on-accent/--radius-sm: aliases usados por regras mais abaixo
+     neste arquivo (::selection, :focus-visible, banner de cookies) que nunca
+     tiveram a variável de origem definida — o token era fantasma. */
+  --color-gold: var(--color-accent);
+  --color-on-accent: var(--color-accent-ink);
+  --radius-sm: var(--radius-control);
   /* Spacing scale (8px grid × multiplier) */
   --space-1: 8px;
   --space-2: 16px;
@@ -1035,8 +1041,6 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* Rei das Vendas · dark-only semantic bridge */
 html { color-scheme: dark; overflow-x: clip; background: var(--color-paper); }
 body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip; transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out); }
-::selection { background: var(--color-gold); color: var(--color-on-accent); }
-:focus-visible { outline-color: var(--color-gold); }
 .rdv-header { position: fixed; inset: 0 0 auto; z-index: 100; border-bottom: 1px solid transparent; color: var(--color-ink); transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out); }
 .rdv-header.is-scrolled { border-color: var(--color-rule); background: color-mix(in srgb, var(--color-paper) 94%, transparent); backdrop-filter: blur(14px); }
 .rdv-header-inner { width: min(100% - 2rem, 82rem); min-height: 5rem; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
@@ -1052,6 +1056,7 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-mobile-actions { display: none; align-items: center; gap: .5rem; }
 .rdv-mobile-nav { display: none; overflow: hidden; border-top: 1px solid var(--color-rule); background: var(--color-paper); padding: 1rem; }
 .rdv-mobile-nav a { display: flex; min-height: 3rem; align-items: center; border-bottom: 1px solid var(--color-rule); color: var(--color-ink); white-space: nowrap; }
+.rdv-mobile-nav a.is-active { color: var(--color-gold); }
 .rdv-mobile-nav .rdv-header-cta { justify-content: center; margin-top: 1rem; border-bottom: 1px solid var(--color-gold); }
 @media (max-width: 900px) {
   .rdv-desktop-nav { display: none; }

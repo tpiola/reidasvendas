@@ -247,12 +247,6 @@ h3,
   gap: var(--space-md);
 }
 
-.rdv-header nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .rdv-brand-link {
   min-width: 0;
   width: fit-content;
