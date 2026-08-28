@@ -1,6 +1,6 @@
 import { lazy, Suspense, Component, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
@@ -98,8 +98,15 @@ const pageTransitionVariants = {
 };
 
 function PageTransition({ children }: { children: React.ReactNode }) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <motion.div variants={pageTransitionVariants} initial="initial" animate="animate" exit="exit">
+    <motion.div
+      variants={pageTransitionVariants}
+      initial={shouldReduceMotion ? false : 'initial'}
+      animate={shouldReduceMotion ? { opacity: 1, y: 0 } : 'animate'}
+      exit={shouldReduceMotion ? undefined : 'exit'}
+    >
       {children}
     </motion.div>
   );
