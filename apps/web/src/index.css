@@ -28,8 +28,10 @@
      neste arquivo (::selection, :focus-visible, banner de cookies) que nunca
      tiveram a variável de origem definida — o token era fantasma. */
   --color-gold: var(--color-accent);
+  --color-gold-strong: var(--color-accent-strong);
   --color-on-accent: var(--color-accent-ink);
   --radius-sm: var(--radius-control);
+  --radius-md: var(--radius-group);
   /* Spacing scale (8px grid × multiplier) */
   --space-1: 8px;
   --space-2: 16px;
@@ -1076,3 +1078,68 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-cookie-actions { gap: .5rem; }
 .rdv-cookie-actions button, .rdv-cookie-actions > a { display: inline-flex; min-height: 2.6rem; flex: 1; align-items: center; justify-content: center; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: transparent; color: var(--color-ink); font-size: .75rem; font-weight: 750; cursor: pointer; white-space: nowrap; }
 .rdv-cookie-actions .is-primary { border-color: var(--color-gold); background: var(--color-gold); color: var(--color-on-accent); }
+
+/* ─── WhatsApp FAB (canto oposto ao banner de cookies, sempre alcançável) ─── */
+.rdv-whatsapp-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  z-index: 9990;
+  display: inline-flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-positive);
+  color: #06170d;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.rdv-whatsapp-fab:hover,
+.rdv-whatsapp-fab:focus-visible {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+.rdv-whatsapp-fab svg { width: 1.6rem; height: 1.6rem; }
+.rdv-whatsapp-fab__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0.45);
+  animation: rdv-whatsapp-pulse 2.6s var(--ease-out) infinite;
+  pointer-events: none;
+}
+@keyframes rdv-whatsapp-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0.4); }
+  70% { box-shadow: 0 0 0 14px rgb(var(--color-positive-rgb) / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0); }
+}
+.rdv-whatsapp-fab__tip {
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 650;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(0.35rem);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  pointer-events: none;
+}
+.rdv-whatsapp-fab:hover .rdv-whatsapp-fab__tip,
+.rdv-whatsapp-fab:focus-visible .rdv-whatsapp-fab__tip {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (max-width: 480px) {
+  .rdv-whatsapp-fab { width: 3.15rem; height: 3.15rem; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+  .rdv-whatsapp-fab__tip { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rdv-whatsapp-fab, .rdv-whatsapp-fab__tip { transition: none; }
+  .rdv-whatsapp-fab__ring { animation: none; box-shadow: none; }
+}

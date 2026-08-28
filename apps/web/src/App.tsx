@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CookieConsent } from '@/components/CookieConsent';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 import Home from '@/pages/Home';
 import { BRAND } from '@/lib/brand';
 import { ARTICLE_BY_SLUG } from '@/lib/articles';
@@ -348,6 +349,7 @@ function SiteLayout() {
         </Suspense>
       </div>
       <SiteFooter />
+      <WhatsAppFab />
       <CookieConsent />
     </>
   );
