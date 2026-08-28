@@ -50,7 +50,7 @@ export default function Diagnostico() {
   const [etapa, setEtapa] = useState<1 | 2>(1);
   const [dados, setDados] = useState<FormData>(() => ({
     ...initialData,
-    email: searchParams.get('email') || '',
+    email: searchParams.get('email')?.trim().toLowerCase() || '',
     solucao: searchParams.get('solucao') || '',
   }));
   const [sucesso, setSucesso] = useState(false);
@@ -76,6 +76,28 @@ export default function Diagnostico() {
 
   useEffect(() => {
     trackEvent('view_diagnostico', { service: searchParams.get('solucao') || undefined, origin: searchParams.get('origem') || undefined });
+  }, [searchParams]);
+
+  useEffect(() => {
+    const email = searchParams.get('email')?.trim().toLowerCase() || '';
+    const solucao = searchParams.get('solucao') || '';
+
+    if (!email && !solucao) return;
+
+    // Static prerendering cannot see the browser query string. Reconcile it after
+    // hydration without replacing values the visitor has already edited.
+    setDados((current) => {
+      const nextEmail = current.email || email;
+      const nextSolution = current.solucao || solucao;
+
+      if (nextEmail === current.email && nextSolution === current.solucao) return current;
+
+      return {
+        ...current,
+        email: nextEmail,
+        solucao: nextSolution,
+      };
+    });
   }, [searchParams]);
 
   useEffect(() => {
