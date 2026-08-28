@@ -3,9 +3,9 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /explorar possibilidades/i }).first()).toHaveAttribute('href', '/solucoes');
-  await expect(page.getByRole('link', { name: /mapear meu negócio/i }).first()).toHaveAttribute('href', /\/diagnostico/);
+  await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /quero parar de perder cliente/i }).first()).toHaveAttribute('href', '/solucoes');
+  await expect(page.getByRole('link', { name: /ver onde estou perdendo cliente/i }).first()).toHaveAttribute('href', /\/diagnostico/);
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
 });
@@ -20,7 +20,7 @@ test('experiência permanece dark-only sem alternador de tema', async ({ page })
 
 test('hero preserva atribuição ao abrir o diagnóstico', async ({ page }) => {
   await page.goto('/?utm_source=campanha-local');
-  await page.locator('.rdv-hero').getByRole('link', { name: /mapear meu negócio/i }).click();
+  await page.locator('.rdv-hero').getByRole('link', { name: /ver onde estou perdendo cliente/i }).click();
   await expect(page).toHaveURL(/\/diagnostico\?.*utm_source=campanha-local/);
 });
 
@@ -38,13 +38,13 @@ test('HTML inicial entrega a proposta de valor sem depender de JavaScript', asyn
   const response = await request.get('/');
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
-  expect(html).toContain('Seu negócio precisa estar pronto');
-  expect(html).toContain('Explorar possibilidades');
+  expect(html).toContain('Seu cliente já está pesquisando');
+  expect(html).toContain('Quero parar de perder cliente');
 });
 
 test('biblioteca conecta soluções, comparação e ferramentas', async ({ page }) => {
   await page.goto('/solucoes');
-  await expect(page.getByRole('heading', { level: 1, name: /comece pelo que precisa mudar/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /pare de perder cliente/i })).toBeVisible();
   await expect(page.getByText(/24 possibilidades encontradas/i)).toBeVisible();
   await page.getByPlaceholder(/vender online/i).fill('representantes');
   await expect(page.getByRole('heading', { level: 3, name: /catálogo para representantes/i })).toBeVisible();
@@ -117,7 +117,7 @@ for (const viewport of [
   test(`home não cria overflow em ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
     const horizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
     );
