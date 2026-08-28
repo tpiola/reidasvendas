@@ -75,7 +75,7 @@ const textFiles = await collectTextFiles(distDirectory);
 const publicText = (await Promise.all(textFiles.map((file) => readFile(file, 'utf8')))).join('\n');
 assert(publicText.includes('5516992333344'), 'WhatsApp oficial ausente no artefato.');
 assert(publicText.includes('contato@reidasvendas.com.br'), 'E-mail oficial ausente no artefato.');
-assert(!await exists(join(distDirectory, 'imagens/portfolio/drogalar.webp')), 'Asset de farmácia permaneceu no deploy.');
+assert(!await exists(join(distDirectory, 'imagens/portfolio/drogalar.webp')), 'Asset legado removido permaneceu no deploy.');
 assert(!await exists(join(distDirectory, 'imagens/nichos')), 'Banco antigo de imagens permaneceu no deploy.');
 assert(!await exists(join(distDirectory, 'imagens/services')), 'Banco antigo de imagens de serviço permaneceu no deploy.');
 for (const pattern of forbiddenPublicPatterns) {

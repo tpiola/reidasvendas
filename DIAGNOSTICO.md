@@ -135,4 +135,4 @@ Com estas 4 ações, o projeto passa de "vitrine técnica" para **funil operacio
 
 ### Potencial de alto impacto a médio prazo
 
-O `PIOLA BUILD & AGENT-OS` descrito no `docs/perfil-usuario.md` é ambicioso e a arquitetura de pacotes deste monorepo é exatamente o fundamento correto para escalar para múltiplos produtos (`Saúde GPT`, `Farmacêutico Shop`, `OpenZap`). Quando esses produtos chegarem, o padrão de `@altiq/ui`, `@altiq/utils`, `@altiq/types` vai economizar meses de duplicação.
+A arquitetura de pacotes deste monorepo é o fundamento para escalar múltiplos produtos digitais sem duplicar componentes, utilitários, tipos e rotinas de qualidade entre aplicações.
