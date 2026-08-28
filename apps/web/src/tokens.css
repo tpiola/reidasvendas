@@ -9,6 +9,7 @@
   --color-rule-rgb: 48 46 40;
   --color-accent-rgb: 232 200 111;
   --color-accent-strong-rgb: 244 225 165;
+  --color-accent-deep-rgb: 212 180 93;
   --color-positive-rgb: 34 199 106;
   --color-negative-rgb: 240 82 82;
 
@@ -22,6 +23,7 @@
   --color-rule: rgb(var(--color-rule-rgb));
   --color-accent: rgb(var(--color-accent-rgb));
   --color-accent-strong: rgb(var(--color-accent-strong-rgb));
+  --color-accent-deep: rgb(var(--color-accent-deep-rgb));
   --color-accent-ink: #111008;
   --color-positive: rgb(var(--color-positive-rgb));
   --color-negative: rgb(var(--color-negative-rgb));

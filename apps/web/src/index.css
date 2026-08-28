@@ -7,21 +7,31 @@
 /* A tipografia do corpo é definida pelo dossier.css (--font-body). */
 
 :root {
-  --rdv-bg: #07090D;
-  --rdv-surface: #0D1118;
-  --rdv-surface-2: #141923;
-  --rdv-surface-3: #1C2330;
-  --rdv-gold: #E8C86F;
-  --rdv-gold-dark: #D4B45D;
-  --rdv-gold-light: #F4E1A5;
-  --rdv-gold-glow: rgba(232,200,111,0.18);
-  --rdv-gold-border: rgba(232,200,111,0.28);
-  --rdv-white: #F7F3E8;
-  --rdv-text-secondary: #C0B9AA;
-  --rdv-text-muted: #9B9384;
-  --rdv-glass: rgba(13,17,24,0.82);
-  --rdv-border: rgba(247,243,232,0.10);
-  --rdv-border-gold: rgba(232,200,111,0.28);
+  /* Espelham tokens.css (fonte única de verdade) — mantidos como alias --rdv-*
+     porque dezenas de regras neste arquivo e em componentes já os referenciam. */
+  --rdv-bg: var(--color-paper);
+  --rdv-surface: var(--color-paper-raised);
+  --rdv-surface-2: var(--color-surface-2);
+  --rdv-surface-3: var(--color-surface-3);
+  --rdv-gold: var(--color-accent);
+  --rdv-gold-dark: var(--color-accent-deep);
+  --rdv-gold-light: var(--color-accent-strong);
+  --rdv-gold-glow: rgb(var(--color-accent-rgb) / 0.18);
+  --rdv-gold-border: rgb(var(--color-accent-rgb) / 0.28);
+  --rdv-white: var(--color-ink);
+  --rdv-text-secondary: var(--color-ink-soft);
+  --rdv-text-muted: var(--color-muted);
+  --rdv-glass: rgb(var(--color-paper-raised-rgb) / 0.82);
+  --rdv-border: rgb(var(--color-ink-rgb) / 0.10);
+  --rdv-border-gold: rgb(var(--color-accent-rgb) / 0.28);
+  /* --color-gold/-on-accent/--radius-sm: aliases usados por regras mais abaixo
+     neste arquivo (::selection, :focus-visible, banner de cookies) que nunca
+     tiveram a variável de origem definida — o token era fantasma. */
+  --color-gold: var(--color-accent);
+  --color-gold-strong: var(--color-accent-strong);
+  --color-on-accent: var(--color-accent-ink);
+  --radius-sm: var(--radius-control);
+  --radius-md: var(--radius-group);
   /* Spacing scale (8px grid × multiplier) */
   --space-1: 8px;
   --space-2: 16px;
@@ -64,6 +74,28 @@ img, video { max-width: 100%; height: auto; display: block; }
 ::selection { background: rgba(214,168,79,0.25); color: #fff; }
 :focus-visible { outline: 2px solid var(--rdv-gold); outline-offset: 3px; border-radius: 4px; }
 
+/* ─── View Transitions (navegação entre rotas) ───
+   Ativado via <Link viewTransition> (React Router 7). Em navegadores sem
+   suporte, o atributo é ignorado e o fade do Framer Motion (App.tsx) assume
+   — nenhum navegador fica sem transição. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: var(--ease-out);
+}
+
+h1 {
+  view-transition-name: rdv-page-title;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--rdv-bg); }
 ::-webkit-scrollbar-thumb { background: rgba(214,168,79,0.3); border-radius: 2px; }
@@ -97,7 +129,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
 }
 .glass-card:hover {
   background: rgba(255,255,255,0.045);
@@ -140,14 +172,14 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-weight: 700;
   font-size: 0.875rem;
   border-radius: 9999px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
   border: none;
   cursor: pointer;
   min-height: 44px;
 }
 .btn-gold:hover {
   background: var(--rdv-gold);
-  box-shadow: 0 4px 14px rgba(166,111,24,0.28);
+  box-shadow: 0 4px 14px rgba(232,200,111,0.28);
   transform: translateY(-1px);
 }
 .btn-gold:active {
@@ -166,7 +198,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-size: 0.875rem;
   border-radius: 9999px;
   border: 1px solid var(--rdv-gold-border);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
   cursor: pointer;
   min-height: 44px;
 }
@@ -284,7 +316,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   width: 50%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-  transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: left 0.8s var(--ease-out);
   pointer-events: none;
 }
 .shine-effect:hover::before {
@@ -343,7 +375,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   border-radius: 2px;
   background: linear-gradient(90deg, var(--rdv-gold-dark), var(--rdv-gold), var(--rdv-gold-light));
   box-shadow: 0 0 8px var(--rdv-gold-glow);
-  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: width 1.2s var(--ease-out);
 }
 
 /* ─── Automation flow lines ─── */
@@ -499,15 +531,15 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Utility: Slide Up ─── */
 .animate-slide-up {
-  animation: slide-up-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-up-reveal 0.7s var(--ease-out) forwards;
 }
 .animate-slide-up-slow {
-  animation: slide-up-reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slide-up-reveal 1s var(--ease-out) forwards;
 }
 
 /* ─── Utility: Scale In ─── */
 .animate-scale-in {
-  animation: scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scale-in 0.6s var(--ease-out) forwards;
 }
 
 /* ─── Scroll Reveal (base — ativado via JS ou Intersection Observer) ─── */
@@ -522,8 +554,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal.revealed {
   opacity: 1;
@@ -532,8 +564,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-left {
   opacity: 0;
   transform: translateX(-24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-left.revealed {
   opacity: 1;
@@ -542,8 +574,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-right {
   opacity: 0;
   transform: translateX(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-right.revealed {
   opacity: 1;
@@ -552,8 +584,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-scale {
   opacity: 0;
   transform: scale(0.92);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-scale.revealed {
   opacity: 1;
@@ -564,7 +596,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .stagger-children > * {
   opacity: 0;
   transform: translateY(16px);
-  animation: stagger-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: stagger-fade-in 0.5s var(--ease-out) forwards;
 }
 .stagger-children > *:nth-child(1)  { animation-delay: 0.05s; }
 .stagger-children > *:nth-child(2)  { animation-delay: 0.1s; }
@@ -605,10 +637,10 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06) inset;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.5s var(--ease-out),
+              backdrop-filter 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out),
+              transform 0.5s var(--ease-out);
   will-change: transform, box-shadow, border-color;
 }
 .glass-card:hover {
@@ -670,8 +702,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Hover Lift (micro-interação) ─── */
 .hover-lift {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s var(--ease-out),
+              box-shadow 0.4s var(--ease-out);
   will-change: transform;
 }
 .hover-lift:hover {
@@ -684,7 +716,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Hover Glow (micro-interação) ─── */
 .hover-glow {
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 0.4s var(--ease-out);
 }
 .hover-glow:hover {
   box-shadow: 0 0 30px rgba(214,168,79,0.12), 0 0 60px rgba(214,168,79,0.06);
@@ -721,7 +753,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 
 /* ─── Magnetic (preparação para efeito magnético, sem JS) ─── */
 .magnetic {
-  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.15s var(--ease-out);
   will-change: transform;
 }
 
@@ -746,7 +778,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   display: inline-block;
   opacity: 0;
   transform: translateY(100%);
-  animation: text-reveal-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: text-reveal-in 0.6s var(--ease-out) forwards;
 }
 @keyframes text-reveal-in {
   to {
@@ -783,7 +815,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .split-text-word {
   display: inline-block;
   opacity: 0;
-  animation: split-text-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: split-text-reveal 0.7s var(--ease-out) forwards;
 }
 .split-text-word:nth-child(1)  { animation-delay: 0.00s; }
 .split-text-word:nth-child(2)  { animation-delay: 0.06s; }
@@ -827,12 +859,12 @@ img, video { max-width: 100%; height: auto; display: block; }
   }
 }
 .card-lift {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.5s var(--ease-out),
+              box-shadow 0.5s var(--ease-out);
   will-change: transform;
 }
 .card-lift:hover {
-  animation: card-lift-hover 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: card-lift-hover 0.5s var(--ease-out) forwards;
 }
 
 /* ─── Scroll parallax (movimento sutil ao scroll) ─── */
@@ -902,7 +934,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
   box-shadow: 0 8px 40px rgba(0,0,0,0.8), 0 0 30px rgba(214,168,79,0.04);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s var(--ease-out);
 }
 .glass-card-gold:hover {
   border-color: rgba(214,168,79,0.4);
@@ -920,8 +952,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-fade {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-fade.visible {
   opacity: 1;
@@ -932,8 +964,8 @@ img, video { max-width: 100%; height: auto; display: block; }
 .reveal-scale-visible {
   opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.8s var(--ease-out),
+              transform 0.8s var(--ease-out);
 }
 .reveal-scale-visible.visible {
   opacity: 1;
@@ -1033,8 +1065,6 @@ img, video { max-width: 100%; height: auto; display: block; }
 /* Rei das Vendas · dark-only semantic bridge */
 html { color-scheme: dark; overflow-x: clip; background: var(--color-paper); }
 body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip; transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out); }
-::selection { background: var(--color-gold); color: var(--color-on-accent); }
-:focus-visible { outline-color: var(--color-gold); }
 .rdv-header { position: fixed; inset: 0 0 auto; z-index: 100; border-bottom: 1px solid transparent; color: var(--color-ink); transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out); }
 .rdv-header.is-scrolled { border-color: var(--color-rule); background: color-mix(in srgb, var(--color-paper) 94%, transparent); backdrop-filter: blur(14px); }
 .rdv-header-inner { width: min(100% - 2rem, 82rem); min-height: 5rem; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
@@ -1050,6 +1080,7 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-mobile-actions { display: none; align-items: center; gap: .5rem; }
 .rdv-mobile-nav { display: none; overflow: hidden; border-top: 1px solid var(--color-rule); background: var(--color-paper); padding: 1rem; }
 .rdv-mobile-nav a { display: flex; min-height: 3rem; align-items: center; border-bottom: 1px solid var(--color-rule); color: var(--color-ink); white-space: nowrap; }
+.rdv-mobile-nav a.is-active { color: var(--color-gold); }
 .rdv-mobile-nav .rdv-header-cta { justify-content: center; margin-top: 1rem; border-bottom: 1px solid var(--color-gold); }
 @media (max-width: 900px) {
   .rdv-desktop-nav { display: none; }
@@ -1069,3 +1100,68 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-cookie-actions { gap: .5rem; }
 .rdv-cookie-actions button, .rdv-cookie-actions > a { display: inline-flex; min-height: 2.6rem; flex: 1; align-items: center; justify-content: center; border: 1px solid var(--color-rule); border-radius: var(--radius-sm); background: transparent; color: var(--color-ink); font-size: .75rem; font-weight: 750; cursor: pointer; white-space: nowrap; }
 .rdv-cookie-actions .is-primary { border-color: var(--color-gold); background: var(--color-gold); color: var(--color-on-accent); }
+
+/* ─── WhatsApp FAB (canto oposto ao banner de cookies, sempre alcançável) ─── */
+.rdv-whatsapp-fab {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  z-index: 9990;
+  display: inline-flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-positive);
+  color: #06170d;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.rdv-whatsapp-fab:hover,
+.rdv-whatsapp-fab:focus-visible {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+.rdv-whatsapp-fab svg { width: 1.6rem; height: 1.6rem; }
+.rdv-whatsapp-fab__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0.45);
+  animation: rdv-whatsapp-pulse 2.6s var(--ease-out) infinite;
+  pointer-events: none;
+}
+@keyframes rdv-whatsapp-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0.4); }
+  70% { box-shadow: 0 0 0 14px rgb(var(--color-positive-rgb) / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(var(--color-positive-rgb) / 0); }
+}
+.rdv-whatsapp-fab__tip {
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-paper-raised);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 650;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(0.35rem);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  pointer-events: none;
+}
+.rdv-whatsapp-fab:hover .rdv-whatsapp-fab__tip,
+.rdv-whatsapp-fab:focus-visible .rdv-whatsapp-fab__tip {
+  opacity: 1;
+  transform: translateX(0);
+}
+@media (max-width: 480px) {
+  .rdv-whatsapp-fab { width: 3.15rem; height: 3.15rem; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); }
+  .rdv-whatsapp-fab__tip { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rdv-whatsapp-fab, .rdv-whatsapp-fab__tip { transition: none; }
+  .rdv-whatsapp-fab__ring { animation: none; box-shadow: none; }
+}

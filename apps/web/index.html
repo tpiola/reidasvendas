@@ -38,7 +38,7 @@
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": ["Organization", "ProfessionalService"],
+            "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
             "@id": "https://reidasvendas.com.br/#organization",
             "name": "Rei das Vendas",
             "description": "Sites premium, e-commerce, aplicativos, SaaS, automações e operação digital sob medida para negócios locais e profissionais liberais.",
@@ -53,6 +53,15 @@
               "addressCountry": "BR"
             },
             "areaServed": ["Franca", "Região de Franca", "Brasil"],
+            "openingHoursSpecification": [
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" },
+              { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+            ],
+            "sameAs": [
+              "https://instagram.com/reidasvendas",
+              "https://linkedin.com/company/reidasvendas",
+              "https://thiagopiola.com.br"
+            ],
             "knowsAbout": ["Sites profissionais", "E-commerce", "Aplicativos", "SaaS", "Automação de atendimento", "SEO local", "CRO"],
             "founder": { "@id": "https://reidasvendas.com.br/#founder" }
           },
@@ -61,6 +70,7 @@
             "@id": "https://reidasvendas.com.br/#founder",
             "name": "Thiago B. G. Piola",
             "url": "https://thiagopiola.com.br",
+            "sameAs": ["https://thiagopiola.com.br"],
             "worksFor": { "@id": "https://reidasvendas.com.br/#organization" }
           },
           {
@@ -258,10 +268,10 @@
       .initial-home__kicker {
         margin: 0;
         padding: 0.5rem 0.9rem;
-        border: 1px solid rgba(228, 185, 60, 0.28);
+        border: 1px solid rgba(232, 200, 111, 0.28);
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.055);
-        color: #e4b93c;
+        color: #e8c86f;
         font-size: 0.7rem;
         font-weight: 700;
         letter-spacing: 0.14em;
@@ -279,9 +289,9 @@
         text-wrap: balance;
       }
       .initial-home h1 span {
-        color: #f2d38a;
+        color: #f4e1a5;
         text-decoration: underline;
-        text-decoration-color: #e4b93c;
+        text-decoration-color: #e8c86f;
         text-decoration-thickness: 2px;
         text-underline-offset: 0.1em;
       }
@@ -294,7 +304,7 @@
         text-wrap: balance;
       }
       .initial-home__lead strong {
-        color: #f2d38a;
+        color: #f4e1a5;
       }
       .initial-home__actions {
         margin-top: 2rem;
@@ -409,7 +419,7 @@
       }
     </style>
   </head>
-  <body>
+  <body class="bg-noise">
     <div id="root">
       <header class="initial-header">
         <div class="initial-header__inner">

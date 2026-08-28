@@ -1,36 +1,7 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-
-const PROJECTS = [
-  {
-    name: 'Sentinela Saúde Ambiental',
-    type: 'Serviço local · Franca/SP',
-    description: 'Serviços, áreas atendidas, critérios de diagnóstico e orçamento reunidos em uma jornada própria.',
-    image: '/imagens/portfolio/sentinela.webp',
-    scope: ['Arquitetura local', 'Páginas de serviço', 'Contato contextual', 'Domínio próprio'],
-    href: 'https://sentinelasaudeambiental.com.br',
-  },
-  {
-    name: 'TKA Esportes',
-    type: 'Comércio · e-commerce',
-    description: 'Uma operação comercial com catálogo por categoria, história de marca e jornada de compra móvel.',
-    image: '/imagens/portfolio/tka-esportes.webp',
-    scope: ['E-commerce', 'Catálogo', 'Marca e conteúdo', 'Experiência mobile'],
-  },
-  {
-    name: 'Keeus',
-    type: 'Marca · e-commerce',
-    description: 'Produto, tamanho e proposta de compra consciente organizados em uma experiência de comércio própria.',
-    image: '/imagens/portfolio/keeus.webp',
-    scope: ['Loja online', 'Páginas de produto', 'Direção de marca', 'Conteúdo comercial'],
-  },
-];
-
-const OTHER_WORK = [
-  ['Thiago Piola', 'Presença autoral', 'Trajetória, projetos e serviços organizados em uma narrativa própria.', 'https://thiagopiola.com.br'],
-  ['SaúdeGPT', 'Produto conversacional', 'Produto web guiado, com histórico e limites institucionais explícitos.', 'https://saudegpt.com'],
-];
+import { OTHER_WORK, PROJECTS } from '@/lib/portfolio';
 
 export default function Portfolio() {
   return (
