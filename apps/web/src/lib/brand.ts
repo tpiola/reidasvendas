@@ -18,21 +18,6 @@ export const BRAND = {
   images: {
     hero: '/videos/hero-signal-loop.mp4',
     og: '/imagens/og-default.jpg',
-    services: {
-      sites: '/imagens/services/sites.jpg',
-      apps: '/imagens/services/apps.jpg',
-      automations: '/imagens/services/automations.jpg',
-      dashboards: '/imagens/services/dashboards.jpg',
-      mentoria: '/imagens/services/mentoria.jpg',
-    },
-    nichos: {
-      calcadista: '/imagens/nichos/calcadista.jpg',
-      comercio: '/imagens/nichos/comercio.jpg',
-      industria: '/imagens/nichos/industria.jpg',
-      saude: '/imagens/nichos/saude.jpg',
-      educacao: '/imagens/nichos/educacao.jpg',
-      servicos: '/imagens/nichos/servicos.jpg',
-    },
   },
   seo: {
     title: 'Sites, aplicativos e soluções digitais em Franca | Rei das Vendas',
