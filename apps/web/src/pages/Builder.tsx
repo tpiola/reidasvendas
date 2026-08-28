@@ -597,7 +597,7 @@ export default function Builder() {
 
                   {/* Share hint */}
                   <p className="text-center text-[10px] text-text-muted">
-                    {deployResult.url} • Publicado via Rei das Vendas AI Builder
+                    {deployResult.url} • Publicado pela Rei das Vendas
                   </p>
                 </div>
               )}

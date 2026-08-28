@@ -25,6 +25,5 @@
   "stats.whatsapp.value": "24h",
   "stats.whatsapp.label": "canal de WhatsApp",
   "stats.radius.value": "40",
-  "stats.radius.label": "km de radio",
-  "footer.built": "Construido por Hermes Agent"
+  "stats.radius.label": "km de radio"
 }

@@ -148,7 +148,6 @@ function generateSiteHtml(payload: DeployPayload): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${companyName} — ${sector} | Site Profissional</title>
   <meta name="description" content="${site.hero.subtitle.slice(0, 160)}">
-  <meta name="generator" content="Rei das Vendas AI Builder">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -370,7 +369,7 @@ function generateSiteHtml(payload: DeployPayload): string {
       <div class="logo" style="font-size: 1.1rem; margin-bottom: 8px">${companyName}</div>
       <p style="color: var(--text-muted); font-size: 0.85rem">${site.summary || `${sector} de excelência — compromisso com resultado.`}</p>
       <p class="powered">
-        Site criado com <a href="https://reidasvendas.com.br" target="_blank" rel="noopener">Rei das Vendas AI Builder</a>
+        Site criado pela <a href="https://reidasvendas.com.br" target="_blank" rel="noopener">Rei das Vendas</a>
       </p>
     </div>
   </footer>
