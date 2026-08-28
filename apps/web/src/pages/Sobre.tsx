@@ -2,6 +2,7 @@ import { ArrowRight, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { BRAND } from '@/lib/brand';
+import { PROJECTS } from '@/lib/portfolio';
 
 const principles = [
   {
@@ -61,6 +62,27 @@ export default function Sobre() {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      <section className="rdv-about__work" aria-labelledby="about-work-title">
+        <div className="rdv-shell">
+          <header>
+            <p className="rdv-kicker">Prova, não promessa</p>
+            <h2 id="about-work-title">O corte se vê no que já foi publicado.</h2>
+          </header>
+          <div className="rdv-about__work-grid">
+            {PROJECTS.map((project) => (
+              <article key={project.name}>
+                <div className="rdv-portfolio-v3__shot">
+                  <img src={project.image} alt={`Interface publicada de ${project.name}`} loading="lazy" width="800" height="500" />
+                </div>
+                <p>{project.type}</p>
+                <h3>{project.name}</h3>
+              </article>
+            ))}
+          </div>
+          <Link className="rdv-about__work-link" to="/portfolio">Ver todos os projetos <ArrowRight aria-hidden="true" /></Link>
         </div>
       </section>
 
