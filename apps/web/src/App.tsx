@@ -170,7 +170,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/solucoes': {
     title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
-    description: 'Explore 24 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais.',
+    description: 'Explore 24 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
   },
   '/diagnostico': {
     title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
@@ -198,7 +198,7 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   },
   '/termos': {
     title: 'Termos de uso | Rei das Vendas',
-    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais.',
+    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais e empresas em todo o Brasil.',
   },
   '/blog': {
     title: 'Caderno de operação | Rei das Vendas',
