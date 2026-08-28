@@ -1,5 +1,5 @@
 import { lazy, Suspense, Component, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
@@ -11,13 +11,11 @@ import { ARTICLE_BY_SLUG } from '@/lib/articles';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
 import { GUIDES, SEO_BY_PATH } from '@/lib/growth';
 
-const ServicoDetalhe = lazy(() => import('@/pages/ServicoDetalhe'));
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
 const Politica = lazy(() => import('@/pages/Politica'));
 const Termos = lazy(() => import('@/pages/Termos'));
 const Sobre = lazy(() => import('@/pages/Sobre'));
-const SegmentoDetalhe = lazy(() => import('@/pages/SegmentoDetalhe'));
 const Portfolio = lazy(() => import('@/pages/Portfolio'));
 const Solucoes = lazy(() => import('@/pages/Solucoes'));
 const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
@@ -121,6 +119,40 @@ function RedirectTo({ to }: { to: string }) {
     window.dispatchEvent(new CustomEvent('route-redirect', { detail: { to, timestamp: Date.now() } }));
   }, [to]);
   return <Navigate to={to} replace />;
+}
+
+/**
+ * /servicos/:slug e /segmentos/:slug eram um catálogo de conteúdo anterior à
+ * reorganização "único caminho comercial" (commit a0c1d7f) que unificou o site
+ * em /solucoes. As páginas antigas (ServicoDetalhe/SegmentoDetalhe) ficaram
+ * sem nenhum link de entrada — órfãs, indexáveis só por URL direta ou backlink
+ * antigo, com conteúdo sobrepondo o de /solucoes (ex.: "infraestrutura-digital"
+ * existe nos dois catálogos com textos diferentes). Redireciona para o
+ * equivalente mais próximo já ativo em /solucoes em vez de manter conteúdo
+ * duplicado indexável.
+ */
+const LEGACY_SLUG_REDIRECTS: Record<string, string> = {
+  'site-conversao-local': '/solucoes/site-institucional-premium',
+  'funis-e-automacao': '/solucoes/funil-de-qualificacao',
+  'aplicativos-e-saas': '/solucoes/app-para-empresas',
+  'google-e-presenca-local': '/solucoes/seo-local-google-business',
+  'infraestrutura-digital': '/solucoes/infraestrutura-digital',
+  'integracao-whatsapp': '/solucoes/automacao-whatsapp',
+  clinicas: '/solucoes/site-para-clinicas',
+  odontologia: '/solucoes/site-para-dentistas',
+  estetica: '/solucoes/site-para-clinicas',
+  restaurantes: '/solucoes/site-para-restaurantes',
+  'oficinas-mecanicas': '/solucoes/site-para-profissionais-liberais',
+  'pet-shop': '/solucoes/site-institucional-premium',
+  advocacia: '/solucoes/site-para-advogados',
+  imobiliarias: '/solucoes/site-para-imobiliarias',
+  'escolas-e-cursos': '/solucoes/site-institucional-premium',
+  'servicos-locais': '/solucoes/site-para-profissionais-liberais',
+};
+
+function RedirectLegacySlug() {
+  const { slug = '' } = useParams();
+  return <RedirectTo to={LEGACY_SLUG_REDIRECTS[slug] ?? '/solucoes'} />;
 }
 
 const META_BY_PATH: Record<string, { title: string; description: string }> = {
@@ -327,7 +359,7 @@ function SiteLayout() {
               {GUIDES.map((guide) => <Route key={guide.slug} path={`/${guide.slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
               <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
               <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
-              <Route path="/servicos/:slug" element={<PageTransition><ServicoDetalhe /></PageTransition>} />
+              <Route path="/servicos/:slug" element={<RedirectLegacySlug />} />
               <Route path="/modelos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
               <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
@@ -337,7 +369,7 @@ function SiteLayout() {
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
               <Route path="/recursos" element={<RedirectTo to="/blog" />} />
               <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
-              <Route path="/segmentos/:slug" element={<PageTransition><SegmentoDetalhe /></PageTransition>} />
+              <Route path="/segmentos/:slug" element={<RedirectLegacySlug />} />
               <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
               <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
               <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
