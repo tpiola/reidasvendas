@@ -217,6 +217,14 @@ export const MARKETPLACE_ITEMS: MarketplaceItem[] = [
     outcome: 'Não deixar o digital parar',
     solution: 'analytics-e-cro',
   },
+  {
+    title: 'Operação digital',
+    description: 'Recepção no WhatsApp, painel de leads e ciclo mensal para o site continuar vendendo depois de publicar.',
+    family: 'operacao',
+    format: 'Assinatura',
+    outcome: 'Fazer o digital continuar trabalhando',
+    solution: 'operacao-digital',
+  },
 ];
 
 export const DELIVERY_MODELS = [

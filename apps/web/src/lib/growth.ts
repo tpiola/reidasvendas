@@ -473,6 +473,27 @@ export const SOLUTIONS: Solution[] = [
     ],
     related: ['distribuicao-multicanal', 'infraestrutura-digital', 'funil-de-qualificacao'],
   },
+  {
+    slug: 'operacao-digital',
+    title: 'Operação digital: o site que continua trabalhando',
+    category: 'Operação e evolução',
+    audience: 'Negócios que já publicaram (ou vão publicar) uma presença digital e precisam que ela atenda, agende e reporte resultado',
+    summary: 'Um ciclo mensal que junta recepção comercial no WhatsApp, painel de acompanhamento e monitoramento de oportunidades em uma única operação responsável.',
+    pain: 'Um site publicado e parado não gera retorno. O atendimento demora, os contatos se perdem sem origem e a empresa não sabe onde melhorar porque nada é medido.',
+    outcome: 'Atendimento que responde sem recomeçar do zero, visão clara dos leads e uma fila de melhorias decidida por uso real, não por palpite.',
+    architecture: [
+      { title: 'Recepção comercial que vende e agenda', detail: 'Fluxo no WhatsApp que recebe o contato com contexto, responde o repetido e entrega a decisão para uma pessoa no momento certo.' },
+      { title: 'Painel de acompanhamento', detail: 'Leads, origem, status e próximas ações visíveis para o dono do negócio, sem depender de planilha ou relatório manual.' },
+      { title: 'Monitoramento de oportunidades', detail: 'Sinais de procura e pedidos que chegam por canais diferentes são registrados e priorizados antes de esfriarem.' },
+      { title: 'Ciclo mensal de melhoria', detail: 'Hipóteses pequenas, medidas e decididas com base no que o uso real mostrou, sem prometer posição ou volume.' },
+    ],
+    questions: [
+      { question: 'Isso substitui a equipe de atendimento?', answer: 'Não. A operação organiza a entrada, responde o repetido e entrega contexto. Decisão comercial e casos sensíveis continuam com pessoas.' },
+      { question: 'Preciso de um site novo para contratar a operação?', answer: 'Não. A operação pode ser montada sobre uma presença já publicada, desde que domínio, acessos e medição estejam organizados.' },
+      { question: 'Vocês garantem mais vendas com a operação?', answer: 'Não. O ciclo reduz atrito e dá visibilidade ao que acontece; resultado depende de oferta, demanda e atendimento, que passam a ser medidos juntos.' },
+    ],
+    related: ['automacao-whatsapp', 'infraestrutura-digital', 'analytics-e-cro'],
+  },
 ];
 
 export type LocalPage = {
