@@ -219,7 +219,7 @@ export const MARKETPLACE_ITEMS: MarketplaceItem[] = [
   },
   {
     title: 'Operação digital',
-    description: 'Recepção no WhatsApp, painel de leads e ciclo mensal para o site continuar vendendo depois de publicar.',
+    description: 'Atendimento no WhatsApp, painel de leads e ciclo mensal para o site continuar vendendo depois de publicado.',
     family: 'operacao',
     format: 'Assinatura',
     outcome: 'Fazer o digital continuar trabalhando',
