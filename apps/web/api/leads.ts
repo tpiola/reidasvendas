@@ -11,7 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Carrega o dataset uma vez por cold start (1.5MB — aceitável)
-const DB_PATH = path.join(__dirname, '..', 'data', 'backend-leads.json');
+const DB_PATH = path.join(__dirname, 'data', 'backend-leads.json');
 let DB = null;
 function loadDB() {
   if (DB) return DB;
@@ -23,7 +23,7 @@ function loadDB() {
   return DB;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   const url = new URL(req.url, 'http://localhost');
   const pathname = url.pathname.replace(/\/+$/, '');
 
@@ -62,7 +62,7 @@ module.exports = async function handler(req, res) {
       if (l.tipo !== 'com_site') verts[l.vertical].sem_site += 1;
     }
     return res.status(200).json(Object.entries(verts)
-      .map(([vertical, v]) => ({ vertical, ...v }))
+      .map(([vertical, v]) => ({ vertical, total: (v as { total: number }).total, com_whatsapp: (v as { com_whatsapp: number }).com_whatsapp, sem_site: (v as { sem_site: number }).sem_site }))
       .sort((a, b) => b.com_whatsapp - a.com_whatsapp));
   }
 
@@ -132,4 +132,4 @@ module.exports = async function handler(req, res) {
   }
 
   return res.status(404).json({ error: 'rota não encontrada' });
-};
+}
