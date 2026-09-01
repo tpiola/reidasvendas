@@ -18,6 +18,12 @@ O Rei das Vendas constrói sites premium, lojas virtuais, catálogos, aplicativo
 - Política de privacidade: https://reidasvendas.com.br/politica
 - Sitemap: https://reidasvendas.com.br/sitemap.xml
 
+## API pública (backend de prospecção local)
+
+- Estatísticas de leads: https://reidasvendas.com.br/api/leads/stats
+- Ranking de verticais: https://reidasvendas.com.br/api/leads/verticals
+- Busca de leads (filtros: vertical, nivel, tipo, tem_whatsapp, quentes, q, sort): https://reidasvendas.com.br/api/leads
+
 ## Contato oficial
 
 - E-mail: contato@reidasvendas.com.br
