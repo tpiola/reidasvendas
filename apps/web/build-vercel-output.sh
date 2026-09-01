@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-cd /opt/data/projects/reidasvendas/apps/web
+cd "$(dirname "$0")"
 OUTPUT_DIR=".vercel/output"
 STATIC_DIR="${OUTPUT_DIR}/static"
 FUNCTIONS_DIR="${OUTPUT_DIR}/functions"
@@ -42,6 +42,22 @@ cat > "${OUTPUT_DIR}/config.json" << 'CONFIGEOF'
     {
       "src": "^/api/health$",
       "dest": "/api/health"
+    },
+    {
+      "src": "^/api/leads$",
+      "dest": "/api/leads"
+    },
+    {
+      "src": "^/api/leads/stats$",
+      "dest": "/api/leads/stats"
+    },
+    {
+      "src": "^/api/leads/verticals$",
+      "dest": "/api/leads/verticals"
+    },
+    {
+      "src": "^/api/leads/([^/]+)$",
+      "dest": "/api/leads/$1"
     },
     {
       "src": "^/api/create-checkout-session$",
@@ -100,6 +116,11 @@ compile_function() {
 }
 FUNCCONFIG
 
+  # Copia dataset JSON (dados de prospecção) para dentro da function
+  if [ -d "api/data" ]; then
+    cp -r api/data "${func_dir}/data"
+  fi
+
   echo "  ✓ api/${api_name}"
 }
 
@@ -110,6 +131,7 @@ compile_function "lead"
 compile_function "chat"
 compile_function "create-checkout-session"
 compile_function "health"
+compile_function "leads"
 
 echo ""
 echo "✓ Build Output API v3 gerado em ${OUTPUT_DIR}"
