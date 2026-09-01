@@ -13,6 +13,10 @@ import leadsData from './data/backend-leads.json';
 
 const DB: any[] = leadsData;
 
+// Dados imutáveis por deploy (dataset embutido no bundle): cacheável no edge da Vercel.
+// s-maxage=3600 + SWR: primeira chamada roda a function, as seguintes saem do CDN.
+const CACHE_EDGE = 'public, s-maxage=3600, stale-while-revalidate=86400';
+
 export default async function handler(req: any, res: any) {
   const url = new URL(req.url, 'http://localhost');
   const pathname = url.pathname.replace(/\/+$/, '');
@@ -25,6 +29,7 @@ export default async function handler(req: any, res: any) {
     const criticos = DB.filter((l: any) => l.nivel === 'CRÍTICO').length;
     const verts: Record<string, number> = {};
     for (const l of DB) verts[l.vertical] = (verts[l.vertical] || 0) + 1;
+    res.setHeader('Cache-Control', CACHE_EDGE);
     return res.status(200).json({
       total, com_whatsapp: comWhats, sem_site: semSite, criticos,
       verticais: Object.keys(verts).length,
@@ -42,6 +47,7 @@ export default async function handler(req: any, res: any) {
       if (l.whatsapp) verts[l.vertical].com_whatsapp += 1;
       if (l.tipo !== 'com_site') verts[l.vertical].sem_site += 1;
     }
+    res.setHeader('Cache-Control', CACHE_EDGE);
     return res.status(200).json(Object.entries(verts)
       .map(([vertical, v]: [string, any]) => ({ vertical, total: v.total, com_whatsapp: v.com_whatsapp, sem_site: v.sem_site }))
       .sort((a, b) => b.com_whatsapp - a.com_whatsapp));
@@ -85,6 +91,7 @@ export default async function handler(req: any, res: any) {
     const limit = Math.min(parseInt(params.get('limit') || '50', 10), 200);
     const offset = parseInt(params.get('offset') || '0', 10);
 
+    res.setHeader('Cache-Control', CACHE_EDGE);
     return res.status(200).json({
       total: resultado.length, limit, offset,
       leads: resultado.slice(offset, offset + limit),
@@ -96,6 +103,7 @@ export default async function handler(req: any, res: any) {
   if (idMatch) {
     const lead = DB.find((l) => l.id === idMatch[1]);
     if (!lead) return res.status(404).json({ error: 'lead não encontrado' });
+    res.setHeader('Cache-Control', CACHE_EDGE);
     return res.status(200).json(lead);
   }
 
