@@ -10,6 +10,11 @@
       "dependabot/**": false
     }
   },
+  "rewrites": [
+    { "source": "/api/leads/stats", "destination": "/api/leads" },
+    { "source": "/api/leads/verticals", "destination": "/api/leads" },
+    { "source": "/api/leads/:id", "destination": "/api/leads" }
+  ],
   "redirects": [
     {
       "source": "/:path*",
