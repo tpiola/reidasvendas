@@ -1,6 +1,6 @@
 # Rei das Vendas
 
-> Infraestrutura digital para negócios locais e profissionais liberais, com direção de projeto em Franca, SP, Brasil.
+> Infraestrutura digital para negócios locais e empresas em todo o Brasil, com direção de projeto em Franca, SP.
 
 ## Proposta
 
