@@ -73,6 +73,15 @@ export default function Hero() {
       data-animation-active={animationActive ? 'true' : 'false'}
     >
       <div className="rdv-hero__media" aria-hidden="true">
+        <img
+          className="rdv-hero__image"
+          src="/imagens/hero-agencia-cinematic.webp"
+          alt=""
+          width="1920"
+          height="1080"
+          fetchPriority="high"
+          decoding="async"
+        />
         <video
           ref={videoRef}
           className="rdv-hero__video"
@@ -81,7 +90,7 @@ export default function Hero() {
           loop
           playsInline
           preload={ambientMotion ? 'metadata' : 'none'}
-          poster="/videos/hero-signal-poster.webp"
+          poster="/imagens/hero-poster.jpg"
           disablePictureInPicture
         >
           <source src="/videos/hero-signal-loop.mp4" type="video/mp4" />

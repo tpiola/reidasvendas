@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
+import { ProjectVideo } from '@/components/ProjectVideo';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
@@ -29,6 +30,7 @@ const PROJECTS = [
     type: 'Serviço local · Franca/SP',
     detail: 'Serviços, áreas atendidas, diagnóstico e orçamento reunidos em uma jornada móvel.',
     image: '/imagens/portfolio/sentinela.webp',
+    video: '/videos/projetos/sentinela.mp4',
     emphasis: 'flagship',
     href: 'https://sentinelasaudeambiental.com.br',
   },
@@ -37,6 +39,7 @@ const PROJECTS = [
     type: 'Comércio · e-commerce',
     detail: 'Trinta anos de história transformados em catálogo por categoria e experiência de compra.',
     image: '/imagens/portfolio/tka-esportes.webp',
+    video: '/videos/projetos/tka.mp4',
     emphasis: 'standard',
     href: 'https://tkaesportes.com.br',
   },
@@ -47,12 +50,16 @@ const OTHER_WORK = [
     name: 'Thiago Piola',
     type: 'Presença autoral · portfólio',
     detail: 'Trajetória, projetos e serviços organizados em uma narrativa própria.',
+    image: '/imagens/portfolio/thiagopiola.webp',
+    video: '/videos/projetos/thiagopiola.mp4',
     href: 'https://thiagopiola.com.br',
   },
   {
     name: 'SaúdeGPT',
     type: 'Produto conversacional · saúde',
     detail: 'Produto web guiado, com histórico e limites institucionais explícitos.',
+    image: '/imagens/portfolio/saudegpt.webp',
+    video: '/videos/projetos/saudegpt.mp4',
     href: 'https://saudegpt.com',
   },
 ];
@@ -190,9 +197,10 @@ export default function Home() {
                     onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
                   >
                     <div className="rdv-project-shot__media">
+                      <ProjectVideo src={project.video ?? ''} poster={project.image} />
                       <img src={project.image} alt={`Interface publicada de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} width="1200" height="750" />
                       <span>{String(index + 1).padStart(2, '0')}</span>
-                      <em>Visitar site <ArrowRight aria-hidden="true" /></em>
+                      <em>Ver em movimento <ArrowRight aria-hidden="true" /></em>
                     </div>
                     <div className="rdv-project-shot__body">
                       <p>{project.type}</p>
@@ -209,7 +217,10 @@ export default function Home() {
             {OTHER_WORK.map((work) => (
               <Reveal key={work.name} delay={0.1}>
                 <a href={work.href} target="_blank" rel="noopener noreferrer" role="listitem" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
-                  <span className="rdv-home-otherwork__mark" aria-hidden="true">↗</span>
+                  <span className="rdv-home-otherwork__media">
+                    <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
+                    <img src={work.image} alt="" width="1200" height="750" loading="lazy" />
+                  </span>
                   <div>
                     <p>{work.type}</p>
                     <h3>{work.name}</h3>

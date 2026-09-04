@@ -39,9 +39,10 @@ export default function Portfolio() {
         <div className="rdv-shell">
           <header><p className="rdv-kicker">Outros contextos</p><h2 id="portfolio-other-title">Produto e presença autoral também exigem uma arquitetura própria.</h2></header>
           <div>
-            {OTHER_WORK.map(([name, type, detail, href], index) => (
+            {OTHER_WORK.map(([name, type, detail, href, image], index) => (
               <a key={name} href={href} target="_blank" rel="noopener noreferrer">
-                <span>{String(index + 4).padStart(2, '0')}</span>
+                <img src={image} alt="" width="240" height="150" loading="lazy" />
+                <span>{String(index + 3).padStart(2, '0')}</span>
                 <div><p>{type}</p><h3>{name}</h3></div>
                 <p>{detail}</p>
                 <ExternalLink aria-hidden="true" />

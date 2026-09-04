@@ -20,13 +20,13 @@ export const PROJECTS: PortfolioProject[] = [
     name: 'TKA Esportes',
     type: 'Comércio · e-commerce',
     description: 'Uma operação comercial com catálogo por categoria, história de marca e jornada de compra móvel.',
-    image: '/imagens/portfolio/tka-esportes.webp',
+    image: '/imagens/portfolio/tka.webp',
     scope: ['E-commerce', 'Catálogo', 'Marca e conteúdo', 'Experiência mobile'],
     href: 'https://tkaesportes.com.br',
   },
 ];
 
-export const OTHER_WORK: [string, string, string, string][] = [
-  ['Thiago Piola', 'Presença autoral', 'Trajetória, projetos e serviços organizados em uma narrativa própria.', 'https://thiagopiola.com.br'],
-  ['SaúdeGPT', 'Produto conversacional', 'Produto web guiado, com histórico e limites institucionais explícitos.', 'https://saudegpt.com'],
+export const OTHER_WORK: [string, string, string, string, string][] = [
+  ['Thiago Piola', 'Presença autoral', 'Trajetória, projetos e serviços organizados em uma narrativa própria.', 'https://thiagopiola.com.br', '/imagens/portfolio/thiagopiola.webp'],
+  ['SaúdeGPT', 'Produto conversacional', 'Produto web guiado, com histórico e limites institucionais explícitos.', 'https://saudegpt.com', '/imagens/portfolio/saudegpt.webp'],
 ];

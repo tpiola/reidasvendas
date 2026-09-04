@@ -31,19 +31,21 @@ body::after {
 }
 
 .rdv-header-inner {
-  min-height: 4.75rem;
+  min-height: 5rem;
 }
 
 .rdv-brand-lockup__mark {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3rem;
+  height: 3rem;
   flex: 0 0 auto;
   overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(232, 200, 111, 0.22));
 }
 
 .rdv-brand-lockup__frame {
-  fill: #090c12;
-  stroke: rgba(232, 200, 111, 0.26);
+  fill: #0d1320;
+  stroke: rgba(232, 200, 111, 0.78);
+  stroke-width: 1.6;
 }
 
 .rdv-brand-lockup__r,
@@ -55,22 +57,22 @@ body::after {
 
 .rdv-brand-lockup__r {
   stroke: #e8c86f;
-  stroke-width: 2.25;
+  stroke-width: 2.7;
 }
 
 .rdv-brand-lockup__rise {
-  stroke: #f4e1a5;
-  stroke-width: 2.25;
+  stroke: #f7e7b3;
+  stroke-width: 2.7;
 }
 
 .rdv-brand-lockup__signal {
-  stroke: #a88d3e;
-  stroke-width: 1;
+  stroke: #c9a84e;
+  stroke-width: 1.3;
 }
 
 .rdv-wordmark {
   color: #f7f3e8 !important;
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
@@ -1225,13 +1227,28 @@ body::after {
 
 .rdv-portfolio-v3__other a {
   display: grid;
-  grid-template-columns: 2.5rem minmax(12rem, 0.7fr) minmax(18rem, 1fr) auto;
+  grid-template-columns: 9rem 2.5rem minmax(12rem, 0.7fr) minmax(18rem, 1fr) auto;
   align-items: center;
   gap: 2rem;
   min-height: 8rem;
   border-bottom: 1px solid rgba(247, 243, 232, 0.11);
   color: inherit;
   text-decoration: none;
+}
+
+.rdv-portfolio-v3__other a img {
+  width: 9rem;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid rgba(247, 243, 232, 0.14);
+  transition: border-color 250ms ease, transform 300ms var(--ease-out);
+}
+
+.rdv-portfolio-v3__other a:hover img {
+  border-color: rgba(232, 200, 111, 0.45);
+  transform: translateY(-2px);
 }
 
 .rdv-portfolio-v3__other a > span {
@@ -1332,6 +1349,19 @@ body::after {
     grid-template-columns: 2rem minmax(0, 1fr) auto;
     gap: 1rem;
     padding-block: 1.5rem;
+  }
+
+  .rdv-portfolio-v3__other a > img {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .rdv-portfolio-v3__other a > span {
+    grid-column: 1;
+  }
+
+  .rdv-portfolio-v3__other a > div {
+    grid-column: 2 / -1;
   }
 
   .rdv-portfolio-v3__other a > p {
@@ -2011,8 +2041,8 @@ body::after {
 
 @media (max-width: 23.5rem) {
   .rdv-brand-lockup__mark {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.6rem;
+    height: 2.6rem;
   }
 
   .rdv-wordmark-subtitle {
@@ -2613,6 +2643,37 @@ body::after {
   transform: scale(1.02);
 }
 
+/* Vídeo de demonstração: cobre a imagem apenas no hover (desktop com hover) */
+.rdv-project-shot__video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transition: opacity 350ms ease;
+  pointer-events: none;
+}
+
+.rdv-project-shot__link:hover .rdv-project-shot__video {
+  opacity: 1;
+}
+
+.rdv-project-shot__media > img {
+  transition: opacity 350ms ease;
+}
+
+.rdv-project-shot__link:hover .rdv-project-shot__media > img {
+  opacity: 0;
+}
+
+/* selo "ver em movimento" por cima do vídeo */
+.rdv-project-shot__media em {
+  z-index: 3;
+}
+
 .rdv-home-otherwork {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2622,10 +2683,10 @@ body::after {
 
 .rdv-home-otherwork__item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) minmax(8rem, 0.6fr);
+  grid-template-columns: minmax(7rem, 10rem) minmax(0, 1fr) minmax(8rem, 0.6fr);
   gap: 1.25rem;
   align-items: center;
-  padding: 1.5rem;
+  padding: 1rem;
   border: 1px solid rgba(247, 243, 232, 0.12);
   background: #0c1017;
   color: inherit;
@@ -2645,19 +2706,36 @@ body::after {
   outline-offset: 3px;
 }
 
-.rdv-home-otherwork__mark {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  place-content: center;
-  border: 1px solid rgba(232, 200, 111, 0.45);
-  color: #e8c86f;
-  transition: background 250ms ease, color 250ms ease;
+.rdv-home-otherwork__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(232, 200, 111, 0.22);
+  background: #11151d;
 }
 
-.rdv-home-otherwork__item:hover .rdv-home-otherwork__mark {
-  background: #e8c86f;
-  color: #111008;
+.rdv-home-otherwork__media img,
+.rdv-home-otherwork__media video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.rdv-home-otherwork__media video {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.rdv-home-otherwork__item:hover .rdv-home-otherwork__media video {
+  opacity: 1;
+}
+
+.rdv-home-otherwork__item:hover .rdv-home-otherwork__media img {
+  opacity: 0;
 }
 
 .rdv-home-otherwork__item > div {
@@ -2694,7 +2772,13 @@ body::after {
   }
 
   .rdv-home-otherwork__item {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(5rem, 7rem) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+  }
+
+  .rdv-home-otherwork__media {
+    grid-row: span 2;
+    align-self: center;
   }
 
   .rdv-home-otherwork__item > p:last-child {
