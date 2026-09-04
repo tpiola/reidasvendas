@@ -298,14 +298,28 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="rdv-closing-v3" aria-labelledby="closing-title">
-        <div className="rdv-shell">
+      <section className="rdv-closing-v3 rdv-closing-v3--video" aria-labelledby="closing-title">
+        <div className="rdv-closing-v3__video" aria-hidden="true">
+          <video
+            src="/videos/showreel-final.mp4"
+            poster="/videos/showreel-poster.jpg"
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="metadata"
+            disablePictureInPicture
+            tabIndex={-1}
+          />
+          <span className="rdv-closing-v3__shade" />
+        </div>
+        <div className="rdv-shell rdv-closing-v3__content">
           <Reveal>
             <p className="rdv-kicker">O primeiro movimento</p>
             <h2 id="closing-title">Mostre seu negócio. A gente devolve uma direção.</h2>
             <p>O diagnóstico registra objetivo, gargalo e prioridade antes de abrir o WhatsApp. Sem proposta genérica e sem compromisso automático.</p>
           </Reveal>
-          <Reveal delay={0.12}>
+          <Reveal delay={0.12} className="rdv-closing-v3__actions">
             <div>
               <Link
                 className="rdv-primary-action"
@@ -318,6 +332,11 @@ export default function Home() {
                 WhatsApp · {BRAND.phoneDisplay}
               </a>
             </div>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="rdv-closing-v3__footnote">
+              Projetos reais em movimento: Sentinela, TKA Esportes, Thiago Piola e SaúdeGPT.
+            </p>
           </Reveal>
         </div>
       </section>

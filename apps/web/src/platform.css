@@ -811,6 +811,101 @@ body::after {
     #05070a;
 }
 
+.rdv-closing-v3--video {
+  background: #03060a;
+}
+
+.rdv-closing-v3__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #03060a;
+}
+
+.rdv-closing-v3__video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.32;
+}
+
+.rdv-closing-v3__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(3, 6, 10, 0.55), rgba(3, 6, 10, 0.94) 78%),
+    linear-gradient(180deg, rgba(3, 6, 10, 0.72), rgba(3, 6, 10, 0.86));
+}
+
+.rdv-closing-v3__content {
+  position: relative;
+  z-index: 1;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  gap: 0 !important;
+  margin-top: 0 !important;
+  text-align: center;
+  border-top: none !important;
+}
+
+.rdv-closing-v3__content > div {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  justify-items: center !important;
+  gap: 0 !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+  width: 100%;
+}
+
+.rdv-closing-v3__actions {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.rdv-closing-v3__actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.rdv-closing-v3--video::after {
+  display: none;
+}
+
+.rdv-closing-v3__content h2,
+.rdv-closing-v3__content .rdv-kicker {
+  margin-inline: auto;
+}
+
+.rdv-closing-v3__content p:not(.rdv-kicker) {
+  margin-inline: auto;
+}
+
+.rdv-closing-v3__footnote {
+  margin-top: 2.5rem;
+  color: rgba(247, 243, 232, 0.55) !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.04em;
+}
+
+.rdv-closing-v3--video .rdv-whatsapp-action {
+  color: #f7f3e8;
+}
+
+/* Sem autoplay de vídeo no mobile: poster cobre e o vídeo não baixa. */
+@media (hover: none), (max-width: 860px) {
+  .rdv-closing-v3__video video {
+    display: none;
+  }
+}
+
 .rdv-closing-v3::after {
   position: absolute;
   top: 50%;
@@ -842,7 +937,7 @@ body::after {
   line-height: 1.75;
 }
 
-.rdv-closing-v3 .rdv-shell > div {
+.rdv-closing-v3__actions > div {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
