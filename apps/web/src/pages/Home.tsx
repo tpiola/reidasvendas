@@ -336,8 +336,8 @@ export default function Home() {
       <section className="rdv-closing-v3 rdv-closing-v3--video" aria-labelledby="closing-title">
         <div className="rdv-closing-v3__video" aria-hidden="true">
           <video
-            src="/videos/showreel-final.mp4"
-            poster="/videos/showreel-poster.jpg"
+            src="/videos/final-cinematic.mp4"
+            poster="/imagens/final-cinematic-poster.jpg"
             muted
             loop
             playsInline
@@ -370,7 +370,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.2}>
             <p className="rdv-closing-v3__footnote">
-              Projetos reais em movimento: Sentinela, TKA Esportes, Thiago Piola e SaúdeGPT.
+              O próximo passo do seu negócio começa com uma conversa — não com um formulário frio.
             </p>
           </Reveal>
         </div>
