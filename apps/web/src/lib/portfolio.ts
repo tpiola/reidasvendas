@@ -22,13 +22,7 @@ export const PROJECTS: PortfolioProject[] = [
     description: 'Uma operação comercial com catálogo por categoria, história de marca e jornada de compra móvel.',
     image: '/imagens/portfolio/tka-esportes.webp',
     scope: ['E-commerce', 'Catálogo', 'Marca e conteúdo', 'Experiência mobile'],
-  },
-  {
-    name: 'Keeus',
-    type: 'Marca · e-commerce',
-    description: 'Produto, tamanho e proposta de compra consciente organizados em uma experiência de comércio própria.',
-    image: '/imagens/portfolio/keeus.webp',
-    scope: ['Loja online', 'Páginas de produto', 'Direção de marca', 'Conteúdo comercial'],
+    href: 'https://tkaesportes.com.br',
   },
 ];
 

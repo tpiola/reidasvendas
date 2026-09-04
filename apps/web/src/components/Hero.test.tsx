@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Hero from './Hero';
 import { I18nProvider } from '../lib/i18n';
@@ -8,15 +8,9 @@ vi.mock('./NeuralCanvas', () => ({
   default: () => <canvas data-testid="neural-canvas" />,
 }));
 
-function DiagnosticLocation() {
-  const location = useLocation();
-  return <output data-testid="diagnostic-location">{location.search}</output>;
-}
-
 describe('Hero', () => {
   beforeEach(() => {
     window.localStorage.setItem('rdv-locale', 'pt');
-    window.history.replaceState({}, '', '/?utm_source=campanha-local');
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
       value: vi.fn().mockImplementation((query: string) => ({
@@ -34,25 +28,22 @@ describe('Hero', () => {
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => undefined);
   });
 
-  it('preserva a atribuição ao abrir o diagnóstico sem coletar dados no hero', async () => {
+  it('apresenta os dois caminhos: soluções e provas publicadas', () => {
     render(
       <BrowserRouter>
         <I18nProvider>
           <Routes>
             <Route path="/" element={<Hero />} />
-            <Route path="/diagnostico" element={<DiagnosticLocation />} />
+            <Route path="/portfolio" element={<main>Portfolio page</main>} />
           </Routes>
         </I18nProvider>
       </BrowserRouter>,
     );
 
-    fireEvent.click(screen.getByRole('link', { name: /mapear meu negócio/i }));
+    expect(screen.getByRole('link', { name: /explorar possibilidades/i })).toHaveAttribute('href', '/solucoes');
+    expect(screen.getByRole('link', { name: /ver projetos reais/i })).toHaveAttribute('href', '/portfolio');
 
-    const output = await screen.findByTestId('diagnostic-location');
-    const query = new URLSearchParams(output.textContent ?? '');
-
-    expect(query.get('email')).toBeNull();
-    expect(query.get('origem')).toBe('home-hero');
-    expect(query.get('utm_source')).toBe('campanha-local');
+    fireEvent.click(screen.getByRole('link', { name: /ver projetos reais/i }));
+    expect(screen.getByText('Portfolio page')).toBeInTheDocument();
   });
 });

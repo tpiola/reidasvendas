@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { useI18n } from '@/lib/i18n';
 
@@ -21,7 +21,6 @@ function ambientMotionAllowed(reducedMotion: boolean): boolean {
 
 export default function Hero() {
   const { t } = useI18n();
-  const location = useLocation();
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,9 +28,6 @@ export default function Hero() {
   const [heroInView, setHeroInView] = useState(true);
   const [documentVisible, setDocumentVisible] = useState(true);
   const animationActive = ambientMotion && heroInView && documentVisible;
-  const diagnosticSearch = new URLSearchParams(location.search);
-  diagnosticSearch.set('origem', 'home-hero');
-  const diagnosticPath = `/diagnostico?${diagnosticSearch.toString()}`;
 
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -136,8 +132,8 @@ export default function Hero() {
           </Link>
           <Link
             className="rdv-hero__secondary"
-            to={diagnosticPath}
-            onClick={() => trackEvent('diagnostic_start', { position: 'home-hero' })}
+            to="/portfolio"
+            onClick={() => trackEvent('hero_cta', { destination: 'portfolio' })}
           >
             {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
           </Link>
