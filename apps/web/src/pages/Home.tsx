@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
 import { ProjectVideo } from '@/components/ProjectVideo';
+import { SetorDivider } from '@/components/SetorDivider';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
@@ -88,6 +89,14 @@ export default function Home() {
         </div>
       </section>
 
+      <SetorDivider
+        video="/videos/setores/pizzaria.mp4"
+        poster="/videos/setores/pizzaria-poster.jpg"
+        kicker="Alimentação · Franca/SP"
+        title="O cardápio que trabalha até de madrugada."
+        description="Pizzaria, hamburgueria, restaurante: o site mostra o cardápio, o horário e o bairro atendido. O pedido cai no WhatsApp de quem está no salão — não em caixa de e-mail esquecida."
+      />
+
       <section className="rdv-platform-intro" aria-labelledby="platform-intro-title">
         <div className="rdv-shell rdv-platform-intro__grid">
           <header>
@@ -169,6 +178,15 @@ export default function Home() {
         </div>
       </section>
 
+      <SetorDivider
+        video="/videos/setores/barbearia.mp4"
+        poster="/videos/setores/barbearia-poster.jpg"
+        kicker="Beleza & barbearia · Franca/SP"
+        title="A agenda cheia começa no primeiro corte bem feito."
+        description="Barbearia e salão vivem de indicação — e de aparecer quando alguém busca 'barbearia perto de mim'. O site mostra o trabalho, o preço e o botão que abre a conversa."
+        align="right"
+      />
+
       <section className="rdv-proof-v3" aria-labelledby="proof-title">
         <div className="rdv-shell">
           <Reveal>
@@ -238,6 +256,14 @@ export default function Home() {
         </div>
       </section>
 
+      <SetorDivider
+        video="/videos/setores/oficina.mp4"
+        poster="/videos/setores/oficina-poster.jpg"
+        kicker="Automotivo · Franca/SP"
+        title="Quem quebra na estrada não escolhe oficina no escuro."
+        description="Oficina mecânica, funilaria, auto elétrica: o cliente chega com o carro parado e a dúvida de quem confiar. O site mostra o serviço, o endereço e o telefone que atende na hora."
+      />
+
       <section className="rdv-models" aria-labelledby="models-title">
         <div className="rdv-shell">
           <Reveal>
@@ -297,6 +323,15 @@ export default function Home() {
           </motion.ol>
         </div>
       </section>
+
+      <SetorDivider
+        video="/videos/setores/estetica.mp4"
+        poster="/videos/setores/estetica-poster.jpg"
+        kicker="Saúde & estética · Franca/SP"
+        title="A primeira consulta começa antes da porta abrir."
+        description="Clínica de estética e saúde: o paciente pesquisa, compara e decide no celular antes de ligar. O site mostra o que é feito, quem faz e o que custa — sem prometer milagre."
+        align="right"
+      />
 
       <section className="rdv-closing-v3 rdv-closing-v3--video" aria-labelledby="closing-title">
         <div className="rdv-closing-v3__video" aria-hidden="true">

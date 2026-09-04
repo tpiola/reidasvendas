@@ -31,12 +31,22 @@ body::after {
 }
 
 .rdv-header-inner {
-  min-height: 5rem;
+  width: min(100% - 2rem, var(--page-width));
+  min-height: 3.9rem;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rdv-brand-lockup {
+  gap: 0.625rem;
 }
 
 .rdv-brand-lockup__mark {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   flex: 0 0 auto;
   overflow: visible;
   filter: drop-shadow(0 0 6px rgba(232, 200, 111, 0.22));
@@ -899,10 +909,11 @@ body::after {
   color: #f7f3e8;
 }
 
-/* Sem autoplay de vídeo no mobile: poster cobre e o vídeo não baixa. */
-@media (hover: none), (max-width: 860px) {
+/* Vídeo também roda no mobile: autoplay silencioso economiza dados do usuário
+   que escolheu assistir — o poster cobre enquanto o vídeo carrega. */
+@media (max-width: 860px) {
   .rdv-closing-v3__video video {
-    display: none;
+    opacity: 0.24;
   }
 }
 
@@ -995,7 +1006,8 @@ body::after {
 @media (max-width: 48rem) {
   .rdv-header-inner {
     width: min(calc(100% - 1.5rem), var(--page-width));
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: none;
+    min-height: 3.6rem;
   }
 
   .rdv-header-context,
@@ -1003,8 +1015,17 @@ body::after {
     display: none;
   }
 
+  .rdv-header-actions {
+    gap: 0.5rem;
+  }
+
+  .rdv-brand-lockup__mark {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
   .rdv-wordmark {
-    font-size: 1.15rem;
+    font-size: 1.08rem;
   }
 
   .rdv-wordmark-subtitle {
@@ -2738,7 +2759,121 @@ body::after {
   transform: scale(1.02);
 }
 
-/* Vídeo de demonstração: cobre a imagem apenas no hover (desktop com hover) */
+/* ─── Faixas divisoras de setores (vídeo cinematográfico entre blocos) ─── */
+.rdv-setor-divider {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(26rem, 58vh, 42rem);
+  overflow: hidden;
+  border-block: 1px solid rgba(232, 200, 111, 0.12);
+  background: #05070b;
+}
+
+.rdv-setor-divider__media {
+  position: absolute;
+  inset: -2% 0;
+  z-index: -1;
+  overflow: hidden;
+  background: #05070b;
+}
+
+.rdv-setor-divider__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.88) contrast(1.05);
+}
+
+.rdv-setor-divider__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3, 6, 10, 0.92) 0%, rgba(3, 6, 10, 0.62) 38%, rgba(3, 6, 10, 0.18) 68%, rgba(3, 6, 10, 0.45) 100%),
+    linear-gradient(180deg, rgba(3, 6, 10, 0.5) 0%, transparent 30%, transparent 70%, rgba(3, 6, 10, 0.72) 100%);
+}
+
+.rdv-setor-divider.is-right .rdv-setor-divider__shade {
+  background:
+    linear-gradient(270deg, rgba(3, 6, 10, 0.92) 0%, rgba(3, 6, 10, 0.62) 38%, rgba(3, 6, 10, 0.18) 68%, rgba(3, 6, 10, 0.45) 100%),
+    linear-gradient(180deg, rgba(3, 6, 10, 0.5) 0%, transparent 30%, transparent 70%, rgba(3, 6, 10, 0.72) 100%);
+}
+
+.rdv-setor-divider__content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.85rem;
+  width: min(calc(100% - 3rem), 82rem);
+  min-height: clamp(26rem, 58vh, 42rem);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 7vh, 5rem);
+}
+
+.rdv-setor-divider.is-right .rdv-setor-divider__content {
+  justify-items: end;
+  text-align: right;
+}
+
+.rdv-setor-divider__content h2 {
+  margin: 0;
+  max-width: 14ch;
+  color: #f7f3e8;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
+  text-wrap: balance;
+  text-shadow: 0 2px 24px rgba(3, 6, 10, 0.55);
+}
+
+.rdv-setor-divider__desc {
+  margin: 0;
+  max-width: 36rem;
+  color: rgba(247, 243, 232, 0.86) !important;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  text-shadow: 0 1px 16px rgba(3, 6, 10, 0.6);
+}
+
+.rdv-setor-divider .rdv-kicker {
+  margin: 0;
+  color: #e8c86f;
+}
+
+@media (max-width: 48rem) {
+  .rdv-setor-divider {
+    min-height: clamp(24rem, 62vh, 34rem);
+  }
+
+  .rdv-setor-divider__content {
+    align-content: end;
+    width: min(calc(100% - 2.5rem), 82rem);
+    min-height: clamp(24rem, 62vh, 34rem);
+    padding-bottom: clamp(2.5rem, 6vh, 4rem);
+  }
+
+  .rdv-setor-divider__shade,
+  .rdv-setor-divider.is-right .rdv-setor-divider__shade {
+    background:
+      linear-gradient(180deg, rgba(3, 6, 10, 0.3) 0%, rgba(3, 6, 10, 0.42) 45%, rgba(3, 6, 10, 0.94) 100%);
+  }
+
+  .rdv-setor-divider.is-right .rdv-setor-divider__content {
+    justify-items: start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rdv-setor-divider__media video {
+    display: none;
+  }
+}
+
+/* ─── Vídeos de demonstração: cobre a imagem apenas no hover (desktop com hover) ─── */
 .rdv-project-shot__video {
   position: absolute;
   inset: 0;
