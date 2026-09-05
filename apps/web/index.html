@@ -417,59 +417,222 @@
           padding-inline: 0.75rem;
         }
       }
+
+      /* Boot shell — espelha o Hero premium real: o primeiro paint é o mesmo conteúdo
+         que o React hidrata (troca imperceptível, sem "segundo template"). */
+      .rdv-boot-head {
+        min-height: 3.9rem;
+        border-bottom: 1px solid var(--rule);
+        background: var(--paper);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0 clamp(1rem, 3vw, 2.5rem);
+      }
+      .rdv-boot-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        color: var(--ink);
+        text-decoration: none;
+        line-height: 1;
+      }
+      .rdv-boot-brand b {
+        display: grid;
+        width: 2.2rem;
+        height: 2.2rem;
+        place-items: center;
+        border: 1px solid var(--accent);
+        color: var(--accent-strong);
+        font-family: var(--display);
+        font-size: 1rem;
+      }
+      .rdv-boot-brand span { display: grid; gap: 0.18rem; }
+      .rdv-boot-brand strong {
+        font-family: var(--display);
+        font-size: 1.22rem;
+        line-height: 0.9;
+      }
+      .rdv-boot-brand small {
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .rdv-boot-head nav {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+      }
+      .rdv-boot-head nav a {
+        color: var(--ink-soft);
+        font-size: 0.86rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .rdv-boot-head nav a:hover { color: var(--ink); }
+      .rdv-boot-hero {
+        position: relative;
+        min-height: calc(100svh - 3.9rem);
+        display: grid;
+        align-items: center;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      .rdv-boot-hero__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .rdv-boot-hero__shade {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(3,6,10,0.9) 0%, rgba(3,6,10,0.62) 45%, rgba(3,6,10,0.28) 100%),
+          linear-gradient(0deg, rgba(3,6,10,0.72) 0%, transparent 40%);
+      }
+      .rdv-boot-hero__content {
+        position: relative;
+        z-index: 1;
+        width: min(calc(100% - 2.5rem), 82rem);
+        margin-inline: auto;
+        padding: clamp(3rem, 9vh, 6rem) 0;
+      }
+      .rdv-boot-hero__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin: 0;
+        padding: 0.45rem 0.85rem;
+        border: 1px solid rgba(232, 200, 111, 0.3);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--accent-strong);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+      .rdv-boot-hero__eyebrow span {
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .rdv-boot-hero h1 {
+        max-width: 12ch;
+        margin: clamp(1.4rem, 3.5vh, 2.2rem) 0 0;
+        color: #f7f5f2;
+        font-family: var(--display);
+        font-size: clamp(3.2rem, 7.6vw, 6.8rem);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 0.92;
+        text-wrap: balance;
+      }
+      .rdv-boot-hero h1 span {
+        color: var(--accent-strong);
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.09em;
+      }
+      .rdv-boot-hero__lede {
+        max-width: 42rem;
+        margin: clamp(1.3rem, 3vh, 1.8rem) 0 0;
+        color: rgba(247, 245, 242, 0.74);
+        font-size: clamp(1rem, 1.5vw, 1.18rem);
+        line-height: 1.65;
+        text-wrap: balance;
+      }
+      .rdv-boot-hero__lede strong { color: var(--accent-strong); font-weight: 600; }
+      .rdv-boot-hero__actions {
+        margin-top: clamp(1.6rem, 3.5vh, 2.2rem);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .rdv-boot-hero__cta {
+        display: inline-flex;
+        min-height: 3rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.3rem;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #141008;
+        font-size: 0.92rem;
+        font-weight: 700;
+        line-height: 1;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .rdv-boot-hero__secondary {
+        display: inline-flex;
+        min-height: 3rem;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.8rem 1.1rem;
+        border: 1px solid rgba(247, 243, 232, 0.28);
+        color: #f7f3e8;
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      @media (max-width: 48rem) {
+        .rdv-boot-head nav { display: none; }
+        .rdv-boot-hero { min-height: calc(100svh - 3.6rem); }
+        .rdv-boot-hero__content { width: min(calc(100% - 2rem), 82rem); }
+        .rdv-boot-hero h1 { max-width: 10ch; font-size: clamp(2.7rem, 12.5vw, 4.1rem); }
+        .rdv-boot-hero__lede { font-size: 0.96rem; }
+      }
     </style>
   </head>
   <body class="bg-noise">
     <div id="root">
-      <header class="initial-header">
-        <div class="initial-header__inner">
-          <a
-            class="initial-brand"
-            href="/"
-            aria-label="Rei das Vendas — página inicial"
+      <header class="rdv-boot-head">
+        <a class="rdv-boot-brand" href="/" aria-label="Rei das Vendas — página inicial">
+          <b aria-hidden="true">R↗</b
+          ><span
+            ><strong>Rei das Vendas</strong><small>Negócios em movimento</small></span
           >
-            <b aria-hidden="true">R↗</b
-            ><span
-              ><strong>Rei das Vendas</strong
-              ><small>Negócios em movimento</small></span
-            >
-          </a>
-          <a class="initial-header__action" href="/diagnostico"
-            >Mapear meu negócio</a
-          >
-        </div>
+        </a>
+        <nav aria-label="Navegação principal">
+          <a href="/solucoes">Soluções</a>
+          <a href="/portfolio">Portfólio</a>
+          <a href="/planos">Planos</a>
+          <a href="/sobre">Sobre</a>
+        </nav>
       </header>
-      <main class="initial-home" id="main-content">
-        <div class="initial-home__grid">
-          <article>
-            <p class="initial-home__kicker">
+      <main id="main-content">
+        <div class="rdv-boot-hero">
+          <img class="rdv-boot-hero__bg" src="/imagens/hero-agencia-cinematic.webp" alt="" width="1920" height="1080" />
+          <div class="rdv-boot-hero__shade"></div>
+          <div class="rdv-boot-hero__content">
+            <p class="rdv-boot-hero__eyebrow">
+              <span aria-hidden="true"></span>
               Infraestrutura digital para negócios locais · Franca/SP
             </p>
-            <h1>
-              Seu negócio precisa estar pronto
-              <span>quando o cliente decidir.</span>
-            </h1>
-            <p class="initial-home__lead">
-              Sites, lojas, aplicativos e operações digitais construídos para
-              reduzir o caminho entre <strong>atenção e venda</strong> — com uma
-              entrega individual e uma operação que pode continuar evoluindo.
+            <h1>Seu negócio precisa estar pronto <span>quando o cliente decidir.</span></h1>
+            <p class="rdv-boot-hero__lede">
+              Criamos a estrutura certa para o seu momento:
+              <strong>sites e lojas premium</strong>, aplicativos, SaaS,
+              <strong>atendimento comercial</strong> e operações digitais sob medida.
             </p>
-            <div class="initial-home__actions">
-              <a class="initial-home__action" href="/solucoes">Explorar possibilidades →</a>
-              <a class="initial-home__secondary" href="/diagnostico?origem=home-hero">Mapear meu negócio ↗</a>
+            <div class="rdv-boot-hero__actions">
+              <a class="rdv-boot-hero__cta" href="/solucoes">Explorar possibilidades →</a>
+              <a class="rdv-boot-hero__secondary" href="/portfolio">Ver projetos reais <span aria-hidden="true">↗</span></a>
             </div>
-          </article>
-          <aside class="initial-map" aria-label="Possibilidades digitais">
-            <div class="initial-map__head"><p>Mapa inicial</p><span>RDV / 2026</span></div>
-            <h2>O que pode ser construído</h2>
-            <ol>
-              <li><h3><span>01</span>Presença e autoridade</h3><p>Sites, páginas e portfólios.</p></li>
-              <li><h3><span>02</span>Venda e comércio</h3><p>Lojas, catálogos e pedidos.</p></li>
-              <li><h3><span>03</span>Produtos digitais</h3><p>Aplicativos, SaaS e sistemas.</p></li>
-              <li><h3><span>04</span>Operação e distribuição</h3><p>Canais, dados e automações.</p></li>
-            </ol>
-          </aside>
+          </div>
         </div>
+      </main></div>
       </main>
     </div>
     <noscript
