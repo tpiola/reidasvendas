@@ -41,7 +41,7 @@ const PROJECTS = [
     name: 'TKA Esportes',
     type: 'Comércio · e-commerce',
     detail: 'Trinta anos de história transformados em catálogo por categoria e experiência de compra.',
-    image: '/imagens/portfolio/tka-esportes.webp',
+    image: '/imagens/portfolio/tka.webp',
     video: '/videos/projetos/tka.mp4',
     emphasis: 'standard',
     href: 'https://tkaesportes.com.br',
