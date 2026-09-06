@@ -55,7 +55,16 @@ for (const url of urls) {
   assert(/<html[^>]+data-theme=["']dark["']/i.test(html), `Tema inicial não é dark: ${pathname}`);
   assert(/<title>[^<]+<\/title>/i.test(html), `Title ausente: ${pathname}`);
   assert(html.includes(`<link rel="canonical" href="${url}"`), `Canonical divergente: ${pathname}`);
-  assert(/<main\b/i.test(html), `Conteúdo inicial ausente: ${pathname}`);
+  if (pathname === '/') {
+    // Home: SPA — o conteúdo real é renderizado pelo React. O HTML inicial carrega
+    // SEO no <head> (title/description/JSON-LD) + boot loader de marca + fallback
+    // <noscript> com a proposta. Validamos essa estrutura em vez de exigir <main>
+    // estático (que causava o "primeiro template" visível antes da hidratação).
+    assert(/id="rdv-boot"/i.test(html), `Boot loader ausente na home: ${pathname}`);
+    assert(/<noscript/i.test(html), `Fallback noscript ausente na home: ${pathname}`);
+  } else {
+    assert(/<main\b/i.test(html), `Conteúdo inicial ausente: ${pathname}`);
+  }
   for (const pattern of forbiddenPublicPatterns) {
     assert(!pattern.test(html), `Conteúdo proibido em ${pathname}: ${pattern}`);
   }

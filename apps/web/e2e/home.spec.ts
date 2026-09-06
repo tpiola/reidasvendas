@@ -34,12 +34,17 @@ test('navegação principal abre todas as rotas internas', async ({ page }) => {
   }
 });
 
-test('HTML inicial entrega a proposta de valor sem depender de JavaScript', async ({ request }) => {
+test('HTML inicial entrega SEO e proposta de valor no head sem depender de JavaScript', async ({ request }) => {
   const response = await request.get('/');
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
-  expect(html).toContain('Seu negócio precisa estar pronto');
-  expect(html).toContain('Explorar possibilidades');
+  // SEO estrutural vive no <head> (o que crawlers e pré-render usam):
+  expect(html).toContain('<title>');
+  expect(html).toContain('Rei das Vendas');
+  expect(html).toContain('description');
+  // Boot loader presente; conteúdo real é renderizado pelo React (SPA),
+  // então o teste visual do h1 roda no navegador (primeiro teste desta spec).
+  expect(html).toContain('id="rdv-boot"');
 });
 
 test('biblioteca conecta soluções, comparação e ferramentas', async ({ page }) => {

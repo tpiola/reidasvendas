@@ -333,6 +333,18 @@ function RouteMetadata() {
 function SiteLayout() {
   const location = useLocation();
 
+  // Remove o boot loader estático do index.html assim que o app monta:
+  // fade-out de 420ms (CSS) revela o conteúdo já renderizado — sem "troca de página".
+  useEffect(() => {
+    const boot = document.getElementById('rdv-boot');
+    if (!boot) return;
+    const frame = requestAnimationFrame(() => {
+      boot.classList.add('is-leaving');
+      window.setTimeout(() => boot.remove(), 500);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <>
       <RouteMetadata />
