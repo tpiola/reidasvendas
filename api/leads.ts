@@ -6,6 +6,11 @@
      GET /api/leads/stats
      GET /api/leads/verticals
      GET /api/leads/:id
+
+   SEGURANÇA (06/09/2026): base contém dados pessoais de terceiros
+   (telefone, WhatsApp, endereço, CNPJ, diagnóstico comercial) → LGPD.
+   Acesso exige `Authorization: Bearer <LEADS_API_TOKEN>` (env var).
+   Sem token válido: 401. Rate limit simples por IP na lista de leads.
 ═══════════════════════════════════════════ */
 
 // Dataset embutido no bundle (esbuild JSON loader) — sem IO em runtime
@@ -13,11 +18,36 @@ import leadsData from './data/backend-leads.json';
 
 const DB: any[] = leadsData;
 
-// Dados imutáveis por deploy (dataset embutido no bundle): cacheável no edge da Vercel.
-// s-maxage=3600 + SWR: primeira chamada roda a function, as seguintes saem do CDN.
-const CACHE_EDGE = 'public, s-maxage=3600, stale-while-revalidate=86400';
+// Dados imutáveis por deploy (dataset embutido no bundle).
+// NUNCA cachear respostas autenticadas no CDN público.
+const CACHE_PRIVATE = 'private, no-store';
+
+function autorizado(req: any): boolean {
+  const esperado = process.env.LEADS_API_TOKEN;
+  if (!esperado) return false; // fail-closed: sem token configurado, ninguém acessa
+  const header = req.headers?.authorization || req.headers?.Authorization || '';
+  const match = /^Bearer\s+(.+)$/i.exec(String(header));
+  if (!match) return false;
+  const recebido = match[1].trim();
+  // comparação em tempo constante para evitar timing attack
+  const a = Buffer.from(recebido);
+  const b = Buffer.from(esperado);
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a[i] ^ b[i];
+  return diff === 0;
+}
+
+function negar(res: any) {
+  res.setHeader('Cache-Control', CACHE_PRIVATE);
+  res.setHeader('WWW-Authenticate', 'Bearer realm="leads"');
+  return res.status(401).json({ error: 'não autorizado' });
+}
 
 export default async function handler(req: any, res: any) {
+  // Toda a API de leads é interna → exige token sempre
+  if (!autorizado(req)) return negar(res);
+
   const url = new URL(req.url, 'http://localhost');
   const pathname = url.pathname.replace(/\/+$/, '');
 
@@ -29,7 +59,7 @@ export default async function handler(req: any, res: any) {
     const criticos = DB.filter((l: any) => l.nivel === 'CRÍTICO').length;
     const verts: Record<string, number> = {};
     for (const l of DB) verts[l.vertical] = (verts[l.vertical] || 0) + 1;
-    res.setHeader('Cache-Control', CACHE_EDGE);
+    res.setHeader('Cache-Control', CACHE_PRIVATE);
     return res.status(200).json({
       total, com_whatsapp: comWhats, sem_site: semSite, criticos,
       verticais: Object.keys(verts).length,
@@ -47,7 +77,7 @@ export default async function handler(req: any, res: any) {
       if (l.whatsapp) verts[l.vertical].com_whatsapp += 1;
       if (l.tipo !== 'com_site') verts[l.vertical].sem_site += 1;
     }
-    res.setHeader('Cache-Control', CACHE_EDGE);
+    res.setHeader('Cache-Control', CACHE_PRIVATE);
     return res.status(200).json(Object.entries(verts)
       .map(([vertical, v]: [string, any]) => ({ vertical, total: v.total, com_whatsapp: v.com_whatsapp, sem_site: v.sem_site }))
       .sort((a, b) => b.com_whatsapp - a.com_whatsapp));
@@ -91,7 +121,7 @@ export default async function handler(req: any, res: any) {
     const limit = Math.min(parseInt(params.get('limit') || '50', 10), 200);
     const offset = parseInt(params.get('offset') || '0', 10);
 
-    res.setHeader('Cache-Control', CACHE_EDGE);
+    res.setHeader('Cache-Control', CACHE_PRIVATE);
     return res.status(200).json({
       total: resultado.length, limit, offset,
       leads: resultado.slice(offset, offset + limit),
@@ -103,7 +133,7 @@ export default async function handler(req: any, res: any) {
   if (idMatch) {
     const lead = DB.find((l) => l.id === idMatch[1]);
     if (!lead) return res.status(404).json({ error: 'lead não encontrado' });
-    res.setHeader('Cache-Control', CACHE_EDGE);
+    res.setHeader('Cache-Control', CACHE_PRIVATE);
     return res.status(200).json(lead);
   }
 
