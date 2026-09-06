@@ -3016,3 +3016,178 @@ body::after {
     grid-column: 2;
   }
 }
+
+/* ═══ MarqueeDivider — divisor tipográfico outline (padrão Obys) ═══ */
+.rdv-marquee-divider {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2.6rem, 6vh, 4.5rem) 0;
+  border-block: 1px solid rgba(232, 200, 111, 0.14);
+  background:
+    radial-gradient(ellipse 90% 120% at 50% 0%, rgba(232, 200, 111, 0.045) 0%, transparent 60%),
+    #07090d;
+}
+
+.rdv-marquee-divider__track {
+  display: flex;
+  width: max-content;
+  animation: rdv-marquee-slide var(--rdv-marquee-duration, 34s) linear infinite;
+}
+
+.rdv-marquee-divider.is-paused .rdv-marquee-divider__track {
+  animation-play-state: paused;
+}
+
+.rdv-marquee-divider__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.rdv-marquee-divider__word {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.4rem, 3vw, 2.6rem);
+  padding-right: clamp(1.4rem, 3vw, 2.6rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(232, 200, 111, 0.5);
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 10vw, 9.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rdv-marquee-divider__word::after {
+  content: '✳';
+  -webkit-text-stroke: 0;
+  color: var(--color-accent, #e8c86f);
+  font-family: var(--font-body);
+  font-size: 0.28em;
+  line-height: 1;
+}
+
+.rdv-marquee-divider__word em {
+  -webkit-text-stroke: 0;
+  color: var(--color-accent-strong, #f4e1a5);
+  font-family: var(--font-serif-accent);
+  font-size: 1.04em;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+@keyframes rdv-marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rdv-marquee-divider__track {
+    animation: none;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .rdv-marquee-divider__group[aria-hidden='true'] {
+    display: none;
+  }
+}
+
+/* ═══ Acento serif itálico em títulos (anti-template, voz editorial) ═══ */
+.rdv-accent-serif {
+  color: var(--color-accent-strong, #f4e1a5);
+  font-family: var(--font-serif-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ═══ SwapLink — texto com troca no hover (padrão Obys) ═══ */
+.rdv-swap-link {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.5rem;
+  border-bottom: 1px solid rgba(232, 200, 111, 0.38);
+  color: #e8c86f;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.rdv-swap-link__stack {
+  position: relative;
+  display: block;
+  height: 1.4em;
+  overflow: hidden;
+}
+
+.rdv-swap-link__row {
+  display: block;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rdv-swap-link__row--swap {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform: translateY(120%);
+}
+
+.rdv-swap-link:hover .rdv-swap-link__row--primary,
+.rdv-swap-link:focus-visible .rdv-swap-link__row--primary {
+  transform: translateY(-120%);
+}
+
+.rdv-swap-link:hover .rdv-swap-link__row--swap,
+.rdv-swap-link:focus-visible .rdv-swap-link__row--swap {
+  transform: translateY(0);
+}
+
+.rdv-swap-link__arrow {
+  width: 1rem;
+  flex-shrink: 0;
+  transition: transform 180ms var(--ease-out);
+}
+
+.rdv-swap-link:hover .rdv-swap-link__arrow {
+  transform: translateX(0.2rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rdv-swap-link__row,
+  .rdv-swap-link__row--swap {
+    transition: none;
+    transform: none;
+  }
+  .rdv-swap-link__row--swap {
+    display: none;
+  }
+}
+
+/* ═══ MagneticCursor — follower dourado (padrão Obys, desktop only) ═══ */
+.rdv-magnetic-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #f4e1a5;
+  box-shadow: 0 0 0 1px rgba(7, 9, 13, 0.35), 0 0 14px rgba(232, 200, 111, 0.55);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+  transition: opacity 240ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rdv-magnetic-dot {
+    display: none;
+  }
+}

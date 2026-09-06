@@ -2,6 +2,8 @@ import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
+import { MarqueeDivider } from '@/components/MarqueeDivider';
+import { SwapLink } from '@/components/SwapLink';
 import { ProjectVideo } from '@/components/ProjectVideo';
 import { SetorDivider } from '@/components/SetorDivider';
 import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
@@ -101,7 +103,7 @@ export default function Home() {
         <div className="rdv-shell rdv-platform-intro__grid">
           <header>
             <p className="rdv-kicker">Mapa de possibilidades</p>
-            <h2 id="platform-intro-title">Não vendemos uma página. Construímos o que o seu negócio precisa para avançar.</h2>
+            <h2 id="platform-intro-title">Não vendemos uma página. Construímos o que o seu negócio precisa <em className="rdv-accent-serif">para avançar</em>.</h2>
           </header>
           <div className="rdv-platform-intro__copy">
             <p>
@@ -146,12 +148,24 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <MarqueeDivider
+        items={[
+          'Presença e autoridade',
+          'Venda e comércio',
+          'Atendimento comercial',
+          'Aplicativos e SaaS',
+          'Operação e distribuição',
+        ]}
+        accent="Venda e comércio"
+        ariaLabel="Do que construímos: presença, venda, atendimento, aplicativos, operação"
+      />
+
       <section className="rdv-distribution" aria-labelledby="distribution-title">
         <div className="rdv-shell rdv-distribution__grid">
           <Reveal>
             <header>
               <p className="rdv-kicker">Capilaridade com direção</p>
-              <h2 id="distribution-title">Um núcleo próprio. Vários caminhos até ele.</h2>
+              <h2 id="distribution-title">Um núcleo próprio. <em className="rdv-accent-serif">Vários caminhos</em> até ele.</h2>
               <p>
                 A presença central organiza a oferta. Cada canal recebe a mensagem, a página e a próxima ação adequadas
                 à intenção de quem chegou.
@@ -193,7 +207,7 @@ export default function Home() {
             <header className="rdv-proof-v3__header">
               <div>
                 <p className="rdv-kicker">Projetos publicados</p>
-                <h2 id="proof-title">Prova em tela. Sem número inventado.</h2>
+                <h2 id="proof-title">Prova em tela. <em className="rdv-accent-serif">Sem número inventado</em>.</h2>
               </div>
               <p>Cada projeto responde a uma operação diferente. A evidência é o produto publicado, a arquitetura e o que ele realmente organiza.</p>
             </header>
@@ -211,6 +225,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rdv-project-shot__link"
+                    data-magnetic
                     aria-label={`Abrir o site publicado de ${project.name} em nova aba`}
                     onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
                   >
@@ -250,8 +265,12 @@ export default function Home() {
           </div>
 
           <div className="rdv-proof-v3__actions">
-            <Link className="rdv-text-action" to="/portfolio">Ver projetos reais <ArrowRight aria-hidden="true" /></Link>
-            <Link className="rdv-text-action" to="/demonstracoes">Explorar arquiteturas demonstrativas <ArrowRight aria-hidden="true" /></Link>
+            <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
+              Ver projetos reais
+            </SwapLink>
+            <SwapLink to="/demonstracoes" swapLabel="Ver arquiteturas em uso">
+              Explorar arquiteturas demonstrativas
+            </SwapLink>
           </div>
         </div>
       </section>
@@ -269,7 +288,7 @@ export default function Home() {
           <Reveal>
             <header className="rdv-models__header">
               <p className="rdv-kicker">Formas de trabalhar</p>
-              <h2 id="models-title">Um projeto individual. A continuidade que fizer sentido.</h2>
+              <h2 id="models-title">Um projeto individual. <em className="rdv-accent-serif">A continuidade</em> que fizer sentido.</h2>
               <p>O desenho, a copy, a estrutura e as integrações pertencem ao contexto do cliente. A assinatura existe para operar e evoluir — não para aprisionar o projeto.</p>
             </header>
           </Reveal>
@@ -351,7 +370,7 @@ export default function Home() {
         <div className="rdv-shell rdv-closing-v3__content">
           <Reveal>
             <p className="rdv-kicker">O primeiro movimento</p>
-            <h2 id="closing-title">Mostre seu negócio. A gente devolve uma direção.</h2>
+            <h2 id="closing-title">Mostre seu negócio. <em className="rdv-accent-serif">A gente devolve uma direção</em>.</h2>
             <p>O diagnóstico registra objetivo, gargalo e prioridade antes de abrir o WhatsApp. Sem proposta genérica e sem compromisso automático.</p>
           </Reveal>
           <Reveal delay={0.12} className="rdv-closing-v3__actions">
@@ -359,6 +378,7 @@ export default function Home() {
               <Link
                 className="rdv-primary-action"
                 to="/diagnostico?origem=home-final"
+                data-magnetic
                 onClick={() => trackEvent('diagnostic_start', { position: 'home-final' })}
               >
                 Mapear meu negócio <ArrowRight aria-hidden="true" />

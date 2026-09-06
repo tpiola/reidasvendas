@@ -134,6 +134,7 @@ export default function Hero() {
           <Link
             className="rdv-hero__submit"
             to="/solucoes"
+            data-magnetic
             onClick={() => trackEvent('hero_cta', { destination: 'solucoes' })}
           >
             {t('hero.premium.cta')}
@@ -142,6 +143,7 @@ export default function Hero() {
           <Link
             className="rdv-hero__secondary"
             to="/portfolio"
+            data-magnetic
             onClick={() => trackEvent('hero_cta', { destination: 'portfolio' })}
           >
             {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
