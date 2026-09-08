@@ -73,7 +73,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     let value = translate(locale, key);
     if (vars) {
       for (const [name, replacement] of Object.entries(vars)) {
-        value = value.replaceAll(`{${name}}`, replacement);
+        value = value.split(`{${name}}`).join(replacement);
       }
     }
     return value;
