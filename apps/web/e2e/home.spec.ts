@@ -23,8 +23,8 @@ test('hero leva aos projetos publicados', async ({ page }) => {
     try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch { /* ignore blocked storage */ }
   });
   await page.goto('/');
-  await expect(page.locator('#rdv-boot')).toHaveCount(0, { timeout: 15000 });
-  await page.locator('.rdv-hero a.rdv-hero__secondary').click({ force: true });
+  await expect(page.locator('.rdv-hero a.rdv-hero__secondary')).toBeVisible();
+  await page.locator('.rdv-hero a.rdv-hero__secondary').click();
   await expect(page).toHaveURL(/\/portfolio/);
 });
 
