@@ -7,9 +7,8 @@ import { CookieConsent } from '@/components/CookieConsent';
 import { WhatsAppFab } from '@/components/WhatsAppFab';
 import Home from '@/pages/Home';
 import { BRAND } from '@/lib/brand';
-import { ARTICLE_BY_SLUG } from '@/lib/articles';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
-import { GUIDES, SEO_BY_PATH } from '@/lib/growth';
+import { GUIDE_SLUGS } from '@/lib/guide-slugs';
 
 const Blog = lazy(() => import('@/pages/Blog'));
 const BlogPost = lazy(() => import('@/pages/BlogPost'));
@@ -244,86 +243,127 @@ function RouteMetadata() {
   const location = useLocation();
 
   useEffect(() => {
-    const articleSlug = location.pathname.match(/^\/blog\/([^/]+)$/)?.[1];
-    const article = articleSlug ? ARTICLE_BY_SLUG.get(articleSlug) : undefined;
-    const growthMetadata = SEO_BY_PATH.get(location.pathname);
-    const metadata = article ? { title: `${article.title} | Rei das Vendas`, description: article.description } : growthMetadata ?? META_BY_PATH[location.pathname] ?? {
-      title: BRAND.seo.title,
-      description: BRAND.seo.description,
+    let cancelled = false;
+    const pathname = location.pathname;
+    const search = location.search;
+    const canonical = `https://reidasvendas.com.br${pathname === '/' ? '/' : pathname}`;
+    const staticMetadata = META_BY_PATH[pathname];
+    const articleSlug = pathname.match(/^\/blog\/([^/]+)$/)?.[1];
+
+    // Scroll + analytics imediatos; meta rica (growth/articles) entra sob demanda
+    // para não embutir growth.ts (~66KB) e articles no chunk principal da home.
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    captureAttribution();
+
+    const apply = (opts: {
+      article?: { title: string; description: string; published: string };
+      growthMetadata?: { title: string; description: string; category: string; questions: { question: string; answer: string }[] };
+    }) => {
+      if (cancelled) return;
+      const { article, growthMetadata } = opts;
+      const metadata = article
+        ? { title: `${article.title} | Rei das Vendas`, description: article.description }
+        : growthMetadata ?? staticMetadata ?? {
+            title: BRAND.seo.title,
+            description: BRAND.seo.description,
+          };
+      const noIndex = ['/obrigado', '/builder', '/extensions'].includes(pathname)
+        || (!article && !growthMetadata && !staticMetadata && pathname !== '/');
+
+      document.title = metadata.title;
+      upsertMeta('description', metadata.description);
+      upsertMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
+      upsertMeta('googlebot', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
+      upsertMeta('twitter:title', metadata.title);
+      upsertMeta('twitter:description', metadata.description);
+      upsertProperty('og:title', metadata.title);
+      upsertProperty('og:description', metadata.description);
+      upsertProperty('og:url', canonical);
+      upsertProperty('og:type', article ? 'article' : 'website');
+      updateCanonical(canonical);
+
+      const staticSchema = document.getElementById('rdv-static-schema');
+      const staticSchemaMatches = staticSchema?.getAttribute('data-path') === pathname;
+      if (!staticSchemaMatches) staticSchema?.remove();
+
+      const previousSchema = document.getElementById('rdv-route-schema');
+      previousSchema?.remove();
+      if (!staticSchemaMatches && (article || growthMetadata || staticMetadata)) {
+        const schema = document.createElement('script');
+        schema.id = 'rdv-route-schema';
+        schema.type = 'application/ld+json';
+        schema.textContent = JSON.stringify(article ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: article.title,
+          description: article.description,
+          datePublished: article.published,
+          dateModified: article.published,
+          inLanguage: 'pt-BR',
+          mainEntityOfPage: canonical,
+          author: { '@id': 'https://reidasvendas.com.br/#founder' },
+          publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
+        } : growthMetadata ? {
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': growthMetadata.category,
+              name: metadata.title,
+              description: metadata.description,
+              url: canonical,
+              provider: { '@id': 'https://reidasvendas.com.br/#organization' },
+            },
+            ...(growthMetadata.questions.length ? [{
+              '@type': 'FAQPage',
+              mainEntity: growthMetadata.questions.map((question) => ({
+                '@type': 'Question',
+                name: question.question,
+                acceptedAnswer: { '@type': 'Answer', text: question.answer },
+              })),
+            }] : []),
+          ],
+        } : {
+          '@context': 'https://schema.org',
+          '@type': pathname === '/solucoes' || pathname === '/portfolio' ? 'CollectionPage' : 'WebPage',
+          name: metadata.title,
+          description: metadata.description,
+          url: canonical,
+          inLanguage: 'pt-BR',
+          isPartOf: { '@id': 'https://reidasvendas.com.br/#website' },
+        }).replace(/</g, '\\u003c');
+        document.head.appendChild(schema);
+      }
+
+      trackEvent('page_view', { page_title: metadata.title });
+      window.dispatchEvent(new CustomEvent('route-change', { detail: { pathname, search, timestamp: Date.now() } }));
     };
-    const canonical = `https://reidasvendas.com.br${location.pathname === '/' ? '/' : location.pathname}`;
-    const noIndex = ['/obrigado', '/builder', '/extensions'].includes(location.pathname)
-      || (!article && !growthMetadata && !META_BY_PATH[location.pathname] && location.pathname !== '/');
 
-    document.title = metadata.title;
-    upsertMeta('description', metadata.description);
-    upsertMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
-    upsertMeta('googlebot', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
-    upsertMeta('twitter:title', metadata.title);
-    upsertMeta('twitter:description', metadata.description);
-    upsertProperty('og:title', metadata.title);
-    upsertProperty('og:description', metadata.description);
-    upsertProperty('og:url', canonical);
-    upsertProperty('og:type', article ? 'article' : 'website');
-    updateCanonical(canonical);
-
-    const staticSchema = document.getElementById('rdv-static-schema');
-    const staticSchemaMatches = staticSchema?.getAttribute('data-path') === location.pathname;
-    if (!staticSchemaMatches) staticSchema?.remove();
-
-    const previousSchema = document.getElementById('rdv-route-schema');
-    previousSchema?.remove();
-    const staticMetadata = META_BY_PATH[location.pathname];
-    if (!staticSchemaMatches && (article || growthMetadata || staticMetadata)) {
-      const schema = document.createElement('script');
-      schema.id = 'rdv-route-schema';
-      schema.type = 'application/ld+json';
-      schema.textContent = JSON.stringify(article ? {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: article.title,
-        description: article.description,
-        datePublished: article.published,
-        dateModified: article.published,
-        inLanguage: 'pt-BR',
-        mainEntityOfPage: canonical,
-        author: { '@id': 'https://reidasvendas.com.br/#founder' },
-        publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
-      } : growthMetadata ? {
-        '@context': 'https://schema.org',
-        '@graph': [
-          {
-            '@type': growthMetadata!.category,
-            name: metadata.title,
-            description: metadata.description,
-            url: canonical,
-            provider: { '@id': 'https://reidasvendas.com.br/#organization' },
-          },
-          ...(growthMetadata!.questions.length ? [{
-            '@type': 'FAQPage',
-            mainEntity: growthMetadata!.questions.map((question) => ({
-              '@type': 'Question',
-              name: question.question,
-              acceptedAnswer: { '@type': 'Answer', text: question.answer },
-            })),
-          }] : []),
-        ],
-      } : {
-        '@context': 'https://schema.org',
-        '@type': location.pathname === '/solucoes' || location.pathname === '/portfolio' ? 'CollectionPage' : 'WebPage',
-        name: metadata.title,
-        description: metadata.description,
-        url: canonical,
-        inLanguage: 'pt-BR',
-        isPartOf: { '@id': 'https://reidasvendas.com.br/#website' },
-      }).replace(/</g, '\\u003c');
-      document.head.appendChild(schema);
+    // Rotas estáticas (home, chrome): aplica já sem importar growth/articles.
+    if (!articleSlug && staticMetadata) {
+      apply({});
+      return () => { cancelled = true; };
     }
 
-    captureAttribution();
-    trackEvent('page_view', { page_title: metadata.title });
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-    window.dispatchEvent(new CustomEvent('route-change', { detail: { pathname: location.pathname, search: location.search, timestamp: Date.now() } }));
+    void (async () => {
+      try {
+        const [articlesMod, growthMod] = await Promise.all([
+          articleSlug ? import('@/lib/articles') : Promise.resolve(null),
+          import('@/lib/growth'),
+        ]);
+        if (cancelled) return;
+        const article = articleSlug && articlesMod
+          ? articlesMod.ARTICLE_BY_SLUG.get(articleSlug)
+          : undefined;
+        const growthMetadata = growthMod.SEO_BY_PATH.get(pathname);
+        apply({ article, growthMetadata });
+      } catch (error) {
+        if (cancelled) return;
+        console.error(JSON.stringify({ level: 'error', event: 'route_metadata_failed', message: error instanceof Error ? error.message : 'unknown' }));
+        apply({});
+      }
+    })();
+
+    return () => { cancelled = true; };
   }, [location.pathname, location.search]);
 
   return null;
@@ -360,7 +400,7 @@ function SiteLayout() {
               <Route path="/ferramentas/:slug" element={<PageTransition><ToolDetail /></PageTransition>} />
               <Route path="/demonstracoes" element={<PageTransition><Demonstrations /></PageTransition>} />
               <Route path="/demonstracoes/:slug" element={<PageTransition><DemoExperience /></PageTransition>} />
-              {GUIDES.map((guide) => <Route key={guide.slug} path={`/${guide.slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
+              {GUIDE_SLUGS.map((slug) => <Route key={slug} path={`/${slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
               <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
               <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/servicos/:slug" element={<RedirectLegacySlug />} />

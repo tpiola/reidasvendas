@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fontes carregadas via <link preload> no index.html (não usar @import para evitar dupla carga e FOUC). */
+/* Fontes self-hosted em fonts.css (preload WOFF2 críticos no index.html). */
 /* A tipografia do corpo é definida pelo dossier.css (--font-body). */
 
 :root {

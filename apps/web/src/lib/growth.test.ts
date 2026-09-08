@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { COMPARISONS, DEMONSTRATIONS, GROWTH_SEO, GUIDES, LOCAL_PAGES, SOLUTIONS, TOOLS } from './growth';
+import { GUIDE_SLUGS } from './guide-slugs';
 
 describe('arquitetura de aquisição digital', () => {
+  it('mantém GUIDE_SLUGS alinhado com GUIDES (router leve)', () => {
+    expect([...GUIDE_SLUGS]).toEqual(GUIDES.map((guide) => guide.slug));
+  });
+
   it('mantém páginas comerciais únicas e canônicas', () => {
     const paths = GROWTH_SEO.map((entry) => entry.path);
     expect(new Set(paths).size).toBe(paths.length);
