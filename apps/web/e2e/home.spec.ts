@@ -20,7 +20,7 @@ test('experiência permanece dark-only sem alternador de tema', async ({ page })
 
 test('hero leva aos projetos publicados', async ({ page }) => {
   await page.addInitScript(() => {
-    try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch {}
+    try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch { /* ignore blocked storage */ }
   });
   await page.goto('/');
   await expect(page.locator('#rdv-boot')).toHaveCount(0, { timeout: 15000 });
