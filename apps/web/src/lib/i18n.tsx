@@ -2,6 +2,7 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type ReactNode,
 } from "react";
@@ -14,6 +15,12 @@ const LOCALES = { pt, en, it, es } as const;
 export type Locale = keyof typeof LOCALES;
 
 const LS_KEY = "rdv-locale";
+const HTML_LANG: Record<Locale, string> = {
+  pt: "pt-BR",
+  en: "en",
+  it: "it",
+  es: "es",
+};
 
 function detect(): Locale {
   try {
@@ -27,10 +34,23 @@ function detect(): Locale {
   return "pt";
 }
 
+function translate(locale: Locale, key: string): string {
+  const tables = [
+    LOCALES[locale] as Record<string, string>,
+    LOCALES.en as Record<string, string>,
+    LOCALES.pt as Record<string, string>,
+  ];
+  for (const table of tables) {
+    const value = table[key];
+    if (value) return value;
+  }
+  return key;
+}
+
 const I18nContext = createContext<{
   locale: Locale;
   setLocale: (l: Locale) => void;
-  t: (key: string) => string;
+  t: (key: string, vars?: Record<string, string>) => string;
 }>({ locale: "pt", setLocale: () => {}, t: (k) => k });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
@@ -43,11 +63,21 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     } catch {
       /* ignore */
     }
-    document.documentElement.lang = l;
   };
 
-  const t = (key: string) =>
-    (LOCALES[locale] as Record<string, string>)[key] ?? key;
+  useEffect(() => {
+    document.documentElement.lang = HTML_LANG[locale];
+  }, [locale]);
+
+  const t = (key: string, vars?: Record<string, string>) => {
+    let value = translate(locale, key);
+    if (vars) {
+      for (const [name, replacement] of Object.entries(vars)) {
+        value = value.replaceAll(`{${name}}`, replacement);
+      }
+    }
+    return value;
+  };
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, t }}>

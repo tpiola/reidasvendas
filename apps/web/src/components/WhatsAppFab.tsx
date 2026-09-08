@@ -4,12 +4,12 @@ import { MessageCircle } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics';
 import { MEASUREMENT_CONSENT_KEY } from '@/lib/analytics';
+import { useI18n } from '@/lib/i18n';
 
 export function WhatsAppFab() {
+  const { t } = useI18n();
   const location = useLocation();
   const [consentOpen, setConsentOpen] = useState(false);
-  // No diagnóstico o WhatsApp qualificado vem do formulário; o FAB permanente
-  // quebrava a promessa de "desbloquear depois da qualificação".
   const hideOnDiagnostico = location.pathname.startsWith('/diagnostico');
 
   useEffect(() => {
@@ -31,12 +31,12 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       className={`rdv-whatsapp-fab${consentOpen ? ' is-hidden' : ''}`}
-      aria-label={`Falar no WhatsApp com ${BRAND.name} — ${BRAND.phoneDisplay}`}
+      aria-label={t('whatsapp.fab.aria', { name: BRAND.name, phone: BRAND.phoneDisplay })}
       onClick={() => trackEvent('whatsapp_click', { position: 'floating' })}
     >
       <span className="rdv-whatsapp-fab__ring" aria-hidden="true" />
       <MessageCircle aria-hidden="true" />
-      <span className="rdv-whatsapp-fab__tip" aria-hidden="true">Fale no WhatsApp</span>
+      <span className="rdv-whatsapp-fab__tip" aria-hidden="true">{t('whatsapp.fab')}</span>
     </a>
   );
 }

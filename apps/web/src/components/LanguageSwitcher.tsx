@@ -8,9 +8,9 @@ const OPTIONS: { code: Locale; label: string }[] = [
 ];
 
 export function LanguageSwitcher() {
-  const { locale, setLocale } = useI18n();
+  const { locale, setLocale, t } = useI18n();
   return (
-    <div className="rdv-lang" role="group" aria-label="Idioma">
+    <div className="rdv-lang" role="group" aria-label={t('lang.label')}>
       {OPTIONS.map((o) => (
         <button
           key={o.code}

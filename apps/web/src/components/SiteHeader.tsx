@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TransitionLink } from '@/components/TransitionLink';
 import { Menu, X } from 'lucide-react';
@@ -8,21 +8,24 @@ import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 
-const NAV_ITEMS = [
-  { label: 'Soluções', to: '/solucoes' },
-  { label: 'Portfólio', to: '/portfolio' },
-  { label: 'Planos', to: '/planos' },
-  { label: 'Sobre', to: '/sobre' },
-];
-
 function isActivePath(pathname: string, to: string): boolean {
   return to === '/' ? pathname === '/' : pathname === to || pathname.startsWith(`${to}/`);
 }
 
 export function SiteHeader() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navItems = useMemo(
+    () => [
+      { label: t('nav.solutions'), to: '/solucoes' },
+      { label: t('nav.portfolio'), to: '/portfolio' },
+      { label: t('nav.plans'), to: '/planos' },
+      { label: t('nav.about'), to: '/sobre' },
+    ],
+    [locale],
+  );
 
   useEffect(() => {
     setMenuOpen(false);
@@ -39,14 +42,14 @@ export function SiteHeader() {
 
   return (
     <header className="rdv-header">
-      <a className="sr-only focus:not-sr-only" href="#main-content">Ir para o conteúdo</a>
+      <a className="sr-only focus:not-sr-only" href="#main-content">{t('nav.skip')}</a>
       <div className="rdv-header-inner">
-        <TransitionLink to="/" className="rdv-brand-link" aria-label="Rei das Vendas — página inicial">
+        <TransitionLink to="/" className="rdv-brand-link" aria-label={t('nav.home')}>
           <BrandLockup compact />
         </TransitionLink>
 
-        <nav className="rdv-desktop-nav" aria-label="Navegação principal">
-          {NAV_ITEMS.map((item) => (
+        <nav className="rdv-desktop-nav" aria-label={t('nav.main')}>
+          {navItems.map((item) => (
             <TransitionLink
               key={item.to}
               to={item.to}
@@ -66,7 +69,7 @@ export function SiteHeader() {
             onClick={() => trackEvent('diagnostic_start', { position: 'header' })}
           >
             <span className="rdv-header-cta__full">{t('nav.cta')}</span>
-            <span className="rdv-header-cta__short">Diagnóstico</span>
+            <span className="rdv-header-cta__short">{t('nav.cta.short')}</span>
           </TransitionLink>
         </div>
 
@@ -77,7 +80,7 @@ export function SiteHeader() {
             className="rdv-menu-button"
             aria-expanded={menuOpen}
             aria-controls="rdv-mobile-nav"
-            aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-label={menuOpen ? t('nav.menu.close') : t('nav.menu.open')}
             onClick={() => setMenuOpen((open) => !open)}
           >
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -86,7 +89,7 @@ export function SiteHeader() {
       </div>
 
       <div id="rdv-mobile-nav" className="rdv-mobile-nav" hidden={!menuOpen}>
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <TransitionLink
             key={item.to}
             to={item.to}

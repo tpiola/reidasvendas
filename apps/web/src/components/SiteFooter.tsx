@@ -3,6 +3,7 @@ import { TransitionLink } from '@/components/TransitionLink';
 import { BrandLockup } from '@/components/BrandLockup';
 import { BRAND } from '@/lib/brand';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
 const SOCIAL = [
@@ -10,55 +11,55 @@ const SOCIAL = [
   { label: 'LinkedIn', href: BRAND.linkedin, icon: Linkedin },
 ];
 
-const INDEX = [
-  ['Possibilidades', '/solucoes'],
-  ['Projetos reais', '/portfolio'],
-  ['Demonstrações', '/demonstracoes'],
-  ['Formas de contratação', '/planos'],
-];
-
-const KNOWLEDGE = [
-  ['Diagnóstico', '/diagnostico'],
-  ['Ferramentas', '/ferramentas'],
-  ['Guias e comparativos', '/blog'],
-  ['Sobre', '/sobre'],
-];
-
 export function SiteFooter() {
+  const { t } = useI18n();
+  const index = [
+    [t('footer.link.possibilities'), '/solucoes'],
+    [t('footer.link.projects'), '/portfolio'],
+    [t('footer.link.demos'), '/demonstracoes'],
+    [t('footer.link.plans'), '/planos'],
+  ] as const;
+  const knowledge = [
+    [t('footer.link.diagnostic'), '/diagnostico'],
+    [t('footer.link.tools'), '/ferramentas'],
+    [t('footer.link.guides'), '/blog'],
+    [t('footer.link.about'), '/sobre'],
+  ] as const;
+
   return (
     <footer className="rdv-footer-v3">
       <div className="rdv-shell rdv-footer-v3__top">
         <div className="rdv-footer-v3__brand">
-          <TransitionLink to="/" aria-label="Rei das Vendas — página inicial"><BrandLockup /></TransitionLink>
-          <p>Dar ao negócio local a presença, os canais e a operação digital necessários para conquistar, atender e manter clientes com velocidade e clareza.</p>
+          <TransitionLink to="/" aria-label={t('nav.home')}><BrandLockup /></TransitionLink>
+          <p>{t('footer.mission')}</p>
         </div>
 
-        <nav aria-label="Soluções e projetos">
-          <p>Construir</p>
-          {INDEX.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
+        <nav aria-label={t('footer.nav.build')}>
+          <p>{t('footer.build')}</p>
+          {index.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
         </nav>
 
-        <nav aria-label="Conhecimento e empresa">
-          <p>Decidir</p>
-          {KNOWLEDGE.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
+        <nav aria-label={t('footer.nav.decide')}>
+          <p>{t('footer.decide')}</p>
+          {knowledge.map(([label, to]) => <TransitionLink key={to} to={to}>{label}</TransitionLink>)}
         </nav>
 
         <div className="rdv-footer-v3__contact">
-          <p>Contato</p>
+          <p>{t('footer.contact')}</p>
           <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_click', { position: 'footer' })}>
             WhatsApp · {BRAND.phoneDisplay}
           </a>
           <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
-          <span>Franca, SP · atendimento remoto</span>
-          <span>Seg–sex 9h–18h · sáb 9h–13h</span>
-          <div className="rdv-footer-v3__social" aria-label="Redes sociais">
+          <span>{t('footer.remote')}</span>
+          <span>{t('footer.hours')}</span>
+          <div className="rdv-footer-v3__social" aria-label={t('footer.social')}>
             {SOCIAL.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${BRAND.name} no ${label}`}
+                aria-label={`${BRAND.name} / ${label}`}
                 onClick={() => trackEvent('social_click', { network: label.toLowerCase(), position: 'footer' })}
               >
                 <Icon aria-hidden="true" />
@@ -69,17 +70,21 @@ export function SiteFooter() {
       </div>
 
       <div className="rdv-shell rdv-footer-v3__statement">
-        <h2>Seu próximo canal precisa levar a algum lugar.</h2>
+        <h2>{t('footer.statement')}</h2>
         <TransitionLink to="/diagnostico?origem=footer" onClick={() => trackEvent('diagnostic_start', { position: 'footer' })}>
-          Mapear meu negócio <ArrowRight aria-hidden="true" />
+          {t('footer.cta')} <ArrowRight aria-hidden="true" />
         </TransitionLink>
       </div>
 
       <div className="rdv-shell rdv-footer-v3__bottom">
         <p>© {new Date().getFullYear()} {BRAND.name}</p>
-        <div><TransitionLink to="/politica">Privacidade</TransitionLink><TransitionLink to="/termos">Termos de uso</TransitionLink><TransitionLink to="/contato">Contato</TransitionLink></div>
+        <div>
+          <TransitionLink to="/politica">{t('footer.privacy')}</TransitionLink>
+          <TransitionLink to="/termos">{t('footer.terms')}</TransitionLink>
+          <TransitionLink to="/contato">{t('footer.contact.link')}</TransitionLink>
+        </div>
         <LanguageSwitcher />
-        <p>Negócios em movimento · Franca/SP</p>
+        <p>{t('footer.tagline')}</p>
       </div>
     </footer>
   );
