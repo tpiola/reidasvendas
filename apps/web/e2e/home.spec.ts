@@ -5,7 +5,7 @@ test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await expect(page.locator('.loading-gold')).toHaveCount(0);
   await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /explorar possibilidades/i }).first()).toHaveAttribute('href', '/solucoes');
-  await expect(page.getByRole('link', { name: /mapear meu negócio/i }).first()).toHaveAttribute('href', /\/diagnostico/);
+  await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
 });
@@ -18,10 +18,10 @@ test('experiência permanece dark-only sem alternador de tema', async ({ page })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
 });
 
-test('hero preserva atribuição ao abrir o diagnóstico', async ({ page }) => {
-  await page.goto('/?utm_source=campanha-local');
-  await page.locator('.rdv-hero').getByRole('link', { name: /mapear meu negócio/i }).click();
-  await expect(page).toHaveURL(/\/diagnostico\?.*utm_source=campanha-local/);
+test('hero leva aos projetos publicados', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.rdv-hero').getByRole('link', { name: /ver projetos reais/i }).click();
+  await expect(page).toHaveURL(/\/portfolio/);
 });
 
 test('navegação principal abre todas as rotas internas', async ({ page }) => {
