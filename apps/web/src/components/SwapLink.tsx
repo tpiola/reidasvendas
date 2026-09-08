@@ -23,6 +23,7 @@ export function SwapLink({
 }) {
   return (
     <Link to={to} className={`rdv-swap-link ${className}`} onClick={onClick}>
+      <span className="sr-only">{children}</span>
       <span className="rdv-swap-link__stack" aria-hidden="true">
         <span className="rdv-swap-link__row rdv-swap-link__row--primary">{children}</span>
         <span className="rdv-swap-link__row rdv-swap-link__row--swap">{swapLabel}</span>

@@ -78,7 +78,7 @@ export default function Solucoes() {
         <div className="rdv-shell">
           <div className="rdv-marketplace__controls">
             <div>
-              <p className="rdv-kicker">24 caminhos possíveis</p>
+              <p className="rdv-kicker">{MARKETPLACE_ITEMS.length} caminhos possíveis</p>
               <h2 id="catalog-title">Filtre por objetivo.</h2>
             </div>
             <label className="rdv-marketplace__search">
