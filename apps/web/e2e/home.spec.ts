@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /explorar possibilidades/i }).first()).toHaveAttribute('href', '/solucoes');
+  await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: /quero parar de perder cliente/i }).first()).toHaveAttribute('href', '/solucoes');
   await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
@@ -19,8 +19,12 @@ test('experiência permanece dark-only sem alternador de tema', async ({ page })
 });
 
 test('hero leva aos projetos publicados', async ({ page }) => {
+  await page.addInitScript(() => {
+    try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch { /* ignore blocked storage */ }
+  });
   await page.goto('/');
-  await page.locator('.rdv-hero').getByRole('link', { name: /ver projetos reais/i }).click();
+  await expect(page.locator('.rdv-hero a.rdv-hero__secondary')).toBeVisible();
+  await page.locator('.rdv-hero a.rdv-hero__secondary').click();
   await expect(page).toHaveURL(/\/portfolio/);
 });
 
@@ -49,7 +53,7 @@ test('HTML inicial entrega SEO e proposta de valor no head sem depender de JavaS
 
 test('biblioteca conecta soluções, comparação e ferramentas', async ({ page }) => {
   await page.goto('/solucoes');
-  await expect(page.getByRole('heading', { level: 1, name: /comece pelo que precisa mudar/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /pare de perder cliente/i })).toBeVisible();
   await expect(page.getByText(/25 possibilidades encontradas/i)).toBeVisible();
   await page.getByPlaceholder(/vender online/i).fill('representantes');
   await expect(page.getByRole('heading', { level: 3, name: /catálogo para representantes/i })).toBeVisible();
@@ -122,7 +126,7 @@ for (const viewport of [
   test(`home não cria overflow em ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: /seu negócio precisa estar pronto/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
     const horizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
     );

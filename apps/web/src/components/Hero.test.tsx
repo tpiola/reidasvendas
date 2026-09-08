@@ -40,7 +40,7 @@ describe('Hero', () => {
       </BrowserRouter>,
     );
 
-    expect(screen.getByRole('link', { name: /explorar possibilidades/i })).toHaveAttribute('href', '/solucoes');
+    expect(screen.getByRole('link', { name: /quero parar de perder cliente/i })).toHaveAttribute('href', '/solucoes');
     expect(screen.getByRole('link', { name: /ver projetos reais/i })).toHaveAttribute('href', '/portfolio');
 
     fireEvent.click(screen.getByRole('link', { name: /ver projetos reais/i }));

@@ -1,7 +1,7 @@
 export const BRAND = {
   name: 'Rei das Vendas',
   tagline: 'Do primeiro clique à próxima venda, tudo precisa funcionar',
-  subtitle: 'Sites, lojas, aplicativos e operações digitais construídos para negócios locais.',
+  subtitle: 'Sites, lojas, aplicativos e operações digitais construídos para negócios locais e empresas em todo o Brasil.',
   phone: '5516992333344',
   phoneDisplay: '(16) 99233-3344',
   whatsapp: 'https://wa.me/5516992333344?text=Ol%C3%A1!%20Quero%20mapear%20as%20oportunidades%20digitais%20do%20meu%20neg%C3%B3cio.',
@@ -13,15 +13,15 @@ export const BRAND = {
     name: 'Thiago B. G. Piola',
     title: 'Fundador e diretor de projeto',
     site: 'https://thiagopiola.com.br',
-    bio: 'Direção de produto e crescimento digital em Franca. Conecta presença, produto, aquisição e atendimento em projetos individuais para negócios locais.',
+    bio: 'Direção de produto e crescimento digital a partir de Franca, SP. Conecta presença, produto, aquisição e atendimento em projetos individuais para negócios locais e empresas em todo o Brasil.',
   },
   images: {
     hero: '/videos/hero-signal-loop.mp4',
     og: '/imagens/og-default.jpg',
   },
   seo: {
-    title: 'Sites, aplicativos e soluções digitais em Franca | Rei das Vendas',
-    description: 'Sites premium, e-commerce, aplicativos, SaaS, automações e operação digital sob medida para negócios locais e profissionais liberais em Franca, SP.',
+    title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
+    description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
     keywords: [
       'site profissional Franca SP',
       'criação de sites Franca',
