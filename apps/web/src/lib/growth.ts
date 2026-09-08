@@ -733,7 +733,7 @@ export const GROWTH_SEO: SeoEntry[] = [
   {
     path: '/solucoes',
     title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
-    description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais.',
+    description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
     category: 'CollectionPage',
     headings: SOLUTIONS.map((item) => item.title),
     questions: [],
