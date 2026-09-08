@@ -41,7 +41,7 @@ export default function Portfolio() {
           <div>
             {OTHER_WORK.map(([name, type, detail, href, image], index) => (
               <a key={name} href={href} target="_blank" rel="noopener noreferrer">
-                <img src={image} alt="" width="240" height="150" loading="lazy" />
+                <img src={image} alt={`Interface publicada de ${name}`} width="240" height="150" loading="lazy" />
                 <span>{String(index + 3).padStart(2, '0')}</span>
                 <div><p>{type}</p><h3>{name}</h3></div>
                 <p>{detail}</p>
