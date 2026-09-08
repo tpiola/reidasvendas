@@ -50,7 +50,7 @@ test('HTML inicial entrega SEO e proposta de valor no head sem depender de JavaS
 test('biblioteca conecta soluções, comparação e ferramentas', async ({ page }) => {
   await page.goto('/solucoes');
   await expect(page.getByRole('heading', { level: 1, name: /comece pelo que precisa mudar/i })).toBeVisible();
-  await expect(page.getByText(/24 possibilidades encontradas/i)).toBeVisible();
+  await expect(page.getByText(/25 possibilidades encontradas/i)).toBeVisible();
   await page.getByPlaceholder(/vender online/i).fill('representantes');
   await expect(page.getByRole('heading', { level: 3, name: /catálogo para representantes/i })).toBeVisible();
   await page.goto('/solucoes/catalogo-para-representantes');
