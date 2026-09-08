@@ -11,10 +11,13 @@ export default defineConfig(({ mode }) => ({
     target: 'esnext',
     rollupOptions: {
       output: {
-        manualChunks: {
-          router: ['react-router-dom'],
-          motion: ['framer-motion'],
-          form: ['react-hook-form', 'zod'],
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          if (id.includes('framer-motion')) return 'motion';
+          if (id.includes('react-router')) return 'router';
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/')) return 'react';
+          if (id.includes('react-hook-form') || id.includes('/zod')) return 'form';
+          if (id.includes('lucide-react')) return 'icons';
         },
       },
     },
