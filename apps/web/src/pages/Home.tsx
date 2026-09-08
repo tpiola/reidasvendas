@@ -252,7 +252,7 @@ export default function Home() {
                 <a href={work.href} target="_blank" rel="noopener noreferrer" role="listitem" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
                   <span className="rdv-home-otherwork__media">
                     <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
-                    <img src={work.image} alt="" width="1200" height="750" loading="lazy" />
+                    <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
                   </span>
                   <div>
                     <p>{work.type}</p>
