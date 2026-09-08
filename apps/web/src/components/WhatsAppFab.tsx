@@ -1,11 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { MessageCircle } from 'lucide-react';
 import { BRAND } from '@/lib/brand';
 import { trackEvent } from '@/lib/analytics';
 import { MEASUREMENT_CONSENT_KEY } from '@/lib/analytics';
 
 export function WhatsAppFab() {
+  const location = useLocation();
   const [consentOpen, setConsentOpen] = useState(false);
+  // No diagnóstico o WhatsApp qualificado vem do formulário; o FAB permanente
+  // quebrava a promessa de "desbloquear depois da qualificação".
+  const hideOnDiagnostico = location.pathname.startsWith('/diagnostico');
 
   useEffect(() => {
     try {
@@ -17,6 +22,8 @@ export function WhatsAppFab() {
     window.addEventListener('rdv:consent', onConsent);
     return () => window.removeEventListener('rdv:consent', onConsent);
   }, []);
+
+  if (hideOnDiagnostico) return null;
 
   return (
     <a
