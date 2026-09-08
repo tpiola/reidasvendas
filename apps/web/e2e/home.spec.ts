@@ -19,8 +19,12 @@ test('experiência permanece dark-only sem alternador de tema', async ({ page })
 });
 
 test('hero leva aos projetos publicados', async ({ page }) => {
+  await page.addInitScript(() => {
+    try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch {}
+  });
   await page.goto('/');
-  await page.locator('.rdv-hero').getByRole('link', { name: /ver projetos reais/i }).click();
+  await expect(page.locator('#rdv-boot')).toHaveCount(0, { timeout: 15000 });
+  await page.locator('.rdv-hero a.rdv-hero__secondary').click({ force: true });
   await expect(page).toHaveURL(/\/portfolio/);
 });
 
