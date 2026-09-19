@@ -692,6 +692,16 @@ h3,
     width: min(calc(100% - 1.5rem), 36rem);
   }
 
+  /* Enquadramento em retrato: a imagem do hero é paisagem (1920x1080) com o
+     assunto — o monitor com o site — deslocado para a direita. Com o "cover"
+     padrão (centro) o celular mostrava justamente a faixa central (mesa e
+     janela) e CORTAVA o monitor. Aqui a janela de recorte vai para cima do
+     assunto. */
+  .rdv-hero__image,
+  .rdv-hero__video {
+    object-position: 68% 42%;
+  }
+
   .rdv-hero__badge {
     max-width: 100%;
     font-size: 0.62rem;
