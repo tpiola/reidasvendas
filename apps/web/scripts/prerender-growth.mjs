@@ -15,6 +15,7 @@ const staticEntries = [
     path: '/',
     title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
     description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
+    heading: 'Seu cliente já está pesquisando. A questão é quem ele vai encontrar.',
     category: 'WebPage',
     headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
     questions: [],
@@ -164,7 +165,7 @@ function initialHeader() {
 }
 
 function staticContent(entry) {
-  const heading = entry.title.replace(/ \| Rei das Vendas$/, '');
+  const heading = entry.heading ?? entry.title.replace(/ \| Rei das Vendas$/, '');
   const sections = entry.headings.slice(0, 6).map((item, index) => {
     const separator = item.indexOf(': ');
     const title = separator >= 0 ? item.slice(0, separator) : item;
@@ -224,6 +225,25 @@ if (updateSource) {
     await mkdir(dirname(output), { recursive: true });
     await writeFile(output, prerenderDocument(template, entry));
   }
+
+  // A HOME também recebe o conteúdo inicial (h1 + blocos). Antes ela ficava só
+  // com o shell vazio: o HTML entregue ao crawler não tinha h1 nem texto, e a
+  // home é justamente a página mais importante do site.
+  // Atenção: não usamos prerenderDocument() aqui — ele injeta entre o #root e o
+  // <noscript>, e na home isso engoliria o boot loader (o validador bloqueia).
+  // O conteúdo entra DENTRO do #root, preservando o boot.
+  const homeEntry = entries.find((item) => item.path === '/');
+  if (homeEntry) {
+    const homeHtml = template.replace(
+      '<div id="root"></div>',
+      `<div id="root">${staticContent(homeEntry)}</div>`,
+    );
+    if (homeHtml === template) {
+      throw new Error('Não foi possível injetar o conteúdo inicial na home (div#root não encontrado)');
+    }
+    await writeFile(join(distDirectory, 'index.html'), homeHtml);
+  }
+
   const count = await writeSitemap(join(distDirectory, 'sitemap.xml'));
-  process.stdout.write(`Prerendered ${entries.length - 1} canonical pages; sitemap contains ${count} URLs.\n`);
+  process.stdout.write(`Prerendered ${entries.length} canonical pages; sitemap contains ${count} URLs.\n`);
 }
