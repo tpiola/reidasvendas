@@ -143,7 +143,7 @@ h3,
 .rdv-system-state,
 .rdv-loading {
   width: min(calc(100% - (var(--space-sm) * 2)), var(--measure-copy));
-  min-height: 60vh;
+  min-height: 60svh;
   margin-inline: auto;
   display: flex;
   flex-direction: column;
@@ -166,7 +166,7 @@ h3,
 }
 
 .rdv-loading {
-  min-height: 50vh;
+  min-height: 50svh;
   align-items: center;
 }
 
@@ -384,7 +384,7 @@ h3,
   min-height: max(42rem, calc(100svh - var(--banner-height)));
   place-items: center;
   overflow: hidden;
-  padding: clamp(3.5rem, 8vh, 7rem) 0;
+  padding: clamp(3.5rem, 8svh, 7rem) 0;
   background:
     radial-gradient(ellipse 70% 60% at 50% 32%, rgba(232, 200, 111, 0.04), transparent 70%),
     var(--rdv-bg, #07090d);
@@ -412,6 +412,12 @@ h3,
   object-fit: cover;
   object-position: center 30%;
   opacity: 0.92;
+  /* No celular esta imagem é ampliada (container retrato x imagem paisagem) e o
+     reescalonamento a cada mudança de viewport/scroll faz o detalhe fino ferver.
+     A camada própria rasteriza uma vez e só reposiciona. */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .rdv-hero__video {
@@ -488,7 +494,7 @@ h3,
 
 .rdv-hero--premium h1 {
   max-width: 14ch;
-  margin: clamp(1.35rem, 3vh, 2rem) 0 0;
+  margin: clamp(1.35rem, 3svh, 2rem) 0 0;
   color: #f7f5f2;
   font-family: var(--font-display);
   font-size: clamp(3.6rem, 7.4vw, 7rem);
@@ -526,7 +532,7 @@ h3,
 
 .rdv-hero__lede {
   max-width: 48rem;
-  margin: clamp(1.5rem, 3vh, 2rem) 0 0;
+  margin: clamp(1.5rem, 3svh, 2rem) 0 0;
   color: rgba(247, 245, 242, 0.72);
   font-size: clamp(1rem, 1.6vw, 1.22rem);
   line-height: 1.7;
@@ -543,7 +549,7 @@ h3,
   width: min(100%, 47rem);
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
-  margin-top: clamp(1.5rem, 4vh, 2.4rem);
+  margin-top: clamp(1.5rem, 4svh, 2.4rem);
   padding: 0.5rem;
   border: 1px solid rgba(232, 230, 225, 0.14);
   border-radius: 1rem;
@@ -679,7 +685,7 @@ h3,
 @media (max-width: 48rem) {
   .rdv-hero.rdv-hero--premium {
     min-height: calc(100svh - var(--banner-height));
-    padding: clamp(2rem, 6vh, 3.5rem) 0;
+    padding: clamp(2rem, 6svh, 3.5rem) 0;
   }
 
   .rdv-hero__content {
@@ -1464,7 +1470,7 @@ h3,
 
 /* Qualified diagnostic */
 .rdv-diagnostic {
-  min-height: 100vh;
+  min-height: 100svh;
   background: var(--color-paper);
   color: var(--color-ink);
 }

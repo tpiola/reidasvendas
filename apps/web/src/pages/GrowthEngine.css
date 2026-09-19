@@ -3,7 +3,7 @@
    Hallmark · enrichment: semantic evidence rows · chrome: reused · slop test: 58 / 58 ✓ */
 
 .ge-page {
-  min-height: 100vh;
+  min-height: 100svh;
   overflow-x: clip;
   background: var(--color-paper);
   color: var(--color-ink);
@@ -681,7 +681,7 @@
 }
 
 .ge-demo-stage {
-  min-height: 80vh;
+  min-height: 80svh;
   padding-block: var(--space-3xl);
   background: var(--color-ink);
   color: var(--color-paper);

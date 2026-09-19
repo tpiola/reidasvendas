@@ -169,7 +169,7 @@ body::after {
 
 .rdv-hero.rdv-hero--premium {
   min-height: min(54rem, calc(100svh - 4.75rem));
-  padding: clamp(4rem, 8vh, 7rem) 0;
+  padding: clamp(4rem, 8svh, 7rem) 0;
   background: #03060a;
 }
 
@@ -208,7 +208,7 @@ body::after {
 
 .rdv-hero--premium h1 {
   max-width: 12ch;
-  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+  margin-top: clamp(1.5rem, 4svh, 2.5rem);
   font-size: clamp(4rem, 7.8vw, 7.5rem);
   letter-spacing: -0.04em;
   line-height: 0.88;
@@ -2780,7 +2780,7 @@ body::after {
 .rdv-setor-divider {
   position: relative;
   isolation: isolate;
-  min-height: clamp(26rem, 58vh, 42rem);
+  min-height: clamp(26rem, 58svh, 42rem);
   overflow: hidden;
   border-block: 1px solid rgba(232, 200, 111, 0.12);
   background: #05070b;
@@ -2800,6 +2800,12 @@ body::after {
   object-fit: cover;
   object-position: center;
   filter: saturate(0.88) contrast(1.05);
+  /* Camada própria: no celular a barra do navegador muda a altura da viewport e
+     o container redimensiona. Sem promoção, o vídeo é reescalado e re-renderizado
+     a cada mudança — o frame "treme". Com a camada, o compositor só reposiciona. */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .rdv-setor-divider__shade {
@@ -2824,9 +2830,9 @@ body::after {
   justify-items: start;
   gap: 0.85rem;
   width: min(calc(100% - 3rem), 82rem);
-  min-height: clamp(26rem, 58vh, 42rem);
+  min-height: clamp(26rem, 58svh, 42rem);
   margin-inline: auto;
-  padding-block: clamp(3rem, 7vh, 5rem);
+  padding-block: clamp(3rem, 7svh, 5rem);
 }
 
 .rdv-setor-divider.is-right .rdv-setor-divider__content {
@@ -2862,14 +2868,14 @@ body::after {
 
 @media (max-width: 48rem) {
   .rdv-setor-divider {
-    min-height: clamp(24rem, 62vh, 34rem);
+    min-height: clamp(24rem, 62svh, 34rem);
   }
 
   .rdv-setor-divider__content {
     align-content: end;
     width: min(calc(100% - 2.5rem), 82rem);
-    min-height: clamp(24rem, 62vh, 34rem);
-    padding-bottom: clamp(2.5rem, 6vh, 4rem);
+    min-height: clamp(24rem, 62svh, 34rem);
+    padding-bottom: clamp(2.5rem, 6svh, 4rem);
   }
 
   .rdv-setor-divider__shade,
@@ -3037,7 +3043,7 @@ body::after {
 .rdv-marquee-divider {
   position: relative;
   overflow: hidden;
-  padding: clamp(2.6rem, 6vh, 4.5rem) 0;
+  padding: clamp(2.6rem, 6svh, 4.5rem) 0;
   border-block: 1px solid rgba(232, 200, 111, 0.14);
   background:
     radial-gradient(ellipse 90% 120% at 50% 0%, rgba(232, 200, 111, 0.045) 0%, transparent 60%),

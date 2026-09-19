@@ -14,7 +14,7 @@ const sugestoes = [
 
 export default function NotFound() {
   return (
-    <main className="relative flex min-h-[80vh] items-center justify-center overflow-hidden">
+    <main className="relative flex min-h-[80svh] items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-background" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,rgba(232,200,111,0.06)_0%,transparent_60%)]" />
 
