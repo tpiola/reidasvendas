@@ -1114,7 +1114,9 @@ body { background: var(--color-paper); color: var(--color-ink); overflow-x: clip
 .rdv-cookie-actions .is-primary { border-color: var(--color-gold); background: var(--color-gold); color: var(--color-on-accent); }
 /* Mobile: banner nunca corta CTA — botões empilham e texto quebra */
 @media (max-width: 640px) {
-  .rdv-cookie { left: .75rem; right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom, 0px)); width: auto; max-height: calc(100dvh - 1.5rem); overflow-y: auto; padding: 1rem; }
+  .rdv-cookie { left: .75rem; right: .75rem; bottom: calc(.75rem + env(safe-area-inset-bottom, 0px)); width: auto; max-height: calc(100svh - 1.5rem); /* era 100dvh: no celular o dvh MUDA quando a barra do
+     navegador aparece/some, e este banner fica fixo na tela durante todo o scroll — ele
+     redimensionava a cada movimento da barra. svh é estável. */ overflow-y: auto; padding: 1rem; }
   .rdv-cookie-actions { flex-direction: column; align-items: stretch; }
   .rdv-cookie-actions button, .rdv-cookie-actions > a { width: 100%; white-space: normal; min-height: 2.75rem; line-height: 1.25; padding-inline: .75rem; }
 }

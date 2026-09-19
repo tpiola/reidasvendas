@@ -17,7 +17,7 @@ body::after {
 }
 
 .page-offset {
-  min-height: calc(100dvh - var(--banner-height));
+  min-height: calc(100svh - var(--banner-height)); /* era 100dvh (instável no scroll mobile) */;
 }
 
 .rdv-header {
