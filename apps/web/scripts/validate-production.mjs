@@ -91,4 +91,30 @@ for (const pattern of forbiddenPublicPatterns) {
   assert(!pattern.test(publicText), `Conteúdo proibido no artefato: ${pattern}`);
 }
 
+// ── Regressão de "tremor" visual (jitter) ───────────────────────────────────
+// Um overlay FIXO cobrindo a tela inteira com animação INFINITA reescreve o valor
+// de todo pixel — inclusive das imagens — a cada frame. Foi exatamente o que fez
+// as imagens do site parecerem tremer (o grão de ruído pulsando a opacidade).
+// Medido: com esse overlay, duas capturas da MESMA imagem parada davam SSIM 0.993;
+// depois de parar a animação, 1.000000 (estável).
+const cssTexts = (await Promise.all(
+  textFiles.filter((file) => file.endsWith('.css')).map((file) => readFile(file, 'utf8')),
+)).join('\n');
+
+assert(
+  !/animation:\s*noise-anim[^;}]*infinite/i.test(cssTexts),
+  'Grão de ruído animado reintroduzido: reescreve todo pixel da tela e faz as imagens tremerem.',
+);
+
+for (const bloco of cssTexts.match(/[^{}]+\{[^{}]*\}/g) ?? []) {
+  const overlayFixo = /position:\s*fixed/.test(bloco);
+  const telaCheia = /inset:\s*0/.test(bloco);
+  const animacaoInfinita = /animation:[^;}]*infinite/.test(bloco);
+  if (overlayFixo && telaCheia && animacaoInfinita) {
+    throw new Error(
+      `Overlay fixo de tela cheia com animação infinita (tremor visual): ${bloco.slice(0, 90).replace(/\s+/g, ' ')}`,
+    );
+  }
+}
+
 process.stdout.write(`Production validation passed: ${urls.length} canonical pages, ${MARKETPLACE_ITEMS.length} marketplace entries.\n`);
