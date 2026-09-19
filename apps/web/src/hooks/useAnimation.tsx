@@ -2,53 +2,56 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
 
-/* ─── Spring config (Design+Code style) ─── */
-const springSoft = { type: 'spring' as const, stiffness: 120, damping: 20, mass: 1 };
-const springBouncy = { type: 'spring' as const, stiffness: 180, damping: 14, mass: 0.8 };
-const springGentle = { type: 'spring' as const, stiffness: 80, damping: 22, mass: 1 };
+/* ─── Motion tokens (Stripe / Linear / Emil Kowalski) ───
+   Duração + curva em vez de spring: previsível, sem overshoot e igual em todas
+   as seções. Entrada = ease-out (chega rápido, assenta suave); deslocamento
+   curto (16–24px, não 40px) para não "empurrar" a página. */
+const EASE_OUT = [0.23, 1, 0.32, 1] as const;      // ease-out-quint
+const EASE_IN_OUT = [0.77, 0, 0.175, 1] as const;  // ease-in-out-quart
+
+/** Durações padrão: micro (hover/press), ui (estado), entrada (seção), hero. */
+export const motionDuration = { micro: 0.14, ui: 0.22, entrada: 0.5, hero: 0.7 } as const;
 
 /* ─── Scroll Reveal Variants ─── */
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: springSoft },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: motionDuration.entrada, ease: EASE_OUT } },
 };
 
 export const fadeInDown: Variants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: { opacity: 1, y: 0, transition: springGentle },
+  hidden: { opacity: 0, y: -16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE_OUT } },
 };
 
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
-  visible: { opacity: 1, x: 0, transition: springSoft },
+  hidden: { opacity: 0, x: -24 },
+  visible: { opacity: 1, x: 0, transition: { duration: motionDuration.entrada, ease: EASE_IN_OUT } },
 };
 
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: springSoft },
+  hidden: { opacity: 0, x: 24 },
+  visible: { opacity: 1, x: 0, transition: { duration: motionDuration.entrada, ease: EASE_IN_OUT } },
 };
 
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: springBouncy },
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.45, ease: EASE_OUT } },
 };
 
-/* ─── Stagger ─── */
+/* ─── Stagger (40–90ms por item, como no padrão de mercado) ─── */
 export const staggerContainer: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06, delayChildren: 0.08 } },
 };
 
 export const staggerItem: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: springSoft },
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.42, ease: EASE_OUT } },
 };
 
-/* ─── Spring transition helper ─── */
-export const springTransition = { type: 'spring' as const, stiffness: 100, damping: 20 };
-
-/* ─── Exported spring configs for direct use ─── */
-export { springSoft, springBouncy, springGentle };
+/* ─── Transição padrão para elementos que mudam de estado em tela ───
+   (mantida para compatibilidade; prefira os tokens acima) */
+export const springTransition = { duration: motionDuration.ui, ease: EASE_OUT };
 
 /* ─── Card 3D Tilt ─── */
 export function useTilt(degree = 6) {
