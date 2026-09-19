@@ -33,7 +33,7 @@ const PROJECTS = [
     type: 'Serviço local · Franca/SP',
     detail: 'Serviços, áreas atendidas, diagnóstico e orçamento reunidos em uma jornada móvel.',
     image: '/imagens/portfolio/sentinela.webp',
-    video: '/videos/projetos/sentinela.mp4',
+    video: '/videos/projetos/sentinela-loop.mp4',
     emphasis: 'flagship',
     href: 'https://sentinelasaudeambiental.com.br',
   },
@@ -42,7 +42,7 @@ const PROJECTS = [
     type: 'Comércio · e-commerce',
     detail: 'Trinta anos de história transformados em catálogo por categoria e experiência de compra.',
     image: '/imagens/portfolio/tka.webp',
-    video: '/videos/projetos/tka.mp4',
+    video: '/videos/projetos/tka-loop.mp4',
     emphasis: 'standard',
     href: 'https://tkaesportes.com.br',
   },
@@ -54,7 +54,7 @@ const OTHER_WORK = [
     type: 'Presença autoral · portfólio',
     detail: 'Trajetória, projetos e serviços organizados em uma narrativa própria.',
     image: '/imagens/portfolio/thiagopiola.webp',
-    video: '/videos/projetos/thiagopiola.mp4',
+    video: '/videos/projetos/thiagopiola-loop.mp4',
     href: 'https://thiagopiola.com.br',
   },
   {
@@ -62,7 +62,7 @@ const OTHER_WORK = [
     type: 'Produto conversacional · saúde',
     detail: 'Produto web guiado, com histórico e limites institucionais explícitos.',
     image: '/imagens/portfolio/saudegpt.webp',
-    video: '/videos/projetos/saudegpt.mp4',
+    video: '/videos/projetos/saudegpt-loop.mp4',
     href: 'https://saudegpt.com',
   },
 ];
@@ -92,7 +92,7 @@ export default function Home() {
       </section>
 
       <SetorDivider
-        video="/videos/setores/pizzaria.mp4"
+        video="/videos/setores/pizzaria-loop.mp4"
         poster="/videos/setores/pizzaria-poster.jpg"
         kicker="Alimentação · Franca/SP"
         title="O cardápio que trabalha até de madrugada."
@@ -193,7 +193,7 @@ export default function Home() {
       </section>
 
       <SetorDivider
-        video="/videos/setores/barbearia.mp4"
+        video="/videos/setores/barbearia-loop.mp4"
         poster="/videos/setores/barbearia-poster.jpg"
         kicker="Beleza & barbearia · Franca/SP"
         title="A agenda cheia começa no primeiro corte bem feito."
@@ -276,7 +276,7 @@ export default function Home() {
       </section>
 
       <SetorDivider
-        video="/videos/setores/oficina.mp4"
+        video="/videos/setores/oficina-loop.mp4"
         poster="/videos/setores/oficina-poster.jpg"
         kicker="Automotivo · Franca/SP"
         title="Quem quebra na estrada não escolhe oficina no escuro."
@@ -344,7 +344,7 @@ export default function Home() {
       </section>
 
       <SetorDivider
-        video="/videos/setores/estetica.mp4"
+        video="/videos/setores/estetica-loop.mp4"
         poster="/videos/setores/estetica-poster.jpg"
         kicker="Saúde & estética · Franca/SP"
         title="A primeira consulta começa antes da porta abrir."
@@ -355,7 +355,7 @@ export default function Home() {
       <section className="rdv-closing-v3 rdv-closing-v3--video" aria-labelledby="closing-title">
         <div className="rdv-closing-v3__video" aria-hidden="true">
           <video
-            src="/videos/final-cinematic.mp4"
+            src="/videos/final-cinematic-loop.mp4"
             poster="/imagens/final-cinematic-poster.jpg"
             muted
             loop
