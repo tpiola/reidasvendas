@@ -3,8 +3,6 @@ import { useI18n, type Locale } from "@/lib/i18n";
 const OPTIONS: { code: Locale; label: string }[] = [
   { code: "pt", label: "PT" },
   { code: "en", label: "EN" },
-  { code: "it", label: "IT" },
-  { code: "es", label: "ES" },
 ];
 
 export function LanguageSwitcher() {

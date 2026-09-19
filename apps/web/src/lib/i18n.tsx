@@ -8,29 +8,27 @@ import {
 } from "react";
 import pt from "../locales/pt.json";
 import en from "../locales/en.json";
-import it from "../locales/it.json";
-import es from "../locales/es.json";
 
-const LOCALES = { pt, en, it, es } as const;
+const LOCALES = { pt, en } as const;
 export type Locale = keyof typeof LOCALES;
 
 const LS_KEY = "rdv-locale";
 const HTML_LANG: Record<Locale, string> = {
   pt: "pt-BR",
   en: "en",
-  it: "it",
-  es: "es",
 };
 
 function detect(): Locale {
   try {
     const saved = localStorage.getItem(LS_KEY);
     if (saved && saved in LOCALES) return saved as Locale;
-    const nav = navigator.language.slice(0, 2);
-    if (nav in LOCALES) return nav as Locale;
   } catch {
     /* ignore */
   }
+  // Português é o padrão do site (negócio local, público brasileiro).
+  // Não usamos navigator.language aqui: o Googlebot rastreia com Accept-Language
+  // en-US, então o site era servido INTEIRO em inglês para ele — e para qualquer
+  // visitante com o navegador em inglês. A troca de idioma é manual, no seletor.
   return "pt";
 }
 
