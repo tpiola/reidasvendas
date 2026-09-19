@@ -493,11 +493,15 @@ h3,
 }
 
 .rdv-hero--premium h1 {
-  max-width: 14ch;
-  margin: clamp(1.35rem, 3svh, 2rem) 0 0;
+  /* 17ch (era 14ch) + fonte menor: a mensagem da capa quebra em ~4 linhas em vez
+     de 6, para caber inteira na primeira tela junto com lede, botões e selos.
+     Antes o h1 sozinho ocupava 593px num viewport de 900px e empurrava os botões
+     para baixo da dobra. */
+  max-width: 17ch;
+  margin: clamp(0.65rem, 1.6svh, 1rem) 0 0;  /* ver nota em platform.css */
   color: #f7f5f2;
   font-family: var(--font-display);
-  font-size: clamp(3.6rem, 7.4vw, 7rem);
+  font-size: clamp(2.9rem, 5.4vw, 5.2rem);
   font-weight: 600;
   letter-spacing: -0.035em;
   line-height: 0.93;
@@ -532,7 +536,7 @@ h3,
 
 .rdv-hero__lede {
   max-width: 48rem;
-  margin: clamp(1.5rem, 3svh, 2rem) 0 0;
+  margin: clamp(0.9rem, 2svh, 1.4rem) 0 0;
   color: rgba(247, 245, 242, 0.72);
   font-size: clamp(1rem, 1.6vw, 1.22rem);
   line-height: 1.7;
@@ -685,7 +689,7 @@ h3,
 @media (max-width: 48rem) {
   .rdv-hero.rdv-hero--premium {
     min-height: calc(100svh - var(--banner-height));
-    padding: clamp(2rem, 6svh, 3.5rem) 0;
+    padding: clamp(1.4rem, 4svh, 2.4rem) 0;
   }
 
   .rdv-hero__content {
@@ -709,15 +713,15 @@ h3,
   }
 
   .rdv-hero--premium h1 {
-    max-width: 13ch;
-    font-size: clamp(2.75rem, 13vw, 4.25rem);
+    max-width: 16ch;
+    font-size: clamp(2.05rem, 9.6vw, 2.9rem);
     line-height: 0.95;
   }
 
   .rdv-hero__lede {
-    margin-top: 1.2rem;
-    font-size: 0.96rem;
-    line-height: 1.55;
+    margin-top: 0.8rem;
+    font-size: 0.86rem;
+    line-height: 1.42;
   }
 
   .rdv-hero__form {
@@ -728,7 +732,7 @@ h3,
   .rdv-hero__form input,
   .rdv-hero__submit {
     width: 100%;
-    min-height: 3rem;
+    min-height: 2.7rem;
   }
 
   .rdv-hero__after-form {
@@ -745,7 +749,7 @@ h3,
 
 @media (max-width: 23.5rem) {
   .rdv-hero--premium h1 {
-    font-size: clamp(2.45rem, 12.5vw, 3.2rem);
+    font-size: clamp(2rem, 9.8vw, 2.9rem);
   }
 
   .rdv-hero__badge {
@@ -2780,7 +2784,8 @@ textarea.rdv-field {
 
   .rdv-cookie-actions {
     align-items: stretch;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 }
 
@@ -2931,7 +2936,7 @@ body::after {
     font-size: var(--text-xs);
   }
   .rdv-cookie-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
   .rdv-cookie-actions button {
     flex: 1 1 auto;
