@@ -1064,7 +1064,9 @@ body::after {
   }
 
   .rdv-hero.rdv-hero--premium {
-    min-height: calc(100svh - 4.75rem);
+    /* capa em até 37.5rem: acima disso o cover escala pela altura e a imagem
+       de 1080px fica visivelmente ampliada (borrada) em tela retina */
+    min-height: min(calc(100svh - 4.75rem), 37.5rem);
     padding: 1.9rem 0 2rem;
   }
 
@@ -3253,5 +3255,19 @@ body::after {
 
   .rdv-hero__assurances {
     margin-top: 0.1rem;
+  }
+}
+
+/* Links do rodapé no celular: vinham com 24px de altura e nenhum respiro,
+   difíceis de acertar com o dedo. O rodapé é .rdv-footer-v3. */
+@media (max-width: 48rem) {
+  .rdv-footer-v3 nav a,
+  .rdv-footer-v3__bottom a,
+  /* links soltos (WhatsApp, e-mail): os que ficam dentro de um parágrafo são
+     inline e não entram aqui */
+  .rdv-footer-v3 a:not(p a) {
+    display: flex;
+    min-height: 2.25rem;
+    align-items: center;
   }
 }

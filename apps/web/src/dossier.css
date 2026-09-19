@@ -688,7 +688,7 @@ h3,
 
 @media (max-width: 48rem) {
   .rdv-hero.rdv-hero--premium {
-    min-height: calc(100svh - var(--banner-height));
+    min-height: min(calc(100svh - var(--banner-height)), 37.5rem);
     padding: clamp(1.4rem, 4svh, 2.4rem) 0;
   }
 
