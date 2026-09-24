@@ -3325,34 +3325,18 @@ body::after {
 }
 
 
-/* ─── Ritmo entre seções (UX) ────────────────────────────────────────────────
-   Medido no build anterior (viewport 412 e 1280, seções da home):
+/* ─── Espaço interno do rodapé até então intocado ────────────────────────────
+   Medido no rodapé renderizado (412x915 e 1280x900). O bloco de fecho do rodapé
+   (.rdv-footer-v3__statement, "Seu próximo canal precisa levar a algum lugar")
+   tinha padding-block: 4rem (128px somando topo e base) e gap: 3rem (48px) para
+   acomodar um h2 e um link — 400px de altura no celular.
 
-     seção                     padding-block        vão entre conteúdos
-     platform-intro/proof/     141px (desktop)      282px
-     models/method-v3          80px (celular)       160px
-     distribution              128px / 80px
-     closing-v3                176px / 96px
+   Isso é o "espaço para respirar" que sobrava e que nenhuma das rodadas
+   anteriores tinha tocado: o aperto anterior mexeu nas LINHAS de link (pitch
+   dos links, e o resultado ficou espremido), não no respiro do bloco.
 
-   Com 6 seções principais isso dava ~1.700px de espaço em branco só no desktop
-   (página de 10.582px) e ~1.000px no celular (página de 12.120px). É o grosso
-   do "espaço para respirar" do site — bem mais que o rodapé.
-
-   Os clamps abaixo reduzem ~40% e preservam a hierarquia: a seção de fechamento
-   continua sendo a mais espaçosa, e a faixa divisória de setor NÃO entra aqui —
-   é um bloco de vídeo full-bleed, o respiro dela vem do min-height, não de
-   padding. Bloco no fim de platform.css: mesma especificidade das regras
-   originais, então vence por ordem. */
-.rdv-platform-intro, .rdv-proof-v3, .rdv-models, .rdv-method-v3 { padding-block: clamp(3rem, 6.5vw, 5.5rem); }
-.rdv-distribution { padding-block: clamp(3rem, 6vw, 5rem); }
-.rdv-closing-v3 { padding-block: clamp(3.5rem, 8vw, 6rem); }
-.rdv-models__grid { margin-top: 2.75rem; }
-
-/* Rodapé: segundo aperto, sobre o que a mudança anterior já tinha feito. */
-.rdv-footer-v3__top { padding-block: 2.75rem; gap: clamp(1.25rem, 3vw, 2.25rem); }
-.rdv-footer-v3 nav, .rdv-footer-v3__contact { row-gap: 0.3rem; }
-.rdv-footer-v3__brand > p { margin-top: 1rem; }
-.rdv-footer-v3__bottom { min-height: 3.5rem; padding-block: 0.85rem; }
-@media (max-width: 48rem) {
-  .rdv-footer-v3__top { padding-block: 2rem; gap: 1rem; }
-}
+   Aqui o respiro do bloco cai ~45%, e as linhas de link continuam como o dono
+   aprovou (min-height 48px de alvo de toque, row-gap 0.4rem). Também reduzo o
+   row-gap da barra final, que somava 32px entre o copyright e os links legais. */
+.rdv-footer-v3__statement { padding-block: 2.25rem; gap: 1.75rem; }
+.rdv-footer-v3__bottom { row-gap: 1.25rem; }
