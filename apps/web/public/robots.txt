@@ -1,17 +1,44 @@
+# Politica de rastreamento - https://reidasvendas.com.br
+# Blocos User-agent nao se acumulam: cada bloco comeca do zero,
+# por isso "Disallow: /api/" e repetido em cada bloco autorizado.
+
 User-agent: *
 Allow: /
 Disallow: /api/
 
+# --- Buscadores e agentes de IA autorizados (citacao com atribuicao) ---
+
 User-agent: ClaudeBot
 Allow: /
+Disallow: /api/
 
 User-agent: GPTBot
 Allow: /
+Disallow: /api/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /api/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /api/
+
+# --- Rastreadores de coleta em massa sem retorno de trafego ---
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
 
 Sitemap: https://reidasvendas.com.br/sitemap.xml

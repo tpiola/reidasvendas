@@ -6,23 +6,88 @@
 
 O Rei das Vendas constrói sites premium, lojas virtuais, catálogos, aplicativos, produtos SaaS, portais, sistemas sob medida, automações de atendimento, arquitetura multicanal, SEO local, analytics e CRO. Cada projeto parte do contexto real do cliente; as demonstrações do site não são apresentadas como projetos publicados.
 
+## Escopo deste arquivo
+
+Somente as páginas públicas listadas abaixo são destinadas a leitura por buscadores e agentes de IA. Todas constam de https://reidasvendas.com.br/sitemap.xml. Rotas internas de operação e de dados não são públicas, estão bloqueadas em https://reidasvendas.com.br/robots.txt e não devem ser rastreadas nem citadas como fonte.
+
 ## Páginas principais
 
 - Página inicial: https://reidasvendas.com.br/
+- Sobre: https://reidasvendas.com.br/sobre
 - Marketplace de soluções: https://reidasvendas.com.br/solucoes
 - Projetos publicados: https://reidasvendas.com.br/portfolio
 - Arquiteturas demonstrativas: https://reidasvendas.com.br/demonstracoes
 - Modelos de contratação: https://reidasvendas.com.br/planos
 - Diagnóstico: https://reidasvendas.com.br/diagnostico
+- Ferramentas: https://reidasvendas.com.br/ferramentas
+- Blog: https://reidasvendas.com.br/blog
 - Contato: https://reidasvendas.com.br/contato
 - Política de privacidade: https://reidasvendas.com.br/politica
+- Termos de uso: https://reidasvendas.com.br/termos
 - Sitemap: https://reidasvendas.com.br/sitemap.xml
 
-## API pública (backend de prospecção local)
+## Soluções
 
-- Estatísticas de leads: https://reidasvendas.com.br/api/leads/stats
-- Ranking de verticais: https://reidasvendas.com.br/api/leads/verticals
-- Busca de leads (filtros: vertical, nivel, tipo, tem_whatsapp, quentes, q, sort): https://reidasvendas.com.br/api/leads
+- Agendamento online: https://reidasvendas.com.br/solucoes/agendamento-online
+- Analytics e CRO: https://reidasvendas.com.br/solucoes/analytics-e-cro
+- App para empresas: https://reidasvendas.com.br/solucoes/app-para-empresas
+- Automação de WhatsApp: https://reidasvendas.com.br/solucoes/automacao-whatsapp
+- Catálogo digital: https://reidasvendas.com.br/solucoes/catalogo-digital
+- Catálogo para representantes: https://reidasvendas.com.br/solucoes/catalogo-para-representantes
+- Desenvolvimento SaaS: https://reidasvendas.com.br/solucoes/desenvolvimento-saas
+- Distribuição multicanal: https://reidasvendas.com.br/solucoes/distribuicao-multicanal
+- E-commerce profissional: https://reidasvendas.com.br/solucoes/ecommerce-profissional
+- Funil de qualificação: https://reidasvendas.com.br/solucoes/funil-de-qualificacao
+- Infraestrutura digital: https://reidasvendas.com.br/solucoes/infraestrutura-digital
+- Landing page: https://reidasvendas.com.br/solucoes/landing-page
+- Operação digital: https://reidasvendas.com.br/solucoes/operacao-digital
+- Portal do cliente: https://reidasvendas.com.br/solucoes/portal-do-cliente
+- SEO local e Google Business: https://reidasvendas.com.br/solucoes/seo-local-google-business
+- Sistema sob medida: https://reidasvendas.com.br/solucoes/sistema-sob-medida
+- Site institucional premium: https://reidasvendas.com.br/solucoes/site-institucional-premium
+- Site para advogados: https://reidasvendas.com.br/solucoes/site-para-advogados
+- Site para clínicas: https://reidasvendas.com.br/solucoes/site-para-clinicas
+- Site para contadores: https://reidasvendas.com.br/solucoes/site-para-contadores
+- Site para dentistas: https://reidasvendas.com.br/solucoes/site-para-dentistas
+- Site para imobiliárias: https://reidasvendas.com.br/solucoes/site-para-imobiliarias
+- Site para profissionais liberais: https://reidasvendas.com.br/solucoes/site-para-profissionais-liberais
+- Site para restaurantes: https://reidasvendas.com.br/solucoes/site-para-restaurantes
+
+## Ferramentas
+
+- Auditoria de site: https://reidasvendas.com.br/ferramentas/auditoria-de-site
+- Calculadora de perda de vendas: https://reidasvendas.com.br/ferramentas/calculadora-perda-vendas
+- Calculadora de preço de site: https://reidasvendas.com.br/ferramentas/calculadora-preco-site
+- Calculadora de ROI: https://reidasvendas.com.br/ferramentas/calculadora-roi
+- Gerador de briefing: https://reidasvendas.com.br/ferramentas/gerador-de-briefing
+
+## Demonstrações
+
+- Clínica premium: https://reidasvendas.com.br/demonstracoes/clinica-premium
+- Imobiliária premium: https://reidasvendas.com.br/demonstracoes/imobiliaria-premium
+- Representação comercial: https://reidasvendas.com.br/demonstracoes/representacao-comercial
+- Restaurante premium: https://reidasvendas.com.br/demonstracoes/restaurante-premium
+
+## Guias comparativos e de custo
+
+- Catálogo digital ou PDF: https://reidasvendas.com.br/catalogo-digital-ou-pdf
+- Landing page ou site: https://reidasvendas.com.br/landing-page-ou-site
+- Quanto custa criar um app: https://reidasvendas.com.br/quanto-custa-criar-um-app
+- Quanto custa um SaaS: https://reidasvendas.com.br/quanto-custa-um-saas
+- Quanto custa um site profissional: https://reidasvendas.com.br/quanto-custa-um-site-profissional
+- Site ou Instagram: https://reidasvendas.com.br/site-ou-instagram
+
+## Alternativas
+
+- Alternativa ao Linktree: https://reidasvendas.com.br/alternativas/linktree
+- Alternativa à Loja Integrada: https://reidasvendas.com.br/alternativas/loja-integrada
+- Alternativa ao Wix: https://reidasvendas.com.br/alternativas/wix
+- Alternativa ao WordPress: https://reidasvendas.com.br/alternativas/wordpress
+
+## Blog
+
+- Presença digital: o que é: https://reidasvendas.com.br/blog/presenca-digital-o-que-e
+- Um projeto, um deploy, um domínio: https://reidasvendas.com.br/blog/um-projeto-um-deploy-um-dominio
 
 ## Contato oficial
 
