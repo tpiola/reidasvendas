@@ -18,7 +18,7 @@ export type Solution = {
 export const SOLUTIONS: Solution[] = [
   {
     slug: 'site-para-advogados',
-    title: 'Site para advogados e escritórios de advocacia',
+    title: 'Site para advogados e escritórios',
     category: 'Advocacia',
     audience: 'Escritórios, advogados autônomos e bancas especializadas',
     summary: 'Uma presença institucional que organiza áreas de atuação, demonstra responsabilidade técnica e encaminha contatos com contexto.',
@@ -41,7 +41,7 @@ export const SOLUTIONS: Solution[] = [
     title: 'Site para clínicas e consultórios',
     category: 'Saúde',
     audience: 'Clínicas médicas, consultórios e operações multiprofissionais',
-    summary: 'A presença que faz o paciente escolher sua clínica no primeiro clique: especialidades claras, equipe apresentada e agendamento sem fricção, com toda a responsabilidade da comunicação em saúde preservada.',
+    summary: 'Presença digital para clínicas e consultórios: especialidades organizadas, equipe apresentada e agendamento sem fricção, com a comunicação em saúde revisada.',
     pain: 'Enquanto sua agenda depende de indicação e mensagem solta no Instagram, a clínica concorrente já aparece primeiro no Google, mostra agendamento online e fecha a consulta que podia ser sua.',
     outcome: 'Menos paciente perdido entre a busca e o WhatsApp: descoberta, confiança institucional e pedido de agendamento na mesma jornada.',
     demonstration: 'clinica-premium',
@@ -59,10 +59,10 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'site-para-dentistas',
-    title: 'Site para dentistas e clínicas odontológicas',
+    title: 'Site para dentistas e clínicas',
     category: 'Odontologia',
     audience: 'Dentistas, clínicas odontológicas e consultórios especializados',
-    summary: 'A diferença entre aparecer nas primeiras posições de "dentista perto de mim" e ser só mais um perfil perdido no Instagram: procedimentos claros, prova de atuação e pedido de avaliação sem fricção.',
+    summary: 'Presença digital para dentistas, clínicas odontológicas e consultórios: procedimentos com linguagem informativa, contexto local e pedido de avaliação.',
     pain: 'Todo dia alguém pesquisa "dentista perto de mim" e fecha com quem responde primeiro no Google e no WhatsApp — não necessariamente com quem atende melhor.',
     outcome: 'Cada busca local vira uma chance real de avaliação agendada, em vez de mais um clique perdido para o consultório concorrente.',
     demonstration: 'clinica-premium',
@@ -80,7 +80,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'site-para-contadores',
-    title: 'Site para contadores e escritórios contábeis',
+    title: 'Site para contadores e escritórios',
     category: 'Contabilidade',
     audience: 'Escritórios contábeis, consultorias tributárias e operações B2B',
     summary: 'Uma presença institucional que explica serviços, perfis atendidos e requisitos iniciais antes da conversa comercial.',
@@ -121,7 +121,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'site-para-restaurantes',
-    title: 'Site para restaurantes e operações de delivery',
+    title: 'Site para restaurantes e delivery',
     category: 'Gastronomia',
     audience: 'Restaurantes, cafeterias, dark kitchens e operações gastronômicas',
     summary: 'Cardápio digital organizado, informações de atendimento e uma jornada de pedido preparada para o canal da operação.',
@@ -163,7 +163,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'catalogo-para-representantes',
-    title: 'Catálogo inteligente para representantes comerciais',
+    title: 'Catálogo para representantes comerciais',
     category: 'Representação comercial',
     audience: 'Representantes, equipes externas, distribuidores e fabricantes',
     summary: 'Uma apresentação comercial que separa linhas, facilita a busca e transforma seleções em pedidos de cotação estruturados.',
@@ -204,7 +204,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'app-para-empresas',
-    title: 'Aplicativo para empresas e operações comerciais',
+    title: 'App para empresas e operações comerciais',
     category: 'Aplicativos',
     audience: 'Empresas que precisam organizar uma jornada digital ou um processo recorrente',
     summary: 'Aplicações web planejadas a partir de um processo real: catálogo, agendamento, orçamento, atendimento ou operação interna.',
@@ -224,7 +224,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'sistema-sob-medida',
-    title: 'Sistema sob medida para operações empresariais',
+    title: 'Sistema sob medida para empresas',
     category: 'Sistemas e SaaS',
     audience: 'Empresas com um processo recorrente que não se encaixa em ferramentas genéricas',
     summary: 'Engenharia de uma aplicação proporcional ao problema, com fluxo, responsabilidades e indicadores definidos antes da implementação.',
@@ -244,7 +244,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'automacao-whatsapp',
-    title: 'Automação de WhatsApp para atendimento comercial',
+    title: 'Automação de WhatsApp para atendimento',
     category: 'Automações',
     audience: 'Empresas que recebem contatos repetidos ou precisam de triagem inicial',
     summary: 'Fluxos que coletam contexto, organizam a intenção e encaminham a conversa para o atendimento adequado.',
@@ -284,7 +284,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'site-institucional-premium',
-    title: 'Site institucional premium para negócios locais',
+    title: 'Site institucional para negócios locais',
     category: 'Presença e autoridade',
     audience: 'Empresas locais que precisam ser encontradas, compreendidas e acionadas com confiança',
     summary: 'Estratégia, conteúdo, design e engenharia reunidos em uma presença própria, rápida e preparada para busca, campanhas e atendimento.',
@@ -323,10 +323,10 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'ecommerce-profissional',
-    title: 'E-commerce profissional e operação de venda online',
+    title: 'E-commerce profissional e venda online',
     category: 'Venda e comércio',
     audience: 'Marcas, lojas e indústrias que precisam vender online com catálogo, checkout e operação conectados',
-    summary: 'A loja que decide se o pedido fecha com você ou abandona o carrinho na concorrência: catálogo que vende sozinho, checkout sem fricção e operação que continua depois do clique em comprar.',
+    summary: 'E-commerce profissional e venda online: catálogo organizado, carrinho e checkout sem fricção, com operação que continua depois da compra.',
     pain: 'Ter uma loja no ar não é o mesmo que vender: catálogo confuso, checkout lento no celular ou frete que só aparece na última tela manda o cliente direto para quem já resolveu isso.',
     outcome: 'Cada visita com intenção de compra convertida — carrinho recuperado, campanha mensurada e operação pronta para crescer sem depender de sorte.',
     architecture: [
@@ -342,7 +342,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'funil-de-qualificacao',
-    title: 'Diagnóstico, orçamento e qualificação comercial',
+    title: 'Diagnóstico, orçamento e qualificação',
     category: 'Captação e atendimento',
     audience: 'Negócios que recebem contatos sem informação suficiente para responder com velocidade',
     summary: 'Uma jornada curta que identifica necessidade, prioridade e contexto antes de entregar a conversa ao responsável certo.',
@@ -380,7 +380,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'desenvolvimento-saas',
-    title: 'Desenvolvimento de SaaS e produtos recorrentes',
+    title: 'Desenvolvimento de SaaS e produtos digitais',
     category: 'Produtos digitais',
     audience: 'Empresas e especialistas que identificaram um problema repetível e precisam validar um produto comercial',
     summary: 'Estratégia, experiência e engenharia para transformar um processo validado em produto com acesso, cobrança e operação contínua.',
@@ -399,7 +399,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'portal-do-cliente',
-    title: 'Portal, área do cliente e assinaturas digitais',
+    title: 'Portal, área do cliente e assinaturas',
     category: 'Produtos digitais',
     audience: 'Empresas que precisam oferecer acesso recorrente a pedidos, documentos, serviços, conteúdo ou suporte',
     summary: 'Uma área segura e reconhecível para centralizar relacionamento, entrega e autosserviço sem expor dados entre clientes.',
@@ -418,7 +418,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'seo-local-google-business',
-    title: 'SEO local e estrutura para Google Business Profile',
+    title: 'SEO local e Google Business Profile',
     category: 'Distribuição',
     audience: 'Negócios locais e profissionais elegíveis que precisam alinhar site, serviços, busca e presença oficial',
     summary: 'Base técnica, conteúdo e consistência de informações para melhorar a compreensão do negócio em buscas locais.',
@@ -475,7 +475,7 @@ export const SOLUTIONS: Solution[] = [
   },
   {
     slug: 'operacao-digital',
-    title: 'Operação digital: o site que continua trabalhando',
+    title: 'Operação digital: o site continua ativo',
     category: 'Operação e evolução',
     audience: 'Para quem já tem site (ou vai publicar um) e precisa que ele atenda, agende e mostre resultado.',
     summary: 'Um ciclo mensal que junta atendimento no WhatsApp, painel de leads e monitoramento de pedidos em um lugar só.',
@@ -642,7 +642,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'quanto-custa-criar-um-app',
-    title: 'Quanto custa criar um aplicativo para uma empresa?',
+    title: 'Quanto custa criar um aplicativo?',
     summary: 'O custo de um aplicativo depende do problema resolvido, dos usuários, dos fluxos, dos dados e das integrações que realmente precisam existir.',
     sections: [
       { title: 'Aplicativo web ou publicação em lojas', detail: 'Uma aplicação web responsiva pode atender muitos processos. Distribuição em lojas traz requisitos e etapas adicionais.' },
@@ -668,7 +668,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'site-ou-instagram',
-    title: 'Site ou Instagram: o que uma empresa precisa?',
+    title: 'Site ou Instagram: qual escolher?',
     summary: 'Instagram e site cumprem funções diferentes. A escolha depende de descoberta, profundidade da informação, controle e jornada de contato.',
     sections: [
       { title: 'Instagram para descoberta e distribuição', detail: 'Uma rede social pode demonstrar rotina, repertório e relacionamento, dependendo das regras e do alcance da plataforma.' },
@@ -695,7 +695,7 @@ export const GUIDES: Guide[] = [
   },
   {
     slug: 'catalogo-digital-ou-pdf',
-    title: 'Catálogo digital ou PDF: qual funciona melhor?',
+    title: 'Catálogo digital ou PDF: qual escolher?',
     summary: 'PDF e catálogo digital resolvem situações diferentes. Atualização, busca, consulta móvel e contexto comercial definem a escolha.',
     sections: [
       { title: 'Quando o PDF é suficiente', detail: 'Um material estático pode atender linhas pequenas, campanhas pontuais ou situações que exigem um arquivo offline.' },
@@ -732,7 +732,7 @@ export type SeoEntry = { path: string; title: string; description: string; categ
 export const GROWTH_SEO: SeoEntry[] = [
   {
     path: '/solucoes',
-    title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
+    title: 'Sites, lojas, apps e soluções digitais | Rei das Vendas',
     description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
     category: 'CollectionPage',
     headings: SOLUTIONS.map((item) => item.title),
@@ -756,8 +756,8 @@ export const GROWTH_SEO: SeoEntry[] = [
   ...COMPARISONS.map((item) => ({ path: `/alternativas/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Article', headings: item.considerations.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
   ...GUIDES.map((item) => ({ path: `/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'Article', headings: item.sections.map((entry) => `${entry.title}: ${entry.detail}`), questions: item.questions })),
   ...TOOLS.map((item) => ({ path: `/ferramentas/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.summary, category: 'WebApplication', headings: [item.result], questions: [] })),
-  ...DEMONSTRATIONS.map((item) => ({ path: `/demonstracoes/${item.slug}`, title: `${item.title} — arquitetura demonstrativa | Rei das Vendas`, description: item.description, category: 'WebPage', headings: [item.segment, item.description], questions: [] })),
-  { path: '/ferramentas', title: 'Ferramentas gratuitas de diagnóstico digital | Rei das Vendas', description: 'Calculadoras, briefing e triagem inicial para avaliar escopo, oportunidades e retorno comercial.', category: 'CollectionPage', headings: TOOLS.map((item) => item.title), questions: [] },
+  ...DEMONSTRATIONS.map((item) => ({ path: `/demonstracoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.description, category: 'WebPage', headings: [item.segment, item.description], questions: [] })),
+  { path: '/ferramentas', title: 'Ferramentas gratuitas de diagnóstico | Rei das Vendas', description: 'Calculadoras, briefing e triagem inicial para avaliar escopo, oportunidades e retorno comercial.', category: 'CollectionPage', headings: TOOLS.map((item) => item.title), questions: [] },
   { path: '/demonstracoes', title: 'Arquiteturas demonstrativas por segmento | Rei das Vendas', description: 'Explore demonstrações interativas para clínicas, restaurantes, imobiliárias e representação comercial.', category: 'CollectionPage', headings: DEMONSTRATIONS.map((item) => item.title), questions: [] },
 ];
 

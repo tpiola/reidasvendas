@@ -2,7 +2,11 @@ import { useMemo, useState } from 'react';
 import { ArrowRight, Search } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-import { DEMONSTRATIONS } from '@/lib/growth';
+import {
+  COMPARISON_BY_SLUG,
+  DEMONSTRATIONS,
+  SOLUTION_BY_SLUG,
+} from '@/lib/growth';
 import {
   FAMILY_LABELS,
   MARKETPLACE_ITEMS,
@@ -29,6 +33,33 @@ const FOUNDATION = [
   ['Medição', 'Eventos úteis, consentimento e leitura do funil sem números decorativos.'],
   ['Continuidade', 'Domínio, acessos, publicação, segurança e responsabilidade documentados.'],
 ];
+
+// Verticais de segmento: o mesmo método aplicado a um tipo de operação específico.
+const SEGMENT_PATHS = [
+  '/solucoes/site-para-advogados',
+  '/solucoes/site-para-clinicas',
+  '/solucoes/site-para-dentistas',
+  '/solucoes/site-para-contadores',
+  '/solucoes/site-para-imobiliarias',
+];
+
+const SEGMENT_VERTICALS = SEGMENT_PATHS.flatMap((to) => {
+  const solution = SOLUTION_BY_SLUG.get(to.replace('/solucoes/', ''));
+  return solution ? [{ to, solution }] : [];
+});
+
+// Comparativos de plataforma mantidos no hub para não depender só do sitemap.
+const COMPARISON_PATHS = [
+  '/alternativas/wix',
+  '/alternativas/wordpress',
+  '/alternativas/loja-integrada',
+  '/alternativas/linktree',
+];
+
+const COMPARISON_LINKS = COMPARISON_PATHS.flatMap((to) => {
+  const comparison = COMPARISON_BY_SLUG.get(to.replace('/alternativas/', ''));
+  return comparison ? [{ to, comparison }] : [];
+});
 
 export default function Solucoes() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -178,6 +209,58 @@ export default function Solucoes() {
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <div><p>{demo.segment}</p><h3>{demo.title}</h3></div>
                 <p>{demo.description}</p>
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rdv-marketplace__demos" aria-labelledby="marketplace-segmentos-title">
+        <div className="rdv-shell">
+          <header>
+            <div>
+              <p className="rdv-kicker">Verticais de segmento</p>
+              <h2 id="marketplace-segmentos-title">O segmento define o vocabulário, a triagem e o limite.</h2>
+            </div>
+            <p>Advocacia, saúde, odontologia, contabilidade e mercado imobiliário exigem informação revisada, encaminhamento específico e responsabilidade técnica declarada. O método é o mesmo; a arquitetura muda.</p>
+          </header>
+          <div>
+            {SEGMENT_VERTICALS.map(({ to, solution }, index) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => trackEvent('category_select', { category: solution.category, position: 'marketplace-segmentos' })}
+              >
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><p>{solution.category}</p><h3>{solution.title}</h3></div>
+                <p>{solution.summary}</p>
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="rdv-marketplace__demos" aria-labelledby="marketplace-alternativas-title">
+        <div className="rdv-shell">
+          <header>
+            <div>
+              <p className="rdv-kicker">Comparativos de plataforma</p>
+              <h2 id="marketplace-alternativas-title">Antes de trocar de ferramenta, entenda o que ela não resolve.</h2>
+            </div>
+            <p>Comparações entre plataformas conhecidas e uma arquitetura própria. Nenhuma delas é tratada como ruim: cada uma responde a um tipo de operação, e o critério é o processo comercial — não a mensalidade.</p>
+          </header>
+          <div>
+            {COMPARISON_LINKS.map(({ to, comparison }, index) => (
+              <Link
+                key={to}
+                to={to}
+                onClick={() => trackEvent('product_view', { platform: comparison.name, position: 'marketplace-alternativas' })}
+              >
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div><p>Alternativa avaliada</p><h3>{comparison.name}</h3></div>
+                <p>{comparison.summary}</p>
                 <ArrowRight aria-hidden="true" />
               </Link>
             ))}

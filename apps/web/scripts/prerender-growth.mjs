@@ -2,7 +2,14 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTICLES } from '../src/lib/articles.ts';
-import { GROWTH_SEO } from '../src/lib/growth.ts';
+import {
+  GROWTH_SEO,
+  SOLUTION_BY_SLUG,
+  COMPARISON_BY_SLUG,
+  GUIDE_BY_SLUG,
+  TOOL_BY_SLUG,
+  DEMONSTRATION_BY_SLUG,
+} from '../src/lib/growth.ts';
 
 const projectRoot = fileURLToPath(new URL('..', import.meta.url));
 const publicDirectory = join(projectRoot, 'public');
@@ -164,6 +171,200 @@ function initialHeader() {
   return `<header class="initial-header"><div class="initial-header__inner"><a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial"><b aria-hidden="true">R↗</b><span><strong>Rei das Vendas</strong><small>Negócios em movimento</small></span></a><a class="initial-header__action" href="/diagnostico">Mapear meu negócio</a></div></header>`;
 }
 
+function bulletList(items) {
+  const body = items.map((item) => `<li>${escapeHtml(item)}</li>`).join('');
+  return body ? `<ul>${body}</ul>` : '';
+}
+
+function detailList(items) {
+  const body = items
+    .map((item) => `<li><h3>${escapeHtml(item.title)}</h3>${item.detail ? `<p>${escapeHtml(item.detail)}</p>` : ''}</li>`)
+    .join('');
+  return body ? `<ol>${body}</ol>` : '';
+}
+
+function faqList(questions) {
+  const body = questions
+    .map((item) => `<li><h3>${escapeHtml(item.question)}</h3><p>${escapeHtml(item.answer)}</p></li>`)
+    .join('');
+  return body ? `<ol>${body}</ol>` : '';
+}
+
+function paragraphList(paragraphs) {
+  return (paragraphs ?? []).map((text) => `<p>${escapeHtml(text)}</p>`).join('');
+}
+
+function relatedSolutions(slugs) {
+  const body = (slugs ?? [])
+    .map((slug) => SOLUTION_BY_SLUG.get(slug))
+    .filter(Boolean)
+    .map((item) => `<li><a href="/solucoes/${item.slug}">${escapeHtml(item.title)}</a><p>${escapeHtml(item.summary)}</p></li>`)
+    .join('');
+  return body ? `<ul>${body}</ul>` : '';
+}
+
+/**
+ * Navegação explícita no HTML estático.
+ *
+ * Espelha a navegação que o React já oferece (header + rodapé), mas agora
+ * também no HTML entregue sem execução de JS. Sem isto, os rastreadores que
+ * não rodam JavaScript (GPTBot, ClaudeBot, OAI-SearchBot, PerplexityBot,
+ * todos liberados no robots.txt) enxergavam um grafo praticamente sem arestas:
+ * as páginas só eram alcançáveis pelo sitemap.
+ *
+ * Não é link farm: são os mesmos destinos reais da navegação do site, em uma
+ * lista por seção. Fica atrás do `.rdv-boot` e é substituído pelo React.
+ */
+function siteNavigation() {
+  const groups = [
+    { label: 'Soluções', links: [['/solucoes', 'Todas as soluções'], ['/ferramentas', 'Ferramentas'], ['/demonstracoes', 'Demonstrações']] },
+    { label: 'Comparativos', links: [...COMPARISON_BY_SLUG.values()].map((item) => [`/alternativas/${item.slug}`, item.title]) },
+    { label: 'Guias de decisão', links: [...GUIDE_BY_SLUG.values()].map((item) => [`/${item.slug}`, item.title]) },
+    { label: 'Publicações', links: [['/blog', 'Caderno de operação']] },
+    { label: 'Institucional', links: [['/portfolio', 'Projetos publicados'], ['/planos', 'Planos'], ['/sobre', 'Sobre'], ['/contato', 'Contato'], ['/diagnostico', 'Diagnóstico'], ['/politica', 'Política de privacidade'], ['/termos', 'Termos de uso']] },
+  ];
+  const body = groups
+    .map((group) => `<section><h3>${escapeHtml(group.label)}</h3><ul>${group.links
+      .map(([href, label]) => `<li><a href="${href}">${escapeHtml(label)}</a></li>`)
+      .join('')}</ul></section>`)
+    .join('');
+  return `<nav aria-label="Navegação do site"><h2>Navegação</h2>${body}</nav>`;
+}
+
+/**
+ * Conteúdo real das páginas internas dentro do HTML entregue ao crawler.
+ *
+ * Por que existe: o site é uma SPA (Vite + React). Sem executar JS, o HTML
+ * inicial trazia apenas <title>/<meta>/JSON-LD mais um esqueleto com títulos —
+ * cerca de 70 a 125 palavras por página, contra 250 a 1.200 no DOM renderizado.
+ * Os rastreadores liberados no robots.txt (GPTBot, ClaudeBot, OAI-SearchBot,
+ * PerplexityBot) não executam JS, então liam a versão pobre.
+ *
+ * Por que é seguro: os blocos `initial-*` ficam DENTRO de #root e são
+ * substituídos pelo React no mount. Enquanto o React não monta, ficam atrás de
+ * `.rdv-boot` (position: fixed; inset: 0; z-index 2147483000; fundo #07090d
+ * opaco). Nenhum humano vê este markup — enriquecê-lo não altera a experiência
+ * visual, apenas o que o robô lê.
+ *
+ * Regra editorial: usar SOMENTE dado real já publicado em growth.ts e
+ * articles.ts. Nada de preço, prazo, métrica, prêmio ou avaliação inventada.
+ */
+function detailBlocks(entry) {
+  const { path } = entry;
+  const tail = (prefix) => (path.startsWith(prefix) ? path.slice(prefix.length) : null);
+  const blocks = [];
+
+  if (path === '/') {
+    const byCategory = new Map();
+    for (const item of SOLUTION_BY_SLUG.values()) {
+      if (!byCategory.has(item.category)) byCategory.set(item.category, []);
+      byCategory.get(item.category).push(item);
+    }
+    const groups = [...byCategory.entries()]
+      .map(([category, items]) => `<section><h2>${escapeHtml(category)}</h2><ul>${items
+        .map((item) => `<li><a href="/solucoes/${item.slug}">${escapeHtml(item.title)}</a><p>${escapeHtml(item.summary)}</p></li>`)
+        .join('')}</ul></section>`)
+      .join('');
+    blocks.push(`<section><h2>Soluções por segmento</h2>${groups}</section>`);
+  } else if (path === '/solucoes') {
+    const byCategory = new Map();
+    for (const item of SOLUTION_BY_SLUG.values()) {
+      if (!byCategory.has(item.category)) byCategory.set(item.category, []);
+      byCategory.get(item.category).push(item);
+    }
+    blocks.push(`<section><h2>Soluções por segmento</h2>${[...byCategory.entries()]
+      .map(([category, items]) => `<section><h3>${escapeHtml(category)}</h3><ul>${items
+        .map((item) => `<li><a href="/solucoes/${item.slug}">${escapeHtml(item.title)}</a><p>${escapeHtml(item.summary)}</p></li>`)
+        .join('')}</ul></section>`)
+      .join('')}</section>`);
+  } else if (path === '/ferramentas') {
+    blocks.push(`<section><h2>Ferramentas disponíveis</h2><ul>${[...TOOL_BY_SLUG.values()]
+      .map((tool) => `<li><a href="/ferramentas/${tool.slug}">${escapeHtml(tool.title)}</a><p>${escapeHtml(tool.summary)}</p>${tool.result ? `<p>${escapeHtml(tool.result)}</p>` : ''}</li>`)
+      .join('')}</ul></section>`);
+  } else if (path === '/demonstracoes') {
+    blocks.push(`<section><h2>Demonstrações publicadas</h2><ul>${[...DEMONSTRATION_BY_SLUG.values()]
+      .map((demo) => {
+        const linked = SOLUTION_BY_SLUG.get(demo.solution);
+        return `<li><a href="/demonstracoes/${demo.slug}">${escapeHtml(demo.title)}</a><p>${escapeHtml(demo.segment)}</p><p>${escapeHtml(demo.description)}</p>${linked ? `<p><a href="/solucoes/${linked.slug}">${escapeHtml(linked.title)}</a></p>` : ''}</li>`;
+      })
+      .join('')}</ul></section>`);
+  } else if (path === '/blog') {
+    blocks.push(`<section><h2>Publicações</h2><ul>${ARTICLES
+      .map((article) => `<li><a href="/blog/${article.slug}">${escapeHtml(article.title)}</a><p>${escapeHtml(article.description)}</p><p>${escapeHtml(article.displayDate)} · ${escapeHtml(article.readTime)}</p></li>`)
+      .join('')}</ul></section>`);
+  } else {
+    const solutionSlug = tail('/solucoes/');
+    const comparisonSlug = tail('/alternativas/');
+    const toolSlug = tail('/ferramentas/');
+    const demoSlug = tail('/demonstracoes/');
+    const articleSlug = tail('/blog/');
+
+    if (solutionSlug) {
+      const solution = SOLUTION_BY_SLUG.get(solutionSlug);
+      if (solution) {
+        blocks.push(`<section><h2>Quem atendemos</h2><p>${escapeHtml(solution.audience)}</p><p>${escapeHtml(solution.summary)}</p></section>`);
+        blocks.push(`<section><h2>O problema que esta página resolve</h2><p>${escapeHtml(solution.pain)}</p></section>`);
+        blocks.push(`<section><h2>O resultado esperado</h2><p>${escapeHtml(solution.outcome)}</p></section>`);
+        if (solution.architecture?.length) blocks.push(`<section><h2>Como a solução se organiza</h2>${detailList(solution.architecture)}</section>`);
+        if (solution.questions?.length) blocks.push(`<section><h2>Perguntas frequentes</h2>${faqList(solution.questions)}</section>`);
+        const demo = solution.demonstration ? DEMONSTRATION_BY_SLUG.get(solution.demonstration) : null;
+        if (demo) blocks.push(`<section><h2>Demonstração relacionada</h2><p><a href="/demonstracoes/${demo.slug}">${escapeHtml(demo.title)}</a></p><p>${escapeHtml(demo.description)}</p></section>`);
+        if (solution.related?.length) blocks.push(`<section><h2>Soluções relacionadas</h2>${relatedSolutions(solution.related)}</section>`);
+      }
+    } else if (comparisonSlug) {
+      const comparison = COMPARISON_BY_SLUG.get(comparisonSlug);
+      if (comparison) {
+        blocks.push(`<section><h2>Resumo da comparação</h2><p>${escapeHtml(comparison.summary)}</p></section>`);
+        blocks.push(`<section><h2>O que ${escapeHtml(comparison.name)} entrega</h2><p>${escapeHtml(comparison.platformFit)}</p></section>`);
+        blocks.push(`<section><h2>O que uma solução sob medida entrega</h2><p>${escapeHtml(comparison.customFit)}</p></section>`);
+        if (comparison.considerations?.length) blocks.push(`<section><h2>Pontos de atenção antes de decidir</h2>${detailList(comparison.considerations)}</section>`);
+        if (comparison.questions?.length) blocks.push(`<section><h2>Perguntas frequentes</h2>${faqList(comparison.questions)}</section>`);
+        if (comparison.officialUrl) blocks.push(`<section><h2>Referência oficial</h2><p><a href="${escapeHtml(comparison.officialUrl)}" rel="noopener noreferrer nofollow">${escapeHtml(comparison.officialUrl)}</a></p></section>`);
+      }
+    } else if (toolSlug) {
+      const tool = TOOL_BY_SLUG.get(toolSlug);
+      if (tool) {
+        blocks.push(`<section><h2>Sobre esta ferramenta</h2><p>${escapeHtml(tool.summary)}</p></section>`);
+        if (tool.result) blocks.push(`<section><h2>O que você recebe</h2><p>${escapeHtml(tool.result)}</p></section>`);
+      }
+    } else if (demoSlug) {
+      const demo = DEMONSTRATION_BY_SLUG.get(demoSlug);
+      if (demo) {
+        blocks.push(`<section><h2>Segmento</h2><p>${escapeHtml(demo.segment)}</p></section>`);
+        blocks.push(`<section><h2>Sobre esta demonstração</h2><p>${escapeHtml(demo.description)}</p></section>`);
+        const linked = SOLUTION_BY_SLUG.get(demo.solution);
+        if (linked) blocks.push(`<section><h2>Solução aplicada</h2><p><a href="/solucoes/${linked.slug}">${escapeHtml(linked.title)}</a></p><p>${escapeHtml(linked.summary)}</p></section>`);
+      }
+    } else if (articleSlug) {
+      const article = ARTICLES.find((item) => item.slug === articleSlug);
+      if (article) {
+        for (const section of article.sections ?? []) {
+          blocks.push(`<section><h2>${escapeHtml(section.heading)}</h2>${paragraphList(section.paragraphs)}${section.bullets?.length ? bulletList(section.bullets) : ''}</section>`);
+        }
+      }
+    } else {
+      const guide = GUIDE_BY_SLUG.get(path.slice(1));
+      if (guide) {
+        blocks.push(`<section><h2>Resumo</h2><p>${escapeHtml(guide.summary)}</p></section>`);
+        if (guide.sections?.length) blocks.push(`<section><h2>O que entra na análise</h2>${detailList(guide.sections)}</section>`);
+        if (guide.questions?.length) blocks.push(`<section><h2>Perguntas frequentes</h2>${faqList(guide.questions)}</section>`);
+        const linked = SOLUTION_BY_SLUG.get(guide.solution);
+        if (linked) blocks.push(`<section><h2>Solução relacionada</h2><p><a href="/solucoes/${linked.slug}">${escapeHtml(linked.title)}</a></p><p>${escapeHtml(linked.summary)}</p></section>`);
+        const tool = guide.tool ? TOOL_BY_SLUG.get(guide.tool) : null;
+        if (tool) blocks.push(`<section><h2>Ferramenta relacionada</h2><p><a href="/ferramentas/${tool.slug}">${escapeHtml(tool.title)}</a></p><p>${escapeHtml(tool.summary)}</p></section>`);
+      }
+    }
+  }
+
+  // Páginas sem dado dedicado (ex.: /planos, /sobre, /portfolio) ainda entregam
+  // as perguntas reais do próprio registro de SEO, que antes iam cortadas em 3.
+  if (!blocks.length && entry.questions?.length) {
+    blocks.push(`<section><h2>Perguntas frequentes</h2>${faqList(entry.questions)}</section>`);
+  }
+
+  return blocks.length ? `<div class="initial-detail">${blocks.join('')}</div>` : '';
+}
+
 function staticContent(entry) {
   const heading = entry.heading ?? entry.title.replace(/ \| Rei das Vendas$/, '');
   const sections = entry.headings.slice(0, 6).map((item, index) => {
@@ -177,7 +378,7 @@ function staticContent(entry) {
   const list = sections || questions;
   const kicker = entry.category === 'Article' ? 'Caderno de operação' : 'Franca/SP · negócios locais e todo o Brasil';
 
-  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">${kicker}</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><a class="initial-home__action" href="/diagnostico">Mapear meu negócio →</a></article><aside class="initial-map" aria-label="Conteúdo desta página"><div class="initial-map__head"><p>Leitura inicial</p><span>RDV / 2026</span></div><h2>O que esta página organiza</h2><ol>${list}</ol></aside></div></main>`;
+  return `<main class="initial-home" id="main-content"><div class="initial-home__grid"><article><p class="initial-home__kicker">${kicker}</p><h1>${escapeHtml(heading)}</h1><p class="initial-home__lead">${escapeHtml(entry.description)}</p><a class="initial-home__action" href="/diagnostico">Mapear meu negócio →</a></article><aside class="initial-map" aria-label="Conteúdo desta página"><div class="initial-map__head"><p>Leitura inicial</p><span>RDV / 2026</span></div><h2>O que esta página organiza</h2><ol>${list}</ol></aside></div>${detailBlocks(entry)}${siteNavigation()}</main>`;
 }
 
 function prerenderDocument(template, entry) {

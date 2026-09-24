@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
+import { GUIDE_BY_SLUG, type Guide } from '@/lib/growth';
 import { DELIVERY_MODELS } from '@/lib/marketplace';
 
 const DELIVERIES = [
@@ -23,6 +24,17 @@ const PRINCIPLES = [
   'Domínio, código, acessos, dados e continuidade são definidos antes do início.',
   'Nenhum pacote promete ranking, volume de vendas ou prazo incompatível com o escopo.',
 ];
+
+// Guias de custo que costumam preceder a conversa sobre investimento.
+const COST_GUIDE_SLUGS = [
+  'quanto-custa-um-site-profissional',
+  'quanto-custa-criar-um-app',
+  'quanto-custa-um-saas',
+];
+
+const COST_GUIDES = COST_GUIDE_SLUGS
+  .map((slug) => GUIDE_BY_SLUG.get(slug))
+  .filter((guide): guide is Guide => Boolean(guide));
 
 export default function Planos() {
   return (
@@ -91,6 +103,31 @@ export default function Planos() {
           <ol>
             {PRINCIPLES.map((principle, index) => (
               <li key={principle}><span>{String(index + 1).padStart(2, '0')}</span><p>{principle}</p></li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="rdv-offers__principles" aria-labelledby="offer-cost-title">
+        <div className="rdv-shell">
+          <header>
+            <p className="rdv-kicker">Antes de comparar propostas</p>
+            <h2 id="offer-cost-title">Quanto custa depende do que precisa existir.</h2>
+          </header>
+          <ol>
+            {COST_GUIDES.map((guide, index) => (
+              <li key={guide.slug}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <Link
+                    className="rdv-offers__secondary"
+                    to={`/${guide.slug}`}
+                    onClick={() => trackEvent('guide_open', { guide: guide.slug, position: 'planos-custo' })}
+                  >
+                    {guide.title} <ArrowRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </li>
             ))}
           </ol>
         </div>
