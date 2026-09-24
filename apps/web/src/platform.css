@@ -3271,3 +3271,88 @@ body::after {
     align-items: center;
   }
 }
+
+
+/* ─── Alvos de toque (mobile) ────────────────────────────────────────────────
+   Medido em viewport 412x915 com o critério do Lighthouse (interativo <48px em
+   largura OU altura): links do rodapé 174x36, links legais 45-80x36, contato
+   380x36, ícones sociais 36x36, botão de menu 40x40, botões do cookie
+   159-180x40, botões do hero 388x40/46, botão de formulário 316x44.
+
+   WCAG 2.5.8 (AA) pede 24x24; 2.5.5 (AAA) e o Lighthouse usam 44-48px. A área
+   tocável sobe para 48px sem aumentar o texto nem os ícones — o alvo cresce por
+   padding, não por tipografia.
+
+   Observação: já existia uma tentativa em .rdv-footer-v3 (min-height: 2.25rem,
+   ou 36px) que ficou abaixo do mínimo. Este bloco a substitui; ele fica no fim
+   de platform.css, que é o último CSS importado em main.tsx. */
+@media (max-width: 48rem) {
+  .rdv-footer-v3 a:not(p a) { min-height: 3rem; }
+  /* Links curtos do rodapé ("Contato") mediam 45x48: altura certa, 3px
+     estreito. min-width garante os 48px independente do comprimento do texto. */
+  .rdv-footer-v3__bottom a { min-width: 3rem; justify-content: center; }
+  .rdv-footer-v3__social a { width: 3rem; height: 3rem; }
+  .rdv-footer-v3__social svg { width: 1.25rem; height: 1.25rem; }
+  .rdv-brand-link { min-height: 3rem; align-items: center; }
+  .rdv-menu-button { width: 3rem; height: 3rem; }
+  .rdv-cookie-head button { width: 2.75rem; height: 2.75rem; }
+  .rdv-cookie-actions button, .rdv-cookie-actions > a { min-height: 3rem; }
+  .rdv-hero__submit, .rdv-hero__secondary { min-height: 3rem; }
+  .rdv-form-action, .rdv-form-back { min-height: 3rem; }
+}
+
+
+/* ─── Ritmo vertical do rodapé (UX) ──────────────────────────────────────────
+   Medido no build anterior: rodapé de 1.482px no celular e 833px no desktop.
+   Causas: padding-block de 80px, gap de 32px (mobile) / 64px (desktop) entre os
+   blocos, e um gap de 12.8px entre os links que virou redundante quando as
+   linhas passaram a ter 48px de altura (o pitch chegou a 61px por linha).
+
+   Aqui: o espaço entre BLOCOS encolhe, e o gap entre linhas volta a ser só uma
+   separação fina — a área tocável continua com 48px, agora com 6.4px de
+   separação (antes eram 36px de alvo e 12.8px de vão morto).
+   Este bloco vem depois das regras originais de propósito: mesma
+   especificidade, então vence por ordem. */
+.rdv-footer-v3__top { padding-block: 3.5rem; gap: clamp(1.5rem, 3.5vw, 2.75rem); }
+.rdv-footer-v3 nav, .rdv-footer-v3__contact { row-gap: 0.4rem; }
+.rdv-footer-v3__brand > p { margin-top: 1.25rem; }
+.rdv-footer-v3__bottom { min-height: 4rem; padding-block: 1rem; }
+
+/* No celular o rodapé é lido em coluna, então o aperto pode ser maior. */
+@media (max-width: 48rem) {
+  .rdv-footer-v3__top { padding-block: 2.5rem; gap: 1.25rem; }
+  .rdv-footer-v3__bottom { padding-block: 1.25rem; }
+}
+
+
+/* ─── Ritmo entre seções (UX) ────────────────────────────────────────────────
+   Medido no build anterior (viewport 412 e 1280, seções da home):
+
+     seção                     padding-block        vão entre conteúdos
+     platform-intro/proof/     141px (desktop)      282px
+     models/method-v3          80px (celular)       160px
+     distribution              128px / 80px
+     closing-v3                176px / 96px
+
+   Com 6 seções principais isso dava ~1.700px de espaço em branco só no desktop
+   (página de 10.582px) e ~1.000px no celular (página de 12.120px). É o grosso
+   do "espaço para respirar" do site — bem mais que o rodapé.
+
+   Os clamps abaixo reduzem ~40% e preservam a hierarquia: a seção de fechamento
+   continua sendo a mais espaçosa, e a faixa divisória de setor NÃO entra aqui —
+   é um bloco de vídeo full-bleed, o respiro dela vem do min-height, não de
+   padding. Bloco no fim de platform.css: mesma especificidade das regras
+   originais, então vence por ordem. */
+.rdv-platform-intro, .rdv-proof-v3, .rdv-models, .rdv-method-v3 { padding-block: clamp(3rem, 6.5vw, 5.5rem); }
+.rdv-distribution { padding-block: clamp(3rem, 6vw, 5rem); }
+.rdv-closing-v3 { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.rdv-models__grid { margin-top: 2.75rem; }
+
+/* Rodapé: segundo aperto, sobre o que a mudança anterior já tinha feito. */
+.rdv-footer-v3__top { padding-block: 2.75rem; gap: clamp(1.25rem, 3vw, 2.25rem); }
+.rdv-footer-v3 nav, .rdv-footer-v3__contact { row-gap: 0.3rem; }
+.rdv-footer-v3__brand > p { margin-top: 1rem; }
+.rdv-footer-v3__bottom { min-height: 3.5rem; padding-block: 0.85rem; }
+@media (max-width: 48rem) {
+  .rdv-footer-v3__top { padding-block: 2rem; gap: 1rem; }
+}

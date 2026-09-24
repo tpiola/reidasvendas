@@ -846,3 +846,20 @@
     transform: none !important;
   }
 }
+
+
+/* ─── Alvos de toque (mobile) ────────────────────────────────────────────────
+   .ge-button/.ge-link/.ge-demo-button tinham min-height: 2.75rem (44px) e foram
+   medidos em 176x44, 186x44, 209x44, 219x44 e 229x44 com viewport 412x915.
+   Sobem para 48px. Este arquivo é um chunk separado (GrowthEngine-*.css) e
+   carrega DEPOIS do bundle principal: a correção precisa viver aqui, senão é
+   sobrescrita pela cascata. */
+@media (max-width: 48rem) {
+  .ge-button, .ge-link, .ge-demo-button { min-height: 3rem; }
+  /* O <input type=checkbox> mede 13x13, mas quem recebe o toque é o <label> que
+     o envolve — tocar no texto também alterna o controle. O label media 316x47:
+     a altura vinha de line-height 1.6 sobre --text-sm somado ao padding-block,
+     e ficava 1px abaixo do mínimo. align-items segue flex-start de propósito,
+     para o texto de 2 linhas continuar alinhado à primeira linha. */
+  .ge-tool-checks label { min-height: 3rem; }
+}
