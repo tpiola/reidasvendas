@@ -22,7 +22,7 @@ const staticEntries = [
     path: '/',
     title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
     description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
-    heading: 'Seu cliente já está pesquisando. A questão é quem ele vai encontrar.',
+    heading: 'Você cuida do seu negócio. A gente faz ele ser encontrado.',
     category: 'WebPage',
     headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
     questions: [],
@@ -168,7 +168,7 @@ function structuredData(entry, url) {
 }
 
 function initialHeader() {
-  return `<header class="initial-header"><div class="initial-header__inner"><a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial"><b aria-hidden="true">R↗</b><span><strong>Rei das Vendas</strong><small>Negócios em movimento</small></span></a><a class="initial-header__action" href="/diagnostico">Mapear meu negócio</a></div></header>`;
+  return `<header class="initial-header"><div class="initial-header__inner"><a class="initial-brand" href="/" aria-label="Rei das Vendas — página inicial"><b aria-hidden="true"><svg width="28" height="28" viewBox="0 0 48 48" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M37.31 30.28 L24.56 28.22 L24.38 28.03 L23.44 28.03 L22.31 28.41 L10.50 30.28 L10.22 29.81 L10.50 29.34 L15.75 26.91 L16.59 26.25 L11.91 17.06 L13.12 17.16 L18.38 18.84 L20.25 19.22 L23.53 10.88 L23.72 9.94 L24.00 9.84 L26.91 17.44 L27.28 18.94 L27.56 19.22 L28.12 19.22 L35.44 16.97 L35.91 17.06 L31.22 26.25 L37.31 29.34 L37.59 29.62 L37.31 30.28Z M26.72 19.50 L24.09 12.19 L23.81 12.09 L21.09 19.50 L23.72 19.50 L23.81 14.16 L24.09 14.25 L24.09 19.50 L26.72 19.50Z M30.66 25.69 L34.31 18.09 L27.84 20.06 L27.84 20.44 L30.47 25.69 L30.66 25.69Z M17.34 25.69 L20.16 20.06 L13.69 18.28 L13.59 18.56 L17.16 25.69 L17.34 25.69Z M30.28 26.25 L27.28 20.25 L26.81 19.97 L24.09 20.06 L24.00 23.16 L23.72 23.06 L23.62 19.97 L21.00 19.97 L20.62 20.16 L17.53 26.25 L30.28 26.25Z M34.59 28.88 L30.19 26.72 L21.75 26.72 L17.62 26.72 L13.41 28.88 L14.25 28.97 L14.44 28.78 L16.50 28.59 L23.44 27.28 L24.56 27.28 L24.75 27.47 L25.69 27.47 L25.88 27.66 L31.31 28.41 L33.75 28.97 L34.59 28.88Z M34.12 32.53 L13.69 32.53 L13.41 32.06 L13.69 31.78 L34.12 31.78 L34.41 32.06 L34.12 32.53Z"/></svg></b><span><strong>Rei das Vendas</strong><small>Negócios em movimento</small></span></a><a class="initial-header__action" href="/diagnostico">Mapear meu negócio</a></div></header>`;
 }
 
 function bulletList(items) {
