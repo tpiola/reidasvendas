@@ -1188,12 +1188,15 @@ h3,
 /* Consent as a compact strip, not a floating panel */
 .rdv-cookie {
   position: fixed;
-  z-index: 40;
+  z-index: 9998;
   right: var(--space-sm);
   bottom: var(--space-sm);
-  left: var(--space-sm);
-  width: min(calc(100% - (var(--space-sm) * 2)), 52rem);
-  margin-inline: auto;
+  left: auto;
+  /* Card de canto (24rem), não barra central: com 52rem + margin auto o aviso
+     cobria o parágrafo do hero e os CTAs no desktop. Esta é a única definição de
+     .rdv-cookie — a duplicata em index.css foi removida. */
+  width: min(calc(100% - (var(--space-sm) * 2)), 24rem);
+  margin-inline: 0;
   padding: var(--space-sm);
   border: 1px solid var(--color-ink);
   border-radius: var(--radius-editorial);
