@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: /você cuida do seu negócio/i })).toBeVisible();
   await expect(page.getByRole('link', { name: /quero parar de perder cliente/i }).first()).toHaveAttribute('href', '/solucoes');
   await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
   await expect(page.locator('#method-title')).toBeVisible();
@@ -59,7 +59,7 @@ test('biblioteca conecta soluções, comparação e ferramentas', async ({ page 
   await expect(page.getByRole('heading', { level: 3, name: /catálogo para representantes/i })).toBeVisible();
   await page.goto('/solucoes/catalogo-para-representantes');
   await expect(
-    page.getByRole('heading', { level: 1, name: /catálogo inteligente para representantes comerciais/i }),
+    page.getByRole('heading', { level: 1, name: /catálogo para representantes comerciais/i }),
   ).toBeVisible();
   await page.goto('/alternativas/wix');
   await expect(page.getByRole('heading', { level: 1, name: /alternativa ao wix/i })).toBeVisible();
@@ -126,7 +126,7 @@ for (const viewport of [
   test(`home não cria overflow em ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: /seu cliente já está pesquisando/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /você cuida do seu negócio/i })).toBeVisible();
     const horizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
     );

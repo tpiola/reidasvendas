@@ -146,7 +146,7 @@ export default function Solucoes() {
           {visibleItems.length ? (
             <div className="rdv-marketplace__grid" role="list">
               {visibleItems.map((item, index) => (
-                <article key={`${item.title}-${item.family}`} role="listitem" className="rdv-market-card">
+                <div key={`${item.title}-${item.family}`} role="listitem" className="rdv-market-card">
                   <div className="rdv-market-card__top">
                     <span>{String(index + 1).padStart(2, '0')}</span>
                     <p>{item.format}</p>
@@ -163,7 +163,7 @@ export default function Solucoes() {
                   >
                     Configurar esta solução <ArrowRight aria-hidden="true" />
                   </Link>
-                </article>
+                </div>
               ))}
             </div>
           ) : (

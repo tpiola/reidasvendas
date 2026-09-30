@@ -96,10 +96,10 @@ export function useTilt(degree = 6) {
 
 /* ─── Reveal ─── */
 export function Reveal({
-  children, className = '', delay = 0, variant = fadeInUp, once = true,
+  children, className = '', delay = 0, variant = fadeInUp, once = true, role,
 }: {
   children: React.ReactNode; className?: string; delay?: number;
-  variant?: Variants; once?: boolean;
+  variant?: Variants; once?: boolean; role?: React.AriaRole;
 }): React.JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: '-30px 0px' });
@@ -108,6 +108,7 @@ export function Reveal({
       ref={ref} variants={variant} initial="hidden"
       animate={isInView ? 'visible' : 'hidden'} transition={{ delay }}
       className={className}
+      role={role}
     >
       {children}
     </motion.div>

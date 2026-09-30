@@ -127,9 +127,8 @@ export default function Home() {
           {FAMILY_ORDER.map((family, index) => {
             const familyItems = MARKETPLACE_ITEMS.filter((item) => item.family === family);
             return (
-              <motion.div key={family} variants={staggerItem}>
+              <motion.div key={family} variants={staggerItem} role="listitem">
                 <Link
-                  role="listitem"
                   className="rdv-family-row"
                   to={`/solucoes?categoria=${family}`}
                   onClick={() => trackEvent('category_select', { category: family, position: 'home-map' })}
@@ -215,9 +214,8 @@ export default function Home() {
 
           <div className="rdv-project-stage" role="list">
             {PROJECTS.map((project, index) => (
-              <Reveal key={project.name} delay={index * 0.08} className="rdv-project-shot-wrap">
+              <Reveal key={project.name} delay={index * 0.08} className="rdv-project-shot-wrap" role="listitem">
                 <article
-                  role="listitem"
                   className={`rdv-project-shot${project.emphasis === 'flagship' ? ' is-flagship' : ''}`}
                 >
                   <a
@@ -248,8 +246,8 @@ export default function Home() {
 
           <div className="rdv-home-otherwork" role="list">
             {OTHER_WORK.map((work) => (
-              <Reveal key={work.name} delay={0.1}>
-                <a href={work.href} target="_blank" rel="noopener noreferrer" role="listitem" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
+              <Reveal key={work.name} delay={0.1} role="listitem">
+                <a href={work.href} target="_blank" rel="noopener noreferrer" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
                   <span className="rdv-home-otherwork__media">
                     <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
                     <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
