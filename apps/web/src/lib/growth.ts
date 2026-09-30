@@ -732,7 +732,7 @@ export type SeoEntry = { path: string; title: string; description: string; categ
 export const GROWTH_SEO: SeoEntry[] = [
   {
     path: '/solucoes',
-    title: 'Sites, lojas, apps e soluções digitais | Rei das Vendas',
+    title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
     description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
     category: 'CollectionPage',
     headings: SOLUTIONS.map((item) => item.title),
@@ -759,6 +759,40 @@ export const GROWTH_SEO: SeoEntry[] = [
   ...DEMONSTRATIONS.map((item) => ({ path: `/demonstracoes/${item.slug}`, title: `${item.title} | Rei das Vendas`, description: item.description, category: 'WebPage', headings: [item.segment, item.description], questions: [] })),
   { path: '/ferramentas', title: 'Ferramentas gratuitas de diagnóstico | Rei das Vendas', description: 'Calculadoras, briefing e triagem inicial para avaliar escopo, oportunidades e retorno comercial.', category: 'CollectionPage', headings: TOOLS.map((item) => item.title), questions: [] },
   { path: '/demonstracoes', title: 'Arquiteturas demonstrativas por segmento | Rei das Vendas', description: 'Explore demonstrações interativas para clínicas, restaurantes, imobiliárias e representação comercial.', category: 'CollectionPage', headings: DEMONSTRATIONS.map((item) => item.title), questions: [] },
+  // Páginas de funil com preço e campanha. Ficam AQUI — e não repetidas em
+  // staticEntries (prerender) e META_BY_PATH (App) — porque este array é lido
+  // pelos dois lados. Com duas fontes, o título de /planos dizia uma coisa no
+  // HTML e outra depois da hidratação; e /black-friday, sem entrada nenhuma,
+  // caía no fallback e nascia com noindex, nofollow.
+  {
+    path: '/planos',
+    title: 'Preços: site, loja e assinatura mensal | Rei das Vendas',
+    description: 'Quanto custa um site profissional, uma loja ou catálogo, e a assinatura mensal de operação e crescimento. Preço na página, escopo por escrito, sem orçamento escondido.',
+    category: 'WebPage',
+    headings: ['Serviço uma vez', 'Assinatura mensal', 'O que você leva junto com o preço', 'As perguntas que todo mundo faz antes de pagar'],
+    questions: [],
+  },
+  {
+    path: '/black-friday',
+    title: 'Black Friday 2026: 30% na implantação do site | Rei das Vendas',
+    description: 'Black Friday do Rei das Vendas: 30% de desconto na implantação de site, loja ou catálogo e o primeiro mês de assinatura grátis, até 27 de novembro de 2026, com as regras por escrito.',
+    category: 'WebPage',
+    headings: ['O que muda no seu bolso', 'O que esta página não tem', 'Como funciona', 'Dúvidas da campanha', 'Regras da campanha, por escrito'],
+    questions: [
+      {
+        question: 'Por que uma agência está fazendo Black Friday?',
+        answer: 'Porque entre setembro e dezembro quem vende produto se prepara para o fim de ano, e o site precisa estar pronto antes da correria. O desconto existe para começar agora, não em janeiro.',
+      },
+      {
+        question: 'O preço riscado foi inflado para a promoção?',
+        answer: 'Não. O valor de referência é o mesmo publicado em /planos fora da campanha, e é para onde ele volta em 28 de novembro de 2026.',
+      },
+      {
+        question: 'O que não entra no desconto da Black Friday?',
+        answer: 'Mídia paga (Google e Instagram), licenças e serviços de terceiros. Esses valores vão direto para a plataforma, na conta do cliente, e sempre aparecem separados do trabalho da casa.',
+      },
+    ],
+  },
 ];
 
 export const SOLUTION_BY_SLUG = new Map(SOLUTIONS.map((item) => [item.slug, item]));

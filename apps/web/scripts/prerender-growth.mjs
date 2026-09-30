@@ -38,15 +38,6 @@ const staticEntries = [
     lastModified: '2026-08-28',
   },
   {
-    path: '/planos',
-    title: 'Projeto individual e operação contínua | Rei das Vendas',
-    description: 'Compare entrega individual, assinatura operacional e ciclos de crescimento para sites, lojas, aplicativos, SaaS e automações.',
-    category: 'WebPage',
-    headings: ['Entrega individual', 'Operação contínua', 'Crescimento e capilaridade', 'Proposta sem surpresa'],
-    questions: [],
-    lastModified: '2026-08-28',
-  },
-  {
     path: '/contato',
     title: 'Contato | Rei das Vendas em Franca, SP',
     description: 'Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.',
@@ -105,7 +96,12 @@ const articleEntries = ARTICLES.map((article) => ({
 }));
 
 const entryMap = new Map();
-for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: '2026-08-28' })), ...articleEntries]) {
+// /planos e /black-friday vêm de GROWTH_SEO (fonte única, lida também pelo App).
+// A data fica aqui porque só estas duas páginas foram publicadas agora; as
+// demais entradas de GROWTH_SEO continuam com a data-base do acervo.
+const DATA_GROWTH = { '/planos': '2026-09-25', '/black-friday': '2026-09-25' };
+
+for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: DATA_GROWTH[item.path] ?? '2026-08-28' })), ...articleEntries]) {
   entryMap.set(entry.path, entry);
 }
 const entries = [...entryMap.values()];

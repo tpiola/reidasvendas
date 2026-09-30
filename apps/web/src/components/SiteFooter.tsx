@@ -1,9 +1,10 @@
 import { ArrowRight, Instagram, Linkedin } from 'lucide-react';
 import { TransitionLink } from '@/components/TransitionLink';
 import { BrandLockup } from '@/components/BrandLockup';
-import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { BRAND } from '@/lib/brand';
+import { CAMPANHA_ATIVA } from '@/lib/ofertas';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { WhatsAppFab } from '@/components/WhatsAppFab';
 import { useI18n } from '@/lib/i18n';
 import { trackEvent } from '@/lib/analytics';
 
@@ -14,12 +15,15 @@ const SOCIAL = [
 
 export function SiteFooter() {
   const { t } = useI18n();
-  const index = [
+  const index: Array<[string, string]> = [
     [t('footer.link.possibilities'), '/solucoes'],
     [t('footer.link.projects'), '/portfolio'],
     [t('footer.link.demos'), '/demonstracoes'],
     [t('footer.link.plans'), '/planos'],
-  ] as const;
+  ];
+  // Enquanto a campanha está no ar, a Black Friday ganha uma porta de entrada.
+  // Depois de 27/11 a linha desaparece (CAMPANHA_ATIVA vem de lib/ofertas).
+  if (CAMPANHA_ATIVA) index.push([t('footer.link.blackFriday'), '/black-friday']);
   const knowledge = [
     [t('footer.link.diagnostic'), '/diagnostico'],
     [t('footer.link.tools'), '/ferramentas'],
@@ -89,7 +93,7 @@ export function SiteFooter() {
       </div>
 
       {/* CTA flutuante dentro do landmark contentinfo: conteúdo fora de landmark
-          viola a regra 'region' do axe em 8 rotas. A posição visual vem de
+          viola a regra 'region' do axe em 8 rotas. Posição visual vem de
           position:fixed (index.css), então o lugar no DOM não move o botão. */}
       <WhatsAppFab />
     </footer>

@@ -176,12 +176,6 @@ export default function Hero() {
               {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
             </Link>
           </div>
-
-          <ul className="rdv-hero__assurances" aria-label={t('hero.premium.assurances.label')}>
-            <li>{t('hero.premium.assurances.individual')}</li>
-            <li>{t('hero.premium.assurances.mobile')}</li>
-            <li>{t('hero.premium.assurances.operation')}</li>
-          </ul>
         </motion.div>
 
         <motion.nav
