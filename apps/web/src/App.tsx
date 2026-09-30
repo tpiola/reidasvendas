@@ -20,7 +20,6 @@ const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
 const Obrigado = lazy(() => import('@/pages/Obrigado'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 const Planos = lazy(() => import('@/pages/Planos'));
-const BlackFriday = lazy(() => import('@/pages/BlackFriday'));
 const ContatoDireto = lazy(() => import('@/pages/ContatoDireto'));
 const SolutionDetail = lazy(() => import('@/pages/SolutionDetail'));
 const ComparisonDetail = lazy(() => import('@/pages/ComparisonDetail'));
@@ -186,6 +185,10 @@ const META_BY_PATH: Record<string, { title: string; description: string }> = {
   '/contato': {
     title: 'Contato | Rei das Vendas em Franca, SP',
     description: 'Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.',
+  },
+  '/planos': {
+    title: 'Projeto individual e operação contínua | Rei das Vendas',
+    description: 'Compare entrega individual, assinatura operacional e ciclos de crescimento para sites, lojas, aplicativos, SaaS e automações.',
   },
   '/politica': {
     title: 'Política de privacidade | Rei das Vendas',
@@ -406,7 +409,6 @@ function SiteLayout() {
               <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
               <Route path="/contato" element={<PageTransition><ContatoDireto /></PageTransition>} />
               <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
-              <Route path="/black-friday" element={<PageTransition><BlackFriday /></PageTransition>} />
               <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
               <Route path="/recursos" element={<RedirectTo to="/blog" />} />
               <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
