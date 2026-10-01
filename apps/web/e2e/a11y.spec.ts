@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 test('a11y: jornadas públicas sem violações sérias ou críticas', async ({ page }) => {
-  test.setTimeout(60000);
+  // 6 rotas x (goto + axe) estoura 60s em container apertado (>=6s por axe).
+  // O teto aqui e so folga de relogio: a assercao de violacoes nao muda.
+  test.setTimeout(180000);
   const routes = ['/', '/solucoes', '/planos', '/portfolio', '/contato', '/diagnostico'];
   const blocking: Array<{
     route: string;
