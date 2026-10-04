@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { useI18n } from '@/lib/i18n';
 
-const BrandSculpture = lazy(() => import('./BrandSculpture'));
+const HeroMotion = lazy(() => import('./HeroMotion'));
 
 type NavigatorWithPerformanceHints = Navigator & {
   connection?: { saveData?: boolean };
@@ -82,7 +82,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="rdv-studio-hero"
+      className={`rdv-studio-hero${ambientMotion ? '' : ' rdv-studio-hero--still'}`}
       aria-labelledby="home-title"
       data-animation-active={animationActive ? 'true' : 'false'}
     >
@@ -129,9 +129,8 @@ export default function Hero() {
         </motion.div>
 
         <div className="rdv-studio-hero__art" aria-hidden="true">
-          <div className="rdv-sculpture-fallback"><i /><i /><i /></div>
           <Suspense fallback={null}>
-            <BrandSculpture active={animationActive} />
+            <HeroMotion active={animationActive} />
           </Suspense>
           <div className="rdv-studio-hero__caption"><span>Estratégia</span><span>Design</span><span>Tecnologia</span></div>
         </div>
