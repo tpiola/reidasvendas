@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { useI18n } from '@/lib/i18n';
 
-const NeuralCanvas = lazy(() => import('./NeuralCanvas'));
+const BrandSculpture = lazy(() => import('./BrandSculpture'));
 
 type NavigatorWithPerformanceHints = Navigator & {
   connection?: { saveData?: boolean };
@@ -38,7 +38,6 @@ export default function Hero() {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [ambientMotion, setAmbientMotion] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const [documentVisible, setDocumentVisible] = useState(true);
@@ -69,17 +68,6 @@ export default function Hero() {
     };
   }, []);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (animationActive) {
-      void video.play().catch(() => undefined);
-    } else {
-      video.pause();
-    }
-  }, [animationActive]);
-
   /**
    * O seletor entra logo depois da mensagem, com as linhas em cascata. É animação
    * de MONTAGEM, não de scroll: a capa já está na tela quando a página abre, e
@@ -94,83 +82,45 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className={`rdv-hero rdv-hero--premium${ambientMotion ? '' : ' rdv-hero--static'}`}
+      className="rdv-studio-hero"
       aria-labelledby="home-title"
       data-animation-active={animationActive ? 'true' : 'false'}
     >
-      <div className="rdv-hero__media" aria-hidden="true">
-        <img
-          className="rdv-hero__image"
-          src="/imagens/hero-agencia-cinematic.webp"
-          alt=""
-          width="1920"
-          height="1080"
-          fetchPriority="high"
-          decoding="async"
-        />
-        <video
-          ref={videoRef}
-          className="rdv-hero__video"
-          autoPlay={animationActive}
-          muted
-          loop
-          playsInline
-          preload={ambientMotion ? 'metadata' : 'none'}
-          poster="/imagens/hero-poster.jpg"
-          disablePictureInPicture
-        >
-          <source src="/videos/hero-signal-loop.mp4" type="video/mp4" />
-        </video>
-        <div className="rdv-hero__shade" />
-      </div>
-
-      <div className="rdv-hero__network" aria-hidden="true">
-        {ambientMotion ? (
-          <Suspense fallback={null}>
-            <NeuralCanvas active={animationActive} className="rdv-neural-canvas" />
-          </Suspense>
-        ) : null}
-      </div>
-
-      <div className="rdv-hero__noise" aria-hidden="true" />
-
-      <div className="rdv-hero__layout">
+      <div className="rdv-studio-hero__layout">
         <motion.div
-          className="rdv-hero__content"
+          className="rdv-studio-hero__content"
           initial={shouldReduceMotion ? false : { opacity: 0, transform: 'scale(0.985)' }}
           animate={{ opacity: 1, transform: 'scale(1)' }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="rdv-hero__eyebrow">
+          <p className="rdv-studio-hero__eyebrow">
             <span aria-hidden="true" />
             {t('hero.premium.badge')}
           </p>
 
           <h1 id="home-title">
             {t('hero.premium.title.lead')}{' '}
-            <span className="rdv-hero__accent">{t('hero.premium.title.accent')}</span>
+            <span className="rdv-studio-hero__accent">{t('hero.premium.title.accent')}</span>
           </h1>
 
-          <p className="rdv-hero__lede">
+          <p className="rdv-studio-hero__lede">
             {t('hero.premium.lede.before')} <strong>{t('hero.premium.lede.site')}</strong>
             {t('hero.premium.lede.middle')}{' '}
             <strong>{t('hero.premium.lede.reception')}</strong> {t('hero.premium.lede.after')}
           </p>
 
-          <div className="rdv-hero__actions-v3">
+          <div className="rdv-studio-hero__actions">
             <Link
-              className="rdv-hero__submit"
+              className="rdv-studio-hero__submit"
               to="/diagnostico?origem=home-hero"
-              data-magnetic
               onClick={() => trackEvent('hero_cta', { destination: 'diagnostico', origin: 'home-hero' })}
             >
               {t('hero.premium.cta')}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
             <Link
-              className="rdv-hero__secondary"
+              className="rdv-studio-hero__secondary"
               to="/portfolio"
-              data-magnetic
               onClick={() => trackEvent('hero_cta', { destination: 'portfolio' })}
             >
               {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
@@ -178,8 +128,17 @@ export default function Hero() {
           </div>
         </motion.div>
 
+        <div className="rdv-studio-hero__art" aria-hidden="true">
+          <div className="rdv-sculpture-fallback"><i /><i /><i /></div>
+          <Suspense fallback={null}>
+            <BrandSculpture active={animationActive} />
+          </Suspense>
+          <div className="rdv-studio-hero__caption"><span>Estratégia</span><span>Design</span><span>Tecnologia</span></div>
+        </div>
+      </div>
+      <div className="rdv-studio-segments">
         <motion.nav
-          className="rdv-hero__selector"
+          className="rdv-studio-segments__nav"
           aria-labelledby="hero-seletor"
           initial={shouldReduceMotion ? false : 'hidden'}
           animate="visible"

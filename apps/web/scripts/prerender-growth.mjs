@@ -22,7 +22,7 @@ const staticEntries = [
     path: '/',
     title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
     description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
-    heading: 'Você cuida do seu negócio. A gente faz ele ser encontrado.',
+    heading: 'Seu negócio. Em outro nível.',
     category: 'WebPage',
     headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
     questions: [],

@@ -4,8 +4,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import Hero from './Hero';
 import { I18nProvider } from '../lib/i18n';
 
-vi.mock('./NeuralCanvas', () => ({
-  default: () => <canvas data-testid="neural-canvas" />,
+vi.mock('./BrandSculpture', () => ({
+  default: () => <canvas data-testid="brand-sculpture" />,
 }));
 
 describe('Hero', () => {

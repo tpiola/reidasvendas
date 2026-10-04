@@ -6,6 +6,7 @@ import { I18nProvider } from './lib/i18n';
 import './index.css';
 import './dossier.css';
 import './platform.css';
+import './studio.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

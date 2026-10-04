@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components -- this module intentionally co-locates reusable motion primitives */
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, type Variants } from 'framer-motion';
+import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion';
 
 /* ─── Motion tokens (Stripe / Linear / Emil Kowalski) ───
    Duração + curva em vez de spring: previsível, sem overshoot e igual em todas
@@ -103,10 +103,11 @@ export function Reveal({
 }): React.JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once, margin: '-30px 0px' });
+  const reducedMotion = useReducedMotion();
   return (
     <motion.div
-      ref={ref} variants={variant} initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'} transition={{ delay }}
+      ref={ref} variants={variant} initial={reducedMotion ? false : "hidden"}
+      animate={reducedMotion || isInView ? 'visible' : 'hidden'} transition={{ delay }}
       className={className}
       role={role}
     >

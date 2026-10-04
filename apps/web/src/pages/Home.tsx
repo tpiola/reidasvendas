@@ -2,11 +2,8 @@ import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
-import { MarqueeDivider } from '@/components/MarqueeDivider';
 import { SwapLink } from '@/components/SwapLink';
-import { ProjectVideo } from '@/components/ProjectVideo';
-import { SetorDivider } from '@/components/SetorDivider';
-import { Reveal, staggerContainer, staggerItem } from '@/hooks/useAnimation';
+import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { BRAND } from '@/lib/brand';
@@ -78,24 +75,24 @@ const METHOD = [
 export default function Home() {
   const shouldReduceMotion = useReducedMotion();
   return (
-    <main id="main-content" className="rdv-platform">
+    <main id="main-content" className="rdv-platform rdv-studio">
       <Hero />
 
       <section className="rdv-proof-v3" aria-labelledby="proof-title">
         <div className="rdv-shell">
-          <Reveal>
+          <div>
             <header className="rdv-proof-v3__header">
               <div>
                 <p className="rdv-kicker">Projetos publicados</p>
-                <h2 id="proof-title">Projetos reais. <em className="rdv-accent-serif">Soluções em uso</em>.</h2>
+                <h2 id="proof-title">Design que sai da tela. <em className="rdv-accent-serif">E entra em operação.</em></h2>
               </div>
               <p>Cada projeto responde a uma operação diferente. A evidência é o produto publicado, a arquitetura e o que ele realmente organiza.</p>
             </header>
-          </Reveal>
+          </div>
 
           <div className="rdv-project-stage" role="list">
             {PROJECTS.map((project, index) => (
-              <Reveal key={project.name} delay={index * 0.08} className="rdv-project-shot-wrap" role="listitem">
+              <div key={project.name} className="rdv-project-shot-wrap" role="listitem">
                 <article
                   className={`rdv-project-shot${project.emphasis === 'flagship' ? ' is-flagship' : ''}`}
                 >
@@ -104,15 +101,13 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rdv-project-shot__link"
-                    data-magnetic
                     aria-label={`Abrir o site publicado de ${project.name} em nova aba`}
                     onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
                   >
                     <div className="rdv-project-shot__media">
-                      <ProjectVideo src={project.video ?? ''} poster={project.image} />
                       <img src={project.image} alt={`Interface publicada de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} width="1200" height="750" />
                       <span>{String(index + 1).padStart(2, '0')}</span>
-                      <em>Ver em movimento <ArrowRight aria-hidden="true" /></em>
+                      <em>Visitar projeto <ArrowRight aria-hidden="true" /></em>
                     </div>
                     <div className="rdv-project-shot__body">
                       <p>{project.type}</p>
@@ -121,16 +116,15 @@ export default function Home() {
                     </div>
                   </a>
                 </article>
-              </Reveal>
+              </div>
             ))}
           </div>
 
           <div className="rdv-home-otherwork" role="list">
             {OTHER_WORK.map((work) => (
-              <Reveal key={work.name} delay={0.1} role="listitem">
+              <div key={work.name} role="listitem">
                 <a href={work.href} target="_blank" rel="noopener noreferrer" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
                   <span className="rdv-home-otherwork__media">
-                    <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
                     <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
                   </span>
                   <div>
@@ -139,7 +133,7 @@ export default function Home() {
                   </div>
                   <p>{work.detail}</p>
                 </a>
-              </Reveal>
+              </div>
             ))}
           </div>
 
@@ -154,29 +148,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="rdv-motion-rail" aria-label="Capacidades digitais">
-        <div className="rdv-motion-rail__track">
-          {[...MARKETPLACE_ITEMS.slice(0, 12), ...MARKETPLACE_ITEMS.slice(0, 12)].map((item, index) => (
-            <span key={`${item.title}-${index}`} aria-hidden={index >= 12 ? 'true' : undefined}>
-              {item.title}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      <SetorDivider
-        video="/videos/setores/pizzaria-loop.mp4"
-        poster="/videos/setores/pizzaria-poster.jpg"
-        kicker="Alimentação · Franca/SP"
-        title="O cardápio que trabalha até de madrugada."
-        description="Pizzaria, hamburgueria, restaurante: o site mostra o cardápio, o horário e o bairro atendido. O pedido cai no WhatsApp de quem está no salão — não em caixa de e-mail esquecida."
-      />
 
       <section className="rdv-platform-intro" aria-labelledby="platform-intro-title">
         <div className="rdv-shell rdv-platform-intro__grid">
           <header>
             <p className="rdv-kicker">Mapa de possibilidades</p>
-            <h2 id="platform-intro-title">Não vendemos uma página. Construímos o que o seu negócio precisa <em className="rdv-accent-serif">para avançar</em>.</h2>
+            <h2 id="platform-intro-title">O próximo passo do seu negócio. <em className="rdv-accent-serif">Bem construído.</em></h2>
           </header>
           <div className="rdv-platform-intro__copy">
             <p>
@@ -220,21 +197,9 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <MarqueeDivider
-        items={[
-          'Presença e autoridade',
-          'Venda e comércio',
-          'Atendimento comercial',
-          'Aplicativos e SaaS',
-          'Operação e distribuição',
-        ]}
-        accent="Venda e comércio"
-        ariaLabel="Do que construímos: presença, venda, atendimento, aplicativos, operação"
-      />
-
       <section className="rdv-distribution" aria-labelledby="distribution-title">
         <div className="rdv-shell rdv-distribution__grid">
-          <Reveal>
+          <div>
             <header>
               <p className="rdv-kicker">Capilaridade com direção</p>
               <h2 id="distribution-title">Um núcleo próprio. <em className="rdv-accent-serif">Vários caminhos</em> até ele.</h2>
@@ -246,9 +211,9 @@ export default function Home() {
                 Ver arquitetura multicanal <ArrowRight aria-hidden="true" />
               </Link>
             </header>
-          </Reveal>
+          </div>
 
-          <Reveal delay={0.15}>
+          <div>
             <div className="rdv-channel-map" aria-label="Canais conectáveis ao núcleo digital">
               <div className="rdv-channel-map__core">
                 <span>Seu negócio</span>
@@ -260,38 +225,19 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      <SetorDivider
-        video="/videos/setores/barbearia-loop.mp4"
-        poster="/videos/setores/barbearia-poster.jpg"
-        kicker="Beleza & barbearia · Franca/SP"
-        title="A agenda cheia começa no primeiro corte bem feito."
-        description="Barbearia e salão vivem de indicação — e de aparecer quando alguém busca 'barbearia perto de mim'. O site mostra o trabalho, o preço e o botão que abre a conversa."
-        align="right"
-      />
-
-
-
-      <SetorDivider
-        video="/videos/setores/oficina-loop.mp4"
-        poster="/videos/setores/oficina-poster.jpg"
-        kicker="Automotivo · Franca/SP"
-        title="Quem quebra na estrada não escolhe oficina no escuro."
-        description="Oficina mecânica, funilaria, auto elétrica: o cliente chega com o carro parado e a dúvida de quem confiar. O site mostra o serviço, o endereço e o telefone que atende na hora."
-      />
-
       <section className="rdv-models" aria-labelledby="models-title">
         <div className="rdv-shell">
-          <Reveal>
+          <div>
             <header className="rdv-models__header">
               <p className="rdv-kicker">Formas de trabalhar</p>
               <h2 id="models-title">Um projeto individual. <em className="rdv-accent-serif">A continuidade</em> que fizer sentido.</h2>
               <p>O desenho, a copy, a estrutura e as integrações pertencem ao contexto do cliente. A assinatura existe para operar e evoluir — não para aprisionar o projeto.</p>
             </header>
-          </Reveal>
+          </div>
 
           <motion.div
             className="rdv-models__grid"
@@ -310,23 +256,23 @@ export default function Home() {
             ))}
           </motion.div>
 
-          <Reveal delay={0.1}>
+          <div>
             <Link className="rdv-primary-action" to="/planos">
               Comparar modelos de contratação <ArrowRight aria-hidden="true" />
             </Link>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       <section className="rdv-method-v3" aria-labelledby="method-title">
         <div className="rdv-shell rdv-method-v3__grid">
-          <Reveal>
+          <div>
             <header>
               <p className="rdv-kicker">Método Rei das Vendas</p>
               <h2 id="method-title">Da leitura à operação, sem pular a realidade do cliente.</h2>
               <p>Nossa missão é o sucesso digital do cliente — e isso exige publicar o que funciona, medir o que importa e manter alguém responsável pelo próximo passo.</p>
             </header>
-          </Reveal>
+          </div>
           <motion.ol
             variants={staggerContainer}
             initial={shouldReduceMotion ? false : 'hidden'}
@@ -343,42 +289,19 @@ export default function Home() {
         </div>
       </section>
 
-      <SetorDivider
-        video="/videos/setores/estetica-loop.mp4"
-        poster="/videos/setores/estetica-poster.jpg"
-        kicker="Saúde & estética · Franca/SP"
-        title="A primeira consulta começa antes da porta abrir."
-        description="Clínica de estética e saúde: o paciente pesquisa, compara e decide no celular antes de ligar. O site mostra o que é feito, quem faz e o que custa — sem prometer milagre."
-        align="right"
-      />
+      <section className="rdv-closing-v3" aria-labelledby="closing-title">
 
-      <section className="rdv-closing-v3 rdv-closing-v3--video" aria-labelledby="closing-title">
-        <div className="rdv-closing-v3__video" aria-hidden="true">
-          <video
-            src="/videos/final-cinematic-loop.mp4"
-            poster="/imagens/final-cinematic-poster.jpg"
-            muted
-            loop
-            playsInline
-            autoPlay
-            preload="metadata"
-            disablePictureInPicture
-            tabIndex={-1}
-          />
-          <span className="rdv-closing-v3__shade" />
-        </div>
         <div className="rdv-shell rdv-closing-v3__content">
-          <Reveal>
+          <div>
             <p className="rdv-kicker">O primeiro movimento</p>
             <h2 id="closing-title">Mostre seu negócio. <em className="rdv-accent-serif">A gente devolve uma direção</em>.</h2>
             <p>O diagnóstico registra objetivo, gargalo e prioridade antes de abrir o WhatsApp. Sem proposta genérica e sem compromisso automático.</p>
-          </Reveal>
-          <Reveal delay={0.12} className="rdv-closing-v3__actions">
+          </div>
+          <div className="rdv-closing-v3__actions">
             <div>
               <Link
                 className="rdv-primary-action"
                 to="/diagnostico?origem=home-final"
-                data-magnetic
                 onClick={() => trackEvent('diagnostic_start', { position: 'home-final' })}
               >
                 Mapear meu negócio <ArrowRight aria-hidden="true" />
@@ -387,12 +310,12 @@ export default function Home() {
                 WhatsApp · {BRAND.phoneDisplay}
               </a>
             </div>
-          </Reveal>
-          <Reveal delay={0.2}>
+          </div>
+          <div>
             <p className="rdv-closing-v3__footnote">
               O próximo passo do seu negócio começa com uma conversa — não com um formulário frio.
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
     </main>

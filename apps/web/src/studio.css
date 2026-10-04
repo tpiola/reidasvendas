@@ -1,0 +1,81 @@
+/* Rei das Vendas — studio direction: precise, sculptural, composed. */
+.rdv-studio { background: #0b0c0e; color: #f4f4f2; }
+.rdv-studio-hero { background: #0b0c0e; position: relative; overflow: hidden; }
+.rdv-studio-hero__layout { width: min(1280px, calc(100% - 96px)); margin: auto; min-height: min(760px, 85svh); display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 12px; padding: 70px 0 64px; }
+.rdv-studio-hero__content { position: relative; z-index: 1; }
+.rdv-studio-hero .rdv-studio-hero__eyebrow { color: #bcbab3; font-size: 12px; letter-spacing: .035em; margin: 0 0 34px; }
+.rdv-studio-hero h1 { font-family: 'Archivo', sans-serif; font-size: clamp(52px, 5.5vw, 82px); font-weight: 500; line-height: 1.06; letter-spacing: -.065em; margin: 0; max-width: 9ch; color: #f4f4f2; }
+.rdv-studio-hero__accent { display: block; color: #d2bd8b; }
+.rdv-studio-hero .rdv-studio-hero__lede { margin: 30px 0 0; font-size: 16px; line-height: 1.8; max-width: 420px; color: #aaaeb5; }
+.rdv-studio-hero__lede strong { font-weight: 400; color: inherit; }
+.rdv-studio-hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 26px; margin-top: 36px; }
+.rdv-studio-hero__submit, .rdv-studio-hero__secondary { min-height: 50px; display: inline-flex; align-items: center; justify-content: center; gap: 18px; font-size: 13px; text-decoration: none; font-weight: 600; }
+.rdv-studio-hero__submit { padding: 0 23px; background: #ecebe6; color: #151619; border: 1px solid #ecebe6; border-radius: 4px; transition: background-color 180ms ease-out; }
+.rdv-studio-hero__secondary { color: #dededb; border-bottom: 1px solid #48494b; }
+.rdv-studio-hero__submit:focus-visible, .rdv-studio-hero__secondary:focus-visible { outline: 2px solid #d2bd8b; outline-offset: 6px; }
+.rdv-studio-hero__art { position: relative; min-width: 0; aspect-ratio: 1; }
+.rdv-brand-sculpture { position: absolute; width: 100%; height: 100%; inset: 0; opacity: 0; }
+.rdv-brand-sculpture[data-ready='true'] { opacity: 1; }
+.rdv-studio-hero__caption { position: absolute; bottom: -8px; left: 0; right: 0; display: flex; justify-content: center; gap: 24px; color: #a4a7ad; font-size: 11px; letter-spacing: .04em; }
+.rdv-studio-hero__caption span + span::before { content: '·'; margin-right: 24px; color: #d2bd8b; }
+.rdv-sculpture-fallback { position: absolute; inset: 14%; perspective: 700px; }
+.rdv-sculpture-fallback i { position: absolute; inset: 5%; border: 24px solid #9d9d9f; border-radius: 50%; transform: rotateX(24deg) rotateY(-32deg); box-shadow: inset 3px 3px 5px #fff9, 2px 2px 8px #000; }
+.rdv-sculpture-fallback i:nth-child(2) { inset: 19%; border-width: 18px; border-color: #bfa16d; transform: rotateX(-25deg) rotateY(40deg); }
+.rdv-sculpture-fallback i:nth-child(3) { inset: 39%; border: 0; background: radial-gradient(circle at 25% 20%, #efe3c7, #b6975b 40%, #302515); transform: none; }
+.rdv-studio-segments { width: min(1280px, calc(100% - 96px)); margin: auto; padding: 26px 0 32px; border-top: 1px solid #2b2d30; }
+.rdv-studio-segments__nav { display: grid; grid-template-columns: 220px 1fr; gap: 25px; }
+.rdv-studio-segments .rdv-hero__selector-head { display: block; margin: 0; padding: 0; border: 0; }
+.rdv-studio-segments .rdv-hero__selector-title { font-family: 'Archivo', sans-serif; font-size: 13px; color: #e4e4df; margin: 0 0 8px; }
+.rdv-studio-segments .rdv-hero__selector-all { font-size: 11px; color: #aaaeb5; }
+.rdv-studio-segments ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 25px; margin: 0; padding: 0; list-style: none; }
+.rdv-studio-segments li a { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 44px; color: #b8bbc1; font-size: 12px; text-decoration: none; }
+.rdv-studio-segments .rdv-hero__selector-num { display: none; }
+.rdv-studio-segments .rdv-hero__selector-arrow { color: #797c83; }
+.rdv-studio .rdv-shell { width: min(1280px, calc(100% - 96px)); }
+.rdv-studio h2 { font-family: 'Archivo', sans-serif; font-size: clamp(32px, 3.5vw, 51px); font-weight: 450; line-height: 1.15; letter-spacing: -.045em; }
+.rdv-studio .rdv-accent-serif { font: inherit; color: #a6a7ab; }
+.rdv-studio h3 { font-family: 'Archivo', sans-serif; letter-spacing: -.035em; }
+.rdv-studio .rdv-kicker { color: #bca67a; font-size: 11px; letter-spacing: .04em; text-transform: none; margin-bottom: 24px; }
+.rdv-studio .rdv-proof-v3, .rdv-studio .rdv-platform-intro, .rdv-studio .rdv-distribution, .rdv-studio .rdv-models, .rdv-studio .rdv-method-v3, .rdv-studio .rdv-closing-v3 { background: #0b0c0e; padding-block: clamp(64px, 8vw, 112px); border-bottom: 1px solid #26282c; }
+.rdv-studio .rdv-proof-v3 { background: #111315; }
+.rdv-studio .rdv-project-stage { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 36px; }
+.rdv-studio .rdv-project-shot { border: 0; background: none; box-shadow: none; transform: none; transition: none; }
+.rdv-studio .rdv-project-shot.is-flagship { grid-row: auto; }
+.rdv-studio .rdv-project-shot__media { border: 1px solid #303236; border-radius: 5px; }
+.rdv-studio .rdv-project-shot__media img, .rdv-studio .rdv-project-shot.is-flagship .rdv-project-shot__media img, .rdv-studio .rdv-project-shot__link:hover .rdv-project-shot__media > img { aspect-ratio: 16/10; transform: none; filter: none; opacity: 1; transition: none; will-change: auto; }
+.rdv-studio .rdv-project-shot__body { padding: 24px 0; }
+.rdv-studio .rdv-project-shot__body h3, .rdv-studio .rdv-project-shot:not(.is-flagship) .rdv-project-shot__body h3 { font-size: 25px; }
+.rdv-studio .rdv-project-shot__body > p:first-child { color: #aaaeb5; font-size: 11px; letter-spacing: .02em; text-transform: none; }
+.rdv-studio .rdv-project-shot__media > span { display: none; }
+.rdv-studio .rdv-home-otherwork__item img { transform: none; opacity: 1; transition: none; }
+.rdv-studio .rdv-channel-map__orbit, .rdv-studio .rdv-channel-map__orbit span { animation: none; }
+.rdv-studio .rdv-primary-action, .rdv-header-cta { background: #ecebe6; border-color: #ecebe6; color: #151619; border-radius: 4px; }
+.rdv-studio .rdv-primary-action:hover, .rdv-header-cta:hover { background: #d2bd8b; border-color: #d2bd8b; color: #151619; }
+.rdv-studio .rdv-closing-v3 h2 { max-width: 850px; }
+.rdv-whatsapp-fab__ring { animation: none; box-shadow: none; }
+@media (hover: hover) and (pointer: fine) { .rdv-studio-hero__submit:hover { background: #d2bd8b; } .rdv-studio-segments li a:hover { color: #fff; } }
+@media (max-width: 900px) {
+  .rdv-studio-hero__layout, .rdv-studio-segments, .rdv-studio .rdv-shell { width: calc(100% - 48px); }
+  .rdv-studio-hero__layout { grid-template-columns: 1.1fr 1fr; padding: 60px 0; min-height: 0; }
+  .rdv-studio-hero h1 { font-size: clamp(46px, 6.6vw, 68px); }
+  .rdv-studio-segments__nav { grid-template-columns: 1fr; gap: 18px; }
+  .rdv-studio-segments .rdv-hero__selector-head { display: flex; align-items: center; justify-content: space-between; }
+}
+@media (max-width: 600px) {
+  .rdv-studio-hero__layout, .rdv-studio-segments, .rdv-studio .rdv-shell { width: calc(100% - 40px); }
+  .rdv-studio-hero__layout { grid-template-columns: 1fr; padding: 42px 0 30px; gap: 8px; }
+  .rdv-studio-hero h1 { font-size: clamp(48px, 13.2vw, 74px); max-width: 10ch; }
+  .rdv-studio-hero .rdv-studio-hero__eyebrow { font-size: 10px; margin-bottom: 24px; }
+  .rdv-studio-hero .rdv-studio-hero__lede { font-size: 14px; margin-top: 24px; max-width: 340px; }
+  .rdv-studio-hero__actions { gap: 18px; margin-top: 26px; }
+  .rdv-studio-hero__submit, .rdv-studio-hero__secondary { font-size: 11px; gap: 12px; }
+  .rdv-studio-hero__submit { padding-inline: 15px; }
+  .rdv-studio-hero__art { width: min(100%, 370px); margin: auto; }
+  .rdv-studio-hero__caption { bottom: 8px; font-size: 10px; }
+  .rdv-studio-segments { padding-block: 24px; }
+  .rdv-studio-segments ul { grid-template-columns: 1fr 1fr; gap: 6px 14px; }
+  .rdv-studio-segments li a { font-size: 11px; }
+  .rdv-studio .rdv-project-stage { grid-template-columns: 1fr; gap: 32px; margin-top: 32px; }
+  .rdv-studio .rdv-proof-v3__header { gap: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .rdv-studio *, .rdv-studio *::before, .rdv-studio *::after { animation: none !important; transition: none !important; } }
