@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 type Vector = [number, number, number];
-type Face = { points: Vector[]; normal: Vector; center: Vector; gold: boolean };
+type Face = { points: Vector[]; normal: Vector; edgeNormals: Vector[]; center: Vector; gold: boolean };
 const faces: Face[] = [];
 const turn = ([x,y,z]: Vector, ax: number, ay: number): Vector => {
   const yy = y*Math.cos(ax)-z*Math.sin(ax), zz = y*Math.sin(ax)+z*Math.cos(ax);
@@ -14,7 +14,7 @@ function torus(radius: number, tube: number, tilt: number, gold: boolean) {
   const point = (u: number, v: number): Vector => turn([(radius+tube*Math.cos(v))*Math.cos(u),(radius+tube*Math.cos(v))*Math.sin(u),tube*Math.sin(v)],tilt,0);
   for(let i=0;i<112;i++) for(let j=0;j<24;j++) {
     const u=i*Math.PI*2/112, v=j*Math.PI*2/24, du=Math.PI*2/112,dv=Math.PI*2/24;
-    faces.push({points:[point(u,v),point(u+du,v),point(u+du,v+dv),point(u,v+dv)],center:point(u+du/2,v+dv/2),normal:turn([Math.cos(v+dv/2)*Math.cos(u+du/2),Math.cos(v+dv/2)*Math.sin(u+du/2),Math.sin(v+dv/2)],tilt,0),gold});
+    faces.push({points:[point(u,v),point(u+du,v),point(u+du,v+dv),point(u,v+dv)],center:point(u+du/2,v+dv/2),edgeNormals:[v,v+dv].map(t=>turn([Math.cos(t)*Math.cos(u+du/2),Math.cos(t)*Math.sin(u+du/2),Math.sin(t)],tilt,0)),normal:turn([Math.cos(v+dv/2)*Math.cos(u+du/2),Math.cos(v+dv/2)*Math.sin(u+du/2),Math.sin(v+dv/2)],tilt,0),gold});
   }
 }
 torus(1.08,.18,.56,false); torus(.72,.125,-.76,true);
@@ -46,15 +46,23 @@ export default function BrandSculpture({ active }: { active: boolean }) {
       for(const {face,center,normal} of mesh){
         if(!coreDrawn && center[2]>0){core();coreDrawn=true;}
         if(dot(normal,unit([-center[0],-center[1],4-center[2]]))<-.12)continue;
-        const diffuse=Math.max(0,dot(normal,lights[0]));
-        const reflection: Vector=[2*normal[2]*normal[0],2*normal[2]*normal[1],2*normal[2]*normal[2]-1];
-        const key=Math.pow(Math.max(0,dot(reflection,lights[0])),14);
-        const rim=Math.pow(Math.max(0,dot(reflection,lights[1])),35);
-        const fill=Math.pow(Math.max(0,dot(reflection,lights[2])),8);
-        const intensity=.14+diffuse*.27+key*.72+rim*.65+fill*.3;
-        const metal=face.gold?[214,180,111]:[211,221,235];
-        const color=metal.map(c=>Math.round(Math.min(255,c*intensity+key*35)));
-        context.fillStyle=`rgb(${color.join(',')})`;context.strokeStyle=context.fillStyle;context.lineWidth=.65;
+        const shade=(n:Vector)=>{
+          const diffuse=Math.max(0,dot(n,lights[0]));
+          const reflection:Vector=[2*n[2]*n[0],2*n[2]*n[1],2*n[2]*n[2]-1];
+          const key=Math.pow(Math.max(0,dot(reflection,lights[0])),14);
+          const rim=Math.pow(Math.max(0,dot(reflection,lights[1])),35);
+          const fill=Math.pow(Math.max(0,dot(reflection,lights[2])),8);
+          const intensity=.14+diffuse*.27+key*.72+rim*.65+fill*.3;
+          const metal=face.gold?[214,180,111]:[211,221,235];
+          return `rgb(${metal.map(c=>Math.round(Math.min(255,c*intensity+key*35))).join(',')})`;
+        };
+        const midpoint=(a:Vector,b:Vector):Vector=>[(a[0]+b[0])/2,(a[1]+b[1])/2,(a[2]+b[2])/2];
+        const a=project(transform(midpoint(face.points[0],face.points[1])));
+        const b=project(transform(midpoint(face.points[2],face.points[3])));
+        const gradient=context.createLinearGradient(a[0],a[1],b[0],b[1]);
+        gradient.addColorStop(0,shade(transform(face.edgeNormals[0])));
+        gradient.addColorStop(1,shade(transform(face.edgeNormals[1])));
+        context.fillStyle=gradient;context.strokeStyle=gradient;context.lineWidth=.5;
         context.beginPath();face.points.forEach((point,i)=>{const p=project(transform(point));if(i===0)context.moveTo(...p);else context.lineTo(...p);});
         context.closePath();context.fill();context.stroke();
       }
