@@ -1511,12 +1511,12 @@ h3,
 }
 
 .rdv-diagnostic__intro h1 {
-  max-width: 18ch;
+  max-width: 26ch;
   margin: var(--space-md) 0 0;
-  font-size: var(--text-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 600;
   letter-spacing: -0.025em;
-  line-height: 1;
+  line-height: 1.1;
   overflow-wrap: anywhere;
   min-width: 0;
 }
@@ -3005,4 +3005,14 @@ body::after {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-lg);
   }
+}
+
+.rdv-diagnostic__details summary {
+  cursor: pointer;
+  padding-block: 0.75rem;
+  color: var(--color-ink-soft);
+}
+.rdv-diagnostic__details summary:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 4px;
 }

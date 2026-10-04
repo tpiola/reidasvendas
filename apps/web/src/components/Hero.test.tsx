@@ -32,7 +32,7 @@ describe('Hero', () => {
     vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => undefined);
   });
 
-  it('apresenta os dois caminhos: soluções e provas publicadas', () => {
+  it('apresenta os dois caminhos: mapeamento e provas publicadas', () => {
     render(
       <BrowserRouter>
         <I18nProvider>
@@ -44,7 +44,7 @@ describe('Hero', () => {
       </BrowserRouter>,
     );
 
-    expect(screen.getByRole('link', { name: /quero parar de perder cliente/i })).toHaveAttribute('href', '/solucoes');
+    expect(screen.getByRole('link', { name: /mapear meu negócio/i })).toHaveAttribute('href', '/diagnostico?origem=home-hero');
     expect(screen.getByRole('link', { name: /ver projetos reais/i })).toHaveAttribute('href', '/portfolio');
 
     fireEvent.click(screen.getByRole('link', { name: /ver projetos reais/i }));

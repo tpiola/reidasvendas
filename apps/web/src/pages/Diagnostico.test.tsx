@@ -1,6 +1,6 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import Diagnostico from './Diagnostico';
 
 class IntersectionObserverMock implements IntersectionObserver {
@@ -15,6 +15,7 @@ class IntersectionObserverMock implements IntersectionObserver {
 }
 
 describe('Diagnostico', () => {
+  afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
   beforeEach(() => {
     Object.defineProperty(window, 'matchMedia', {
       configurable: true,
@@ -59,19 +60,43 @@ describe('Diagnostico', () => {
       </MemoryRouter>,
     );
 
-    await waitFor(() => {
-      expect(screen.getByLabelText('O que você precisa?')).toHaveValue('catalogo-para-representantes');
-    });
-
     fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'QA Deploy' } });
     fireEvent.change(screen.getByLabelText('Qual é o seu negócio?'), {
       target: { value: 'representacao-comercial' },
     });
-    fireEvent.change(screen.getByLabelText('Qual problema você quer resolver?'), {
-      target: { value: 'Validar o handoff do Hero.' },
+    fireEvent.change(screen.getByLabelText('Principal objetivo comercial'), {
+      target: { value: 'mais-contatos' },
     });
     fireEvent.click(screen.getByRole('button', { name: 'Continuar' }));
 
+    await waitFor(() => {
+      expect(screen.getByLabelText('Solução de interesse (opcional)')).toHaveValue('catalogo-para-representantes');
+    });
+    expect(screen.getByLabelText('Conte mais sobre o problema (opcional)')).not.toBeRequired();
+    expect(screen.getByLabelText('Faixa de investimento (opcional)')).not.toBeRequired();
     expect(await screen.findByLabelText('E-mail')).toHaveValue('comercial@exemplo.com');
   });
+  it('envia apenas os campos essenciais e mantém o handoff explícito', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ ok: true, delivery: 'whatsapp_handoff' }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    render(<MemoryRouter><Diagnostico /></MemoryRouter>);
+    fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Pessoa de teste' } });
+    fireEvent.change(screen.getByLabelText('Qual é o seu negócio?'), { target: { value: 'servico-local' } });
+    fireEvent.change(screen.getByLabelText('Principal objetivo comercial'), { target: { value: 'mais-contatos' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Continuar' }));
+    fireEvent.change(screen.getByLabelText('WhatsApp para retorno'), { target: { value: '16999999999' } });
+    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'teste@example.com' } });
+    fireEvent.click(screen.getByRole('checkbox'));
+    fireEvent.click(screen.getByRole('button', { name: 'Registrar meu diagnóstico' }));
+    expect(await screen.findByText('Diagnóstico preparado para envio')).toBeInTheDocument();
+    const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(payload).toMatchObject({ name: 'Pessoa de teste', email: 'teste@example.com', consent: true, service: '', investment: '' });
+    expect(payload.message).toContain('Objetivo: mais-contatos');
+    expect(screen.getByText(/ainda precisa ser enviado/)).toBeInTheDocument();
+    expect(decodeURIComponent(screen.getByRole('link', { name: /Abrir conversa qualificada/ }).getAttribute('href') || '')).toContain('Ainda a definir');
+  });
+
 });

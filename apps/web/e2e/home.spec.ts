@@ -4,7 +4,7 @@ test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
   await expect(page.getByRole('heading', { level: 1, name: /você cuida do seu negócio/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /quero parar de perder cliente/i }).first()).toHaveAttribute('href', '/solucoes');
+  await expect(page.locator('.rdv-hero__submit')).toHaveAttribute('href', '/diagnostico?origem=home-hero');
   await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
@@ -70,14 +70,19 @@ test('biblioteca conecta soluções, comparação e ferramentas', async ({ page 
 test('diagnóstico mantém WhatsApp atrás do gate de qualificação', async ({ page }) => {
   await page.goto('/diagnostico?solucao=catalogo-para-representantes');
   await expect(page.getByRole('link', { name: /abrir conversa qualificada/i })).toHaveCount(0);
-  await expect(page.getByLabel('O que você precisa?')).toHaveValue('catalogo-para-representantes');
+  await page.getByLabel('Nome').fill('Pessoa de teste');
+  await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
+  await page.getByLabel('Principal objetivo comercial').selectOption('vender-mais');
+  await page.getByRole('button', { name: 'Continuar', exact: true }).click();
+  await page.getByText('Adicionar detalhes (opcional)', { exact: true }).click();
+  await expect(page.getByLabel('Solução de interesse (opcional)')).toHaveValue('catalogo-para-representantes');
 });
 
 test('diagnóstico reposiciona e anuncia a próxima etapa', async ({ page }) => {
   await page.goto('/diagnostico?solucao=catalogo-para-representantes');
   await page.getByLabel('Nome').fill('Pessoa de teste');
   await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
-  await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
+  await page.getByLabel('Principal objetivo comercial').selectOption('vender-mais');
   await page.getByRole('button', { name: 'Continuar', exact: true }).click();
 
   const nextStepHeading = page.getByRole('heading', { level: 2, name: /como devemos encaminhar seu diagnóstico/i });
@@ -92,12 +97,11 @@ test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não ex
   await page.goto('/diagnostico?solucao=catalogo-para-representantes');
   await page.getByLabel('Nome').fill('Pessoa de teste');
   await page.getByLabel('Qual é o seu negócio?').selectOption('representacao-comercial');
-  await page.getByLabel('Qual problema você quer resolver?').fill('Organizar pedidos enviados pelo WhatsApp.');
+  await page.getByLabel('Principal objetivo comercial').selectOption('vender-mais');
   await page.getByRole('button', { name: 'Continuar', exact: true }).click();
-  await page.getByLabel('Faixa de investimento disponível').selectOption('5000-10000');
+
   await page.getByLabel('WhatsApp para retorno').fill('16999999999');
   await page.getByLabel('E-mail').fill('teste@example.com');
-  await page.getByLabel('Principal objetivo comercial').selectOption('vender-mais');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: /registrar meu diagnóstico/i }).click();
 
@@ -106,7 +110,7 @@ test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não ex
   const whatsapp = page.getByRole('link', { name: /abrir conversa qualificada/i });
   await expect(whatsapp).toBeVisible();
   expect(decodeURIComponent((await whatsapp.getAttribute('href')) || '')).toContain(
-    'Organizar pedidos enviados pelo WhatsApp.',
+    'Objetivo comercial: vender-mais.',
   );
 });
 

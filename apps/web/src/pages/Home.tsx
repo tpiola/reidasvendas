@@ -81,6 +81,79 @@ export default function Home() {
     <main id="main-content" className="rdv-platform">
       <Hero />
 
+      <section className="rdv-proof-v3" aria-labelledby="proof-title">
+        <div className="rdv-shell">
+          <Reveal>
+            <header className="rdv-proof-v3__header">
+              <div>
+                <p className="rdv-kicker">Projetos publicados</p>
+                <h2 id="proof-title">Projetos reais. <em className="rdv-accent-serif">Soluções em uso</em>.</h2>
+              </div>
+              <p>Cada projeto responde a uma operação diferente. A evidência é o produto publicado, a arquitetura e o que ele realmente organiza.</p>
+            </header>
+          </Reveal>
+
+          <div className="rdv-project-stage" role="list">
+            {PROJECTS.map((project, index) => (
+              <Reveal key={project.name} delay={index * 0.08} className="rdv-project-shot-wrap" role="listitem">
+                <article
+                  className={`rdv-project-shot${project.emphasis === 'flagship' ? ' is-flagship' : ''}`}
+                >
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rdv-project-shot__link"
+                    data-magnetic
+                    aria-label={`Abrir o site publicado de ${project.name} em nova aba`}
+                    onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
+                  >
+                    <div className="rdv-project-shot__media">
+                      <ProjectVideo src={project.video ?? ''} poster={project.image} />
+                      <img src={project.image} alt={`Interface publicada de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} width="1200" height="750" />
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <em>Ver em movimento <ArrowRight aria-hidden="true" /></em>
+                    </div>
+                    <div className="rdv-project-shot__body">
+                      <p>{project.type}</p>
+                      <h3>{project.name}</h3>
+                      <p>{project.detail}</p>
+                    </div>
+                  </a>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="rdv-home-otherwork" role="list">
+            {OTHER_WORK.map((work) => (
+              <Reveal key={work.name} delay={0.1} role="listitem">
+                <a href={work.href} target="_blank" rel="noopener noreferrer" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
+                  <span className="rdv-home-otherwork__media">
+                    <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
+                    <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
+                  </span>
+                  <div>
+                    <p>{work.type}</p>
+                    <h3>{work.name}</h3>
+                  </div>
+                  <p>{work.detail}</p>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="rdv-proof-v3__actions">
+            <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
+              Ver projetos reais
+            </SwapLink>
+            <SwapLink to="/demonstracoes" swapLabel="Ver arquiteturas em uso">
+              Explorar arquiteturas demonstrativas
+            </SwapLink>
+          </div>
+        </div>
+      </section>
+
       <section className="rdv-motion-rail" aria-label="Capacidades digitais">
         <div className="rdv-motion-rail__track">
           {[...MARKETPLACE_ITEMS.slice(0, 12), ...MARKETPLACE_ITEMS.slice(0, 12)].map((item, index) => (
@@ -200,78 +273,7 @@ export default function Home() {
         align="right"
       />
 
-      <section className="rdv-proof-v3" aria-labelledby="proof-title">
-        <div className="rdv-shell">
-          <Reveal>
-            <header className="rdv-proof-v3__header">
-              <div>
-                <p className="rdv-kicker">Projetos publicados</p>
-                <h2 id="proof-title">Prova em tela. <em className="rdv-accent-serif">Sem número inventado</em>.</h2>
-              </div>
-              <p>Cada projeto responde a uma operação diferente. A evidência é o produto publicado, a arquitetura e o que ele realmente organiza.</p>
-            </header>
-          </Reveal>
 
-          <div className="rdv-project-stage" role="list">
-            {PROJECTS.map((project, index) => (
-              <Reveal key={project.name} delay={index * 0.08} className="rdv-project-shot-wrap" role="listitem">
-                <article
-                  className={`rdv-project-shot${project.emphasis === 'flagship' ? ' is-flagship' : ''}`}
-                >
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rdv-project-shot__link"
-                    data-magnetic
-                    aria-label={`Abrir o site publicado de ${project.name} em nova aba`}
-                    onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
-                  >
-                    <div className="rdv-project-shot__media">
-                      <ProjectVideo src={project.video ?? ''} poster={project.image} />
-                      <img src={project.image} alt={`Interface publicada de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} width="1200" height="750" />
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <em>Ver em movimento <ArrowRight aria-hidden="true" /></em>
-                    </div>
-                    <div className="rdv-project-shot__body">
-                      <p>{project.type}</p>
-                      <h3>{project.name}</h3>
-                      <p>{project.detail}</p>
-                    </div>
-                  </a>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="rdv-home-otherwork" role="list">
-            {OTHER_WORK.map((work) => (
-              <Reveal key={work.name} delay={0.1} role="listitem">
-                <a href={work.href} target="_blank" rel="noopener noreferrer" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
-                  <span className="rdv-home-otherwork__media">
-                    <ProjectVideo src={work.video ?? ''} poster={work.image ?? ''} />
-                    <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
-                  </span>
-                  <div>
-                    <p>{work.type}</p>
-                    <h3>{work.name}</h3>
-                  </div>
-                  <p>{work.detail}</p>
-                </a>
-              </Reveal>
-            ))}
-          </div>
-
-          <div className="rdv-proof-v3__actions">
-            <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
-              Ver projetos reais
-            </SwapLink>
-            <SwapLink to="/demonstracoes" swapLabel="Ver arquiteturas em uso">
-              Explorar arquiteturas demonstrativas
-            </SwapLink>
-          </div>
-        </div>
-      </section>
 
       <SetorDivider
         video="/videos/setores/oficina-loop.mp4"

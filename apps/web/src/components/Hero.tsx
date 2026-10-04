@@ -160,9 +160,9 @@ export default function Hero() {
           <div className="rdv-hero__actions-v3">
             <Link
               className="rdv-hero__submit"
-              to="/solucoes"
+              to="/diagnostico?origem=home-hero"
               data-magnetic
-              onClick={() => trackEvent('hero_cta', { destination: 'solucoes' })}
+              onClick={() => trackEvent('hero_cta', { destination: 'diagnostico', origin: 'home-hero' })}
             >
               {t('hero.premium.cta')}
               <ArrowRight size={18} aria-hidden="true" />

@@ -42,7 +42,7 @@ const trustItems = [
   'Análise feita a partir do contexto informado',
   'Foco em prioridades reais',
   'Sem promessa de primeiro lugar no Google',
-  'WhatsApp liberado somente após a qualificação',
+  'Conversa inicial sem compromisso de contratação',
 ];
 
 export default function Diagnostico() {
@@ -73,10 +73,10 @@ export default function Diagnostico() {
     `E-mail: ${dados.email}.`,
     `WhatsApp para retorno: ${dados.whatsapp}.`,
     `Negócio: ${dados.segmento}.`,
-    `Necessidade: ${dados.solucao}.`,
-    `Problema: ${dados.problema}.`,
+    `Necessidade: ${dados.solucao || 'A definir na conversa'}.`,
+    `Problema: ${dados.problema || 'A detalhar na conversa'}.`,
     `Objetivo comercial: ${dados.objetivo}.`,
-    `Faixa de investimento: ${dados.investimento}.`,
+    `Faixa de investimento: ${dados.investimento || 'Ainda a definir'}.`,
   ].join('\n');
   const contextualWhatsapp = `https://wa.me/${BRAND.phone}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -218,11 +218,11 @@ export default function Diagnostico() {
           <Reveal className="rdv-diagnostic__intro">
             <SectionLabel>Mapeamento do perfil do seu negócio</SectionLabel>
             <h1 className="mt-6 font-serif text-4xl font-bold leading-[1.05] text-text-primary sm:text-5xl lg:text-7xl">
-              Antes de recomendar tecnologia, entendemos a sua operação.
+              Conte o que seu negócio precisa.
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Informe seu negócio, a necessidade, o problema e a faixa de investimento. Depois do envio,
-              você recebe acesso a uma conversa contextualizada pelo WhatsApp.
+              Informe seu segmento e objetivo. Depois, deixe seus contatos para preparar a conversa pelo WhatsApp.
+              Esta etapa é um contato inicial; um diagnóstico aprofundado, se necessário, terá escopo e valor apresentados antes da contratação.
             </p>
           </Reveal>
 
@@ -307,71 +307,6 @@ export default function Diagnostico() {
                             </select>
                           </div>
                           <div>
-                            <label htmlFor="solucao" className={labelClass}>O que você precisa?</label>
-                            <select id="solucao" name="solucao" required value={dados.solucao} onChange={(event) => updateField('solucao', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione a necessidade principal</option>
-                              {SOLUTIONS.map((solution) => <option key={solution.slug} value={solution.slug}>{solution.title}</option>)}
-                              <option value="ainda-nao-sei">Ainda preciso entender a melhor solução</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="problema" className={labelClass}>Qual problema você quer resolver?</label>
-                            <textarea id="problema" name="problema" required rows={3} maxLength={1000} value={dados.problema} onChange={(event) => updateField('problema', event.target.value)} placeholder="Explique onde a operação perde oportunidades ou exige esforço manual." className={inputClass} />
-                          </div>
-                          <button
-                            type="submit"
-                            className="rdv-form-action"
-                          >
-                            Continuar <ArrowRight size={18} aria-hidden="true" />
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <div>
-                            <label htmlFor="investimento" className={labelClass}>Faixa de investimento disponível</label>
-                            <select id="investimento" name="investimento" required value={dados.investimento} onChange={(event) => updateField('investimento', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione uma faixa aproximada</option>
-                              <option value="ate-2500">Até R$ 2.500</option>
-                              <option value="2500-5000">R$ 2.500 a R$ 5.000</option>
-                              <option value="5000-10000">R$ 5.000 a R$ 10.000</option>
-                              <option value="10000-25000">R$ 10.000 a R$ 25.000</option>
-                              <option value="acima-25000">Acima de R$ 25.000</option>
-                              <option value="preciso-definir">Ainda preciso definir</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="whatsapp" className={labelClass}>WhatsApp para retorno</label>
-                            <input id="whatsapp" name="whatsapp" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} value={dados.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} placeholder="(16) 99999-9999" className={inputClass} />
-                          </div>
-                          <div>
-                            <label htmlFor="email" className={labelClass}>E-mail</label>
-                            <input
-                              id="email"
-                              name="email"
-                              type="email"
-                              autoComplete="email"
-                              required
-                              value={dados.email}
-                              onChange={(event) => updateField('email', event.target.value)}
-                              placeholder="voce@empresa.com.br"
-                              className={inputClass}
-                            />
-                          </div>
-                          <div>
-                            <label htmlFor="presenca-digital" className={labelClass}>
-                              Site ou perfil do Google <span className="text-text-muted">(opcional)</span>
-                            </label>
-                            <input
-                              id="presenca-digital"
-                              name="presencaDigital"
-                              type="text"
-                              value={dados.presencaDigital}
-                              onChange={(event) => updateField('presencaDigital', event.target.value)}
-                              placeholder="https://seusite.com.br ou link do perfil"
-                              className={inputClass}
-                            />
-                          </div>
-                          <div>
                             <label htmlFor="objetivo" className={labelClass}>Principal objetivo comercial</label>
                             <select
                               id="objetivo"
@@ -390,6 +325,76 @@ export default function Diagnostico() {
                               <option value="nao-sei">Ainda preciso entender</option>
                             </select>
                           </div>
+                          <button
+                            type="submit"
+                            className="rdv-form-action"
+                          >
+                            Continuar <ArrowRight size={18} aria-hidden="true" />
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            <label htmlFor="whatsapp" className={labelClass}>WhatsApp para retorno</label>
+                            <input id="whatsapp" name="whatsapp" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} value={dados.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} placeholder="(16) 99999-9999" className={inputClass} />
+                          </div>
+                          <div>
+                            <label htmlFor="email" className={labelClass}>E-mail</label>
+                            <input
+                              id="email"
+                              name="email"
+                              type="email"
+                              autoComplete="email"
+                              required
+                              value={dados.email}
+                              onChange={(event) => updateField('email', event.target.value)}
+                              placeholder="voce@empresa.com.br"
+                              className={inputClass}
+                            />
+                          </div>
+                          <details className="rdv-diagnostic__details">
+                            <summary>Adicionar detalhes (opcional)</summary>
+                            <div className="mt-5 space-y-5">
+                              <div>
+                                <label htmlFor="solucao" className={labelClass}>Solução de interesse (opcional)</label>
+                                <select id="solucao" name="solucao" value={dados.solucao} onChange={(event) => updateField('solucao', event.target.value)} className={inputClass}>
+                                  <option value="" disabled>Selecione a necessidade principal</option>
+                                  {SOLUTIONS.map((solution) => <option key={solution.slug} value={solution.slug}>{solution.title}</option>)}
+                                  <option value="ainda-nao-sei">Ainda preciso entender a melhor solução</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label htmlFor="problema" className={labelClass}>Conte mais sobre o problema (opcional)</label>
+                                <textarea id="problema" name="problema" rows={3} maxLength={1000} value={dados.problema} onChange={(event) => updateField('problema', event.target.value)} placeholder="Explique onde a operação perde oportunidades ou exige esforço manual." className={inputClass} />
+                              </div>
+                              <div>
+                                <label htmlFor="investimento" className={labelClass}>Faixa de investimento (opcional)</label>
+                                <select id="investimento" name="investimento" value={dados.investimento} onChange={(event) => updateField('investimento', event.target.value)} className={inputClass}>
+                                  <option value="" disabled>Selecione uma faixa aproximada</option>
+                                  <option value="ate-2500">Até R$ 2.500</option>
+                                  <option value="2500-5000">R$ 2.500 a R$ 5.000</option>
+                                  <option value="5000-10000">R$ 5.000 a R$ 10.000</option>
+                                  <option value="10000-25000">R$ 10.000 a R$ 25.000</option>
+                                  <option value="acima-25000">Acima de R$ 25.000</option>
+                                  <option value="preciso-definir">Ainda preciso definir</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label htmlFor="presenca-digital" className={labelClass}>
+                                  Site ou perfil do Google <span className="text-text-muted">(opcional)</span>
+                                </label>
+                                <input
+                                  id="presenca-digital"
+                                  name="presencaDigital"
+                                  type="text"
+                                  value={dados.presencaDigital}
+                                  onChange={(event) => updateField('presencaDigital', event.target.value)}
+                                  placeholder="https://seusite.com.br ou link do perfil"
+                                  className={inputClass}
+                                />
+                              </div>
+                            </div>
+                          </details>
                           <label className="flex items-start gap-3 text-xs leading-5 text-text-secondary"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-gold" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
                           <div className="rdv-form-message">
                             {erro ? <p role="alert">{erro}</p> : null}
@@ -429,7 +434,7 @@ export default function Diagnostico() {
                     <p className="mt-4 max-w-lg leading-relaxed text-text-secondary">
                       {entrega === 'whatsapp_handoff'
                         ? 'Seu diagnóstico está organizado, mas ainda precisa ser enviado. Abra o WhatsApp e confirme o envio da mensagem para a nossa equipe.'
-                        : 'Seu negócio, a solução procurada, o problema e a faixa de investimento foram registrados. Abra o WhatsApp com essas informações já organizadas.'}
+                        : 'Seu negócio, objetivo e contatos foram registrados. Abra o WhatsApp com essas informações já organizadas.'}
                     </p>
                     <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row sm:justify-center">
                       <a
@@ -469,7 +474,7 @@ export default function Diagnostico() {
                   ))}
                 </ul>
                 <div className="mt-8 border-t border-text-primary/[0.08] pt-7">
-                  <p className="text-sm leading-7 text-text-secondary">O contato pelo WhatsApp é liberado somente depois do registro do diagnóstico. Assim, o atendimento começa com informações reais da operação.</p>
+                  <p className="text-sm leading-7 text-text-secondary">O formulário organiza seu contexto antes da conversa. Se preferir falar diretamente, use o contato pelo WhatsApp disponível no rodapé.</p>
                 </div>
               </aside>
             </Reveal>
