@@ -1,114 +1,79 @@
 import { useEffect, useRef } from 'react';
 
-// A small, self-contained studio render. No models, textures or external requests.
-const vertex = `attribute vec2 position; void main(){gl_Position=vec4(position,0.,1.);}`;
-const fragment = `
-precision highp float;
-uniform vec2 resolution;
-uniform float phase;
-mat2 turn(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
-vec2 scene(vec3 p){
-  p.xz=turn(-.36+phase*.58)*p.xz;
-  p.xy=turn(-.36)*p.xy;
-  vec3 a=p; a.yz=turn(.62)*a.yz;
-  float outer=length(vec2(length(a.xy)-1.17,a.z))-.19;
-  vec3 b=p; b.yz=turn(-.64)*b.yz;
-  float inner=length(vec2(length(b.xy)-.81,b.z))-.14;
-  float core=length(p)-.32;
-  return outer<inner && outer<core ? vec2(outer,0.) : inner<core ? vec2(inner,1.) : vec2(core,1.);
-}
-vec3 normal(vec3 p){vec2 e=vec2(.001,0.);return normalize(vec3(scene(p+e.xyy).x-scene(p-e.xyy).x,scene(p+e.yxy).x-scene(p-e.yxy).x,scene(p+e.yyx).x-scene(p-e.yyx).x));}
-vec3 studio(vec3 r){
-  float top=pow(max(0.,dot(r,normalize(vec3(-.4,1.,.5)))),12.);
-  float strip=pow(max(0.,dot(r,normalize(vec3(-1.,.2,1.)))),45.);
-  float rim=pow(max(0.,dot(r,normalize(vec3(1.,.6,-.4)))),26.);
-  return vec3(.055)+vec3(.85,.9,1.)*top*2.1+vec3(1.)*strip*3.+vec3(1.,.86,.6)*rim*1.7;
-}
-void main(){
-  vec2 uv=(gl_FragCoord.xy*2.-resolution)/resolution.y;
-  vec3 ro=vec3(0.,0.,4.6),rd=normalize(vec3(uv,-3.1));
-  float travel=0.; vec2 hit=vec2(0.);
-  for(int i=0;i<72;i++){hit=scene(ro+rd*travel);if(hit.x<.0015||travel>8.)break;travel+=hit.x*.8;}
-  vec3 col=vec3(.043,.047,.055);
-  if(travel<8.){
-    vec3 p=ro+rd*travel,n=normal(p),r=reflect(rd,n);
-    vec3 metal=mix(vec3(.78,.84,.9),vec3(.83,.61,.28),hit.y);
-    float fres=pow(1.-max(0.,dot(n,-rd)),3.);
-    float ao=clamp(scene(p+n*.18).x/.18,.3,1.);
-    col=studio(r)*metal*ao+metal*.12*max(0.,dot(n,normalize(vec3(-1.,2.,3.))))+fres*metal*.13;
-    col=col/(col+vec3(.65)); col=pow(col,vec3(.82));
+type Vector = [number, number, number];
+type Face = { points: Vector[]; normal: Vector; center: Vector; gold: boolean };
+const faces: Face[] = [];
+const turn = ([x,y,z]: Vector, ax: number, ay: number): Vector => {
+  const yy = y*Math.cos(ax)-z*Math.sin(ax), zz = y*Math.sin(ax)+z*Math.cos(ax);
+  return [x*Math.cos(ay)+zz*Math.sin(ay), yy, -x*Math.sin(ay)+zz*Math.cos(ay)];
+};
+const unit = (v: Vector): Vector => { const l = Math.hypot(...v); return v.map(n=>n/l) as Vector; };
+const dot = (a: Vector,b: Vector) => a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+// True toroidal meshes, projected in perspective and lit by three studio softboxes.
+function torus(radius: number, tube: number, tilt: number, gold: boolean) {
+  const point = (u: number, v: number): Vector => turn([(radius+tube*Math.cos(v))*Math.cos(u),(radius+tube*Math.cos(v))*Math.sin(u),tube*Math.sin(v)],tilt,0);
+  for(let i=0;i<112;i++) for(let j=0;j<24;j++) {
+    const u=i*Math.PI*2/112, v=j*Math.PI*2/24, du=Math.PI*2/112,dv=Math.PI*2/24;
+    faces.push({points:[point(u,v),point(u+du,v),point(u+du,v+dv),point(u,v+dv)],center:point(u+du/2,v+dv/2),normal:turn([Math.cos(v+dv/2)*Math.cos(u+du/2),Math.cos(v+dv/2)*Math.sin(u+du/2),Math.sin(v+dv/2)],tilt,0),gold});
   }
-  gl_FragColor=vec4(col,1.);
-}`;
+}
+torus(1.08,.18,.56,false); torus(.72,.125,-.76,true);
+const lights = [unit([-1,1,2]), unit([1,.4,1]), unit([0,-1,-.5])];
 
 export default function BrandSculpture({ active }: { active: boolean }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const activeRef = useRef(active);
-  activeRef.current = active;
-  const restartRef = useRef<(() => void) | null>(null);
-  useEffect(() => { restartRef.current?.(); }, [active]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const gl = canvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
-    if (!gl) return;
-    const shaders: WebGLShader[] = [];
-    const compile = (type: number, source: string) => {
-      const shader = gl.createShader(type);
-      if (!shader) return null;
-      shaders.push(shader);
-      gl.shaderSource(shader, source); gl.compileShader(shader);
-      return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null;
-    };
-    const vs = compile(gl.VERTEX_SHADER, vertex), fs = compile(gl.FRAGMENT_SHADER, fragment);
-    const program = gl.createProgram();
-    if (!vs || !fs || !program) { shaders.forEach(s => gl.deleteShader(s)); return; }
-    gl.attachShader(program, vs); gl.attachShader(program, fs); gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      shaders.forEach(s => gl.deleteShader(s)); gl.deleteProgram(program); return;
-    }
-    gl.useProgram(program);
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
-    const position = gl.getAttribLocation(program, 'position');
-    gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-    const resolution = gl.getUniformLocation(program, 'resolution');
-    const phase = gl.getUniformLocation(program, 'phase');
-    let frame = 0, elapsed = 0, previous = 0, dirty = true;
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const ratio = Math.min(window.devicePixelRatio || 1, 1.25);
-      canvas.width = Math.max(1, Math.round(rect.width * ratio));
-      canvas.height = Math.max(1, Math.round(rect.height * ratio));
-      gl.viewport(0,0,canvas.width,canvas.height); dirty = true;
-    };
-    const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
-    // One finite reveal, then a still object. No perpetual wobble or cursor chasing.
-    const render = (now: number) => {
-      const animate = activeRef.current && elapsed < 4000;
-      if (animate) elapsed += Math.min(now - (previous || now), 40);
-      previous = now;
-      if (animate || dirty) {
-        const t = elapsed > 0 ? Math.min(elapsed / 4000, 1) : activeRef.current ? 0 : 1;
-        gl.uniform2f(resolution, canvas.width, canvas.height);
-        gl.uniform1f(phase, 1-Math.pow(1-t,3));
-        gl.drawArrays(gl.TRIANGLES,0,6); canvas.dataset.ready = 'true'; dirty = false;
+  const canvasRef=useRef<HTMLCanvasElement>(null);
+  const activeRef=useRef(active); activeRef.current=active;
+  const restartRef=useRef<(() => void)|null>(null);
+  useEffect(()=>{restartRef.current?.();},[active]);
+  useEffect(()=>{
+    const canvas=canvasRef.current, context=canvas?.getContext('2d',{alpha:false});
+    if(!canvas || !context) return;
+    let frame=0, elapsed=0, previous=0, lastPaint=0, dirty=true;
+    const paint=(phase: number)=>{
+      const w=canvas.width,h=canvas.height,scale=Math.min(w,h)*.32;
+      context.fillStyle='#0b0c0e';context.fillRect(0,0,w,h);
+      const angle=-.28+phase*.52;
+      const transform=(p: Vector)=>turn(p,-.12,angle);
+      const project=([x,y,z]: Vector):[number,number]=>[w/2+x*scale*4/(4-z),h/2-y*scale*4/(4-z)];
+      const mesh=faces.map(face=>({face,center:transform(face.center),normal:transform(face.normal)})).sort((a,b)=>a.center[2]-b.center[2]);
+      // Draw the core in depth order with the surrounding metal surfaces.
+      let coreDrawn=false;
+      const core=()=>{
+        const r=scale*.25,g=context.createRadialGradient(w/2-r*.4,h/2-r*.55,0,w/2,h/2,r);
+        g.addColorStop(0,'#fff1c9');g.addColorStop(.3,'#bba16a');g.addColorStop(.72,'#6b5330');g.addColorStop(1,'#2c261b');
+        context.fillStyle=g;context.beginPath();context.arc(w/2,h/2,r,0,Math.PI*2);context.fill();
+      };
+      for(const {face,center,normal} of mesh){
+        if(!coreDrawn && center[2]>0){core();coreDrawn=true;}
+        if(dot(normal,unit([-center[0],-center[1],4-center[2]]))<-.12)continue;
+        const diffuse=Math.max(0,dot(normal,lights[0]));
+        const reflection: Vector=[2*normal[2]*normal[0],2*normal[2]*normal[1],2*normal[2]*normal[2]-1];
+        const key=Math.pow(Math.max(0,dot(reflection,lights[0])),14);
+        const rim=Math.pow(Math.max(0,dot(reflection,lights[1])),35);
+        const fill=Math.pow(Math.max(0,dot(reflection,lights[2])),8);
+        const intensity=.14+diffuse*.27+key*.72+rim*.65+fill*.3;
+        const metal=face.gold?[214,180,111]:[211,221,235];
+        const color=metal.map(c=>Math.round(Math.min(255,c*intensity+key*35)));
+        context.fillStyle=`rgb(${color.join(',')})`;context.strokeStyle=context.fillStyle;context.lineWidth=.65;
+        context.beginPath();face.points.forEach((point,i)=>{const p=project(transform(point));if(i===0)context.moveTo(...p);else context.lineTo(...p);});
+        context.closePath();context.fill();context.stroke();
       }
-      if (activeRef.current && elapsed < 4000) frame = requestAnimationFrame(render);
+      if(!coreDrawn)core();canvas.dataset.ready='true';
     };
-    restartRef.current = () => { cancelAnimationFrame(frame); previous = 0; dirty = true; frame = requestAnimationFrame(render); };
-    frame = requestAnimationFrame(render);
-    const onResize = () => { resize(); cancelAnimationFrame(frame); frame = requestAnimationFrame(render); };
-    window.addEventListener('resize', onResize);
-    const onLost = (event: Event) => { event.preventDefault(); cancelAnimationFrame(frame); delete canvas.dataset.ready; };
-    canvas.addEventListener('webglcontextlost', onLost);
-    return () => {
-      restartRef.current = null; cancelAnimationFrame(frame); observer.disconnect(); window.removeEventListener('resize', onResize);
-      canvas.removeEventListener('webglcontextlost', onLost);
-      gl.deleteBuffer(buffer); gl.deleteProgram(program); shaders.forEach(s => gl.deleteShader(s));
+    const render=(now:number)=>{
+      const animate=activeRef.current && elapsed<4000;
+      if(animate)elapsed+=Math.min(now-(previous||now),40);
+      previous=now;
+      if(dirty || (animate && now-lastPaint>=32) || elapsed>=4000){
+        const t=elapsed>0?Math.min(elapsed/4000,1):activeRef.current?0:1;
+        paint(1-Math.pow(1-t,3));dirty=false;lastPaint=now;
+      }
+      if(activeRef.current && elapsed<4000)frame=requestAnimationFrame(render);
     };
-  }, []);
+    const restart=()=>{cancelAnimationFrame(frame);previous=0;dirty=true;frame=requestAnimationFrame(render);};
+    const resize=()=>{const rect=canvas.getBoundingClientRect();const ratio=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.max(1,Math.round(rect.width*ratio));canvas.height=Math.max(1,Math.round(rect.height*ratio));restart();};
+    const observer=new ResizeObserver(resize);observer.observe(canvas);restartRef.current=restart;resize();
+    return ()=>{cancelAnimationFrame(frame);observer.disconnect();restartRef.current=null;};
+  },[]);
   return <canvas ref={canvasRef} className="rdv-brand-sculpture" aria-hidden="true" />;
 }
