@@ -128,7 +128,7 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        <div className="rdv-studio-hero__art" aria-hidden="true">
+        <div className="rdv-studio-hero__art">
           <Suspense fallback={null}>
             <HeroMotion active={animationActive} />
           </Suspense>

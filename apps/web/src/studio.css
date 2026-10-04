@@ -74,18 +74,30 @@
 }
 @media (prefers-reduced-motion: reduce) { .rdv-studio *, .rdv-studio *::before, .rdv-studio *::after { animation: none !important; transition: none !important; } }
 
-/* One finite choreography, compositor transforms only; no frame-by-frame JS. */
+/* A fixed brand core, with transform-only orbital motion. */
 .rdv-light-motion { position: absolute; inset: 0; contain: layout paint; }
-.rdv-light-motion__art { display: block; width: 100%; height: 100%; }
-.rdv-light-motion__layer { transform-box: fill-box; transform-origin: center; }
-.rdv-light-motion__back { animation: rdv-ribbon-arrive 2200ms cubic-bezier(.16,1,.3,1) both; }
-.rdv-light-motion__front { animation: rdv-ribbon-unfold 2600ms cubic-bezier(.16,1,.3,1) both; }
-.rdv-light-motion__trace { animation: rdv-ribbon-trace 1600ms cubic-bezier(.16,1,.3,1) 500ms both; }
-.rdv-light-motion__glint { position: absolute; left: 49%; top: 20%; width: 32%; height: 1px; background: linear-gradient(90deg, transparent, #fff3d4, transparent); transform: rotate(-35deg); opacity: 0; pointer-events: none; animation: rdv-ribbon-glint 3600ms cubic-bezier(.22,1,.36,1) 250ms both; }
+.rdv-logo-scene { position: absolute; inset: 3%; }
+.rdv-logo-scene__halo { position: absolute; inset: 7%; border-radius: 50%; background: radial-gradient(circle, #c6a66b14, #c6a66b05 46%, transparent 70%); }
+.rdv-logo-scene__grid { position: absolute; inset: 0; width: 100%; height: 100%; stroke: #bfa674; stroke-opacity: .23; stroke-width: .7; }
+.rdv-logo-scene__orbit { position: absolute; border: 1px solid #c8b07b20; border-radius: 50%; animation: rdv-logo-orbit 24s linear infinite; }
+.rdv-logo-scene__orbit::before { content: ''; position: absolute; inset: -1px; border: 1px solid transparent; border-top-color: #e2c992; border-right-color: #c8b07b55; border-radius: inherit; }
+.rdv-logo-scene__orbit span { position: absolute; left: 50%; top: -3px; width: 5px; height: 5px; border-radius: 50%; background: #ffefc4; box-shadow: 0 0 10px #e8c86faa, 0 0 22px #e8c86f44; }
+.rdv-logo-scene__orbit--outer { inset: 10%; animation-duration: 32s; }
+.rdv-logo-scene__orbit--inner { inset: 19%; animation-duration: 22s; animation-direction: reverse; animation-delay: -8s; }
+.rdv-logo-scene__orbit--inner::before { border-top-color: #ced9e4; border-right-color: #ced9e433; }
+.rdv-logo-scene__orbit--inner span { background: #e9f0f6; box-shadow: 0 0 12px #ced9e488; }
+.rdv-logo-scene__equator { position: absolute; inset: 4%; transform: rotate(-32deg) scaleY(.46); }
+.rdv-logo-scene__orbit--tilted { inset: 0; animation-duration: 18s; }
+.rdv-logo-scene__core { position: absolute; inset: 31%; border-radius: 28%; background: #07090d; border: 1px solid #d0b47766; box-shadow: inset 0 1px 0 #ffe8b333, 0 18px 42px #0008, 0 0 48px #b49b6020; overflow: hidden; }
+.rdv-logo-scene__core img { display: block; width: 100%; height: 100%; }
+.rdv-logo-scene__shine { position: absolute; inset: -50%; background: linear-gradient(115deg, transparent 40%, #fff0d312 49%, transparent 57%); animation: rdv-logo-shine 10s cubic-bezier(.16,1,.3,1) infinite; }
+.rdv-logo-scene__signature { position: absolute; top: 76%; left: 0; right: 0; text-align: center; font-size: clamp(8px, .8vw, 11px); letter-spacing: .26em; color: #bda879; }
+.rdv-logo-scene__control { position: absolute; right: 5%; bottom: 5%; width: 44px; height: 44px; display: grid; place-items: center; color: #bda879; border: 1px solid #bda87930; border-radius: 50%; background: #0b0c0e; cursor: pointer; }
+.rdv-logo-scene__control:focus-visible { outline: 2px solid #e8c86f; outline-offset: 4px; }
 .rdv-light-motion[data-motion-active='false'] * { animation-play-state: paused; }
 .rdv-studio-hero--still .rdv-light-motion * { animation: none; }
-@keyframes rdv-ribbon-arrive { from { transform: translate3d(0,22px,0) rotate(-12deg) scale(.94); opacity: 0; } to { transform: translate3d(0,0,0) rotate(0) scale(1); opacity: 1; } }
-@keyframes rdv-ribbon-unfold { from { transform: translate3d(0,-18px,0) rotate(14deg) scale(.88); opacity: 0; } to { transform: translate3d(0,0,0) rotate(0) scale(1); opacity: 1; } }
-@keyframes rdv-ribbon-trace { from { transform: scale(.97); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-@keyframes rdv-ribbon-glint { 0%,20%,100% { opacity: 0; } 35% { opacity: .65; } 0%,20% { transform: translate3d(-50px,40px,0) rotate(-35deg); } 100% { transform: translate3d(90px,-60px,0) rotate(-35deg); } }
-@media (prefers-reduced-motion: reduce) { .rdv-light-motion * { animation: none !important; } }
+.rdv-studio-hero--still .rdv-logo-scene__control { display: none; }
+@keyframes rdv-logo-orbit { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rdv-logo-shine { 0%, 15% { transform: translateX(-65%); opacity: 0; } 25% { opacity: 1; } 45%, 100% { transform: translateX(65%); opacity: 0; } }
+@media (max-width: 600px) { .rdv-logo-scene__control { right: 0; bottom: 9%; } }
+@media (prefers-reduced-motion: reduce) { .rdv-light-motion * { animation: none !important; } .rdv-logo-scene__control { display: none; } }
