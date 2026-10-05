@@ -51,7 +51,7 @@ const trustItems = [
   'Análise feita a partir do contexto informado',
   'Foco em prioridades reais',
   'Sem promessa de primeiro lugar no Google',
-  'Conversa inicial sem compromisso de contratação',
+  'Triagem remunerada, creditada integralmente no Setup',
 ];
 
 export default function Diagnostico() {
@@ -241,8 +241,9 @@ export default function Diagnostico() {
               Conte o que seu negócio precisa.
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Informe seu segmento e objetivo. Depois, deixe seus contatos para preparar a conversa pelo WhatsApp.
-              Esta etapa é um contato inicial; um diagnóstico aprofundado, se necessário, terá escopo e valor apresentados antes da contratação.
+              Informe segmento, faturamento aproximado, tráfego atual e quem decide o investimento. As respostas
+              organizam a triagem clínica: laudo em 5 dias úteis, com escopo e valor apresentados antes de qualquer
+              contratação — e creditados no Setup se você aprovar a execução.
             </p>
           </Reveal>
 
