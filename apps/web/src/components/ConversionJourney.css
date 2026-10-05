@@ -1,0 +1,430 @@
+.rdv-studio .rdv-journey {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 80% 45%, #bca67a0b, transparent 58%), #0b0c0e;
+}
+.rdv-journey__layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+}
+.rdv-journey__copy,
+.rdv-journey__console {
+  min-width: 0;
+}
+.rdv-studio .rdv-journey h2 {
+  margin: 0;
+  font-size: clamp(34px, 3.45vw, 49px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+.rdv-journey h2 > span {
+  color: #d2bd8b;
+}
+.rdv-journey__lede {
+  max-width: 46ch;
+  margin: 24px 0;
+  color: #b3b5bb;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.rdv-journey__principles {
+  display: grid;
+  gap: 12px;
+  margin: 26px 0 32px;
+  padding: 0;
+  list-style: none;
+}
+.rdv-journey__principles li {
+  display: flex;
+  gap: 10px;
+  align-items: start;
+  color: #dededb;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.rdv-journey__principles svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin-top: 3px;
+  color: #d2bd8b;
+}
+.rdv-journey__cta svg {
+  transition: transform 200ms ease;
+}
+.rdv-journey__cta:hover svg {
+  transform: translateX(4px);
+}
+.rdv-journey__assurance {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: #aaaeb5;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.rdv-journey__assurance svg {
+  width: 15px;
+  height: 15px;
+  color: #bca67a;
+}
+.rdv-journey__console {
+  position: relative;
+  border: 1px solid #3b3830;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #1a1b1e, #101113 65%);
+  box-shadow:
+    0 28px 70px #0004,
+    inset 0 1px 0 #fff1;
+  overflow: hidden;
+}
+.rdv-journey__console-head {
+  padding: 23px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #ffffff0d;
+}
+.rdv-journey__console-head > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #efeee9;
+}
+.rdv-journey__console-head small {
+  display: block;
+  margin-top: 4px;
+  color: #a6a7ab;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+.rdv-journey__monogram {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #bca67a60;
+  border-radius: 7px;
+  color: #e2ce9f;
+  font-size: 12px;
+  letter-spacing: -0.05em;
+}
+.rdv-journey__pause {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #ffffff14;
+  border-radius: 50%;
+  background: #ffffff03;
+  color: #d2bd8b;
+  cursor: pointer;
+}
+.rdv-journey__pause svg {
+  width: 14px;
+  height: 14px;
+}
+.rdv-journey__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 28px 22px 24px;
+  margin: 0;
+  list-style: none;
+}
+.rdv-journey__steps li {
+  position: relative;
+}
+.rdv-journey__steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 23px;
+  left: calc(50% + 27px);
+  width: calc(100% - 54px);
+  height: 1px;
+  background: #40403c;
+  transition: background 400ms ease;
+}
+.rdv-journey__steps li[data-complete="true"]::after {
+  background: #bca67a;
+}
+.rdv-journey__steps button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 2px;
+  background: none;
+  border: 0;
+  color: #b2b3b8;
+  cursor: pointer;
+}
+.rdv-journey__node {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #444449;
+  border-radius: 12px;
+  background: #18191c;
+  transition:
+    border-color 400ms ease,
+    background 400ms ease,
+    color 400ms ease;
+}
+.rdv-journey__node svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.5;
+}
+.rdv-journey__step-name {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  margin-top: 11px;
+  font-size: 12px;
+}
+.rdv-journey__step-name small {
+  color: #91939b;
+  font-size: 9px;
+}
+.rdv-journey__steps [data-active="true"] .rdv-journey__node {
+  background: #d2bd8b;
+  border-color: #e8d8b5;
+  color: #171716;
+  box-shadow: 0 0 26px #d2bd8b12;
+}
+.rdv-journey__steps [data-active="true"] .rdv-journey__step-name {
+  color: #efdfba;
+}
+.rdv-journey__steps [data-complete="true"] .rdv-journey__node {
+  border-color: #bca67a80;
+  color: #d2bd8b;
+}
+.rdv-journey__detail {
+  margin: 0 22px 22px;
+  padding: 23px;
+  border: 1px solid #bca67a29;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 50% 0, #bca67a09, transparent 75%), #0d0e10;
+  min-height: 350px;
+}
+.rdv-journey__detail-top {
+  display: flex;
+  justify-content: space-between;
+  color: #bca67a;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+}
+.rdv-journey__visual {
+  margin: 23px 0 26px;
+}
+.rdv-journey__channels {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+.rdv-journey__channels span {
+  padding: 6px 10px;
+  border: 1px solid #373737;
+  border-radius: 4px;
+  color: #bcbec3;
+  font-size: 10px;
+  background: #191a1c;
+  white-space: nowrap;
+}
+.rdv-journey__conduit {
+  position: relative;
+  margin: 0 auto;
+  width: 1px;
+  height: 25px;
+  background: #bca67a40;
+  overflow: hidden;
+}
+.rdv-journey__conduit i {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 12px;
+  background: #f5deb0;
+  animation: rdv-journey-flow 2.6s ease-in-out infinite;
+}
+.rdv-journey__business {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: 270px;
+  margin: auto;
+  padding: 14px 17px;
+  border: 1px solid #bca67a70;
+  border-radius: 7px;
+  background: linear-gradient(110deg, #bca67a12, #bca67a04);
+  color: #f0e8d7;
+}
+.rdv-journey__business > svg {
+  width: 21px;
+  height: 21px;
+  flex-shrink: 0;
+  color: #d2bd8b;
+  stroke-width: 1.5;
+}
+.rdv-journey__business > svg:last-child {
+  margin-left: auto;
+  width: 15px;
+  height: 15px;
+}
+.rdv-journey__business > span {
+  font-size: 13px;
+  font-weight: 500;
+}
+.rdv-journey__business small {
+  display: block;
+  margin-top: 3px;
+  color: #a9a79f;
+  font-size: 10px;
+  font-weight: 400;
+}
+.rdv-studio .rdv-journey__detail h3 {
+  min-height: 2.5em;
+  margin: 0 0 10px;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+.rdv-journey__detail p {
+  min-height: 66px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #b0b2b8;
+}
+.rdv-journey__outcome {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #ffffff10;
+  color: #d2bd8b;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.rdv-journey__outcome svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.rdv-journey__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 25px 20px;
+  color: #a0a1a7;
+  font-size: 9px;
+  line-height: 1.6;
+}
+.rdv-journey__footer span:last-child {
+  color: #bca67a;
+}
+.rdv-journey button:focus-visible,
+.rdv-journey a:focus-visible {
+  outline: 2px solid #e8d8b5;
+  outline-offset: 5px;
+  border-radius: 4px;
+}
+.rdv-journey[data-playing="false"] .rdv-journey__conduit i {
+  animation-play-state: paused;
+}
+@keyframes rdv-journey-flow {
+  0% {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  85%,
+  100% {
+    transform: translateY(32px);
+    opacity: 0;
+  }
+}
+@media (max-width: 960px) {
+  .rdv-journey__layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .rdv-journey__copy {
+    max-width: 620px;
+  }
+  .rdv-journey__console {
+    width: 100%;
+    max-width: 620px;
+  }
+  .rdv-journey__detail {
+    min-height: 350px;
+  }
+}
+@media (max-width: 480px) {
+  .rdv-studio .rdv-journey h2 {
+    font-size: clamp(30px, 8vw, 38px);
+  }
+  .rdv-journey__lede {
+    font-size: 14px;
+  }
+  .rdv-journey__principles li {
+    font-size: 12px;
+  }
+  .rdv-journey__console-head {
+    padding: 17px 16px;
+  }
+  .rdv-journey__steps {
+    padding: 23px 10px;
+  }
+  .rdv-journey__step-name {
+    gap: 4px;
+    font-size: 11px;
+  }
+  .rdv-journey__step-name small {
+    display: none;
+  }
+  .rdv-journey__detail {
+    margin: 0 12px 18px;
+    padding: 17px;
+    min-height: 372px;
+  }
+  .rdv-journey__channels {
+    gap: 5px;
+  }
+  .rdv-journey__channels span {
+    padding: 6px 7px;
+    font-size: 9px;
+  }
+  .rdv-journey__detail p {
+    min-height: 86px;
+  }
+  .rdv-journey__footer {
+    padding-inline: 17px;
+  }
+  .rdv-journey__cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rdv-journey *,
+  .rdv-journey *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

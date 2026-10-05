@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
+import ConversionJourney from '@/components/ConversionJourney';
 import { SwapLink } from '@/components/SwapLink';
 import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -16,7 +16,6 @@ import {
 } from '@/lib/conversao';
 import { ESTEIRA_RESUMO, PILARES } from '@/lib/esteira';
 import {
-  ACQUISITION_CHANNELS,
   DELIVERY_MODELS,
   FAMILY_LABELS,
   MARKETPLACE_ITEMS,
@@ -304,37 +303,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="rdv-distribution" aria-labelledby="distribution-title">
-        <div className="rdv-shell rdv-distribution__grid">
-          <div>
-            <header>
-              <p className="rdv-kicker">Capilaridade com direção</p>
-              <h2 id="distribution-title">Um núcleo próprio. <em className="rdv-accent-serif">Vários caminhos</em> até ele.</h2>
-              <p>
-                A presença central organiza a oferta. Cada canal recebe a mensagem, a página e a próxima ação adequadas
-                à intenção de quem chegou.
-              </p>
-              <Link className="rdv-primary-action" to="/solucoes/distribuicao-multicanal">
-                Ver arquitetura multicanal <ArrowRight aria-hidden="true" />
-              </Link>
-            </header>
-          </div>
-
-          <div>
-            <div className="rdv-channel-map" aria-label="Canais conectáveis ao núcleo digital">
-              <div className="rdv-channel-map__core">
-                <span>Seu negócio</span>
-                <strong>Oferta · dados · atendimento</strong>
-              </div>
-              <div className="rdv-channel-map__orbit">
-                {ACQUISITION_CHANNELS.map((channel, index) => (
-                  <span key={channel} style={{ '--channel-index': index } as CSSProperties}>{channel}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ConversionJourney />
 
       <section className="rdv-models" aria-labelledby="models-title">
         <div className="rdv-shell">
