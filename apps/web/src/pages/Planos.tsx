@@ -127,7 +127,10 @@ export default function Planos() {
                 <span className="rdv-precos__selo">Etapa {pilar.ordem}</span>
                 <h3>{pilar.nome}</h3>
                 <p className="rdv-precos__valor">
-                  <strong>{pilar.faixa}</strong> <span>{pilar.id === 'mrr' ? 'por mês' : 'uma vez'}</span>
+                  <strong>{pilar.faixa}</strong>
+                  {/* A faixa do MRR já diz "por mês": repetir o rótulo aqui
+                      produzia "R$ 2.000 a R$ 5.000 por mês por mês". */}
+                  {pilar.id === 'mrr' ? null : <span>uma vez</span>}
                 </p>
                 <p className="rdv-precos__resumo">{pilar.resumo}</p>
                 <ul>
