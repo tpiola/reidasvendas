@@ -3,6 +3,7 @@ import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
 import { ASSINATURA, CAMPANHA_ATIVA, IMPLANTACAO, MESES_ANUAIS, brl } from '@/lib/ofertas';
+import { ESTEIRA_RESUMO, PILARES } from '@/lib/esteira';
 import { GUIDE_BY_SLUG, type Guide } from '@/lib/growth';
 
 /**
@@ -58,6 +59,14 @@ const FAQ = [
     q: 'Preciso entender de tecnologia para contratar?',
     a: 'Não. Você fala do seu negócio — o que vende, para quem, o que o cliente pergunta no balcão. Traduzir isso para a internet é o trabalho pelo qual você está pagando.',
   },
+  {
+    q: 'Por que a triagem é paga?',
+    a: 'Porque diagnóstico de graça é orçamento disfarçado: existe para vender o que já foi decidido, não para medir o que está errado. A triagem é auditoria remunerada, com laudo de 12 pontos em 5 dias úteis, e o valor é creditado integralmente no Setup se você aprovar a execução. Quem não quer pagar por medição não sustenta engenharia depois — e é melhor descobrir isso antes, dos dois lados, do que no meio do projeto.',
+  },
+  {
+    q: 'As duas tabelas convivem? Qual é a diferença entre elas?',
+    a: 'Convivem, e resolvem problemas diferentes. A esteira de engenharia (Triagem → Setup → Otimização contínua) é para quem tem tráfego chegando e venda que não fecha: começa medindo o vazamento. A execução abaixo é para quem já sabe o que precisa — página de campanha, site profissional ou loja — e quer preço e prazo publicados, sem passar pela triagem. O que não existe nesta casa é "orçamento sob consulta".',
+  },
 ];
 
 const COST_GUIDE_SLUGS = [
@@ -100,10 +109,53 @@ export default function Planos() {
         </div>
       </header>
 
+      <section className="rdv-precos__bloco" aria-labelledby="precos-esteira">
+        <div className="rdv-shell">
+          <header>
+            <p className="rdv-kicker">Engenharia de conversão</p>
+            <h2 id="precos-esteira">Dois caminhos. Um deles começa medindo por que a venda não fecha.</h2>
+            <p>
+              Se o problema é <strong>vender</strong> — o tráfego chega e não vira contrato —, a contratação começa pela
+              Triagem Clínica: auditoria remunerada, com laudo de 12 pontos em 5 dias úteis e valor creditado no Setup
+              aprovado. Se o que falta é um ativo específico com preço publicado, a tabela de execução logo abaixo resolve
+              sem passar pela triagem.
+            </p>
+          </header>
+          <div className="rdv-precos__grade">
+            {PILARES.map((pilar) => (
+              <article key={pilar.id} className={pilar.id === 'setup' ? 'is-destaque' : undefined}>
+                <span className="rdv-precos__selo">Etapa {pilar.ordem}</span>
+                <h3>{pilar.nome}</h3>
+                <p className="rdv-precos__valor">
+                  <strong>{pilar.faixa}</strong> <span>{pilar.id === 'mrr' ? 'por mês' : 'uma vez'}</span>
+                </p>
+                <p className="rdv-precos__resumo">{pilar.resumo}</p>
+                <ul>
+                  {pilar.escopo.map((item) => (
+                    <li key={item}><Check aria-hidden="true" /> <span>{item}</span></li>
+                  ))}
+                </ul>
+                <p className="rdv-precos__prazo">Prazo: {pilar.prazo}.</p>
+                <p className="rdv-precos__resumo">{pilar.ancoragem}</p>
+                <p className="rdv-precos__prazo">{pilar.funcao}</p>
+                <Link
+                  className="rdv-primary-action"
+                  to={`/diagnostico?origem=planos-esteira&pilar=${pilar.id}&estagio=triagem`}
+                  onClick={() => trackEvent('diagnostic_start', { position: 'plans-esteira', pillar: pilar.nome })}
+                >
+                  {pilar.id === 'triagem' ? 'Iniciar triagem clínica' : 'Começar pela triagem'} <ArrowRight aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+          <p className="rdv-precos__prazo">{ESTEIRA_RESUMO}</p>
+        </div>
+      </section>
+
       <section className="rdv-precos__bloco" aria-labelledby="precos-implantacao">
         <div className="rdv-shell">
           <header>
-            <p className="rdv-kicker">Serviço uma vez</p>
+            <p className="rdv-kicker">Execução: serviço uma vez</p>
             <h2 id="precos-implantacao">Você paga uma vez. A coisa passa a existir.</h2>
             <p>
               Escopo fechado, escopo por escrito, entrega com data. Serve para quem precisa do site no ar e depois

@@ -112,6 +112,26 @@ const DATA_GROWTH = { '/planos': '2026-10-05', '/diagnostico': '2026-10-05', '/b
 for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: DATA_GROWTH[item.path] ?? '2026-08-28' })), ...articleEntries]) {
   entryMap.set(entry.path, entry);
 }
+// /obrigado é rota do app desde o começo, mas nunca teve HTML próprio. Sem arquivo
+// pré-renderizado e sem rewrite de SPA a Vercel devolve 404 (medido em 05/10/2026),
+// quebrando quem chega pelo comprovante, por e-mail antigo ou por link salvo.
+// É página de confirmação: entra no build com noindex e fica fora do sitemap.
+entryMap.set('/obrigado', {
+  path: '/obrigado',
+  title: 'Mensagem enviada | Rei das Vendas',
+  description: 'Recebemos sua solicitação. Em breve retornamos com a análise da presença digital do seu negócio.',
+  category: 'WebPage',
+  headings: [
+    'Confirmação: comprovante e cronograma enviados por e-mail',
+    'Próximo passo: retorno em até 24 horas úteis',
+    'Construção: atualizações semanais até a entrega',
+    'Entrega: no ar, testado e com treinamento',
+  ],
+  questions: [],
+  lastModified: '2026-10-05',
+  noIndex: true,
+});
+
 const entries = [...entryMap.values()];
 
 function escapeHtml(value) {
@@ -391,8 +411,13 @@ function prerenderDocument(template, entry) {
   let html = template.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(entry.title)}</title>`);
 
   html = updateMeta(html, 'name', 'description', entry.description);
-  html = updateMeta(html, 'name', 'robots', 'index, follow, max-snippet:-1, max-image-preview:large');
-  html = updateMeta(html, 'name', 'googlebot', 'index, follow, max-snippet:-1, max-image-preview:large');
+  // Página marcada como noIndex no app (App.tsx) precisa dizer o mesmo no HTML
+  // estático — senão o arquivo entregue ao rastreador contradiz a aplicação.
+  const robotsValue = entry.noIndex
+    ? 'noindex, follow'
+    : 'index, follow, max-snippet:-1, max-image-preview:large';
+  html = updateMeta(html, 'name', 'robots', robotsValue);
+  html = updateMeta(html, 'name', 'googlebot', robotsValue);
   html = updateMeta(html, 'name', 'twitter:title', entry.title);
   html = updateMeta(html, 'name', 'twitter:description', entry.description);
   html = updateMeta(html, 'property', 'og:type', entry.category === 'Article' ? 'article' : 'website');
@@ -413,13 +438,14 @@ function prerenderDocument(template, entry) {
 }
 
 async function writeSitemap(target) {
-  const urls = entries
+  const listed = entries.filter((entry) => !entry.noIndex);
+  const urls = listed
     .sort((a, b) => a.path.localeCompare(b.path, 'pt-BR'))
     .map((entry) => `  <url>\n    <loc>${escapeHtml(`${origin}${entry.path}`)}</loc>\n    <lastmod>${entry.lastModified}</lastmod>\n  </url>`)
     .join('\n');
 
   await writeFile(target, `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
-  return entries.length;
+  return listed.length;
 }
 
 if (updateSource) {

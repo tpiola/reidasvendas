@@ -766,11 +766,14 @@ export const GROWTH_SEO: SeoEntry[] = [
   // caía no fallback e nascia com noindex, nofollow.
   {
     path: '/planos',
-    title: 'Preços: site, loja e assinatura mensal | Rei das Vendas',
-    description: 'Quanto custa um site profissional, uma loja ou catálogo, e a assinatura mensal de operação e crescimento. Preço na página, escopo por escrito, sem orçamento escondido.',
+    title: 'Preços: triagem de conversão, site, loja e assinatura | Rei das Vendas',
+    description: 'Triagem clínica remunerada, setup de infraestrutura ancorado no ROI e otimização contínua — mais a tabela de execução (site, loja e assinatura) com preço e prazo publicados. Sem orçamento escondido.',
     category: 'WebPage',
-    headings: ['Serviço uma vez', 'Assinatura mensal', 'O que você leva junto com o preço', 'As perguntas que todo mundo faz antes de pagar'],
-    questions: [],
+    headings: ['Engenharia de conversão: Triagem Clínica, Setup e Otimização contínua', 'Execução: serviço uma vez', 'Assinatura mensal', 'O que você leva junto com o preço', 'As perguntas que todo mundo faz antes de pagar'],
+    questions: [
+      { question: 'Por que a triagem é paga?', answer: 'Porque diagnóstico de graça é orçamento disfarçado: existe para vender o que já foi decidido, não para medir o que está errado. A triagem é auditoria remunerada, com laudo de 12 pontos em 5 dias úteis, e o valor é creditado integralmente no Setup se você aprovar a execução.' },
+      { question: 'As duas tabelas convivem? Qual é a diferença entre elas?', answer: 'Convivem. A esteira de engenharia (Triagem, Setup e Otimização contínua) é para quem tem tráfego chegando e venda que não fecha: começa medindo o vazamento. A tabela de execução é para quem já sabe o que precisa — página de campanha, site profissional ou loja — e quer preço e prazo publicados, sem passar pela triagem.' },
+    ],
   },
   {
     path: '/black-friday',
