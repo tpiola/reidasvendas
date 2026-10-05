@@ -67,6 +67,18 @@ describe('Diagnostico', () => {
     fireEvent.change(screen.getByLabelText('Principal objetivo comercial'), {
       target: { value: 'mais-contatos' },
     });
+    fireEvent.change(screen.getByLabelText('Faturamento mensal aproximado'), {
+      target: { value: '30k-100k' },
+    });
+    fireEvent.change(screen.getByLabelText(/Sessões mensais de tráfego próprio/), {
+      target: { value: '500-2k' },
+    });
+    fireEvent.change(screen.getByLabelText('Quem decide sobre investimento em aquisição'), {
+      target: { value: 'eu' },
+    });
+    fireEvent.change(screen.getByLabelText('O que motivou a busca agora'), {
+      target: { value: 'concorrente' },
+    });
     fireEvent.click(screen.getByRole('button', { name: 'Continuar' }));
 
     await waitFor(() => {
@@ -88,6 +100,10 @@ describe('Diagnostico', () => {
     fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Pessoa de teste' } });
     fireEvent.change(screen.getByLabelText('Qual é o seu negócio?'), { target: { value: 'servico-local' } });
     fireEvent.change(screen.getByLabelText('Principal objetivo comercial'), { target: { value: 'mais-contatos' } });
+    fireEvent.change(screen.getByLabelText('Faturamento mensal aproximado'), { target: { value: '100k-500k' } });
+    fireEvent.change(screen.getByLabelText(/Sessões mensais de tráfego próprio/), { target: { value: '2k-10k' } });
+    fireEvent.change(screen.getByLabelText('Quem decide sobre investimento em aquisição'), { target: { value: 'eu-socio' } });
+    fireEvent.change(screen.getByLabelText('O que motivou a busca agora'), { target: { value: 'queda-vendas' } });
     fireEvent.click(screen.getByRole('button', { name: 'Continuar' }));
     fireEvent.change(screen.getByLabelText('WhatsApp para retorno'), { target: { value: '16999999999' } });
     fireEvent.click(screen.getByRole('checkbox'));

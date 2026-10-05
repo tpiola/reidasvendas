@@ -6,8 +6,15 @@ import { SwapLink } from '@/components/SwapLink';
 import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
-import { BRAND } from '@/lib/brand';
-import { HOME_FAQS } from '@/lib/home-content';
+import {
+  HOME_FAQS,
+  LAUDOS,
+  MEDICAO_REALIZADA_EM,
+  PATOLOGIAS,
+  PROTOCOLO,
+  TRADE_OFF,
+} from '@/lib/conversao';
+import { ESTEIRA_RESUMO, PILARES } from '@/lib/esteira';
 import {
   ACQUISITION_CHANNELS,
   DELIVERY_MODELS,
@@ -79,15 +86,88 @@ export default function Home() {
     <main id="main-content" className="rdv-platform rdv-studio">
       <Hero />
 
+      {/* PATOLOGIA — o que a triagem mede, com o custo de cada vazamento em CAC. */}
+      <section className="rdv-method-v3" aria-labelledby="patologia-title">
+        <div className="rdv-shell rdv-method-v3__grid">
+          <div>
+            <header>
+              <p className="rdv-kicker">Patologia de funil</p>
+              <h2 id="patologia-title">Quatro vazamentos consomem o orçamento que já foi aprovado.</h2>
+              <p>Nenhum deles aparece no relatório de vaidade. Todos aparecem no custo por cliente adquirido.</p>
+            </header>
+          </div>
+          <motion.ol
+            variants={staggerContainer}
+            initial={shouldReduceMotion ? false : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+          >
+            {PATOLOGIAS.map((item) => (
+              <motion.li key={item.titulo} variants={staggerItem}>
+                <span>{item.ordem}</span>
+                <div>
+                  <h3>{item.titulo}</h3>
+                  <p>{item.doenca}</p>
+                  <p><strong>Custo:</strong> {item.custo}</p>
+                  <p><strong>Princípio ativo:</strong> {item.mecanismo}</p>
+                </div>
+              </motion.li>
+            ))}
+          </motion.ol>
+        </div>
+      </section>
+
+      {/* PROTOCOLO — as 12 verificações e o instrumento de cada uma. */}
+      <section id="protocolo" className="rdv-shell scroll-mt-28 py-20 sm:py-28" aria-labelledby="protocolo-title">
+        <header className="max-w-3xl">
+          <p className="rdv-kicker">Protocolo de auditoria</p>
+          <h2 id="protocolo-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-text-primary sm:text-5xl">
+            Doze verificações. Cada uma com o instrumento que a mede.
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-text-secondary sm:text-lg">
+            A triagem segue esta ordem porque a leitura barata vem primeiro: rastreio antes de mídia, medição antes de
+            opinião. O laudo entrega a fila priorizada por impacto e esforço.
+          </p>
+        </header>
+
+        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] sm:grid-cols-2 lg:grid-cols-3">
+          {PROTOCOLO.map(([titulo, detalhe], index) => (
+            <li key={titulo} className="bg-black/20 p-6">
+              <span className="font-serif text-sm text-gold" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <h3 className="mt-2 font-serif text-lg font-bold text-text-primary">{titulo}</h3>
+              <p className="mt-2 text-sm leading-6 text-text-secondary">{detalhe}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Link
+            className="rdv-primary-action"
+            to="/diagnostico?origem=home-protocolo&estagio=triagem"
+            onClick={() => trackEvent('diagnostic_start', { position: 'home-protocolo', stage: 'triagem' })}
+          >
+            Solicitar triagem clínica <ArrowRight aria-hidden="true" />
+          </Link>
+          <SwapLink to="/solucoes" swapLabel="Abrir o catálogo de soluções">
+            Ver o que pode ser construído
+          </SwapLink>
+        </div>
+      </section>
+
+      {/* LAUDOS — a prova publicada, com o que foi medido de fato. */}
       <section className="rdv-proof-v3" aria-labelledby="proof-title">
         <div className="rdv-shell">
           <div>
             <header className="rdv-proof-v3__header">
               <div>
-                <p className="rdv-kicker">Projetos publicados</p>
-                <h2 id="proof-title">Design que sai da tela. <em className="rdv-accent-serif">E entra em operação.</em></h2>
+                <p className="rdv-kicker">Laudos publicados</p>
+                <h2 id="proof-title">Métrica de vaidade morre. <em className="rdv-accent-serif">Métrica de negócio fica.</em></h2>
               </div>
-              <p>Conheça os sites em funcionamento, veja o que foi entregue e compare com a necessidade do seu negócio.</p>
+              <p>
+                Cada laudo abaixo foi medido por auditoria direta nas páginas em produção em {MEDICAO_REALIZADA_EM}.
+                Onde ainda não existe instrumentação instalada, está escrito: nenhum resultado de negócio é afirmado
+                sem medição.
+              </p>
             </header>
           </div>
 
@@ -138,8 +218,34 @@ export default function Home() {
             ))}
           </div>
 
+          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] lg:grid-cols-3">
+            {LAUDOS.map((laudo) => (
+              <article key={laudo.projeto} className="bg-black/20 p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{laudo.metadata}</p>
+                <h3 className="mt-3 font-serif text-2xl font-bold text-text-primary">{laudo.projeto}</h3>
+                <p className="mt-4 text-sm leading-6 text-text-secondary">
+                  <strong className="text-text-primary">Métrica de vaidade morta:</strong> {laudo.vaidade}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-text-secondary">
+                  <strong className="text-text-primary">Métrica de negócio salva:</strong> {laudo.negocio}
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {laudo.medido.map((linha) => (
+                    <li key={linha} className="flex gap-2 text-sm leading-6 text-text-muted">
+                      <span aria-hidden="true" className="text-gold">·</span>
+                      {linha}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-text-muted">{laudo.depois}</p>
+              </article>
+            ))}
+          </div>
+
           <div className="rdv-proof-v3__actions">
-            <Link className="rdv-primary-action" to="/diagnostico?origem=home-projetos" onClick={() => trackEvent('diagnostic_start', { position: 'home-projetos' })}>Quero um projeto para meu negócio <ArrowRight aria-hidden="true" /></Link>
+            <Link className="rdv-primary-action" to="/diagnostico?origem=home-projetos&estagio=triagem" onClick={() => trackEvent('diagnostic_start', { position: 'home-projetos', stage: 'triagem' })}>
+              Quero a triagem do meu funil <ArrowRight aria-hidden="true" />
+            </Link>
             <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
               Ver projetos reais
             </SwapLink>
@@ -149,7 +255,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
 
       <section className="rdv-platform-intro" aria-labelledby="platform-intro-title">
         <div className="rdv-shell rdv-platform-intro__grid">
@@ -291,40 +396,119 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="rdv-home-faq" aria-labelledby="faq-title">
-        <div className="rdv-shell">
-          <p className="rdv-kicker">Antes de decidir</p>
-          <h2 id="faq-title">O que você precisa saber para começar.</h2>
-          {HOME_FAQS.map((item) => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
-          <Link className="rdv-text-action" to="/planos">Compare os preços e as entregas <ArrowRight aria-hidden="true" /></Link>
+      {/* ESTEIRA — a escada de contratação, com o preço ancorado em resultado. */}
+      <section id="triagem-paga" className="rdv-shell scroll-mt-28 py-20 sm:py-28" aria-labelledby="esteira-title">
+        <header className="max-w-3xl">
+          <p className="rdv-kicker">Esteira de contratação</p>
+          <h2 id="esteira-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-text-primary sm:text-5xl">
+            O preço é ancorado no retorno. Não em hora, não em quantidade de página.
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-text-secondary sm:text-lg">
+            Três pilares, nesta ordem: primeiro se mede, depois se constrói, depois se otimiza com dado. Não existe
+            atalho entre eles, e nada é cobrado por quantidade de tela entregue.
+          </p>
+          <p className="mt-4 text-sm leading-6 text-text-muted">{ESTEIRA_RESUMO}</p>
+        </header>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          {PILARES.map((pilar) => (
+            <article key={pilar.id} className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-7">
+              <span className="font-serif text-sm text-gold" aria-hidden="true">{pilar.ordem}</span>
+              <h3 className="mt-2 font-serif text-2xl font-bold text-text-primary">{pilar.nome}</h3>
+              <p className="mt-3 font-serif text-xl font-bold text-gold-light">{pilar.faixa}</p>
+              <p className="mt-3 text-sm leading-6 text-text-secondary">{pilar.resumo}</p>
+              <ul className="mt-5 space-y-2">
+                {pilar.escopo.map((linha) => (
+                  <li key={linha} className="flex gap-2 text-sm leading-6 text-text-secondary">
+                    <span aria-hidden="true" className="text-gold">·</span>
+                    {linha}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs leading-5 text-text-muted">Prazo: {pilar.prazo}</p>
+              <p className="mt-3 border-t border-white/10 pt-4 text-sm leading-6 text-text-primary">{pilar.ancoragem}</p>
+              <p className="mt-4 text-xs leading-5 text-text-muted">{pilar.funcao}</p>
+              <Link
+                className="rdv-primary-action mt-6 self-start"
+                to={`/diagnostico?origem=home-esteira-${pilar.id}&estagio=triagem`}
+                onClick={() => trackEvent('diagnostic_start', { position: `home-esteira-${pilar.id}`, stage: 'triagem' })}
+              >
+                Solicitar triagem <ArrowRight aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
+        </div>
+
+        {/* Quebra de objeção do diagnóstico remunerado — a fonte também alimenta o HTML pré-renderizado. */}
+        <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] p-7 sm:p-10">
+          <h3 className="font-serif text-2xl font-bold text-text-primary">Por que o diagnóstico é pago</h3>
+          <dl className="mt-6 grid gap-6 sm:grid-cols-2">
+            {HOME_FAQS.map((item) => (
+              <div key={item.question}>
+                <dt className="text-sm font-semibold text-text-primary">{item.question}</dt>
+                <dd className="mt-2 text-sm leading-6 text-text-secondary">{item.answer}</dd>
+              </div>
+            ))}
+          </dl>
+          <Link className="rdv-text-action mt-8 inline-flex" to="/planos">
+            Ver a esteira completa com escopo e prazo <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      {/* LIMITE DE ESCOPO — quem não se reconhece aqui não deve contratar. */}
+      <section className="rdv-method-v3" aria-labelledby="tradeoff-title">
+        <div className="rdv-shell rdv-method-v3__grid">
+          <div>
+            <header>
+              <p className="rdv-kicker">Limite de escopo</p>
+              <h2 id="tradeoff-title">Quatro perfis não são clientes desta casa.</h2>
+              <p>Recusar trabalho é parte do método: escopo errado produz entrega bonita e resultado nenhum.</p>
+            </header>
+          </div>
+          <motion.ol
+            variants={staggerContainer}
+            initial={shouldReduceMotion ? false : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+          >
+            {TRADE_OFF.map((item) => (
+              <motion.li key={item.titulo} variants={staggerItem}>
+                <span>{item.ordem}</span>
+                <div><h3>{item.titulo}</h3><p>{item.detalhe}</p></div>
+              </motion.li>
+            ))}
+          </motion.ol>
         </div>
       </section>
 
       <section className="rdv-closing-v3" aria-labelledby="closing-title">
-
         <div className="rdv-shell rdv-closing-v3__content">
           <div>
             <p className="rdv-kicker">O primeiro movimento</p>
-            <h2 id="closing-title">Mostre seu negócio. <em className="rdv-accent-serif">A gente devolve uma direção</em>.</h2>
-            <p>O diagnóstico registra objetivo, gargalo e prioridade antes de abrir o WhatsApp. Sem proposta genérica e sem compromisso automático.</p>
+            <h2 id="closing-title">Antes de construir, <em className="rdv-accent-serif">meça o vazamento</em>.</h2>
+            <p>
+              A triagem registra objetivo, gargalo e prioridade em números. Nenhuma conversa comercial começa antes de
+              o laudo existir.
+            </p>
           </div>
           <div className="rdv-closing-v3__actions">
             <div>
               <Link
                 className="rdv-primary-action"
-                to="/diagnostico?origem=home-final"
-                onClick={() => trackEvent('diagnostic_start', { position: 'home-final' })}
+                to="/diagnostico?origem=home-final&estagio=triagem"
+                onClick={() => trackEvent('diagnostic_start', { position: 'home-final', stage: 'triagem' })}
               >
-                Mapear meu negócio <ArrowRight aria-hidden="true" />
+                Solicitar triagem clínica <ArrowRight aria-hidden="true" />
               </Link>
-              <a className="rdv-whatsapp-action" href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_click', { position: 'home-final' })}>
-                WhatsApp · {BRAND.phoneDisplay}
-              </a>
+              <Link className="rdv-text-action" to="/planos">
+                Ver esteira, escopo e prazos
+              </Link>
             </div>
           </div>
           <div>
             <p className="rdv-closing-v3__footnote">
-              O próximo passo do seu negócio começa com uma conversa — não com um formulário frio.
+              Quatro triagens por mês. O laudo é seu, creditado integralmente no Setup se você aprovar a execução.
             </p>
           </div>
         </div>
