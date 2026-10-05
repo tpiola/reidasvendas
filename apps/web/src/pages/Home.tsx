@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '@/components/Hero';
+import ConversionJourney from '@/components/ConversionJourney';
 import { SwapLink } from '@/components/SwapLink';
 import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
@@ -255,6 +256,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ConversionJourney />
 
       <section className="rdv-platform-intro" aria-labelledby="platform-intro-title">
         <div className="rdv-shell rdv-platform-intro__grid">
