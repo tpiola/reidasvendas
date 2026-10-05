@@ -3,9 +3,9 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /seu próximo cliente precisa encontrar você/i })).toBeVisible();
-  await expect(page.locator('.rdv-studio-hero').getByRole('link', { name: /mapear meu negócio/i })).toHaveAttribute('href', '/diagnostico?origem=home-hero');
-  await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
+  await expect(page.getByRole('heading', { level: 1, name: /você não perde venda por falta de tráfego/i })).toBeVisible();
+  await expect(page.locator('.rdv-studio-hero').getByRole('link', { name: /solicitar triagem clínica/i })).toHaveAttribute('href', '/diagnostico?origem=home-hero&estagio=triagem');
+  await expect(page.getByRole('link', { name: /ver o protocolo de auditoria/i }).first()).toHaveAttribute('href', '#protocolo');
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
 });
