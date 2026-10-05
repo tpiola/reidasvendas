@@ -451,7 +451,7 @@ export default function Home() {
             ))}
           </dl>
           <Link className="rdv-text-action mt-8 inline-flex" to="/planos">
-            Ver a esteira completa com escopo e prazo <ArrowRight aria-hidden="true" />
+            Ver a tabela de execução vigente (implantação e assinatura) <ArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
