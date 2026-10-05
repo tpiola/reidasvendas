@@ -5,6 +5,7 @@ import { Reveal, SectionLabel } from '@/hooks/useAnimation';
 import { BRAND } from '@/lib/brand';
 import { captureAttribution, trackEvent } from '@/lib/analytics';
 import { SOLUTIONS } from '@/lib/growth';
+import { selectedOffer } from '@/lib/ofertas';
 
 type FormData = {
   nome: string;
@@ -47,11 +48,12 @@ const trustItems = [
 
 export default function Diagnostico() {
   const [searchParams] = useSearchParams();
+  const oferta = selectedOffer(searchParams.get('plano'), searchParams.get('cobranca'), searchParams.get('campanha'));
   const [etapa, setEtapa] = useState<1 | 2>(1);
   const [dados, setDados] = useState<FormData>(() => ({
     ...initialData,
     email: searchParams.get('email')?.trim().toLowerCase() || '',
-    solucao: searchParams.get('solucao') || '',
+    solucao: oferta?.service || searchParams.get('solucao') || '',
   }));
   const [sucesso, setSucesso] = useState(false);
   const [entrega, setEntrega] = useState<DeliveryMode>('webhook');
@@ -68,9 +70,10 @@ export default function Diagnostico() {
   );
 
   const whatsappMessage = [
-    'Olá! Acabei de concluir o mapeamento do perfil do seu negócio.',
+    'Olá! Quero conversar sobre o meu projeto digital.',
     `Nome: ${dados.nome}.`,
-    `E-mail: ${dados.email}.`,
+    ...(dados.email ? [`E-mail: ${dados.email}.`] : []),
+    ...(oferta ? [`Plano: ${oferta.label} — ${oferta.price} (${oferta.billing}${oferta.campaign ? '; campanha Black Friday' : ''}).`] : []),
     `WhatsApp para retorno: ${dados.whatsapp}.`,
     `Negócio: ${dados.segmento}.`,
     `Necessidade: ${dados.solucao || 'A definir na conversa'}.`,
@@ -86,7 +89,7 @@ export default function Diagnostico() {
 
   useEffect(() => {
     const email = searchParams.get('email')?.trim().toLowerCase() || '';
-    const solucao = searchParams.get('solucao') || '';
+    const solucao = selectedOffer(searchParams.get('plano'), searchParams.get('cobranca'))?.service || searchParams.get('solucao') || '';
 
     if (!email && !solucao) return;
 
@@ -182,6 +185,10 @@ export default function Diagnostico() {
           ramo: dados.segmento,
           source: 'diagnostico',
           origem: 'diagnostico',
+          origin: searchParams.get('origem') || 'direto',
+          plan: oferta?.id,
+          billing: oferta?.billing,
+          campaign: oferta?.campaign,
           message: mensagem,
           mensagem,
           service: dados.solucao,
@@ -196,15 +203,16 @@ export default function Diagnostico() {
 
       if (!response.ok) throw new Error('lead_delivery_failed');
       const body = await response.json().catch(() => ({}));
-      if (body.ok === false) throw new Error('lead_delivery_failed');
+      if (body.ok !== true || !['webhook', 'whatsapp_handoff'].includes(body.delivery)) throw new Error('lead_delivery_failed');
 
       const delivery: DeliveryMode = body.delivery === 'whatsapp_handoff' ? 'whatsapp_handoff' : 'webhook';
       setEntrega(delivery);
       trackEvent('form_submit', { form: 'diagnostico', service: dados.solucao, investment: dados.investimento, segment: dados.segmento, delivery });
+      trackEvent(delivery === 'webhook' ? 'generate_lead' : 'lead_prepared', { form: 'diagnostico', service: dados.solucao, plan: oferta?.id, billing: oferta?.billing, delivery });
       setSucesso(true);
       trackEvent('thank_you_view', { service: dados.solucao, delivery });
     } catch {
-      setErro('Não foi possível registrar o diagnóstico agora. Revise sua conexão e tente novamente.');
+      setErro('Não foi possível enviar agora. Seus dados continuam aqui: tente novamente ou envie o contexto pelo WhatsApp.');
       trackEvent('form_error', { form: 'diagnostico', service: dados.solucao });
     } finally {
       setEnviando(false);
@@ -225,6 +233,8 @@ export default function Diagnostico() {
               Esta etapa é um contato inicial; um diagnóstico aprofundado, se necessário, terá escopo e valor apresentados antes da contratação.
             </p>
           </Reveal>
+
+          {oferta ? <p className="rdv-offer-context" role="status">Sua escolha: <strong>{oferta.label} · {oferta.price}</strong> · {oferta.billing === 'implantacao' ? 'Implantação' : `Assinatura ${oferta.billing}`}. O escopo será confirmado antes da contratação.</p> : null}
 
           <div className="rdv-diagnostic__grid">
             <Reveal>
@@ -339,13 +349,12 @@ export default function Diagnostico() {
                             <input id="whatsapp" name="whatsapp" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} value={dados.whatsapp} onChange={(event) => updateField('whatsapp', event.target.value)} placeholder="(16) 99999-9999" className={inputClass} />
                           </div>
                           <div>
-                            <label htmlFor="email" className={labelClass}>E-mail</label>
+                            <label htmlFor="email" className={labelClass}>E-mail (opcional)</label>
                             <input
                               id="email"
                               name="email"
                               type="email"
                               autoComplete="email"
-                              required
                               value={dados.email}
                               onChange={(event) => updateField('email', event.target.value)}
                               placeholder="voce@empresa.com.br"
@@ -397,7 +406,7 @@ export default function Diagnostico() {
                           </details>
                           <label className="flex items-start gap-3 text-xs leading-5 text-text-secondary"><input type="checkbox" required checked={dados.consentimento} onChange={(event) => updateField('consentimento', event.target.checked)} className="mt-1 accent-gold" />Autorizo o uso destas informações exclusivamente para análise e retorno sobre esta solicitação.</label>
                           <div className="rdv-form-message">
-                            {erro ? <p role="alert">{erro}</p> : null}
+                            {erro ? <><p role="alert">{erro}</p><a href={contextualWhatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent('whatsapp_open', { origin: 'diagnostico-fallback', plan: oferta?.id })}>Enviar contexto pelo WhatsApp</a></> : null}
                           </div>
                           <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
                             <button

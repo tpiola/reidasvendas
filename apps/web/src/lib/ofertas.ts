@@ -16,6 +16,8 @@ export const brl = (valor: number) =>
   valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 0 });
 
 export interface ItemOferta {
+  id: string;
+  solucao: string;
   nome: string;
   /** null = sob diagnóstico (não escondemos tudo atrás de "fale conosco") */
   valor: number | null;
@@ -29,6 +31,8 @@ export interface ItemOferta {
 /** Implantação: serviço entregue uma vez, com escopo fechado. */
 export const IMPLANTACAO: ItemOferta[] = [
   {
+    id: 'pagina-campanha',
+    solucao: 'landing-page',
     nome: 'Página de campanha',
     valor: 1497,
     selo: 'Começa aqui',
@@ -42,6 +46,8 @@ export const IMPLANTACAO: ItemOferta[] = [
     prazo: '5 dias úteis após o material do negócio',
   },
   {
+    id: 'site-profissional',
+    solucao: 'site-institucional-premium',
     nome: 'Site profissional',
     valor: 3297,
     destaque: true,
@@ -57,6 +63,8 @@ export const IMPLANTACAO: ItemOferta[] = [
     prazo: '12 dias úteis após o material do negócio',
   },
   {
+    id: 'loja-catalogo',
+    solucao: 'ecommerce-profissional',
     nome: 'Loja ou catálogo com pedido',
     valor: 5497,
     resumo: 'Para quem vende produto e perde venda no "manda no direct?". Catálogo organizado com pedido que chega fechado.',
@@ -70,6 +78,8 @@ export const IMPLANTACAO: ItemOferta[] = [
     prazo: '20 dias úteis após catálogo e fotos',
   },
   {
+    id: 'sob-medida',
+    solucao: 'sistema-sob-medida',
     nome: 'Sob medida',
     valor: null,
     resumo: 'Aplicativo, sistema interno, portal ou integração que o seu negócio já precisa e nenhum pacote cobre.',
@@ -84,6 +94,8 @@ export const IMPLANTACAO: ItemOferta[] = [
 ];
 
 export interface ItemAssinatura {
+  id: string;
+  solucao: string;
   nome: string;
   mensal: number;
   resumo: string;
@@ -95,6 +107,8 @@ export interface ItemAssinatura {
 /** Assinatura: mensalidade, sem fidelidade. Anual = 10 mensalidades. */
 export const ASSINATURA: ItemAssinatura[] = [
   {
+    id: 'base',
+    solucao: 'operacao-digital',
     nome: 'Base',
     mensal: 297,
     resumo: 'O seu site no ar, rápido, seguro e com alguém responsável por isso.',
@@ -106,6 +120,8 @@ export const ASSINATURA: ItemAssinatura[] = [
     ],
   },
   {
+    id: 'crescimento',
+    solucao: 'seo-local-google-business',
     nome: 'Crescimento',
     mensal: 697,
     destaque: true,
@@ -120,6 +136,8 @@ export const ASSINATURA: ItemAssinatura[] = [
     ],
   },
   {
+    id: 'capilaridade',
+    solucao: 'distribuicao-multicanal',
     nome: 'Capilaridade',
     mensal: 1297,
     resumo: 'Para quem já tem site e atendimento e quer disputar espaço em mais de um canal.',
@@ -135,6 +153,19 @@ export const ASSINATURA: ItemAssinatura[] = [
 
 /** Anual: paga 10, usa 12 (dois meses grátis). */
 export const MESES_ANUAIS = 10;
+
+/** Resolve apenas ofertas publicadas; parâmetros desconhecidos não viram oferta. */
+export function selectedOffer(id: string | null, billing: string | null, campaign?: string | null) {
+  const project = IMPLANTACAO.find((item) => item.id === id);
+  if (project) {
+    const promotion = campaign === 'black-friday' && Date.now() < new Date(BLACK_FRIDAY.fim).getTime();
+    return { id: project.id, label: project.nome, service: project.solucao, billing: 'implantacao', campaign: promotion ? 'black-friday' : undefined, price: project.valor === null ? 'Sob diagnóstico' : brl(promotion ? precoComDesconto(project.valor) : project.valor) };
+  }
+  const subscription = ASSINATURA.find((item) => item.id === id);
+  if (!subscription) return undefined;
+  const annual = billing === 'anual';
+  return { id: subscription.id, label: subscription.nome, service: subscription.solucao, campaign: undefined, billing: annual ? 'anual' : 'mensal', price: annual ? `${brl(subscription.mensal * MESES_ANUAIS)}/ano` : `${brl(subscription.mensal)}/mês` };
+}
 
 export interface BlackFriday {
   /** Data real da Black Friday 2026 — 4ª quinta de novembro + 1 dia. */

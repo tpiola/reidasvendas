@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 import { ARTICLE_BY_SLUG } from '@/lib/articles';
 import { trackEvent } from '@/lib/analytics';
+import { BRAND } from '@/lib/brand';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -25,6 +26,7 @@ export default function BlogPost() {
         <div className="rdv-shell">
           <Link className="rdv-article__back" to="/blog"><ArrowLeft aria-hidden="true" /> Caderno de operação</Link>
           <p className="rdv-kicker">{article.category} · {article.displayDate} · {article.readTime}</p>
+          <p className="rdv-article__byline">Por <Link to="/sobre">{BRAND.founder.name}</Link> · {BRAND.founder.title}</p>
           <h1>{article.title}</h1>
           <p>{article.description}</p>
         </div>

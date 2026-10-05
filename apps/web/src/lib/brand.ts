@@ -20,7 +20,7 @@ export const BRAND = {
     og: '/imagens/og-default.jpg',
   },
   seo: {
-    title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
+    title: 'Sites e automações em Franca, SP | Rei das Vendas',
     description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
     keywords: [
       'site profissional Franca SP',

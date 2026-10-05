@@ -126,6 +126,8 @@ export default function Hero() {
               {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
             </Link>
           </div>
+          <p className="rdv-studio-hero__assurance">{t('hero.premium.assurance')}</p>
+          <Link className="rdv-studio-hero__pricing" to="/planos">{t('hero.premium.pricing')}</Link>
         </motion.div>
 
         <div className="rdv-studio-hero__art">

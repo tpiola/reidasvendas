@@ -55,6 +55,10 @@ for (const url of urls) {
   assert(/<html[^>]+data-theme=["']dark["']/i.test(html), `Tema inicial não é dark: ${pathname}`);
   assert(/<title>[^<]+<\/title>/i.test(html), `Title ausente: ${pathname}`);
   assert(html.includes(`<link rel="canonical" href="${url}"`), `Canonical divergente: ${pathname}`);
+  for (const language of ['pt-BR', 'x-default']) {
+    assert(html.includes(`hreflang="${language}" href="${url}"`), `Hreflang divergente: ${pathname} (${language})`);
+  }
+  assert((html.match(/<h1\b/gi) || []).length === 1, `Cada página precisa de um H1: ${pathname}`);
   if (pathname === '/') {
     // Home: SPA — o conteúdo real é renderizado pelo React. O HTML inicial carrega
     // SEO no <head> (title/description/JSON-LD) + boot loader de marca + fallback

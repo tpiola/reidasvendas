@@ -74,7 +74,8 @@ describe('Diagnostico', () => {
     });
     expect(screen.getByLabelText('Conte mais sobre o problema (opcional)')).not.toBeRequired();
     expect(screen.getByLabelText('Faixa de investimento (opcional)')).not.toBeRequired();
-    expect(await screen.findByLabelText('E-mail')).toHaveValue('comercial@exemplo.com');
+    expect(await screen.findByLabelText('E-mail (opcional)')).toHaveValue('comercial@exemplo.com');
+    expect(screen.getByLabelText('E-mail (opcional)')).not.toBeRequired();
   });
   it('envia apenas os campos essenciais e mantém o handoff explícito', async () => {
     const fetchMock = vi.fn().mockResolvedValue({
@@ -82,18 +83,18 @@ describe('Diagnostico', () => {
       json: async () => ({ ok: true, delivery: 'whatsapp_handoff' }),
     });
     vi.stubGlobal('fetch', fetchMock);
-    render(<MemoryRouter><Diagnostico /></MemoryRouter>);
+    render(<MemoryRouter initialEntries={['/diagnostico?plano=crescimento&cobranca=anual&origem=planos']}><Diagnostico /></MemoryRouter>);
+    expect(screen.getByText(/Sua escolha:/)).toHaveTextContent('Crescimento · R$ 6.970/ano');
     fireEvent.change(screen.getByLabelText('Nome'), { target: { value: 'Pessoa de teste' } });
     fireEvent.change(screen.getByLabelText('Qual é o seu negócio?'), { target: { value: 'servico-local' } });
     fireEvent.change(screen.getByLabelText('Principal objetivo comercial'), { target: { value: 'mais-contatos' } });
     fireEvent.click(screen.getByRole('button', { name: 'Continuar' }));
     fireEvent.change(screen.getByLabelText('WhatsApp para retorno'), { target: { value: '16999999999' } });
-    fireEvent.change(screen.getByLabelText('E-mail'), { target: { value: 'teste@example.com' } });
     fireEvent.click(screen.getByRole('checkbox'));
     fireEvent.click(screen.getByRole('button', { name: 'Registrar meu diagnóstico' }));
     expect(await screen.findByText('Diagnóstico preparado para envio')).toBeInTheDocument();
     const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
-    expect(payload).toMatchObject({ name: 'Pessoa de teste', email: 'teste@example.com', consent: true, service: '', investment: '' });
+    expect(payload).toMatchObject({ name: 'Pessoa de teste', email: '', consent: true, service: 'seo-local-google-business', investment: '', plan: 'crescimento', billing: 'anual', origin: 'planos' });
     expect(payload.message).toContain('Objetivo: mais-contatos');
     expect(screen.getByText(/ainda precisa ser enviado/)).toBeInTheDocument();
     expect(decodeURIComponent(screen.getByRole('link', { name: /Abrir conversa qualificada/ }).getAttribute('href') || '')).toContain('Ainda a definir');

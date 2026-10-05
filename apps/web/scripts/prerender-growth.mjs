@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ARTICLES } from '../src/lib/articles.ts';
+import { HOME_FAQS } from '../src/lib/home-content.ts';
 import {
   GROWTH_SEO,
   SOLUTION_BY_SLUG,
@@ -20,13 +21,13 @@ const updateSource = process.argv.includes('--update-source');
 const staticEntries = [
   {
     path: '/',
-    title: 'Sites e Soluções Digitais Premium | Franca, SP e Brasil',
+    title: 'Sites e automações em Franca, SP | Rei das Vendas',
     description: 'Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.',
-    heading: 'Seu negócio. Em outro nível.',
+    heading: 'Seu próximo cliente precisa encontrar você. E conseguir comprar.',
     category: 'WebPage',
     headings: ['Presença e autoridade', 'Venda e comércio', 'Produtos digitais', 'Operação e distribuição'],
-    questions: [],
-    lastModified: '2026-08-28',
+    questions: HOME_FAQS,
+    lastModified: '2026-10-05',
   },
   {
     path: '/portfolio',
@@ -71,7 +72,7 @@ const staticEntries = [
     category: 'WebPage',
     headings: ['Informações', 'Finalidade', 'Operadores', 'Conservação', 'Medição', 'Seus pedidos'],
     questions: [],
-    lastModified: '2026-08-28',
+    lastModified: '2026-10-05',
   },
   {
     path: '/termos',
@@ -99,7 +100,7 @@ const entryMap = new Map();
 // /planos e /black-friday vêm de GROWTH_SEO (fonte única, lida também pelo App).
 // A data fica aqui porque só estas duas páginas foram publicadas agora; as
 // demais entradas de GROWTH_SEO continuam com a data-base do acervo.
-const DATA_GROWTH = { '/planos': '2026-09-25', '/black-friday': '2026-09-25' };
+const DATA_GROWTH = { '/planos': '2026-10-05', '/diagnostico': '2026-10-05', '/black-friday': '2026-10-05' };
 
 for (const entry of [...staticEntries, ...GROWTH_SEO.map((item) => ({ ...item, lastModified: DATA_GROWTH[item.path] ?? '2026-08-28' })), ...articleEntries]) {
   entryMap.set(entry.path, entry);
@@ -262,6 +263,7 @@ function detailBlocks(entry) {
         .join('')}</ul></section>`)
       .join('');
     blocks.push(`<section><h2>Soluções por segmento</h2>${groups}</section>`);
+    blocks.push(`<section><h2>Antes de decidir</h2>${faqList(HOME_FAQS)}</section>`);
   } else if (path === '/solucoes') {
     const byCategory = new Map();
     for (const item of SOLUTION_BY_SLUG.values()) {
@@ -391,6 +393,7 @@ function prerenderDocument(template, entry) {
   html = updateMeta(html, 'property', 'og:description', entry.description);
   html = updateMeta(html, 'property', 'og:url', url);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*(")/i, `$1${escapeHtml(url)}$2`);
+  html = html.replace(/(<link\s+rel="alternate"\s+hreflang="(?:pt-BR|x-default)"\s+href=")[^"]*(")/gi, `$1${escapeHtml(url)}$2`);
   html = html.replace('</head>', `    <script id="rdv-static-schema" data-path="${escapeHtml(entry.path)}" type="application/ld+json">${structuredData(entry, url)}</script>\n  </head>`);
 
   const rootOpening = '<div id="root">';
@@ -431,13 +434,14 @@ if (updateSource) {
   // O conteúdo entra DENTRO do #root, preservando o boot.
   const homeEntry = entries.find((item) => item.path === '/');
   if (homeEntry) {
-    const homeHtml = template.replace(
+    let homeHtml = template.replace(
       '<div id="root"></div>',
       `<div id="root">${staticContent(homeEntry)}</div>`,
     );
     if (homeHtml === template) {
       throw new Error('Não foi possível injetar o conteúdo inicial na home (div#root não encontrado)');
     }
+    homeHtml = homeHtml.replace('</head>', `<script id="rdv-static-schema" data-path="/" type="application/ld+json">${structuredData(homeEntry, `${origin}/`)}</script></head>`);
     await writeFile(join(distDirectory, 'index.html'), homeHtml);
   }
 

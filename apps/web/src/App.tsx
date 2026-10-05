@@ -233,6 +233,7 @@ function updateCanonical(url: string) {
     document.head.appendChild(canonical);
   }
   canonical.href = url;
+  document.querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]').forEach((link) => { link.href = url; });
 }
 
 function RouteMetadata() {

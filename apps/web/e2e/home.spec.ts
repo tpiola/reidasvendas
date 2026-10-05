@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test';
 test('home apresenta a marca e a jornada principal', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.loading-gold')).toHaveCount(0);
-  await expect(page.getByRole('heading', { level: 1, name: /você cuida do seu negócio/i })).toBeVisible();
-  await expect(page.locator('.rdv-hero__submit')).toHaveAttribute('href', '/diagnostico?origem=home-hero');
+  await expect(page.getByRole('heading', { level: 1, name: /seu próximo cliente precisa encontrar você/i })).toBeVisible();
+  await expect(page.locator('.rdv-studio-hero').getByRole('link', { name: /mapear meu negócio/i })).toHaveAttribute('href', '/diagnostico?origem=home-hero');
   await expect(page.getByRole('link', { name: /ver projetos reais/i }).first()).toHaveAttribute('href', '/portfolio');
   await expect(page.locator('#method-title')).toBeVisible();
   await expect(page.locator('#proof-title')).toBeVisible();
@@ -23,8 +23,8 @@ test('hero leva aos projetos publicados', async ({ page }) => {
     try { localStorage.setItem('reidasvendas:cookie-consent', 'rejected'); } catch { /* ignore blocked storage */ }
   });
   await page.goto('/');
-  await expect(page.locator('.rdv-hero a.rdv-hero__secondary')).toBeVisible();
-  await page.locator('.rdv-hero a.rdv-hero__secondary').click();
+  await expect(page.locator('.rdv-studio-hero').getByRole('link', { name: /ver projetos reais/i })).toBeVisible();
+  await page.locator('.rdv-studio-hero').getByRole('link', { name: /ver projetos reais/i }).click();
   await expect(page).toHaveURL(/\/portfolio/);
 });
 
@@ -101,7 +101,7 @@ test('diagnóstico conclui o encaminhamento honesto pelo WhatsApp quando não ex
   await page.getByRole('button', { name: 'Continuar', exact: true }).click();
 
   await page.getByLabel('WhatsApp para retorno').fill('16999999999');
-  await page.getByLabel('E-mail').fill('teste@example.com');
+  await page.getByLabel('E-mail (opcional)').fill('teste@example.com');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', { name: /registrar meu diagnóstico/i }).click();
 
@@ -122,6 +122,27 @@ test('demonstração comercial permite filtrar e selecionar produtos', async ({ 
   await expect(page.getByText(/1 item selecionado/)).toBeVisible();
 });
 
+test('plano escolhido segue até o contato sem exigir e-mail e mantém contexto se a API falhar', async ({ page }) => {
+  await page.addInitScript(() => localStorage.setItem('reidasvendas:cookie-consent', 'rejected'));
+  await page.route('**/api/lead', (route) => route.fulfill({ status: 502, json: { ok: false } }));
+  await page.goto('/planos');
+  await page.locator('article').filter({ has: page.getByRole('heading', { name: 'Site profissional', exact: true }) }).getByRole('link', { name: /quero este/i }).click();
+  await expect(page).toHaveURL(/plano=site-profissional/);
+  await expect(page.getByText(/Sua escolha:/)).toContainText('Site profissional');
+  await page.getByLabel('Nome').fill('Pessoa de teste');
+  await page.getByLabel('Qual é o seu negócio?').selectOption('servico-local');
+  await page.getByLabel('Principal objetivo comercial').selectOption('mais-contatos');
+  await page.getByRole('button', { name: 'Continuar', exact: true }).click();
+  await expect(page.getByLabel('E-mail (opcional)')).not.toHaveAttribute('required');
+  await page.getByLabel('WhatsApp para retorno').fill('16999999999');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', { name: /registrar meu diagnóstico/i }).click();
+  await expect(page.getByRole('alert')).toContainText('Seus dados continuam aqui');
+  await expect(page.getByLabel('WhatsApp para retorno')).toHaveValue('16999999999');
+  const fallback = page.getByRole('link', { name: /enviar contexto pelo WhatsApp/i });
+  expect(decodeURIComponent(await fallback.getAttribute('href') || '')).toContain('Site profissional');
+});
+
 for (const viewport of [
   { name: 'mobile', width: 360, height: 800 },
   { name: 'tablet', width: 768, height: 1024 },
@@ -130,7 +151,7 @@ for (const viewport of [
   test(`home não cria overflow em ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1, name: /você cuida do seu negócio/i })).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1, name: /seu próximo cliente precisa encontrar você/i })).toBeVisible();
     const horizontalOverflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
     );

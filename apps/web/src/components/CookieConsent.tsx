@@ -10,11 +10,14 @@ export function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const reopen = () => setVisible(true);
+    window.addEventListener('rdv:consent-settings', reopen);
     try {
       if (localStorage.getItem(MEASUREMENT_CONSENT_KEY) === null) setVisible(true);
     } catch {
       setVisible(false);
     }
+    return () => window.removeEventListener('rdv:consent-settings', reopen);
   }, []);
 
   const persist = (value: ConsentValue) => {

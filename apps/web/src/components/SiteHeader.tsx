@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TransitionLink } from '@/components/TransitionLink';
 import { Menu, X } from 'lucide-react';
@@ -13,19 +13,16 @@ function isActivePath(pathname: string, to: string): boolean {
 }
 
 export function SiteHeader() {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = useMemo(
-    () => [
+  const navItems = [
       { label: t('nav.solutions'), to: '/solucoes' },
       { label: t('nav.portfolio'), to: '/portfolio' },
       { label: t('nav.plans'), to: '/planos' },
       { label: t('nav.about'), to: '/sobre' },
-    ],
-    [locale],
-  );
+    ];
 
   useEffect(() => {
     setMenuOpen(false);

@@ -5,6 +5,7 @@
 
 // A função publicada na raiz precisa ser autônoma: apps/web usa ESM e
 // importar seu handler pelo runtime CommonJS da Vercel quebra a execução.
+import { createHash } from 'node:crypto';
 
 type RequestListener = (value?: unknown) => void;
 
@@ -28,7 +29,7 @@ const RATE_LIMIT = 6;
 const IDEMPOTENCY_TTL_MS = 30 * 60 * 1000;
 
 const requestBuckets = new Map<string, number[]>();
-const processedRequests = new Map<string, { expiresAt: number; delivery: 'webhook' | 'whatsapp_handoff' }>();
+const processedRequests = new Map<string, { expiresAt: number; fingerprint: string; delivery: 'webhook' | 'whatsapp_handoff' }>();
 
 function pruneRequestState(now: number) {
   if (requestBuckets.size > 1_000) {
@@ -56,6 +57,10 @@ type LeadPayload = {
   service?: string;
   problem?: string;
   investment?: string;
+  origin?: string;
+  plan?: string;
+  billing?: string;
+  campaign?: string;
   landingPage?: string;
   consent?: boolean;
   utm?: Record<string, string>;
@@ -87,8 +92,9 @@ function requestOriginAllowed(req: Req): boolean {
     const hostname = new URL(origin).hostname.toLowerCase();
     return hostname === 'reidasvendas.com.br'
       || hostname === 'www.reidasvendas.com.br'
-      || hostname === 'localhost'
-      || hostname.endsWith('.vercel.app');
+      || (process.env.NODE_ENV !== 'production' && hostname === 'localhost')
+      || hostname === process.env.VERCEL_URL
+      || /^reidasvendas(?:-[a-z0-9-]+)?\.vercel\.app$/.test(hostname);
   } catch {
     return false;
   }
@@ -110,19 +116,19 @@ function requestAllowedByRate(req: Req): boolean {
   return true;
 }
 
-function getProcessedRequest(key: string): 'webhook' | 'whatsapp_handoff' | undefined {
+function getProcessedRequest(key: string) {
   const record = processedRequests.get(key);
   if (!record) return undefined;
   if (record.expiresAt <= Date.now()) {
     processedRequests.delete(key);
     return undefined;
   }
-  return record.delivery;
+  return record;
 }
 
-function rememberProcessedRequest(key: string, delivery: 'webhook' | 'whatsapp_handoff') {
+function rememberProcessedRequest(key: string, delivery: 'webhook' | 'whatsapp_handoff', fingerprint: string) {
   if (!key) return;
-  processedRequests.set(key, { delivery, expiresAt: Date.now() + IDEMPOTENCY_TTL_MS });
+  processedRequests.set(key, { delivery, fingerprint, expiresAt: Date.now() + IDEMPOTENCY_TTL_MS });
 }
 
 function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok: false; error: string } {
@@ -137,6 +143,10 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
   const service = sanitizeString(input.service, 150) || undefined;
   const problem = sanitizeString(input.problem, 1000) || undefined;
   const investment = sanitizeString(input.investment, 100) || undefined;
+  const origin = sanitizeString(input.origin, 100) || undefined;
+  const plan = sanitizeString(input.plan, 100) || undefined;
+  const billing = sanitizeString(input.billing, 30) || undefined;
+  const campaign = sanitizeString(input.campaign, 50) || undefined;
   const landingPage = sanitizeString(input.landingPage, 300) || undefined;
   const consent = typeof input.consent === 'boolean' ? input.consent : undefined;
   const honeypot = sanitizeString(input.website, 200);
@@ -150,10 +160,11 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
     : undefined;
 
   if (!name) return { ok: false, error: 'name_required' };
-  if (!email) return { ok: false, error: 'email_required' };
-  if (!isEmail(email)) return { ok: false, error: 'invalid_email' };
+  if (email && !isEmail(email)) return { ok: false, error: 'invalid_email' };
   if (!phone) return { ok: false, error: 'phone_required' };
-  if (phone.replace(/\D/g, '').length < 10) return { ok: false, error: 'invalid_phone' };
+  const digits = phone.replace(/\D/g, '');
+  const national = digits.startsWith('55') && digits.length > 11 ? digits.slice(2) : digits;
+  if (!/^[1-9]{2}\d{8,9}$/.test(national)) return { ok: false, error: 'invalid_phone' };
   if (consent !== true) return { ok: false, error: 'consent_required' };
   if (honeypot) return { ok: false, error: 'request_rejected' };
 
@@ -169,6 +180,10 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
       service,
       problem,
       investment,
+      origin,
+      plan,
+      billing,
+      campaign,
       landingPage,
       consent,
       ...(utm && Object.keys(utm).length ? { utm } : {}),
@@ -177,6 +192,7 @@ function parseLeadBody(input: unknown): { ok: true; value: LeadPayload } | { ok:
 }
 
 function json(res: Res, status: number, body: unknown) {
+  res.setHeader?.('Cache-Control', 'no-store');
   if (res.status) {
     res.status(status).json(body);
     return;
@@ -263,7 +279,7 @@ export default async function handler(req: Req, res: Res) {
     }
   }
 
-  if (bodyStr.length > MAX_BODY_BYTES) {
+  if (Buffer.byteLength(bodyStr, 'utf8') > MAX_BODY_BYTES) {
     json(res, 413, { ok: false, error: 'payload_too_large' });
     return;
   }
@@ -283,11 +299,16 @@ export default async function handler(req: Req, res: Res) {
   }
 
   const idempotencyKey = sanitizeString(headerValue(req, 'x-idempotency-key'), 120);
+  const fingerprint = createHash('sha256').update(JSON.stringify(parsed.value)).digest('hex');
   const previousDelivery = idempotencyKey ? getProcessedRequest(idempotencyKey) : undefined;
   if (previousDelivery) {
+    if (previousDelivery.fingerprint !== fingerprint) {
+      json(res, 409, { ok: false, error: 'idempotency_conflict' });
+      return;
+    }
     json(res, 202, {
       ok: true,
-      delivery: previousDelivery,
+      delivery: previousDelivery.delivery,
       duplicate: true,
       message: 'Solicitação já registrada.',
     });
@@ -299,7 +320,7 @@ export default async function handler(req: Req, res: Res) {
   const webhookSecret = process.env.LEAD_WEBHOOK_SECRET || process.env.N8N_API_KEY || '';
 
   if (!n8nUrl) {
-    rememberProcessedRequest(idempotencyKey, 'whatsapp_handoff');
+    rememberProcessedRequest(idempotencyKey, 'whatsapp_handoff', fingerprint);
     json(res, 202, {
       ok: true,
       delivery: 'whatsapp_handoff',
@@ -313,6 +334,7 @@ export default async function handler(req: Req, res: Res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...(idempotencyKey ? { 'X-Idempotency-Key': idempotencyKey } : {}),
         ...(webhookSecret ? { 'Authorization': `Bearer ${webhookSecret}` } : {}),
       },
       body: JSON.stringify(parsed.value),
@@ -325,7 +347,7 @@ export default async function handler(req: Req, res: Res) {
       return;
     }
 
-    rememberProcessedRequest(idempotencyKey, 'webhook');
+    rememberProcessedRequest(idempotencyKey, 'webhook', fingerprint);
     json(res, 202, {
       ok: true,
       delivery: 'webhook',

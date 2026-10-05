@@ -7,6 +7,7 @@ import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
 import { motion, useReducedMotion } from 'framer-motion';
 import { trackEvent } from '@/lib/analytics';
 import { BRAND } from '@/lib/brand';
+import { HOME_FAQS } from '@/lib/home-content';
 import {
   ACQUISITION_CHANNELS,
   DELIVERY_MODELS,
@@ -86,7 +87,7 @@ export default function Home() {
                 <p className="rdv-kicker">Projetos publicados</p>
                 <h2 id="proof-title">Design que sai da tela. <em className="rdv-accent-serif">E entra em operação.</em></h2>
               </div>
-              <p>Cada projeto responde a uma operação diferente. A evidência é o produto publicado, a arquitetura e o que ele realmente organiza.</p>
+              <p>Conheça os sites em funcionamento, veja o que foi entregue e compare com a necessidade do seu negócio.</p>
             </header>
           </div>
 
@@ -138,6 +139,7 @@ export default function Home() {
           </div>
 
           <div className="rdv-proof-v3__actions">
+            <Link className="rdv-primary-action" to="/diagnostico?origem=home-projetos" onClick={() => trackEvent('diagnostic_start', { position: 'home-projetos' })}>Quero um projeto para meu negócio <ArrowRight aria-hidden="true" /></Link>
             <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
               Ver projetos reais
             </SwapLink>
@@ -286,6 +288,15 @@ export default function Home() {
               </motion.li>
             ))}
           </motion.ol>
+        </div>
+      </section>
+
+      <section className="rdv-home-faq" aria-labelledby="faq-title">
+        <div className="rdv-shell">
+          <p className="rdv-kicker">Antes de decidir</p>
+          <h2 id="faq-title">O que você precisa saber para começar.</h2>
+          {HOME_FAQS.map((item) => <details key={item.question}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+          <Link className="rdv-text-action" to="/planos">Compare os preços e as entregas <ArrowRight aria-hidden="true" /></Link>
         </div>
       </section>
 

@@ -98,7 +98,7 @@ export default function BlackFriday() {
             {acabou ? (
               <p>
                 <strong>A campanha terminou.</strong> Os valores voltaram para a tabela de{' '}
-                <Link to="/planos">planos</Link> — mas o diagnóstico continua gratuito.
+                <Link to="/planos">planos</Link> — o contato inicial continua sem compromisso.
               </p>
             ) : contagem ? (
               <>
@@ -159,7 +159,7 @@ export default function BlackFriday() {
                   <p className="rdv-precos__prazo">Prazo: {plano.prazo}.</p>
                   <Link
                     className="rdv-primary-action"
-                    to={`/diagnostico?origem=bf-${plano.nome.toLowerCase().replace(/[^a-z]+/g, '-')}`}
+                    to={`/diagnostico?origem=black-friday&plano=${plano.id}&solucao=${plano.solucao}&campanha=black-friday`}
                     onClick={() => trackEvent('diagnostic_start', { position: 'black-friday-plan', plan: plano.nome })}
                   >
                     Quero com o desconto <ArrowRight aria-hidden="true" />

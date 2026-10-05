@@ -78,12 +78,10 @@ export default function Planos() {
       <header className="rdv-offers__hero">
         <div className="rdv-shell">
           <p className="rdv-kicker">Preço na mesa</p>
-          <h1>Quanto custa o cliente que procura você e encontra o concorrente?</h1>
+          <h1>Seu projeto. Escopo e preço claros.</h1>
           <p>
-            Enquanto essa pessoa digita no celular, ela decide entre os negócios que consegue achar na hora — e quem não tem onde ser encontrado
-            não entra na lista. Abaixo está quanto custa resolver isso, com o que
-            está incluído e em quanto tempo fica pronto. Sem orçamento escondido, sem "a partir de" que vira outro
-            número na proposta.
+            Compare sites, páginas de campanha e lojas. Veja o que está incluído,
+            o prazo de entrega e escolha o próximo passo do seu negócio.
           </p>
           <div className="rdv-offers__hero-actions">
             <Link
@@ -135,7 +133,7 @@ export default function Planos() {
                 <p className="rdv-precos__prazo">Prazo: {plano.prazo}.</p>
                 <Link
                   className="rdv-primary-action"
-                  to={`/diagnostico?origem=plano-${plano.nome.toLowerCase().replace(/[^a-z]+/g, '-')}`}
+                  to={`/diagnostico?origem=planos&plano=${plano.id}&solucao=${plano.solucao}`}
                   onClick={() => trackEvent('diagnostic_start', { position: 'plans-implantacao', plan: plano.nome })}
                 >
                   Quero este <ArrowRight aria-hidden="true" />
@@ -202,7 +200,7 @@ export default function Planos() {
                 <p className="rdv-precos__prazo">Cancela quando quiser. Sem fidelidade.</p>
                 <Link
                   className="rdv-primary-action"
-                  to={`/diagnostico?origem=assinatura-${plano.nome.toLowerCase().replace(/[^a-z]+/g, '-')}`}
+                  to={`/diagnostico?origem=planos&plano=${plano.id}&solucao=${plano.solucao}&cobranca=${anual ? 'anual' : 'mensal'}`}
                   onClick={() => trackEvent('diagnostic_start', { position: 'plans-assinatura', plan: plano.nome })}
                 >
                   Quero este <ArrowRight aria-hidden="true" />

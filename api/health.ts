@@ -10,6 +10,7 @@ type Response = {
 };
 
 function json(res: Response, status: number, body: Record<string, unknown>) {
+  res.setHeader?.('Cache-Control', 'no-store');
   if (res.status) {
     res.status(status).json(body);
     return;
@@ -31,5 +32,6 @@ export default function handler(req: Request, res: Response) {
     ok: true,
     service: 'reidasvendas',
     revision: process.env.VERCEL_GIT_COMMIT_SHA || null,
+    leadDelivery: process.env.LEAD_WEBHOOK_URL || process.env.N8N_WEBHOOK_URL ? 'webhook' : 'whatsapp_handoff',
   });
 }

@@ -5,7 +5,7 @@ import { BRAND } from '@/lib/brand';
 const dataRows = [
   {
     label: 'Diagnóstico',
-    detail: 'Nome, e-mail, WhatsApp, tipo de negócio, necessidade, problema, objetivo, faixa de investimento e o endereço opcional do site ou perfil informado.',
+    detail: 'Nome, e-mail opcional, WhatsApp, tipo de negócio, necessidade, problema, objetivo, faixa de investimento e o endereço opcional do site ou perfil informado.',
   },
   {
     label: 'Origem',
@@ -29,7 +29,7 @@ export default function Politica() {
     <main id="main-content" className="rdv-privacy">
       <section className="rdv-privacy__hero">
         <div className="rdv-shell">
-          <p className="rdv-kicker">Aviso de privacidade / 25 ago. 2026</p>
+          <p className="rdv-kicker">Aviso de privacidade / 5 out. 2026</p>
           <h1>Dados suficientes para responder. Nada além do necessário.</h1>
           <p>
             Este aviso descreve as informações tratadas quando você navega, registra um diagnóstico ou abre
@@ -99,6 +99,7 @@ export default function Politica() {
               A preferência de medição é salva no navegador. Dados de atribuição ficam na sessão. Eventos só são
               enviados a uma ferramenta externa de medição quando ela estiver configurada e você tiver permitido.
             </p>
+            <button className="rdv-form-back" type="button" onClick={() => window.dispatchEvent(new CustomEvent('rdv:consent-settings'))}>Alterar minha preferência de medição</button>
           </article>
         </div>
       </section>

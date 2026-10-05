@@ -7,6 +7,9 @@ import './index.css';
 import './dossier.css';
 import './platform.css';
 import './studio.css';
+import { startMeasurement } from './lib/analytics';
+
+startMeasurement();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
