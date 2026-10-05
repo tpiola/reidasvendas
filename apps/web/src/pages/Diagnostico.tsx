@@ -14,10 +14,6 @@ type FormData = {
   email: string;
   presencaDigital: string;
   objetivo: string;
-  faturamento: string;
-  sessoes: string;
-  decisor: string;
-  prazo: string;
   solucao: string;
   problema: string;
   investimento: string;
@@ -33,10 +29,6 @@ const initialData: FormData = {
   email: '',
   presencaDigital: '',
   objetivo: '',
-  faturamento: '',
-  sessoes: '',
-  decisor: '',
-  prazo: '',
   solucao: '',
   problema: '',
   investimento: '',
@@ -51,7 +43,7 @@ const trustItems = [
   'Análise feita a partir do contexto informado',
   'Foco em prioridades reais',
   'Sem promessa de primeiro lugar no Google',
-  'Triagem remunerada, creditada integralmente no Setup',
+  'Conversa inicial sem compromisso de contratação',
 ];
 
 export default function Diagnostico() {
@@ -168,10 +160,6 @@ export default function Diagnostico() {
     const attribution = captureAttribution();
     const mensagem = [
       `Segmento: ${dados.segmento}`,
-      `Faturamento: ${dados.faturamento}`,
-      `Sessões por mês: ${dados.sessoes}`,
-      `Decisor do investimento: ${dados.decisor}`,
-      `Gatilho e prazo: ${dados.prazo}`,
       `Solução: ${dados.solucao}`,
       `Problema: ${dados.problema}`,
       `Objetivo: ${dados.objetivo || 'Não informado'}`,
@@ -241,9 +229,8 @@ export default function Diagnostico() {
               Conte o que seu negócio precisa.
             </h1>
             <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
-              Informe segmento, faturamento aproximado, tráfego atual e quem decide o investimento. As respostas
-              organizam a triagem clínica: laudo em 5 dias úteis, com escopo e valor apresentados antes de qualquer
-              contratação — e creditados no Setup se você aprovar a execução.
+              Informe seu segmento e objetivo. Depois, deixe seus contatos para preparar a conversa pelo WhatsApp.
+              Esta etapa é um contato inicial; um diagnóstico aprofundado, se necessário, terá escopo e valor apresentados antes da contratação.
             </p>
           </Reveal>
 
@@ -346,50 +333,6 @@ export default function Diagnostico() {
                               <option value="automatizar-atendimento">Automatizar o atendimento</option>
                               <option value="sistema-app">Criar um sistema ou app</option>
                               <option value="nao-sei">Ainda preciso entender</option>
-                            </select>
-                          </div>
-                          {/* Qualificação: as quatro respostas que filtram curiosidade de compromisso
-                              antes de qualquer contato comercial. Média de 2 ou mais aprovadas abre a
-                              agenda de triagem; abaixo disso, a casa devolve ferramenta e não abre conversa. */}
-                          <div>
-                            <label htmlFor="faturamento" className={labelClass}>Faturamento mensal aproximado</label>
-                            <select id="faturamento" name="faturamento" required value={dados.faturamento} onChange={(event) => updateField('faturamento', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione a faixa</option>
-                              <option value="ate-30k">Até R$ 30 mil</option>
-                              <option value="30k-100k">R$ 30 mil a R$ 100 mil</option>
-                              <option value="100k-500k">R$ 100 mil a R$ 500 mil</option>
-                              <option value="acima-500k">Acima de R$ 500 mil</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="sessoes" className={labelClass}>Sessões mensais de tráfego próprio (Google, anúncio, Instagram)</label>
-                            <select id="sessoes" name="sessoes" required value={dados.sessoes} onChange={(event) => updateField('sessoes', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione a faixa</option>
-                              <option value="ate-500">Até 500</option>
-                              <option value="500-2k">500 a 2 mil</option>
-                              <option value="2k-10k">2 mil a 10 mil</option>
-                              <option value="acima-10k">Acima de 10 mil</option>
-                              <option value="nao-meço">Não meço hoje</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="decisor" className={labelClass}>Quem decide sobre investimento em aquisição</label>
-                            <select id="decisor" name="decisor" required value={dados.decisor} onChange={(event) => updateField('decisor', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione quem assina</option>
-                              <option value="eu">Eu, sozinho</option>
-                              <option value="eu-socio">Eu e sócio</option>
-                              <option value="comite">Comitê ou diretoria</option>
-                              <option value="terceiro">Agência ou terceiro decide</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label htmlFor="prazo" className={labelClass}>O que motivou a busca agora</label>
-                            <select id="prazo" name="prazo" required value={dados.prazo} onChange={(event) => updateField('prazo', event.target.value)} className={inputClass}>
-                              <option value="" disabled>Selecione o gatilho</option>
-                              <option value="queda-vendas">Queda de vendas</option>
-                              <option value="concorrente">Concorrente aparecendo na frente</option>
-                              <option value="lancamento">Lançamento ou campanha com data</option>
-                              <option value="pesquisa">Pesquisa de preço, sem prazo</option>
                             </select>
                           </div>
                           <button

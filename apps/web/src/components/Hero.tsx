@@ -1,10 +1,16 @@
-import { useRef } from 'react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '@/lib/analytics';
-import { ESTADO_TECNICO, MEDICAO_REALIZADA_EM } from '@/lib/conversao';
 import { useI18n } from '@/lib/i18n';
+
+const HeroMotion = lazy(() => import('./HeroMotion'));
+
+type NavigatorWithPerformanceHints = Navigator & {
+  connection?: { saveData?: boolean };
+  deviceMemory?: number;
+};
 
 /**
  * Os segmentos do seletor apontam TODOS para páginas que existem de verdade —
@@ -21,17 +27,52 @@ const SEGMENTOS = [
   { slug: '/solucoes/site-para-profissionais-liberais', key: 'hero.premium.selector.liberais' },
 ] as const;
 
-/**
- * A capa não carrega mais animação ambiente em canvas/3D. O bloco da direita agora
- * é o estado técnico medido em produção: dado real no lugar de escultura — e é o
- * que mantém o LCP dentro do orçamento (LCP < 1,2 s, CLS 0), porque não há uma
- * segunda árvore de JavaScript para baixar acima da dobra.
- */
+function ambientMotionAllowed(reducedMotion: boolean): boolean {
+  const navigatorHints = navigator as NavigatorWithPerformanceHints;
+  const lowMemory = navigatorHints.deviceMemory !== undefined && navigatorHints.deviceMemory < 4;
+
+  return !reducedMotion && navigatorHints.connection?.saveData !== true && !lowMemory;
+}
+
 export default function Hero() {
   const { t } = useI18n();
   const shouldReduceMotion = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const [ambientMotion, setAmbientMotion] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
+  const [documentVisible, setDocumentVisible] = useState(true);
+  const animationActive = ambientMotion && heroInView && documentVisible;
 
+  useEffect(() => {
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotionPolicy = () => {
+      setAmbientMotion(ambientMotionAllowed(reducedMotionQuery.matches));
+    };
+    const updateVisibility = () => setDocumentVisible(!document.hidden);
+    const section = sectionRef.current;
+    const observer =
+      section && typeof IntersectionObserver !== 'undefined'
+        ? new IntersectionObserver(([entry]) => setHeroInView(entry?.isIntersecting ?? false), { threshold: 0.01 })
+        : undefined;
+
+    updateMotionPolicy();
+    updateVisibility();
+    if (section) observer?.observe(section);
+    reducedMotionQuery.addEventListener('change', updateMotionPolicy);
+    document.addEventListener('visibilitychange', updateVisibility);
+
+    return () => {
+      observer?.disconnect();
+      reducedMotionQuery.removeEventListener('change', updateMotionPolicy);
+      document.removeEventListener('visibilitychange', updateVisibility);
+    };
+  }, []);
+
+  /**
+   * O seletor entra logo depois da mensagem, com as linhas em cascata. É animação
+   * de MONTAGEM, não de scroll: a capa já está na tela quando a página abre, e
+   * whileInView exigiria IntersectionObserver — que o jsdom dos testes não tem.
+   */
   const cascata = { hidden: {}, visible: { transition: { staggerChildren: 0.045, delayChildren: 0.2 } } };
   const linhaCascata = {
     hidden: { opacity: 0, y: 8 },
@@ -39,7 +80,12 @@ export default function Hero() {
   };
 
   return (
-    <section ref={sectionRef} className="rdv-studio-hero rdv-studio-hero--still" aria-labelledby="home-title">
+    <section
+      ref={sectionRef}
+      className={`rdv-studio-hero${ambientMotion ? '' : ' rdv-studio-hero--still'}`}
+      aria-labelledby="home-title"
+      data-animation-active={animationActive ? 'true' : 'false'}
+    >
       <div className="rdv-studio-hero__layout">
         <motion.div
           className="rdv-studio-hero__content"
@@ -66,42 +112,31 @@ export default function Hero() {
           <div className="rdv-studio-hero__actions">
             <Link
               className="rdv-studio-hero__submit"
-              to="/diagnostico?origem=home-hero&estagio=triagem"
-              onClick={() => trackEvent('hero_cta', { destination: 'diagnostico', origin: 'home-hero', stage: 'triagem' })}
+              to="/diagnostico?origem=home-hero"
+              onClick={() => trackEvent('hero_cta', { destination: 'diagnostico', origin: 'home-hero' })}
             >
               {t('hero.premium.cta')}
               <ArrowRight size={18} aria-hidden="true" />
             </Link>
-            <a
+            <Link
               className="rdv-studio-hero__secondary"
-              href="#protocolo"
-              onClick={() => trackEvent('hero_cta', { destination: 'protocolo' })}
+              to="/portfolio"
+              onClick={() => trackEvent('hero_cta', { destination: 'portfolio' })}
             >
-              {t('hero.premium.cases')} <span aria-hidden="true">↓</span>
-            </a>
+              {t('hero.premium.cases')} <span aria-hidden="true">↗</span>
+            </Link>
           </div>
           <p className="rdv-studio-hero__assurance">{t('hero.premium.assurance')}</p>
-          <a className="rdv-studio-hero__pricing" href="#triagem-paga">{t('hero.premium.pricing')}</a>
+          <Link className="rdv-studio-hero__pricing" to="/planos">{t('hero.premium.pricing')}</Link>
         </motion.div>
 
         <div className="rdv-studio-hero__art">
-          <dl className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] sm:grid-cols-2" aria-label={`Estado técnico medido em produção em ${MEDICAO_REALIZADA_EM}`}>
-            {ESTADO_TECNICO.map((item) => (
-              <div key={item.rotulo} className="p-5">
-                <dt className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{item.rotulo}</dt>
-                <dd className="mt-2 font-serif text-2xl font-bold text-text-primary">{item.valor}</dd>
-                <dd className="mt-1 text-xs leading-5 text-text-muted">{item.detalhe}</dd>
-              </div>
-            ))}
-          </dl>
-          <div className="rdv-studio-hero__caption">
-            <span>Medição</span>
-            <span>Instrumentação</span>
-            <span>Engenharia</span>
-          </div>
+          <Suspense fallback={null}>
+            <HeroMotion active={animationActive} />
+          </Suspense>
+          <div className="rdv-studio-hero__caption"><span>Estratégia</span><span>Design</span><span>Tecnologia</span></div>
         </div>
       </div>
-
       <div className="rdv-studio-segments">
         <motion.nav
           className="rdv-studio-segments__nav"

@@ -41,10 +41,10 @@ const STEPS = [
     icon: MessageCircle,
     title: "Transforme interesse em conversa.",
     description:
-      "WhatsApp e formulários conectados ao atendimento, com contexto para continuar a conversa.",
+      "Automações no WhatsApp para responder o primeiro contato, organizar pedidos e encaminhar a conversa para sua equipe.",
     signal: "Contato com contexto",
-    detail: "O interesse chega a quem pode atender.",
-    channels: ["WhatsApp", "Formulário", "Atendimento"],
+    detail: "Menos espera. Mais contexto para atender e vender.",
+    channels: ["WhatsApp", "Automação", "Sua equipe"],
   },
   {
     name: "Evoluir",
@@ -101,17 +101,17 @@ export default function ConversionJourney() {
             <span>Ser escolhido é o que importa.</span>
           </h2>
           <p className="rdv-journey__lede">
-            Conectamos sua presença digital ao caminho da venda: a pessoa
-            encontra, entende sua oferta e chega ao atendimento com um motivo
-            para conversar.
+            Sites profissionais, soluções digitais e automações no WhatsApp
+            conectados para apresentar seu negócio, agilizar o atendimento e
+            reduzir as oportunidades perdidas por falta de resposta.
           </p>
           <ul className="rdv-journey__principles">
             <li>
               <Check aria-hidden="true" /> Oferta clara em cada ponto de contato
             </li>
             <li>
-              <Check aria-hidden="true" /> Menos etapas entre o interesse e o
-              atendimento
+              <Check aria-hidden="true" /> Atendimento rápido no WhatsApp, com
+              apoio da automação
             </li>
             <li>
               <Check aria-hidden="true" /> Medição para orientar a próxima

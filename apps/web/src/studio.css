@@ -13,7 +13,7 @@
 .rdv-studio-hero__submit { padding: 0 23px; background: #ecebe6; color: #151619; border: 1px solid #ecebe6; border-radius: 4px; transition: background-color 180ms ease-out; }
 .rdv-studio-hero__secondary { color: #dededb; border-bottom: 1px solid #48494b; }
 .rdv-studio-hero__submit:focus-visible, .rdv-studio-hero__secondary:focus-visible { outline: 2px solid #d2bd8b; outline-offset: 6px; }
-.rdv-studio-hero__art { position: relative; min-width: 0; align-self: center; padding-bottom: 32px; }
+.rdv-studio-hero__art { position: relative; min-width: 0; aspect-ratio: 1; }
 .rdv-studio-hero__caption { position: absolute; bottom: -8px; left: 0; right: 0; display: flex; justify-content: center; gap: 24px; color: #a4a7ad; font-size: 11px; letter-spacing: .04em; }
 .rdv-studio-hero__caption span + span::before { content: '·'; margin-right: 24px; color: #d2bd8b; }
 .rdv-studio-segments { width: min(1280px, calc(100% - 96px)); margin: auto; padding: 26px 0 32px; border-top: 1px solid #2b2d30; }
