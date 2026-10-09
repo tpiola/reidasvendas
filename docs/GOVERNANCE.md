@@ -34,4 +34,15 @@ Os domínios `reidasvendas.com.br` e `www.reidasvendas.com.br` pertencem somente
 
 ## Higiene
 
-Branches integradas ou abandonadas devem ser removidas após verificação. Documentos temporários de execução não permanecem na raiz do repositório; decisões duráveis ficam em `docs/`.
+- Branches integradas ou abandonadas devem ser removidas após verificação. Documentos temporários de execução não permanecem na raiz do repositório; decisões duráveis ficam em `docs/`.
+
+## Fontes de verdade
+
+| Documento | Responde |
+|---|---|
+| [`ESTADO-ATUAL.md`](ESTADO-ATUAL.md) | O que está no ar, o que está aprovado, o que é intocável, o que está pendente. Revisão de política = SHA do último commit que o tocou |
+| [`GOVERNANCA-AGENTES.md`](GOVERNANCA-AGENTES.md) | Protocolo operacional de agente: estabelecer revisão, lease de escrita, verificação por risco, integração, incidente |
+| Este arquivo | Identidade canônica, controles de mudança, proteção de produção e domínio |
+
+Estado no papel não obriga ninguém: o portão real é `./scripts/preflight.sh` mais os checks de CI
+exigidos na `main`.
