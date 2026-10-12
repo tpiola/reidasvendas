@@ -28,19 +28,22 @@ não edite, não commite. Relate a lacuna.
 | Domínio canônico | `reidasvendas.com.br` (`www` deve redirecionar para ele) |
 | Diretório da aplicação | `apps/web` — Vite + React + Tailwind, SPA com pré-render |
 | Monorepo | `pnpm` + `turbo` — **nunca npm ou yarn** (há um `package-lock.json` órfão na raiz: não use, não propague) |
+| Identidade de commit | `178150229+tpiola@users.noreply.github.com` — o GitHub **recusa** push com e-mail privado. Nunca use `-c user.email=` para sobrescrever a identidade deste repo |
 
 ## O que está no ar — verifique antes de confiar
 
-Última verificação: **09/10/2026** · commit `ff65401` · bundle `index-SPAa1Izf.js` (idêntico ao
-`apps/web/dist/index.html` local, ou seja: o publicado é o build deste commit) · TTFB 109 ms ·
+Última verificação: **12/10/2026** · commit `e299631` · bundle `index-Bcir6itP.js` ·
+**sha256 do bundle servido idêntico ao build local** (`b1c52c32b469ffd18394c110bb7aa534`) — ou seja,
+o que está no ar é exatamente o build deste commit · TTFB 24/40/164 ms (mediana 40 ms) ·
 `/`, `/diagnostico`, `/planos` e `/obrigado` em 200 · `/obrigado` com `noindex, follow` ·
-`www` responde 307 para o domínio canônico.
+sitemap com 58 URLs · `www` responde 307 para o domínio canônico.
 Não acredite neste parágrafo sem conferir:
 
 ```bash
 git fetch origin && git rev-parse --short origin/main
 curl -sI https://reidasvendas.com.br | head -3
 curl -s https://reidasvendas.com.br | grep -oE 'index-[A-Za-z0-9_-]+\.js' | head -1
+sha256sum apps/web/dist/assets/index-*.js      # compare com o publicado
 ```
 
 O bundle publicado tem de casar com o build local do commit publicado. Divergência = deploy
@@ -126,6 +129,8 @@ mesmo caminho de arquivo.
 | 05/10/2026 | `5ad57c8` | Cobre a jornada comercial com testes; realinha o e2e ao hero publicado |
 | 05/10/2026 | `1dab5a5` | Esteira no topo de `/planos`; `/obrigado` deixa de responder 404 |
 | 05/10/2026 | `ff65401` | Remove o "por mês" duplicado no cartão da Otimização Contínua |
+| 09/10/2026 | `91ea4b3` | Fonte de verdade, protocolo multi-agente e pré-voo contra reversão silenciosa |
+| 12/10/2026 | `e299631` | Corrige 3 vulnerabilidades de dependência (`postcss-selector-parser` 7.1.6, `smol-toml` 1.9.1, `source-map-js` 1.2.2); audit 4 → 1; documenta a mecânica de overrides |
 
 ## Incidentes registrados
 
@@ -142,6 +147,10 @@ lugar (seguindo o aviso enganoso do console), a resolução voltou **para baixo*
 Detectado apenas porque a versão resolvida foi lida no lockfile, não a saída do `audit`. Regra que
 fica: depois de mexer em override, conferir a versão **no lockfile** e comparar com o backup.
 
+**12/10/2026 — push recusado por e-mail privado.** O push com `-c user.email=...@gmail.com` foi
+recusado pelo GitHub ("email privacy restrictions"). A identidade correta deste repo é
+`178150229+tpiola@users.noreply.github.com`. Não sobrescreva a identidade configurada.
+
 ## Pendências abertas
 
 | Pendência | Estado |
@@ -153,6 +162,7 @@ fica: depois de mexer em override, conferir a versão **no lockfile** e comparar
 | `braces` (1 high) | Sem correção publicada pelo upstream. Build-only. Aceito e documentado acima |
 | 404 em `text/plain` | A aplicação não tem página de 404 própria: rota inexistente devolve `NOT_FOUND` cru da Vercel (79 B, sem marca nem caminho de volta) |
 | `og:image` única | Um único JPEG (236 KB) para todas as rotas — compartilhamento social genérico |
+| CSS render-blocking | 178.819 B de CSS em arquivo único + 9.680 B inline, sem code-split por rota |
 
 Resolvido em 09/10/2026: `www.reidasvendas.com.br` deixou de ser NXDOMAIN — responde 307 para
 `reidasvendas.com.br`, que é o comportamento que o `docs/GOVERNANCE.md` exige.
