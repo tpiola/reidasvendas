@@ -49,6 +49,30 @@ pendente ou falho, não "provavelmente foi".
 Para conferir o `noindex` de `/obrigado`, use parser multi-linha (`python3 -c` com regex): a tag vem
 quebrada em três linhas e o `grep` devolve falso negativo.
 
+## Dependências e overrides — onde eles realmente valem
+
+Medido em **12/10/2026**, dentro deste repo (não em diretório de teste):
+
+- O `package.json` fixa `packageManager: pnpm@9.15.0`. **É essa a versão que roda aqui**, e ela lê
+  os overrides **apenas** de `package.json` → `pnpm.overrides`.
+- O console imprime `[WARN] The "pnpm" field in package.json is no longer read by pnpm ... ignored:
+  pnpm.overrides` — **falso alarme na 9.15**. Os overrides são lidos e aplicados: comprovado com
+  quatro variantes (só `package.json` → aplica; os dois arquivos → aplica; **só
+  `pnpm-workspace.yaml` → não aplica nada**, e o install ainda passa, silencioso).
+- Em pnpm **10+/11** a mecânica inverte: lá o `overrides` tem de estar no `pnpm-workspace.yaml` e o
+  campo do `package.json` é realmente ignorado. **Ao subir o `packageManager`, mova o bloco antes** —
+  senão as 23 travas deixam de valer sem avisar.
+- **Nunca mantenha as duas listas em paralelo**: divergem em silêncio.
+- **Nunca teste mecânica de pnpm em `/tmp`**: sem o campo `packageManager`, o shim resolve o pnpm
+  global (aqui, 11.22.0) e a conclusão sai ao contrário. Use `pnpm install --lockfile-only` dentro
+  do repo — resolve a árvore sem baixar nada e é rápido.
+- `braces` (GHSA-vfj7-8cjw-p6xm, alto) **não tem versão corrigida publicada**: 3.0.3, a última,
+  segue afetada. Não escreva override para ele — `>=3.0.4` derruba o install inteiro com
+  `ERR_PNPM_NO_MATCHING_VERSION`. Risco aceito e documentado: só entra em cadeia de build
+  (`chokidar` via `tailwindcss`, `fast-glob` via `micromatch`), nunca no bundle publicado.
+- Prova de que um override valeu é a **versão resolvida no `pnpm-lock.yaml`**, não a saída do
+  `pnpm audit`.
+
 ## Arquitetura comercial aprovada
 
 A home deixou de ser página de vendas e passou a ser **engenharia de conversão** (decisão do dono,
@@ -112,6 +136,12 @@ fonte de verdade nem portão de qualidade — só um `AGENTS.md` sobre acionar s
 documento, `docs/GOVERNANCA-AGENTES.md` e o lease de escrita. **Reverter trabalho aprovado exige
 decisão explícita do dono registrada aqui antes da edição.**
 
+**12/10/2026 — quase desligamento silencioso dos overrides.** Ao trocar o bloco de overrides de
+lugar (seguindo o aviso enganoso do console), a resolução voltou **para baixo**: `smol-toml`
+1.8.0 → 1.5.2 e `postcss-selector-parser` para 6.1.3 — as versões vulneráveis — **sem nenhum erro**.
+Detectado apenas porque a versão resolvida foi lida no lockfile, não a saída do `audit`. Regra que
+fica: depois de mexer em override, conferir a versão **no lockfile** e comparar com o backup.
+
 ## Pendências abertas
 
 | Pendência | Estado |
@@ -120,6 +150,9 @@ decisão explícita do dono registrada aqui antes da edição.**
 | Black Friday 30% | Desconto ainda incide sobre tiers legados; converter para desconto na Triagem exige percentual definido pelo dono |
 | Higiene da raiz | `24_hour_action_plan.md`, `AUDITORIA_COMPLETA.md`, `DIAGNOSTICO.md`, `REBUILD_PLAN.md`, `design-qa.md`, `package-lock.json` — o próprio `docs/GOVERNANCE.md` proíbe docs temporários na raiz |
 | Portão no GitHub | `main` bloqueia force-push e exclusão, mas **não exige PR nem check** — qualquer escrita entra direto. Decisão do dono |
+| `braces` (1 high) | Sem correção publicada pelo upstream. Build-only. Aceito e documentado acima |
+| 404 em `text/plain` | A aplicação não tem página de 404 própria: rota inexistente devolve `NOT_FOUND` cru da Vercel (79 B, sem marca nem caminho de volta) |
+| `og:image` única | Um único JPEG (236 KB) para todas as rotas — compartilhamento social genérico |
 
 Resolvido em 09/10/2026: `www.reidasvendas.com.br` deixou de ser NXDOMAIN — responde 307 para
 `reidasvendas.com.br`, que é o comportamento que o `docs/GOVERNANCE.md` exige.
@@ -132,6 +165,7 @@ pnpm check    # tsc --noEmit
 pnpm lint
 pnpm test     # baseline 09/10/2026: 36 testes em 7 arquivos
 pnpm build    # pré-render: ~59 páginas (medido em 05/10/2026)
+pnpm audit    # baseline 12/10/2026: 1 high (braces, sem correção publicada no upstream)
 ```
 
 Portão vermelho = **não commite, não empurre**. Se falhar, relate o erro real; não declare sucesso.

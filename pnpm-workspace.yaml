@@ -2,3 +2,26 @@ packages:
   - "apps/*"
   - "packages/*"
   - "tools/*"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ONDE VIVEM OS OVERRIDES (medido em 12/10/2026, não é opinião):
+#
+#   pnpm 9.15 (a versão que este repo fixa em packageManager) lê APENAS
+#   package.json -> "pnpm.overrides". Um bloco "overrides" NESTE arquivo é IGNORADO
+#   por ela. O console imprime "[WARN] The pnpm field in package.json is no longer
+#   read by pnpm ... ignored: pnpm.overrides" — é FALSO ALARME na 9.15: os overrides
+#   são lidos e aplicados. Comprovado com 4 variantes:
+#     A) só package.json  -> aplicou (postcss-selector-parser 7.1.6, smol-toml 1.9.1)
+#     B) os dois          -> aplicou
+#     C) só este arquivo  -> NÃO aplicou (6.1.3 e 1.5.2, as versões vulneráveis)
+#   Em pnpm 10+/11 a mecânica inverte: lá "overrides" DEVE vir para cá e o campo do
+#   package.json é realmente ignorado (verificado na 11.22.0).
+#
+# => ANTES de subir o packageManager para 10+, mova o bloco para este arquivo.
+#    Enquanto a versão fixada for 9.x, a lista canônica é a do package.json.
+#    Nunca mantenha as duas listas em paralelo: divergem em silêncio.
+#
+# Não existe override para "braces": GHSA-vfj7-8cjw-p6xm não tem versão corrigida
+# publicada (3.0.3, a última, segue afetada) e ele só entra em cadeia de build
+# (chokidar via tailwindcss, fast-glob via micromatch).
+# ─────────────────────────────────────────────────────────────────────────────
