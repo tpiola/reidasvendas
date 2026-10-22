@@ -9,19 +9,22 @@ export function BrandMark() {
       aria-hidden="true"
     >
       <path
-        d="M6 14 16 23 24 8 32 23 42 14"
+        d="M7 15 16 23 24 10 32 23 41 15 37 35H11L7 15Z"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinejoin="round"
-        pathLength="1"
+        fill="currentColor"
+        fillOpacity="0.12"
       />
       <path
-        d="M32 14H42V24"
+        d="M12 40H36"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="2.2"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
+      <circle cx="7" cy="12" r="2" fill="currentColor" />
+      <circle cx="24" cy="7" r="2" fill="currentColor" />
+      <circle cx="41" cy="12" r="2" fill="currentColor" />
     </svg>
   );
 }

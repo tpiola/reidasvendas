@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  MagneticCTA,
   ParallaxStage,
   SpotlightCard,
   StickyStackSection,
 } from "@/components/ObsidianMotion";
+import { CalmHero } from "@/components/CalmHero";
 import { MicroQuiz } from "@/components/MicroQuiz";
 import { IMPLANTACAO, brl } from "@/lib/ofertas";
 import { PROJECTS, OTHER_WORK, PROJECT_EVIDENCE } from "@/lib/portfolio";
@@ -50,36 +50,33 @@ export default function Home() {
   );
   return (
     <main id="main-content" className="obs-home">
-      <section className="obs-hero rdv-shell">
-        <div className="obs-hero-copy">
-          <p className="obs-label">Franca, SP · Atendemos todo o Brasil</p>
-          <h1>
-            Seu cliente já está pesquisando na sua cidade.{" "}
-            <span>Ele encontra você ou o seu concorrente?</span>
-          </h1>
+      <CalmHero />
+      <section
+        className="obs-section rdv-shell calm-journey"
+        aria-labelledby="journey-title"
+      >
+        <div className="calm-feature-copy">
+          <h2 id="journey-title">
+            Da busca à conversa.
+            <br />
+            <span>Com tudo no lugar.</span>
+          </h2>
           <p>
-            Sites, catálogos e atendimento conectados para transformar a procura
-            pelo seu negócio em conversas de venda.
+            Seu cliente entende o que você oferece, encontra o serviço certo e
+            chega ao atendimento com uma ideia do que precisa.
           </p>
-          <MagneticCTA to="#comecar">Quero receber mais contatos</MagneticCTA>
-          <Link className="obs-text-link" to="/planos">
-            Ver escopos e preços publicados →
+          <Link className="calm-link" to="/solucoes">
+            Conhecer as possibilidades <span aria-hidden="true">↗</span>
           </Link>
-          <div className="obs-hero-note">
-            Seu domínio. Seus acessos. Um caminho claro até o pedido.
-          </div>
         </div>
         <ParallaxStage>
           <div
             className="obs-journey"
             aria-label="Demonstração ilustrativa da busca ao contato. Não representa um resultado real."
           >
-            <div className="obs-window">
-              <span />
-              <span />
-              <span />
-              <small>Uma jornada. Sem pontas soltas.</small>
-            </div>
+            <p className="calm-demo-label">
+              Um exemplo de jornada para o seu cliente
+            </p>
             <div className="obs-search">
               <span aria-hidden="true">⌕</span> Seu serviço + sua cidade{" "}
               <span aria-hidden="true">↵</span>
@@ -106,7 +103,7 @@ export default function Home() {
               </div>
             </div>
             <small className="obs-demo-caption">
-              Demonstração ilustrativa · ciclo de 8 segundos
+              Demonstração ilustrativa, sem dados de clientes
             </small>
           </div>
         </ParallaxStage>

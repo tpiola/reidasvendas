@@ -18,7 +18,7 @@ const staticEntries = [
     description:
       "Sites, catálogos e atendimento conectados para transformar a procura pelo seu negócio em conversas de venda. Implantação direta ou auditoria profissional.",
     heading:
-      "Seu cliente já está pesquisando na sua cidade. Ele encontra você ou o seu concorrente?",
+      "Seu negócio merece ser encontrado.",
     category: "WebPage",
     headings: [
       "Patologia de funil",

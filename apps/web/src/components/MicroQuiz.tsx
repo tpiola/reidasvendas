@@ -42,7 +42,10 @@ export function MicroQuiz({
   }, []);
   const location = useLocation();
   const question = QUESTIONS[answers.length];
-  const message = `Olá! Quero conversar sobre ${context}.\n${offer ? `Oferta: ${offer}\n` : ""}${answers.map((a, i) => `${QUESTIONS[i].title} ${a}`).join("\n")}\nOrigem: https://reidasvendas.com.br${location.pathname}${location.search}`;
+  const objective = new URLSearchParams(location.search)
+    .get("objetivo")
+    ?.slice(0, 600);
+  const message = `Olá! Quero conversar sobre ${context}.\n${offer ? `Oferta: ${offer}\n` : ""}${objective ? `Objetivo: ${objective}\n` : ""}${answers.map((a, i) => `${QUESTIONS[i].title} ${a}`).join("\n")}\nOrigem: https://reidasvendas.com.br${location.pathname}${location.search}`;
   return (
     <section className="obs-quiz" aria-label="Qualificação rápida">
       <p className="obs-label">

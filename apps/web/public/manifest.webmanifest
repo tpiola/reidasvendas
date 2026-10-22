@@ -4,10 +4,13 @@
   "description": "Sites, lojas, aplicativos e operações digitais para negócios locais.",
   "start_url": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone"],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
   "orientation": "portrait-primary",
-  "background_color": "#07090D",
-  "theme_color": "#07090D",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
   "scope": "/",
   "lang": "pt-BR",
   "dir": "ltr",
@@ -38,7 +41,11 @@
       "purpose": "any"
     }
   ],
-  "categories": ["business", "technology", "productivity"],
+  "categories": [
+    "business",
+    "technology",
+    "productivity"
+  ],
   "screenshots": [],
   "prefer_related_applications": false,
   "related_applications": [],

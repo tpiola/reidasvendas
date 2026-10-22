@@ -14,16 +14,16 @@ test("home serve a mesma proposta no HTML e no navegador, sem cortina", async ({
   expect(response.ok()).toBeTruthy();
   const html = await response.text();
   expect(html).not.toContain('id="rdv-boot"');
-  expect(html).toContain("Seu cliente já está pesquisando na sua cidade.");
+  expect(html).toContain("Seu negócio merece ser encontrado.");
   await page.goto("/");
   await expect(
     page.getByRole("heading", {
       level: 1,
-      name: /seu cliente já está pesquisando/i,
+      name: /seu negócio merece ser encontrado/i,
     }),
   ).toBeVisible();
   await expect(page.locator("header nav")).toHaveCount(1);
-  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
   await page.getByRole("link", { name: "Quero receber mais contatos" }).click();
   await expect(page.locator("#comecar")).toBeInViewport();
 });
@@ -107,7 +107,10 @@ test("rotas estratégicas, catálogo e vertical mantêm conteúdo e navegação"
 });
 
 for (const viewport of [
+  { width: 320, height: 812 },
+  { width: 375, height: 812 },
   { width: 390, height: 844 },
+  { width: 414, height: 896 },
   { width: 768, height: 1024 },
   { width: 1440, height: 900 },
 ]) {
@@ -136,3 +139,26 @@ for (const viewport of [
     }
   });
 }
+
+test("brief da abertura chega à qualificação com o contexto preservado", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page
+    .getByLabel("O que você quer construir?")
+    .fill("Quero um catálogo para minha loja em Franca");
+  await page.getByRole("button", { name: "Começar meu projeto" }).click();
+  await expect(page).toHaveURL(/modo=implantacao/);
+  expect(new URL(page.url()).searchParams.get("objetivo")).toBe(
+    "Quero um catálogo para minha loja em Franca",
+  );
+  await page.getByRole("button", { name: /loja ou restaurante/i }).click();
+  await page.getByRole("button", { name: /organizar catálogo/i }).click();
+  await page.getByRole("button", { name: /^agora/i }).click();
+  const href = await page
+    .getByRole("link", { name: /continuar no whatsapp/i })
+    .getAttribute("href");
+  expect(new URL(href!).searchParams.get("text")).toContain(
+    "Objetivo: Quero um catálogo para minha loja em Franca",
+  );
+});

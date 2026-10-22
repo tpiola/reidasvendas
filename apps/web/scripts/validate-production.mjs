@@ -8,7 +8,6 @@ const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const distDirectory = join(projectRoot, "dist");
 const origin = "https://reidasvendas.com.br";
 const forbiddenPublicPatterns = [
-  /data-theme=["']light["']/i,
   /5516993333344/,
   /\bfarm[aá]cia\b/i,
   /drogalar/i,
@@ -57,8 +56,8 @@ for (const url of urls) {
   assert(await exists(htmlPath), `HTML prerenderizado ausente: ${pathname}`);
   const html = await readFile(htmlPath, "utf8");
   assert(
-    /<html[^>]+data-theme=["']dark["']/i.test(html),
-    `Tema inicial não é dark: ${pathname}`,
+    /<html[^>]+data-theme=["']light["']/i.test(html),
+    `Tema inicial não é light: ${pathname}`,
   );
   assert(/<title>[^<]+<\/title>/i.test(html), `Title ausente: ${pathname}`);
   assert(

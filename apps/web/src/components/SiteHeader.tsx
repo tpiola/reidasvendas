@@ -69,7 +69,7 @@ export function SiteHeader() {
               trackEvent("diagnostic_start", { position: "header" })
             }
           >
-            {t("nav.cta")}
+            Vamos conversar
           </TransitionLink>
           <button
             type="button"
