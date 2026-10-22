@@ -183,7 +183,7 @@ body {
   border: 1px solid #29543e;
   border-radius: 8px;
   padding: 22px 18px;
-  animation: obs-arrive 8s infinite;
+  animation: obs-arrive 8s 1 both;
 }
 .obs-notification-icon {
   color: var(--obs-green);
@@ -574,7 +574,7 @@ body {
   0%,
   35% {
     transform: translateY(8px);
-    opacity: 0.45;
+    opacity: 1;
   }
   48%,
   95% {
@@ -582,7 +582,7 @@ body {
     opacity: 1;
   }
   100% {
-    opacity: 0.45;
+    opacity: 1;
   }
 }
 @keyframes obs-draw {
@@ -797,4 +797,30 @@ body {
     animation: none !important;
     transform: none !important;
   }
+}
+/* Keep the mobile reading path static and the mockup text fully legible. */
+@media (max-width: 800px) {
+  .obs-stage {
+    animation: none !important;
+    transform: none !important;
+  }
+  .obs-notification {
+    animation: none !important;
+    opacity: 1;
+  }
+  .rdv-whatsapp-fab__ring {
+    animation: none !important;
+  }
+  .rdv-header {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Legacy full-screen SVG fractal textures cause avoidable rasterization. */
+body::before,
+body::after {
+  display: none !important;
+  content: none !important;
+  background-image: none !important;
 }

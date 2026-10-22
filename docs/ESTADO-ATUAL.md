@@ -197,3 +197,7 @@ TypeScript, lint, 50 testes unitários e build do monorepo aprovados. Playwright
 
 ### Publicação e otimização do caminho crítico
 Release 2aa52ab publicado em produção no projeto canônico, deployment dpl_ARsRFm653ru6DrnDVcqPiARVdUyL READY. Domínio confirmado com novo Hero, sem boot overlay e com headers de segurança. A segunda passagem remove motion dos preloads da Home e conserva essa biblioteca nas rotas que precisam dela; as profundidades da Home usam CSS nativo. Portão completo e 20 testes de navegador revalidados. O SHA publicado deve ser confirmado no deployment correspondente, e não inferido de um preview.
+
+### Correção final de contraste e rasterização — 22/10/2026
+O release e8401e9 foi confirmado READY no projeto original e nas 58 URLs do domínio, com bundle idêntico ao build por SHA-256. A auditoria revelou contraste reduzido na animação e duas texturas SVG globais; removidas nesta revisão. Movimento decorativo móvel fica estático. O teste de acessibilidade agora cobre movimento normal e impede o retorno das texturas. TypeScript, lint, 50 testes unitários e build aprovados. Lighthouse móvel local final: 82/100/100/100, LCP 2,2 s, CLS 0, TBT 580 ms; não representa dado de campo nem nota 10/10. Relatório registra também a medição anterior de produção por proxy e suas limitações.
+Todos os 21 cenários de navegador aprovados: 20 na rodada completa e o teste adicional de axe isoladamente após ajuste do limite de tempo, sem relaxar as asserções.

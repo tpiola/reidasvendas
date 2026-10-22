@@ -18,7 +18,7 @@ Pré-render: 59 páginas, 58 URLs indexáveis no sitemap e /obrigado com noindex
 | pnpm lint | 8 tarefas aprovadas |
 | pnpm test | 50 testes aprovados: 42 do site e 8 dos demais pacotes |
 | pnpm build | 4 tarefas aprovadas; pré-render e validação de produção aprovados |
-| Playwright | 20 testes aprovados em 2,3 minutos |
+| Playwright | 21 testes, incluindo movimento normal no celular e regressão das texturas globais |
 | Navegação completa | 58 URLs com status 200, um H1, schema JSON válido e sem erro de JavaScript |
 | Acessibilidade automática | Nenhuma violação séria ou crítica nas seis jornadas auditadas |
 | Responsividade | 390, 768 e 1440 px; sem overflow horizontal |
@@ -62,3 +62,13 @@ O commit 2aa52ab foi publicado no projeto existente, com estado READY, novo Hero
 A passagem seguinte retira Framer Motion da árvore inicial da Home, usa scroll timeline nativa com alternativa estática, mantém a preferência por movimento reduzido e preserva transições nativas de navegação. Os preloads da Home contêm apenas React, router e ícones; a biblioteca de motion passa a carregar apenas nas páginas que a utilizam. Os CTAs primários das páginas internas também seguem o verde esmeralda.
 
 Revalidação desta passagem: pnpm check, pnpm lint, pnpm test (50 testes), pnpm build e todos os 20 testes Playwright aprovados, incluindo as 58 rotas. A nota de laboratório anterior é histórica; a versão otimizada deve ser medida após sua publicação.
+
+## Auditoria final e evidência de produção — 22/10/2026
+
+O release e8401e9 foi confirmado no deployment dpl_A25zzVPGX39q6RYgEaqAaEJu7Gs9, READY no projeto existente. A auditoria HTTP do domínio aprovou as 58 URLs, um H1 e canonical por página, ausência de cortina de boot, 404 real, /obrigado noindex, headers de segurança e redirects legados 301. O bundle publicado foi comparado por SHA-256 com o artefato local. O navegador móvel confirmou a jornada do microquiz e a mensagem preparada, sem enviar mensagem e sem erros de JavaScript.
+
+Uma medição desse release em produção, através do proxy de rede do ambiente e com CPU móvel simulada, retornou desempenho 34, acessibilidade 97, boas práticas 100 e SEO 100; LCP 5 s, CLS 0 e TBT 4.940 ms. Esse resultado não foi omitido nem apresentado como dado de campo. O contraste de uma notificação durante a animação era um defeito real: foi corrigido com opacidade integral. A tentativa de medição independente pela API PageSpeed Insights recebeu HTTP 429 por quota indisponível; não há resultado dessa API.
+
+A correção final também remove duas texturas SVG fractais de tela inteira, desativa movimento decorativo no celular e adiciona teste com movimento normal. Medição isolada do artefato final local, Lighthouse 13.5.0, Chromium headless 153, perfil móvel padrão com CPU 4×: **desempenho 82, acessibilidade 100, boas práticas 100 e SEO 100; LCP 2,2 s, FCP 2,1 s, CLS 0 e TBT 580 ms**. Os resultados locais e os obtidos por proxy têm condições diferentes; não são uma comparação controlada entre domínio e localhost. TBT continua acima do ideal e requer acompanhamento. Nenhum teste comprova liderança comercial em Franca ou conversão futura; esses resultados dependem de dados reais após publicação.
+
+Portão final: check, lint, 50 testes unitários e build aprovados. Dos 21 testes de navegador, 20 passaram na rodada completa; a análise axe com movimento normal ultrapassou 30 s. Com prazo de 90 s e as mesmas asserções, a reexecução isolada passou em 26,6 s. Todos os 21 cenários estão aprovados; a ocorrência de timeout fica registrada.
