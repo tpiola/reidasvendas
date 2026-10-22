@@ -1,30 +1,20 @@
+/** Three commercial peaks; the central negative space is an upward arrow. */
 export function BrandMark() {
   return (
     <svg
       className="rdv-brand-lockup__mark rdv-brand-mark"
       width="48"
       height="48"
-      viewBox="0 0 48 48"
+      viewBox="0 0 64 64"
       fill="none"
       aria-hidden="true"
     >
       <path
-        d="M7 15 16 23 24 10 32 23 41 15 37 35H11L7 15Z"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinejoin="round"
         fill="currentColor"
-        fillOpacity="0.12"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8 46 14 20 24 32 32 10 40 32 50 20 56 46H8ZM29 39V29H25L32 19 39 29H35V39H29ZM10 49H54V54H10V49Z"
       />
-      <path
-        d="M12 40H36"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-      <circle cx="7" cy="12" r="2" fill="currentColor" />
-      <circle cx="24" cy="7" r="2" fill="currentColor" />
-      <circle cx="41" cy="12" r="2" fill="currentColor" />
     </svg>
   );
 }

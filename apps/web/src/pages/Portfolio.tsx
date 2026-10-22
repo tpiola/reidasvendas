@@ -12,8 +12,7 @@ export default function Portfolio() {
           <h1>Engenharia aplicada: casos reais.</h1>
           <p>
             Conheça a arquitetura de busca local, compra e atendimento dos
-            projetos publicados. Medições quantitativas de velocidade e
-            conversão: a instrumentar.
+            projetos publicados.
           </p>
         </div>
       </header>

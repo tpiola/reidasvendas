@@ -766,8 +766,8 @@ export const GROWTH_SEO: SeoEntry[] = [
   // caía no fallback e nascia com noindex, nofollow.
   {
     path: '/planos',
-    title: 'Preços: triagem de conversão, site, loja e assinatura | Rei das Vendas',
-    description: 'Triagem clínica remunerada, setup de infraestrutura ancorado no ROI e otimização contínua — mais a tabela de execução (site, loja e assinatura) com preço e prazo publicados. Sem orçamento escondido.',
+    title: 'Planos e preços: site, catálogo e auditoria | Rei das Vendas',
+    description: 'Página por R$ 1.497, site por R$ 3.297 e catálogo por R$ 5.497. Veja escopo, prazo e auditoria para operações com tráfego.',
     category: 'WebPage',
     headings: ['Engenharia de conversão: Triagem Clínica, Setup e Otimização contínua', 'Execução: serviço uma vez', 'Assinatura mensal', 'O que você leva junto com o preço', 'As perguntas que todo mundo faz antes de pagar'],
     questions: [

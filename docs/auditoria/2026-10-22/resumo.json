@@ -1,0 +1,173 @@
+{
+  "final-local-mobile-1.json": {
+    "url": "http://127.0.0.1:4180/",
+    "date": "2026-10-22T16:50:33.385Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 99.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 1965.798,
+      "first-contentful-paint": 1665.798,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 4.5,
+      "server-response-time": 11,
+      "total-byte-weight": 168606
+    }
+  },
+  "final-local-mobile-2.json": {
+    "url": "http://127.0.0.1:4180/",
+    "date": "2026-10-22T16:50:44.809Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 99.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 1960.082,
+      "first-contentful-paint": 1660.082,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 14,
+      "server-response-time": 2,
+      "total-byte-weight": 168606
+    }
+  },
+  "final-local-desktop.json": {
+    "url": "http://127.0.0.1:4180/",
+    "date": "2026-10-22T16:51:07.429Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 429.95,
+      "first-contentful-paint": 369.95,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 0,
+      "server-response-time": 2,
+      "total-byte-weight": 198685
+    }
+  },
+  "final-local-mobile-3.json": {
+    "url": "http://127.0.0.1:4180/",
+    "date": "2026-10-22T16:50:56.179Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 99.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 1805.988,
+      "first-contentful-paint": 1655.988,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 10,
+      "server-response-time": 2,
+      "total-byte-weight": 168606
+    }
+  },
+  "baseline-squarespace-desktop.json": {
+    "url": "https://pt.squarespace.com/design-de-sites",
+    "date": "2026-10-22T16:36:05.234Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 56.00000000000001,
+      "accessibility": 100,
+      "best-practices": 69.0,
+      "seo": 92.0
+    },
+    "metrics": {
+      "largest-contentful-paint": 2807.23349999996,
+      "first-contentful-paint": 1150.0689999999904,
+      "cumulative-layout-shift": 0.07191011235955055,
+      "total-blocking-time": 348.99999999999955,
+      "server-response-time": 111,
+      "total-byte-weight": 7973008
+    }
+  },
+  "baseline-local-mobile.json": {
+    "url": "http://127.0.0.1:4180/",
+    "date": "2026-10-22T16:32:14.509Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 99.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 1665.996,
+      "first-contentful-paint": 1665.996,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 17,
+      "server-response-time": 8,
+      "total-byte-weight": 134584
+    }
+  },
+  "baseline-rdv-mobile.json": {
+    "url": "https://reidasvendas.com.br/",
+    "date": "2026-10-22T16:34:17.104Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 91.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 1711.9575000000002,
+      "first-contentful-paint": 1711.9575000000002,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 0,
+      "server-response-time": 119,
+      "total-byte-weight": 141987
+    }
+  },
+  "baseline-squarespace-mobile.json": {
+    "url": "https://pt.squarespace.com/design-de-sites",
+    "date": "2026-10-22T16:34:59.398Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 28.000000000000004,
+      "accessibility": 96.0,
+      "best-practices": 73.0,
+      "seo": 92.0
+    },
+    "metrics": {
+      "largest-contentful-paint": 14268.118000000002,
+      "first-contentful-paint": 3648.2220000000057,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 3549.5920000000024,
+      "server-response-time": 324,
+      "total-byte-weight": 7757031
+    }
+  },
+  "baseline-rdv-desktop.json": {
+    "url": "https://reidasvendas.com.br/",
+    "date": "2026-10-22T16:34:38.313Z",
+    "lighthouse": "13.5.0",
+    "scores": {
+      "performance": 92.0,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "metrics": {
+      "largest-contentful-paint": 446.2114999999998,
+      "first-contentful-paint": 446.2114999999998,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 0,
+      "server-response-time": 141,
+      "total-byte-weight": 141984
+    }
+  }
+}

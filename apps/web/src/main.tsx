@@ -9,9 +9,12 @@ import "./platform.css";
 import "./studio.css";
 import "./obsidian.css";
 import "./calm.css";
+import "./commerce.css";
+import { startBusinessTracking } from "./lib/businessTracking";
 import { startMeasurement } from "./lib/analytics";
 
 startMeasurement();
+startBusinessTracking();
 
 const root = document.getElementById("root")!;
 const app = (

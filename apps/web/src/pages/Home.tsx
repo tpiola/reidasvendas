@@ -1,3 +1,4 @@
+import { useSectionReveals } from "@/hooks/useSectionReveals";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -5,10 +6,17 @@ import {
   SpotlightCard,
   StickyStackSection,
 } from "@/components/ObsidianMotion";
+import {
+  BusinessConcerns,
+  DeliveryMethod,
+  CommercialFAQ,
+} from "@/components/CommercialSections";
 import { CalmHero } from "@/components/CalmHero";
 import { MicroQuiz } from "@/components/MicroQuiz";
 import { IMPLANTACAO, brl } from "@/lib/ofertas";
+import portfolioMedia from "@/lib/portfolio-media.json";
 import { PROJECTS, OTHER_WORK, PROJECT_EVIDENCE } from "@/lib/portfolio";
+const avif = portfolioMedia as Record<string, string>;
 const cases = [
   ...PROJECTS,
   ...OTHER_WORK.map(([name, type, description, href, image]) => ({
@@ -33,6 +41,7 @@ const segments = [
   ],
 ];
 export default function Home() {
+  useSectionReveals();
   const [interactive, setInteractive] = useState(false);
   useEffect(() => {
     setInteractive(true);
@@ -51,6 +60,8 @@ export default function Home() {
   return (
     <main id="main-content" className="obs-home">
       <CalmHero />
+      <BusinessConcerns />
+      <DeliveryMethod />
       <section
         className="obs-section rdv-shell calm-journey"
         aria-labelledby="journey-title"
@@ -108,6 +119,98 @@ export default function Home() {
           </div>
         </ParallaxStage>
       </section>
+      <section className="obs-section rdv-shell" aria-labelledby="cases-title">
+        <div className="obs-section-heading">
+          <h2 id="cases-title">
+            Engenharia aplicada:
+            <br />
+            <span>casos reais.</span>
+          </h2>
+          <p>Projetos publicados. Entre, navegue e conheça o trabalho.</p>
+        </div>
+        <StickyStackSection>
+          {cases.map((project, i) => (
+            <article
+              className="obs-case"
+              key={project.name}
+              style={{ top: `${100 + i * 16}px` }}
+            >
+              <a href={project.href} target="_blank" rel="noopener noreferrer">
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcSet={`${avif[project.image.replace(".webp", "-480.webp")]} 480w, ${avif[project.image.replace(".webp", "-800.webp")]} 800w, ${avif[project.image]} 1200w`}
+                    sizes="(max-width: 800px) calc(100vw - 40px), 50vw"
+                  />
+                  <img
+                    src={project.image}
+                    srcSet={`${project.image.replace(".webp", "-480.webp")} 480w, ${project.image.replace(".webp", "-800.webp")} 800w, ${project.image} 1200w`}
+                    sizes="(max-width: 800px) calc(100vw - 32px), 50vw"
+                    decoding="async"
+                    alt={`Projeto ${project.name}`}
+                    width="1200"
+                    height="750"
+                    loading="lazy"
+                  />
+                </picture>
+              </a>
+              <div>
+                <small>{project.type}</small>
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+                <ul>
+                  {project.scope.map((scope) => (
+                    <li key={scope}>{scope}</li>
+                  ))}
+                </ul>
+                <div className="obs-measure">
+                  <span aria-hidden="true">↗</span>
+                  <div>
+                    Trabalho publicado
+                    <small>
+                      Explore a experiência e os recursos do projeto.
+                    </small>
+                  </div>
+                </div>
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explorar projeto publicado ↗
+                </a>
+              </div>
+            </article>
+          ))}
+        </StickyStackSection>
+      </section>
+      <section
+        className="obs-section rdv-shell"
+        aria-labelledby="evidence-title"
+      >
+        <div className="obs-section-heading">
+          <h2 id="evidence-title">
+            Trabalho publicado.
+            <br />
+            <span>Código verificável.</span>
+          </h2>
+          <p>
+            Do serviço local à plataforma de conteúdo: conheça projetos próprios
+            e confira o que foi construído.
+          </p>
+        </div>
+        <div className="obs-evidence">
+          {PROJECT_EVIDENCE.map((project) => (
+            <article key={project.name}>
+              <h3>{project.name}</h3>
+              <p>{project.detail}</p>
+              <a href={project.repo} target="_blank" rel="noopener noreferrer">
+                Conferir projeto no GitHub ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
       <section className="obs-section rdv-shell" aria-labelledby="door-title">
         <div className="obs-section-heading">
           <h2 id="door-title">
@@ -161,6 +264,12 @@ export default function Home() {
                     <h3>{item.nome}</h3>
                     <strong className="obs-price">{brl(item.valor!)}</strong>
                     <p>{item.resumo}</p>
+                    <ul className="commercial-deliverables">
+                      {item.entrega.slice(0, 2).map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                    <p className="commercial-deadline">Prazo: {item.prazo}.</p>
                     <Link to={`/diagnostico?modo=implantacao&plano=${item.id}`}>
                       Ver meu projeto ↗
                     </Link>
@@ -197,6 +306,28 @@ export default function Home() {
               </dl>
             </div>
           )}
+        </div>
+      </section>
+      <section
+        className="obs-section rdv-shell"
+        aria-labelledby="segments-title"
+      >
+        <div className="obs-section-heading">
+          <h2 id="segments-title">
+            Seu mercado.
+            <br />
+            <span>Uma jornada própria.</span>
+          </h2>
+          <Link to="/solucoes">Explorar todas as estruturas ↗</Link>
+        </div>
+        <div className="obs-grid three obs-segments">
+          {segments.map(([name, description, slug]) => (
+            <SpotlightCard key={name}>
+              <h3>{name}</h3>
+              <p>{description}</p>
+              <Link to={`/solucoes/${slug}`}>Ver estrutura ↗</Link>
+            </SpotlightCard>
+          ))}
         </div>
       </section>
       <section className="obs-section obs-comparison">
@@ -368,114 +499,7 @@ export default function Home() {
           </small>
         </div>
       </section>
-      <section className="obs-section rdv-shell" aria-labelledby="cases-title">
-        <div className="obs-section-heading">
-          <h2 id="cases-title">
-            Engenharia aplicada:
-            <br />
-            <span>casos reais.</span>
-          </h2>
-          <p>
-            Projetos publicados. Entre, navegue e conheça o trabalho. Resultados
-            quantitativos de velocidade e conversão: a instrumentar.
-          </p>
-        </div>
-        <StickyStackSection>
-          {cases.map((project, i) => (
-            <article
-              className="obs-case"
-              key={project.name}
-              style={{ top: `${100 + i * 16}px` }}
-            >
-              <a href={project.href} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={project.image}
-                  srcSet={`${project.image.replace(".webp", "-480.webp")} 480w, ${project.image.replace(".webp", "-800.webp")} 800w, ${project.image} 1200w`}
-                  sizes="(max-width: 800px) calc(100vw - 32px), 50vw"
-                  decoding="async"
-                  alt={`Projeto ${project.name}`}
-                  width="1200"
-                  height="750"
-                  loading="lazy"
-                />
-              </a>
-              <div>
-                <small>{project.type}</small>
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <ul>
-                  {project.scope.map((scope) => (
-                    <li key={scope}>{scope}</li>
-                  ))}
-                </ul>
-                <div className="obs-measure">
-                  <span aria-hidden="true">◔</span>
-                  <div>
-                    Medição de performance
-                    <small>Sem comparação numérica até existir laudo.</small>
-                  </div>
-                </div>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Explorar projeto publicado ↗
-                </a>
-              </div>
-            </article>
-          ))}
-        </StickyStackSection>
-      </section>
-      <section
-        className="obs-section rdv-shell"
-        aria-labelledby="evidence-title"
-      >
-        <div className="obs-section-heading">
-          <h2 id="evidence-title">
-            Trabalho publicado.
-            <br />
-            <span>Código verificável.</span>
-          </h2>
-          <p>
-            Do serviço local à plataforma de conteúdo: conheça projetos próprios
-            e confira o que foi construído.
-          </p>
-        </div>
-        <div className="obs-evidence">
-          {PROJECT_EVIDENCE.map((project) => (
-            <article key={project.name}>
-              <h3>{project.name}</h3>
-              <p>{project.detail}</p>
-              <a href={project.repo} target="_blank" rel="noopener noreferrer">
-                Conferir projeto no GitHub ↗
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section
-        className="obs-section rdv-shell"
-        aria-labelledby="segments-title"
-      >
-        <div className="obs-section-heading">
-          <h2 id="segments-title">
-            Seu mercado.
-            <br />
-            <span>Uma jornada própria.</span>
-          </h2>
-          <Link to="/solucoes">Explorar todas as estruturas ↗</Link>
-        </div>
-        <div className="obs-grid three obs-segments">
-          {segments.map(([name, description, slug]) => (
-            <SpotlightCard key={name}>
-              <h3>{name}</h3>
-              <p>{description}</p>
-              <Link to={`/solucoes/${slug}`}>Ver estrutura ↗</Link>
-            </SpotlightCard>
-          ))}
-        </div>
-      </section>
+      <CommercialFAQ />
       <section id="comecar" className="obs-section rdv-shell obs-closing">
         <div>
           <h2>

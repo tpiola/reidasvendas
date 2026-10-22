@@ -6,7 +6,17 @@ test("58 rotas canônicas têm HTML, SEO, schema legível e navegam sem erro de 
 }) => {
   test.setTimeout(300000);
   await page.addInitScript(() =>
-    localStorage.setItem("reidasvendas:cookie-consent", "rejected"),
+    localStorage.setItem(
+      "reidasvendas:consent-v2",
+      JSON.stringify({
+        version: "2026-10-22",
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        updatedAt: "2026-10-22T00:00:00Z",
+        expiresAt: "2099-01-01T00:00:00Z",
+      }),
+    ),
   );
   const sitemap = await (await request.get("/sitemap.xml")).text();
   const paths = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
@@ -50,7 +60,17 @@ test("preços normais e promocionais permanecem coerentes", async ({ page }) => 
 
 test("recusa de analytics não dispara tags de medição", async ({ page }) => {
   await page.addInitScript(() =>
-    localStorage.setItem("reidasvendas:cookie-consent", "rejected"),
+    localStorage.setItem(
+      "reidasvendas:consent-v2",
+      JSON.stringify({
+        version: "2026-10-22",
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        updatedAt: "2026-10-22T00:00:00Z",
+        expiresAt: "2099-01-01T00:00:00Z",
+      }),
+    ),
   );
   const calls: string[] = [];
   page.on("request", (request) => {

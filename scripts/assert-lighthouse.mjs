@@ -1,0 +1,11 @@
+import { readFile } from 'node:fs/promises';
+const file = process.argv[2];
+if (!file) throw new Error('Uso: node scripts/assert-lighthouse.mjs caminho/relatorio.json');
+const report = JSON.parse(await readFile(file, 'utf8'));
+if (report.runtimeError) throw new Error(report.runtimeError.message);
+const failures = [];
+const limits = { performance: .90, accessibility: .95, 'best-practices': .95, seo: .95 };
+for (const [name, minimum] of Object.entries(limits)) if (!(report.categories?.[name]?.score >= minimum)) failures.push(`${name}: ${report.categories?.[name]?.score} < ${minimum}`);
+for (const [name, maximum] of [['largest-contentful-paint', 2500], ['cumulative-layout-shift', .1], ['first-contentful-paint', 2000]]) if (!(report.audits?.[name]?.numericValue <= maximum)) failures.push(`${name}: ${report.audits?.[name]?.numericValue} > ${maximum}`);
+if (failures.length) throw new Error(`Orçamento não atendido: ${failures.join('; ')}`);
+console.log(JSON.stringify({ file, passed: true, scores: Object.fromEntries(Object.entries(limits).map(([name]) => [name, Math.round(report.categories[name].score * 100)])), lcp: report.audits['largest-contentful-paint'].numericValue, cls: report.audits['cumulative-layout-shift'].numericValue, inp: 'Somente RUM com interação real; não inferido do Lighthouse.' }));

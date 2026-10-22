@@ -7,6 +7,7 @@ declare global {
   }
 
   interface ImportMetaEnv {
+    readonly VITE_MARKETING_ENABLED?: string;
     readonly VITE_GTM_ID?: string;
     readonly VITE_GA4_ID?: string;
     readonly VITE_GSC_VERIFICATION?: string;

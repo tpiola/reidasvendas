@@ -64,16 +64,10 @@ for (const url of urls) {
     html.includes(`<link rel="canonical" href="${url}"`),
     `Canonical divergente: ${pathname}`,
   );
-  for (const language of ["pt-BR", "x-default"]) {
-    assert(
-      (html.match(/<link\b[^>]*>/gi) || []).some(
-        (tag) =>
-          tag.includes(`hreflang="${language}"`) &&
-          tag.includes(`href="${url}"`),
-      ),
-      `Hreflang divergente: ${pathname} (${language})`,
-    );
-  }
+  assert(
+    !/hreflang=/i.test(html),
+    `Não há variantes traduzidas publicadas para hreflang: ${pathname}`,
+  );
   assert(
     (html.match(/<h1\b/gi) || []).length === 1,
     `Cada página precisa de um H1: ${pathname}`,

@@ -1,3 +1,5 @@
+> Revisão22/10/2026: direção clara comercial com Sora self-host nos títulos, system-ui no corpo, CTA ouro#C8A24A com texto preto e coroa geométrica com seta. Regras anteriores conflitantes são históricas; ver docs/AUDITORIA-CONVERSAO-BRASILEIRA.md.
+
 > Direção vigente — 22/10/2026: interface clara e espaçosa, inspirada no ritmo público de meta.ai. A revisão abaixo é histórica onde divergir. Fonte única: `apps/web/src/tokens.css`, aplicada por `calm.css`. Tipografia de sistema sem condensação; branco, cinzas frios, azul de ação e coroa dourada. Formulário de objetivo na abertura; redes sociais com rótulos. Scroll com transform nativo e alternativa estática; sem esconder texto antes da hidratação.
 
 ---

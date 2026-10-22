@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+date: Thu, 22 Oct 2026 16:31:23 GMT
+
+HTTP/2 200 
+date: Thu, 22 Oct 2026 16:31:23 GMT
+content-type: text/html; charset=utf-8
+content-length: 77135
+server: envoy
+vary: Accept-Encoding,Accept-Encoding
+accept-ranges: bytes
+age: 22439
+cache-control: no-cache
+etag: W/"ed1025e2572d309f0df0a5a5f67add4a"
+expires: 
+strict-transport-security: max-age=15552000
+x-content-type-options: nosniff
+x-contextid: BJpk6nCq/u5wQoY2P
+x-sl-norewrite: 1
+x-sl-notranslate: 1
+content-language: pt-BR
+x-sl-cached: 1
+content-encoding: gzip
+x-server: Smartling
+x-sl-notranslate: 1
+x-sl-norewrite: 1
+x-envoy-upstream-service-time: 260
+

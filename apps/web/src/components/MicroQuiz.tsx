@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { readBrief, clearBrief } from "@/lib/brief";
 import { BRAND } from "@/lib/brand";
 import { trackEvent } from "@/lib/analytics";
 const QUESTIONS = [
@@ -42,9 +43,11 @@ export function MicroQuiz({
   }, []);
   const location = useLocation();
   const question = QUESTIONS[answers.length];
-  const objective = new URLSearchParams(location.search)
-    .get("objetivo")
-    ?.slice(0, 600);
+  const state = location.state as { objective?: string } | null;
+  const objective =
+    state?.objective?.slice(0, 600) ||
+    readBrief() ||
+    new URLSearchParams(location.search).get("objetivo")?.slice(0, 600);
   const message = `Olá! Quero conversar sobre ${context}.\n${offer ? `Oferta: ${offer}\n` : ""}${objective ? `Objetivo: ${objective}\n` : ""}${answers.map((a, i) => `${QUESTIONS[i].title} ${a}`).join("\n")}\nOrigem: https://reidasvendas.com.br${location.pathname}${location.search}`;
   return (
     <section className="obs-quiz" aria-label="Qualificação rápida">
@@ -97,12 +100,13 @@ export function MicroQuiz({
               href={`https://wa.me/${BRAND.phone}?text=${encodeURIComponent(message)}`}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() =>
+              onClick={() => {
                 trackEvent("whatsapp_click", {
                   position: "micro-quiz",
                   context,
-                })
-              }
+                });
+                clearBrief();
+              }}
             >
               Continuar no WhatsApp ↗
             </a>

@@ -1,4 +1,5 @@
 import { build } from "esbuild";
+import { HOME_FAQ } from "../src/lib/commercial.ts";
 import { mkdir, readFile, writeFile, readdir, unlink } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -17,18 +18,17 @@ const staticEntries = [
     title: "Sites para negócios locais em Franca, SP | Rei das Vendas",
     description:
       "Sites, catálogos e atendimento conectados para transformar a procura pelo seu negócio em conversas de venda. Implantação direta ou auditoria profissional.",
-    heading:
-      "Seu negócio merece ser encontrado.",
+    heading: "Da visita ao contato. Com um caminho claro.",
     category: "WebPage",
     headings: [
-      "Patologia de funil",
-      "Protocolo de auditoria",
-      "Laudos publicados",
-      "Esteira de contratação",
-      "Limite de escopo",
+      "O contato não deveria se perder pelo caminho",
+      "Um projeto organizado",
+      "Projetos publicados",
+      "Implantação direta e auditoria",
+      "Dúvidas antes de começar",
     ],
     questions: [],
-    lastModified: "2026-10-05",
+    lastModified: "2026-10-22",
   },
   {
     path: "/portfolio",
@@ -95,7 +95,7 @@ const staticEntries = [
       "Seus pedidos",
     ],
     questions: [],
-    lastModified: "2026-10-05",
+    lastModified: "2026-10-22",
   },
   {
     path: "/termos",
@@ -237,10 +237,11 @@ function structuredData(entry, url) {
     },
   ];
 
-  if (entry.questions.length) {
+  const questions = entry.path === "/" ? HOME_FAQ : entry.questions;
+  if (questions.length) {
     graph.push({
       "@type": "FAQPage",
-      mainEntity: entry.questions.map((item) => ({
+      mainEntity: questions.map((item) => ({
         "@type": "Question",
         name: item.question,
         acceptedAnswer: { "@type": "Answer", text: item.answer },

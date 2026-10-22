@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieConsent } from "@/components/CookieConsent";
 import Home from "@/pages/Home";
+import { HOME_FAQ } from "@/lib/commercial";
 import { BRAND } from "@/lib/brand";
 import { captureAttribution, trackEvent } from "@/lib/analytics";
 import { GUIDE_SLUGS } from "@/lib/guide-slugs";
@@ -379,13 +380,27 @@ function RouteMetadata() {
               : {
                   "@context": "https://schema.org",
                   "@type":
-                    pathname === "/solucoes" || pathname === "/portfolio"
-                      ? "CollectionPage"
-                      : "WebPage",
+                    pathname === "/"
+                      ? ["WebPage", "FAQPage"]
+                      : pathname === "/solucoes" || pathname === "/portfolio"
+                        ? "CollectionPage"
+                        : "WebPage",
                   name: metadata.title,
                   description: metadata.description,
                   url: canonical,
                   inLanguage: "pt-BR",
+                  ...(pathname === "/"
+                    ? {
+                        mainEntity: HOME_FAQ.map((item) => ({
+                          "@type": "Question",
+                          name: item.question,
+                          acceptedAnswer: {
+                            "@type": "Answer",
+                            text: item.answer,
+                          },
+                        })),
+                      }
+                    : {}),
                   isPartOf: { "@id": "https://reidasvendas.com.br/#website" },
                 },
         ).replace(/</g, "\\u003c");

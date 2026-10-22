@@ -4,6 +4,7 @@ import { BrandLockup } from "@/components/BrandLockup";
 import { BRAND } from "@/lib/brand";
 import { CAMPANHA_ATIVA } from "@/lib/ofertas";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { StickyMobileCTA } from "@/components/StickyMobileCTA";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
 import { useI18n } from "@/lib/i18n";
 import { trackEvent } from "@/lib/analytics";
@@ -70,7 +71,13 @@ export function SiteFooter() {
           >
             WhatsApp · {BRAND.phoneDisplay}
           </a>
-          <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a>
+          <a
+            href={`mailto:${BRAND.email}`}
+            data-track="email_click"
+            data-location="footer"
+          >
+            {BRAND.email}
+          </a>
           <span>{t("footer.remote")}</span>
           <span>{t("footer.hours")}</span>
           <div
@@ -120,6 +127,15 @@ export function SiteFooter() {
             {t("footer.contact.link")}
           </TransitionLink>
         </div>
+        <button
+          type="button"
+          className="rdv-cookie-settings"
+          onClick={() =>
+            window.dispatchEvent(new Event("rdv:consent-settings"))
+          }
+        >
+          Preferências de cookies
+        </button>
         <LanguageSwitcher />
         <p>{t("footer.tagline")}</p>
       </div>
@@ -128,6 +144,7 @@ export function SiteFooter() {
           viola a regra 'region' do axe em 8 rotas. Posição visual vem de
           position:fixed (index.css), então o lugar no DOM não move o botão. */}
       <WhatsAppFab />
+      <StickyMobileCTA />
     </footer>
   );
 }
