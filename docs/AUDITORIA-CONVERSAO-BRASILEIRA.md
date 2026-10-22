@@ -232,3 +232,9 @@ Hipóteses iniciais de funil: CTR CTA3–8%, scroll50>=50%, form_start→submit>
 Implementação, backlog, copy, schemas, plano de tracking/testes e evidência completa estão neste repositório. Scripts podem ser executados pela equipe sem preencher placeholders no código de produção. IDs reais de contas, acesso a dashboards, autorização de métricas e condições comerciais ainda são dados do negócio e não podem ser inferidos.
 
 Fontes primárias: https://developers.google.com/tag-platform/security/guides/consent?consentmode=basic ; https://web.dev/articles/vitals ; https://developers.google.com/search/docs/specialty/international/localized-versions ; https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes . Evidência de interface A é inspeção pública e LHR; resultado de vendas de A não está disponível. Não se copiou sua linguagem visual.
+
+### Verificação final no domínio público
+
+Release de runtime `612fb1f6b9c22ada3905a71ca38a06dd06bf4e06`, deployment `dpl_4i7RdApDswatnSuZZfKFqSDktLSx`, READY no domínio canônico. Todas as58 rotas responderam200. Os5 assets iniciais conferem byte a byte com o build; fonte e AVIF também. Headers, canonical limpa e novo hero verificados. Navegador público: zero erro de console, AVIF carregado e briefing ausente da query.
+
+Lighthouse público após release, mesmas condições de proxy descritas: mobile92/100/100/100, LCP1.768ms, CLS0, FCP1.618ms, TBT25ms, transferência175.914B. Desktop93/100/100/100, LCP444ms. São amostras de laboratório, não INP/p75 nem promessa de resultado. LHR completos final-public-*.json.gz e production-verification.json arquivados junto às demais evidências. A atualização documental subsequente não altera o runtime medido.
