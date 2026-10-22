@@ -1,16 +1,6 @@
-import {
-  useRef,
-  type ReactNode,
-  type PointerEvent,
-  type HTMLAttributes,
-} from "react";
+import { type ReactNode, type PointerEvent, type HTMLAttributes } from "react";
 import { Link } from "react-router-dom";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+
 export function SpotlightCard({
   children,
   className = "",
@@ -37,11 +27,14 @@ export function MagneticCTA({
   children: ReactNode;
   to: string;
 }) {
-  const reduce = useReducedMotion();
   const props: HTMLAttributes<HTMLElement> = {
     className: "obs-cta",
     onPointerMove: (e) => {
-      if (reduce || e.pointerType !== "mouse") return;
+      if (
+        e.pointerType !== "mouse" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      )
+        return;
       const b = e.currentTarget.getBoundingClientRect();
       e.currentTarget.style.transform = `translate(${(e.clientX - b.left - b.width / 2) * 0.07}px, ${(e.clientY - b.top - b.height / 2) * 0.12}px)`;
     },
@@ -66,18 +59,7 @@ export function MagneticCTA({
   );
 }
 export function ParallaxStage({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [18, -18]);
-  return (
-    <motion.div ref={ref} style={{ y: reduce ? 0 : y }} className="obs-stage">
-      {children}
-    </motion.div>
-  );
+  return <div className="obs-stage">{children}</div>;
 }
 export function StickyStackSection({ children }: { children: ReactNode }) {
   return <div className="obs-stack">{children}</div>;

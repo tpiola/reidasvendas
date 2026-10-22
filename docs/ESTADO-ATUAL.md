@@ -194,3 +194,6 @@ O dono solicitou testes completos e uso dos projetos do GitHub como autoridade. 
 
 ### Portão da versão Obsidian — 22/10/2026
 TypeScript, lint, 50 testes unitários e build do monorepo aprovados. Playwright: 20 testes aprovados, incluindo 58 rotas, acessibilidade, preços, privacidade, três viewports e HTML sem JavaScript. Relatório: docs/VERIFICACAO-OBSIDIAN.md. Dependências atualizadas para Vite 6.4.4, Vitest 4.1.12 e Storybook 8.6.19; permanece apenas braces sem patch. O parágrafo de publicação de 12/10 acima é histórico: confirmar o SHA deste release no GitHub e na Vercel, em vez de reutilizar o identificador antigo.
+
+### Publicação e otimização do caminho crítico
+Release 2aa52ab publicado em produção no projeto canônico, deployment dpl_ARsRFm653ru6DrnDVcqPiARVdUyL READY. Domínio confirmado com novo Hero, sem boot overlay e com headers de segurança. A segunda passagem remove motion dos preloads da Home e conserva essa biblioteca nas rotas que precisam dela; as profundidades da Home usam CSS nativo. Portão completo e 20 testes de navegador revalidados. O SHA publicado deve ser confirmado no deployment correspondente, e não inferido de um preview.

@@ -7,7 +7,6 @@ import {
   useParams,
   Navigate,
 } from "react-router-dom";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieConsent } from "@/components/CookieConsent";
@@ -110,42 +109,8 @@ function Loading() {
   );
 }
 
-const pageTransitionVariants = {
-  initial: { opacity: 0, y: 12 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.28, ease: [0.16, 1, 0.3, 1] as const },
-  },
-  exit: {
-    opacity: 0,
-    y: -8,
-    transition: { duration: 0.18, ease: [0.4, 0, 1, 1] as const },
-  },
-};
-
-// Navegadores com View Transitions API nativo (Chromium, e React Router v7
-// via <Link viewTransition>) já cross-dissolvem a troca de rota no nível do
-// compositor — rodar a animação do Framer Motion por cima duplicaria o efeito
-// e brigaria com o snapshot do navegador. Nesses navegadores o Framer Motion
-// só entrega o estado final; nos demais, mantém o fade/slide de sempre.
-const supportsViewTransitions =
-  typeof document !== "undefined" && "startViewTransition" in document;
-
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const shouldReduceMotion = useReducedMotion();
-  const skipMotion = shouldReduceMotion || supportsViewTransitions;
-
-  return (
-    <motion.div
-      variants={pageTransitionVariants}
-      initial={false}
-      animate={skipMotion ? { opacity: 1, y: 0 } : "animate"}
-      exit={skipMotion ? undefined : "exit"}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="rdv-page-transition">{children}</div>;
 }
 
 /** Redirect 301-level para consolidar rotas antigas (evita duplicidade e perda de SEO). */
@@ -486,196 +451,185 @@ function SiteLayout() {
       <SiteHeader />
       <div className="page-offset">
         <Suspense fallback={<Loading />}>
-          <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<Home />} />
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/solucoes"
+              element={
+                <PageTransition>
+                  <Solucoes />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/solucoes/:slug"
+              element={
+                <PageTransition>
+                  <SolutionDetail />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/alternativas/:slug"
+              element={
+                <PageTransition>
+                  <ComparisonDetail />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/ferramentas"
+              element={
+                <PageTransition>
+                  <Tools />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/ferramentas/:slug"
+              element={
+                <PageTransition>
+                  <ToolDetail />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/demonstracoes"
+              element={
+                <PageTransition>
+                  <Demonstrations />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/demonstracoes/:slug"
+              element={
+                <PageTransition>
+                  <DemoExperience />
+                </PageTransition>
+              }
+            />
+            {GUIDE_SLUGS.map((slug) => (
               <Route
-                path="/solucoes"
+                key={slug}
+                path={`/${slug}`}
                 element={
                   <PageTransition>
-                    <Solucoes />
+                    <IntentGuide />
                   </PageTransition>
                 }
               />
-              <Route
-                path="/solucoes/:slug"
-                element={
-                  <PageTransition>
-                    <SolutionDetail />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/alternativas/:slug"
-                element={
-                  <PageTransition>
-                    <ComparisonDetail />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/ferramentas"
-                element={
-                  <PageTransition>
-                    <Tools />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/ferramentas/:slug"
-                element={
-                  <PageTransition>
-                    <ToolDetail />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/demonstracoes"
-                element={
-                  <PageTransition>
-                    <Demonstrations />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/demonstracoes/:slug"
-                element={
-                  <PageTransition>
-                    <DemoExperience />
-                  </PageTransition>
-                }
-              />
-              {GUIDE_SLUGS.map((slug) => (
-                <Route
-                  key={slug}
-                  path={`/${slug}`}
-                  element={
-                    <PageTransition>
-                      <IntentGuide />
-                    </PageTransition>
-                  }
-                />
-              ))}
-              <Route
-                path="/diagnostico"
-                element={
-                  <PageTransition>
-                    <Diagnostico />
-                  </PageTransition>
-                }
-              />
-              <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
-              <Route path="/servicos/:slug" element={<RedirectLegacySlug />} />
-              <Route path="/modelos" element={<RedirectTo to="/solucoes" />} />
-              <Route
-                path="/projetos"
-                element={<RedirectTo to="/portfolio" />}
-              />
-              <Route
-                path="/blog"
-                element={
-                  <PageTransition>
-                    <Blog />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/blog/:slug"
-                element={
-                  <PageTransition>
-                    <BlogPost />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/contato"
-                element={
-                  <PageTransition>
-                    <ContatoDireto />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/planos"
-                element={
-                  <PageTransition>
-                    <Planos />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/black-friday"
-                element={
-                  <PageTransition>
-                    <BlackFriday />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/sobre"
-                element={
-                  <PageTransition>
-                    <Sobre />
-                  </PageTransition>
-                }
-              />
-              <Route path="/recursos" element={<RedirectTo to="/blog" />} />
-              <Route
-                path="/segmentos"
-                element={<RedirectTo to="/solucoes" />}
-              />
-              <Route path="/segmentos/:slug" element={<RedirectLegacySlug />} />
-              <Route
-                path="/portfolio"
-                element={
-                  <PageTransition>
-                    <Portfolio />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/obrigado"
-                element={
-                  <PageTransition>
-                    <Obrigado />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/politica"
-                element={
-                  <PageTransition>
-                    <Politica />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/termos"
-                element={
-                  <PageTransition>
-                    <Termos />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="/templates"
-                element={<RedirectTo to="/demonstracoes" />}
-              />
-              <Route path="/builder" element={<RedirectTo to="/solucoes" />} />
-              <Route
-                path="/extensions"
-                element={<RedirectTo to="/solucoes" />}
-              />
-              <Route
-                path="*"
-                element={
-                  <PageTransition>
-                    <NotFound />
-                  </PageTransition>
-                }
-              />
-            </Routes>
-          </AnimatePresence>
+            ))}
+            <Route
+              path="/diagnostico"
+              element={
+                <PageTransition>
+                  <Diagnostico />
+                </PageTransition>
+              }
+            />
+            <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
+            <Route path="/servicos/:slug" element={<RedirectLegacySlug />} />
+            <Route path="/modelos" element={<RedirectTo to="/solucoes" />} />
+            <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
+            <Route
+              path="/blog"
+              element={
+                <PageTransition>
+                  <Blog />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/blog/:slug"
+              element={
+                <PageTransition>
+                  <BlogPost />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/contato"
+              element={
+                <PageTransition>
+                  <ContatoDireto />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/planos"
+              element={
+                <PageTransition>
+                  <Planos />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/black-friday"
+              element={
+                <PageTransition>
+                  <BlackFriday />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/sobre"
+              element={
+                <PageTransition>
+                  <Sobre />
+                </PageTransition>
+              }
+            />
+            <Route path="/recursos" element={<RedirectTo to="/blog" />} />
+            <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
+            <Route path="/segmentos/:slug" element={<RedirectLegacySlug />} />
+            <Route
+              path="/portfolio"
+              element={
+                <PageTransition>
+                  <Portfolio />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/obrigado"
+              element={
+                <PageTransition>
+                  <Obrigado />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/politica"
+              element={
+                <PageTransition>
+                  <Politica />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/termos"
+              element={
+                <PageTransition>
+                  <Termos />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/templates"
+              element={<RedirectTo to="/demonstracoes" />}
+            />
+            <Route path="/builder" element={<RedirectTo to="/solucoes" />} />
+            <Route path="/extensions" element={<RedirectTo to="/solucoes" />} />
+            <Route
+              path="*"
+              element={
+                <PageTransition>
+                  <NotFound />
+                </PageTransition>
+              }
+            />
+          </Routes>
         </Suspense>
       </div>
       <SiteFooter />

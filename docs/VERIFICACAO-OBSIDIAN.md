@@ -54,3 +54,11 @@ A bateria não equivale a certificação de todos os navegadores ou a teste em u
 ## Medição de laboratório móvel
 
 Lighthouse 13.5.0, execução isolada no artefato de produção local, perfil móvel padrão: desempenho 69; acessibilidade 100; boas práticas 100; SEO 100. LCP 2,4 s, FCP 2,2 s, CLS 0, TBT 1.720 ms. Esta medição ainda indica trabalho na inicialização do JavaScript. Não é uma nota 10/10 nem dado de usuários reais. A medição anterior tinha TBT 3.520 ms; a redução não elimina a necessidade de otimizar o caminho crítico.
+
+## Segunda passagem de otimização
+
+O commit 2aa52ab foi publicado no projeto existente, com estado READY, novo Hero visível no domínio, bundle index-Dmw8KIVA.js e headers nosniff/SAMEORIGIN/HSTS confirmados por HTTP.
+
+A passagem seguinte retira Framer Motion da árvore inicial da Home, usa scroll timeline nativa com alternativa estática, mantém a preferência por movimento reduzido e preserva transições nativas de navegação. Os preloads da Home contêm apenas React, router e ícones; a biblioteca de motion passa a carregar apenas nas páginas que a utilizam. Os CTAs primários das páginas internas também seguem o verde esmeralda.
+
+Revalidação desta passagem: pnpm check, pnpm lint, pnpm test (50 testes), pnpm build e todos os 20 testes Playwright aprovados, incluindo as 58 rotas. A nota de laboratório anterior é histórica; a versão otimizada deve ser medida após sua publicação.
