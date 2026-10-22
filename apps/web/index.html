@@ -8,9 +8,7 @@
     />
     <meta name="theme-color" content="#07090D" />
     <meta name="color-scheme" content="dark" />
-    <title>
-      Sites e automações em Franca, SP | Rei das Vendas
-    </title>
+    <title>Sites e automações em Franca, SP | Rei das Vendas</title>
     <meta
       name="description"
       content="Sites premium, e-commerce, apps, SaaS, automações e operação digital sob medida para negócios locais e empresas em todo o Brasil — a partir de Franca, SP."
@@ -24,8 +22,16 @@
       content="index, follow, max-snippet:-1, max-image-preview:large"
     />
     <link rel="canonical" href="https://reidasvendas.com.br/" />
-    <link rel="alternate" hreflang="pt-BR" href="https://reidasvendas.com.br/" />
-    <link rel="alternate" hreflang="x-default" href="https://reidasvendas.com.br/" />
+    <link
+      rel="alternate"
+      hreflang="pt-BR"
+      href="https://reidasvendas.com.br/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://reidasvendas.com.br/"
+    />
 
     <meta name="geo.region" content="BR-SP" />
     <meta name="geo.placename" content="Franca" />
@@ -68,15 +74,39 @@
             },
             "areaServed": ["Franca", "Região de Franca", "Brasil"],
             "openingHoursSpecification": [
-              { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" },
-              { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:00",
+                "closes": "18:00"
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "09:00",
+                "closes": "13:00"
+              }
             ],
             "sameAs": [
               "https://instagram.com/reidasvendas",
               "https://linkedin.com/company/reidasvendas",
               "https://thiagopiola.com.br"
             ],
-            "knowsAbout": ["Sites profissionais", "E-commerce", "Aplicativos", "SaaS", "Automação de atendimento", "SEO local", "CRO"],
+            "knowsAbout": [
+              "Sites profissionais",
+              "E-commerce",
+              "Aplicativos",
+              "SaaS",
+              "Automação de atendimento",
+              "SEO local",
+              "CRO"
+            ],
             "founder": { "@id": "https://reidasvendas.com.br/#founder" }
           },
           {
@@ -117,7 +147,10 @@
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rei das Vendas — da busca à venda, sem perder ninguém no caminho" />
+    <meta
+      property="og:image:alt"
+      content="Rei das Vendas — da busca à venda, sem perder ninguém no caminho"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -154,387 +187,36 @@
     />
 
     <style>
-      :root {
-        --paper: #07090d;
-        --paper-raised: #0d1118;
-        --surface: #141923;
-        --ink: #f7f3e8;
-        --ink-soft: #c0b9aa;
-        --muted: #9b9384;
-        --rule: #302e28;
-        --accent: #e8c86f;
-        --accent-strong: #f4e1a5;
-        --positive: #22c76a;
-        --positive-ink: #06170d;
-        --display: "Barlow Condensed", "Arial Narrow", sans-serif;
-        --body: "Archivo", "Helvetica Neue", sans-serif;
-      }
-      *,
-      *::before,
-      *::after { box-sizing: border-box; }
-      html,
-      body {
-        margin: 0;
-        min-width: 320px;
-        overflow-x: clip;
-        background: var(--paper);
-        color: var(--ink);
+      html {
+        background: #05070a;
+        color-scheme: dark;
       }
       body {
-        font-family: var(--body);
-        font-size: 16px;
-        line-height: 1.7;
-        -webkit-font-smoothing: antialiased;
-      }
-      #root { min-height: 100dvh; }
-
-      /* Boot loader — estado de carregamento de marca, NÃO uma página.
-         Some quando o React monta (removeBootLoader em main.tsx).
-         Mesmo fundo do tema: a transição para o conteúdo é suave. */
-      .rdv-boot {
-        position: fixed;
-        inset: 0;
-        z-index: 2147483000;
-        display: grid;
-        place-items: center;
-        background: #07090d;
-        transition: opacity 420ms ease;
-      }
-      .rdv-boot.is-leaving {
-        opacity: 0;
-        pointer-events: none;
-      }
-      .rdv-boot__inner {
-        display: grid;
-        justify-items: center;
-        gap: 1rem;
-      }
-      .rdv-boot__mark {
-        display: grid;
-        width: 3.4rem;
-        height: 3.4rem;
-        place-items: center;
-        border: 1px solid rgba(232, 200, 111, 0.85);
-        color: #f4e1a5;
-        font-family: var(--display);
-        font-size: 1.55rem;
-        line-height: 1;
-      }
-      .rdv-boot__name {
-        color: #f7f3e8;
-        font-family: var(--display);
-        font-size: 1.45rem;
-        font-weight: 600;
-        letter-spacing: 0.03em;
-        line-height: 1;
-      }
-      .rdv-boot__bar {
-        width: 9rem;
-        height: 1px;
-        overflow: hidden;
-        background: rgba(232, 200, 111, 0.18);
-      }
-      .rdv-boot__bar::after {
-        content: '';
-        display: block;
-        width: 45%;
-        height: 100%;
-        background: #e8c86f;
-        animation: rdv-boot-slide 1.15s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-      }
-      @keyframes rdv-boot-slide {
-        0% { transform: translateX(-110%); }
-        100% { transform: translateX(245%); }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .rdv-boot__bar::after { animation: none; }
-      }
-
-      /* ═══ CSS das páginas internas pré-renderizadas (markup initial-* gerado
-         pelo prerender-growth.mjs — NÃO usado na home, que só tem o loader) ═══ */
-      .initial-header {
-        border-bottom: 1px solid var(--rule);
-        background: var(--paper);
-      }
-      .initial-header__inner {
-        width: min(calc(100% - 2rem), 82rem);
-        min-height: 4.5rem;
-        margin-inline: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-        .initial-header__action {
-          font-size: 0.75rem;
-        }
-        .initial-header__action {
-          padding-inline: 0.75rem;
-        }
-      .initial-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        color: var(--ink);
-        text-decoration: none;
-        line-height: 1;
-      }
-      .initial-brand b {
-        display: grid;
-        width: 2.5rem;
-        height: 2.5rem;
-        place-items: center;
-        border: 1px solid var(--ink);
-        font-family: var(--display);
-        font-size: 1.125rem;
-      }
-      .initial-brand span {
-        display: grid;
-        gap: 0.25rem;
-      }
-      .initial-brand strong {
-        font-family: var(--display);
-        font-size: 1.375rem;
-        line-height: 0.9;
-      }
-      .initial-brand small {
-        color: var(--ink-soft);
-        font-size: 0.75rem;
-        font-weight: 600;
-      }
-        .initial-brand small {
-          display: none;
-        }
-        .initial-brand strong {
-          font-size: 1.125rem;
-        }
-        .initial-brand b {
-          width: 2.25rem;
-          height: 2.25rem;
-        }
-      .initial-home__action {
-        display: inline-flex;
-        min-height: 2.75rem;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--positive);
-        background: var(--positive);
-        color: var(--positive-ink);
-        font-size: 0.875rem;
-        font-weight: 700;
-        line-height: 1;
-        text-decoration: none;
-        white-space: nowrap;
-      }
-      .initial-home {
-        min-height: calc(100svh - 4.5rem);
-        padding: clamp(3rem, 8vh, 7rem) 1rem;
-        display: grid;
-        place-items: center;
-        background:
-#0b0c0e;
-        color: #f7f5f2;
-        text-align: center;
-      }
-      .initial-home__grid {
-        width: min(100%, 82rem);
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(19rem, 0.8fr);
-        align-items: end;
-        gap: clamp(2rem, 6vw, 6rem);
-        text-align: left;
-      }
-      .initial-home__kicker {
         margin: 0;
-        padding: 0.5rem 0.9rem;
-        border: 1px solid rgba(232, 200, 111, 0.28);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.055);
-        color: #e8c86f;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        line-height: 1;
-        text-transform: uppercase;
+        background: #05070a;
       }
-      .initial-home h1 {
-        max-width: 14ch;
-        margin: clamp(1.35rem, 3vh, 2rem) 0 0;
-        font-family: var(--display);
-        font-size: clamp(3.6rem, 7.4vw, 7rem);
-        font-weight: 600;
-        letter-spacing: -0.035em;
-        line-height: 0.93;
-        text-wrap: balance;
-      }
-      .initial-home h1 span {
-        color: #f4e1a5;
-        text-decoration: underline;
-        text-decoration-color: #e8c86f;
-        text-decoration-thickness: 2px;
-        text-underline-offset: 0.1em;
-      }
-      .initial-home__lead {
-        max-width: 48rem;
-        margin: clamp(1.5rem, 3vh, 2rem) 0 0;
-        color: rgba(247, 245, 242, 0.72);
-        font-size: clamp(1rem, 1.6vw, 1.22rem);
-        line-height: 1.7;
-        text-wrap: balance;
-      }
-      .initial-home__lead strong {
-        color: #f4e1a5;
-      }
-      .initial-home__actions {
-        margin-top: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-      }
-      .initial-home__secondary {
-        display: inline-flex;
-        min-height: 2.75rem;
-        align-items: center;
-        padding: 0.75rem 1rem;
-        border: 1px solid rgba(247, 243, 232, 0.25);
-        color: #f7f3e8;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-decoration: none;
-      }
-        .initial-home {
-          padding: 2rem 0.75rem;
-        }
-        .initial-home__grid {
-          grid-template-columns: 1fr;
-          align-items: start;
-        }
-        .initial-home h1 {
-          max-width: 13ch;
-          font-size: clamp(2.75rem, 13vw, 4.25rem);
-          line-height: 0.95;
-        }
-        .initial-home__lead {
-          margin-top: 1.2rem;
-          font-size: 0.96rem;
-          line-height: 1.55;
-        }
-      .initial-map {
-        padding: 1.5rem;
-        border: 1px solid rgba(232, 200, 111, 0.24);
-        background: rgba(7, 9, 13, 0.74);
-        backdrop-filter: blur(1rem);
-      }
-      .initial-map__head {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        color: var(--accent);
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-      .initial-map h2 {
-        margin: 1rem 0;
-        font: 600 1.5rem/1 var(--display);
-      }
-      .initial-map ol {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      .initial-map li {
-        padding: 0.85rem 0;
-        border-top: 1px solid rgba(247, 243, 232, 0.12);
-      }
-      .initial-map p {
-        margin: 0;
-      }
-      .initial-map h3 {
-        font-size: 0.9rem;
-      }
-      .initial-map h3 span {
-        margin-right: 0.65rem;
-        color: var(--accent);
-        font: 600 0.7rem/1 var(--display);
-      }
-      .initial-map p {
-        margin-top: 0.35rem;
-        color: var(--ink-soft);
-        font-size: 0.75rem;
-      }
-        .initial-map { display: none; }
-      .initial-sr-only {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-      }
-
-
-      @media (max-width: 48rem) {
-        .initial-brand small {
-          display: none;
-        }
-        .initial-header__action {
-          font-size: 0.75rem;
-        }
-        .initial-home {
-          padding: 2rem 0.75rem;
-        }
-        .initial-home__grid {
-          grid-template-columns: 1fr;
-          align-items: start;
-        }
-        .initial-home h1 {
-          max-width: 13ch;
-          font-size: clamp(2.75rem, 13vw, 4.25rem);
-          line-height: 0.95;
-        }
-        .initial-home__lead {
-          margin-top: 1.2rem;
-          font-size: 0.96rem;
-          line-height: 1.55;
-        }
-        .initial-map { display: none; }
-      }
-      @media (max-width: 23.5rem) {
-        .initial-brand strong {
-          font-size: 1.125rem;
-        }
-        .initial-brand b {
-          width: 2.25rem;
-          height: 2.25rem;
-        }
-        .initial-header__action {
-          padding-inline: 0.75rem;
-        }
+      #root {
+        min-height: 100dvh;
       }
     </style>
   </head>
-    <body class="bg-noise">
+  <body class="bg-noise">
     <div id="root"></div>
-    <div class="rdv-boot" id="rdv-boot" role="status" aria-label="Carregando Rei das Vendas">
-      <div class="rdv-boot__inner" aria-hidden="true">
-        <span class="rdv-boot__mark"><svg width="34" height="34" viewBox="0 0 48 48" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M37.31 30.28 L24.56 28.22 L24.38 28.03 L23.44 28.03 L22.31 28.41 L10.50 30.28 L10.22 29.81 L10.50 29.34 L15.75 26.91 L16.59 26.25 L11.91 17.06 L13.12 17.16 L18.38 18.84 L20.25 19.22 L23.53 10.88 L23.72 9.94 L24.00 9.84 L26.91 17.44 L27.28 18.94 L27.56 19.22 L28.12 19.22 L35.44 16.97 L35.91 17.06 L31.22 26.25 L37.31 29.34 L37.59 29.62 L37.31 30.28Z M26.72 19.50 L24.09 12.19 L23.81 12.09 L21.09 19.50 L23.72 19.50 L23.81 14.16 L24.09 14.25 L24.09 19.50 L26.72 19.50Z M30.66 25.69 L34.31 18.09 L27.84 20.06 L27.84 20.44 L30.47 25.69 L30.66 25.69Z M17.34 25.69 L20.16 20.06 L13.69 18.28 L13.59 18.56 L17.16 25.69 L17.34 25.69Z M30.28 26.25 L27.28 20.25 L26.81 19.97 L24.09 20.06 L24.00 23.16 L23.72 23.06 L23.62 19.97 L21.00 19.97 L20.62 20.16 L17.53 26.25 L30.28 26.25Z M34.59 28.88 L30.19 26.72 L21.75 26.72 L17.62 26.72 L13.41 28.88 L14.25 28.97 L14.44 28.78 L16.50 28.59 L23.44 27.28 L24.56 27.28 L24.75 27.47 L25.69 27.47 L25.88 27.66 L31.31 28.41 L33.75 28.97 L34.59 28.88Z M34.12 32.53 L13.69 32.53 L13.41 32.06 L13.69 31.78 L34.12 31.78 L34.41 32.06 L34.12 32.53Z"/></svg></span>
-        <span class="rdv-boot__name">Rei das Vendas</span>
-        <span class="rdv-boot__bar"></span>
-      </div>
-    </div>
     <noscript>
       <div style="padding: 4rem 1rem; text-align: center">
-        <p style="font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; margin: 0 0 0.5rem">
+        <p
+          style="
+            font-family: &quot;Barlow Condensed&quot;, sans-serif;
+            font-size: 1.6rem;
+            margin: 0 0 0.5rem;
+          "
+        >
           Rei das Vendas
         </p>
         <p style="margin: 0">
-          Sites, lojas, aplicativos e operações digitais para negócios locais e empresas em todo o Brasil — a partir de Franca, SP.
-          Ative o JavaScript para navegar, ou fale conosco pelo WhatsApp.
+          Sites, lojas, aplicativos e operações digitais para negócios locais e
+          empresas em todo o Brasil — a partir de Franca, SP. Ative o JavaScript
+          para navegar, ou fale conosco pelo WhatsApp.
         </p>
       </div>
     </noscript>

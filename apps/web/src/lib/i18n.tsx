@@ -52,7 +52,11 @@ const I18nContext = createContext<{
 }>({ locale: "pt", setLocale: () => {}, t: (k) => k });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(detect);
+  const [locale, setLocaleState] = useState<Locale>("pt");
+
+  useEffect(() => {
+    setLocaleState(detect());
+  }, []);
 
   const setLocale = (l: Locale) => {
     setLocaleState(l);

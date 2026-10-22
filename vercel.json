@@ -34,187 +34,202 @@
         }
       ],
       "destination": "https://reidasvendas.com.br/:path*",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/recursos",
       "destination": "/blog",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/site-conversao-local",
       "destination": "/solucoes/site-institucional-premium",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/funis-e-automacao",
       "destination": "/solucoes/funil-de-qualificacao",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/aplicativos-e-saas",
       "destination": "/solucoes/app-para-empresas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/google-e-presenca-local",
       "destination": "/solucoes/seo-local-google-business",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/infraestrutura-digital",
       "destination": "/solucoes/infraestrutura-digital",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/integracao-whatsapp",
       "destination": "/solucoes/automacao-whatsapp",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/servicos/:slug",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/modelos",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/clinicas",
       "destination": "/solucoes/site-para-clinicas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/odontologia",
       "destination": "/solucoes/site-para-dentistas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/estetica",
       "destination": "/solucoes/site-para-clinicas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/restaurantes",
       "destination": "/solucoes/site-para-restaurantes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/oficinas-mecanicas",
       "destination": "/solucoes/site-para-profissionais-liberais",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/pet-shop",
       "destination": "/solucoes/site-institucional-premium",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/advocacia",
       "destination": "/solucoes/site-para-advogados",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/imobiliarias",
       "destination": "/solucoes/site-para-imobiliarias",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/escolas-e-cursos",
       "destination": "/solucoes/site-institucional-premium",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/servicos-locais",
       "destination": "/solucoes/site-para-profissionais-liberais",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/segmentos/:slug",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/projetos",
       "destination": "/portfolio",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/privacy",
       "destination": "/politica",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/privacidade",
       "destination": "/politica",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/templates",
       "destination": "/demonstracoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/builder",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/extensions",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/dashboard/:path*",
       "destination": "/solucoes",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/infraestrutura-de-vendas-digitais",
       "destination": "/blog/um-projeto-um-deploy-um-dominio",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/automacao-inteligente-para-negocios-locais",
       "destination": "/blog/presenca-digital-o-que-e",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/blog/design-premium-ou-template",
       "destination": "/blog/presenca-digital-o-que-e",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/solucoes/site-para-dentistas-em-campinas",
       "destination": "/solucoes/site-para-dentistas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/solucoes/site-para-dentistas-em-sorocaba",
       "destination": "/solucoes/site-para-dentistas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/solucoes/site-para-clinicas-em-campinas",
       "destination": "/solucoes/site-para-clinicas",
-      "permanent": true
+      "statusCode": 301
     },
     {
       "source": "/solucoes/landing-page-para-advogados-em-sao-paulo",
       "destination": "/solucoes/landing-page",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wp/servicos",
+      "destination": "/solucoes",
+      "statusCode": 301
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "statusCode": 301
     }
   ],
   "headers": [

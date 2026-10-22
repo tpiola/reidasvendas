@@ -1,520 +1,497 @@
-import type { CSSProperties } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import Hero from '@/components/Hero';
-import ConversionJourney from '@/components/ConversionJourney';
-import { SwapLink } from '@/components/SwapLink';
-import { staggerContainer, staggerItem } from '@/hooks/useAnimation';
-import { motion, useReducedMotion } from 'framer-motion';
-import { trackEvent } from '@/lib/analytics';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  HOME_FAQS,
-  LAUDOS,
-  MEDICAO_REALIZADA_EM,
-  PATOLOGIAS,
-  PROTOCOLO,
-  TRADE_OFF,
-} from '@/lib/conversao';
-import { ESTEIRA_RESUMO, PILARES } from '@/lib/esteira';
-import {
-  ACQUISITION_CHANNELS,
-  DELIVERY_MODELS,
-  FAMILY_LABELS,
-  MARKETPLACE_ITEMS,
-  type SolutionFamily,
-} from '@/lib/marketplace';
-
-const FAMILY_ORDER: SolutionFamily[] = [
-  'presenca',
-  'comercio',
-  'atendimento',
-  'produto',
-  'distribuicao',
-  'operacao',
+  MagneticCTA,
+  ParallaxStage,
+  SpotlightCard,
+  StickyStackSection,
+} from "@/components/ObsidianMotion";
+import { MicroQuiz } from "@/components/MicroQuiz";
+import { IMPLANTACAO, brl } from "@/lib/ofertas";
+import { PROJECTS, OTHER_WORK, PROJECT_EVIDENCE } from "@/lib/portfolio";
+const cases = [
+  ...PROJECTS,
+  ...OTHER_WORK.map(([name, type, description, href, image]) => ({
+    name,
+    type,
+    description,
+    href,
+    image,
+    scope: ["Experiência mobile", "Jornada própria"],
+  })),
 ];
-
-const PROJECTS = [
-  {
-    name: 'Sentinela Saúde Ambiental',
-    type: 'Serviço local · Franca/SP',
-    detail: 'Serviços, áreas atendidas, diagnóstico e orçamento reunidos em uma jornada móvel.',
-    image: '/imagens/portfolio/sentinela.webp',
-    video: '/videos/projetos/sentinela-loop.mp4',
-    emphasis: 'flagship',
-    href: 'https://sentinelasaudeambiental.com.br',
-  },
-  {
-    name: 'TKA Esportes',
-    type: 'Comércio · e-commerce',
-    detail: 'Trinta anos de história transformados em catálogo por categoria e experiência de compra.',
-    image: '/imagens/portfolio/tka.webp',
-    video: '/videos/projetos/tka-loop.mp4',
-    emphasis: 'standard',
-    href: 'https://tkaesportes.com.br',
-  },
+const segments = [
+  ["Clínicas", "Agendamentos com contexto.", "site-para-clinicas"],
+  ["Advogados", "Sua atuação, apresentada com clareza.", "site-para-advogados"],
+  ["Imobiliárias", "Do imóvel ao contato certo.", "site-para-imobiliarias"],
+  ["Lojas", "Produtos que viram pedidos.", "ecommerce-profissional"],
+  ["Restaurantes", "Cardápio, escolha e pedido.", "site-para-restaurantes"],
+  [
+    "Serviços locais",
+    "Seja encontrado na sua região.",
+    "seo-local-google-business",
+  ],
 ];
-
-const OTHER_WORK = [
-  {
-    name: 'Thiago Piola',
-    type: 'Presença autoral · portfólio',
-    detail: 'Trajetória, projetos e serviços organizados em uma narrativa própria.',
-    image: '/imagens/portfolio/thiagopiola.webp',
-    video: '/videos/projetos/thiagopiola-loop.mp4',
-    href: 'https://thiagopiola.com.br',
-  },
-  {
-    name: 'SaúdeGPT',
-    type: 'Produto conversacional · saúde',
-    detail: 'Produto web guiado, com histórico e limites institucionais explícitos.',
-    image: '/imagens/portfolio/saudegpt.webp',
-    video: '/videos/projetos/saudegpt-loop.mp4',
-    href: 'https://saudegpt.com',
-  },
-];
-
-const METHOD = [
-  ['Leitura', 'Entendemos oferta, público, canais, atendimento e o que está travando a próxima venda.'],
-  ['Corte', 'Priorizamos a intervenção que reduz mais atrito sem inflar o primeiro escopo.'],
-  ['Construção', 'Design, conteúdo, código, integrações e medição avançam como uma única entrega.'],
-  ['Distribuição', 'Publicamos e conectamos busca, campanhas, conteúdo e atendimento ao destino certo.'],
-  ['Operação', 'Acompanhamos estabilidade, uso e oportunidades para decidir o próximo release.'],
-];
-
 export default function Home() {
-  const shouldReduceMotion = useReducedMotion();
+  const [interactive, setInteractive] = useState(false);
+  useEffect(() => {
+    setInteractive(true);
+  }, []);
+  const [door, setDoor] = useState<"direct" | "scale">("direct");
+  const [optimized, setOptimized] = useState(true);
+  const [searches, setSearches] = useState(1000);
+  const [ticket, setTicket] = useState(300);
+  const [current, setCurrent] = useState(1);
+  const [target, setTarget] = useState(2);
+  const [close, setClose] = useState(20);
+  const potential = Math.max(
+    0,
+    ((((searches * (target - current)) / 100) * close) / 100) * ticket,
+  );
   return (
-    <main id="main-content" className="rdv-platform rdv-studio">
-      <Hero />
-
-      {/* PATOLOGIA — o que a triagem mede, com o custo de cada vazamento em CAC. */}
-      <section className="rdv-method-v3" aria-labelledby="patologia-title">
-        <div className="rdv-shell rdv-method-v3__grid">
-          <div>
-            <header>
-              <p className="rdv-kicker">Patologia de funil</p>
-              <h2 id="patologia-title">Quatro vazamentos consomem o orçamento que já foi aprovado.</h2>
-              <p>Nenhum deles aparece no relatório de vaidade. Todos aparecem no custo por cliente adquirido.</p>
-            </header>
-          </div>
-          <motion.ol
-            variants={staggerContainer}
-            initial={shouldReduceMotion ? false : 'hidden'}
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-          >
-            {PATOLOGIAS.map((item) => (
-              <motion.li key={item.titulo} variants={staggerItem}>
-                <span>{item.ordem}</span>
-                <div>
-                  <h3>{item.titulo}</h3>
-                  <p>{item.doenca}</p>
-                  <p><strong>Custo:</strong> {item.custo}</p>
-                  <p><strong>Princípio ativo:</strong> {item.mecanismo}</p>
-                </div>
-              </motion.li>
-            ))}
-          </motion.ol>
-        </div>
-      </section>
-
-      {/* PROTOCOLO — as 12 verificações e o instrumento de cada uma. */}
-      <section id="protocolo" className="rdv-shell scroll-mt-28 py-20 sm:py-28" aria-labelledby="protocolo-title">
-        <header className="max-w-3xl">
-          <p className="rdv-kicker">Protocolo de auditoria</p>
-          <h2 id="protocolo-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-text-primary sm:text-5xl">
-            Doze verificações. Cada uma com o instrumento que a mede.
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-text-secondary sm:text-lg">
-            A triagem segue esta ordem porque a leitura barata vem primeiro: rastreio antes de mídia, medição antes de
-            opinião. O laudo entrega a fila priorizada por impacto e esforço.
+    <main id="main-content" className="obs-home">
+      <section className="obs-hero rdv-shell">
+        <div className="obs-hero-copy">
+          <p className="obs-label">Franca, SP · Atendemos todo o Brasil</p>
+          <h1>
+            Seu cliente já está pesquisando na sua cidade.{" "}
+            <span>Ele encontra você ou o seu concorrente?</span>
+          </h1>
+          <p>
+            Sites, catálogos e atendimento conectados para transformar a procura
+            pelo seu negócio em conversas de venda.
           </p>
-        </header>
-
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] sm:grid-cols-2 lg:grid-cols-3">
-          {PROTOCOLO.map(([titulo, detalhe], index) => (
-            <li key={titulo} className="bg-black/20 p-6">
-              <span className="font-serif text-sm text-gold" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              <h3 className="mt-2 font-serif text-lg font-bold text-text-primary">{titulo}</h3>
-              <p className="mt-2 text-sm leading-6 text-text-secondary">{detalhe}</p>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <Link
-            className="rdv-primary-action"
-            to="/diagnostico?origem=home-protocolo&estagio=triagem"
-            onClick={() => trackEvent('diagnostic_start', { position: 'home-protocolo', stage: 'triagem' })}
-          >
-            Solicitar triagem clínica <ArrowRight aria-hidden="true" />
+          <MagneticCTA to="#comecar">Quero receber mais contatos</MagneticCTA>
+          <Link className="obs-text-link" to="/planos">
+            Ver escopos e preços publicados →
           </Link>
-          <SwapLink to="/solucoes" swapLabel="Abrir o catálogo de soluções">
-            Ver o que pode ser construído
-          </SwapLink>
+          <div className="obs-hero-note">
+            Seu domínio. Seus acessos. Um caminho claro até o pedido.
+          </div>
         </div>
-      </section>
-
-      {/* LAUDOS — a prova publicada, com o que foi medido de fato. */}
-      <section className="rdv-proof-v3" aria-labelledby="proof-title">
-        <div className="rdv-shell">
-          <div>
-            <header className="rdv-proof-v3__header">
+        <ParallaxStage>
+          <div
+            className="obs-journey"
+            aria-label="Demonstração ilustrativa da busca ao contato. Não representa um resultado real."
+          >
+            <div className="obs-window">
+              <span />
+              <span />
+              <span />
+              <small>Uma jornada. Sem pontas soltas.</small>
+            </div>
+            <div className="obs-search">
+              <span aria-hidden="true">⌕</span> Seu serviço + sua cidade{" "}
+              <span aria-hidden="true">↵</span>
+            </div>
+            <div className="obs-search-result">
+              <small>SEU NEGÓCIO · SITE PRÓPRIO</small>
+              <h2>A escolha começa aqui.</h2>
+              <p>
+                O que você faz. Onde atende.
+                <br />
+                Por que falar com você.
+              </p>
+              <span className="obs-demo-button">Conhecer o serviço ↗</span>
+            </div>
+            <div className="obs-journey-line" />
+            <div className="obs-notification">
+              <span className="obs-notification-icon" aria-hidden="true">
+                ↗
+              </span>
               <div>
-                <p className="rdv-kicker">Laudos publicados</p>
-                <h2 id="proof-title">Métrica de vaidade morre. <em className="rdv-accent-serif">Métrica de negócio fica.</em></h2>
-              </div>
-              <p>
-                Cada laudo abaixo foi medido por auditoria direta nas páginas em produção em {MEDICAO_REALIZADA_EM}.
-                Onde ainda não existe instrumentação instalada, está escrito: nenhum resultado de negócio é afirmado
-                sem medição.
-              </p>
-            </header>
-          </div>
-
-          <div className="rdv-project-stage" role="list">
-            {PROJECTS.map((project, index) => (
-              <div key={project.name} className="rdv-project-shot-wrap" role="listitem">
-                <article
-                  className={`rdv-project-shot${project.emphasis === 'flagship' ? ' is-flagship' : ''}`}
-                >
-                  <a
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rdv-project-shot__link"
-                    aria-label={`Abrir o site publicado de ${project.name} em nova aba`}
-                    onClick={() => trackEvent('portfolio_open', { project: project.name, position: 'home-proof' })}
-                  >
-                    <div className="rdv-project-shot__media">
-                      <img src={project.image} alt={`Interface publicada de ${project.name}`} loading={index === 0 ? 'eager' : 'lazy'} width="1200" height="750" />
-                      <span>{String(index + 1).padStart(2, '0')}</span>
-                      <em>Visitar projeto <ArrowRight aria-hidden="true" /></em>
-                    </div>
-                    <div className="rdv-project-shot__body">
-                      <p>{project.type}</p>
-                      <h3>{project.name}</h3>
-                      <p>{project.detail}</p>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            ))}
-          </div>
-
-          <div className="rdv-home-otherwork" role="list">
-            {OTHER_WORK.map((work) => (
-              <div key={work.name} role="listitem">
-                <a href={work.href} target="_blank" rel="noopener noreferrer" className="rdv-home-otherwork__item" onClick={() => trackEvent('portfolio_open', { project: work.name, position: 'home-proof' })}>
-                  <span className="rdv-home-otherwork__media">
-                    <img src={work.image} alt={`Interface publicada de ${work.name}`} width="1200" height="750" loading="lazy" />
-                  </span>
-                  <div>
-                    <p>{work.type}</p>
-                    <h3>{work.name}</h3>
-                  </div>
-                  <p>{work.detail}</p>
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] lg:grid-cols-3">
-            {LAUDOS.map((laudo) => (
-              <article key={laudo.projeto} className="bg-black/20 p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{laudo.metadata}</p>
-                <h3 className="mt-3 font-serif text-2xl font-bold text-text-primary">{laudo.projeto}</h3>
-                <p className="mt-4 text-sm leading-6 text-text-secondary">
-                  <strong className="text-text-primary">Métrica de vaidade morta:</strong> {laudo.vaidade}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-text-secondary">
-                  <strong className="text-text-primary">Métrica de negócio salva:</strong> {laudo.negocio}
-                </p>
-                <ul className="mt-4 space-y-2">
-                  {laudo.medido.map((linha) => (
-                    <li key={linha} className="flex gap-2 text-sm leading-6 text-text-muted">
-                      <span aria-hidden="true" className="text-gold">·</span>
-                      {linha}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 border-t border-white/10 pt-4 text-xs leading-5 text-text-muted">{laudo.depois}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="rdv-proof-v3__actions">
-            <Link className="rdv-primary-action" to="/diagnostico?origem=home-projetos&estagio=triagem" onClick={() => trackEvent('diagnostic_start', { position: 'home-projetos', stage: 'triagem' })}>
-              Quero a triagem do meu funil <ArrowRight aria-hidden="true" />
-            </Link>
-            <SwapLink to="/portfolio" swapLabel="Abrir o portfólio">
-              Ver projetos reais
-            </SwapLink>
-            <SwapLink to="/demonstracoes" swapLabel="Ver arquiteturas em uso">
-              Explorar arquiteturas demonstrativas
-            </SwapLink>
-          </div>
-        </div>
-      </section>
-
-      <ConversionJourney />
-
-      <section className="rdv-platform-intro" aria-labelledby="platform-intro-title">
-        <div className="rdv-shell rdv-platform-intro__grid">
-          <header>
-            <p className="rdv-kicker">Mapa de possibilidades</p>
-            <h2 id="platform-intro-title">O próximo passo do seu negócio. <em className="rdv-accent-serif">Bem construído.</em></h2>
-          </header>
-          <div className="rdv-platform-intro__copy">
-            <p>
-              Site, loja, aplicativo, atendimento ou automação são partes do mesmo sistema: fazer o cliente encontrar,
-              entender, escolher e continuar com você.
-            </p>
-            <Link className="rdv-text-action" to="/solucoes">
-              Explorar todas as possibilidades <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-
-        <motion.div
-          className="rdv-shell rdv-family-ledger"
-          role="list"
-          variants={staggerContainer}
-          initial={shouldReduceMotion ? false : 'hidden'}
-          whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
-        >
-          {FAMILY_ORDER.map((family, index) => {
-            const familyItems = MARKETPLACE_ITEMS.filter((item) => item.family === family);
-            return (
-              <motion.div key={family} variants={staggerItem} role="listitem">
-                <Link
-                  className="rdv-family-row"
-                  to={`/solucoes?categoria=${family}`}
-                  onClick={() => trackEvent('category_select', { category: family, position: 'home-map' })}
-                >
-                  <span className="rdv-family-row__index">{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{FAMILY_LABELS[family]}</h3>
-                    <p>{familyItems.map((item) => item.format).slice(0, 4).join(' · ')}</p>
-                  </div>
-                  <strong>{familyItems.length} possibilidades</strong>
-                  <ArrowRight aria-hidden="true" />
-                </Link>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </section>
-
-      <section className="rdv-distribution" aria-labelledby="distribution-title">
-        <div className="rdv-shell rdv-distribution__grid">
-          <div>
-            <header>
-              <p className="rdv-kicker">Capilaridade com direção</p>
-              <h2 id="distribution-title">Um núcleo próprio. <em className="rdv-accent-serif">Vários caminhos</em> até ele.</h2>
-              <p>
-                A presença central organiza a oferta. Cada canal recebe a mensagem, a página e a próxima ação adequadas
-                à intenção de quem chegou.
-              </p>
-              <Link className="rdv-primary-action" to="/solucoes/distribuicao-multicanal">
-                Ver arquitetura multicanal <ArrowRight aria-hidden="true" />
-              </Link>
-            </header>
-          </div>
-
-          <div>
-            <div className="rdv-channel-map" aria-label="Canais conectáveis ao núcleo digital">
-              <div className="rdv-channel-map__core">
-                <span>Seu negócio</span>
-                <strong>Oferta · dados · atendimento</strong>
-              </div>
-              <div className="rdv-channel-map__orbit">
-                {ACQUISITION_CHANNELS.map((channel, index) => (
-                  <span key={channel} style={{ '--channel-index': index } as CSSProperties}>{channel}</span>
-                ))}
+                <small>WHATSAPP · CONTATO COM CONTEXTO</small>
+                <strong>“Vi seu serviço. Vocês atendem no meu bairro?”</strong>
+                <p>Serviço + região + intenção de compra</p>
               </div>
             </div>
+            <small className="obs-demo-caption">
+              Demonstração ilustrativa · ciclo de 8 segundos
+            </small>
           </div>
-        </div>
+        </ParallaxStage>
       </section>
-
-      <section className="rdv-models" aria-labelledby="models-title">
-        <div className="rdv-shell">
-          <div>
-            <header className="rdv-models__header">
-              <p className="rdv-kicker">Formas de trabalhar</p>
-              <h2 id="models-title">Um projeto individual. <em className="rdv-accent-serif">A continuidade</em> que fizer sentido.</h2>
-              <p>O desenho, a copy, a estrutura e as integrações pertencem ao contexto do cliente. A assinatura existe para operar e evoluir — não para aprisionar o projeto.</p>
-            </header>
-          </div>
-
-          <motion.div
-            className="rdv-models__grid"
-            variants={staggerContainer}
-            initial={shouldReduceMotion ? false : 'hidden'}
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-          >
-            {DELIVERY_MODELS.map((model, index) => (
-              <motion.article key={model.id} variants={staggerItem}>
-                <span>{String(index + 1).padStart(2, '0')} / {model.label}</span>
-                <h3>{model.title}</h3>
-                <p>{model.description}</p>
-                <strong>{model.cadence}</strong>
-              </motion.article>
-            ))}
-          </motion.div>
-
-          <div>
-            <Link className="rdv-primary-action" to="/planos">
-              Comparar modelos de contratação <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="rdv-method-v3" aria-labelledby="method-title">
-        <div className="rdv-shell rdv-method-v3__grid">
-          <div>
-            <header>
-              <p className="rdv-kicker">Método Rei das Vendas</p>
-              <h2 id="method-title">Da leitura à operação, sem pular a realidade do cliente.</h2>
-              <p>Nossa missão é o sucesso digital do cliente — e isso exige publicar o que funciona, medir o que importa e manter alguém responsável pelo próximo passo.</p>
-            </header>
-          </div>
-          <motion.ol
-            variants={staggerContainer}
-            initial={shouldReduceMotion ? false : 'hidden'}
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-          >
-            {METHOD.map(([title, detail], index) => (
-              <motion.li key={title} variants={staggerItem}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div><h3>{title}</h3><p>{detail}</p></div>
-              </motion.li>
-            ))}
-          </motion.ol>
-        </div>
-      </section>
-
-      {/* ESTEIRA — a escada de contratação, com o preço ancorado em resultado. */}
-      <section id="triagem-paga" className="rdv-shell scroll-mt-28 py-20 sm:py-28" aria-labelledby="esteira-title">
-        <header className="max-w-3xl">
-          <p className="rdv-kicker">Esteira de contratação</p>
-          <h2 id="esteira-title" className="mt-4 font-serif text-3xl font-bold leading-tight text-text-primary sm:text-5xl">
-            O preço é ancorado no retorno. Não em hora, não em quantidade de página.
+      <section className="obs-section rdv-shell" aria-labelledby="door-title">
+        <div className="obs-section-heading">
+          <h2 id="door-title">
+            O próximo passo depende
+            <br />
+            <span>do seu momento.</span>
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-text-secondary sm:text-lg">
-            Três pilares, nesta ordem: primeiro se mede, depois se constrói, depois se otimiza com dado. Não existe
-            atalho entre eles, e nada é cobrado por quantidade de tela entregue.
+          <p>
+            Começar bem e escalar uma operação exigem trabalhos diferentes.
+            Escolha o seu caminho.
           </p>
-          <p className="mt-4 text-sm leading-6 text-text-muted">{ESTEIRA_RESUMO}</p>
-        </header>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {PILARES.map((pilar) => (
-            <article key={pilar.id} className="flex flex-col rounded-2xl border border-white/10 bg-white/[0.02] p-7">
-              <span className="font-serif text-sm text-gold" aria-hidden="true">{pilar.ordem}</span>
-              <h3 className="mt-2 font-serif text-2xl font-bold text-text-primary">{pilar.nome}</h3>
-              <p className="mt-3 font-serif text-xl font-bold text-gold-light">{pilar.faixa}</p>
-              <p className="mt-3 text-sm leading-6 text-text-secondary">{pilar.resumo}</p>
-              <ul className="mt-5 space-y-2">
-                {pilar.escopo.map((linha) => (
-                  <li key={linha} className="flex gap-2 text-sm leading-6 text-text-secondary">
-                    <span aria-hidden="true" className="text-gold">·</span>
-                    {linha}
-                  </li>
+        </div>
+        <div
+          className="obs-tabs"
+          role="tablist"
+          aria-label="Modelo de contratação"
+        >
+          <button
+            disabled={!interactive}
+            id="direct-tab"
+            role="tab"
+            aria-selected={door === "direct"}
+            aria-controls="door-panel"
+            onClick={() => setDoor("direct")}
+          >
+            Quero meu site ou catálogo
+          </button>
+          <button
+            disabled={!interactive}
+            id="scale-tab"
+            role="tab"
+            aria-selected={door === "scale"}
+            aria-controls="door-panel"
+            onClick={() => setDoor("scale")}
+          >
+            Já tenho tráfego. Quero vender melhor.
+          </button>
+        </div>
+        <div
+          id="door-panel"
+          role="tabpanel"
+          aria-labelledby={`${door}-tab`}
+          className="obs-door-panel"
+        >
+          {door === "direct" ? (
+            <>
+              <div className="obs-grid three">
+                {IMPLANTACAO.slice(0, 3).map((item) => (
+                  <SpotlightCard key={item.id}>
+                    <small>Implantação direta</small>
+                    <h3>{item.nome}</h3>
+                    <strong className="obs-price">{brl(item.valor!)}</strong>
+                    <p>{item.resumo}</p>
+                    <Link to={`/diagnostico?modo=implantacao&plano=${item.id}`}>
+                      Ver meu projeto ↗
+                    </Link>
+                  </SpotlightCard>
                 ))}
-              </ul>
-              <p className="mt-5 text-xs leading-5 text-text-muted">Prazo: {pilar.prazo}</p>
-              <p className="mt-3 border-t border-white/10 pt-4 text-sm leading-6 text-text-primary">{pilar.ancoragem}</p>
-              <p className="mt-4 text-xs leading-5 text-text-muted">{pilar.funcao}</p>
-              <Link
-                className="rdv-primary-action mt-6 self-start"
-                to={`/diagnostico?origem=home-esteira-${pilar.id}&estagio=triagem`}
-                onClick={() => trackEvent('diagnostic_start', { position: `home-esteira-${pilar.id}`, stage: 'triagem' })}
-              >
-                Solicitar triagem <ArrowRight aria-hidden="true" />
-              </Link>
+              </div>
+              <p className="obs-muted">
+                Escopo fechado, sem auditoria paga obrigatória. Mensalidade
+                opcional e custos de terceiros separados.
+              </p>
+            </>
+          ) : (
+            <div className="obs-scale">
+              <div>
+                <h3>Descubra onde o contato deixa de virar venda.</h3>
+                <p>
+                  Auditoria profissional para empresas com campanhas e tráfego
+                  ativos. Receba prioridades antes de investir na reconstrução.
+                </p>
+                <Link className="obs-cta" to="/diagnostico?estagio=triagem">
+                  Solicitar diagnóstico ↗
+                </Link>
+              </div>
+              <dl>
+                <dt>Diagnóstico profissional</dt>
+                <dd>
+                  R$ 1.500–2.500{" "}
+                  <small>Creditado no Setup aprovado em até 30 dias.</small>
+                </dd>
+                <dt>Setup de infraestrutura</dt>
+                <dd>R$ 8.000–25.000</dd>
+                <dt>Otimização contínua</dt>
+                <dd>R$ 2.000–5.000/mês</dd>
+              </dl>
+            </div>
+          )}
+        </div>
+      </section>
+      <section className="obs-section obs-comparison">
+        <div className="rdv-shell">
+          <div className="obs-section-heading">
+            <h2>
+              Bonito ajuda.
+              <br />
+              <span>O caminho até a venda decide.</span>
+            </h2>
+            <p>
+              Compare a estrutura da jornada. Velocidade e conversão dependem de
+              medição em cada projeto.
+            </p>
+          </div>
+          <div
+            className="obs-tabs"
+            role="group"
+            aria-label="Comparar estrutura"
+          >
+            <button
+              disabled={!interactive}
+              aria-pressed={!optimized}
+              onClick={() => setOptimized(false)}
+            >
+              Site comum / página de links
+            </button>
+            <button
+              disabled={!interactive}
+              aria-pressed={optimized}
+              onClick={() => setOptimized(true)}
+            >
+              Arquitetura Rei das Vendas
+            </button>
+          </div>
+          <div className="obs-compare-grid">
+            {(optimized
+              ? [
+                  [
+                    "Busca com intenção",
+                    "Uma página para cada serviço e região atendida.",
+                  ],
+                  [
+                    "Escolha sem ruído",
+                    "Oferta clara, conteúdo direto e layout adaptado ao celular.",
+                  ],
+                  [
+                    "Conversa qualificada",
+                    "WhatsApp recebe o contexto que o cliente escolheu.",
+                  ],
+                ]
+              : [
+                  [
+                    "Destino genérico",
+                    "Quando toda campanha aponta para a mesma lista de links.",
+                  ],
+                  [
+                    "Mais decisões",
+                    "Quando o visitante precisa descobrir sozinho onde clicar.",
+                  ],
+                  [
+                    "Contato sem contexto",
+                    "Quando a conversa recomeça do zero no atendimento.",
+                  ],
+                ]
+            ).map(([title, copy]) => (
+              <div key={title}>
+                <span aria-hidden="true">{optimized ? "↗" : "—"}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section
+        className="obs-section rdv-shell obs-simulator"
+        aria-labelledby="sim-title"
+      >
+        <div>
+          <h2 id="sim-title">
+            Quanto vale melhorar
+            <br />
+            <span>o próximo clique?</span>
+          </h2>
+          <p>
+            Teste uma hipótese com seus números. O cálculo considera contatos,
+            fechamento e ticket; não confunde lead com venda.
+          </p>
+          <small>
+            Simulação de receita bruta incremental mensal. Não é previsão, lucro
+            nem garantia. Não inclui custos, impostos, margem ou recorrência.
+          </small>
+        </div>
+        <div className="obs-calculator">
+          {[
+            {
+              label: "Visitas mensais estimadas",
+              value: searches,
+              set: setSearches,
+              min: 100,
+              max: 10000,
+              step: 100,
+              format: (v: number) => v.toLocaleString("pt-BR"),
+            },
+            {
+              label: "Ticket médio",
+              value: ticket,
+              set: setTicket,
+              min: 50,
+              max: 5000,
+              step: 50,
+              format: brl,
+            },
+            {
+              label: "Visita → contato atual",
+              value: current,
+              set: setCurrent,
+              min: 0.5,
+              max: 10,
+              step: 0.5,
+              format: (v: number) => `${v}%`,
+            },
+            {
+              label: "Visita → contato desejada",
+              value: target,
+              set: setTarget,
+              min: 0.5,
+              max: 10,
+              step: 0.5,
+              format: (v: number) => `${v}%`,
+            },
+            {
+              label: "Contatos que fecham venda",
+              value: close,
+              set: setClose,
+              min: 1,
+              max: 100,
+              step: 1,
+              format: (v: number) => `${v}%`,
+            },
+          ].map((field) => (
+            <label key={field.label}>
+              {field.label}
+              <output>{field.format(field.value)}</output>
+              <input
+                type="range"
+                disabled={!interactive}
+                aria-label={field.label}
+                min={field.min}
+                max={field.max}
+                step={field.step}
+                value={field.value}
+                onChange={(e) => field.set(Number(e.target.value))}
+              />
+            </label>
+          ))}
+          <div className="obs-calculator-total">
+            <small>RECEITA ADICIONAL NA HIPÓTESE</small>
+            <strong>
+              {brl(potential)}
+              <span>/mês</span>
+            </strong>
+          </div>
+          <small>
+            Visitas × diferença de conversão × fechamento × ticket.{" "}
+            {target <= current &&
+              "A meta precisa superar a taxa atual para haver incremento."}
+          </small>
+        </div>
+      </section>
+      <section className="obs-section rdv-shell" aria-labelledby="cases-title">
+        <div className="obs-section-heading">
+          <h2 id="cases-title">
+            Engenharia aplicada:
+            <br />
+            <span>casos reais.</span>
+          </h2>
+          <p>
+            Projetos publicados. Entre, navegue e conheça o trabalho. Resultados
+            quantitativos de velocidade e conversão: a instrumentar.
+          </p>
+        </div>
+        <StickyStackSection>
+          {cases.map((project, i) => (
+            <article
+              className="obs-case"
+              key={project.name}
+              style={{ top: `${100 + i * 16}px` }}
+            >
+              <a href={project.href} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={project.image}
+                  srcSet={`${project.image.replace(".webp", "-480.webp")} 480w, ${project.image.replace(".webp", "-800.webp")} 800w, ${project.image} 1200w`}
+                  sizes="(max-width: 800px) calc(100vw - 32px), 50vw"
+                  decoding="async"
+                  alt={`Projeto ${project.name}`}
+                  width="1200"
+                  height="750"
+                  loading="lazy"
+                />
+              </a>
+              <div>
+                <small>{project.type}</small>
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+                <ul>
+                  {project.scope.map((scope) => (
+                    <li key={scope}>{scope}</li>
+                  ))}
+                </ul>
+                <div className="obs-measure">
+                  <span aria-hidden="true">◔</span>
+                  <div>
+                    Medição de performance
+                    <small>Sem comparação numérica até existir laudo.</small>
+                  </div>
+                </div>
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Explorar projeto publicado ↗
+                </a>
+              </div>
+            </article>
+          ))}
+        </StickyStackSection>
+      </section>
+      <section
+        className="obs-section rdv-shell"
+        aria-labelledby="evidence-title"
+      >
+        <div className="obs-section-heading">
+          <h2 id="evidence-title">
+            Trabalho publicado.
+            <br />
+            <span>Código verificável.</span>
+          </h2>
+          <p>
+            Do serviço local à plataforma de conteúdo: conheça projetos próprios
+            e confira o que foi construído.
+          </p>
+        </div>
+        <div className="obs-evidence">
+          {PROJECT_EVIDENCE.map((project) => (
+            <article key={project.name}>
+              <h3>{project.name}</h3>
+              <p>{project.detail}</p>
+              <a href={project.repo} target="_blank" rel="noopener noreferrer">
+                Conferir projeto no GitHub ↗
+              </a>
             </article>
           ))}
         </div>
-
-        {/* Quebra de objeção do diagnóstico remunerado — a fonte também alimenta o HTML pré-renderizado. */}
-        <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] p-7 sm:p-10">
-          <h3 className="font-serif text-2xl font-bold text-text-primary">Por que o diagnóstico é pago</h3>
-          <dl className="mt-6 grid gap-6 sm:grid-cols-2">
-            {HOME_FAQS.map((item) => (
-              <div key={item.question}>
-                <dt className="text-sm font-semibold text-text-primary">{item.question}</dt>
-                <dd className="mt-2 text-sm leading-6 text-text-secondary">{item.answer}</dd>
-              </div>
-            ))}
-          </dl>
-          <Link className="rdv-text-action mt-8 inline-flex" to="/planos">
-            Ver a tabela de execução vigente (implantação e assinatura) <ArrowRight aria-hidden="true" />
-          </Link>
+      </section>
+      <section
+        className="obs-section rdv-shell"
+        aria-labelledby="segments-title"
+      >
+        <div className="obs-section-heading">
+          <h2 id="segments-title">
+            Seu mercado.
+            <br />
+            <span>Uma jornada própria.</span>
+          </h2>
+          <Link to="/solucoes">Explorar todas as estruturas ↗</Link>
+        </div>
+        <div className="obs-grid three obs-segments">
+          {segments.map(([name, description, slug]) => (
+            <SpotlightCard key={name}>
+              <h3>{name}</h3>
+              <p>{description}</p>
+              <Link to={`/solucoes/${slug}`}>Ver estrutura ↗</Link>
+            </SpotlightCard>
+          ))}
         </div>
       </section>
-
-      {/* LIMITE DE ESCOPO — quem não se reconhece aqui não deve contratar. */}
-      <section className="rdv-method-v3" aria-labelledby="tradeoff-title">
-        <div className="rdv-shell rdv-method-v3__grid">
-          <div>
-            <header>
-              <p className="rdv-kicker">Limite de escopo</p>
-              <h2 id="tradeoff-title">Quatro perfis não são clientes desta casa.</h2>
-              <p>Recusar trabalho é parte do método: escopo errado produz entrega bonita e resultado nenhum.</p>
-            </header>
-          </div>
-          <motion.ol
-            variants={staggerContainer}
-            initial={shouldReduceMotion ? false : 'hidden'}
-            whileInView="visible"
-            viewport={{ once: true, margin: '-40px' }}
-          >
-            {TRADE_OFF.map((item) => (
-              <motion.li key={item.titulo} variants={staggerItem}>
-                <span>{item.ordem}</span>
-                <div><h3>{item.titulo}</h3><p>{item.detalhe}</p></div>
-              </motion.li>
-            ))}
-          </motion.ol>
+      <section id="comecar" className="obs-section rdv-shell obs-closing">
+        <div>
+          <h2>
+            Vamos encurtar
+            <br />
+            <span>o caminho até a venda.</span>
+          </h2>
+          <p>
+            Três escolhas para começar uma conversa sobre o que seu negócio
+            precisa.
+          </p>
         </div>
-      </section>
-
-      <section className="rdv-closing-v3" aria-labelledby="closing-title">
-        <div className="rdv-shell rdv-closing-v3__content">
-          <div>
-            <p className="rdv-kicker">O primeiro movimento</p>
-            <h2 id="closing-title">Antes de construir, <em className="rdv-accent-serif">meça o vazamento</em>.</h2>
-            <p>
-              A triagem registra objetivo, gargalo e prioridade em números. Nenhuma conversa comercial começa antes de
-              o laudo existir.
-            </p>
-          </div>
-          <div className="rdv-closing-v3__actions">
-            <div>
-              <Link
-                className="rdv-primary-action"
-                to="/diagnostico?origem=home-final&estagio=triagem"
-                onClick={() => trackEvent('diagnostic_start', { position: 'home-final', stage: 'triagem' })}
-              >
-                Solicitar triagem clínica <ArrowRight aria-hidden="true" />
-              </Link>
-              <Link className="rdv-text-action" to="/planos">
-                Ver esteira, escopo e prazos
-              </Link>
-            </div>
-          </div>
-          <div>
-            <p className="rdv-closing-v3__footnote">
-              Quatro triagens por mês. O laudo é seu, creditado integralmente no Setup se você aprovar a execução.
-            </p>
-          </div>
-        </div>
+        <MicroQuiz context="meu negócio" />
       </section>
     </main>
   );

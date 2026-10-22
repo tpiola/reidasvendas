@@ -126,3 +126,7 @@ Botões têm alvo mínimo de 44 px, foco visível e verbo específico. Cards exi
 - Não repetir badges, gradientes, pills e grids de cards como gramática padrão.
 - Não usar “IA” como categoria pública; comunicar velocidade, atendimento, análise e automação como capacidades de negócio.
 - Todo projeto é individual. Demonstração é referência de arquitetura, nunca case nem produto pronto.
+
+## Obsidian Editorial — 22/10/2026
+
+Home assimétrica com jornada CSS, implantação e auditoria em portas separadas, comparação estrutural, simulador com premissas editáveis, casos publicados, segmentos e microquiz. Fundo #05070A; superfície #0B0F17; dourado #E8C86F; CTA #10B981. Títulos Barlow Condensed; corpo Archivo, fontes locais. Movimento respeita reduced-motion. Cards empilhados só no desktop; mobile segue fluxo normal. A Home é renderizada com o mesmo componente React no build e no cliente, sem boot overlay. Resultados não medidos não recebem pontuação inventada.

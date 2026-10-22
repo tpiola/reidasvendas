@@ -1,34 +1,41 @@
-import { lazy, Suspense, Component, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { SiteHeader } from '@/components/SiteHeader';
-import { SiteFooter } from '@/components/SiteFooter';
-import { CookieConsent } from '@/components/CookieConsent';
-import Home from '@/pages/Home';
-import { BRAND } from '@/lib/brand';
-import { captureAttribution, trackEvent } from '@/lib/analytics';
-import { GUIDE_SLUGS } from '@/lib/guide-slugs';
+import { lazy, Suspense, Component, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  useParams,
+  Navigate,
+} from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { CookieConsent } from "@/components/CookieConsent";
+import Home from "@/pages/Home";
+import { BRAND } from "@/lib/brand";
+import { captureAttribution, trackEvent } from "@/lib/analytics";
+import { GUIDE_SLUGS } from "@/lib/guide-slugs";
 
-const Blog = lazy(() => import('@/pages/Blog'));
-const BlogPost = lazy(() => import('@/pages/BlogPost'));
-const Politica = lazy(() => import('@/pages/Politica'));
-const Termos = lazy(() => import('@/pages/Termos'));
-const Sobre = lazy(() => import('@/pages/Sobre'));
-const Portfolio = lazy(() => import('@/pages/Portfolio'));
-const Solucoes = lazy(() => import('@/pages/Solucoes'));
-const Diagnostico = lazy(() => import('@/pages/Diagnostico'));
-const Obrigado = lazy(() => import('@/pages/Obrigado'));
-const NotFound = lazy(() => import('@/pages/NotFound'));
-const Planos = lazy(() => import('@/pages/Planos'));
-const BlackFriday = lazy(() => import('@/pages/BlackFriday'));
-const ContatoDireto = lazy(() => import('@/pages/ContatoDireto'));
-const SolutionDetail = lazy(() => import('@/pages/SolutionDetail'));
-const ComparisonDetail = lazy(() => import('@/pages/ComparisonDetail'));
-const IntentGuide = lazy(() => import('@/pages/IntentGuide'));
-const Tools = lazy(() => import('@/pages/Tools'));
-const ToolDetail = lazy(() => import('@/pages/ToolDetail'));
-const Demonstrations = lazy(() => import('@/pages/Demonstrations'));
-const DemoExperience = lazy(() => import('@/pages/DemoExperience'));
+const Blog = lazy(() => import("@/pages/Blog"));
+const BlogPost = lazy(() => import("@/pages/BlogPost"));
+const Politica = lazy(() => import("@/pages/Politica"));
+const Termos = lazy(() => import("@/pages/Termos"));
+const Sobre = lazy(() => import("@/pages/Sobre"));
+const Portfolio = lazy(() => import("@/pages/Portfolio"));
+const Solucoes = lazy(() => import("@/pages/Solucoes"));
+const Diagnostico = lazy(() => import("@/pages/Diagnostico"));
+const Obrigado = lazy(() => import("@/pages/Obrigado"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const Planos = lazy(() => import("@/pages/Planos"));
+const BlackFriday = lazy(() => import("@/pages/BlackFriday"));
+const ContatoDireto = lazy(() => import("@/pages/ContatoDireto"));
+const SolutionDetail = lazy(() => import("@/pages/SolutionDetail"));
+const ComparisonDetail = lazy(() => import("@/pages/ComparisonDetail"));
+const IntentGuide = lazy(() => import("@/pages/IntentGuide"));
+const Tools = lazy(() => import("@/pages/Tools"));
+const ToolDetail = lazy(() => import("@/pages/ToolDetail"));
+const Demonstrations = lazy(() => import("@/pages/Demonstrations"));
+const DemoExperience = lazy(() => import("@/pages/DemoExperience"));
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -38,7 +45,10 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class PageErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -49,8 +59,17 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
   }
 
   componentDidCatch(error: Error) {
-    trackEvent('client_error', { boundary: 'page', message: error.message.slice(0, 160) });
-    console.error(JSON.stringify({ level: 'error', event: 'page_render_failed', message: error.message }));
+    trackEvent("client_error", {
+      boundary: "page",
+      message: error.message.slice(0, 160),
+    });
+    console.error(
+      JSON.stringify({
+        level: "error",
+        event: "page_render_failed",
+        message: error.message,
+      }),
+    );
   }
 
   handleRetry = () => {
@@ -63,8 +82,17 @@ class PageErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState
         <div className="rdv-system-state" role="alert">
           <p className="rdv-kicker">Falha de carregamento</p>
           <h1>Não foi possível abrir esta página.</h1>
-          <p>Tente novamente. Se o problema continuar, use o WhatsApp para falar com a equipe.</p>
-          <button onClick={this.handleRetry} className="rdv-action rdv-action--primary rdv-action--md" type="button">Tentar novamente</button>
+          <p>
+            Tente novamente. Se o problema continuar, use o WhatsApp para falar
+            com a equipe.
+          </p>
+          <button
+            onClick={this.handleRetry}
+            className="rdv-action rdv-action--primary rdv-action--md"
+            type="button"
+          >
+            Tentar novamente
+          </button>
         </div>
       );
     }
@@ -101,9 +129,10 @@ const pageTransitionVariants = {
 // compositor — rodar a animação do Framer Motion por cima duplicaria o efeito
 // e brigaria com o snapshot do navegador. Nesses navegadores o Framer Motion
 // só entrega o estado final; nos demais, mantém o fade/slide de sempre.
-const supportsViewTransitions = typeof document !== 'undefined' && 'startViewTransition' in document;
+const supportsViewTransitions =
+  typeof document !== "undefined" && "startViewTransition" in document;
 
-function PageTransition({ children }: { children: React.ReactNode }) {
+export function PageTransition({ children }: { children: React.ReactNode }) {
   const shouldReduceMotion = useReducedMotion();
   const skipMotion = shouldReduceMotion || supportsViewTransitions;
 
@@ -111,8 +140,8 @@ function PageTransition({ children }: { children: React.ReactNode }) {
     <motion.div
       variants={pageTransitionVariants}
       initial={false}
-      animate={skipMotion ? { opacity: 1, y: 0 } : 'animate'}
-      exit={skipMotion ? undefined : 'exit'}
+      animate={skipMotion ? { opacity: 1, y: 0 } : "animate"}
+      exit={skipMotion ? undefined : "exit"}
     >
       {children}
     </motion.div>
@@ -123,7 +152,11 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 function RedirectTo({ to }: { to: string }) {
   useEffect(() => {
     // Compatibilidade com SEO: registra o redirect como clique (tentar trocar para 301 real no server).
-    window.dispatchEvent(new CustomEvent('route-redirect', { detail: { to, timestamp: Date.now() } }));
+    window.dispatchEvent(
+      new CustomEvent("route-redirect", {
+        detail: { to, timestamp: Date.now() },
+      }),
+    );
   }, [to]);
   return <Navigate to={to} replace />;
 }
@@ -139,76 +172,85 @@ function RedirectTo({ to }: { to: string }) {
  * duplicado indexável.
  */
 const LEGACY_SLUG_REDIRECTS: Record<string, string> = {
-  'site-conversao-local': '/solucoes/site-institucional-premium',
-  'funis-e-automacao': '/solucoes/funil-de-qualificacao',
-  'aplicativos-e-saas': '/solucoes/app-para-empresas',
-  'google-e-presenca-local': '/solucoes/seo-local-google-business',
-  'infraestrutura-digital': '/solucoes/infraestrutura-digital',
-  'integracao-whatsapp': '/solucoes/automacao-whatsapp',
-  clinicas: '/solucoes/site-para-clinicas',
-  odontologia: '/solucoes/site-para-dentistas',
-  estetica: '/solucoes/site-para-clinicas',
-  restaurantes: '/solucoes/site-para-restaurantes',
-  'oficinas-mecanicas': '/solucoes/site-para-profissionais-liberais',
-  'pet-shop': '/solucoes/site-institucional-premium',
-  advocacia: '/solucoes/site-para-advogados',
-  imobiliarias: '/solucoes/site-para-imobiliarias',
-  'escolas-e-cursos': '/solucoes/site-institucional-premium',
-  'servicos-locais': '/solucoes/site-para-profissionais-liberais',
+  "site-conversao-local": "/solucoes/site-institucional-premium",
+  "funis-e-automacao": "/solucoes/funil-de-qualificacao",
+  "aplicativos-e-saas": "/solucoes/app-para-empresas",
+  "google-e-presenca-local": "/solucoes/seo-local-google-business",
+  "infraestrutura-digital": "/solucoes/infraestrutura-digital",
+  "integracao-whatsapp": "/solucoes/automacao-whatsapp",
+  clinicas: "/solucoes/site-para-clinicas",
+  odontologia: "/solucoes/site-para-dentistas",
+  estetica: "/solucoes/site-para-clinicas",
+  restaurantes: "/solucoes/site-para-restaurantes",
+  "oficinas-mecanicas": "/solucoes/site-para-profissionais-liberais",
+  "pet-shop": "/solucoes/site-institucional-premium",
+  advocacia: "/solucoes/site-para-advogados",
+  imobiliarias: "/solucoes/site-para-imobiliarias",
+  "escolas-e-cursos": "/solucoes/site-institucional-premium",
+  "servicos-locais": "/solucoes/site-para-profissionais-liberais",
 };
 
 function RedirectLegacySlug() {
-  const { slug = '' } = useParams();
-  return <RedirectTo to={LEGACY_SLUG_REDIRECTS[slug] ?? '/solucoes'} />;
+  const { slug = "" } = useParams();
+  return <RedirectTo to={LEGACY_SLUG_REDIRECTS[slug] ?? "/solucoes"} />;
 }
 
 const META_BY_PATH: Record<string, { title: string; description: string }> = {
-  '/': {
+  "/": {
     title: BRAND.seo.title,
     description: BRAND.seo.description,
   },
-  '/solucoes': {
-    title: 'Sites, lojas, aplicativos e soluções digitais | Rei das Vendas',
-    description: 'Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.',
+  "/solucoes": {
+    title: "Sites, lojas, aplicativos e soluções digitais | Rei das Vendas",
+    description:
+      "Explore 25 possibilidades de presença, comércio, atendimento, produto, distribuição e operação digital para negócios locais e empresas em todo o Brasil.",
   },
-  '/diagnostico': {
-    title: 'Mapeamento do perfil do seu negócio | Rei das Vendas',
-    description: 'Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.',
+  "/diagnostico": {
+    title: "Mapeamento do perfil do seu negócio | Rei das Vendas",
+    description:
+      "Informe seu negócio, a solução necessária, o problema comercial e a faixa de investimento antes do atendimento pelo WhatsApp.",
   },
-  '/portfolio': {
-    title: 'Projetos publicados | Rei das Vendas',
-    description: 'Sites, lojas e produtos digitais publicados, apresentados com contexto, escopo real e sem métricas inventadas.',
+  "/portfolio": {
+    title: "Projetos publicados | Rei das Vendas",
+    description:
+      "Sites, lojas e produtos digitais publicados, apresentados com contexto, escopo real e sem métricas inventadas.",
   },
-  '/sobre': {
-    title: 'Sobre o Rei das Vendas | Franca, SP',
-    description: 'Princípios, forma de trabalho e responsabilidade por projetos digitais conduzidos a partir de Franca, SP.',
+  "/sobre": {
+    title: "Sobre o Rei das Vendas | Franca, SP",
+    description:
+      "Princípios, forma de trabalho e responsabilidade por projetos digitais conduzidos a partir de Franca, SP.",
   },
-  '/contato': {
-    title: 'Contato | Rei das Vendas em Franca, SP',
-    description: 'Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.',
+  "/contato": {
+    title: "Contato | Rei das Vendas em Franca, SP",
+    description:
+      "Fale pelo WhatsApp (16) 99233-3344 ou pelo e-mail contato@reidasvendas.com.br e organize o contexto do seu projeto digital.",
   },
-  '/politica': {
-    title: 'Política de privacidade | Rei das Vendas',
-    description: 'Como informações enviadas pelo diagnóstico e dados de medição são tratados.',
+  "/politica": {
+    title: "Política de privacidade | Rei das Vendas",
+    description:
+      "Como informações enviadas pelo diagnóstico e dados de medição são tratados.",
   },
-  '/termos': {
-    title: 'Termos de uso | Rei das Vendas',
-    description: 'Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais e empresas em todo o Brasil.',
+  "/termos": {
+    title: "Termos de uso | Rei das Vendas",
+    description:
+      "Condições gerais de uso e contratação dos serviços do Rei das Vendas para negócios locais e empresas em todo o Brasil.",
   },
-  '/blog': {
-    title: 'Caderno de operação | Rei das Vendas',
-    description: 'Leituras sobre publicação, busca, atendimento e continuidade para decidir antes de construir.',
+  "/blog": {
+    title: "Caderno de operação | Rei das Vendas",
+    description:
+      "Leituras sobre publicação, busca, atendimento e continuidade para decidir antes de construir.",
   },
-  '/obrigado': {
-    title: 'Mensagem enviada | Rei das Vendas',
-    description: 'Recebemos sua solicitação. Em breve retornamos com a análise da presença digital do seu negócio.',
+  "/obrigado": {
+    title: "Próximos passos | Rei das Vendas",
+    description:
+      "Confira como confirmar seu contato, receber a proposta e aprovar o projeto. Esta página não confirma pagamento.",
   },
 };
 
 function upsertMeta(name: string, content: string) {
   let element = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
   if (!element) {
-    element = document.createElement('meta');
+    element = document.createElement("meta");
     element.name = name;
     document.head.appendChild(element);
   }
@@ -216,24 +258,32 @@ function upsertMeta(name: string, content: string) {
 }
 
 function upsertProperty(property: string, content: string) {
-  let element = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+  let element = document.querySelector<HTMLMetaElement>(
+    `meta[property="${property}"]`,
+  );
   if (!element) {
-    element = document.createElement('meta');
-    element.setAttribute('property', property);
+    element = document.createElement("meta");
+    element.setAttribute("property", property);
     document.head.appendChild(element);
   }
   element.content = content;
 }
 
 function updateCanonical(url: string) {
-  let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  let canonical = document.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]',
+  );
   if (!canonical) {
-    canonical = document.createElement('link');
-    canonical.rel = 'canonical';
+    canonical = document.createElement("link");
+    canonical.rel = "canonical";
     document.head.appendChild(canonical);
   }
   canonical.href = url;
-  document.querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]').forEach((link) => { link.href = url; });
+  document
+    .querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]')
+    .forEach((link) => {
+      link.href = url;
+    });
 }
 
 function RouteMetadata() {
@@ -243,124 +293,185 @@ function RouteMetadata() {
     let cancelled = false;
     const pathname = location.pathname;
     const search = location.search;
-    const canonical = `https://reidasvendas.com.br${pathname === '/' ? '/' : pathname}`;
+    const canonical = `https://reidasvendas.com.br${pathname === "/" ? "/" : pathname}`;
     const staticMetadata = META_BY_PATH[pathname];
     const articleSlug = pathname.match(/^\/blog\/([^/]+)$/)?.[1];
 
     // Scroll + analytics imediatos; meta rica (growth/articles) entra sob demanda
     // para não embutir growth.ts (~66KB) e articles no chunk principal da home.
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
     captureAttribution();
 
     const apply = (opts: {
       article?: { title: string; description: string; published: string };
-      growthMetadata?: { title: string; description: string; category: string; questions: { question: string; answer: string }[] };
+      growthMetadata?: {
+        title: string;
+        description: string;
+        category: string;
+        questions: { question: string; answer: string }[];
+      };
     }) => {
       if (cancelled) return;
       const { article, growthMetadata } = opts;
       const metadata = article
-        ? { title: `${article.title} | Rei das Vendas`, description: article.description }
-        : growthMetadata ?? staticMetadata ?? {
+        ? {
+            title: `${article.title} | Rei das Vendas`,
+            description: article.description,
+          }
+        : (growthMetadata ??
+          staticMetadata ?? {
             title: BRAND.seo.title,
             description: BRAND.seo.description,
-          };
-      const noIndex = ['/obrigado', '/builder', '/extensions'].includes(pathname)
-        || (!article && !growthMetadata && !staticMetadata && pathname !== '/');
+          });
+      const noIndex =
+        ["/obrigado", "/builder", "/extensions"].includes(pathname) ||
+        (!article && !growthMetadata && !staticMetadata && pathname !== "/");
 
       document.title = metadata.title;
-      upsertMeta('description', metadata.description);
-      upsertMeta('robots', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
-      upsertMeta('googlebot', noIndex ? 'noindex, nofollow' : 'index, follow, max-snippet:-1, max-image-preview:large');
-      upsertMeta('twitter:title', metadata.title);
-      upsertMeta('twitter:description', metadata.description);
-      upsertProperty('og:title', metadata.title);
-      upsertProperty('og:description', metadata.description);
-      upsertProperty('og:url', canonical);
-      upsertProperty('og:type', article ? 'article' : 'website');
+      upsertMeta("description", metadata.description);
+      upsertMeta(
+        "robots",
+        noIndex
+          ? "noindex, nofollow"
+          : "index, follow, max-snippet:-1, max-image-preview:large",
+      );
+      upsertMeta(
+        "googlebot",
+        noIndex
+          ? "noindex, nofollow"
+          : "index, follow, max-snippet:-1, max-image-preview:large",
+      );
+      upsertMeta("twitter:title", metadata.title);
+      upsertMeta("twitter:description", metadata.description);
+      upsertProperty("og:title", metadata.title);
+      upsertProperty("og:description", metadata.description);
+      upsertProperty("og:url", canonical);
+      upsertProperty("og:type", article ? "article" : "website");
       updateCanonical(canonical);
 
-      const staticSchema = document.getElementById('rdv-static-schema');
-      const staticSchemaMatches = staticSchema?.getAttribute('data-path') === pathname;
+      const staticSchema = document.getElementById("rdv-static-schema");
+      const staticSchemaMatches =
+        staticSchema?.getAttribute("data-path") === pathname;
       if (!staticSchemaMatches) staticSchema?.remove();
 
-      const previousSchema = document.getElementById('rdv-route-schema');
+      const previousSchema = document.getElementById("rdv-route-schema");
       previousSchema?.remove();
-      if (!staticSchemaMatches && (article || growthMetadata || staticMetadata)) {
-        const schema = document.createElement('script');
-        schema.id = 'rdv-route-schema';
-        schema.type = 'application/ld+json';
-        schema.textContent = JSON.stringify(article ? {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: article.title,
-          description: article.description,
-          datePublished: article.published,
-          dateModified: article.published,
-          inLanguage: 'pt-BR',
-          mainEntityOfPage: canonical,
-          author: { '@id': 'https://reidasvendas.com.br/#founder' },
-          publisher: { '@id': 'https://reidasvendas.com.br/#organization' },
-        } : growthMetadata ? {
-          '@context': 'https://schema.org',
-          '@graph': [
-            {
-              '@type': growthMetadata.category,
-              name: metadata.title,
-              description: metadata.description,
-              url: canonical,
-              provider: { '@id': 'https://reidasvendas.com.br/#organization' },
-            },
-            ...(growthMetadata.questions.length ? [{
-              '@type': 'FAQPage',
-              mainEntity: growthMetadata.questions.map((question) => ({
-                '@type': 'Question',
-                name: question.question,
-                acceptedAnswer: { '@type': 'Answer', text: question.answer },
-              })),
-            }] : []),
-          ],
-        } : {
-          '@context': 'https://schema.org',
-          '@type': pathname === '/solucoes' || pathname === '/portfolio' ? 'CollectionPage' : 'WebPage',
-          name: metadata.title,
-          description: metadata.description,
-          url: canonical,
-          inLanguage: 'pt-BR',
-          isPartOf: { '@id': 'https://reidasvendas.com.br/#website' },
-        }).replace(/</g, '\\u003c');
+      if (
+        !staticSchemaMatches &&
+        (article || growthMetadata || staticMetadata)
+      ) {
+        const schema = document.createElement("script");
+        schema.id = "rdv-route-schema";
+        schema.type = "application/ld+json";
+        schema.textContent = JSON.stringify(
+          article
+            ? {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: article.title,
+                description: article.description,
+                datePublished: article.published,
+                dateModified: article.published,
+                inLanguage: "pt-BR",
+                mainEntityOfPage: canonical,
+                author: { "@id": "https://reidasvendas.com.br/#founder" },
+                publisher: {
+                  "@id": "https://reidasvendas.com.br/#organization",
+                },
+              }
+            : growthMetadata
+              ? {
+                  "@context": "https://schema.org",
+                  "@graph": [
+                    {
+                      "@type": growthMetadata.category,
+                      name: metadata.title,
+                      description: metadata.description,
+                      url: canonical,
+                      provider: {
+                        "@id": "https://reidasvendas.com.br/#organization",
+                      },
+                    },
+                    ...(growthMetadata.questions.length
+                      ? [
+                          {
+                            "@type": "FAQPage",
+                            mainEntity: growthMetadata.questions.map(
+                              (question) => ({
+                                "@type": "Question",
+                                name: question.question,
+                                acceptedAnswer: {
+                                  "@type": "Answer",
+                                  text: question.answer,
+                                },
+                              }),
+                            ),
+                          },
+                        ]
+                      : []),
+                  ],
+                }
+              : {
+                  "@context": "https://schema.org",
+                  "@type":
+                    pathname === "/solucoes" || pathname === "/portfolio"
+                      ? "CollectionPage"
+                      : "WebPage",
+                  name: metadata.title,
+                  description: metadata.description,
+                  url: canonical,
+                  inLanguage: "pt-BR",
+                  isPartOf: { "@id": "https://reidasvendas.com.br/#website" },
+                },
+        ).replace(/</g, "\\u003c");
         document.head.appendChild(schema);
       }
 
-      trackEvent('page_view', { page_title: metadata.title });
-      window.dispatchEvent(new CustomEvent('route-change', { detail: { pathname, search, timestamp: Date.now() } }));
+      trackEvent("page_view", { page_title: metadata.title });
+      window.dispatchEvent(
+        new CustomEvent("route-change", {
+          detail: { pathname, search, timestamp: Date.now() },
+        }),
+      );
     };
 
     // Rotas estáticas (home, chrome): aplica já sem importar growth/articles.
     if (!articleSlug && staticMetadata) {
       apply({});
-      return () => { cancelled = true; };
+      return () => {
+        cancelled = true;
+      };
     }
 
     void (async () => {
       try {
         const [articlesMod, growthMod] = await Promise.all([
-          articleSlug ? import('@/lib/articles') : Promise.resolve(null),
-          import('@/lib/growth'),
+          articleSlug ? import("@/lib/articles") : Promise.resolve(null),
+          import("@/lib/growth"),
         ]);
         if (cancelled) return;
-        const article = articleSlug && articlesMod
-          ? articlesMod.ARTICLE_BY_SLUG.get(articleSlug)
-          : undefined;
+        const article =
+          articleSlug && articlesMod
+            ? articlesMod.ARTICLE_BY_SLUG.get(articleSlug)
+            : undefined;
         const growthMetadata = growthMod.SEO_BY_PATH.get(pathname);
         apply({ article, growthMetadata });
       } catch (error) {
         if (cancelled) return;
-        console.error(JSON.stringify({ level: 'error', event: 'route_metadata_failed', message: error instanceof Error ? error.message : 'unknown' }));
+        console.error(
+          JSON.stringify({
+            level: "error",
+            event: "route_metadata_failed",
+            message: error instanceof Error ? error.message : "unknown",
+          }),
+        );
         apply({});
       }
     })();
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [location.pathname, location.search]);
 
   return null;
@@ -368,18 +479,6 @@ function RouteMetadata() {
 
 function SiteLayout() {
   const location = useLocation();
-
-  // Remove o boot loader estático do index.html assim que o app monta:
-  // fade-out de 420ms (CSS) revela o conteúdo já renderizado — sem "troca de página".
-  useEffect(() => {
-    const boot = document.getElementById('rdv-boot');
-    if (!boot) return;
-    const frame = requestAnimationFrame(() => {
-      boot.classList.add('is-leaving');
-      window.setTimeout(() => boot.remove(), 500);
-    });
-    return () => cancelAnimationFrame(frame);
-  }, []);
 
   return (
     <>
@@ -389,37 +488,192 @@ function SiteLayout() {
         <Suspense fallback={<Loading />}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-              <Route path="/solucoes" element={<PageTransition><Solucoes /></PageTransition>} />
-              <Route path="/solucoes/:slug" element={<PageTransition><SolutionDetail /></PageTransition>} />
-              <Route path="/alternativas/:slug" element={<PageTransition><ComparisonDetail /></PageTransition>} />
-              <Route path="/ferramentas" element={<PageTransition><Tools /></PageTransition>} />
-              <Route path="/ferramentas/:slug" element={<PageTransition><ToolDetail /></PageTransition>} />
-              <Route path="/demonstracoes" element={<PageTransition><Demonstrations /></PageTransition>} />
-              <Route path="/demonstracoes/:slug" element={<PageTransition><DemoExperience /></PageTransition>} />
-              {GUIDE_SLUGS.map((slug) => <Route key={slug} path={`/${slug}`} element={<PageTransition><IntentGuide /></PageTransition>} />)}
-              <Route path="/diagnostico" element={<PageTransition><Diagnostico /></PageTransition>} />
+              <Route path="/" element={<Home />} />
+              <Route
+                path="/solucoes"
+                element={
+                  <PageTransition>
+                    <Solucoes />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/solucoes/:slug"
+                element={
+                  <PageTransition>
+                    <SolutionDetail />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/alternativas/:slug"
+                element={
+                  <PageTransition>
+                    <ComparisonDetail />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/ferramentas"
+                element={
+                  <PageTransition>
+                    <Tools />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/ferramentas/:slug"
+                element={
+                  <PageTransition>
+                    <ToolDetail />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/demonstracoes"
+                element={
+                  <PageTransition>
+                    <Demonstrations />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/demonstracoes/:slug"
+                element={
+                  <PageTransition>
+                    <DemoExperience />
+                  </PageTransition>
+                }
+              />
+              {GUIDE_SLUGS.map((slug) => (
+                <Route
+                  key={slug}
+                  path={`/${slug}`}
+                  element={
+                    <PageTransition>
+                      <IntentGuide />
+                    </PageTransition>
+                  }
+                />
+              ))}
+              <Route
+                path="/diagnostico"
+                element={
+                  <PageTransition>
+                    <Diagnostico />
+                  </PageTransition>
+                }
+              />
               <Route path="/servicos" element={<RedirectTo to="/solucoes" />} />
               <Route path="/servicos/:slug" element={<RedirectLegacySlug />} />
               <Route path="/modelos" element={<RedirectTo to="/solucoes" />} />
-              <Route path="/projetos" element={<RedirectTo to="/portfolio" />} />
-              <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
-              <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
-              <Route path="/contato" element={<PageTransition><ContatoDireto /></PageTransition>} />
-              <Route path="/planos" element={<PageTransition><Planos /></PageTransition>} />
-              <Route path="/black-friday" element={<PageTransition><BlackFriday /></PageTransition>} />
-              <Route path="/sobre" element={<PageTransition><Sobre /></PageTransition>} />
+              <Route
+                path="/projetos"
+                element={<RedirectTo to="/portfolio" />}
+              />
+              <Route
+                path="/blog"
+                element={
+                  <PageTransition>
+                    <Blog />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/blog/:slug"
+                element={
+                  <PageTransition>
+                    <BlogPost />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/contato"
+                element={
+                  <PageTransition>
+                    <ContatoDireto />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/planos"
+                element={
+                  <PageTransition>
+                    <Planos />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/black-friday"
+                element={
+                  <PageTransition>
+                    <BlackFriday />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/sobre"
+                element={
+                  <PageTransition>
+                    <Sobre />
+                  </PageTransition>
+                }
+              />
               <Route path="/recursos" element={<RedirectTo to="/blog" />} />
-              <Route path="/segmentos" element={<RedirectTo to="/solucoes" />} />
+              <Route
+                path="/segmentos"
+                element={<RedirectTo to="/solucoes" />}
+              />
               <Route path="/segmentos/:slug" element={<RedirectLegacySlug />} />
-              <Route path="/portfolio" element={<PageTransition><Portfolio /></PageTransition>} />
-              <Route path="/obrigado" element={<PageTransition><Obrigado /></PageTransition>} />
-              <Route path="/politica" element={<PageTransition><Politica /></PageTransition>} />
-              <Route path="/termos" element={<PageTransition><Termos /></PageTransition>} />
-              <Route path="/templates" element={<RedirectTo to="/demonstracoes" />} />
+              <Route
+                path="/portfolio"
+                element={
+                  <PageTransition>
+                    <Portfolio />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/obrigado"
+                element={
+                  <PageTransition>
+                    <Obrigado />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/politica"
+                element={
+                  <PageTransition>
+                    <Politica />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/termos"
+                element={
+                  <PageTransition>
+                    <Termos />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/templates"
+                element={<RedirectTo to="/demonstracoes" />}
+              />
               <Route path="/builder" element={<RedirectTo to="/solucoes" />} />
-              <Route path="/extensions" element={<RedirectTo to="/solucoes" />} />
-              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+              <Route
+                path="/extensions"
+                element={<RedirectTo to="/solucoes" />}
+              />
+              <Route
+                path="*"
+                element={
+                  <PageTransition>
+                    <NotFound />
+                  </PageTransition>
+                }
+              />
             </Routes>
           </AnimatePresence>
         </Suspense>
@@ -434,8 +688,18 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/dashboard/*" element={<Navigate to="/solucoes" replace />} />
-        <Route path="*" element={<PageErrorBoundary><SiteLayout /></PageErrorBoundary>} />
+        <Route
+          path="/dashboard/*"
+          element={<Navigate to="/solucoes" replace />}
+        />
+        <Route
+          path="*"
+          element={
+            <PageErrorBoundary>
+              <SiteLayout />
+            </PageErrorBoundary>
+          }
+        />
       </Routes>
     </Router>
   );

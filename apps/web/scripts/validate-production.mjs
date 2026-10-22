@@ -1,12 +1,12 @@
-import { access, readFile, readdir } from 'node:fs/promises';
-import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { MARKETPLACE_ITEMS } from '../src/lib/marketplace.ts';
-import { SEO_BY_PATH } from '../src/lib/growth.ts';
+import { access, readFile, readdir } from "node:fs/promises";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { MARKETPLACE_ITEMS } from "../src/lib/marketplace.ts";
+import { SEO_BY_PATH } from "../src/lib/growth.ts";
 
-const projectRoot = fileURLToPath(new URL('..', import.meta.url));
-const distDirectory = join(projectRoot, 'dist');
-const origin = 'https://reidasvendas.com.br';
+const projectRoot = fileURLToPath(new URL("..", import.meta.url));
+const distDirectory = join(projectRoot, "dist");
+const origin = "https://reidasvendas.com.br";
 const forbiddenPublicPatterns = [
   /data-theme=["']light["']/i,
   /5516993333344/,
@@ -33,66 +33,110 @@ async function collectTextFiles(directory) {
   const files = [];
   for (const entry of entries) {
     const path = join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...await collectTextFiles(path));
-    else if (/\.(?:html|js|css|json|txt|xml|webmanifest)$/i.test(entry.name)) files.push(path);
+    if (entry.isDirectory()) files.push(...(await collectTextFiles(path)));
+    else if (/\.(?:html|js|css|json|txt|xml|webmanifest)$/i.test(entry.name))
+      files.push(path);
   }
   return files;
 }
 
-const sitemap = await readFile(join(distDirectory, 'sitemap.xml'), 'utf8');
-const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const sitemap = await readFile(join(distDirectory, "sitemap.xml"), "utf8");
+const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
+  (match) => match[1],
+);
 assert(urls.length >= 50, `Sitemap incompleto: ${urls.length} URLs.`);
-assert(new Set(urls).size === urls.length, 'Sitemap contém URLs duplicadas.');
+assert(new Set(urls).size === urls.length, "Sitemap contém URLs duplicadas.");
 
 for (const url of urls) {
   assert(url.startsWith(origin), `Origem canônica inválida: ${url}`);
   const pathname = new URL(url).pathname;
-  const htmlPath = pathname === '/'
-    ? join(distDirectory, 'index.html')
-    : join(distDirectory, `${pathname.slice(1)}.html`);
+  const htmlPath =
+    pathname === "/"
+      ? join(distDirectory, "index.html")
+      : join(distDirectory, `${pathname.slice(1)}.html`);
   assert(await exists(htmlPath), `HTML prerenderizado ausente: ${pathname}`);
-  const html = await readFile(htmlPath, 'utf8');
-  assert(/<html[^>]+data-theme=["']dark["']/i.test(html), `Tema inicial não é dark: ${pathname}`);
+  const html = await readFile(htmlPath, "utf8");
+  assert(
+    /<html[^>]+data-theme=["']dark["']/i.test(html),
+    `Tema inicial não é dark: ${pathname}`,
+  );
   assert(/<title>[^<]+<\/title>/i.test(html), `Title ausente: ${pathname}`);
-  assert(html.includes(`<link rel="canonical" href="${url}"`), `Canonical divergente: ${pathname}`);
-  for (const language of ['pt-BR', 'x-default']) {
-    assert(html.includes(`hreflang="${language}" href="${url}"`), `Hreflang divergente: ${pathname} (${language})`);
+  assert(
+    html.includes(`<link rel="canonical" href="${url}"`),
+    `Canonical divergente: ${pathname}`,
+  );
+  for (const language of ["pt-BR", "x-default"]) {
+    assert(
+      (html.match(/<link\b[^>]*>/gi) || []).some(
+        (tag) =>
+          tag.includes(`hreflang="${language}"`) &&
+          tag.includes(`href="${url}"`),
+      ),
+      `Hreflang divergente: ${pathname} (${language})`,
+    );
   }
-  assert((html.match(/<h1\b/gi) || []).length === 1, `Cada página precisa de um H1: ${pathname}`);
-  if (pathname === '/') {
-    // Home: SPA — o conteúdo real é renderizado pelo React. O HTML inicial carrega
-    // SEO no <head> (title/description/JSON-LD) + boot loader de marca + fallback
-    // <noscript> com a proposta. Validamos essa estrutura em vez de exigir <main>
-    // estático (que causava o "primeiro template" visível antes da hidratação).
-    assert(/id="rdv-boot"/i.test(html), `Boot loader ausente na home: ${pathname}`);
-    assert(/<noscript/i.test(html), `Fallback noscript ausente na home: ${pathname}`);
-  } else {
-    assert(/<main\b/i.test(html), `Conteúdo inicial ausente: ${pathname}`);
-  }
+  assert(
+    (html.match(/<h1\b/gi) || []).length === 1,
+    `Cada página precisa de um H1: ${pathname}`,
+  );
+  assert(
+    !/id="rdv-boot"/i.test(html),
+    `Boot overlay must not be present: ${pathname}`,
+  );
+  assert(/<main\b/i.test(html), `Conteúdo inicial ausente: ${pathname}`);
   for (const pattern of forbiddenPublicPatterns) {
     assert(!pattern.test(html), `Conteúdo proibido em ${pathname}: ${pattern}`);
   }
 
-  const assetPaths = [...html.matchAll(/(?:src|href)=["'](\/[^"']+\.[a-z0-9]+)(?:\?[^"']*)?["']/gi)]
-    .map((match) => match[1]);
+  const assetPaths = [
+    ...html.matchAll(
+      /(?:src|href)=["'](\/[^"']+\.[a-z0-9]+)(?:\?[^"']*)?["']/gi,
+    ),
+  ].map((match) => match[1]);
   for (const assetPath of assetPaths) {
-    assert(await exists(join(distDirectory, assetPath.slice(1))), `Asset ausente em ${pathname}: ${assetPath}`);
+    assert(
+      await exists(join(distDirectory, assetPath.slice(1))),
+      `Asset ausente em ${pathname}: ${assetPath}`,
+    );
   }
 }
 
 for (const item of MARKETPLACE_ITEMS) {
-  assert(SEO_BY_PATH.has(`/solucoes/${item.solution}`), `Solução sem página canônica: ${item.solution}`);
+  assert(
+    SEO_BY_PATH.has(`/solucoes/${item.solution}`),
+    `Solução sem página canônica: ${item.solution}`,
+  );
 }
 
 const textFiles = await collectTextFiles(distDirectory);
-const publicText = (await Promise.all(textFiles.map((file) => readFile(file, 'utf8')))).join('\n');
-assert(publicText.includes('5516992333344'), 'WhatsApp oficial ausente no artefato.');
-assert(publicText.includes('contato@reidasvendas.com.br'), 'E-mail oficial ausente no artefato.');
-assert(!await exists(join(distDirectory, 'imagens/portfolio/drogalar.webp')), 'Asset legado removido permaneceu no deploy.');
-assert(!await exists(join(distDirectory, 'imagens/nichos')), 'Banco antigo de imagens permaneceu no deploy.');
-assert(!await exists(join(distDirectory, 'imagens/services')), 'Banco antigo de imagens de serviço permaneceu no deploy.');
+const publicText = (
+  await Promise.all(textFiles.map((file) => readFile(file, "utf8")))
+).join("\n");
+assert(
+  publicText.includes("5516992333344"),
+  "WhatsApp oficial ausente no artefato.",
+);
+assert(
+  publicText.includes("contato@reidasvendas.com.br"),
+  "E-mail oficial ausente no artefato.",
+);
+assert(
+  !(await exists(join(distDirectory, "imagens/portfolio/drogalar.webp"))),
+  "Asset legado removido permaneceu no deploy.",
+);
+assert(
+  !(await exists(join(distDirectory, "imagens/nichos"))),
+  "Banco antigo de imagens permaneceu no deploy.",
+);
+assert(
+  !(await exists(join(distDirectory, "imagens/services"))),
+  "Banco antigo de imagens de serviço permaneceu no deploy.",
+);
 for (const pattern of forbiddenPublicPatterns) {
-  assert(!pattern.test(publicText), `Conteúdo proibido no artefato: ${pattern}`);
+  assert(
+    !pattern.test(publicText),
+    `Conteúdo proibido no artefato: ${pattern}`,
+  );
 }
 
 // ── Regressão de "tremor" visual (jitter) ───────────────────────────────────
@@ -101,13 +145,17 @@ for (const pattern of forbiddenPublicPatterns) {
 // as imagens do site parecerem tremer (o grão de ruído pulsando a opacidade).
 // Medido: com esse overlay, duas capturas da MESMA imagem parada davam SSIM 0.993;
 // depois de parar a animação, 1.000000 (estável).
-const cssTexts = (await Promise.all(
-  textFiles.filter((file) => file.endsWith('.css')).map((file) => readFile(file, 'utf8')),
-)).join('\n');
+const cssTexts = (
+  await Promise.all(
+    textFiles
+      .filter((file) => file.endsWith(".css"))
+      .map((file) => readFile(file, "utf8")),
+  )
+).join("\n");
 
 assert(
   !/animation:\s*noise-anim[^;}]*infinite/i.test(cssTexts),
-  'Grão de ruído animado reintroduzido: reescreve todo pixel da tela e faz as imagens tremerem.',
+  "Grão de ruído animado reintroduzido: reescreve todo pixel da tela e faz as imagens tremerem.",
 );
 
 for (const bloco of cssTexts.match(/[^{}]+\{[^{}]*\}/g) ?? []) {
@@ -116,9 +164,38 @@ for (const bloco of cssTexts.match(/[^{}]+\{[^{}]*\}/g) ?? []) {
   const animacaoInfinita = /animation:[^;}]*infinite/.test(bloco);
   if (overlayFixo && telaCheia && animacaoInfinita) {
     throw new Error(
-      `Overlay fixo de tela cheia com animação infinita (tremor visual): ${bloco.slice(0, 90).replace(/\s+/g, ' ')}`,
+      `Overlay fixo de tela cheia com animação infinita (tremor visual): ${bloco.slice(0, 90).replace(/\s+/g, " ")}`,
     );
   }
 }
 
-process.stdout.write(`Production validation passed: ${urls.length} canonical pages, ${MARKETPLACE_ITEMS.length} marketplace entries.\n`);
+process.stdout.write(
+  `Production validation passed: ${urls.length} canonical pages, ${MARKETPLACE_ITEMS.length} marketplace entries.\n`,
+);
+
+const vercel = JSON.parse(
+  await readFile(join(projectRoot, "../../vercel.json"), "utf8"),
+);
+const securityHeaders = vercel.headers.find(
+  (rule) => rule.source === "/(.*)",
+).headers;
+for (const name of [
+  "X-Content-Type-Options",
+  "X-Frame-Options",
+  "Strict-Transport-Security",
+]) {
+  assert(
+    securityHeaders.some(
+      (header) => header.key.toLowerCase() === name.toLowerCase(),
+    ),
+    `Security header missing: ${name}`,
+  );
+}
+for (const rule of vercel.redirects)
+  assert(
+    rule.statusCode === 301,
+    `Legacy redirect must be 301: ${rule.source}`,
+  );
+process.stdout.write(
+  "Security configuration passed: production headers and legacy 301 redirects.\n",
+);

@@ -1,8 +1,13 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, Check } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { trackEvent } from '@/lib/analytics';
-import { BLACK_FRIDAY, IMPLANTACAO, brl, precoComDesconto } from '@/lib/ofertas';
+import { useEffect, useState } from "react";
+import { ArrowRight, Check } from "lucide-react";
+import { Link } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
+import {
+  BLACK_FRIDAY,
+  IMPLANTACAO,
+  brl,
+  precoComDesconto,
+} from "@/lib/ofertas";
 
 /**
  * Black Friday do Rei das Vendas.
@@ -18,35 +23,44 @@ import { BLACK_FRIDAY, IMPLANTACAO, brl, precoComDesconto } from '@/lib/ofertas'
  */
 
 const PASSOS = [
-  ['Você faz o diagnóstico', 'Duas etapas, sem telefone e sem vendedor do outro lado. Ele monta o seu caso e o que precisa existir.'],
-  ['Você recebe a proposta por escrito', 'Escopo, prazo, valor com o desconto aplicado e o que depende de você. Nada de "a gente vê depois".'],
-  ['Você assina até 27/11 e o preço trava', 'O valor combinado não muda depois, mesmo que a entrega comece em dezembro.'],
+  [
+    "Você escolhe sua implantação",
+    "Três escolhas rápidas para informar seu negócio, necessidade e prazo.",
+  ],
+  [
+    "Você recebe a proposta por escrito",
+    'Escopo, prazo, valor com o desconto aplicado e o que depende de você. Nada de "a gente vê depois".',
+  ],
+  [
+    "Você assina até 27/11 e o preço trava",
+    "O valor combinado não muda depois, mesmo que a entrega comece em dezembro.",
+  ],
 ];
 
 const FAQ = [
   {
-    q: 'Por que uma agência está fazendo Black Friday?',
-    a: 'Porque entre setembro e dezembro quem vende produto se prepara para o fim de ano — e o site precisa estar pronto antes da correria, não em janeiro. O desconto existe para você começar agora em vez de depois da correria.',
+    q: "Por que uma agência está fazendo Black Friday?",
+    a: "Porque entre setembro e dezembro quem vende produto se prepara para o fim de ano — e o site precisa estar pronto antes da correria, não em janeiro. O desconto existe para você começar agora em vez de depois da correria.",
   },
   {
     q: 'Isso não é golpe de "preço de" inflado?',
-    a: 'Não. O preço de referência é o mesmo que está publicado em /planos hoje, fora da campanha, e é para onde ele volta em 28 de novembro. Se você quiser conferir antes de decidir, abra a página de planos e compare.',
+    a: "Não. O preço de referência é o mesmo que está publicado em /planos hoje, fora da campanha, e é para onde ele volta em 28 de novembro. Se você quiser conferir antes de decidir, abra a página de planos e compare.",
   },
   {
-    q: 'Preciso pagar tudo hoje?',
-    a: 'Não. A condição é assinar até 27/11; as condições de pagamento ficam escritas na proposta que você recebe.',
+    q: "Preciso pagar tudo hoje?",
+    a: "Não. A condição é assinar até 27/11; as condições de pagamento ficam escritas na proposta que você recebe.",
   },
   {
-    q: 'A entrega começa quando?',
-    a: 'Na ordem de chegada das assinaturas. Como o desconto é o mesmo para todo mundo, quem assina primeiro é atendido primeiro — e você recebe a data de início por escrito.',
+    q: "A entrega começa quando?",
+    a: "Na ordem de chegada das assinaturas. Como o desconto é o mesmo para todo mundo, quem assina primeiro é atendido primeiro — e você recebe a data de início por escrito.",
   },
   {
-    q: 'O que não entra no desconto?',
-    a: 'Mídia paga (Google, Instagram), licenças e serviços de terceiros. Esses valores sempre ficam separados e vão direto para a plataforma, na sua conta — a gente não põe desconto em dinheiro que não é nosso.',
+    q: "O que não entra no desconto?",
+    a: "Mídia paga (Google, Instagram), licenças e serviços de terceiros. Esses valores sempre ficam separados e vão direto para a plataforma, na sua conta — a gente não põe desconto em dinheiro que não é nosso.",
   },
   {
-    q: 'E se a campanha acabar e eu perder?',
-    a: 'O desconto de 30% acaba. O trabalho não: você contrata pelo preço de tabela em qualquer outra semana do ano, e o diagnóstico continua gratuito.',
+    q: "E se a campanha acabar e eu perder?",
+    a: "O desconto de 30% acaba. O trabalho não: você contrata pelo preço de tabela em qualquer outra semana do ano, e o diagnóstico continua gratuito.",
   },
 ];
 
@@ -62,7 +76,8 @@ function useContagem(fim: string) {
   }, [fim]);
   if (agora === null) return null;
   const resta = new Date(fim).getTime() - agora;
-  if (resta <= 0) return { acabou: true, dias: 0, horas: 0, minutos: 0, segundos: 0 };
+  if (resta <= 0)
+    return { acabou: true, dias: 0, horas: 0, minutos: 0, segundos: 0 };
   return {
     acabou: false,
     dias: Math.floor(resta / 86400000),
@@ -85,33 +100,48 @@ export default function BlackFriday() {
             Black Friday 2026 · vale até 27 de novembro, às 23h59
           </p>
           <h1>
-            {Math.round(BLACK_FRIDAY.descontoImplantacao * 100)}% a menos para o seu negócio parar de ser
-            <em className="rdv-accent-serif"> invisível</em> na busca da sua cidade.
+            {Math.round(BLACK_FRIDAY.descontoImplantacao * 100)}% a menos para o
+            seu negócio parar de ser
+            <em className="rdv-accent-serif"> invisível</em> na busca da sua
+            cidade.
           </h1>
           <p>
-            Sem contador que reinicia quando você volta à página. Sem "últimas vagas" inventadas para te apressar.
-            Sem preço "de" que nunca foi praticado. A campanha é simples: você fecha até 27 de novembro e paga 30%
-            menos na implantação — e o primeiro mês da assinatura sai de graça.
+            Sem contador que reinicia quando você volta à página. Sem "últimas
+            vagas" inventadas para te apressar. Sem preço "de" que nunca foi
+            praticado. A campanha é simples: você fecha até 27 de novembro e
+            paga 30% menos na implantação — e o primeiro mês da assinatura sai
+            de graça.
           </p>
 
           <div className="rdv-bf__contagem" role="timer" aria-live="off">
             {acabou ? (
               <p>
-                <strong>A campanha terminou.</strong> Os valores voltaram para a tabela de{' '}
-                <Link to="/planos">planos</Link> — o contato inicial continua sem compromisso.
+                <strong>A campanha terminou.</strong> Os valores voltaram para a
+                tabela de <Link to="/planos">planos</Link> — o contato inicial
+                continua sem compromisso.
               </p>
             ) : contagem ? (
               <>
                 <span className="rdv-bf__rotulo">Termina em</span>
                 <span className="rdv-bf__numeros">
-                  <span><strong>{contagem.dias}</strong>dias</span>
-                  <span><strong>{contagem.horas}</strong>horas</span>
-                  <span><strong>{contagem.minutos}</strong>min</span>
-                  <span><strong>{contagem.segundos}</strong>seg</span>
+                  <span>
+                    <strong>{contagem.dias}</strong>dias
+                  </span>
+                  <span>
+                    <strong>{contagem.horas}</strong>horas
+                  </span>
+                  <span>
+                    <strong>{contagem.minutos}</strong>min
+                  </span>
+                  <span>
+                    <strong>{contagem.segundos}</strong>seg
+                  </span>
                 </span>
               </>
             ) : (
-              <p className="rdv-bf__rotulo">A oferta vale até sexta, 27 de novembro de 2026, às 23h59.</p>
+              <p className="rdv-bf__rotulo">
+                A oferta vale até 27 de novembro de 2026, às 23h59.
+              </p>
             )}
           </div>
 
@@ -119,7 +149,9 @@ export default function BlackFriday() {
             <Link
               className="rdv-primary-action"
               to="/diagnostico?origem=black-friday"
-              onClick={() => trackEvent('diagnostic_start', { position: 'black-friday' })}
+              onClick={() =>
+                trackEvent("diagnostic_start", { position: "black-friday" })
+              }
             >
               Garantir o desconto <ArrowRight aria-hidden="true" />
             </Link>
@@ -134,33 +166,55 @@ export default function BlackFriday() {
         <div className="rdv-shell">
           <header>
             <p className="rdv-kicker">O que muda no seu bolso</p>
-            <h2 id="bf-precos">O preço de sempre, com 30% a menos até sexta.</h2>
-            <p>Os valores riscados são os mesmos publicados em /planos fora da campanha — pode conferir.</p>
+            <h2 id="bf-precos">
+              O preço de sempre, com 30% a menos até 27/11/2026.
+            </h2>
+            <p>
+              Os valores riscados são os mesmos publicados em /planos fora da
+              campanha — pode conferir.
+            </p>
           </header>
           <div className="rdv-precos__grade">
             {planos.map((plano) => {
               const comDesconto = precoComDesconto(plano.valor as number);
               const economia = (plano.valor as number) - comDesconto;
               return (
-                <article key={plano.nome} className={plano.destaque ? 'is-destaque' : undefined}>
-                  <span className="rdv-precos__selo">{plano.selo ?? ''}</span>
+                <article
+                  key={plano.nome}
+                  className={plano.destaque ? "is-destaque" : undefined}
+                >
+                  <span className="rdv-precos__selo">{plano.selo ?? ""}</span>
                   <h3>{plano.nome}</h3>
                   <p className="rdv-precos__valor is-desconto">
                     <s>{brl(plano.valor as number)}</s>
                     <strong>{brl(comDesconto)}</strong>
-                    <span>uma vez{BLACK_FRIDAY.mesGratisAssinatura ? ' + 1º mês de assinatura grátis' : ''}</span>
+                    <span>
+                      uma vez
+                      {BLACK_FRIDAY.mesGratisAssinatura
+                        ? " + 1º mês de assinatura grátis"
+                        : ""}
+                    </span>
                   </p>
-                  <p className="rdv-precos__economia">Você economiza {brl(economia)}.</p>
+                  <p className="rdv-precos__economia">
+                    Você economiza {brl(economia)}.
+                  </p>
                   <ul>
                     {plano.entrega.map((item) => (
-                      <li key={item}><Check aria-hidden="true" /> <span>{item}</span></li>
+                      <li key={item}>
+                        <Check aria-hidden="true" /> <span>{item}</span>
+                      </li>
                     ))}
                   </ul>
                   <p className="rdv-precos__prazo">Prazo: {plano.prazo}.</p>
                   <Link
                     className="rdv-primary-action"
                     to={`/diagnostico?origem=black-friday&plano=${plano.id}&solucao=${plano.solucao}&campanha=black-friday`}
-                    onClick={() => trackEvent('diagnostic_start', { position: 'black-friday-plan', plan: plano.nome })}
+                    onClick={() =>
+                      trackEvent("diagnostic_start", {
+                        position: "black-friday-plan",
+                        plan: plano.nome,
+                      })
+                    }
                   >
                     Quero com o desconto <ArrowRight aria-hidden="true" />
                   </Link>
@@ -175,7 +229,9 @@ export default function BlackFriday() {
         <div className="rdv-shell">
           <header>
             <p className="rdv-kicker">O que esta página não tem</p>
-            <h2 id="bf-honestidade">Numa semana de desconto falso, o mais raro é o que não está aqui.</h2>
+            <h2 id="bf-honestidade">
+              Numa semana de desconto falso, o mais raro é o que não está aqui.
+            </h2>
           </header>
           <ul>
             {BLACK_FRIDAY.oQueNaoTem.map((item) => (
@@ -183,8 +239,8 @@ export default function BlackFriday() {
             ))}
           </ul>
           <p>
-            Se você viu qualquer um desses quatro em outro anúncio, agora você sabe o que aquele preço estava
-            realmente comprando: a sua pressa.
+            Se você viu qualquer um desses quatro em outro anúncio, agora você
+            sabe o que aquele preço estava realmente comprando: a sua pressa.
           </p>
         </div>
       </section>
@@ -193,12 +249,14 @@ export default function BlackFriday() {
         <div className="rdv-shell">
           <header>
             <p className="rdv-kicker">Como funciona</p>
-            <h2 id="bf-passos">Três passos. Nenhum deles é uma ligação de vendedor.</h2>
+            <h2 id="bf-passos">
+              Três passos. Nenhum deles é uma ligação de vendedor.
+            </h2>
           </header>
           <ol>
             {PASSOS.map(([titulo, detalhe], index) => (
               <li key={titulo}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
+                <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
                   <strong>{titulo}</strong>
                   <p>{detalhe}</p>
@@ -235,8 +293,10 @@ export default function BlackFriday() {
           <ol>
             {BLACK_FRIDAY.regras.map((regra, index) => (
               <li key={regra}>
-                <span>{String(index + 1).padStart(2, '0')}</span>
-                <div><p>{regra}</p></div>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <p>{regra}</p>
+                </div>
               </li>
             ))}
           </ol>
@@ -245,25 +305,34 @@ export default function BlackFriday() {
 
       <section className="rdv-offers__closing" aria-labelledby="bf-fechamento">
         <div className="rdv-shell">
-          <p className="rdv-kicker">{acabou ? 'A campanha terminou' : 'Faltam dias contados'}</p>
+          <p className="rdv-kicker">
+            {acabou ? "A campanha terminou" : "Faltam dias contados"}
+          </p>
           <h2 id="bf-fechamento">
             {acabou
-              ? 'O desconto acabou — o problema que ele resolvia, não.'
-              : 'Até 27 de novembro o site que coloca você na busca custa 30% menos. Depois, preço de tabela.'}
+              ? "O desconto acabou — o problema que ele resolvia, não."
+              : "Até 27 de novembro o site que coloca você na busca custa 30% menos. Depois, preço de tabela."}
           </h2>
           <p>
-            O diagnóstico tem duas etapas, é gratuito e não te compromete a nada. Ele mostra o que o seu cliente
-            pesquisa, o que o concorrente tem publicado e qual das opções resolve o seu caso.
+            O diagnóstico tem duas etapas, é gratuito e não te compromete a
+            nada. Ele mostra o que o seu cliente pesquisa, o que o concorrente
+            tem publicado e qual das opções resolve o seu caso.
           </p>
           <div>
             <Link
               className="rdv-primary-action"
               to="/diagnostico?origem=black-friday-final"
-              onClick={() => trackEvent('diagnostic_start', { position: 'black-friday-final' })}
+              onClick={() =>
+                trackEvent("diagnostic_start", {
+                  position: "black-friday-final",
+                })
+              }
             >
               Montar o meu diagnóstico <ArrowRight aria-hidden="true" />
             </Link>
-            <Link className="rdv-offers__secondary" to="/contato">Falar direto no WhatsApp <span aria-hidden="true">↗</span></Link>
+            <Link className="rdv-offers__secondary" to="/contato">
+              Falar direto no WhatsApp <span aria-hidden="true">↗</span>
+            </Link>
           </div>
         </div>
       </section>

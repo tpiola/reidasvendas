@@ -42,3 +42,6 @@ next-env.d.ts
 gen_*.py
 .env*
 *.tsbuildinfo
+
+# Temporary build-time React renderer
+apps/web/.prerender-pages.*

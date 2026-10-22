@@ -3,7 +3,7 @@
 Documento canônico de estado deste repositório. **Todo agente lê este arquivo antes de editar
 qualquer coisa.** Ele diz o que está no ar, o que está aprovado, o que não pode ser revertido e
 o que está pendente. Sem ler isto, uma alteração é chute — e chute já custou 4 horas de site
-errado (ver *Incidentes*).
+errado (ver _Incidentes_).
 
 ## Como este documento é versionado
 
@@ -20,15 +20,15 @@ não edite, não commite. Relate a lacuna.
 
 ## Identidade canônica
 
-| Recurso | Valor |
-|---|---|
-| Repositório | `tpiola/reidasvendas` (público) |
-| Branch de produção | `main` — protegida contra force-push e exclusão (`enforce_admins: true`) |
-| Projeto Vercel | `reidasvendas` · `prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL` · time `thiagopiola` |
-| Domínio canônico | `reidasvendas.com.br` (`www` deve redirecionar para ele) |
-| Diretório da aplicação | `apps/web` — Vite + React + Tailwind, SPA com pré-render |
-| Monorepo | `pnpm` + `turbo` — **nunca npm ou yarn** (há um `package-lock.json` órfão na raiz: não use, não propague) |
-| Identidade de commit | `178150229+tpiola@users.noreply.github.com` — o GitHub **recusa** push com e-mail privado. Nunca use `-c user.email=` para sobrescrever a identidade deste repo |
+| Recurso                | Valor                                                                                                                                                           |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repositório            | `tpiola/reidasvendas` (público)                                                                                                                                 |
+| Branch de produção     | `main` — protegida contra force-push e exclusão (`enforce_admins: true`)                                                                                        |
+| Projeto Vercel         | `reidasvendas` · `prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL` · time `thiagopiola`                                                                                        |
+| Domínio canônico       | `reidasvendas.com.br` (`www` deve redirecionar para ele)                                                                                                        |
+| Diretório da aplicação | `apps/web` — Vite + React + Tailwind, SPA com pré-render                                                                                                        |
+| Monorepo               | `pnpm` + `turbo` — **nunca npm ou yarn** (há um `package-lock.json` órfão na raiz: não use, não propague)                                                       |
+| Identidade de commit   | `178150229+tpiola@users.noreply.github.com` — o GitHub **recusa** push com e-mail privado. Nunca use `-c user.email=` para sobrescrever a identidade deste repo |
 
 ## O que está no ar — verifique antes de confiar
 
@@ -59,7 +59,7 @@ Medido em **12/10/2026**, dentro deste repo (não em diretório de teste):
 - O `package.json` fixa `packageManager: pnpm@9.15.0`. **É essa a versão que roda aqui**, e ela lê
   os overrides **apenas** de `package.json` → `pnpm.overrides`.
 - O console imprime `[WARN] The "pnpm" field in package.json is no longer read by pnpm ... ignored:
-  pnpm.overrides` — **falso alarme na 9.15**. Os overrides são lidos e aplicados: comprovado com
+pnpm.overrides` — **falso alarme na 9.15**. Os overrides são lidos e aplicados: comprovado com
   quatro variantes (só `package.json` → aplica; os dois arquivos → aplica; **só
   `pnpm-workspace.yaml` → não aplica nada**, e o install ainda passa, silencioso).
 - Em pnpm **10+/11** a mecânica inverte: lá o `overrides` tem de estar no `pnpm-workspace.yaml` e o
@@ -120,17 +120,17 @@ mesmo caminho de arquivo.
 
 ## Diário de decisões
 
-| Data | SHA | Decisão |
-|---|---|---|
-| 04–05/10/2026 | `43bd5f9` | Home vira engenharia de conversão; triagem remunerada no lugar do CTA de WhatsApp |
-| 05/10/2026 | `76d173c` | Alinha o discurso do diagnóstico; remove o vão do hero antigo |
-| 05/10/2026 | `afcedc9` | Link da esteira aponta para a tabela de execução real |
-| 05/10/2026 | `c98c2d4` | Merge de reconciliação: arquitetura de conversão + jornada comercial do outro agente |
-| 05/10/2026 | `5ad57c8` | Cobre a jornada comercial com testes; realinha o e2e ao hero publicado |
-| 05/10/2026 | `1dab5a5` | Esteira no topo de `/planos`; `/obrigado` deixa de responder 404 |
-| 05/10/2026 | `ff65401` | Remove o "por mês" duplicado no cartão da Otimização Contínua |
-| 09/10/2026 | `91ea4b3` | Fonte de verdade, protocolo multi-agente e pré-voo contra reversão silenciosa |
-| 12/10/2026 | `e299631` | Corrige 3 vulnerabilidades de dependência (`postcss-selector-parser` 7.1.6, `smol-toml` 1.9.1, `source-map-js` 1.2.2); audit 4 → 1; documenta a mecânica de overrides |
+| Data          | SHA       | Decisão                                                                                                                                                               |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 04–05/10/2026 | `43bd5f9` | Home vira engenharia de conversão; triagem remunerada no lugar do CTA de WhatsApp                                                                                     |
+| 05/10/2026    | `76d173c` | Alinha o discurso do diagnóstico; remove o vão do hero antigo                                                                                                         |
+| 05/10/2026    | `afcedc9` | Link da esteira aponta para a tabela de execução real                                                                                                                 |
+| 05/10/2026    | `c98c2d4` | Merge de reconciliação: arquitetura de conversão + jornada comercial do outro agente                                                                                  |
+| 05/10/2026    | `5ad57c8` | Cobre a jornada comercial com testes; realinha o e2e ao hero publicado                                                                                                |
+| 05/10/2026    | `1dab5a5` | Esteira no topo de `/planos`; `/obrigado` deixa de responder 404                                                                                                      |
+| 05/10/2026    | `ff65401` | Remove o "por mês" duplicado no cartão da Otimização Contínua                                                                                                         |
+| 09/10/2026    | `91ea4b3` | Fonte de verdade, protocolo multi-agente e pré-voo contra reversão silenciosa                                                                                         |
+| 12/10/2026    | `e299631` | Corrige 3 vulnerabilidades de dependência (`postcss-selector-parser` 7.1.6, `smol-toml` 1.9.1, `source-map-js` 1.2.2); audit 4 → 1; documenta a mecânica de overrides |
 
 ## Incidentes registrados
 
@@ -153,16 +153,16 @@ recusado pelo GitHub ("email privacy restrictions"). A identidade correta deste 
 
 ## Pendências abertas
 
-| Pendência | Estado |
-|---|---|
-| `/obrigado` autocontraditório | "Mensagem enviada" vs "Pagamento Confirmado"; entrega 7 dias (página) vs 12 dias úteis (FAQ) — **aguarda a verdade do dono** |
-| Black Friday 30% | Desconto ainda incide sobre tiers legados; converter para desconto na Triagem exige percentual definido pelo dono |
-| Higiene da raiz | `24_hour_action_plan.md`, `AUDITORIA_COMPLETA.md`, `DIAGNOSTICO.md`, `REBUILD_PLAN.md`, `design-qa.md`, `package-lock.json` — o próprio `docs/GOVERNANCE.md` proíbe docs temporários na raiz |
-| Portão no GitHub | `main` bloqueia force-push e exclusão, mas **não exige PR nem check** — qualquer escrita entra direto. Decisão do dono |
-| `braces` (1 high) | Sem correção publicada pelo upstream. Build-only. Aceito e documentado acima |
-| 404 em `text/plain` | A aplicação não tem página de 404 própria: rota inexistente devolve `NOT_FOUND` cru da Vercel (79 B, sem marca nem caminho de volta) |
-| `og:image` única | Um único JPEG (236 KB) para todas as rotas — compartilhamento social genérico |
-| CSS render-blocking | 178.819 B de CSS em arquivo único + 9.680 B inline, sem code-split por rota |
+| Pendência                     | Estado                                                                                                                                                                                       |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/obrigado` autocontraditório | "Mensagem enviada" vs "Pagamento Confirmado"; entrega 7 dias (página) vs 12 dias úteis (FAQ) — **aguarda a verdade do dono**                                                                 |
+| Black Friday 30%              | Desconto ainda incide sobre tiers legados; converter para desconto na Triagem exige percentual definido pelo dono                                                                            |
+| Higiene da raiz               | `24_hour_action_plan.md`, `AUDITORIA_COMPLETA.md`, `DIAGNOSTICO.md`, `REBUILD_PLAN.md`, `design-qa.md`, `package-lock.json` — o próprio `docs/GOVERNANCE.md` proíbe docs temporários na raiz |
+| Portão no GitHub              | `main` bloqueia force-push e exclusão, mas **não exige PR nem check** — qualquer escrita entra direto. Decisão do dono                                                                       |
+| `braces` (1 high)             | Sem correção publicada pelo upstream. Build-only. Aceito e documentado acima                                                                                                                 |
+| 404 em `text/plain`           | A aplicação não tem página de 404 própria: rota inexistente devolve `NOT_FOUND` cru da Vercel (79 B, sem marca nem caminho de volta)                                                         |
+| `og:image` única              | Um único JPEG (236 KB) para todas as rotas — compartilhamento social genérico                                                                                                                |
+| CSS render-blocking           | 178.819 B de CSS em arquivo único + 9.680 B inline, sem code-split por rota                                                                                                                  |
 
 Resolvido em 09/10/2026: `www.reidasvendas.com.br` deixou de ser NXDOMAIN — responde 307 para
 `reidasvendas.com.br`, que é o comportamento que o `docs/GOVERNANCE.md` exige.
@@ -184,3 +184,13 @@ Portão vermelho = **não commite, não empurre**. Se falhar, relate o erro real
 
 Toda mudança de runtime (rota, preço, copy aprovada, comportamento no ar) atualiza este arquivo no
 **mesmo commit** da mudança. Decisão sem registro aqui não existe para o próximo agente.
+
+## Decisão do dono — 22/10/2026
+
+O MASTER PROMPT desta sessão substitui o hero clínico, a obrigatoriedade de auditoria para implantação e a proibição de WhatsApp após qualificação. Duas portas: implantação direta com tabela existente; auditoria profissional R$ 1.500–2.500 e Setup R$ 8.000–25.000 para operações com tráfego. Microquiz de três escolhas com envio voluntário no WhatsApp. Identidade Obsidian Editorial; sem cortina de carregamento. Garantias e faixas existentes preservadas. Simulador é hipótese explícita, não resultado de cliente. Métricas de projetos sem laudo não serão inventadas.
+
+### Verificação ampliada solicitada em 22/10/2026
+O dono solicitou testes completos e uso dos projetos do GitHub como autoridade. Fontes públicas verificadas: tpiola/sentinela-saude-ambiental (rotas em site/src/app), tpiola/saudegpt, tpiola/thiagopiola e tpiola/spes. Nenhum resultado financeiro foi inferido do código. O pré-render usa os mesmos componentes React das 59 páginas (58 indexáveis, /obrigado fora do sitemap). /obrigado deixa de afirmar pagamento sem verificação; mantém o texto de garantia de 30 dias. A hidratação preserva o HTML inicial e as animações não ocultam o conteúdo antes do primeiro paint.
+
+### Portão da versão Obsidian — 22/10/2026
+TypeScript, lint, 50 testes unitários e build do monorepo aprovados. Playwright: 20 testes aprovados, incluindo 58 rotas, acessibilidade, preços, privacidade, três viewports e HTML sem JavaScript. Relatório: docs/VERIFICACAO-OBSIDIAN.md. Dependências atualizadas para Vite 6.4.4, Vitest 4.1.12 e Storybook 8.6.19; permanece apenas braces sem patch. O parágrafo de publicação de 12/10 acima é histórico: confirmar o SHA deste release no GitHub e na Vercel, em vez de reutilizar o identificador antigo.

@@ -1,7 +1,7 @@
-import { ArrowRight, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { trackEvent } from '@/lib/analytics';
-import { OTHER_WORK, PROJECTS } from '@/lib/portfolio';
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { Link } from "react-router-dom";
+import { trackEvent } from "@/lib/analytics";
+import { OTHER_WORK, PROJECTS, PROJECT_EVIDENCE } from "@/lib/portfolio";
 
 export default function Portfolio() {
   return (
@@ -9,41 +9,95 @@ export default function Portfolio() {
       <header className="rdv-portfolio-v3__hero">
         <div className="rdv-shell">
           <p className="rdv-kicker">Projetos reais</p>
-          <h1>A interface é a parte visível de uma decisão maior.</h1>
-          <p>Mostramos o que foi organizado e o escopo publicado. Quando não existe mensuração verificável, não inventamos uma métrica para preencher o card.</p>
+          <h1>Engenharia aplicada: casos reais.</h1>
+          <p>
+            Conheça a arquitetura de busca local, compra e atendimento dos
+            projetos publicados. Medições quantitativas de velocidade e
+            conversão: a instrumentar.
+          </p>
         </div>
       </header>
 
-      <section className="rdv-portfolio-v3__projects" aria-labelledby="portfolio-projects-title">
+      <section
+        className="rdv-portfolio-v3__projects"
+        aria-labelledby="portfolio-projects-title"
+      >
         <div className="rdv-shell">
-          <h2 id="portfolio-projects-title" className="sr-only">Projetos publicados</h2>
+          <h2 id="portfolio-projects-title" className="sr-only">
+            Projetos publicados
+          </h2>
           {PROJECTS.map((project, index) => (
             <article key={project.name}>
               <div className="rdv-portfolio-v3__shot">
-                <img src={project.image} alt={`Interface publicada de ${project.name}`} width="1200" height="750" loading={index === 0 ? 'eager' : 'lazy'} />
-                <span>{String(index + 1).padStart(2, '0')}</span>
+                <img
+                  src={project.image}
+                  srcSet={`${project.image.replace(".webp", "-480.webp")} 480w, ${project.image.replace(".webp", "-800.webp")} 800w, ${project.image} 1200w`}
+                  sizes="(max-width: 800px) calc(100vw - 32px), 50vw"
+                  decoding="async"
+                  alt={`Interface publicada de ${project.name}`}
+                  width="1200"
+                  height="750"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+                <span>{String(index + 1).padStart(2, "0")}</span>
               </div>
               <div className="rdv-portfolio-v3__copy">
                 <p>{project.type}</p>
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
-                <ul aria-label={`Escopo de ${project.name}`}>{project.scope.map((item) => <li key={item}>{item}</li>)}</ul>
-                {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer">Abrir projeto <ExternalLink aria-hidden="true" /></a> : <span>Registro visual do projeto</span>}
+                <ul aria-label={`Escopo de ${project.name}`}>
+                  {project.scope.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                {project.href ? (
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Abrir projeto <ExternalLink aria-hidden="true" />
+                  </a>
+                ) : (
+                  <span>Registro visual do projeto</span>
+                )}
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="rdv-portfolio-v3__other" aria-labelledby="portfolio-other-title">
+      <section
+        className="rdv-portfolio-v3__other"
+        aria-labelledby="portfolio-other-title"
+      >
         <div className="rdv-shell">
-          <header><p className="rdv-kicker">Outros contextos</p><h2 id="portfolio-other-title">Produto e presença autoral também exigem uma arquitetura própria.</h2></header>
+          <header>
+            <p className="rdv-kicker">Outros contextos</p>
+            <h2 id="portfolio-other-title">
+              Produto e presença autoral também exigem uma arquitetura própria.
+            </h2>
+          </header>
           <div>
             {OTHER_WORK.map(([name, type, detail, href, image], index) => (
-              <a key={name} href={href} target="_blank" rel="noopener noreferrer">
-                <img src={image} alt={`Interface publicada de ${name}`} width="240" height="150" loading="lazy" />
-                <span>{String(index + 3).padStart(2, '0')}</span>
-                <div><p>{type}</p><h3>{name}</h3></div>
+              <a
+                key={name}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={image}
+                  alt={`Interface publicada de ${name}`}
+                  width="240"
+                  height="150"
+                  loading="lazy"
+                />
+                <span>{String(index + 3).padStart(2, "0")}</span>
+                <div>
+                  <p>{type}</p>
+                  <h3>{name}</h3>
+                </div>
                 <p>{detail}</p>
                 <ExternalLink aria-hidden="true" />
               </a>
@@ -52,21 +106,58 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="rdv-portfolio-v3__demos" aria-labelledby="portfolio-demos-title">
+      <section
+        className="rdv-portfolio-v3__demos"
+        aria-labelledby="portfolio-demos-title"
+      >
         <div className="rdv-shell">
-          <div><p className="rdv-kicker">Mais repertório</p><h2 id="portfolio-demos-title">Demonstração não é case. É uma forma honesta de mostrar o que pode ser construído.</h2></div>
           <div>
-            <p>Explore fluxos de catálogo, pedido, agendamento e busca com dados fictícios claramente identificados.</p>
-            <Link to="/demonstracoes">Abrir arquiteturas demonstrativas <ArrowRight aria-hidden="true" /></Link>
+            <p className="rdv-kicker">Mais repertório</p>
+            <h2 id="portfolio-demos-title">
+              Demonstração não é case. É uma forma honesta de mostrar o que pode
+              ser construído.
+            </h2>
+          </div>
+          <div>
+            <p>
+              Explore fluxos de catálogo, pedido, agendamento e busca com dados
+              fictícios claramente identificados.
+            </p>
+            <Link to="/demonstracoes">
+              Abrir arquiteturas demonstrativas{" "}
+              <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
 
+      <section className="rdv-shell obs-section" aria-labelledby="github-title">
+        <h2 id="github-title" className="text-4xl mb-8">
+          Projetos com código público
+        </h2>
+        <div className="obs-evidence">
+          {PROJECT_EVIDENCE.map((project) => (
+            <article key={project.name}>
+              <h3>{project.name}</h3>
+              <p>{project.detail}</p>
+              <a href={project.repo} target="_blank" rel="noopener noreferrer">
+                Ver projeto no GitHub ↗
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
       <section className="rdv-portfolio-v3__closing">
         <div className="rdv-shell">
           <p className="rdv-kicker">Novo projeto</p>
           <h2>Qual parte da sua operação merece virar produto?</h2>
-          <Link className="rdv-primary-action" to="/diagnostico?origem=portfolio" onClick={() => trackEvent('diagnostic_start', { position: 'portfolio-closing' })}>
+          <Link
+            className="rdv-primary-action"
+            to="/diagnostico?origem=portfolio"
+            onClick={() =>
+              trackEvent("diagnostic_start", { position: "portfolio-closing" })
+            }
+          >
             Registrar o contexto <ArrowRight aria-hidden="true" />
           </Link>
         </div>
