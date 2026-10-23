@@ -27,7 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^9.25.0",
     "@storybook/addon-essentials": "^8.6.19",
-    "@storybook/react": "^8.6.19",
+    "@storybook/react": "^10.6.2",
     "@storybook/react-vite": "^8.6.19",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
