@@ -1,0 +1,65 @@
+[
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 97.0,
+    "lcp_ms": 1597,
+    "cls": 0,
+    "bytes": 228449
+  },
+  {
+    "url": "http://127.0.0.1:3000/servicos",
+    "performance": 98.0,
+    "lcp_ms": 1613,
+    "cls": 0,
+    "bytes": 237610
+  },
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 97.0,
+    "lcp_ms": 1792,
+    "cls": 0,
+    "bytes": 237472
+  },
+  {
+    "url": "http://127.0.0.1:3000/servicos",
+    "performance": 98.0,
+    "lcp_ms": 1597,
+    "cls": 0,
+    "bytes": 237610
+  },
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 95.0,
+    "lcp_ms": 1807,
+    "cls": 0,
+    "bytes": 237472
+  },
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 97.0,
+    "lcp_ms": 1738,
+    "cls": 0,
+    "bytes": 237472
+  },
+  {
+    "url": "http://127.0.0.1:3000/servicos",
+    "performance": 99.0,
+    "lcp_ms": 1602,
+    "cls": 0,
+    "bytes": 237610
+  },
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 97.0,
+    "lcp_ms": 1839,
+    "cls": 0,
+    "bytes": 228449
+  },
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 98.0,
+    "lcp_ms": 1610,
+    "cls": 0,
+    "bytes": 228449
+  }
+]
