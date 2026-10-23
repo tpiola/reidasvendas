@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp route handlers require full navigation and a fresh event ID, without prefetch. */
 'use client';
 export default function Error({ reset }: { reset: () => void }) {
   return (

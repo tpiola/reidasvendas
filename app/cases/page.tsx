@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp route handlers require full navigation and a fresh event ID, without prefetch. */
+import Link from 'next/link';
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
@@ -35,9 +37,9 @@ export default function Page() {
             Escopo, responsabilidades e critérios de aceite ficam definidos
             antes da construção.
           </p>
-          <a className="button button-primary" href="/metodo">
+          <Link className="button button-primary" href="/metodo">
             Conhecer o método
-          </a>
+          </Link>
           <a className="text-link" href="/go/whatsapp?src=cases&page=/cases">
             Pedir referências disponíveis ↗
           </a>

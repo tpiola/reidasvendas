@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
@@ -31,6 +32,30 @@ export default function Page() {
           Garantia de 30 dias. As condições aplicáveis constam na proposta. Este
           texto não amplia nem restringe direitos legais do contratante.
         </p>
+        <h2>Oferta de assinatura em validação</h2>
+        <p>
+          Os planos recorrentes apresentados são uma proposta de oferta. A
+          implantação é separada da mensalidade. O ciclo anual proposto tem
+          cobrança anual única e desconto de 8% somente sobre as 12
+          mensalidades; a equivalência mensal não é parcelamento. A proposta
+          final deve informar escopo, custo total, vencimentos, renovação,
+          suporte e dependências.
+        </p>
+        <p>
+          Antes de contratar, é obrigatório definir prazo mínimo, cancelamento,
+          data de corte, eventual restituição, acesso ao domínio, exportação do
+          site, licenças e transição de dados. Essas condições não são
+          presumidas. O checkout fica indisponível enquanto oferta, termos e
+          provedor não estiverem configurados e aprovados pela operação.
+        </p>
+        <p>
+          A confirmação de assinatura e pagamento depende do provedor e da
+          conciliação do servidor. Visitar a página de obrigado, apresentar um
+          identificador na URL ou clicar em pagar não confirma recebimento.
+          Upgrade, downgrade, inadimplência, renovação e encerramento seguem o
+          contrato e a configuração do provedor. Recibo de pagamento não
+          substitui nota fiscal quando exigida.
+        </p>
         <h2>Resultados e simulações</h2>
         <p>
           Simulações são hipóteses matemáticas informadas pelo visitante. Não
@@ -61,7 +86,7 @@ export default function Page() {
           respeitados os direitos aplicáveis do consumidor.
         </p>
         <p>
-          <a href="/privacidade">Leia também a política de privacidade.</a>
+          <Link href="/privacidade">Leia também a política de privacidade.</Link>
         </p>
       </div>
     </PageShell>

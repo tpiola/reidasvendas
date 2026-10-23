@@ -1,0 +1,41 @@
+{
+  "measuredAt": "2026-10-23T18:43:20.134Z",
+  "method": "Built initial HTML; deduplicated script and stylesheet references; gzip level9; modern browsers skip noModule fallback. This is not wire RUM or field CWV.",
+  "budgetsDecimalBytes": {
+    "html": 50000,
+    "css": 50000,
+    "modernJs": 150000
+  },
+  "pages": [
+    {
+      "route": "/",
+      "gzipBytes": {
+        "html": 20736,
+        "css": 15351,
+        "modernJs": 149742
+      },
+      "noModuleFallbackGzipBytes": 39520,
+      "pass": true
+    },
+    {
+      "route": "/planos",
+      "gzipBytes": {
+        "html": 14392,
+        "css": 15351,
+        "modernJs": 144232
+      },
+      "noModuleFallbackGzipBytes": 39520,
+      "pass": true
+    },
+    {
+      "route": "/simulador",
+      "gzipBytes": {
+        "html": 7044,
+        "css": 15351,
+        "modernJs": 145580
+      },
+      "noModuleFallbackGzipBytes": 39520,
+      "pass": true
+    }
+  ]
+}

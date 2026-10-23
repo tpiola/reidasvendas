@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp route handlers require full navigation and a fresh event ID, without prefetch. */
 import { CookieSettingsButton } from '@/lib/consent';
 
 import Link from 'next/link';
@@ -16,16 +17,30 @@ export default function Footer() {
               loading="lazy"
             />
             <p>
-              Marketing, tecnologia e processo comercial.
+              Presença digital com continuidade.
               <br />
-              Uma operação conectada à sua venda.
+              Site, busca local e atendimento conectados.
             </p>
+            {process.env.BUSINESS_LEGAL_NAME && (
+              <p className="footer-local">
+                {process.env.BUSINESS_LEGAL_NAME}
+                {process.env.BUSINESS_CNPJ
+                  ? ` · CNPJ ${process.env.BUSINESS_CNPJ}`
+                  : ''}
+              </p>
+            )}
             <p className="footer-local">
               Franca/SP · atendimento na região e no Brasil
             </p>
           </div>
           <div>
             <h2>O que fazemos</h2>
+            <Link href="/planos" data-event="click_cta_planos">
+              Planos de assinatura
+            </Link>
+            <Link href="/seo-local-franca">SEO local em Franca</Link>
+            <Link href="/painel-de-leads">Painel de leads</Link>
+            <Link href="/manutencao-de-site">Manutenção de site</Link>
             <Link href="/servicos/criacao-de-sites-franca">
               Sites para negócios
             </Link>
@@ -40,10 +55,12 @@ export default function Footer() {
           <div>
             <h2>Explore</h2>
             <Link href="/metodo">Nosso método</Link>
-            <Link href="/cases">Casos e evidências</Link>
+            <Link href="/casos">Casos e evidências</Link>
             <Link href="/blog">Guias práticos</Link>
             <Link href="/faq">Perguntas frequentes</Link>
             <Link href="/contato">Contato</Link>
+            <Link href="/simulador">Simulador</Link>
+            <Link href="/area-do-cliente">Área do cliente</Link>
           </div>
           <div className="footer-contact">
             <h2>Vamos falar do seu negócio</h2>
@@ -61,7 +78,7 @@ export default function Footer() {
             <Link href="/privacidade">Privacidade</Link>
             <Link href="/termos">Termos de uso</Link>
             <CookieSettingsButton />
-            <a href="/sitemap.xml">Sitemap</a>
+            <Link href="/sitemap.xml">Sitemap</Link>
           </div>
         </div>
       </footer>

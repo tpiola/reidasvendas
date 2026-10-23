@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
@@ -63,9 +64,9 @@ export default function Page() {
         dispositivos e conversas fora do site afetam a leitura. A confirmação de
         venda vem da operação, não de um clique.
       </p>
-      <a className="text-link" href="/diagnostico">
+      <Link className="text-link" href="/diagnostico">
         Organizar a medição da minha operação ↗
-      </a>
+      </Link>
     </PageShell>
   );
 }

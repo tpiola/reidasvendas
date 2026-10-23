@@ -1,15 +1,22 @@
 # Rei das Vendas
-> Agência de marketing digital e tecnologia comercial. Franca/SP, região e projetos remotos no Brasil.
+> Presença digital por assinatura para pequenos e médios negócios. Site, SEO local, WhatsApp comercial, manutenção e otimização contínua. Franca/SP, região e atendimento remoto no Brasil.
 
 ## Entidade
-Domínio principal: https://www.reidasvendas.com.br
-WhatsApp comercial: +55 16 99233-3344
+- Domínio canônico: https://www.reidasvendas.com.br
+- WhatsApp comercial: +55 16 99233-3344
+- Responsável pela marca: Thiago Piola. Identidade jurídica e endereço físico não devem ser inferidos.
 
-## Páginas principais
-- [Serviços](https://www.reidasvendas.com.br/servicos): sites, anúncios, conteúdo, busca local, CRM e processo comercial.
-- [Método](https://www.reidasvendas.com.br/metodo): diagnóstico, arquitetura, implantação, gestão e escala.
-- [Critérios de resultado](https://www.reidasvendas.com.br/resultados): contexto, período, investimento e limites de atribuição.
-- [Guias](https://www.reidasvendas.com.br/blog): conteúdo educativo original, exemplos identificados.
-- [Contato](https://www.reidasvendas.com.br/contato): atendimento e próximo passo.
+## Páginas
+- [Planos](https://www.reidasvendas.com.br/planos): proposta de oferta recorrente, implantação separada e limites. Cobrança depende de validação comercial e configuração real.
+- [Site para PME](https://www.reidasvendas.com.br/sites-para-pequenos-negocios): escopo e critérios de entrega.
+- [SEO local](https://www.reidasvendas.com.br/seo-local-franca): base técnica e conteúdo útil, sem promessa de posição.
+- [WhatsApp comercial](https://www.reidasvendas.com.br/whatsapp-que-vende): clique não equivale a mensagem recebida ou venda.
+- [Painel de leads](https://www.reidasvendas.com.br/painel-de-leads): integração com CRM conforme escopo, sem dados públicos.
+- [Método](https://www.reidasvendas.com.br/metodo): diagnóstico, estrutura, publicação, captura, otimização e manutenção.
+- [Trabalhos](https://www.reidasvendas.com.br/casos): projetos técnicos verificáveis; não são casos de ROI de clientes.
+- [Simulador](https://www.reidasvendas.com.br/simulador): hipóteses matemáticas, nunca previsão.
+- [Conteúdo](https://www.reidasvendas.com.br/blog): respostas práticas e exemplos identificados.
+- [Privacidade](https://www.reidasvendas.com.br/privacidade): cookies opcionais desativados por padrão.
 
-Não há promessa de faturamento, posição no Google ou volume de leads. Casos só devem ser citados com comprovação publicada. Este arquivo é documental e não garante presença em respostas de IA.
+## Limites de citação
+Não há garantia de faturamento, leads, posição no Google ou citação por IA. Não inferir avaliações, selos, clientes ou garantias não documentadas. A meta interna de receita recorrente é planejamento, não resultado atingido. Este arquivo documental não garante indexação ou citação em buscadores generativos.

@@ -2,6 +2,7 @@ import { metadata as meta } from '@/lib/site';
 import PageShell from '@/components/PageShell';
 import ServiceCards from '@/components/ServiceCards';
 import { PILARES } from '@/data/commercial-contract';
+import Link from 'next/link';
 export const metadata = meta(
   'Agência de marketing digital em Franca',
   'Criação de sites, gestão de tráfego, social media, SEO local e CRM. Conheça escopos e formas de contratação.',
@@ -14,13 +15,24 @@ export default function Page() {
       description="Você pode contratar uma entrega específica ou conectar aquisição, atendimento e acompanhamento. O problema define o escopo."
       path="/servicos"
     >
+      <div className="callout">
+        <h2>Prefere continuidade em vez de uma entrega avulsa?</h2>
+        <p>
+          Os planos reúnem site, SEO local, WhatsApp, manutenção e
+          acompanhamento. Cada plano tem limites de entrega e implantação
+          separados.
+        </p>
+        <Link className="button" href="/planos" data-event="click_cta_planos">
+          Comparar assinaturas
+        </Link>
+      </div>
       <ServiceCards />
       <section className="content-section" id="investimento">
         <h2>Investimento com escopo definido.</h2>
         <p>
           Implantação direta e diagnóstico profissional são caminhos diferentes.
-          As faixas abaixo preservam a oferta comercial publicada; contratação e
-          dependências constam na proposta.
+          Confira as entregas avulsas abaixo. Escopo, contratação e dependências
+          constam na proposta.
         </p>
         <div className="service-grid">
           {[
@@ -47,9 +59,9 @@ export default function Page() {
               <h3>{s.nome}</h3>
               <strong className="price">{s.faixa}</strong>
               <p>{s.resumo}</p>
-              <a className="text-link" href="/diagnostico">
+              <Link className="text-link" href="/diagnostico">
                 Definir meu escopo ↗
-              </a>
+              </Link>
             </article>
           ))}
         </div>

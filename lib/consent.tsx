@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import {
@@ -63,7 +64,7 @@ export default function ConsentBanner() {
         Usamos o necessário para lembrar sua escolha e proteger os formulários.
         Com sua permissão, Google Analytics mede o uso e a Meta mede anúncios.
         Recusar não limita o site.{' '}
-        <a href="/privacidade">Leia a política de privacidade.</a>
+        <Link href="/privacidade">Leia a política de privacidade.</Link>
       </p>
       {settings && (
         <fieldset>

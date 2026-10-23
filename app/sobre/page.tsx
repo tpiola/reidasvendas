@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp route handlers require full navigation and a fresh event ID, without prefetch. */
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
