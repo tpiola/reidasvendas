@@ -123,3 +123,7 @@ Nove medições mobile do build final, três por página, passaram nas assertion
 Medição desktop da home: performance 100, LCP 613 ms e CLS 0, uma execução local. Relatório recuperado após indisponibilidade temporária do ambiente; sem perda de código ou testes.
 
 A cobertura de metadados foi ampliada de 29 para 50 páginas (46 do sitemap e quatro fluxos noindex). Encontrou título duplicado em `/seo-local-franca` e no serviço anterior; a página nova recebeu contexto “para PME”, preservando URL e conteúdo. A rodada completa posterior passou: 34/34 em 17,2 segundos, com as 50 páginas conferidas. JS e CSS iniciais da home permaneceram idênticos por SHA-256 após a correção apenas nos metadados do módulo; as medições Lighthouse registradas continuam correspondentes aos mesmos assets.
+
+## Confirmação pública e CI
+
+PR #90 integrado; Quality gates 40005811619 concluído com sucesso. Produção no deployment dpl_7du22Fu3oZQmTjSrkvT4QXBTtHsg, source 821ffbf. As 50 páginas passaram também no domínio público: 200, títulos únicos, canonical correto, um H1 e JSON-LD válido; 46 URLs no sitemap. Robots, manifest, oito headers de segurança e o checkout Profissional/anual foram conferidos. Nenhum pagamento ou lead real criado. Consulta de error/fatal neste deployment nos últimos 15 minutos retornou zero grupos, sem inferir uptime contínuo. Comprovante completo em PUBLICACAO-ASSINATURAS.json.

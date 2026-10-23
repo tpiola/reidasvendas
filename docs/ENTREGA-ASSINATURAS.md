@@ -2,6 +2,8 @@
 
 Entrega de engenharia e operação em 23/10/2026. Atualiza **tpiola/reidasvendas**, projeto Vercel **reidasvendas/prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL**, domínio **https://www.reidasvendas.com.br**. Não cria outro repositório ou projeto. O código foi implementado; a oferta recorrente permanece uma proposta a validar, sem cobrança ativa. Nenhuma cobrança, campanha ou lead real foi criado pelos testes.
 
+Publicação confirmada pelo PR #90 no projeto existente; [comprovante de produção e 50 páginas](PUBLICACAO-ASSINATURAS.json). Checkout permanece bloqueado até validação comercial e das contas.
+
 ## 1. Resumo executivo
 
 A oferta combina implantação de site e uma rotina contratada de presença digital: SEO técnico/local conforme escopo, WhatsApp contextual, captura conectada ao CRM quando configurado, manutenção, relatório e melhoria. O mecanismo é explícito: organizar oferta → publicar e conferir → facilitar contato → registrar o que aconteceu → revisar a prioridade mensal. O visitante compara preços e limites antes de oferecer dados pessoais. O prestador protege margem com capacidade definida, implantação separada e custos externos declarados.

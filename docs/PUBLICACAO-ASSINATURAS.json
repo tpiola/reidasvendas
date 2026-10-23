@@ -1,0 +1,580 @@
+{
+  "verifiedAt": "2026-10-23T18:59:41.500Z",
+  "repository": "tpiola/reidasvendas",
+  "projectId": "prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL",
+  "teamId": "team_X4bKucsxm1xNovRCzLleI3JC",
+  "pullRequest": 90,
+  "sourceCommit": "821ffbf6862fa2929cc0d04fd816eb62b4a49d96",
+  "validatedTree": "3b2539387efd692316fb3ef422e74ad820c524f1",
+  "productionDeployment": "dpl_7du22Fu3oZQmTjSrkvT4QXBTtHsg",
+  "productionState": "READY",
+  "canonical": "https://www.reidasvendas.com.br",
+  "apexRedirect": {
+    "destination": "www.reidasvendas.com.br",
+    "status": 308,
+    "evidence": "Verified Vercel project domain configuration"
+  },
+  "quality": {
+    "githubRun": 40005811619,
+    "conclusion": "success",
+    "unitTests": 59,
+    "e2eTests": 34,
+    "publicPages": 50,
+    "sitemapUrls": 46,
+    "axePages": 8,
+    "responsiveWidths": [320, 375, 390, 414, 768, 1440],
+    "nativeAnnualRadioWithoutJavaScript": true
+  },
+  "localLighthouse": {
+    "mobile": {
+      "home": [98, 98, 98],
+      "diagnostico": [99, 99, 99],
+      "planos": [97, 98, 99]
+    },
+    "desktopHome": 100,
+    "clsAllRuns": 0,
+    "fieldCWVVerified": false,
+    "details": "docs/PERFORMANCE-ASSINATURAS.json"
+  },
+  "modernInitialPayloadGzipBytes": {
+    "homeJs": 149742,
+    "homeCss": 15351,
+    "homeHtml": 20736
+  },
+  "securityHeaders": {
+    "content-security-policy": "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
+    "content-security-policy-report-only": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://connect.facebook.net https://va.vercel-scripts.com https://vercel.live; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com https://www.facebook.com; font-src 'self'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://www.facebook.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://vercel.live wss://ws-us3.pusher.com; frame-src https://vercel.live; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; report-uri /csp-report",
+    "cross-origin-resource-policy": "same-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY"
+  },
+  "runtimeLogReview": {
+    "deployment": "dpl_7du22Fu3oZQmTjSrkvT4QXBTtHsg",
+    "window": "15m",
+    "levels": ["error", "fatal"],
+    "groupsReturned": 0,
+    "continuousUptimeProven": false
+  },
+  "checkout": {
+    "enabled": false,
+    "sourceOfferStatus": "proposal",
+    "professionalAnnualTotal": "11006.88 BRL",
+    "professionalAnnualWithSetup": "13503.88 BRL",
+    "publicContextChecked": true,
+    "realPaymentsTested": false
+  },
+  "pending": [
+    "Cadastro jurídico e condições comerciais finais",
+    "GA4, GSC, Meta Pixel/CAPI e validação nas contas",
+    "CRM e Redis durável",
+    "Stripe/Prices/webhook e validação sandbox",
+    "Portal autenticado, operação fiscal e dunning conforme contrato",
+    "Fotos, depoimentos e casos autorizados",
+    "CWV/INP de campo, revisão humana de leitor de tela e observabilidade contínua"
+  ],
+  "publicPages": [
+    {
+      "url": "https://www.reidasvendas.com.br",
+      "status": 200,
+      "title": "Sites e presença digital por assinatura em Franca",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/planos",
+      "status": 200,
+      "title": "Planos de site e presença digital por assinatura | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/planos",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/simulador",
+      "status": 200,
+      "title": "Simulador de oportunidades e maturidade digital | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/simulador",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/casos",
+      "status": 200,
+      "title": "Trabalhos e evidências de execução | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/casos",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/sites-para-pequenos-negocios",
+      "status": 200,
+      "title": "Site para pequenos negócios para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/sites-para-pequenos-negocios",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/seo-local-franca",
+      "status": 200,
+      "title": "SEO local em Franca para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/seo-local-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/whatsapp-que-vende",
+      "status": 200,
+      "title": "WhatsApp comercial para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/whatsapp-que-vende",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/painel-de-leads",
+      "status": 200,
+      "title": "Painel de leads para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/painel-de-leads",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/manutencao-de-site",
+      "status": 200,
+      "title": "Manutenção de site para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/manutencao-de-site",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/otimizacao-de-conversao",
+      "status": 200,
+      "title": "Otimização de conversão para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/otimizacao-de-conversao",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/automacao-comercial",
+      "status": 200,
+      "title": "Automação comercial para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/automacao-comercial",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/metodo",
+      "status": 200,
+      "title": "Método de marketing e operação comercial | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/metodo",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/diagnostico",
+      "status": 200,
+      "title": "Diagnóstico comercial em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/diagnostico",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos",
+      "status": 200,
+      "title": "Agência de marketing digital em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/resultados",
+      "status": 200,
+      "title": "Como medimos resultado comercial | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/resultados",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/cases",
+      "status": 200,
+      "title": "Cases e critérios de comprovação | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/cases",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog",
+      "status": 200,
+      "title": "Guias de vendas e marketing para PME | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/faq",
+      "status": 200,
+      "title": "Dúvidas sobre assinatura, site e continuidade | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/faq",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/sobre",
+      "status": 200,
+      "title": "Sobre a Rei das Vendas em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/sobre",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/contato",
+      "status": 200,
+      "title": "Contato Rei das Vendas — Franca/SP | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/contato",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/privacidade",
+      "status": 200,
+      "title": "Política de privacidade e cookies | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/privacidade",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/termos",
+      "status": 200,
+      "title": "Termos de uso | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/termos",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/criacao-de-sites-franca",
+      "status": 200,
+      "title": "Criação de sites em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/criacao-de-sites-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/gestao-de-trafego-franca",
+      "status": 200,
+      "title": "Gestão de tráfego em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/gestao-de-trafego-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/social-media-franca",
+      "status": 200,
+      "title": "Social media em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/social-media-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/seo-local-franca",
+      "status": 200,
+      "title": "SEO local em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/seo-local-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/implantacao-crm-franca",
+      "status": 200,
+      "title": "Implantação de CRM em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/implantacao-crm-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/automacao-de-follow-up-franca",
+      "status": 200,
+      "title": "Automação de follow-up em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/automacao-de-follow-up-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/consultoria-comercial-franca",
+      "status": 200,
+      "title": "Consultoria comercial em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/consultoria-comercial-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/servicos/diagnostico-de-funil-franca",
+      "status": 200,
+      "title": "Diagnóstico de funil em Franca | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/servicos/diagnostico-de-funil-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/site-que-nao-gera-leads",
+      "status": 200,
+      "title": "Seu site não gera leads? Investigue o caminho antes de refazer tudo | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/site-que-nao-gera-leads",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/quantos-leads-site-profissional-franca",
+      "status": 200,
+      "title": "Quantos leads um site profissional pode gerar em Franca? | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/quantos-leads-site-profissional-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/assinatura-de-site-ou-site-avulso",
+      "status": 200,
+      "title": "Site por assinatura ou projeto avulso: qual contratação faz sentido? | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/assinatura-de-site-ou-site-avulso",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/whatsapp-comercial-follow-up",
+      "status": 200,
+      "title": "WhatsApp comercial: um follow-up que continua a conversa | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/whatsapp-comercial-follow-up",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/seo-local-para-pme-franca",
+      "status": 200,
+      "title": "SEO local para PME em Franca: organize a base que o cliente procura | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/seo-local-para-pme-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/checklist-site-que-vende",
+      "status": 200,
+      "title": "Checklist de um site que ajuda o cliente a decidir | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/checklist-site-que-vende",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/erros-landing-page-pequeno-negocio",
+      "status": 200,
+      "title": "Erros de landing page que atrapalham a decisão em pequenos negócios | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/erros-landing-page-pequeno-negocio",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/medir-roi-presenca-digital",
+      "status": 200,
+      "title": "Como medir o retorno da presença digital sem confundir clique com receita | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/medir-roi-presenca-digital",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/guia/funil-de-vendas-para-pme",
+      "status": 200,
+      "title": "Funil de vendas para PME: organize o próximo passo | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/guia/funil-de-vendas-para-pme",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/follow-up-que-converte",
+      "status": 200,
+      "title": "Follow-up que ajuda o cliente a decidir | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/follow-up-que-converte",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/crm-para-pme",
+      "status": 200,
+      "title": "CRM para PME: escolha o processo antes da ferramenta | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/crm-para-pme",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/indicadores-comerciais-para-pme",
+      "status": 200,
+      "title": "Indicadores comerciais que ajudam a decidir | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/indicadores-comerciais-para-pme",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/como-responder-objecoes-de-venda",
+      "status": 200,
+      "title": "Objeção de venda: esclareça antes de argumentar | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/como-responder-objecoes-de-venda",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/como-aumentar-conversao-em-franca",
+      "status": 200,
+      "title": "Vendas locais em Franca: conecte busca e atendimento | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/como-aumentar-conversao-em-franca",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/automacao-sem-perder-atendimento-humano",
+      "status": 200,
+      "title": "Automação comercial com saída para uma pessoa | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/automacao-sem-perder-atendimento-humano",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/blog/quando-fazer-diagnostico-comercial",
+      "status": 200,
+      "title": "Diagnóstico comercial antes de ampliar o investimento | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/blog/quando-fazer-diagnostico-comercial",
+      "robots": "index, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/obrigado",
+      "status": 200,
+      "title": "Próximo passo do seu atendimento | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/obrigado",
+      "robots": "noindex, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/checkout",
+      "status": 200,
+      "title": "Revisar plano e contratação | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/checkout",
+      "robots": "noindex, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/onboarding",
+      "status": 200,
+      "title": "Preparação da implantação | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/onboarding",
+      "robots": "noindex, follow",
+      "validSchema": true,
+      "pass": true
+    },
+    {
+      "url": "https://www.reidasvendas.com.br/area-do-cliente",
+      "status": 200,
+      "title": "Atendimento a clientes | Rei das Vendas",
+      "h1": 1,
+      "canonical": "https://www.reidasvendas.com.br/area-do-cliente",
+      "robots": "noindex, follow",
+      "validSchema": true,
+      "pass": true
+    }
+  ]
+}
