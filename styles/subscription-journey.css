@@ -1,0 +1,198 @@
+.subscription-intake {
+  max-width: 44rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+.subscription-intake .eyebrow {
+  color: var(--color-gold-dark);
+}
+.subscription-intake select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem;
+  color: var(--color-midnight);
+  background: var(--color-white);
+}
+.subscription-intake .button,
+.checkout-grid .button {
+  max-width: 100%;
+  gap: 0.7rem;
+  font-size: 0.9rem;
+}
+.checkout-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.checkout-totals {
+  margin-block: 2rem;
+}
+.checkout-totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--color-line);
+  padding-block: 1rem;
+  flex-wrap: wrap;
+}
+.checkout-totals dt {
+  max-width: 25ch;
+}
+.checkout-totals dd {
+  margin: 0;
+  font-weight: 700;
+}
+.checkout-totals > div:last-child {
+  font-size: 1.1rem;
+}
+.checkout-grid li {
+  margin-block: 0.75rem;
+}
+.checkout-grid .consent-check {
+  margin-block: 1.5rem;
+}
+.onboarding-checklist {
+  padding-left: 1.5rem;
+}
+.onboarding-checklist li {
+  margin-block: 1.25rem;
+  padding-left: 0.5rem;
+}
+.onboarding-checklist strong {
+  display: block;
+}
+@media (max-width: 767px) {
+  .checkout-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 375px) {
+  .subscription-intake .button,
+  .checkout-grid .button {
+    font-size: 0.8rem;
+    padding-inline: 0.65rem;
+  }
+}
+.intent-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 1rem;
+  scrollbar-width: thin;
+}
+.intent-tabs button {
+  flex: 0 0 auto;
+  min-height: 46px;
+  white-space: nowrap;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  padding: 0.65rem 1rem;
+  background: var(--color-white);
+  color: var(--color-midnight);
+  font-size: 0.9rem;
+}
+.intent-tabs button[aria-selected='true'] {
+  color: var(--color-paper);
+  background: var(--color-midnight);
+  border-color: var(--color-midnight);
+}
+.intent-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  min-height: 225px;
+  border-block: 1px solid var(--color-line);
+  padding-block: 2rem;
+}
+.intent-panel h3 {
+  max-width: 35ch;
+}
+.intent-panel p {
+  max-width: 70ch;
+  margin-bottom: 0;
+}
+.intent-panel .text-link {
+  white-space: nowrap;
+}
+@media (max-width: 767px) {
+  .intent-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+    min-height: 310px;
+  }
+  .intent-tabs {
+    max-width: 100%;
+  }
+}
+
+.site-header .brand {
+  transform-origin: left center;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.site-header.is-compact .brand {
+  transform: scale(0.93);
+}
+.dynamic-feed-controls {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+.dynamic-feed-controls button {
+  min-width: 48px;
+  min-height: 48px;
+  border: 1px solid var(--color-line);
+  color: var(--color-midnight);
+  background: var(--color-white);
+  border-radius: var(--radius-pill);
+}
+.dynamic-proof-feed {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(270px, 36%);
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 1px;
+  padding: 4px 4px 1.5rem;
+  scrollbar-width: thin;
+}
+.dynamic-proof-feed article {
+  scroll-snap-align: start;
+  border-top: 1px solid var(--color-line);
+  padding-block: 1.5rem;
+  min-width: 0;
+}
+.dynamic-proof-feed article > span {
+  display: block;
+  color: var(--color-gold-dark);
+  font-size: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.dynamic-proof-feed h3 {
+  font-size: 1.5rem;
+}
+@media (max-width: 767px) {
+  .dynamic-proof-feed {
+    grid-auto-columns: minmax(0, 88%);
+    gap: 1.5rem;
+  }
+  .dynamic-proof-feed .text-link {
+    font-size: 0.85rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .brand {
+    transition: none;
+  }
+  .site-header.is-compact .brand {
+    transform: none;
+  }
+}

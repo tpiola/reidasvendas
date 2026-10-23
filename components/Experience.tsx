@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { track, trackWhatsapp } from '@/lib/tracking';
+import { handleTrackedAction, track } from '@/lib/tracking';
 
 export default function Experience() {
   const pathname = usePathname();
@@ -12,6 +12,9 @@ export default function Experience() {
     const progress = document.querySelector<HTMLElement>(
       '.scroll-progress span',
     );
+    const decorative = document.querySelector<HTMLElement>(
+      '[data-scroll-parallax]',
+    );
     let frame = 0;
     const reached = new Set<number>();
     const update = () => {
@@ -20,6 +23,10 @@ export default function Experience() {
       if (progress)
         progress.style.transform = `scaleX(${Math.min(1, Math.max(0, ratio))})`;
       header?.classList.toggle('is-compact', window.scrollY > 56);
+      if (decorative)
+        decorative.style.transform = reduce.matches
+          ? 'none'
+          : `translateY(${Math.min(12, Math.max(0, window.scrollY * 0.025))}px)`;
       [50, 90].forEach((depth) => {
         if (ratio * 100 >= depth && !reached.has(depth)) {
           reached.add(depth);
@@ -45,7 +52,16 @@ export default function Experience() {
                 ],
                 {
                   duration: 500,
-                  easing: 'cubic-bezier(.16,1,.3,1)',
+                  easing: 'cubic-bezier(.23,1,.32,1)',
+                  delay: Math.min(
+                    300,
+                    Math.max(
+                      0,
+                      Number(
+                        (entry.target as HTMLElement).dataset.revealDelay,
+                      ) || 0,
+                    ),
+                  ),
                   fill: 'none',
                 },
               );
@@ -58,7 +74,9 @@ export default function Experience() {
     document
       .querySelectorAll('[data-reveal]')
       .forEach((node) => reveal.observe(node));
-    const hero = document.querySelector('.hero');
+    const hero = document.querySelector(
+      '.hero, .subscription-hero, [data-hero]',
+    );
     const heroObserver = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) {
         track('view_hero', { page: window.location.pathname });
@@ -67,18 +85,12 @@ export default function Experience() {
     });
     if (hero) heroObserver.observe(hero);
     const click = (event: MouseEvent) => {
-      const target = (event.target as Element).closest<HTMLAnchorElement>('a');
+      if (!(event.target instanceof Element)) return;
+      const target = event.target.closest<HTMLElement>(
+        'a, button[data-event], [data-event][role="button"]',
+      );
       if (!target) return;
-      if (target.href.includes('/go/whatsapp')) {
-        const url = new URL(target.href);
-        const eventId = crypto.randomUUID();
-        const placement = url.searchParams.get('src') || 'body';
-        url.searchParams.set('event_id', eventId);
-        url.searchParams.set('page', window.location.pathname);
-        target.href = url.toString();
-        trackWhatsapp(eventId, placement, window.location.pathname);
-      } else if (target.dataset.event)
-        track(target.dataset.event, { page: window.location.pathname });
+      handleTrackedAction(target, window.location.pathname);
       target.closest('details.mobile-menu')?.removeAttribute('open');
     };
     document.addEventListener('click', click, true);
@@ -94,6 +106,7 @@ export default function Experience() {
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('scroll', scroll);
+      if (decorative) decorative.style.transform = 'none';
       document.removeEventListener('click', click, true);
       document.removeEventListener('keydown', key);
       reveal.disconnect();

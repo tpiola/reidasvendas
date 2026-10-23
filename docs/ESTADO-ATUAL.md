@@ -5,7 +5,11 @@ qualquer coisa.** Ele diz o que está no ar, o que está aprovado, o que não po
 o que está pendente. Sem ler isto, uma alteração é chute — e chute já custou 4 horas de site
 errado (ver _Incidentes_).
 
-## Estado vigente — publicação de 23/10/2026
+## Evolução ativa — assinaturas PME, 23/10/2026
+
+Autoridade ativa: Codex /root desde 2026-10-23, branch feat/assinaturas-pme-2026-10-23. O dono solicitou evolução para assinatura digital (site, SEO local, WhatsApp rastreado, captura de leads, manutenção, relatórios e otimização) e planejamento de R$15 mil MRR sem garantia. A nova oferta é proposta comercial, não altera preços avulsos/garantia anteriores. Pagamentos permanecem fechados até aprovação da oferta/termos e configuração real do provedor. Seis subagentes concluíram escopos isolados e liberaram os leases; /root integra e publica layout, rotas, jornada, SEO, políticas, ambiente e documentação. Repositório, projeto Vercel e domínio permanecem os mesmos. A base publicada segue ec35312 até a publicação desta evolução. Candidato validado localmente: check, lint, 59 testes unitários, build com 60 entradas e 34 E2E aprovados (50 páginas verificadas), Lighthouse mobile 97–99 em nove execuções e desktop 100 em uma execução, todos de laboratório. Home JS moderno 149.742 B gzip e CSS 15.351 B, sem alegação de CWV/INP de campo. Oferta: Essencial R$497/mês + implantação R$1.497; Profissional R$997/mês + R$2.497; Escala R$1.997/mês + R$3.997, em status proposal. Anual proposto: 8% sobre 12 mensalidades, uma cobrança anual; implantação separada. Fonte única em data/subscription-plans.ts; preços históricos avulsos preservados. Checkout permanece indisponível sem aprovação de oferta/termos, conta Stripe e ledger durável. Todos os SVGs da marca, dados editoriais, sitemap e rotas anteriores são preservados ou ampliados. Documentação completa em docs/ENTREGA-ASSINATURAS.md; testes e limites em docs/QA-ASSINATURAS.md. Publicação só pode ser declarada após confirmar o commit/deployment e o domínio.
+
+## Estado anterior publicado — 23/10/2026
 
 Esta seção e a decisão explícita do dono de 23/10/2026 prevalecem sobre o histórico abaixo.
 
@@ -211,34 +215,41 @@ Toda mudança de runtime (rota, preço, copy aprovada, comportamento no ar) atua
 O MASTER PROMPT desta sessão substitui o hero clínico, a obrigatoriedade de auditoria para implantação e a proibição de WhatsApp após qualificação. Duas portas: implantação direta com tabela existente; auditoria profissional R$ 1.500–2.500 e Setup R$ 8.000–25.000 para operações com tráfego. Microquiz de três escolhas com envio voluntário no WhatsApp. Identidade Obsidian Editorial; sem cortina de carregamento. Garantias e faixas existentes preservadas. Simulador é hipótese explícita, não resultado de cliente. Métricas de projetos sem laudo não serão inventadas.
 
 ### Verificação ampliada solicitada em 22/10/2026
+
 O dono solicitou testes completos e uso dos projetos do GitHub como autoridade. Fontes públicas verificadas: tpiola/sentinela-saude-ambiental (rotas em site/src/app), tpiola/saudegpt, tpiola/thiagopiola e tpiola/spes. Nenhum resultado financeiro foi inferido do código. O pré-render usa os mesmos componentes React das 59 páginas (58 indexáveis, /obrigado fora do sitemap). /obrigado deixa de afirmar pagamento sem verificação; mantém o texto de garantia de 30 dias. A hidratação preserva o HTML inicial e as animações não ocultam o conteúdo antes do primeiro paint.
 
 ### Portão da versão Obsidian — 22/10/2026
+
 TypeScript, lint, 50 testes unitários e build do monorepo aprovados. Playwright: 20 testes aprovados, incluindo 58 rotas, acessibilidade, preços, privacidade, três viewports e HTML sem JavaScript. Relatório: docs/VERIFICACAO-OBSIDIAN.md. Dependências atualizadas para Vite 6.4.4, Vitest 4.1.12 e Storybook 8.6.19; permanece apenas braces sem patch. O parágrafo de publicação de 12/10 acima é histórico: confirmar o SHA deste release no GitHub e na Vercel, em vez de reutilizar o identificador antigo.
 
 ### Publicação e otimização do caminho crítico
+
 Release 2aa52ab publicado em produção no projeto canônico, deployment dpl_ARsRFm653ru6DrnDVcqPiARVdUyL READY. Domínio confirmado com novo Hero, sem boot overlay e com headers de segurança. A segunda passagem remove motion dos preloads da Home e conserva essa biblioteca nas rotas que precisam dela; as profundidades da Home usam CSS nativo. Portão completo e 20 testes de navegador revalidados. O SHA publicado deve ser confirmado no deployment correspondente, e não inferido de um preview.
 
 ### Correção final de contraste e rasterização — 22/10/2026
+
 O release e8401e9 foi confirmado READY no projeto original e nas 58 URLs do domínio, com bundle idêntico ao build por SHA-256. A auditoria revelou contraste reduzido na animação e duas texturas SVG globais; removidas nesta revisão. Movimento decorativo móvel fica estático. O teste de acessibilidade agora cobre movimento normal e impede o retorno das texturas. TypeScript, lint, 50 testes unitários e build aprovados. Lighthouse móvel local final: 82/100/100/100, LCP 2,2 s, CLS 0, TBT 580 ms; não representa dado de campo nem nota 10/10. Relatório registra também a medição anterior de produção por proxy e suas limitações.
 Todos os 21 cenários de navegador aprovados: 20 na rodada completa e o teste adicional de axe isoladamente após ajuste do limite de tempo, sem relaxar as asserções.
 
 ### Nova direção aprovada pelo dono — 22/10/2026
+
 O dono rejeitou a fonte condensada e o visual escuro por não transmitirem confiança. Solicitou inspiração no espaço e no ritmo de meta.ai, formulário na abertura, menu e rodapé estratégicos, coroa dourada, redes sociais e animações de scroll. Esta decisão substitui a identidade Obsidian anterior, preservando preços, rotas, garantias e integrações. Referência visual inspecionada publicamente; aplicação própria, sem afiliação à Meta.
 
 Portão desta direção: pnpm check, lint, 50 testes unitários e build aprovados. Playwright final: 25 testes aprovados em 1,1 min, incluindo 58 rotas, seis larguras (320, 375, 390, 414, 768, 1440), axe nas seis jornadas, movimento normal, preços, privacidade e formulário até a mensagem preparada. Formulário GET com objetivo de até 600 caracteres mantém o contexto no microquiz e no WhatsApp. A coroa também atualiza favicon e ícones do manifest. Nenhum número de desempenho anterior é atribuído a este novo design; não foi rodada nova medição de campo.
 
 ### Diretriz de conversão brasileira e auditoria comparativa — 22/10/2026
+
 O dono solicitou benchmark disciplinar de Squarespace, sem cópia visual; coroa comercial com seta, ouro contido, CTA dominante, FAQ, sticky mobile após hero, consentimento por finalidade, tracking limpo e orçamento Lighthouse mobile >=90 como portão. Preservar repo, projeto e 58 rotas; não inventar métricas, endereço, prova, condições de pagamento ou acesso a GA4/GSC.
 
 Portão desta revisão: check, lint, 57 testes unitários e build aprovados. Lighthouse local mobile em três execuções: 99/100/100/100; LCP 1,806–1,966 s, CLS 0. Desktop: 100 nas quatro categorias. Evidências completas em docs/auditoria/2026-10-22 e relatório AUDITORIA-CONVERSAO-BRASILEIRA.md. Consentimento básico bloqueia tags até autorização; briefing sai da URL e usa rascunho essencial de 30 minutos. GA4/GSC e INP de campo não disponíveis.
 Playwright final desta revisão: 30 aprovados em 48,5 s, incluindo as 58 rotas. Screenshots desktop/mobile revisados. Relatório comparativo sem extrapolar laboratório para conversão real.
 Verificação pública do runtime 612fb1f: deployment dpl_4i7RdApDswatnSuZZfKFqSDktLSx READY no domínio; 58 rotas200, cinco assets iniciais idênticos por SHA-256, fonte/AVIF/canonical/headers conferidos. Lighthouse público mobile92/100/100/100 (LCP1,768s, CLS0), desktop93/100/100/100. JSONs arquivados. Esta atualização documental não altera o runtime.
 
-
 ## Decisão explícita do dono — 23/10/2026
+
 O dono solicitou apagar o código do projeto e reconstruir do zero com Next.js App Router, agência completa de marketing digital e WhatsApp direto como principal canal. Autorizou reconstrução no mesmo repositório GitHub e no mesmo projeto Vercel, novo logo, domínio canônico www, mensuração consentida e auditoria com subagentes. Esta decisão substitui restrições de preservação da arquitetura Vite, design, rotas legadas e funil anteriores. Histórico Git e branch backup/pre-rebuild-2026-10-23 preservam integralmente a versão anterior, sem force-push. Preços comerciais e garantia permanecem conforme contrato histórico, sem inventar condições.
 Integração: Codex /root em 2026-10-23; subagentes com propriedade isolada de arquivos; implementação concluída e publicada; configuração de domínio corrigida conforme seção vigente.
 
 ### Implementação e portão da reconstrução23/10/2026
+
 Aplicação Next16/React19 na raiz, oito serviços locais, oito artigos/guias, páginas institucionais, consentimento por finalidade, adapters Google/Meta/CRM e WhatsApp fixo. Identidade clara com coroa vetorial própria, Sora local e corpo de sistema. Prova de trabalho de três projetos verificados, sem resultado comercial inventado. Faixas de preço e garantia preservadas. Check/lint28 testes e build aprovados. Lighthouse mobile9 execuções: home95–97, diagnóstico97–98, serviços98–99, CLS0; dados de laboratório. O bloqueio inicial www→apex307 foi resolvido por sessão autenticada no mesmo projeto. Publicação confirmada no merge5aaaa14; detalhes e limites em docs/VALIDACAO.md.

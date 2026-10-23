@@ -1,0 +1,146 @@
+{
+  "measuredAt": "2026-10-23",
+  "scope": "Production build on local server; mobile lab, three independent runs per route. No field INP/CWV or conversion claim. Chromium153. Mobile assertions passed in three LHCI autorun invocations, one route each.",
+  "runs": [
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/",
+      "fetchTime": "2026-10-23T18:34:49.722Z",
+      "performance": 98,
+      "metrics": {
+        "largest-contentful-paint": 1685.59,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 268852,
+        "server-response-time": 52.58,
+        "total-blocking-time": 114.23
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/",
+      "fetchTime": "2026-10-23T18:35:37.489Z",
+      "performance": 98,
+      "metrics": {
+        "largest-contentful-paint": 1640.79,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 268852,
+        "server-response-time": 8.72,
+        "total-blocking-time": 99.31
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/",
+      "fetchTime": "2026-10-23T18:35:13.666Z",
+      "performance": 98,
+      "metrics": {
+        "largest-contentful-paint": 1648.43,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 268852,
+        "server-response-time": 7.04,
+        "total-blocking-time": 122.05
+      },
+      "representative": true
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/diagnostico",
+      "fetchTime": "2026-10-23T18:36:22.504Z",
+      "performance": 99,
+      "metrics": {
+        "largest-contentful-paint": 1544.46,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 260561,
+        "server-response-time": 145.92,
+        "total-blocking-time": 115.8
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/diagnostico",
+      "fetchTime": "2026-10-23T18:36:46.468Z",
+      "performance": 99,
+      "metrics": {
+        "largest-contentful-paint": 1530.36,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 260561,
+        "server-response-time": 18.4,
+        "total-blocking-time": 98.12
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/diagnostico",
+      "fetchTime": "2026-10-23T18:37:10.286Z",
+      "performance": 99,
+      "metrics": {
+        "largest-contentful-paint": 1540.95,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 260561,
+        "server-response-time": 14.75,
+        "total-blocking-time": 106.69
+      },
+      "representative": true
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/planos",
+      "fetchTime": "2026-10-23T18:38:16.312Z",
+      "performance": 97,
+      "metrics": {
+        "largest-contentful-paint": 1685.32,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 258581,
+        "server-response-time": 77.31,
+        "total-blocking-time": 140.27
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/planos",
+      "fetchTime": "2026-10-23T18:38:40.514Z",
+      "performance": 98,
+      "metrics": {
+        "largest-contentful-paint": 1591.0,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 258581,
+        "server-response-time": 5.77,
+        "total-blocking-time": 134.43
+      },
+      "representative": false
+    },
+    {
+      "device": "mobile",
+      "url": "https://www.reidasvendas.com.br/planos",
+      "fetchTime": "2026-10-23T18:39:03.932Z",
+      "performance": 99,
+      "metrics": {
+        "largest-contentful-paint": 1618.3,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 258581,
+        "server-response-time": 5.93,
+        "total-blocking-time": 95.24
+      },
+      "representative": true
+    },
+    {
+      "device": "desktop",
+      "url": "https://www.reidasvendas.com.br/",
+      "fetchTime": "2026-10-23T18:40:09.326Z",
+      "performance": 100,
+      "metrics": {
+        "largest-contentful-paint": 613.18,
+        "cumulative-layout-shift": 0,
+        "total-byte-weight": 301420,
+        "server-response-time": 56.69,
+        "total-blocking-time": 0
+      },
+      "representative": true
+    }
+  ]
+}

@@ -1,13 +1,9 @@
 import Link from 'next/link';
 import PageShell from './PageShell';
 import JsonLd from './JsonLd';
-import content from '@/data/content.json';
+import type { EditorialArticle } from '@/lib/editorial';
 import { SITE } from '@/lib/site';
-export default function Article({
-  article: a,
-}: {
-  article: (typeof content.articles)[number];
-}) {
+export default function Article({ article: a }: { article: EditorialArticle }) {
   return (
     <PageShell title={a.title} description={a.description} path={a.route}>
       <div className="article-layout">
@@ -23,13 +19,13 @@ export default function Article({
           ))}
           {a.slug === 'follow-up-que-converte' && (
             <p>
-              <a
+              <Link
                 href="/downloads/guia-follow-up.md"
                 download
                 data-event="resource_download"
               >
                 Baixar guia de follow-up em texto ↗
-              </a>
+              </Link>
             </p>
           )}
           <section>
@@ -58,11 +54,15 @@ export default function Article({
           <h2>Continue por aqui</h2>
           {a.related.map((path) => (
             <Link key={path} href={path}>
-              {path.startsWith('/servicos')
-                ? 'Conhecer o serviço relacionado'
-                : path === '/diagnostico'
-                  ? 'Conversar sobre meu cenário'
-                  : 'Ler o conteúdo relacionado'}{' '}
+              {path === '/planos'
+                ? 'Comparar os planos'
+                : path === '/simulador'
+                  ? 'Simular meu cenário'
+                  : path.startsWith('/servicos')
+                    ? 'Conhecer o serviço relacionado'
+                    : path === '/diagnostico'
+                      ? 'Conversar sobre meu cenário'
+                      : 'Ler o conteúdo relacionado'}{' '}
               ↗
             </Link>
           ))}

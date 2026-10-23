@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import content from '@/data/content.json';
+import { articles } from '@/lib/editorial';
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
@@ -15,7 +15,7 @@ export default function Page() {
       path="/blog"
     >
       <div className="article-grid">
-        {content.articles.map((a) => (
+        {articles.map((a) => (
           <article className="article-card" key={a.slug}>
             <p className="muted">
               {a.category} · {a.readMinutes} min

@@ -20,17 +20,17 @@ Não habilitar flags experimentais para obter nota de laboratório. ISR só faz 
 
 ## Configuração do projeto existente
 
-| Campo | Valor |
-| --- | --- |
-| Framework Preset | Next.js |
-| Root Directory | raiz do repositório; remover o caminho legado `apps/web` se estiver definido |
-| Build Command | `pnpm build` |
-| Install Command | `pnpm install --frozen-lockfile` |
-| Output Directory | padrão Next.js; limpar o antigo `apps/web/dist` |
-| Node.js | 22.x ou 24.x compatível com a versão instalada |
-| Região de funções | `gru1`, próxima de Franca/SP; a CDN continua global |
-| Branch de produção | `main` |
-| Preview | branches de trabalho no mesmo projeto; manter proteção existente |
+| Campo              | Valor                                                                        |
+| ------------------ | ---------------------------------------------------------------------------- |
+| Framework Preset   | Next.js                                                                      |
+| Root Directory     | raiz do repositório; remover o caminho legado `apps/web` se estiver definido |
+| Build Command      | `pnpm build`                                                                 |
+| Install Command    | `pnpm install --frozen-lockfile`                                             |
+| Output Directory   | padrão Next.js; limpar o antigo `apps/web/dist`                              |
+| Node.js            | 22.x ou 24.x compatível com a versão instalada                               |
+| Região de funções  | `gru1`, próxima de Franca/SP; a CDN continua global                          |
+| Branch de produção | `main`                                                                       |
+| Preview            | branches de trabalho no mesmo projeto; manter proteção existente             |
 
 A região brasileira reduz a distância de requisições dinâmicas locais; o resultado depende da localização do CRM/Redis. Se os dados estiverem em outro continente, medir a cadeia inteira antes de mudar a região.
 
@@ -52,21 +52,21 @@ O `proxy.ts` implementa correção de host/HTTPS defensiva apenas nos dois hosts
 
 Use `.env.example` como inventário. Criar variáveis de produção e preview separadamente no painel autenticado Vercel, com secrets server-only e sem imprimir os valores. `NEXT_PUBLIC_*` entram no bundle: nunca colocar tokens nesses campos. Não commitar `.env.local` ou arquivos baixados da Vercel.
 
-| Finalidade | Variáveis | Verificação necessária |
-| --- | --- | --- |
-| Canônico | `NEXT_PUBLIC_SITE_URL` | deve ser exatamente a origem www HTTPS |
-| GA4 | `NEXT_PUBLIC_GA4_ID` | ID real, fluxo web, consentimento, DebugView |
-| Search Console | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` quando usar meta | propriedade domínio exige DNS; meta é alternativa URL-prefix |
-| Meta Pixel | `NEXT_PUBLIC_META_PIXEL_ID` | pixel pertencente à empresa e Test Events |
-| Meta domínio | `NEXT_PUBLIC_META_DOMAIN_VERIFICATION` | meta/DNS realmente reconhecido no Business Manager |
-| Meta CAPI | `META_CAPI_ACCESS_TOKEN`, `META_GRAPH_VERSION` | versão suportada no app Meta; deduplicação e consentimento |
-| CAPI em teste | `META_CAPI_TEST_EVENT_CODE` | remover o código de teste na publicação de campanhas |
-| Contato | `WHATSAPP_NUMBER` | `5516992333344`, titularidade e atendimento humano |
-| CRM | `CRM_API_URL`, `CRM_API_KEY` | contrato POST e retorno real com `id` ou `lead_id` |
-| Anti-spam | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `RATE_LIMIT_SALT` | serviço durável configurado; salt longo e aleatório |
-| Monitoramento opcional | `SENTRY_DSN` | implementar SDK antes de declarar captura ativa |
-| Vercel RUM opcional | `NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS` | enable no projeto e renderização submetida ao consentimento |
-| Controlador | `BUSINESS_LEGAL_NAME`, `BUSINESS_CNPJ`, `BUSINESS_ADDRESS`, `PRIVACY_CONTACT_EMAIL` | dados verdadeiros e finalidade/retencão aprovadas |
+| Finalidade             | Variáveis                                                                           | Verificação necessária                                       |
+| ---------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Canônico               | `NEXT_PUBLIC_SITE_URL`                                                              | deve ser exatamente a origem www HTTPS                       |
+| GA4                    | `NEXT_PUBLIC_GA4_ID`                                                                | ID real, fluxo web, consentimento, DebugView                 |
+| Search Console         | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` quando usar meta                             | propriedade domínio exige DNS; meta é alternativa URL-prefix |
+| Meta Pixel             | `NEXT_PUBLIC_META_PIXEL_ID`                                                         | pixel pertencente à empresa e Test Events                    |
+| Meta domínio           | `NEXT_PUBLIC_META_DOMAIN_VERIFICATION`                                              | meta/DNS realmente reconhecido no Business Manager           |
+| Meta CAPI              | `META_CAPI_ACCESS_TOKEN`, `META_GRAPH_VERSION`                                      | versão suportada no app Meta; deduplicação e consentimento   |
+| CAPI em teste          | `META_CAPI_TEST_EVENT_CODE`                                                         | remover o código de teste na publicação de campanhas         |
+| Contato                | `WHATSAPP_NUMBER`                                                                   | `5516992333344`, titularidade e atendimento humano           |
+| CRM                    | `CRM_API_URL`, `CRM_API_KEY`                                                        | contrato POST e retorno real com `id` ou `lead_id`           |
+| Anti-spam              | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, `RATE_LIMIT_SALT`             | serviço durável configurado; salt longo e aleatório          |
+| Monitoramento opcional | `SENTRY_DSN`                                                                        | implementar SDK antes de declarar captura ativa              |
+| Vercel RUM opcional    | `NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS`                                               | enable no projeto e renderização submetida ao consentimento  |
+| Controlador            | `BUSINESS_LEGAL_NAME`, `BUSINESS_CNPJ`, `BUSINESS_ADDRESS`, `PRIVACY_CONTACT_EMAIL` | dados verdadeiros e finalidade/retencão aprovadas            |
 
 `VERCEL_ANALYTICS_ID` não é exigido pelos SDKs padrão Vercel Analytics/Speed Insights. Não inventar esse ID nem afirmar que monitoramento está ativo só por existir componente. A grafia usual de Sentry é `SENTRY_DSN`; a variável `SENTORY_DSN` mencionada no briefing não é um padrão do fornecedor.
 
@@ -131,3 +131,11 @@ Rotina semanal: qualidade dos leads por origem → atendimento → agendamento �
 - Domínios: https://vercel.com/docs/domains
 
 Consultadas para esta implantação em 23/10/2026. Validar novamente quando atualizar a versão do framework ou o projeto.
+
+## Evolução de assinaturas — 23/10/2026
+
+O mesmo projeto agora recebe `/planos`, módulos de presença digital, revisão `/checkout`, onboarding e atendimento ao cliente. Não criar projeto novo. Removida a regra histórica `/planos`→`/servicos`. APIs de pagamento documentadas em `PAGAMENTOS.md`; proposta comercial em `ASSINATURAS-ESTRATEGIA.md`.
+
+Ativar cobrança exige primeiro validar preços/condições, identidade e contrato; alterar a fonte de oferta de proposal para approved; configurar flags OFFER/TERMS, TERMS_VERSION, Stripe test/live/PriceIDs/webhook e Redis; executar sandbox com callbacks duplicados/fora de ordem e conciliação de valores; configurar portal/dunning e processo fiscal; só então testar produção de forma controlada. Não mudar a chave de teste para live como se isso concluísse a validação. GA4/Meta/CRM continuam dependentes das contas reais.
+
+As páginas de checkout, onboarding e atendimento são noindex e ficam fora do sitemap. Permanecem rastreáveis para permitir a leitura de noindex; robots.txt não é proteção de dados nem autenticação. Nenhum identificador de sessão na URL confirma pagamento. Preview mantém proteção e noindex. O código de pagamento sem secrets responde indisponível, e o CTA WhatsApp permanece útil.

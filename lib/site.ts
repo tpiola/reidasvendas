@@ -24,7 +24,7 @@ export function metadata(
           url: SITE + '/og/og-1200x630.png',
           width: 1200,
           height: 630,
-          alt: 'Rei das Vendas — marketing e operação na mesma direção',
+          alt: 'Rei das Vendas — presença digital com continuidade',
         },
       ],
     },
@@ -45,7 +45,7 @@ export const organization = {
   logo: SITE + '/logo/simbolo.svg',
   telephone: '+5516992333344',
   description:
-    'Agência de marketing digital e tecnologia comercial em Franca/SP.',
+    'Sites por assinatura, SEO local, WhatsApp comercial e melhoria contínua da presença digital de pequenos e médios negócios em Franca/SP e no Brasil.',
   areaServed: [
     { '@type': 'City', name: 'Franca' },
     { '@type': 'Country', name: 'Brasil' },

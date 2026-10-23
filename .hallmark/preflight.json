@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-23",
+  "scope": "home and subscription pricing",
+  "framework": "Next.js 16 App Router / React 19",
+  "font": "Sora self-hosted WOFF2 + system-ui body",
+  "palette": "existing midnight / ivory / antique gold tokens",
+  "motion": "native IO/RAF; manual interactive modules; reduced-motion",
+  "spacing": "existing semantic 4pt scale",
+  "preserved": [
+    "logo",
+    "tokens.css",
+    "global styles",
+    "header",
+    "footer",
+    "tracking"
+  ],
+  "introduced": [
+    "dark editorial subscription hero",
+    "three-plan pricing",
+    "monthly/annual comparison",
+    "six-stage method"
+  ],
+  "authorization": "Owner requested subscription repositioning; delegated exclusive source scope"
+}

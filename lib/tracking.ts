@@ -1,5 +1,15 @@
 'use client';
 
+import {
+  sanitizeAttribution,
+  sanitizeBillingCycle,
+  sanitizeMachineValue,
+  sanitizePath,
+  sanitizePlanId,
+  validEventId,
+  type WhatsAppContext,
+} from './whatsapp';
+
 export type Consent = {
   version: 1;
   analytics: boolean;
@@ -53,7 +63,24 @@ const events = new Set([
   'contact_whatsapp',
   'schedule_booked',
   'resource_download',
+  'plan_view',
+  'plan_select',
+  'checkout_start',
+  'calculator_start',
+  'calculator_result',
+  'click_cta_planos',
+  'click_cta_diagnostico',
+  'consent_updated',
+  'faq_open',
+  'service_view',
 ]);
+// Revenue is authoritative only after a verified provider webhook, never a browser action.
+export const SERVER_ONLY_EVENTS = [
+  'purchase',
+  'subscription_created',
+  'subscription_renewal',
+] as const;
+export const EVENT_TAXONOMY = [...events, ...SERVER_ONLY_EVENTS] as const;
 const safeKeys = new Set([
   'page',
   'placement',
@@ -64,6 +91,11 @@ const safeKeys = new Set([
   'source',
   'medium',
   'campaign',
+  'plan_id',
+  'billing_cycle',
+  'analytics_state',
+  'marketing_state',
+  'consent_version',
 ]);
 
 export function readConsent(): Consent {
@@ -108,6 +140,59 @@ function script(id: string, src: string) {
   node.async = true;
   document.head.appendChild(node);
 }
+/** Meta reads document URL/referrer itself. Suppress it on free-form query context. */
+export function canUseMetaPageContext(): boolean {
+  for (const raw of [
+    location.origin + location.pathname + (location.search || ''),
+    document.referrer,
+  ]) {
+    if (!raw) continue;
+    try {
+      const url = new URL(raw);
+      for (const [key, value] of url.searchParams) {
+        if (
+          [
+            'utm_source',
+            'utm_medium',
+            'utm_campaign',
+            'utm_content',
+            'source',
+            'medium',
+            'campaign',
+            'src',
+          ].includes(key) &&
+          sanitizeMachineValue(value)
+        )
+          continue;
+        if (
+          ['gclid', 'fbclid', 'gbraid', 'wbraid'].includes(key) &&
+          /^[A-Za-z0-9_.-]{10,512}$/.test(value)
+        )
+          continue;
+        if (['plan', 'plan_id', 'plano'].includes(key) && sanitizePlanId(value))
+          continue;
+        if (
+          ['cycle', 'ciclo', 'billing_cycle'].includes(key) &&
+          sanitizeBillingCycle(value)
+        )
+          continue;
+        return false;
+      }
+    } catch {
+      return false;
+    }
+  }
+  return true;
+}
+function safeReferrer(): string {
+  try {
+    if (!document.referrer) return '';
+    const url = new URL(document.referrer);
+    return url.origin + url.pathname;
+  } catch {
+    return '';
+  }
+}
 export function bootTracking() {
   if (typeof window === 'undefined' || window.__rdvBooted) return;
   window.__rdvBooted = true;
@@ -141,13 +226,21 @@ export function applyConsent(value: Consent) {
     window.gtag?.('config', GA_ID, {
       send_page_view: false,
       page_location: location.origin + location.pathname,
+      page_referrer: safeReferrer(),
+      ...gaCampaignFields(getAttribution()),
       allow_google_signals: value.marketing,
       allow_ad_personalization_signals: value.marketing,
     });
     script('rdv-ga', `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`);
     track('page_view', { page: location.pathname });
   }
-  if (value.marketing && PIXEL_ID && /^\d+$/.test(PIXEL_ID) && !metaLoaded) {
+  if (
+    value.marketing &&
+    PIXEL_ID &&
+    /^\d+$/.test(PIXEL_ID) &&
+    !metaLoaded &&
+    canUseMetaPageContext()
+  ) {
     metaLoaded = true;
     const fb: Pixel = (...args: unknown[]) => {
       if (fb.callMethod) fb.callMethod(...args);
@@ -171,15 +264,11 @@ export function applyConsent(value: Consent) {
 export function getAttribution(): Record<string, string> {
   if (typeof window === 'undefined' || !readConsent().analytics) return {};
   const query = new URLSearchParams(location.search);
-  const result: Record<string, string> = {};
-  for (const [queryKey, key] of [
-    ['utm_source', 'source'],
-    ['utm_medium', 'medium'],
-    ['utm_campaign', 'campaign'],
-  ] as const) {
-    const value = query.get(queryKey);
-    if (value && /^[a-zA-Z0-9_-]{1,100}$/.test(value)) result[key] = value;
-  }
+  const result = sanitizeAttribution({
+    source: query.get('utm_source'),
+    medium: query.get('utm_medium'),
+    campaign: query.get('utm_campaign'),
+  });
   if (Object.keys(result).length) {
     try {
       sessionStorage.setItem('rdv-attribution-v1', JSON.stringify(result));
@@ -190,16 +279,12 @@ export function getAttribution(): Record<string, string> {
     const saved: unknown = JSON.parse(
       sessionStorage.getItem('rdv-attribution-v1') || '{}',
     );
-    if (saved && typeof saved === 'object') {
-      for (const key of ['source', 'medium', 'campaign']) {
-        const value = (saved as Record<string, unknown>)[key];
-        if (typeof value === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(value))
-          result[key] = value;
-      }
-    }
+    if (saved && typeof saved === 'object' && !Array.isArray(saved))
+      return sanitizeAttribution(saved as Record<string, unknown>);
   } catch {}
-  return result;
+  return {};
 }
+
 function deleteOptionalCookies() {
   const names = document.cookie
     .split(';')
@@ -234,6 +319,11 @@ export function saveConsent(analytics: boolean, marketing: boolean) {
       sessionStorage.removeItem('rdv-attribution-v1');
     } catch {}
   }
+  track('consent_updated', {
+    analytics_state: analytics ? 'granted' : 'denied',
+    marketing_state: marketing ? 'granted' : 'denied',
+    consent_version: 1,
+  });
   window.dispatchEvent(new CustomEvent('rdv:consent', { detail: value }));
   if ((old.analytics && !analytics) || (old.marketing && !marketing)) {
     deleteOptionalCookies();
@@ -241,6 +331,14 @@ export function saveConsent(analytics: boolean, marketing: boolean) {
   }
   return value;
 }
+function gaCampaignFields(attribution: Record<string, string>) {
+  return {
+    ...(attribution.source ? { campaign_source: attribution.source } : {}),
+    ...(attribution.medium ? { campaign_medium: attribution.medium } : {}),
+    ...(attribution.campaign ? { campaign_name: attribution.campaign } : {}),
+  };
+}
+const emittedConversions = new Set<string>();
 export function track(
   name: string,
   params: Record<string, string | number> = {},
@@ -248,42 +346,187 @@ export function track(
 ) {
   if (typeof window === 'undefined' || !events.has(name)) return;
   const clean = Object.fromEntries(
-    Object.entries(params).filter(([key, value]) => {
-      if (!safeKeys.has(key)) return false;
-      if (typeof value === 'number') return Number.isFinite(value);
-      if (key === 'page') return /^\/(?!\/)[A-Za-z0-9/_-]{0,199}$/.test(value);
-      return /^[A-Za-z0-9][A-Za-z0-9._/-]{0,99}$/.test(value);
-    }),
+    Object.entries(params).flatMap<[string, string | number]>(
+      ([key, value]) => {
+        if (!safeKeys.has(key)) return [];
+        if (key === 'plan_id') {
+          const plan = sanitizePlanId(value);
+          return plan ? [[key, plan]] : [];
+        }
+        if (key === 'billing_cycle') {
+          const cycle = sanitizeBillingCycle(value);
+          return cycle ? [[key, cycle]] : [];
+        }
+        if (key === 'event_id')
+          return validEventId(value) ? [[key, value]] : [];
+        if (key === 'analytics_state' || key === 'marketing_state')
+          return value === 'granted' || value === 'denied'
+            ? [[key, value]]
+            : [];
+        if (typeof value === 'number')
+          return Number.isFinite(value) &&
+            ['score', 'consent_version'].includes(key)
+            ? [[key, value]]
+            : [];
+        if (key === 'page')
+          return sanitizePath(value) === value ? [[key, value]] : [];
+        const safe = sanitizeMachineValue(value, 100);
+        return safe ? [[key, safe]] : [];
+      },
+    ),
   );
-  // Callers pass pathnames, never query strings, names, phones, messages or emails.
-  if (current.analytics)
+  // Never accept a conversion classification for an unrelated UI interaction.
+  const expectedMeta =
+    name === 'lead_created'
+      ? 'Lead'
+      : name === 'whatsapp_click'
+        ? 'Contact'
+        : name === 'schedule_booked'
+          ? 'Schedule'
+          : undefined;
+  const eventId =
+    typeof clean.event_id === 'string' ? clean.event_id : undefined;
+  const conversionKey = eventId ? `${name}:${eventId}` : undefined;
+  if (conversionKey && emittedConversions.has(conversionKey)) return;
+  if (conversionKey) {
+    emittedConversions.add(conversionKey);
+    if (emittedConversions.size > 500)
+      emittedConversions.delete(emittedConversions.values().next().value!);
+  }
+  if (current.analytics) {
+    const attribution = getAttribution();
+    const campaignFields = gaCampaignFields(attribution);
+    if (Object.keys(campaignFields).length)
+      window.gtag?.('set', campaignFields);
     window.gtag?.('event', name, {
+      ...attribution,
       ...clean,
       page_location: location.origin + location.pathname,
     });
-  if (current.marketing && metaEvent)
-    window.fbq?.('track', metaEvent, {}, { eventID: params.event_id });
+  }
+  if (!current.marketing || !canUseMetaPageContext()) return;
+  if (expectedMeta) {
+    // Only confirmed conversion callers may select these standard events.
+    if (metaEvent === expectedMeta && eventId)
+      window.fbq?.('track', expectedMeta, clean, { eventID: eventId });
+    return;
+  }
+  // PageView is owned by bootTracking/trackPageView. Consent choice is not a retargeting signal.
+  if (name === 'page_view' || name === 'consent_updated') return;
+  const standard =
+    name === 'plan_view' || name === 'service_view'
+      ? 'ViewContent'
+      : name === 'checkout_start'
+        ? 'InitiateCheckout'
+        : undefined;
+  if (standard) {
+    if (eventId) window.fbq?.('track', standard, clean, { eventID: eventId });
+    else window.fbq?.('track', standard, clean);
+  } else window.fbq?.('trackCustom', name, clean);
 }
 export function whatsappHref(
   placement: string,
   page = typeof location !== 'undefined' ? location.pathname : '/',
+  context: WhatsAppContext = {},
 ) {
   const eventId =
     typeof crypto !== 'undefined' && 'randomUUID' in crypto
       ? crypto.randomUUID()
-      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  return `/go/whatsapp?${new URLSearchParams({ src: placement, page, event_id: eventId })}`;
+      : undefined;
+  const params = new URLSearchParams({
+    src: sanitizeMachineValue(placement) || 'body',
+    page: sanitizePath(page),
+  });
+  if (eventId) params.set('event_id', eventId);
+  const plan = sanitizePlanId(context.plan),
+    cycle = sanitizeBillingCycle(context.cycle);
+  if (plan) params.set('plan', plan);
+  if (cycle) params.set('cycle', cycle);
+  for (const [key, value] of Object.entries(getAttribution()))
+    params.set(key, value);
+  return `/go/whatsapp?${params}`;
 }
 export function trackWhatsapp(
   eventId: string,
   placement: string,
   page: string,
+  context: WhatsAppContext = {},
 ) {
-  track('click_cta_whatsapp', { placement, page });
-  track('whatsapp_click', { placement, page, event_id: eventId }, 'Contact');
+  const params: Record<string, string> = { placement, page, event_id: eventId };
+  const plan = sanitizePlanId(context.plan),
+    cycle = sanitizeBillingCycle(context.cycle);
+  if (plan) params.plan_id = plan;
+  if (cycle) params.billing_cycle = cycle;
+  Object.assign(params, getAttribution());
+  track('click_cta_whatsapp', {
+    placement,
+    page,
+    ...(plan ? { plan_id: plan } : {}),
+    ...(cycle ? { billing_cycle: cycle } : {}),
+  });
+  track('whatsapp_click', params, 'Contact');
+}
+/** The single delegated click entry point, called by Experience. Navigation is never cancelled. */
+export function handleTrackedAction(target: HTMLElement, page: string) {
+  const anchor = target instanceof HTMLAnchorElement ? target : null;
+  const declared = target.dataset.event;
+  const contextNode = target.closest<HTMLElement>('[data-plan-id]');
+  const plan = sanitizePlanId(
+    target.dataset.planId || contextNode?.dataset.planId,
+  );
+  const cycle = sanitizeBillingCycle(
+    target.dataset.billingCycle ||
+      target.closest<HTMLElement>('[data-billing-cycle]')?.dataset.billingCycle,
+  );
+  const params: Record<string, string> = { page: sanitizePath(page) };
+  if (plan) params.plan_id = plan;
+  if (cycle) params.billing_cycle = cycle;
+  if (anchor) {
+    const url = new URL(anchor.href, location.origin);
+    if (url.origin === location.origin && url.pathname === '/go/whatsapp') {
+      const eventId = crypto.randomUUID();
+      const placement =
+        sanitizeMachineValue(url.searchParams.get('src')) || 'body';
+      url.searchParams.set('event_id', eventId);
+      url.searchParams.set('page', sanitizePath(page));
+      const queryPlan =
+        plan ||
+        sanitizePlanId(
+          url.searchParams.get('plan') ||
+            url.searchParams.get('plano') ||
+            url.searchParams.get('plan_id'),
+        );
+      const queryCycle =
+        cycle ||
+        sanitizeBillingCycle(
+          url.searchParams.get('cycle') || url.searchParams.get('ciclo'),
+        );
+      if (queryPlan) url.searchParams.set('plan', queryPlan);
+      else url.searchParams.delete('plan');
+      if (queryCycle) url.searchParams.set('cycle', queryCycle);
+      else {
+        url.searchParams.delete('cycle');
+        url.searchParams.delete('ciclo');
+      }
+      for (const [key, value] of Object.entries(getAttribution()))
+        url.searchParams.set(key, value);
+      anchor.href = url.toString();
+      trackWhatsapp(eventId, placement, page, {
+        plan: queryPlan,
+        cycle: queryCycle,
+      });
+    }
+  }
+  if (
+    declared &&
+    declared !== 'whatsapp_click' &&
+    declared !== 'click_cta_whatsapp'
+  )
+    track(declared, params);
 }
 
 export function trackPageView(path: string) {
   track('page_view', { page: path });
-  if (current.marketing) window.fbq?.('track', 'PageView');
+  if (current.marketing && canUseMetaPageContext())
+    window.fbq?.('track', 'PageView');
 }

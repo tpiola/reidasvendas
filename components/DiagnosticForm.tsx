@@ -1,7 +1,8 @@
 'use client';
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { track, getAttribution } from '@/lib/tracking';
+import { track, trackWhatsapp, getAttribution } from '@/lib/tracking';
 export default function DiagnosticForm({
   crmEnabled,
 }: {
@@ -46,6 +47,7 @@ export default function DiagnosticForm({
     const eventId = crypto.randomUUID();
     track('form_submit', { page: '/diagnostico', event_id: eventId });
     if (!crmEnabled) {
+      trackWhatsapp(eventId, 'diagnostico_form', '/diagnostico');
       const text = `Olá! Vim pelo site Rei das Vendas. Sou ${values.name}, da ${values.company}. Meu desafio: ${values.challenge}`;
       window.location.assign(
         'https://wa.me/5516992333344?' + new URLSearchParams({ text }),
@@ -175,7 +177,7 @@ export default function DiagnosticForm({
           aria-describedby="consent-error"
         />
         Autorizo o contato solicitado sobre minha empresa. Li a{' '}
-        <a href="/privacidade">política de privacidade</a>. Isto não autoriza
+        <Link href="/privacidade">política de privacidade</Link>. Isto não autoriza
         campanhas futuras.
       </label>
       <p className="field-error" id="consent-error">

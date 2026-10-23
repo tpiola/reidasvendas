@@ -13,7 +13,8 @@
     "e2e": "playwright test",
     "a11y": "playwright test -g accessibility",
     "format": "prettier --write .",
-    "readiness": "node scripts/check-readiness.mjs"
+    "readiness": "node scripts/check-readiness.mjs",
+    "budget": "node scripts/check-performance-budget.mjs"
   },
   "dependencies": {
     "next": "16.4.2",

@@ -6,10 +6,14 @@ import Footer from '@/components/Footer';
 import Experience from '@/components/Experience';
 import JsonLd from '@/components/JsonLd';
 import Observability from '@/components/Observability';
-import ConsentBanner, { TrackingNavigation } from '@/lib/consent';
+import ConsentBanner from '@/lib/consent';
+import TrackingNavigation from '@/components/TrackingNavigation';
 import { organization, SITE, metadata as meta } from '@/lib/site';
 import '@/styles/globals.css';
 import '@/styles/pages.css';
+import '@/styles/subscriptions.css';
+import '@/styles/commercial-flow.css';
+import '@/styles/subscription-journey.css';
 const sora = localFont({
   src: '../public/fonts/sora-latin.woff2',
   display: 'swap',
@@ -19,12 +23,12 @@ const sora = localFont({
 });
 export const metadata: Metadata = {
   ...meta(
-    'Sites, tráfego e social media em Franca',
-    'Rei das Vendas: sites rápidos, gestão de tráfego, social media e processo comercial para empresas de Franca/SP e região.',
+    'Sites por assinatura e SEO local em Franca',
+    'Site profissional, SEO local, WhatsApp rastreado e manutenção contínua para pequenos negócios em Franca/SP. Conheça os planos e seus limites.',
   ),
   metadataBase: new URL(SITE),
   title: {
-    default: 'Rei das Vendas | Sites e marketing digital em Franca',
+    default: 'Rei das Vendas | Sites por assinatura em Franca',
     template: '%s | Rei das Vendas',
   },
   applicationName: 'Rei das Vendas',

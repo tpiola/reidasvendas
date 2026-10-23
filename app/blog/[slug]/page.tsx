@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import Article from '@/components/Article';
-import content from '@/data/content.json';
+import { articles } from '@/lib/editorial';
 import { metadata as meta } from '@/lib/site';
 export const dynamicParams = false;
 export const revalidate = 86400;
 export function generateStaticParams() {
-  return content.articles
+  return articles
     .filter((a) => a.route.startsWith('/blog/'))
     .map((a) => ({ slug: a.slug }));
 }
@@ -15,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const a = content.articles.find((a) => a.route === '/' + 'blog/' + slug);
+  const a = articles.find((a) => a.route === '/' + 'blog/' + slug);
   return a ? meta(a.title, a.metaDescription, a.route) : {};
 }
 export default async function Page({
@@ -24,7 +24,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const a = content.articles.find((a) => a.route === '/blog/' + slug);
+  const a = articles.find((a) => a.route === '/blog/' + slug);
   if (!a) notFound();
   return <Article article={a} />;
 }

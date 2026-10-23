@@ -99,14 +99,41 @@ export default function Page() {
           </a>
           .
         </p>
+        <h2>Planos, diagnóstico rápido e pagamentos</h2>
+        <p>
+          Escolher um plano e responder ao diagnóstico rápido não inicia uma
+          cobrança. O contexto não sensível de implantação pode ficar neste
+          navegador por até 30 minutos e não é enviado ao analytics. O plano e o
+          ciclo são usados para dar continuidade à solicitação.
+        </p>
+        <p>
+          Quando a contratação online estiver habilitada, o checkout hospedado
+          da Stripe recebe os dados de pagamento e identificação solicitados por
+          ela. Este site não recebe o número completo do cartão. O servidor
+          trata identificadores de operação, plano, valor e status estritamente
+          necessários para conciliar cobrança, renovação, falha ou cancelamento,
+          sem copiar esses dados para ferramentas de publicidade
+          automaticamente.
+        </p>
+        <p>
+          O adaptador de pagamento está preparado, mas a cobrança ainda não está
+          ativa nesta oferta. O fornecedor efetivo, seus termos, a identidade
+          jurídica do contratante e a política de retenção devem ser confirmados
+          antes de habilitar pagamentos. Emissão fiscal e recibo seguem a
+          contratação e obrigações aplicáveis; este site não emite uma nota
+          fiscal automaticamente.
+        </p>
         <h2>Retenção e segurança</h2>
         <p>
           Preferências de cookies expiram em 180 dias. Chaves pseudonimizadas de
-          controle de tentativas expiram em até dez minutos. Pedidos de contato
-          devem ser revisados em até 180 dias após a última interação, para
-          exclusão ou definição de outra necessidade legal/contratual.
-          Documentos contratuais seguem os prazos legais aplicáveis. Não
-          registramos o texto do seu desafio em ferramentas de analytics.
+          controle de tentativas expiram em até dez minutos. O adaptador de
+          pagamento usa armazenamento durável de registros mínimos com prazos
+          técnicos documentados; a retenção contratual e fiscal precisa ser
+          confirmada antes da ativação. Pedidos de contato devem ser revisados
+          em até 180 dias após a última interação, para exclusão ou definição de
+          outra necessidade legal/contratual. Documentos contratuais seguem os
+          prazos legais aplicáveis. Não registramos o texto do seu desafio em
+          ferramentas de analytics.
         </p>
         <p>
           Tráfego HTTPS, validação de entrada e controles de acesso reduzem

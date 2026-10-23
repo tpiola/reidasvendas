@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { metadata as meta } from '@/lib/site';
 import PageShell from '@/components/PageShell';
 import content from '@/data/content.json';
@@ -13,6 +14,19 @@ export default function Page() {
       description="Observamos o caminho da compra, escolhemos a prioridade e implantamos com responsabilidade definida. Diagnóstico não é uma obrigação para contratar um site."
       path="/metodo"
     >
+      <section className="callout">
+        <h2>Na assinatura, a publicação tem continuidade.</h2>
+        <p>
+          Diagnóstico rápido → estrutura → publicação → captura de contatos →
+          otimização → manutenção. A equipe registra entregas mensais, acompanha
+          os indicadores disponíveis e revê prioridades com o contratante. O
+          próximo investimento depende de dados e capacidade, não de uma meta
+          prometida de vendas.
+        </p>
+        <Link className="text-link" href="/planos" data-event="click_cta_planos">
+          Ver planos e limites ↗
+        </Link>
+      </section>
       <ol className="method-list">
         {content.method.map((m) => (
           <li key={m.step}>
@@ -41,9 +55,9 @@ export default function Page() {
           acompanhar. Não é uma certificação clínica de marketing nem promessa
           de resultado.
         </p>
-        <a className="button button-primary" href="/diagnostico">
+        <Link className="button button-primary" href="/diagnostico">
           Conversar sobre meu cenário
-        </a>
+        </Link>
       </div>
     </PageShell>
   );

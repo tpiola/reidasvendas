@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import content from '../../data/content.json';
+import subscriptionArticles from '../../data/subscription-articles.json';
+import { subscriptionSolutions } from '../../data/subscription-solutions';
 const mainRoutes = [
   '/',
   '/metodo',
@@ -15,12 +17,25 @@ const mainRoutes = [
   '/privacidade',
   '/termos',
   '/obrigado',
+  '/planos',
+  '/simulador',
+  '/casos',
+  '/checkout',
+  '/onboarding',
+  '/area-do-cliente',
 ];
 const serviceRoutes = content.services.map(
   (service) => `/servicos/${service.slug}`,
 );
-const articleRoutes = content.articles.map((article) => article.route);
-const allRoutes = [...mainRoutes, ...serviceRoutes, ...articleRoutes];
+const articleRoutes = [...content.articles, ...subscriptionArticles].map(
+  (article) => article.route,
+);
+const allRoutes = [
+  ...mainRoutes,
+  ...serviceRoutes,
+  ...articleRoutes,
+  ...subscriptionSolutions.map((solution) => '/' + solution.slug),
+];
 const rejectCookies = async (page: import('@playwright/test').Page) => {
   const reject = page.getByRole('button', {
     name: 'Rejeitar opcionais',
@@ -206,7 +221,7 @@ test('privacy: default denied, independent categories and reopening are function
 test('micro-conversions: quiz, calculator and accessible validation preserve honest outcomes', async ({
   page,
 }) => {
-  await page.goto('/');
+  await page.goto('/simulador');
   await rejectCookies(page);
   const calculator = page.getByLabel('Contatos no mês', { exact: true });
   await calculator.fill('100');
@@ -252,12 +267,43 @@ test('keyboard and reduced motion keep navigation and reading available', async 
   await expect(
     page.getByRole('link', { name: /(?:Ir|Pular) para o conteúdo/i }),
   ).toBeFocused();
-  const tab = page.getByRole('tab', { name: 'Falta presença', exact: true });
-  await tab.focus();
-  await tab.press('ArrowRight');
+  const intents = page.getByRole('tablist', {
+    name: 'Seu principal desafio',
+    exact: true,
+  });
+  await expect(intents.getByRole('tab')).toHaveCount(5);
+  const first = intents.getByRole('tab', {
+    name: 'Não recebo contatos',
+    exact: true,
+  });
+  const second = intents.getByRole('tab', {
+    name: 'Site não converte',
+    exact: true,
+  });
+  const last = intents.getByRole('tab', {
+    name: 'Quero continuidade',
+    exact: true,
+  });
+  await first.focus();
+  await first.press('ArrowRight');
+  await expect(second).toBeFocused();
+  await expect(second).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('tabpanel')).toContainText(
+    'Antes de trazer mais visitas',
+  );
+  await second.press('ArrowLeft');
+  await expect(first).toBeFocused();
+  await first.press('End');
+  await expect(last).toBeFocused();
+  await expect(last).toHaveAttribute('aria-selected', 'true');
   await expect(
-    page.getByRole('tab', { name: 'O anúncio não vende', exact: true }),
-  ).toBeFocused();
+    page
+      .getByRole('tabpanel')
+      .getByRole('link', { name: /Comparar os planos/ }),
+  ).toHaveAttribute('href', '/planos');
+  await last.press('Home');
+  await expect(first).toBeFocused();
+  await expect(first).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 });
 

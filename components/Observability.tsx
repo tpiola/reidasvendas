@@ -1,34 +1,57 @@
 'use client';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { readConsent } from '@/lib/tracking';
-const Analytics = dynamic(
-  () => import('@vercel/analytics/react').then((m) => m.Analytics),
-  { ssr: false },
-);
-const SpeedInsights = dynamic(
-  () => import('@vercel/speed-insights/next').then((m) => m.SpeedInsights),
-  { ssr: false },
-);
-export default function Observability() {
-  const [enabled, setEnabled] = useState(false);
-  useEffect(() => {
-    const update = () => setEnabled(readConsent().analytics);
-    update();
-    window.addEventListener('rdv:consent', update);
-    return () => window.removeEventListener('rdv:consent', update);
-  }, []);
-  if (!enabled || process.env.NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS !== 'true')
+type Widgets = {
+  Analytics: typeof import('@vercel/analytics/react').Analytics;
+  SpeedInsights: typeof import('@vercel/speed-insights/next').SpeedInsights;
+};
+function withoutQuery<T extends { url: string }>(event: T): T | null {
+  if (!readConsent().analytics) return null;
+  try {
+    const url = new URL(event.url);
+    return { ...event, url: url.origin + url.pathname };
+  } catch {
     return null;
-  return (
+  }
+}
+/** The SDK modules and their scripts are fetched only after optional consent. */
+export default function Observability() {
+  const [widgets, setWidgets] = useState<Widgets | null>(null);
+  useEffect(() => {
+    let mounted = true;
+    const update = async () => {
+      if (
+        !readConsent().analytics ||
+        process.env.NEXT_PUBLIC_ENABLE_VERCEL_ANALYTICS !== 'true'
+      ) {
+        setWidgets(null);
+        return;
+      }
+      try {
+        const [analytics, speed] = await Promise.all([
+          import('@vercel/analytics/react'),
+          import('@vercel/speed-insights/next'),
+        ]);
+        if (mounted && readConsent().analytics)
+          setWidgets({
+            Analytics: analytics.Analytics,
+            SpeedInsights: speed.SpeedInsights,
+          });
+      } catch {
+        /* Optional telemetry failure never interrupts the commercial journey. */
+      }
+    };
+    void update();
+    window.addEventListener('rdv:consent', update);
+    return () => {
+      mounted = false;
+      window.removeEventListener('rdv:consent', update);
+    };
+  }, []);
+  return widgets ? (
     <>
-      <Analytics
-        beforeSend={(event) => ({
-          ...event,
-          url: new URL(new URL(event.url).pathname, location.origin).href,
-        })}
-      />
-      <SpeedInsights />
+      <widgets.Analytics beforeSend={withoutQuery} />
+      <widgets.SpeedInsights beforeSend={withoutQuery} />
     </>
-  );
+  ) : null;
 }
