@@ -57,8 +57,21 @@ O audit completo encontrou dependências transitivas vulneráveis apenas no ferr
 
 ## Limites de publicação e contas externas
 
-A API permite atualizar build e criar deploy no projeto existente, mas recusou consultar env vars (403). A CLI não está autenticada e a interface Vercel exige login. IDs e secrets não foram inventados. GA4/Pixel/CAPI/GSC/CRM/Redis não podem ser considerados configurados nem validados nas contas.
+A API recusou consultar env vars (403); após autenticação do proprietário, o painel confirmou apenas variáveis legadas, sem IDs GA4/Pixel ou configuração do novo CRM/Redis. Nenhum segredo foi revelado ou copiado. GA4/Pixel/CAPI/GSC/CRM/Redis não estão ativados nem validados nas contas.
 
-O domínio `www.reidasvendas.com.br` ainda tem redirect externo307 para o apex. `proxy.ts` faz apex→www308, portanto publicar em produção antes de limpar essa regra criaria loop. Uma tentativa suportada de reatribuir o alias com redirect nulo não alterou a configuração de domínio nem a resposta pública. Por isso a versão nova deve permanecer em preview do MESMO projeto até corrigir o domínio e validar novamente.
+O redirect externo antigo www→apex307 foi removido em sessão autenticada. www está conectado diretamente à produção; apex→www308 foi salvo no mesmo projeto e confirmado pela API. Não houve alteração de DNS/nameservers ou criação de outro projeto.
+
+## Publicação verificada
+
+- PR https://github.com/tpiola/reidasvendas/pull/89 integrado com merge preservando histórico.
+- Commit de runtime: `5aaaa148df46a8b918953f7c8a0f4fac4a4f228d`; fonte `800b15b3c2c5dab065b1f3a358e6c35b08b6e012`.
+- Deployment: `dpl_BtLc73GHj7HnRSRKhKYZNCiV5Lxi`, READY, produção, região gru1, mesmo projectId/time.
+- CI Quality gates aprovado; Vercel e CodeRabbit success; nenhum thread de revisão pendente ao integrar.
+- Home pública200 com nova copy; apex308 para www sem loop, com caminho/UTMs preservados. HTTP migra para HTTPS com308. Evidência HTTP sem PII em `PUBLICACAO-HTTP.json`.
+- 21 páginas institucionais/serviços responderam200 na conferência pública; oito serviços locais acessíveis. Redirect WhatsApp302 aponta para HTTPS wa.me/5516992333344; headers de segurança nos documentos. Redirects externos da plataforma não recebem todos os headers da aplicação.
+- Diagnóstico, criação de sites, social media e privacidade200 com um H1 e canonical absoluto www. Obrigado200 noindex; inexistente404 noindex.
+- Sitemap, robots, llms.txt e manifest200. HSTS, nosniff, DENY, Permissions-Policy, Referrer-Policy e CSP confirmados. CSP completa permanece report-only; não é certificação de segurança.
+- Navegador em produção: home renderizada e inspecionada; categorias opcionais iniciam desmarcadas; salvar preferências e navegação ao diagnóstico funcionam. Formulário vazio mostra erros e foca primeiro campo. O acionamento final de WhatsApp foi bloqueado pela política do navegador de teste ao tentar abrir protocolo externo. Não houve envio de mensagem ou criação de lead real.
+- As verificações não comprovam entrega a CRM, recebimento no WhatsApp, mensuração nas contas, SLA ou CWV de campo.
 
 Cadastro jurídico, CNPJ, endereço quando houver divulgação física, identidade do controlador, fornecedores/contrato CRM e retenção efetiva precisam de confirmação. Não há selo ou certificação LGPD fictícia. A política de privacidade é uma implementação revisável, não uma certificação jurídica.

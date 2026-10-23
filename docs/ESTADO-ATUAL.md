@@ -5,6 +5,27 @@ qualquer coisa.** Ele diz o que está no ar, o que está aprovado, o que não po
 o que está pendente. Sem ler isto, uma alteração é chute — e chute já custou 4 horas de site
 errado (ver _Incidentes_).
 
+## Estado vigente — publicação de 23/10/2026
+
+Esta seção e a decisão explícita do dono de 23/10/2026 prevalecem sobre o histórico abaixo.
+
+- Aplicação: Next.js App Router 16 / React 19, na raiz; pnpm 11.25.0.
+- Canônico: https://www.reidasvendas.com.br. Apex redireciona 308 para www, inclusive na configuração de domínio Vercel.
+- Repositório e projeto existentes preservados: tpiola/reidasvendas / prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL.
+- Runtime publicado: merge 5aaaa148df46a8b918953f7c8a0f4fac4a4f228d, PR #89.
+- Deployment de produção: dpl_BtLc73GHj7HnRSRKhKYZNCiV5Lxi, READY, região gru1, Git main.
+- Nova home confirmada publicamente, sem loop de domínio. Páginas críticas, metadados, headers, sitemap, robots, manifest e 404 conferidos após publicação.
+- 28 testes unitários, 19 E2E, build/check/lint e workflow GitHub aprovados. Lighthouse mobile de laboratório 95–99 conforme página; nenhuma alegação de INP/CWV de campo.
+- Integrações GA4/Meta/CAPI/GSC/CRM/Redis aguardam IDs, credenciais e validação das contas. Tags opcionais desativadas; diagnóstico prepara mensagem revisável no WhatsApp quando o CRM não está configurado.
+- Cadastro jurídico, controlador, retenção e provas comerciais dependem de dados reais. Não publicar métricas, reviews ou identidade inventados.
+- Backup: backup/pre-rebuild-2026-10-23 no commit 33d3bb5f45b10a1eea3f5f5fa65ecef82936edc4. Reverter runtime antigo exige reavaliar também a orientação dos redirects externos.
+
+Integração e publicação: Codex /root, com seis subagentes de escopo isolado. Não há lease de edição ativo após esta atualização documental.
+
+## Histórico anterior — não usar como configuração vigente
+
+As descrições Vite, domínio apex e funil sem WhatsApp abaixo registram decisões anteriores, substituídas pela solicitação expressa de reconstrução em 23/10/2026. Preservadas para auditoria.
+
 ## Como este documento é versionado
 
 A **revisão de política** é o SHA do último commit que tocou este arquivo:
@@ -217,7 +238,7 @@ Verificação pública do runtime 612fb1f: deployment dpl_4i7RdApDswatnSuZZfKFqS
 
 ## Decisão explícita do dono — 23/10/2026
 O dono solicitou apagar o código do projeto e reconstruir do zero com Next.js App Router, agência completa de marketing digital e WhatsApp direto como principal canal. Autorizou reconstrução no mesmo repositório GitHub e no mesmo projeto Vercel, novo logo, domínio canônico www, mensuração consentida e auditoria com subagentes. Esta decisão substitui restrições de preservação da arquitetura Vite, design, rotas legadas e funil anteriores. Histórico Git e branch backup/pre-rebuild-2026-10-23 preservam integralmente a versão anterior, sem force-push. Preços comerciais e garantia permanecem conforme contrato histórico, sem inventar condições.
-Integração: Codex /root em 2026-10-23; subagentes com propriedade isolada de arquivos; implementação concluída, promoção pendente de configuração de domínio.
+Integração: Codex /root em 2026-10-23; subagentes com propriedade isolada de arquivos; implementação concluída e publicada; configuração de domínio corrigida conforme seção vigente.
 
 ### Implementação e portão da reconstrução23/10/2026
-Aplicação Next16/React19 na raiz, oito serviços locais, oito artigos/guias, páginas institucionais, consentimento por finalidade, adapters Google/Meta/CRM e WhatsApp fixo. Identidade clara com coroa vetorial própria, Sora local e corpo de sistema. Prova de trabalho de três projetos verificados, sem resultado comercial inventado. Faixas de preço e garantia preservadas. Check/lint28 testes e build aprovados. Lighthouse mobile9 execuções: home95–97, diagnóstico97–98, serviços98–99, CLS0; dados de laboratório. Portão de produção ainda BLOQUEADO pela regra Vercel www→apex307, conflitante com novo canonicalwww/proxyapex→www. Env vars403, CLI e browser sem login. Deploy somente preview até resolver. Ver docs/VALIDACAO.md.
+Aplicação Next16/React19 na raiz, oito serviços locais, oito artigos/guias, páginas institucionais, consentimento por finalidade, adapters Google/Meta/CRM e WhatsApp fixo. Identidade clara com coroa vetorial própria, Sora local e corpo de sistema. Prova de trabalho de três projetos verificados, sem resultado comercial inventado. Faixas de preço e garantia preservadas. Check/lint28 testes e build aprovados. Lighthouse mobile9 execuções: home95–97, diagnóstico97–98, serviços98–99, CLS0; dados de laboratório. O bloqueio inicial www→apex307 foi resolvido por sessão autenticada no mesmo projeto. Publicação confirmada no merge5aaaa14; detalhes e limites em docs/VALIDACAO.md.

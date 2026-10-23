@@ -1,0 +1,318 @@
+[
+  {
+    "url": "https://www.reidasvendas.com.br/",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/metodo",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/metodo"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/diagnostico",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/diagnostico"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/resultados",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/resultados"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/cases",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/cases"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/blog",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/blog"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/faq",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/faq"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/sobre",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/sobre"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/contato",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/contato"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/privacidade",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/privacidade"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/termos",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/termos"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/obrigado",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/obrigado"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/criacao-de-sites-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/criacao-de-sites-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/gestao-de-trafego-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/gestao-de-trafego-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/social-media-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/social-media-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/seo-local-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/seo-local-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/implantacao-crm-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/implantacao-crm-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/automacao-de-follow-up-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/automacao-de-follow-up-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/consultoria-comercial-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/consultoria-comercial-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/servicos/diagnostico-de-funil-franca",
+    "status": 200,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br/servicos/diagnostico-de-funil-franca"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/sitemap.xml",
+    "status": 200,
+    "location": null,
+    "h1": 0,
+    "canonical": [],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/robots.txt",
+    "status": 200,
+    "location": null,
+    "h1": 0,
+    "canonical": [],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/manifest.webmanifest",
+    "status": 200,
+    "location": null,
+    "h1": 0,
+    "canonical": [],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/llms.txt",
+    "status": 200,
+    "location": null,
+    "h1": 0,
+    "canonical": [],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/nao-existe-qa",
+    "status": 404,
+    "location": null,
+    "h1": 1,
+    "canonical": [
+      "https://www.reidasvendas.com.br"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/cases/resultado-nao-publicado",
+    "status": 404,
+    "location": null,
+    "h1": 0,
+    "canonical": [
+      "https://www.reidasvendas.com.br"
+    ],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://www.reidasvendas.com.br/go/whatsapp?src=qa&page=/servicos&campaign=teste",
+    "status": 302,
+    "location": "https://wa.me/5516992333344?text=Ol%C3%A1%21+Vim+pelo+site+Rei+das+Vendas.+Quero+entender+como+aumentar+minhas+vendas.",
+    "h1": 0,
+    "canonical": [],
+    "security": true,
+    "external_tags": false
+  },
+  {
+    "url": "https://reidasvendas.com.br/servicos?utm_source=qa&utm_campaign=validacao",
+    "status": 308,
+    "location": "https://www.reidasvendas.com.br/servicos?utm_source=qa&utm_campaign=validacao",
+    "h1": 0,
+    "canonical": [],
+    "security": false,
+    "external_tags": false
+  },
+  {
+    "url": "http://reidasvendas.com.br/servicos",
+    "status": 308,
+    "location": "https://reidasvendas.com.br/servicos",
+    "h1": 0,
+    "canonical": [],
+    "security": false,
+    "external_tags": false
+  }
+]

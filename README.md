@@ -65,6 +65,6 @@ Astro poderia reduzir a hidratação de um site editorial simples; Next facilita
 
 A presença de código não configura contas externas. IDs GA4/Pixel, verificação Search Console/Meta, token CAPI/versão Graph, CRM/contrato de payload, Redis/rate-limit, identidade jurídica e retenção efetiva precisam ser confirmados no projeto existente. Veja `.env.example` e `pnpm readiness`. Não versionar secrets nem substituir valores reais por placeholders.
 
-O domínio Vercel estava configurado para www→apex307 no início desta execução. A promoção com apex→www deve aguardar a correção dessa configuração externa. Preview protegido permanece no mesmo projectId.
+Publicado em https://www.reidasvendas.com.br pelo PR #89, merge `5aaaa148df46a8b918953f7c8a0f4fac4a4f228d`, no mesmo projeto Vercel. A regra antiga www→apex foi removida; apex→www308 está ativo. Preview continua protegido. Integrações externas e cadastro jurídico permanecem pendentes conforme `docs/VALIDACAO.md`.
 
 Campo CWV/INP, disponibilidade, entrega real CRM e recebimento no EventsManager não são demonstrados por um build ou Lighthouse. Logs CSP são deliberadamente descartados até existir coletor sanitizado; política ampla está em Report-Only e política mínima é aplicada.

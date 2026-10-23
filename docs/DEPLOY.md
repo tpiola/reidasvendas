@@ -36,6 +36,8 @@ A região brasileira reduz a distância de requisições dinâmicas locais; o re
 
 ### Domínio: ordem evita loop
 
+Concluído em 23/10/2026: www direto em produção e apex→www308, confirmados no painel, API e HTTP público. Runtime publicado no merge5aaaa14 / deployment dpl_BtLc73GHj7HnRSRKhKYZNCiV5Lxi. As instruções abaixo documentam a ordem para futuras reconstruções/rollback.
+
 Na auditoria de 23/10/2026, o projeto tinha **www → apex, 307**. É o inverso da nova decisão. Uma regra de domínio é processada antes do código; publicar apenas o novo `proxy.ts` sem removê-la gera loop.
 
 1. No projeto confirmado, remover o destino de redirecionamento do domínio `www.reidasvendas.com.br`.
