@@ -1,0 +1,818 @@
+{
+  "brand": {
+    "name": "Rei das Vendas",
+    "city": "Franca/SP",
+    "siteUrl": "https://www.reidasvendas.com.br",
+    "phone": "+5516992333344",
+    "whatsapp": "https://wa.me/5516992333344",
+    "promise": "Conectamos marketing, tecnologia e operação comercial para sua empresa enxergar e corrigir o caminho até a venda.",
+    "positioning": "Agência de marketing digital e tecnologia comercial para negócios locais.",
+    "mechanism": "Entendemos onde a oportunidade se perde, definimos prioridades e implantamos site, mídia, conteúdo e acompanhamento com uma medida clara por etapa.",
+    "proofStatement": "Sem promessa de faturamento. Escopo, responsabilidade e indicadores definidos antes da execução.",
+    "verifiedFacts": [
+      "Atendimento a empresas de Franca, região e projetos remotos no Brasil",
+      "WhatsApp comercial: (16) 99233-3344"
+    ],
+    "pendingFacts": [
+      "[INSERIR_CNPJ]",
+      "[INSERIR_ENDERECO]",
+      "[VERIFICAR] horário comercial e prazo de resposta",
+      "[VERIFICAR] casos e depoimentos autorizados",
+      "[VERIFICAR] identidade e experiência profissional do responsável"
+    ]
+  },
+  "home": {
+    "title": "Sua próxima venda precisa de caminho.",
+    "eyebrow": "Marketing digital e tecnologia comercial · Franca/SP",
+    "description": "Sites rápidos, anúncios, conteúdo e processo comercial conectados. Primeiro identificamos o que trava a venda. Depois construímos o que sua operação precisa para avançar.",
+    "primaryCta": "Falar com especialista no WhatsApp",
+    "secondaryCta": "Ver como trabalhamos",
+    "microcopy": "Conte seu desafio. Vamos entender o cenário antes de indicar um serviço.",
+    "trust": [
+      "Atendimento humano em Franca/SP",
+      "Medição desde a primeira entrega",
+      "Escopo claro, sem promessas de venda"
+    ],
+    "problemTitle": "O anúncio pode estar funcionando. O caminho depois dele, não.",
+    "problemDescription": "Mais visitas não resolvem uma oferta confusa. Mais mensagens não resolvem um atendimento sem continuidade. Encontramos o ponto que merece atenção antes de ampliar o investimento.",
+    "problems": [
+      {
+        "title": "Seu site recebe visitas, mas não conversas",
+        "description": "A oferta, a confiança ou o próximo passo podem estar pouco claros.",
+        "service": "criacao-de-sites-franca"
+      },
+      {
+        "title": "O WhatsApp enche. O histórico se perde",
+        "description": "Sem responsável, etapa e próxima ação, oportunidades ficam esquecidas.",
+        "service": "implantacao-crm-franca"
+      },
+      {
+        "title": "O anúncio traz contato sem perfil",
+        "description": "Campanha, página e qualificação precisam apontar para o mesmo público.",
+        "service": "gestao-de-trafego-franca"
+      },
+      {
+        "title": "A empresa posta, mas não sustenta uma oferta",
+        "description": "Conteúdo precisa responder dúvidas reais e abrir uma conversa comercial.",
+        "service": "social-media-franca"
+      }
+    ],
+    "methodTitle": "Entender. Priorizar. Implantar. Acompanhar.",
+    "servicesTitle": "A solução começa pelo problema certo.",
+    "proofTitle": "Resultado precisa de contexto.",
+    "proofDescription": "Um número isolado não comprova retorno. Publicamos casos somente com período, ponto de partida, escopo e autorização. Enquanto os casos são preparados, veja nosso método e os critérios que usamos para avaliar uma entrega.",
+    "calculatorTitle": "Quantas oportunidades ficam sem próximo passo?",
+    "calculatorDescription": "Faça uma simulação com os números da sua operação. O cálculo é uma hipótese de planejamento, não previsão de receita.",
+    "comparison": [
+      {
+        "before": "Site que apenas apresenta a empresa",
+        "after": "Oferta clara e próximo passo rastreável"
+      },
+      {
+        "before": "Campanha avaliada só por cliques",
+        "after": "Origem conectada a contatos qualificados"
+      },
+      {
+        "before": "Conversas sem responsável",
+        "after": "Etapa, responsável e próxima ação definidos"
+      },
+      {
+        "before": "Postagens sem linha comercial",
+        "after": "Conteúdo ligado a dúvidas, oferta e decisão"
+      }
+    ],
+    "finalTitle": "Antes de investir mais, entenda o que falta.",
+    "finalDescription": "Envie seu site ou descreva sua operação. O primeiro passo é identificar o problema e combinar uma análise com escopo claro.",
+    "finalCta": "Conversar sobre minha operação"
+  },
+  "method": [
+    {
+      "step": 1,
+      "title": "Diagnóstico",
+      "description": "Mapeamos como o cliente encontra sua empresa, entende a oferta, entra em contato e recebe continuidade.",
+      "deliverable": "Mapa do caminho comercial e lacunas de informação.",
+      "metric": "Taxas por etapa quando houver dados suficientes."
+    },
+    {
+      "step": 2,
+      "title": "Arquitetura",
+      "description": "Escolhemos a prioridade, o canal e a entrega que respondem ao gargalo identificado.",
+      "deliverable": "Plano com escopo, responsáveis, dependências e indicadores.",
+      "metric": "Uma métrica principal e limites de custo e qualidade."
+    },
+    {
+      "step": 3,
+      "title": "Implantação",
+      "description": "Construímos páginas, campanhas, conteúdos e integrações necessários ao plano, com validação antes da publicação.",
+      "deliverable": "Entrega testada, documentação e rotina de operação.",
+      "metric": "Funcionamento do percurso de contato e integridade da medição."
+    },
+    {
+      "step": 4,
+      "title": "Gestão",
+      "description": "Revisamos os sinais da operação e corrigimos o que impede a próxima etapa. A cadência é combinada no contrato.",
+      "deliverable": "Leitura periódica e lista de decisões priorizadas.",
+      "metric": "Contatos qualificados, avanço no funil e tempo de resposta."
+    },
+    {
+      "step": 5,
+      "title": "Escala",
+      "description": "Ampliamos investimento e canais quando capacidade de atendimento, margem e evidências sustentam a decisão.",
+      "deliverable": "Plano de expansão com critério de continuidade e parada.",
+      "metric": "Custo de aquisição, margem e capacidade de entrega."
+    }
+  ],
+  "services": [
+    {
+      "slug": "criacao-de-sites-franca",
+      "title": "Criação de sites em Franca",
+      "shortTitle": "Sites que abrem conversas",
+      "category": "Tecnologia",
+      "description": "Site rápido e claro para apresentar sua oferta, responder objeções e conduzir o visitante ao contato.",
+      "metaDescription": "Criação e reconstrução de sites para empresas de Franca/SP. Oferta clara, experiência mobile, SEO técnico e WhatsApp conectado ao caminho comercial.",
+      "problem": "O cliente visita seu site e precisa adivinhar o que contratar ou como falar com você.",
+      "approach": "Organizamos a oferta e a navegação antes de construir. Depois validamos velocidade, acessibilidade, contato e medição em dispositivos móveis.",
+      "deliverables": [
+        "Arquitetura de páginas e copy da oferta",
+        "Interface responsiva e componentes reutilizáveis",
+        "SEO técnico, metadados e sitemap",
+        "WhatsApp contextual e formulário quando necessário",
+        "Consentimento, testes e documentação de publicação"
+      ],
+      "goodFit": "Empresas com uma oferta definida e disposição para fornecer informações, imagens e revisões.",
+      "limits": "Hospedagem, domínio, integrações pagas e manutenção precisam constar na proposta. Um site não garante tráfego ou vendas.",
+      "measurement": "Conversas iniciadas, contatos qualificados e desempenho mobile.",
+      "cta": "Conversar sobre meu novo site",
+      "related": [
+        "gestao-de-trafego-franca",
+        "seo-local-franca",
+        "diagnostico-de-funil-franca"
+      ]
+    },
+    {
+      "slug": "gestao-de-trafego-franca",
+      "title": "Gestão de tráfego em Franca",
+      "shortTitle": "Anúncios com destino claro",
+      "category": "Aquisição",
+      "description": "Campanhas de Google e Meta conectadas à oferta, à página e à capacidade de atendimento da sua empresa.",
+      "metaDescription": "Gestão de Google Ads e Meta Ads em Franca/SP com objetivo comercial, páginas de destino, consentimento e acompanhamento de contatos qualificados.",
+      "problem": "O relatório mostra cliques, mas a empresa não consegue relacionar o investimento às oportunidades reais.",
+      "approach": "Conferimos oferta, destino e medição antes de ampliar campanha. Cada teste tem hipótese, orçamento e critério de avaliação.",
+      "deliverables": [
+        "Auditoria de conta e conversões disponíveis",
+        "Plano de campanha, públicos e criativos",
+        "Organização de UTMs e eventos",
+        "Acompanhamento de qualidade dos contatos",
+        "Relatório com decisões e limites de atribuição"
+      ],
+      "goodFit": "Negócios com verba de mídia separada da gestão e alguém responsável por atender os contatos.",
+      "limits": "Verba de anúncios é paga às plataformas. Aprovação de anúncios, volume de leads e custo por venda não são garantidos.",
+      "measurement": "Custo por contato qualificado, avanço comercial e receita quando houver integração confiável.",
+      "cta": "Revisar minha aquisição de clientes",
+      "related": [
+        "criacao-de-sites-franca",
+        "social-media-franca",
+        "implantacao-crm-franca"
+      ]
+    },
+    {
+      "slug": "social-media-franca",
+      "title": "Social media em Franca",
+      "shortTitle": "Conteúdo que sustenta a oferta",
+      "category": "Conteúdo",
+      "description": "Planejamento e produção de conteúdo para explicar o que sua empresa faz, construir confiança e abrir conversas relevantes.",
+      "metaDescription": "Social media para empresas de Franca/SP. Calendário editorial, identidade consistente e conteúdo ligado à oferta e às dúvidas reais do cliente.",
+      "problem": "A empresa publica com frequência, mas o público não entende por que contratar nem o que fazer em seguida.",
+      "approach": "Definimos temas ligados ao atendimento e à decisão de compra. A rotina de aprovação preserva a informação correta e a identidade da marca.",
+      "deliverables": [
+        "Linha editorial por público e intenção",
+        "Calendário com formatos e responsáveis",
+        "Design e copy conforme escopo contratado",
+        "Rotina de aprovação e publicação",
+        "Leitura de alcance, interação útil e contatos"
+      ],
+      "goodFit": "Empresas que conseguem participar da aprovação e fornecer bastidores, produtos e informações reais.",
+      "limits": "Captação presencial, atendimento de mensagens, vídeos e mídia paga dependem do escopo. Seguidores e viralização não são garantidos.",
+      "measurement": "Interações relevantes, visitas ao destino e conversas atribuíveis ao conteúdo.",
+      "cta": "Organizar o conteúdo da minha empresa",
+      "related": [
+        "gestao-de-trafego-franca",
+        "criacao-de-sites-franca",
+        "seo-local-franca"
+      ]
+    },
+    {
+      "slug": "seo-local-franca",
+      "title": "SEO local em Franca",
+      "shortTitle": "Ser encontrado com informação certa",
+      "category": "Busca local",
+      "description": "Organização técnica e editorial para sua empresa ser compreendida nos mecanismos de busca e escolhida por quem procura o serviço.",
+      "metaDescription": "SEO local para empresas de Franca/SP: site, conteúdo, dados consistentes e revisão do Perfil da Empresa no Google, sem promessa de primeira posição.",
+      "problem": "A empresa aparece com informações incompletas ou não oferece uma página útil para quem busca seu serviço.",
+      "approach": "Conferimos rastreamento, indexação, páginas e dados da empresa. Priorizamos conteúdo útil, informação consistente e prova local verificável.",
+      "deliverables": [
+        "Auditoria técnica de indexação e estrutura",
+        "Mapa de intenção para páginas existentes e novas",
+        "Revisão de dados e serviços do Perfil da Empresa",
+        "Metadados, links internos e dados estruturados aplicáveis",
+        "Acompanhamento no Search Console"
+      ],
+      "goodFit": "Empresas com informações cadastrais consistentes e serviço real na região informada.",
+      "limits": "A presença no Google depende de critérios da plataforma e concorrência. Não há garantia de indexação, posição ou citação por IA.",
+      "measurement": "Consultas relevantes, páginas descobertas, contatos locais e integridade cadastral.",
+      "cta": "Entender minha presença nas buscas",
+      "related": [
+        "criacao-de-sites-franca",
+        "social-media-franca",
+        "diagnostico-de-funil-franca"
+      ]
+    },
+    {
+      "slug": "implantacao-crm-franca",
+      "title": "Implantação de CRM em Franca",
+      "shortTitle": "Cada oportunidade com próximo passo",
+      "category": "Operação comercial",
+      "description": "Organização de etapas, responsáveis e próximos contatos para reduzir oportunidades esquecidas.",
+      "metaDescription": "Implantação de CRM para pequenas e médias empresas de Franca/SP. Funil simples, responsáveis, origem dos contatos e rotina comercial documentada.",
+      "problem": "O histórico fica no celular de uma pessoa e a empresa não sabe quais contatos precisam de retorno.",
+      "approach": "Escolhemos um processo que a equipe consegue usar. A ferramenta vem depois da definição das etapas e das responsabilidades.",
+      "deliverables": [
+        "Desenho de etapas e critérios de avanço",
+        "Campos mínimos e responsáveis",
+        "Configuração da ferramenta acordada",
+        "Rotina de retorno e visões de acompanhamento",
+        "Treinamento e documentação de uso"
+      ],
+      "goodFit": "Empresas com alguém responsável pela rotina comercial e disponibilidade para manter registros.",
+      "limits": "Licenças e migração de dados dependem do escopo. O CRM não substitui o atendimento nem corrige dados incompletos automaticamente.",
+      "measurement": "Oportunidades sem ação, tempo por etapa e adesão da equipe.",
+      "cta": "Organizar meu processo comercial",
+      "related": [
+        "automacao-de-follow-up-franca",
+        "consultoria-comercial-franca",
+        "diagnostico-de-funil-franca"
+      ]
+    },
+    {
+      "slug": "automacao-de-follow-up-franca",
+      "title": "Automação de follow-up em Franca",
+      "shortTitle": "Retorno com contexto e controle",
+      "category": "Automação",
+      "description": "Lembretes, distribuição e comunicações planejadas para sua equipe dar continuidade a conversas relevantes.",
+      "metaDescription": "Automação de follow-up para empresas de Franca/SP. Rotinas de retorno, regras de contato, integração com CRM e transição clara para atendimento humano.",
+      "problem": "O orçamento foi enviado e ninguém combinou quando ou por que retomar a conversa.",
+      "approach": "Definimos gatilhos, finalidade, frequência e saída antes de automatizar. O cliente precisa reconhecer o motivo do contato e poder encerrar a comunicação.",
+      "deliverables": [
+        "Mapa de situações que exigem retorno",
+        "Mensagens contextualizadas e regras de interrupção",
+        "Lembretes e distribuição para equipe",
+        "Integração compatível com ferramentas e políticas",
+        "Testes de falha, duplicação e atendimento humano"
+      ],
+      "goodFit": "Empresas com histórico organizado e origem legítima dos contatos.",
+      "limits": "Custos de provedores e mensagens dependem da solução. Não usamos disparos indiscriminados nem bases compradas.",
+      "measurement": "Retornos realizados, respostas úteis, opt-outs e oportunidades retomadas.",
+      "cta": "Revisar a continuidade dos meus contatos",
+      "related": [
+        "implantacao-crm-franca",
+        "consultoria-comercial-franca",
+        "diagnostico-de-funil-franca"
+      ]
+    },
+    {
+      "slug": "consultoria-comercial-franca",
+      "title": "Consultoria comercial em Franca",
+      "shortTitle": "Decisões comerciais com evidência",
+      "category": "Estratégia",
+      "description": "Leitura do processo de venda para escolher prioridades de oferta, atendimento e acompanhamento.",
+      "metaDescription": "Consultoria comercial para empresas de Franca/SP. Diagnóstico de oferta, atendimento, funil e indicadores com prioridades e responsabilidades claras.",
+      "problem": "Há muitas ideias de melhoria e pouca clareza sobre o que merece ser feito primeiro.",
+      "approach": "Observamos dados e conversas permitidas, identificamos hipóteses e combinamos testes pequenos para reduzir decisões por impressão.",
+      "deliverables": [
+        "Leitura da oferta e do percurso comercial",
+        "Mapa de gargalos e qualidade dos dados",
+        "Plano priorizado com responsáveis",
+        "Roteiros de atendimento e critérios de qualificação",
+        "Rotina de revisão de indicadores"
+      ],
+      "goodFit": "Empresas dispostas a revisar processo, disponibilizar dados necessários e executar decisões combinadas.",
+      "limits": "Recomendações dependem das informações fornecidas e da execução. Não há promessa de faturamento ou garantia de resultado comercial.",
+      "measurement": "Avanço entre etapas, qualidade do atendimento, margem e capacidade operacional.",
+      "cta": "Conversar sobre meus gargalos comerciais",
+      "related": [
+        "implantacao-crm-franca",
+        "automacao-de-follow-up-franca",
+        "diagnostico-de-funil-franca"
+      ]
+    },
+    {
+      "slug": "diagnostico-de-funil-franca",
+      "title": "Diagnóstico de funil em Franca",
+      "shortTitle": "Descobrir onde a venda perde força",
+      "category": "Diagnóstico",
+      "description": "Análise do caminho entre descoberta, contato, proposta e venda para orientar a próxima decisão de investimento.",
+      "metaDescription": "Diagnóstico de funil comercial em Franca/SP. Revise origem dos contatos, oferta, página, atendimento e continuidade antes de ampliar o investimento.",
+      "problem": "O negócio conhece o total de vendas, mas não identifica em qual etapa as oportunidades deixam de avançar.",
+      "approach": "Mapeamos etapas, conferimos evidências e separamos problema comprovado de hipótese. Lacunas de dados entram no plano de medição.",
+      "deliverables": [
+        "Mapa do caminho da descoberta à venda",
+        "Lista de dados necessários e lacunas",
+        "Leitura de oferta, página e contato",
+        "Hipóteses priorizadas por impacto e esforço",
+        "Proposta de próximos passos com escopo"
+      ],
+      "goodFit": "Empresas que precisam decidir entre refazer site, anunciar, organizar atendimento ou implantar processo.",
+      "limits": "O escopo e eventual custo da análise são informados antes da contratação. Dados insuficientes limitam conclusões.",
+      "measurement": "Cobertura de medição e identificação de prioridades testáveis.",
+      "cta": "Solicitar uma análise do meu funil",
+      "related": [
+        "criacao-de-sites-franca",
+        "gestao-de-trafego-franca",
+        "consultoria-comercial-franca"
+      ]
+    }
+  ],
+  "faq": [
+    {
+      "question": "Preciso contratar todos os serviços?",
+      "answer": "Não. O diagnóstico ajuda a definir a prioridade. A proposta descreve o serviço necessário, o que está incluído e o que depende da sua equipe."
+    },
+    {
+      "question": "Vocês garantem vendas ou primeira posição no Google?",
+      "answer": "Não. Vendas dependem de oferta, mercado, preço, atendimento e execução. Definimos metas de trabalho e indicadores, sem garantir faturamento, posição ou volume de leads."
+    },
+    {
+      "question": "Atendem empresas pequenas de Franca?",
+      "answer": "Sim. O escopo precisa fazer sentido para o momento, a capacidade de atendimento e o investimento da empresa. Também avaliamos projetos remotos de outras regiões."
+    },
+    {
+      "question": "Quanto custa um site ou uma gestão de marketing?",
+      "answer": "O valor depende de páginas, conteúdo, integrações, volume de produção e acompanhamento. Você recebe escopo e condições antes de contratar. Verba de mídia e licenças devem aparecer separadas."
+    },
+    {
+      "question": "Meu site atual pode ser aproveitado?",
+      "answer": "Primeiro verificamos estrutura, conteúdo, dados e acessos. Quando a reconstrução é necessária, planejamos redirecionamentos e preservamos o que tiver valor para o negócio."
+    },
+    {
+      "question": "Quem fica com domínio, contas e materiais?",
+      "answer": "A proposta deve definir propriedade e entrega de cada ativo. Recomendamos que domínio e contas de anúncios sejam da empresa, com acessos concedidos por função."
+    },
+    {
+      "question": "Em quanto tempo fica pronto?",
+      "answer": "O cronograma é definido após o escopo e depende de acessos, conteúdo, aprovações e integrações. As etapas e responsabilidades aparecem na proposta."
+    },
+    {
+      "question": "Vocês atendem pelo WhatsApp?",
+      "answer": "Sim. O canal comercial é (16) 99233-3344. Conte seu principal desafio para começarmos pela necessidade da operação."
+    },
+    {
+      "question": "Preciso aparecer em vídeos para fazer social media?",
+      "answer": "Não em todos os projetos. Escolhemos formatos que expliquem a oferta e construam confiança. Produtos, processos, demonstrações e respostas podem compor a linha editorial."
+    },
+    {
+      "question": "Como saberei se o trabalho está funcionando?",
+      "answer": "Combinamos uma medida por etapa e revisamos qualidade dos contatos e avanço comercial. Cliques e alcance ajudam na leitura, mas não substituem contatos qualificados e vendas registradas."
+    }
+  ],
+  "cases": [],
+  "feed": [
+    {
+      "id": "metodo",
+      "type": "method",
+      "tag": "Como avaliamos",
+      "title": "Uma entrega precisa ter critério de aceite",
+      "description": "Site, campanha e CRM são verificados pelo caminho que o cliente realmente percorre.",
+      "href": "/metodo",
+      "cta": "Conhecer o método",
+      "metric": null
+    },
+    {
+      "id": "guia",
+      "type": "guide",
+      "tag": "Guia prático",
+      "title": "O próximo passo não pode ficar na memória",
+      "description": "Um modelo simples de funil ajuda a organizar responsável, etapa e retorno.",
+      "href": "/guia/funil-de-vendas-para-pme",
+      "cta": "Ler o guia",
+      "metric": null
+    },
+    {
+      "id": "diagnostico",
+      "type": "service",
+      "tag": "Primeira decisão",
+      "title": "Antes de comprar outro site, revise o caminho",
+      "description": "A página pode ser só uma das partes. Oferta e continuidade também entram na análise.",
+      "href": "/diagnostico",
+      "cta": "Entender o diagnóstico",
+      "metric": null
+    }
+  ],
+  "pages": {
+    "metodo": {
+      "title": "O método começa antes da ferramenta.",
+      "description": "Diagnóstico, arquitetura, implantação, gestão e escala. Cada etapa define o que será feito, por quem e como avaliar."
+    },
+    "diagnostico": {
+      "title": "Onde sua venda perde força?",
+      "description": "Conte como o cliente chega, como é atendido e onde você percebe a dificuldade. Vamos definir o próximo passo com escopo claro."
+    },
+    "servicos": {
+      "title": "Marketing e operação na mesma direção.",
+      "description": "Site, tráfego, conteúdo e acompanhamento comercial conectados ao momento da sua empresa."
+    },
+    "cases": {
+      "title": "Resultados precisam de contexto.",
+      "description": "Nenhum número sem origem, período e escopo. Os casos serão publicados após validação e autorização das empresas envolvidas."
+    },
+    "resultados": {
+      "title": "O que medimos antes de chamar de resultado.",
+      "description": "Comparamos ponto de partida, período, investimento, qualidade dos contatos e avanço comercial. Alcance sozinho não conta a história."
+    },
+    "blog": {
+      "title": "Decisões melhores para vender melhor.",
+      "description": "Guias de site, mídia e processo comercial escritos para quem precisa aplicar, avaliar e decidir."
+    },
+    "faq": {
+      "title": "O que precisa estar claro antes de contratar.",
+      "description": "Escopo, investimento, prazo, propriedade e medição. Respostas diretas para uma decisão bem informada."
+    },
+    "sobre": {
+      "title": "Diagnóstico antes de indicação.",
+      "description": "A Rei das Vendas conecta marketing digital e tecnologia comercial para empresas de Franca/SP, região e projetos remotos. Nosso trabalho começa por entender a operação."
+    },
+    "contato": {
+      "title": "Vamos começar pelo seu desafio.",
+      "description": "Envie seu site, segmento e principal dificuldade. Isso nos ajuda a encaminhar a conversa certa."
+    },
+    "obrigado": {
+      "title": "Seu próximo passo está aqui.",
+      "description": "Se o envio foi confirmado, sua solicitação entrou no fluxo de atendimento. Se preferir continuar agora, abra o WhatsApp e informe o mesmo nome e empresa.",
+      "warning": "Só exibir confirmação após retorno positivo do servidor; visita direta não deve afirmar recebimento."
+    },
+    "privacidade": {
+      "title": "Seus dados têm finalidade. Sua escolha tem controle.",
+      "description": "Veja o que é necessário para atender sua solicitação e escolha se permite medição de navegação e publicidade."
+    }
+  },
+  "form": {
+    "title": "Conte o essencial sobre sua operação",
+    "hint": "Não envie dados de clientes, informações sensíveis ou senhas.",
+    "fields": ["nome", "whatsapp", "empresa", "desafio"],
+    "privacy": "Usaremos estas informações para atender sua solicitação. Leia a Política de Privacidade.",
+    "marketingOptIn": "Quero receber conteúdos e novidades da Rei das Vendas. Posso cancelar depois.",
+    "submit": "Solicitar conversa sobre meu diagnóstico",
+    "loading": "Enviando sua solicitação…",
+    "success": "Solicitação recebida. Você pode continuar pelo WhatsApp.",
+    "error": "Não conseguimos confirmar o envio. Tente novamente ou fale pelo WhatsApp.",
+    "invalidPhone": "Informe um WhatsApp com DDD.",
+    "invalidConsent": "Confirme que leu como usaremos seus dados para atender esta solicitação."
+  },
+  "consent": {
+    "title": "Você escolhe os cookies opcionais",
+    "description": "Usamos recursos necessários ao funcionamento. Com sua permissão, medimos a navegação e a publicidade com Google e Meta. Você pode mudar a escolha no rodapé.",
+    "accept": "Aceitar opcionais",
+    "reject": "Recusar opcionais",
+    "customize": "Escolher por finalidade",
+    "necessary": "Necessários: funcionamento, segurança e registro da sua escolha.",
+    "analytics": "Análise: entender navegação e melhorar o site.",
+    "marketing": "Publicidade: medir anúncios e criar públicos nas plataformas autorizadas."
+  },
+  "articles": [
+    {
+      "slug": "funil-de-vendas-para-pme",
+      "route": "/guia/funil-de-vendas-para-pme",
+      "title": "Funil de vendas para PME: organize o próximo passo",
+      "description": "Um funil útil mostra quem precisa de atenção, por que uma oportunidade avançou e qual é a próxima ação. Comece com poucas etapas e critérios claros.",
+      "metaDescription": "Aprenda a montar um funil de vendas simples para PME: etapas, responsáveis, próximos passos e indicadores sem complicar a rotina comercial.",
+      "category": "Processo comercial",
+      "readMinutes": 4,
+      "schema": "Article",
+      "sections": [
+        {
+          "heading": "O problema não é ter poucas colunas",
+          "text": "Um funil deixa de ajudar quando suas etapas descrevem intenções vagas. 'Em negociação' pode significar orçamento enviado, dúvida sem resposta ou uma conversa esquecida. A primeira decisão é definir o que precisa acontecer para uma oportunidade entrar e sair de cada etapa."
+        },
+        {
+          "heading": "Comece com um caminho que a equipe reconhece",
+          "text": "Use descoberta, contato qualificado, proposta, decisão e encerramento como ponto de partida. Ajuste ao seu processo. Para cada etapa, registre responsável, última ação, próxima ação e data. Um contato sem necessidade identificada não deve ser tratado como proposta em andamento."
+        },
+        {
+          "heading": "Exemplo de aplicação",
+          "text": "Exemplo ilustrativo: uma empresa de instalação recebe uma pergunta de preço. Antes de enviar a proposta, confirma local, necessidade e restrição de prazo. A oportunidade só entra em 'proposta' quando há escopo suficiente para apresentar condições. O registro inclui o que falta decidir e uma data combinada de retorno. Isso é um exemplo de processo, não um caso de cliente."
+        },
+        {
+          "heading": "Meça o que orienta uma decisão",
+          "text": "Acompanhe quantas oportunidades entraram, quantas avançaram e por que outras foram encerradas. Use o mesmo período e a mesma definição para comparar. Taxas com pouco volume oscilam: leia as conversas e os motivos antes de concluir que uma mudança melhorou as vendas."
+        }
+      ],
+      "checklist": [
+        "Cada etapa tem critério de entrada e saída",
+        "Cada oportunidade tem responsável",
+        "Existe próxima ação com data",
+        "Motivos de encerramento são registrados",
+        "A equipe revisa oportunidades paradas"
+      ],
+      "related": [
+        "/servicos/implantacao-crm-franca",
+        "/blog/follow-up-que-converte",
+        "/diagnostico"
+      ],
+      "cta": "Organizar meu funil comercial",
+      "event": "resource_view"
+    },
+    {
+      "slug": "follow-up-que-converte",
+      "route": "/blog/follow-up-que-converte",
+      "title": "Follow-up que ajuda o cliente a decidir",
+      "description": "Retomar uma conversa exige motivo, contexto e respeito ao momento do cliente. Uma mensagem repetida sem nova informação não corrige uma proposta pouco clara.",
+      "metaDescription": "Como organizar follow-up comercial com contexto, próxima ação e regra de encerramento. Evite insistência e acompanhe propostas com respeito ao cliente.",
+      "category": "Atendimento",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "O retorno começa na conversa anterior",
+          "text": "Ao enviar uma proposta, pergunte o que falta para a decisão e combine quando faz sentido retomar. Sem esse contexto, a equipe acaba usando 'alguma novidade?' para situações muito diferentes. O registro deve explicar a necessidade, a dúvida e a próxima ação."
+        },
+        {
+          "heading": "Uma mensagem precisa ter utilidade",
+          "text": "Uma boa retomada pode esclarecer uma restrição, comparar escopos ou responder uma dúvida aberta. Exemplo ilustrativo: 'Você comentou que precisa reduzir o tempo de atendimento. Separei o que está incluído na integração e o que continuará com sua equipe. Faz sentido revisarmos esse ponto?' O objetivo é facilitar uma decisão informada."
+        },
+        {
+          "heading": "Frequência não é uma receita universal",
+          "text": "A cadência depende de complexidade, urgência e autorização para contato. Defina limites, respeite pedidos de interrupção e encerre quando não houver interesse. Uma automação deve parar quando a pessoa responde ou quando o atendimento humano assume, evitando mensagens duplicadas."
+        },
+        {
+          "heading": "Avalie resposta útil, não só mensagem entregue",
+          "text": "Registre qual situação motivou o retorno, se houve resposta, se a oportunidade avançou e por que foi encerrada. Conversas recuperadas não devem ser atribuídas automaticamente à última mensagem: preço, necessidade e contatos anteriores também podem influenciar a decisão."
+        }
+      ],
+      "checklist": [
+        "Retorno tem motivo específico",
+        "Data foi combinada quando possível",
+        "Mensagem responde uma questão real",
+        "Existe regra de parada",
+        "Contato pode encerrar comunicações"
+      ],
+      "related": [
+        "/servicos/automacao-de-follow-up-franca",
+        "/guia/funil-de-vendas-para-pme",
+        "/servicos/implantacao-crm-franca"
+      ],
+      "cta": "Revisar minha rotina de retorno",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "crm-para-pme",
+      "route": "/blog/crm-para-pme",
+      "title": "CRM para PME: escolha o processo antes da ferramenta",
+      "description": "Uma ferramenta mais completa não resolve etapas confusas. Defina o uso diário, a informação necessária e o responsável antes de comparar licenças.",
+      "metaDescription": "Como escolher e implantar CRM para PME: processo, campos mínimos, adoção da equipe, custos de integração e rotina de acompanhamento.",
+      "category": "Tecnologia comercial",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "A pergunta certa é o que precisa ficar visível",
+          "text": "Se sua dificuldade é esquecer retornos, comece por próxima ação e responsável. Se é entender a origem das oportunidades, organize a entrada dos contatos. A lista de funcionalidades só faz sentido depois de identificar qual decisão a equipe precisa tomar melhor."
+        },
+        {
+          "heading": "Reduza o cadastro ao necessário",
+          "text": "Nome, canal de contato, empresa quando aplicável, necessidade, origem, etapa, responsável e próxima ação podem ser suficientes para começar. Cada campo adicional exige tempo e disciplina. Dados sensíveis e informações de terceiros sem finalidade não devem ser coletados por conveniência."
+        },
+        {
+          "heading": "Teste a rotina com uma situação real",
+          "text": "Exemplo ilustrativo: um orçamento chega pelo WhatsApp, é atribuído a alguém e recebe uma data de retorno. Verifique se a pessoa consegue registrar e atualizar sem repetir o mesmo trabalho em várias ferramentas. Se a integração falha, precisa existir uma forma clara de identificar e corrigir o problema."
+        },
+        {
+          "heading": "Inclua custo de operação na escolha",
+          "text": "Compare licenças, mensagens, implantação, suporte, exportação e integrações. Confirme quem administra a conta e como recuperar os dados. Um piloto com critérios de uso e revisão é mais útil que contratar funções que a equipe não conseguirá manter."
+        }
+      ],
+      "checklist": [
+        "Problema e rotina definidos",
+        "Campos mínimos escolhidos",
+        "Responsável pela qualidade dos registros",
+        "Custos recorrentes conhecidos",
+        "Exportação e acessos conferidos"
+      ],
+      "related": [
+        "/servicos/implantacao-crm-franca",
+        "/blog/indicadores-comerciais-para-pme",
+        "/guia/funil-de-vendas-para-pme"
+      ],
+      "cta": "Avaliar um CRM para minha operação",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "indicadores-comerciais-para-pme",
+      "route": "/blog/indicadores-comerciais-para-pme",
+      "title": "Indicadores comerciais que ajudam a decidir",
+      "description": "Um painel precisa responder uma pergunta. Separe volume, qualidade, avanço e economia para evitar decisões baseadas apenas em alcance ou cliques.",
+      "metaDescription": "Indicadores comerciais para PME: contatos qualificados, taxa por etapa, tempo de resposta, custo de aquisição e margem com definições consistentes.",
+      "category": "Medição",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "Comece pela decisão que precisa tomar",
+          "text": "Para decidir se deve ampliar uma campanha, visitas não bastam. Você precisa saber quais contatos tinham perfil, quantos avançaram e se a operação consegue atendê-los. A métrica principal depende do objetivo, e deve vir acompanhada de limites de custo e qualidade."
+        },
+        {
+          "heading": "Use definições estáveis",
+          "text": "Contato qualificado precisa ter um critério documentado, como necessidade compatível e área atendida. Taxa de avanço é o número que avançou dividido pelo número elegível da etapa, dentro de uma janela definida. Não misture propostas de períodos diferentes sem explicar o efeito do ciclo de venda."
+        },
+        {
+          "heading": "Leia os sinais em conjunto",
+          "text": "Mais mensagens com pior perfil podem aumentar o trabalho sem ampliar oportunidades. Menos contatos com maior adequação podem ser positivos, mas só o acompanhamento posterior permite avaliar. Tempo de resposta, motivos de perda e capacidade de atendimento ajudam a interpretar a mudança."
+        },
+        {
+          "heading": "Declare os limites dos dados",
+          "text": "Links de WhatsApp medem intenção de abrir o canal, não uma conversa concluída. Uma venda registrada sem origem não deve ser atribuída por suposição. Com amostras pequenas, mudanças percentuais podem refletir acaso; descreva o volume e use observações de atendimento como evidência complementar."
+        }
+      ],
+      "checklist": [
+        "Métrica responde uma decisão",
+        "Definições escritas",
+        "Período e volume exibidos",
+        "Origem e etapas conectadas quando possível",
+        "Limites de atribuição declarados"
+      ],
+      "related": [
+        "/servicos/consultoria-comercial-franca",
+        "/servicos/gestao-de-trafego-franca",
+        "/resultados"
+      ],
+      "cta": "Definir o que minha empresa precisa medir",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "como-responder-objecoes-de-venda",
+      "route": "/blog/como-responder-objecoes-de-venda",
+      "title": "Objeção de venda: esclareça antes de argumentar",
+      "description": "Preço, prazo e confiança exigem respostas diferentes. Entender o que a pessoa está comparando evita insistência e propostas desalinhadas.",
+      "metaDescription": "Como responder objeções comerciais com clareza: entenda a comparação, explique escopo, reconheça limites e combine um próximo passo sem pressão.",
+      "category": "Atendimento",
+      "readMinutes": 3,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "Uma frase pode esconder perguntas diferentes",
+          "text": "'Está caro' pode significar falta de orçamento, ausência de valor percebido ou comparação com outro escopo. Em vez de oferecer desconto imediatamente, pergunte qual ponto precisa ficar mais claro. A resposta ajuda a descobrir se existe uma condição de contratação possível."
+        },
+        {
+          "heading": "Compare entregas, responsabilidades e riscos",
+          "text": "Ao comparar um site, por exemplo, confira páginas, conteúdo, integrações, manutenção, propriedade e prazo. Não desqualifique outro fornecedor sem evidência. Mostre o que sua proposta inclui e o que fica fora, em linguagem que o cliente consiga avaliar."
+        },
+        {
+          "heading": "Demonstre com contexto",
+          "text": "Exemplo ilustrativo: 'Esta proposta inclui organizar a oferta, construir as páginas e testar o caminho até o WhatsApp. A gestão mensal de anúncios fica fora. Qual dessas entregas é prioridade agora?' A pergunta permite ajustar a necessidade sem prometer o que não será entregue."
+        },
+        {
+          "heading": "Aceite quando não existe adequação",
+          "text": "Se o investimento ou o prazo não são compatíveis, registre o motivo e evite pressão. Uma decisão sem clareza aumenta o risco de expectativa frustrada. O próximo passo pode ser uma revisão de escopo, uma data futura combinada ou o encerramento respeitoso da conversa."
+        }
+      ],
+      "checklist": [
+        "Entendi o que está sendo comparado",
+        "Expliquei o escopo sem atacar concorrentes",
+        "Não prometi resultado fora de controle",
+        "Registrei a dúvida e o próximo passo"
+      ],
+      "related": [
+        "/servicos/consultoria-comercial-franca",
+        "/faq",
+        "/diagnostico"
+      ],
+      "cta": "Revisar a clareza da minha oferta",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "como-aumentar-conversao-em-franca",
+      "route": "/blog/como-aumentar-conversao-em-franca",
+      "title": "Vendas locais em Franca: conecte busca e atendimento",
+      "description": "Quem encontra uma empresa local precisa confirmar serviço, região, confiança e forma de contato. Revise esse percurso antes de ampliar a divulgação.",
+      "metaDescription": "Como revisar a conversão de negócios locais em Franca/SP: informação consistente, oferta clara, experiência mobile e continuidade no WhatsApp.",
+      "category": "Negócios locais",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "A proximidade precisa aparecer em informação útil",
+          "text": "Dizer 'somos de Franca' ajuda a situar, mas não substitui área atendida, serviços, formas de contato e disponibilidade real. Use endereço apenas quando for correto e adequado ao modelo de atendimento. Não crie unidades ou horários para parecer mais próximo."
+        },
+        {
+          "heading": "Faça a mesma oferta nos pontos de entrada",
+          "text": "O cliente pode começar no Google, em um anúncio, em uma publicação ou por indicação. O site precisa confirmar a oferta que gerou a visita. Nome da empresa, telefone e condições devem ser consistentes, e o contato deve funcionar bem no celular."
+        },
+        {
+          "heading": "Teste como um cliente faria",
+          "text": "Procure o serviço, abra a página pelo celular, encontre o que está incluído e tente fazer contato. Observe quantos passos foram necessários e que informação ficou faltando. Faça o teste também com conexão limitada e navegação por teclado. Corrija obstáculos antes de comprar mais visitas."
+        },
+        {
+          "heading": "Feche o ciclo no atendimento",
+          "text": "Uma mensagem recebida precisa de responsável e contexto. Registre de onde veio, qual necessidade foi apresentada e o que ficou combinado. Solicite avaliações de forma legítima depois da entrega, sem inventar notas, condicionar benefícios ou selecionar apenas quem promete elogiar."
+        }
+      ],
+      "checklist": [
+        "Área de atendimento real",
+        "Nome e telefone consistentes",
+        "Oferta alinhada à divulgação",
+        "WhatsApp funciona no celular",
+        "Responsável e próximo passo registrados"
+      ],
+      "related": [
+        "/servicos/seo-local-franca",
+        "/servicos/criacao-de-sites-franca",
+        "/contato"
+      ],
+      "cta": "Revisar o caminho do meu cliente local",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "automacao-sem-perder-atendimento-humano",
+      "route": "/blog/automacao-sem-perder-atendimento-humano",
+      "title": "Automação comercial com saída para uma pessoa",
+      "description": "Automatizar uma tarefa repetitiva pode ajudar a equipe. Obrigar o cliente a percorrer um fluxo que não responde sua dúvida cria um obstáculo.",
+      "metaDescription": "Como automatizar atendimento e follow-up com contexto, limites, proteção de dados e transição clara para atendimento humano.",
+      "category": "Automação",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "Escolha a tarefa antes da tecnologia",
+          "text": "Distribuir contatos, registrar origem e lembrar uma data são tarefas diferentes de responder uma reclamação ou negociar escopo. Comece por atividades previsíveis, com regras verificáveis. Não coloque uma automação em uma etapa que exige julgamento sem definir supervisão e limites."
+        },
+        {
+          "heading": "Informe o que o fluxo consegue fazer",
+          "text": "O cliente precisa entender se está falando com uma automação e como pedir ajuda humana. Um menu curto, com alternativa de texto livre e transferência, costuma ser mais claro que uma sequência extensa de perguntas. Só peça dados necessários à próxima decisão."
+        },
+        {
+          "heading": "Trate falhas como parte do projeto",
+          "text": "Teste mensagem duplicada, ausência de resposta, integração indisponível e troca de responsável. A equipe precisa saber quando o fluxo parou e o que fazer. Uma automação que continua enviando mensagens depois de o cliente responder destrói o contexto que deveria preservar."
+        },
+        {
+          "heading": "Meça trabalho resolvido e fricção criada",
+          "text": "Não avalie apenas quantidade de mensagens. Observe tarefas concluídas, necessidade de repetição, transferências e pedidos de interrupção. Se o fluxo economiza tempo interno mas faz o cliente repetir a história, ele precisa ser revisto."
+        }
+      ],
+      "checklist": [
+        "Finalidade clara",
+        "Dados mínimos",
+        "Identificação da automação",
+        "Transferência humana disponível",
+        "Falhas e duplicações testadas",
+        "Regra de parada documentada"
+      ],
+      "related": [
+        "/servicos/automacao-de-follow-up-franca",
+        "/servicos/implantacao-crm-franca",
+        "/privacidade"
+      ],
+      "cta": "Avaliar o que faz sentido automatizar",
+      "event": "article_cta_click"
+    },
+    {
+      "slug": "quando-fazer-diagnostico-comercial",
+      "route": "/blog/quando-fazer-diagnostico-comercial",
+      "title": "Diagnóstico comercial antes de ampliar o investimento",
+      "description": "Quando o problema ainda é uma impressão, contratar uma ferramenta pode apenas mudar o lugar da confusão. Organize evidências e hipóteses primeiro.",
+      "metaDescription": "Quando fazer diagnóstico comercial: mapeie oferta, aquisição, atendimento e continuidade para definir prioridades de site, marketing e processo.",
+      "category": "Diagnóstico",
+      "readMinutes": 4,
+      "schema": "BlogPosting",
+      "sections": [
+        {
+          "heading": "Separe sintoma de causa",
+          "text": "Poucas vendas são um sintoma com várias causas possíveis. Pode faltar procura, a oferta pode estar confusa ou o atendimento pode perder continuidade. O diagnóstico precisa localizar em qual etapa há evidência de dificuldade, sem escolher a solução antes da análise."
+        },
+        {
+          "heading": "Reúna o mínimo que permite observar o caminho",
+          "text": "Use páginas de entrada, origem dos contatos, conversas permitidas, propostas e motivos de encerramento. Proteja dados pessoais e limite acessos à finalidade da análise. Quando a origem não existe ou os registros são incompletos, a primeira entrega pode ser um plano de medição."
+        },
+        {
+          "heading": "Transforme hipóteses em prioridades",
+          "text": "Exemplo ilustrativo: se a equipe recebe contatos compatíveis, mas envia propostas sem combinar retorno, testar uma rotina de continuidade pode ser prioridade antes de ampliar anúncios. Essa conclusão só faz sentido se os registros confirmarem o cenário; não é uma regra universal."
+        },
+        {
+          "heading": "Saia da análise com uma decisão executável",
+          "text": "O resultado deve indicar ação, responsável, prazo de execução, dependências e forma de avaliar. Se todas as sugestões têm a mesma prioridade, o diagnóstico não ajudou a escolher. Um plano curto com limites claros costuma ser mais aplicável que uma lista extensa sem responsáveis."
+        }
+      ],
+      "checklist": [
+        "Problema definido sem solução antecipada",
+        "Evidências e lacunas separadas",
+        "Dados pessoais protegidos",
+        "Hipóteses priorizadas",
+        "Ação com responsável e avaliação"
+      ],
+      "related": [
+        "/diagnostico",
+        "/metodo",
+        "/servicos/consultoria-comercial-franca"
+      ],
+      "cta": "Solicitar uma conversa de diagnóstico",
+      "event": "article_cta_click"
+    }
+  ]
+}

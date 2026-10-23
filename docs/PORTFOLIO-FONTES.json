@@ -1,0 +1,89 @@
+{
+  "checkedAt": "2026-10-23",
+  "heading": "Projetos para conhecer de perto",
+  "intro": "Projetos mantidos na conta tpiola, apresentados para demonstrar estrutura e experiência de navegação. Não representam resultados financeiros, depoimentos ou indicação de clientes.",
+  "displayLabel": "Projeto próprio / portfólio técnico",
+  "scopeOfVerification": "Verificação de repositórios públicos via integração GitHub e leitura pública dos sites. Não foi feito teste completo de funcionalidades, auditoria médica, validação de conteúdo religioso, medição de performance ou confirmação de autoria exclusiva de todos os assets.",
+  "selected": [
+    {
+      "id": "thiagopiola",
+      "title": "Thiago Piola",
+      "url": "https://thiagopiola.com.br/",
+      "repo": "https://github.com/tpiola/thiagopiola",
+      "category": "Presença profissional e conteúdo",
+      "description": "Site profissional com caminhos para pacientes e empresas, páginas de educação em saúde, treinamento e contato. A página pública organiza diferentes intenções de visita e apresenta conteúdo relacionado.",
+      "observedFeatures": ["Navegação separada para Saúde, Empresas e Conteúdo", "Jornada educativa em etapas", "Artigos e formulário de newsletter visíveis", "Links de contato e políticas no rodapé"],
+      "ownershipEvidence": "Repositório público sob o proprietário tpiola com permissão administrativa na conexão. README identifica o site de Thiago Piola, o mesmo nome do site público. O código de layout confirma título e identidade usados na página.",
+      "deploymentEvidence": "Site público consultado com título e conteúdo compatíveis com o README e o layout do repositório. O README identifica o projeto Vercel existente thiagopiola. Esta leitura não prova o commit exato atualmente publicado.",
+      "claimLimits": "Não atribuir métricas de aquisição, vendas, performance ou resultado clínico. Não afirmar que os formulários foram enviados ou testados nesta verificação. Autoria de todos os recursos visuais não foi auditada.",
+      "sources": [
+        {"url": "https://thiagopiola.com.br/", "type": "public_site", "date": "2026-10-23", "observed": "Título Thiago Piola; navegação Saúde, Empresas, Conteúdo e Sobre; educação em saúde e treinamento."},
+        {"url": "https://github.com/tpiola/thiagopiola", "type": "repository_metadata", "date": "2026-10-23", "observed": "Proprietário tpiola; visibilidade public; branch main; permissão admin na conexão."},
+        {"url": "https://github.com/tpiola/thiagopiola/blob/main/README.md", "type": "repository_file", "date": "2026-10-23", "observed": "Identifica Piola Health v4.0, Thiago Piola e projeto Vercel thiagopiola."},
+        {"url": "https://github.com/tpiola/thiagopiola/blob/main/app/layout.tsx", "type": "repository_file", "date": "2026-10-23", "observed": "Metadados e estrutura de layout com identidade Thiago Piola."}
+      ],
+      "cta": "Visitar o projeto"
+    },
+    {
+      "id": "saudegpt",
+      "title": "Escola de Saúde — Franca J",
+      "url": "https://saudegpt.com/",
+      "repo": "https://github.com/tpiola/saudegpt",
+      "category": "Plataforma educativa",
+      "description": "Plataforma de aprendizagem com trilhas, biblioteca de consulta e simulações de atendimento. A navegação pública apresenta níveis de prática e caminhos para aprender, consultar e acompanhar o aprendizado.",
+      "observedFeatures": ["Navegação Aprender, Meu campus, Consultar e Meu aprendizado", "Trilhas e prática de situações de atendimento", "Níveis básico, intermediário e avançado apresentados", "Identificação do responsável pelo conteúdo no rodapé"],
+      "ownershipEvidence": "Repositório público sob tpiola com permissão administrativa na conexão. O rodapé público atribui criação e revisão a Thiago Biasoli Garcia Piola. Código de layout contém o título atual da escola; src/lib/site-url.ts fixa saudegpt.com como domínio canônico.",
+      "deploymentEvidence": "Título e organização do site público correspondem ao layout atual do repositório. O README referencia o domínio saudegpt.com, mas também traz referência antiga a outro nome de repositório; por isso a vinculação foi cruzada com o código atual.",
+      "claimLimits": "Apresentar como projeto educativo pessoal/técnico, sem afirmar vínculo oficial ou endosso institucional de empregador, rede farmacêutica ou instituição de ensino. Não afirmar certificação, eficácia educativa ou validação completa do conteúdo clínico. Não usar números de aulas como prova de resultado.",
+      "sources": [
+        {"url": "https://saudegpt.com/", "type": "public_site", "date": "2026-10-23", "observed": "Página Escola de Saúde - Franca J, trilhas, simulações e identificação de Thiago no rodapé."},
+        {"url": "https://github.com/tpiola/saudegpt", "type": "repository_metadata", "date": "2026-10-23", "observed": "Proprietário tpiola; visibilidade public; branch main; permissão admin na conexão."},
+        {"url": "https://github.com/tpiola/saudegpt/blob/main/src/app/layout.tsx", "type": "repository_file", "date": "2026-10-23", "observed": "Título e descrição da Escola de Saúde; providers de progresso e componentes de navegação."},
+        {"url": "https://github.com/tpiola/saudegpt/blob/main/src/lib/site-url.ts", "type": "repository_file", "date": "2026-10-23", "observed": "Domínio canônico https://saudegpt.com."}
+      ],
+      "cta": "Visitar o projeto"
+    },
+    {
+      "id": "spes",
+      "title": "SPES — Santuário Digital",
+      "url": "https://spes.blog/",
+      "repo": "https://github.com/tpiola/spes",
+      "category": "Experiência editorial e comunidade",
+      "description": "Experiência editorial sobre São Carlo Acutis com navegação por ambientes, fotografias creditadas, oração e fontes. O projeto combina leitura, acervo visual e acesso a uma comunidade de oração.",
+      "observedFeatures": ["Navegação por ambientes editoriais", "Galeria e créditos de fotografias", "Seções de oração e fontes", "Link público para grupo de oração"],
+      "ownershipEvidence": "Repositório público sob tpiola com permissão administrativa na conexão. O arquivo index.html contém canonical de spes.blog e título idêntico ao site público. Isso comprova controle do repositório e associação técnica com o domínio, não autoria exclusiva de textos, fotografias ou obras de arte.",
+      "deploymentEvidence": "Título, canonical e blocos editoriais do index.html correspondem à página pública atual consultada. O commit exato publicado não foi validado nesta tarefa.",
+      "claimLimits": "Apresentar como projeto independente, sem vínculo oficial com a Igreja, Associação Carlo Acutis, paróquia, santo, instituição ou canal citado. Não reproduzir fotografias e obras no portfólio sem verificar licença; preferir cartão tipográfico e link. Não afirmar números de membros ou resultados de comunidade.",
+      "sources": [
+        {"url": "https://spes.blog/", "type": "public_site", "date": "2026-10-23", "observed": "SPES — Santuário Digital com ambientes, fotografias, oração, fontes e acesso a grupo."},
+        {"url": "https://github.com/tpiola/spes", "type": "repository_metadata", "date": "2026-10-23", "observed": "Proprietário tpiola; visibilidade public; branch main; permissão admin na conexão."},
+        {"url": "https://github.com/tpiola/spes/blob/main/index.html", "type": "repository_file", "date": "2026-10-23", "observed": "Título atual de São Carlo Acutis/SPES e canonical https://spes.blog/."},
+        {"url": "https://github.com/tpiola/spes/blob/main/README.md", "type": "repository_file", "date": "2026-10-23", "observed": "Projeto identificado como santuário digital e comunidade independente; domínio spes.blog."}
+      ],
+      "cta": "Visitar o projeto"
+    }
+  ],
+  "auditedButNotSelected": [
+    {
+      "title": "Sentinela Saúde Ambiental",
+      "url": "https://www.sentinelasaudeambiental.com.br/",
+      "repo": "https://github.com/tpiola/sentinela-saude-ambiental",
+      "description": "Site público de empresa de controle de pragas em Franca, com serviços, atendimento empresarial, páginas por ocorrência e CTAs de contato. O layout do repositório usa o mesmo título e descrição do site.",
+      "ownershipEvidence": "Repositório público sob tpiola com permissão admin na conexão. Isso comprova controle técnico do repositório, mas não comprova propriedade da empresa ou autorização para apresentar sua marca como cliente da Rei das Vendas.",
+      "reasonNotSelected": "A marca pertence a uma operação empresarial identificada no site por CNPJ. Sem confirmação de autorização para portfólio/uso da marca, não classificar como projeto próprio nem cliente, e não copiar fotos de atendimentos.",
+      "requiredBeforePublication": "Confirmação de relação com a empresa e autorização para exibir nome, link, descrição e eventuais imagens como trabalho realizado. Qualquer resultado comercial exige evidência separada.",
+      "sources": [
+        {"url": "https://www.sentinelasaudeambiental.com.br/", "type": "public_site", "date": "2026-10-23", "observed": "Página de controle de pragas em Franca; serviços, atendimento empresarial e contato."},
+        {"url": "https://github.com/tpiola/sentinela-saude-ambiental", "type": "repository_metadata", "date": "2026-10-23", "observed": "Repositório público de tpiola com permissão administrativa na conexão."},
+        {"url": "https://github.com/tpiola/sentinela-saude-ambiental/blob/main/site/src/app/layout.tsx", "type": "repository_file", "date": "2026-10-23", "observed": "Título e descrição compatíveis com o site público da Sentinela."}
+      ]
+    }
+  ],
+  "publicationGuardrails": [
+    "Usar o conjunto como portfólio técnico de projetos mantidos, não como mural de clientes ou prova de aumento de vendas.",
+    "Não usar logos de RD Saúde, Raia, Igreja ou outras instituições para sugerir endosso.",
+    "Não copiar fotografias de terceiros para os cartões; usar composição tipográfica própria com link externo.",
+    "Não afirmar autoria exclusiva quando a evidência demonstra apenas controle do repositório e correspondência com o site.",
+    "Não exibir Lighthouse, CWV, taxa de conversão, vendas, membros, receita, prazo ou satisfação como verificados por esta auditoria."
+  ]
+}
