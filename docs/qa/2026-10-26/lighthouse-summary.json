@@ -1,0 +1,68 @@
+{
+  "method": "Lighthouse 12.6.1, Chromium 153, local production build, mobile 390x844, simulated throttling. Three runs each; not field data or conversion evidence.",
+  "results": [
+    {
+      "url": "http://127.0.0.1:3000/",
+      "performance": 0.97,
+      "LCP": 1843.457,
+      "CLS": 0,
+      "TBT": 142.69299999999976
+    },
+    {
+      "url": "http://127.0.0.1:3000/",
+      "performance": 0.98,
+      "LCP": 1727.129,
+      "CLS": 0,
+      "TBT": 122.54399999999987
+    },
+    {
+      "url": "http://127.0.0.1:3000/",
+      "performance": 0.99,
+      "LCP": 1727.805,
+      "CLS": 0,
+      "TBT": 83.85300000000007
+    },
+    {
+      "url": "http://127.0.0.1:3000/diagnostico",
+      "performance": 0.98,
+      "LCP": 1613.826,
+      "CLS": 0,
+      "TBT": 137.9079999999999
+    },
+    {
+      "url": "http://127.0.0.1:3000/diagnostico",
+      "performance": 0.96,
+      "LCP": 1612.947,
+      "CLS": 0,
+      "TBT": 203.75
+    },
+    {
+      "url": "http://127.0.0.1:3000/diagnostico",
+      "performance": 0.98,
+      "LCP": 1585.508,
+      "CLS": 0,
+      "TBT": 131.05600000000004
+    },
+    {
+      "url": "http://127.0.0.1:3000/planos",
+      "performance": 0.98,
+      "LCP": 1656.327,
+      "CLS": 0,
+      "TBT": 109.23500000000013
+    },
+    {
+      "url": "http://127.0.0.1:3000/planos",
+      "performance": 0.98,
+      "LCP": 1678.44,
+      "CLS": 0,
+      "TBT": 136.41600000000017
+    },
+    {
+      "url": "http://127.0.0.1:3000/planos",
+      "performance": 0.98,
+      "LCP": 1622.277,
+      "CLS": 0,
+      "TBT": 118.01499999999987
+    }
+  ]
+}

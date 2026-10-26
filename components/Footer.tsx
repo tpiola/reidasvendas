@@ -2,6 +2,7 @@
 import { CookieSettingsButton } from '@/lib/consent';
 
 import Link from 'next/link';
+import BrandLockup from '@/components/BrandLockup';
 
 export default function Footer() {
   return (
@@ -9,15 +10,11 @@ export default function Footer() {
       <footer className="site-footer">
         <div className="container footer-top">
           <div className="footer-brand">
-            <img
-              src="/logo/lockup-escuro.svg"
-              alt="Rei das Vendas"
-              width="250"
-              height="49"
-              loading="lazy"
-            />
+            <Link href="/" aria-label="Rei das Vendas — início">
+              <BrandLockup />
+            </Link>
             <p>
-              Presença digital com continuidade.
+              Seu negócio merece ser bem apresentado.
               <br />
               Site, busca local e atendimento conectados.
             </p>

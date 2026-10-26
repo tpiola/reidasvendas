@@ -1,5 +1,12 @@
 # Estado atual — Rei das Vendas
 
+## Redesign autorizado — 26/10/2026
+
+Implementação: Codex /root em 2026-10-26. O dono solicitou restaurar o logo antigo e melhorar design, animações e copy de conversão do domínio existente. Base verificada: c872fd9, main, tpiola/reidasvendas; Vercel prj_pcMEMsQCigN8NVGVqm8uiWgSSLVL, team_X4bKucsxm1xNovRCzLleI3JC. Símbolo original recuperado do histórico 7a007ab:apps/web/public/logo-mark.svg, sem redesenho. Escopo: home, identidade compartilhada, motion, estilos e ícones associados. Preservar arquitetura Next, dados comerciais, consentimento, rotas e integrações. Validação local concluída; publicação pelo mesmo projeto, via Git main, em andamento. Sem lease de edição paralelo.
+
+Qualidade desta revisão: check/lint/build, 59 testes unitários e 35 E2E aprovados; 50 rotas públicas, seis larguras, oito jornadas axe, teclado, consentimento, planos e pausa de animação. Lighthouse mobile local, nove execuções: home 97/98/99; diagnóstico e planos 96–99, CLS zero e portões aprovados. Orçamento inicial da home: 149.863 B de JS moderno gzip, CSS 19.830 B. Fonte SVG da coroa original idêntica byte a byte ao histórico 7a007ab. Sem mudança de dependências, preços ou condições. pnpm audit --prod sem vulnerabilidades; auditoria completa registra oito avisos herdados da ferramenta @lhci/cli, sem uso em runtime. Evidência: docs/QA-REDESIGN-2026-10-26.md e docs/qa/2026-10-26/lighthouse-summary.json.
+
+
 Documento canônico de estado deste repositório. **Todo agente lê este arquivo antes de editar
 qualquer coisa.** Ele diz o que está no ar, o que está aprovado, o que não pode ser revertido e
 o que está pendente. Sem ler isto, uma alteração é chute — e chute já custou 4 horas de site

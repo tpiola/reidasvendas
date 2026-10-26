@@ -42,7 +42,7 @@ export const organization = {
   '@id': SITE + '/#organization',
   name: NAME,
   url: SITE,
-  logo: SITE + '/logo/simbolo.svg',
+  logo: SITE + '/logo/original-mark.svg',
   telephone: '+5516992333344',
   description:
     'Sites por assinatura, SEO local, WhatsApp comercial e melhoria contínua da presença digital de pequenos e médios negócios em Franca/SP e no Brasil.',

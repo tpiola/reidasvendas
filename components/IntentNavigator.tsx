@@ -6,40 +6,40 @@ const intents = [
   {
     id: 'presenca',
     label: 'Não recebo contatos',
-    title: 'O cliente precisa encontrar e entender seu negócio.',
-    text: 'Comece pela oferta, pela região atendida e por um caminho curto até o contato. Um site bem explicado é uma base; demanda e atendimento continuam fazendo parte da venda.',
+    title: 'O próximo contato começa com uma oferta clara.',
+    text: 'Mostre o que você faz, para quem e por que escolher sua empresa. Organizamos essa apresentação com páginas de serviço e um caminho direto para pedir orçamento.',
     href: '/sites-para-pequenos-negocios',
     cta: 'Revisar minha presença',
   },
   {
     id: 'conversao',
     label: 'Site não converte',
-    title: 'Antes de trazer mais visitas, confira a próxima ação.',
-    text: 'Uma revisão de oferta, navegação e formulário pode revelar onde o contato se perde. Sem dados suficientes, tratamos a mudança como hipótese e conferimos no uso real.',
+    title: 'Visita sem próximo passo vira oportunidade perdida.',
+    text: 'Seu visitante encontra a oferta, entende a diferença e sabe como chamar? Revisamos conteúdo, navegação e formulário para identificar o que dificulta essa decisão.',
     href: '/otimizacao-de-conversao',
     cta: 'Entender a revisão',
   },
   {
     id: 'followup',
     label: 'Retorno desorganizado',
-    title: 'Cada oportunidade precisa de responsável e retorno.',
-    text: 'Organize o atendimento e o registro das etapas. O painel integrado e os lembretes dependem de CRM, acesso e escopo contratados; não são números fictícios em um gráfico.',
+    title: 'Um bom contato merece continuidade.',
+    text: 'Defina quem atende, em qual etapa a conversa está e quando retornar. Avaliamos o painel de leads e as integrações adequadas à sua rotina.',
     href: '/painel-de-leads',
     cta: 'Organizar meus contatos',
   },
   {
     id: 'seo',
     label: 'Busca local fraca',
-    title: 'Seu serviço precisa responder à busca da sua região.',
-    text: 'Confira as páginas, a indexação e as informações reais da empresa. SEO local exige manutenção e contexto; não há primeira posição garantida.',
+    title: 'Sua cidade procura o que você oferece.',
+    text: 'Páginas de serviços, informações consistentes e uma base técnica organizada ajudam a apresentar sua empresa nas buscas locais. Avaliamos por onde começar.',
     href: '/seo-local-franca',
     cta: 'Avaliar a busca local',
   },
   {
     id: 'assinatura',
     label: 'Quero continuidade',
-    title: 'Uma assinatura precisa mostrar o trabalho de cada mês.',
-    text: 'Compare implantação, páginas, conteúdo, ajustes e relatório. A proposta define o que entra, o que é extra e como encerrar, sem esconder o custo inteiro.',
+    title: 'Seu site precisa acompanhar a sua empresa.',
+    text: 'Tenha uma rotina para atualizar conteúdo, ajustar páginas e cuidar da estrutura técnica. Compare as entregas e a capacidade mensal de cada plano.',
     href: '/planos',
     cta: 'Comparar os planos',
   },
@@ -81,14 +81,14 @@ export default function IntentNavigator() {
         <div>
           <p className="subscription-kicker">Comece pelo que está travando</p>
           <h2 id={`${id}-title`}>
-            Qual parte merece
+            Onde o digital
             <br />
-            atenção primeiro?
+            trava seu negócio?
           </h2>
         </div>
         <p>
-          Escolha seu cenário. A recomendação muda pelo problema, sem pedir seu
-          telefone para mostrar o caminho.
+          Escolha o desafio mais próximo da sua realidade e veja por onde
+          podemos começar. Você explora antes de entrar em contato.
         </p>
       </div>
       <div
