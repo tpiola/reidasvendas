@@ -14,6 +14,7 @@ import '@/styles/pages.css';
 import '@/styles/subscriptions.css';
 import '@/styles/commercial-flow.css';
 import '@/styles/subscription-journey.css';
+import '@/styles/studio.css';
 const sora = localFont({
   src: '../public/fonts/sora-latin.woff2',
   display: 'swap',
@@ -34,8 +35,8 @@ export const metadata: Metadata = {
   applicationName: 'Rei das Vendas',
   manifest: '/manifest.webmanifest',
   icons: {
-    icon: [{ url: '/logo/favicon.svg', type: 'image/svg+xml' }],
-    apple: '/icons/apple-touch-icon.png',
+    icon: [{ url: '/logo/original-favicon.svg', type: 'image/svg+xml' }],
+    apple: '/icons/original-apple-touch-icon.png',
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,

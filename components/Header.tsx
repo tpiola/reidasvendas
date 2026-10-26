@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp route handlers require full navigation and a fresh event ID, without prefetch. */
 import Link from 'next/link';
+import BrandLockup from '@/components/BrandLockup';
 
 const links = [
   ['/planos', 'Planos'],
@@ -18,13 +19,7 @@ export default function Header() {
       <header className="site-header">
         <div className="container header-inner">
           <Link href="/" className="brand" aria-label="Rei das Vendas — início">
-            {/* Vetor local, com dimensões reservadas e texto em curvas. */}
-            <img
-              src="/logo/lockup-claro.svg"
-              alt="Rei das Vendas"
-              width="238"
-              height="46"
-            />
+            <BrandLockup />
           </Link>
           <nav className="desktop-nav" aria-label="Navegação principal">
             {links.map(([href, label]) => (
@@ -43,7 +38,23 @@ export default function Header() {
             href="/go/whatsapp?src=header"
           >
             <span className="header-cta-label">Conversar</span>
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11.7a8 8 0 0 1-11.7 7.1L4 20l1.2-4.2A8 8 0 1 1 20 11.7Z" stroke="currentColor" strokeWidth="1.6"/><path d="M9 8c.4 3.2 2 4.9 5.5 6l1-1.6-2-1-1 1a6 6 0 0 1-2.3-2.4l.9-.9L10 7.5 9 8Z" fill="currentColor"/></svg>
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M20 11.7a8 8 0 0 1-11.7 7.1L4 20l1.2-4.2A8 8 0 1 1 20 11.7Z"
+                stroke="currentColor"
+                strokeWidth="1.6"
+              />
+              <path
+                d="M9 8c.4 3.2 2 4.9 5.5 6l1-1.6-2-1-1 1a6 6 0 0 1-2.3-2.4l.9-.9L10 7.5 9 8Z"
+                fill="currentColor"
+              />
+            </svg>
           </a>
           <details className="mobile-menu">
             <summary aria-label="Abrir menu">

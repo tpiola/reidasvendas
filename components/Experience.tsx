@@ -77,15 +77,42 @@ export default function Experience() {
     const hero = document.querySelector(
       '.hero, .subscription-hero, [data-hero]',
     );
-    const heroObserver = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
+    const scene = document.querySelector<HTMLElement>('.royal-scene');
+    let inView = true;
+    let viewed = false;
+    const motion = () => {
+      if (scene)
+        scene.dataset.active = String(
+          inView && !document.hidden && !reduce.matches,
+        );
+    };
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      motion();
+      if (inView && !viewed) {
+        viewed = true;
         track('view_hero', { page: window.location.pathname });
-        heroObserver.disconnect();
       }
     });
     if (hero) heroObserver.observe(hero);
+    document.addEventListener('visibilitychange', motion);
+    reduce.addEventListener('change', motion);
+    motion();
     const click = (event: MouseEvent) => {
       if (!(event.target instanceof Element)) return;
+      const control = event.target.closest<HTMLButtonElement>(
+        '[data-motion-toggle]',
+      );
+      if (control && scene) {
+        const paused = scene.dataset.paused !== 'true';
+        scene.dataset.paused = String(paused);
+        control.setAttribute('aria-pressed', String(paused));
+        control.setAttribute(
+          'aria-label',
+          paused ? 'Retomar animação' : 'Pausar animação',
+        );
+        return;
+      }
       const target = event.target.closest<HTMLElement>(
         'a, button[data-event], [data-event][role="button"]',
       );
@@ -111,6 +138,8 @@ export default function Experience() {
       document.removeEventListener('keydown', key);
       reveal.disconnect();
       heroObserver.disconnect();
+      document.removeEventListener('visibilitychange', motion);
+      reduce.removeEventListener('change', motion);
     };
   }, [pathname]);
   return null;

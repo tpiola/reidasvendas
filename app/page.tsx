@@ -1,355 +1,413 @@
-/* eslint-disable @next/next/no-html-link-for-pages -- WhatsApp redirects require full navigation and a per-click event ID; never prefetch this endpoint. */
+/* eslint-disable @next/next/no-html-link-for-pages -- Tracked WhatsApp redirects require a full navigation. */
 import Link from 'next/link';
 import content from '@/data/content.json';
 import portfolio from '@/data/portfolio.json';
 import Pricing from '@/components/Pricing';
 import IntentNavigator from '@/components/IntentNavigator';
 import DynamicFeed from '@/components/DynamicFeed';
+import HeroOrbit from '@/components/HeroOrbit';
 import { MaturityQuiz } from '@/components/MaturityQuiz';
 import { CommercialFlow, BeforeAfter } from '@/components/CommercialFlow';
 import { metadata as createMetadata } from '@/lib/site';
 
 export const metadata = createMetadata(
-  'Sites e presença digital por assinatura em Franca',
-  'Site, SEO local, WhatsApp e manutenção com escopo e acompanhamento contínuo. Planos para pequenas empresas de Franca/SP, região e Brasil.',
+  'Sites profissionais e presença digital em Franca',
+  'Apresente seu negócio com um site profissional, SEO local e um caminho direto para o WhatsApp. Criação e acompanhamento em Franca/SP e no Brasil.',
   '/',
 );
-
 const modules = [
   {
+    href: '/sites-para-pequenos-negocios',
+    label: 'Design + desenvolvimento',
+    title: 'Um site à altura do seu negócio.',
+    text: 'Mostre por que escolher sua empresa. Páginas rápidas, conteúdo que explica sua oferta e um próximo passo fácil de encontrar.',
+    detail: 'Da primeira impressão ao pedido de orçamento.',
+    type: 'site',
+  },
+  {
     href: '/seo-local-franca',
-    label: 'Ser encontrado',
-    title: 'Presença na busca local.',
-    text: 'Informações claras sobre serviço, região e contato. Uma base de SEO que pode ser mantida ao longo do tempo.',
-    mark: '↗',
+    label: 'SEO + presença local',
+    title: 'Sua região precisa encontrar você.',
+    text: 'Organize serviços, localização e informações da empresa para responder às buscas de quem procura o que você faz.',
+    detail: 'Seu serviço, no contexto da sua cidade.',
+    type: 'search',
   },
   {
     href: '/whatsapp-que-vende',
-    label: 'Facilitar o contato',
-    title: 'WhatsApp com contexto.',
-    text: 'O visitante chega à conversa sabendo o que procura. Sua equipe continua o atendimento com um próximo passo.',
-    mark: '↗',
-  },
-  {
-    href: '/painel-de-leads',
-    label: 'Acompanhar oportunidades',
-    title: 'Contatos fora da memória.',
-    text: 'Uma visão do caminho comercial quando o escopo e as integrações permitem. Recursos adicionais são avaliados na proposta.',
-    mark: '↗',
+    label: 'Contato + atendimento',
+    title: 'Menos atrito. Mais conversa.',
+    text: 'Conecte a página ao WhatsApp com uma mensagem contextualizada. O cliente entende a oferta e sua equipe sabe por onde começar.',
+    detail: 'Um caminho curto entre interesse e contato.',
+    type: 'contact',
   },
   {
     href: '/manutencao-de-site',
-    label: 'Manter a base',
-    title: 'Cuidado depois da entrega.',
-    text: 'Revisões técnicas, atualizações compatíveis e uma capacidade definida para pequenos ajustes.',
-    mark: '↗',
+    label: 'Manutenção + evolução',
+    title: 'O negócio muda. O site acompanha.',
+    text: 'Atualizações, ajustes e revisão da presença digital em uma rotina combinada. Você cuida da operação; nós cuidamos da sua base.',
+    detail: 'Continuidade com escopo e entregas definidos.',
+    type: 'care',
   },
-  {
-    href: '/otimizacao-de-conversao',
-    label: 'Revisar o caminho',
-    title: 'Melhorias com uma razão.',
-    text: 'Oferta, leitura e chamadas para contato podem ser revisadas com base nas perguntas e nos dados disponíveis.',
-    mark: '↗',
-  },
-  {
-    href: '/automacao-comercial',
-    label: 'Conectar a operação',
-    title: 'Automação com responsabilidade.',
-    text: 'Integrações e retomadas dependem de escopo, consentimento e capacidade de atendimento. Nada de prometer um comercial no piloto automático.',
-    mark: '↗',
-  },
-];
-const method = [
-  ['Entender', 'Negócio, público e ponto de partida.'],
-  ['Definir', 'Escopo, materiais e critérios de entrega.'],
-  ['Construir', 'Site, conteúdo e caminhos de contato.'],
-  ['Publicar', 'Conferência técnica e ativação da base.'],
-  ['Acompanhar', 'Entregas e indicadores disponíveis.'],
-  ['Evoluir', 'Ajustes dentro da capacidade contratada.'],
 ];
 const questions = [
   [
-    'O que significa site por assinatura?',
-    'É a combinação de um trabalho inicial de implantação com uma rotina recorrente de cuidado e entregas. Não é um software que você precisa montar sozinho. O escopo informa o que será construído e o que continua depois da publicação.',
+    'Já tenho um site. Preciso começar do zero?',
+    'Nem sempre. Primeiro avaliamos oferta, conteúdo, navegação e estrutura técnica. O que estiver funcionando pode ser aproveitado. A proposta explica o que manter, ajustar ou reconstruir.',
   ],
   [
-    'A assinatura inclui tudo o que meu negócio precisar?',
-    'Não. Cada plano tem limite de páginas, conteúdo e ajustes. Anúncios, redes sociais, licenças e integrações específicas só entram quando previstos na proposta. Trabalho recorrente não significa trabalho ilimitado.',
+    'O que significa site por assinatura?',
+    'Você contrata a implantação inicial e uma rotina de manutenção e entregas. Cada plano informa páginas, conteúdo, ajustes e investimento. Assim, a presença digital continua recebendo cuidado depois da publicação.',
+  ],
+  [
+    'A assinatura inclui anúncios e redes sociais?',
+    'Gestão de anúncios, redes sociais, licenças e integrações específicas têm escopo separado. Antes de contratar, você recebe a relação do que entra no plano e dos custos adicionais, quando houver.',
   ],
   [
     'Vou receber uma quantidade garantida de clientes?',
-    'Não. O site ajuda a apresentar a oferta e a facilitar o contato, mas volume e qualidade de oportunidades dependem de demanda, região, investimento, preço, atendimento e outros fatores. Medimos o que estiver disponível sem prometer vendas ou posições na busca.',
+    'Não há garantia de vendas ou de posição no Google. Construímos uma presença que apresenta sua oferta e facilita o contato. Demanda, preço, atendimento e investimento também influenciam o resultado.',
   ],
   [
-    'Posso contratar um projeto sem assinatura?',
-    'Sim. Há projetos de implantação e serviços avulsos. A escolha depende do que precisa ser entregue e da continuidade que sua operação deseja. Podemos comparar os caminhos antes de elaborar a proposta.',
+    'Posso contratar sem assinatura?',
+    'Sim. Projetos de implantação e serviços avulsos também são avaliados. A conversa inicial serve para encontrar o formato que faz sentido para seu negócio.',
   ],
   [
-    'Minha empresa precisa estar em Franca?',
-    'O foco local é Franca/SP e região, com atendimento também a distância no Brasil. Materiais, reuniões e aprovação de conteúdo são combinados conforme o projeto.',
+    'Vocês atendem fora de Franca?',
+    'Sim. Estamos em Franca/SP e atendemos empresas da região e de outras cidades do Brasil. Reuniões, envio de materiais e aprovações podem acontecer a distância.',
   ],
 ];
 
+function ServiceArt({ type }: { type: string }) {
+  return (
+    <div
+      className={`studio-service-art studio-service-art-${type}`}
+      aria-hidden="true"
+    >
+      {type === 'site' ? (
+        <div className="art-browser">
+          <div className="art-browser-bar">
+            <i />
+            <i />
+            <i />
+            <span>Seu negócio, bem apresentado.</span>
+          </div>
+          <div className="art-browser-body">
+            <span>Feito para a sua empresa.</span>
+            <b>
+              Uma boa impressão.
+              <br />
+              Um próximo passo.
+            </b>
+            <div className="art-browser-cta">
+              Vamos conversar <span>↗</span>
+            </div>
+          </div>
+          <div className="art-browser-lines">
+            <i />
+            <i />
+            <i />
+          </div>
+        </div>
+      ) : type === 'search' ? (
+        <div className="art-search">
+          <span>⌕</span>
+          <b>Seu serviço + sua cidade</b>
+          <div>
+            <i />
+            <i />
+            <i />
+          </div>
+          <p>
+            Conecte o que você faz
+            <br />a quem está procurando.
+          </p>
+        </div>
+      ) : type === 'contact' ? (
+        <div className="art-contact">
+          <div>
+            Gostei do que vi.
+            <br />
+            Podemos conversar?
+          </div>
+          <span>
+            Claro. Me conte o que sua empresa precisa. <b>↗</b>
+          </span>
+          <p>Exemplo de uma jornada de contato</p>
+        </div>
+      ) : (
+        <div className="art-care">
+          <div>
+            <span>Seu negócio</span>
+            <b>Em movimento.</b>
+          </div>
+          <svg viewBox="0 0 300 90" fill="none">
+            <path
+              d="M0 80H300M0 45H300M0 10H300"
+              stroke="currentColor"
+              opacity=".12"
+            />
+            <path
+              d="m10 70 45-12 42 8 49-32 38 6 48-23 56-7"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeDasharray="5 5"
+            />
+            <circle cx="288" cy="10" r="5" fill="currentColor" />
+          </svg>
+          <p>Ilustração de continuidade. Não representa resultados.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
-    <>
-      <section
-        className="subscription-hero hero"
-        aria-labelledby="subscription-hero-title"
-      >
-        <div className="container subscription-hero-grid">
-          <div className="subscription-hero-copy">
-            <p className="subscription-kicker">
-              Assinatura de presença digital · Franca/SP
+    <div className="studio-home">
+      <section className="studio-hero hero" aria-labelledby="home-title">
+        <div className="container studio-hero-grid">
+          <div className="studio-hero-copy">
+            <p className="studio-kicker">
+              <span /> Estratégia, design e tecnologia para negócios
             </p>
-            <h1 id="subscription-hero-title">
-              Seu site no ar.
+            <h1 id="home-title">
+              Seu negócio é bom.
               <br />
               <span>
-                Sua presença
+                O digital precisa
                 <br />
-                em evolução.
+                mostrar isso.
               </span>
             </h1>
-            <p className="subscription-hero-description">
-              Site, busca local, WhatsApp e manutenção em uma rotina definida.
-              Você apresenta seu negócio com clareza e sabe o que será cuidado
-              depois da publicação.
+            <p className="studio-hero-description">
+              Seu próximo cliente precisa encontrar você, entender seu valor e
+              saber como chamar. Conectamos{' '}
+              <strong>site, busca local e WhatsApp</strong> para encurtar esse
+              caminho.
             </p>
-            <div className="subscription-hero-actions">
-              <a
-                className="button subscription-button-gold"
-                href="#planos"
-                data-event="click_cta_planos"
+            <div className="studio-hero-actions">
+              <Link
+                className="button studio-primary"
+                href="/diagnostico"
+                data-event="click_cta_diagnostico"
               >
-                Ver planos <span aria-hidden="true">↓</span>
-              </a>
-              <a
-                className="subscription-dark-link"
-                href="/go/whatsapp?src=hero"
-              >
-                Conversar sobre meu negócio <span aria-hidden="true">↗</span>
+                Quero melhorar meu digital <span aria-hidden="true">↗</span>
+              </Link>
+              <a className="studio-project-link" href="#trabalhos">
+                Veja o que construímos <span aria-hidden="true">↓</span>
               </a>
             </div>
-            <p className="subscription-hero-location">
-              Franca/SP · região · atendimento no Brasil
+            <p className="studio-hero-assurance">
+              Você conta o desafio. Nós definimos o caminho.
+              <br />
+              <span>Escopo e investimento apresentados antes de começar.</span>
             </p>
           </div>
-          <aside
-            className="subscription-hero-summary"
-            aria-label="Como a assinatura é composta"
-          >
-            <div
-              className="subscription-hero-brand"
-              aria-hidden="true"
-              data-scroll-parallax
-            >
-              <img src="/logo/simbolo.svg" alt="" width="124" height="124" />
-            </div>
-            <p className="subscription-summary-intro">
-              O site é o começo.
-              <br />{' '}O trabalho continua.
-            </p>
-            <div className="subscription-summary-row">
-              <span>Implantação</span>
-              <p>Uma base construída para a sua oferta.</p>
-            </div>
-            <div className="subscription-summary-row">
-              <span>Recorrência</span>
-              <p>Cuidado e entregas dentro de um escopo.</p>
-            </div>
-            <div className="subscription-summary-row">
-              <span>Clareza</span>
-              <p>Limites, investimento e próximos passos visíveis.</p>
-            </div>
-            <Link className="subscription-dark-link" href="/metodo">
-              Entenda a sequência de trabalho ↗
-            </Link>
-          </aside>
+          <HeroOrbit />
         </div>
-        <div className="subscription-hero-bottom container">
-          <span>Um projeto para o seu negócio.</span>
-          <span>Uma rotina para manter a base.</span>
-          <span>Uma proposta antes de qualquer cobrança.</span>
+        <div className="container studio-hero-bottom">
+          <span>
+            Franca/SP <i /> Atendemos todo o Brasil
+          </span>
+          <a href="#servicos">
+            Conheça o que podemos construir <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
+
+      <div className="studio-audience">
+        <div className="container">
+          <p>
+            O seu tamanho pode mudar.
+            <br />
+            <strong>O cuidado com a sua marca, não.</strong>
+          </p>
+          <div>
+            <span>Comércio</span>
+            <span>Serviços</span>
+            <span>Clínicas</span>
+            <span>Indústrias</span>
+            <span>Profissionais</span>
+          </div>
+        </div>
+      </div>
 
       <IntentNavigator />
 
       <section
-        className="subscription-section container"
-        aria-labelledby="continuity-title"
+        id="servicos"
+        className="studio-services subscription-section container"
+        aria-labelledby="services-title"
       >
         <div className="subscription-heading">
-          <h2 id="continuity-title">
-            Publicar resolve a estreia.
-            <br />
-            Quem cuida do dia seguinte?
-          </h2>
-          <p>
-            O horário muda. Uma oferta sai de linha. O cliente faz uma pergunta
-            que o site não responde. A assinatura cria uma rotina para esse
-            trabalho não ficar sempre para depois.
-          </p>
+          <div>
+            <p className="studio-section-label">Presença que trabalha junto</p>
+            <h2 id="services-title">
+              Bonito para olhar.
+              <br />
+              <span>Claro para decidir.</span>
+            </h2>
+          </div>
+          <div>
+            <p>
+              Não basta colocar sua empresa na internet. Cada página precisa
+              explicar o que você faz, transmitir confiança e ajudar o visitante
+              a dar o próximo passo.
+            </p>
+            <Link className="text-link" href="/servicos">
+              Explore todos os serviços ↗
+            </Link>
+          </div>
         </div>
-        <div className="subscription-continuity">
-          <article data-reveal>
-            <span aria-hidden="true">↗</span>
-            <h3>Uma base bem explicada.</h3>
-            <p>
-              Seu serviço, sua região e seu contato apresentados para quem está
-              decidindo.
-            </p>
-          </article>
-          <article data-reveal>
-            <span aria-hidden="true">↗</span>
-            <h3>Uma continuidade combinada.</h3>
-            <p>
-              Entregas recorrentes e ajustes com limites que você conhece antes
-              de contratar.
-            </p>
-          </article>
-          <article data-reveal>
-            <span aria-hidden="true">↗</span>
-            <h3>Uma leitura do que aconteceu.</h3>
-            <p>
-              Relatório das entregas e dos indicadores disponíveis, sem
-              confundir clique com venda.
-            </p>
-          </article>
+        <div className="studio-services-grid">
+          {modules.map((module, index) => (
+            <Link
+              href={module.href}
+              key={module.href}
+              className="studio-service"
+              data-reveal
+              data-reveal-delay={(index % 2) * 80}
+            >
+              <ServiceArt type={module.type} />
+              <div className="studio-service-content">
+                <div className="studio-service-label">
+                  <span>{module.label}</span>
+                  <span aria-hidden="true">0{index + 1} / ↗</span>
+                </div>
+                <h3>{module.title}</h3>
+                <p>{module.text}</p>
+                <span className="studio-service-detail">{module.detail}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="studio-services-extras">
+          <p>Precisa conectar o que acontece depois do contato?</p>
+          <div>
+            <Link href="/painel-de-leads">Painel de leads ↗</Link>
+            <Link href="/automacao-comercial">Automação comercial ↗</Link>
+            <Link href="/otimizacao-de-conversao">
+              Otimização de conversão ↗
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="subscription-flow-section">
+      <section
+        className="studio-method subscription-flow-section"
+        aria-labelledby="method-title"
+      >
         <div className="container">
           <div className="subscription-heading">
-            <h2>
-              Do primeiro interesse
-              <br />à próxima conversa.
-            </h2>
-            <p>
-              O site faz parte de um caminho. Encontrar, entender a oferta,
-              entrar em contato e dar continuidade precisam fazer sentido
-              juntos.
-            </p>
+            <div>
+              <p className="studio-section-label">
+                Um caminho. Partes conectadas.
+              </p>
+              <h2 id="method-title">
+                Do primeiro clique
+                <br />
+                <span>à próxima conversa.</span>
+              </h2>
+            </div>
+            <div>
+              <p>
+                Um site não atende sozinho. Construímos a estrutura, organizamos
+                o contato e combinamos como acompanhar a evolução. Explore as
+                etapas abaixo.
+              </p>
+              <Link className="text-link" href="/metodo">
+                Conheça nosso método ↗
+              </Link>
+            </div>
           </div>
           <CommercialFlow />
         </div>
       </section>
 
       <section
-        className="subscription-section container"
-        aria-labelledby="modules-title"
+        id="trabalhos"
+        className="subscription-section container studio-work"
+        aria-labelledby="portfolio-title"
       >
         <div className="subscription-heading">
-          <h2 id="modules-title">
-            Cada parte tem
-            <br />
-            uma função comercial.
-          </h2>
+          <div>
+            <p className="studio-section-label">Veja a execução</p>
+            <h2 id="portfolio-title">
+              Ideias que saíram
+              <br />
+              <span>do papel para o ar.</span>
+            </h2>
+          </div>
           <div>
             <p>
-              Uma base conectada por etapas. Os módulos abaixo mostram o que
-              pode ser organizado; a inclusão em cada plano ou projeto é
-              definida na proposta.
+              Projetos próprios com propostas diferentes. Abra, navegue e veja
+              como design, conteúdo e interação se encontram na prática.
             </p>
-            <Link className="text-link" href="/servicos">
-              Ver todos os serviços ↗
+            <Link className="text-link" href="/cases">
+              Conheça os projetos e seu contexto ↗
             </Link>
           </div>
         </div>
-        <div className="subscription-module-grid">
-          {modules.map((module) => (
-            <Link
-              href={module.href}
-              key={module.href}
-              className="subscription-module"
-              data-reveal
+        <div className="studio-projects">
+          {portfolio.map((project, index) => (
+            <a
+              className={`studio-project studio-project-${project.id}`}
+              key={project.id}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Abrir ${project.title}, em nova aba`}
             >
-              <div>
-                <span>{module.label}</span>
-                <span aria-hidden="true">{module.mark}</span>
+              <div className="studio-project-visual" aria-hidden="true">
+                <span className="studio-project-index">
+                  Projeto 0{index + 1}
+                </span>
+                <span className="studio-project-wordmark">
+                  {index === 0 ? (
+                    <>
+                      Thiago
+                      <br />
+                      Piola<span>Saúde. Conhecimento. Cuidado.</span>
+                    </>
+                  ) : index === 1 ? (
+                    <>
+                      Escola
+                      <br />
+                      de Saúde<span>Aprender. Praticar. Evoluir.</span>
+                    </>
+                  ) : (
+                    <>
+                      SPES<span>Um espaço para a esperança.</span>
+                    </>
+                  )}
+                </span>
+                <span className="studio-project-open">Explorar projeto ↗</span>
               </div>
-              <h3>{module.title}</h3>
-              <p>{module.text}</p>
-            </Link>
+              <div className="studio-project-caption">
+                <span>{project.category}</span>
+                <h3>
+                  {project.title} <span aria-hidden="true">↗</span>
+                </h3>
+              </div>
+            </a>
           ))}
         </div>
+        <p className="subscription-evidence-note">
+          Portfólio próprio. As capas identificam os projetos; os links abrem os
+          sites reais. Contexto e fontes na página de projetos.
+        </p>
       </section>
 
-      <section
-        id="planos"
-        className="subscription-plans-section"
-        aria-labelledby="pricing-title"
-      >
-        <div className="container">
-          <div className="subscription-heading">
-            <div>
-              <p className="subscription-kicker">
-                Implantação + acompanhamento
-              </p>
-              <h2 id="pricing-title">
-                Escolha uma base.
-                <br />
-                Conheça a continuidade.
-              </h2>
-            </div>
-            <div>
-              <p>
-                Três escopos para comparar capacidade, rotina e investimento. A
-                escolha abre uma conversa para confirmar se o plano atende sua
-                empresa.
-              </p>
-              <Link className="text-link" href="/planos">
-                Comparar planos e condições ↗
-              </Link>
-            </div>
-          </div>
-          <Pricing />
-        </div>
-      </section>
-
-      <section
-        className="subscription-section container"
-        aria-labelledby="method-title"
-      >
-        <div className="subscription-heading">
-          <h2 id="method-title">
-            Uma sequência clara,
-            <br />
-            da leitura à evolução.
-          </h2>
-          <p>
-            O método evita começar pelo desenho e descobrir o objetivo no final.
-            Cada etapa prepara a próxima, com responsabilidade e critério de
-            entrega.
-          </p>
-        </div>
-        <ol className="subscription-method">
-          {method.map(([title, text], index) => (
-            <li key={title} data-reveal>
-              <span className="subscription-method-number">0{index + 1}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </li>
-          ))}
-        </ol>
-        <Link className="text-link" href="/metodo">
-          Ver como trabalhamos ↗
-        </Link>
-      </section>
-
-      <section className="subscription-comparison-section">
+      <section className="studio-difference subscription-comparison-section">
         <div className="container">
           <div className="subscription-heading">
             <h2>
-              Uma base que muda
-              <br />a forma de acompanhar.
+              Seu cliente não deveria
+              <br />
+              <span>precisar adivinhar.</span>
             </h2>
             <p>
-              Esta comparação explica a organização pretendida. Não apresenta
-              resultado de cliente nem garante que a implantação, sozinha,
-              aumente as vendas.
+              O que você faz. Para quem. Como entrar em contato. Veja como uma
+              presença organizada ajuda a tornar essas respostas mais claras.
             </p>
           </div>
           <BeforeAfter />
@@ -357,74 +415,56 @@ export default function Home() {
       </section>
 
       <section
-        className="subscription-section container"
-        aria-labelledby="portfolio-title"
+        id="planos"
+        className="subscription-plans-section studio-plans"
+        aria-labelledby="pricing-title"
       >
-        <div className="subscription-heading">
-          <h2 id="portfolio-title">
-            Projetos que você
-            <br />
-            pode abrir e conhecer.
-          </h2>
-          <div>
-            <p>
-              Três projetos do portfólio próprio, com site e repositório
-              públicos verificados. Mostram execução e formas de organizar
-              conteúdo — sem atribuir retorno financeiro.
-            </p>
-            <Link className="text-link" href="/cases">
-              Conhecer o contexto dos projetos ↗
-            </Link>
-          </div>
-        </div>
-        <div className="subscription-portfolio">
-          {portfolio.map((project) => (
-            <article key={project.id} data-reveal>
-              <span className="subscription-project-category">
-                {project.category}
-              </span>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <ul>
-                {project.observedFeatures.slice(0, 2).map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-              <a
-                className="text-link"
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Abrir ${project.title}, em nova aba`}
-              >
-                Abrir o projeto <span aria-hidden="true">↗</span>
-              </a>
-            </article>
-          ))}
-        </div>
-        <p className="subscription-evidence-note">
-          Projetos próprios não equivalem a casos comerciais auditados.
-          Recursos, dados e vínculos de cada projeto estão descritos na página
-          de evidências.
-        </p>
-      </section>
-
-      <section className="subscription-tools-section">
         <div className="container">
           <div className="subscription-heading">
-            <h2>
-              Antes de escolher o plano,
-              <br />
-              olhe para o seu cenário.
-            </h2>
+            <div>
+              <p className="studio-section-label">
+                Seu site pronto. O cuidado continua.
+              </p>
+              <h2 id="pricing-title">
+                Comece com a base.
+                <br />
+                <span>Evolua com um plano.</span>
+              </h2>
+            </div>
             <div>
               <p>
-                Uma leitura rápida ajuda a preparar a conversa. O questionário
-                não pede seu telefone; o simulador trabalha com hipóteses que
-                você pode editar.
+                A implantação coloca o projeto no ar. A assinatura mantém uma
+                rotina de conteúdo, ajustes e cuidado técnico. Compare o que
+                cada plano entrega.
+              </p>
+              <Link className="text-link" href="/planos">
+                Comparar todos os detalhes e condições ↗
+              </Link>
+            </div>
+          </div>
+          <Pricing />
+        </div>
+      </section>
+
+      <section className="subscription-tools-section studio-diagnostic">
+        <div className="container">
+          <div className="subscription-heading">
+            <div>
+              <p className="studio-section-label">Antes de investir mais</p>
+              <h2>
+                Descubra onde
+                <br />
+                <span>o caminho se quebra.</span>
+              </h2>
+            </div>
+            <div>
+              <p>
+                Seu problema está na presença, no contato ou no acompanhamento?
+                Responda a três perguntas para orientar sua próxima decisão. Sem
+                cadastro.
               </p>
               <Link className="text-link" href="/simulador">
-                Abrir simulador de oportunidade ↗
+                Explore também o simulador de oportunidade ↗
               </Link>
             </div>
           </div>
@@ -433,40 +473,20 @@ export default function Home() {
       </section>
 
       <section
-        className="subscription-section container"
+        className="subscription-section container studio-content"
         aria-labelledby="content-title"
       >
         <div className="subscription-heading">
           <h2 id="content-title">
-            Conteúdo para decidir
+            Decisões melhores
             <br />
-            com mais contexto.
+            <span>começam com clareza.</span>
           </h2>
           <Link className="text-link" href="/blog">
-            Explorar os guias ↗
+            Explore os guias práticos ↗
           </Link>
         </div>
         <DynamicFeed items={content.feed} />
-      </section>
-
-      <section className="subscription-services-note">
-        <div className="container">
-          <div>
-            <h2>
-              Precisa de tráfego,
-              <br />
-              social media ou consultoria?
-            </h2>
-            <p>
-              A Rei das Vendas também atua nessas frentes. Gestão de anúncios,
-              redes sociais e projetos comerciais são avaliados em escopo
-              separado; a assinatura não inclui tudo por padrão.
-            </p>
-          </div>
-          <Link href="/servicos" className="button">
-            Explorar os serviços ↗
-          </Link>
-        </div>
       </section>
 
       <section
@@ -474,14 +494,15 @@ export default function Home() {
         aria-labelledby="faq-title"
       >
         <div>
+          <p className="studio-section-label">Vamos tirar as dúvidas</p>
           <h2 id="faq-title">
-            O que vale esclarecer
+            Antes da proposta,
             <br />
-            antes de começar.
+            <span>uma boa conversa.</span>
           </h2>
           <p>
-            O plano deve deixar o trabalho mais claro, inclusive o que não está
-            incluído.
+            Entenda o formato, o acompanhamento e o que faz sentido para a sua
+            empresa.
           </p>
           <Link href="/faq" className="text-link">
             Ver todas as perguntas ↗
@@ -502,24 +523,39 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="subscription-final">
+      <section className="studio-final">
         <div className="container">
-          <div>
-            <p>Conte o que sua empresa precisa apresentar — e manter.</p>
+          <p>Seu próximo capítulo começa com uma decisão.</p>
+          <div className="studio-final-grid">
             <h2>
-              Vamos encontrar o ponto
+              Vamos colocar
               <br />
-              de partida do seu site.
+              seu negócio
+              <br />
+              <span>em evidência.</span>
             </h2>
+            <div>
+              <p>
+                Conte o que você faz e o que precisa melhorar. Vamos transformar
+                isso em um projeto com direção, escopo e próximos passos.
+              </p>
+              <a
+                className="button studio-primary"
+                href="/go/whatsapp?src=final"
+              >
+                Falar sobre meu negócio <span aria-hidden="true">↗</span>
+              </a>
+              <Link className="studio-final-secondary" href="/diagnostico">
+                Prefiro preencher o briefing →
+              </Link>
+            </div>
           </div>
-          <div>
-            <a className="button" href="/go/whatsapp?src=final">
-              Conversar sobre meu negócio ↗
-            </a>
-            <Link href="/planos">Prefiro comparar os planos →</Link>
+          <div className="studio-final-foot">
+            <span>Estratégia antes do layout. Clareza antes da proposta.</span>
+            <Link href="/planos">Ver planos e investimento ↗</Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
