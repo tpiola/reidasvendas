@@ -39,3 +39,11 @@ A auditoria completa retorna oito avisos herdados, todos transitivos de @lhci/cl
 ## Limites preservados
 
 Nenhum dado de vendas, cliente, depoimento ou garantia inventado. Preços, condições, APIs, autenticação, consentimento, analytics, integrações e rotas existentes preservados. Não foram enviados contatos ou mensagens reais. Pagamento e contas externas mantêm as limitações documentadas na revisão anterior. A publicação só é considerada confirmada após deployment READY no projeto canônico e inspeção do domínio público.
+
+## Publicação confirmada
+
+PR #91 integrado: commit de produção 230f096525d7cbedfcf1901a5a0b2b25ab0792d5; deployment dpl_36Ej88EMGDEvHfJ5RnnZKGWZHF1V READY, main, gru1, mesmo projeto e equipe. Domínio oficial inspecionado visualmente depois da publicação. Home, /diagnostico, /planos, /servicos, /logo/original-mark.svg e /manifest.webmanifest retornaram 200; logo servido idêntico por SHA-256. Preview hospedado teve os controles de pausa/retomada e navegação principal ao briefing verificados manualmente.
+
+GitHub Quality gates 40344199349 estava em andamento na instalação do Chromium ao registrar a entrega. Check/lint/test/build/budget remotos já aprovados. Os 35 E2E e as nove medições Lighthouse acima são resultados locais; não representam conclusão do CI remoto.
+
+Este registro documental não altera o runtime validado.
