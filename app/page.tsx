@@ -355,9 +355,15 @@ export default function Home() {
                 <span className="studio-project-index">
                   Projeto 0{index + 1}
                 </span>
-                <span className="studio-project-wordmark">
-                  {project.title}
-
+                <span className="studio-project-browser" aria-hidden="true">
+                  <span className="studio-project-browser-bar"><i/><i/><i/><span>Prévia ilustrativa da estrutura</span></span>
+                  <span className="studio-project-browser-body">
+                    <span className="studio-project-browser-eyebrow">{project.category}</span>
+                    <strong>{project.title}</strong>
+                    <span className="studio-project-browser-line" />
+                    <span className="studio-project-browser-line short" />
+                    <span className="studio-project-browser-action">Explorar projeto <b>↗</b></span>
+                  </span>
                 </span>
                 <span className="studio-project-open">Explorar projeto ↗</span>
               </div>
