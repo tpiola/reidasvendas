@@ -232,7 +232,7 @@ describe('deterministic WhatsApp destination', () => {
     });
     expect(url.origin + url.pathname).toBe('https://wa.me/5516992333344');
     expect(url.searchParams.get('text')).toContain(
-      'plano Escala, com cobrança mensal',
+      'plano Escala, no ciclo mensal',
     );
     expect(url.searchParams.get('text')).toContain('Google');
     expect(url.searchParams.get('text')).not.toContain('private-value');
@@ -286,7 +286,7 @@ describe('WhatsApp HTTP route degrades without blocking contact', () => {
     const target = new URL(response.headers.get('location')!);
     expect(target.origin + target.pathname).toBe('https://wa.me/5516992333344');
     expect(target.searchParams.get('text')).toContain(
-      'plano Profissional, com cobrança anual',
+      'plano Profissional, no ciclo anual',
     );
     expect(response.headers.get('cache-control')).toContain('no-store');
     expect(after).not.toHaveBeenCalled();

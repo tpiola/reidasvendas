@@ -2,7 +2,7 @@
 import { metadata as meta } from '@/lib/site';
 import PageShell from '@/components/PageShell';
 import DiagnosticForm from '@/components/DiagnosticForm';
-import { SubscriptionIntake } from '@/components/SubscriptionJourney';
+import { SubscriptionCheckout } from '@/components/SubscriptionJourney';
 import { selectedSubscription } from '@/lib/subscription-context';
 export const metadata = meta(
   'Diagnóstico comercial em Franca',
@@ -19,41 +19,17 @@ export default async function Page({
   if (plan)
     return (
       <PageShell
-        title="Seu plano precisa caber na sua operação."
-        description={`Você escolheu o ${plan.name}. Confira se este é o ponto de partida adequado antes de revisar a proposta de assinatura.`}
+        title={`Revise a proposta do ${plan.name}.`}
+        description="Confira escopo e investimento. Depois, peça sua proposta no WhatsApp, sem cadastro ou perguntas obrigatórias."
         path="/diagnostico"
       >
-        <div className="split-content">
-          <SubscriptionIntake planId={plan.id} cycle={cycle} />
-          <aside className="callout">
-            <h2>O que acontece depois?</h2>
-            <ol>
-              <li>Revisão de implantação, recorrência e condições.</li>
-              <li>Confirmação de escopo e contratação.</li>
-              <li>Pagamento no provedor, quando habilitado.</li>
-              <li>Onboarding com materiais e responsabilidades.</li>
-            </ol>
-            <p>
-              A conversa inicial é gratuita. Diagnóstico profissional
-              aprofundado é outro serviço, contratado à parte. Nenhuma auditoria
-              paga é iniciada por responder às perguntas.
-            </p>
-            <a
-              className="text-link"
-              href={
-                '/go/whatsapp?' +
-                new URLSearchParams({
-                  src: 'diagnostico',
-                  page: '/diagnostico',
-                  plano: plan.id,
-                  ciclo: cycle,
-                })
-              }
-            >
-              Prefiro avaliar com a equipe ↗
-            </a>
-          </aside>
-        </div>
+        <SubscriptionCheckout
+          key={plan.id + cycle}
+          planId={plan.id}
+          cycle={cycle}
+          available={false}
+          page="/diagnostico"
+        />
       </PageShell>
     );
   return (

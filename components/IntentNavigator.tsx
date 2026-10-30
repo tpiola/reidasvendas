@@ -6,40 +6,40 @@ const intents = [
   {
     id: 'presenca',
     label: 'Não recebo contatos',
-    title: 'O próximo contato começa com uma oferta clara.',
-    text: 'Mostre o que você faz, para quem e por que escolher sua empresa. Organizamos essa apresentação com páginas de serviço e um caminho direto para pedir orçamento.',
+    title: 'Sua oferta clara. O contato mais perto.',
+    text: 'Mostre seu serviço, sua região e como pedir orçamento.',
     href: '/sites-para-pequenos-negocios',
     cta: 'Revisar minha presença',
   },
   {
     id: 'conversao',
     label: 'Site não converte',
-    title: 'Visita sem próximo passo vira oportunidade perdida.',
-    text: 'Seu visitante encontra a oferta, entende a diferença e sabe como chamar? Revisamos conteúdo, navegação e formulário para identificar o que dificulta essa decisão.',
+    title: 'Seu visitante sabe como continuar?',
+    text: 'Revise oferta, navegação e formulário para facilitar a decisão.',
     href: '/otimizacao-de-conversao',
     cta: 'Entender a revisão',
   },
   {
     id: 'followup',
     label: 'Retorno desorganizado',
-    title: 'Um bom contato merece continuidade.',
-    text: 'Defina quem atende, em qual etapa a conversa está e quando retornar. Avaliamos o painel de leads e as integrações adequadas à sua rotina.',
+    title: 'Organize o próximo retorno.',
+    text: 'Organize contatos, responsáveis e retornos em um processo adequado à sua rotina.',
     href: '/painel-de-leads',
     cta: 'Organizar meus contatos',
   },
   {
     id: 'seo',
     label: 'Busca local fraca',
-    title: 'Sua cidade procura o que você oferece.',
-    text: 'Páginas de serviços, informações consistentes e uma base técnica organizada ajudam a apresentar sua empresa nas buscas locais. Avaliamos por onde começar.',
+    title: 'Seja encontrado na sua região.',
+    text: 'Conecte páginas de serviço, dados da empresa e presença nas buscas locais.',
     href: '/seo-local-franca',
     cta: 'Avaliar a busca local',
   },
   {
     id: 'assinatura',
     label: 'Quero continuidade',
-    title: 'Seu site precisa acompanhar a sua empresa.',
-    text: 'Tenha uma rotina para atualizar conteúdo, ajustar páginas e cuidar da estrutura técnica. Compare as entregas e a capacidade mensal de cada plano.',
+    title: 'Mantenha seu site atualizado.',
+    text: 'Compare os planos para manter conteúdo, ajustes e cuidado técnico.',
     href: '/planos',
     cta: 'Comparar os planos',
   },
@@ -61,15 +61,6 @@ export default function IntentNavigator() {
     };
     if (intent && Object.prototype.hasOwnProperty.call(mapping, intent))
       setActive(mapping[intent]);
-    else if (query.get('utm_source') === 'google') setActive(3);
-    else {
-      try {
-        const host = new URL(document.referrer).hostname;
-        if (/^(?:www\.)?google\.com(?:\.br)?$/.test(host)) setActive(3);
-      } catch {
-        /* No readable referrer uses neutral intent. */
-      }
-    }
   }, []);
   const item = intents[active];
   return (

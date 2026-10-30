@@ -4,7 +4,7 @@ import ServiceCards from '@/components/ServiceCards';
 import { PILARES } from '@/data/commercial-contract';
 import Link from 'next/link';
 export const metadata = meta(
-  'Agência de marketing digital em Franca',
+  'Sites, SEO local e automação em Franca',
   'Criação de sites, gestão de tráfego, social media, SEO local e CRM. Conheça escopos e formas de contratação.',
   '/servicos',
 );

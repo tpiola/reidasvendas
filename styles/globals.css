@@ -1066,7 +1066,7 @@ img {
   position: fixed;
   z-index: 60;
   right: 25px;
-  bottom: 25px;
+  bottom: max(25px, env(safe-area-inset-bottom));
   gap: 12px;
   align-items: center;
   min-height: 52px;

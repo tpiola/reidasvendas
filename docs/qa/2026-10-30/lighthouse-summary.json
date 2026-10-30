@@ -1,0 +1,65 @@
+[
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 98,
+    "lcp_ms": 1861.8,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 98,
+    "lcp_ms": 1705,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/",
+    "performance": 99,
+    "lcp_ms": 1693.9,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 98,
+    "lcp_ms": 1564.6,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 98,
+    "lcp_ms": 1581.6,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/diagnostico",
+    "performance": 98,
+    "lcp_ms": 1569.0,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/planos",
+    "performance": 98,
+    "lcp_ms": 1646.1,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/planos",
+    "performance": 99,
+    "lcp_ms": 1632.5,
+    "cls": 0,
+    "lab_only": true
+  },
+  {
+    "url": "http://127.0.0.1:3000/planos",
+    "performance": 98,
+    "lcp_ms": 1634.8,
+    "cls": 0,
+    "lab_only": true
+  }
+]

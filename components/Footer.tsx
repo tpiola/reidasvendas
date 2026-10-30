@@ -52,12 +52,12 @@ export default function Footer() {
           <div>
             <h2>Explore</h2>
             <Link href="/metodo">Nosso método</Link>
-            <Link href="/casos">Casos e evidências</Link>
+            <Link href="/casos">Projetos publicados</Link>
             <Link href="/blog">Guias práticos</Link>
             <Link href="/faq">Perguntas frequentes</Link>
             <Link href="/contato">Contato</Link>
             <Link href="/simulador">Simulador</Link>
-            <Link href="/area-do-cliente">Área do cliente</Link>
+            <Link href="/area-do-cliente">Atendimento ao cliente</Link>
           </div>
           <div className="footer-contact">
             <h2>Vamos falar do seu negócio</h2>
@@ -81,6 +81,7 @@ export default function Footer() {
       </footer>
       <a
         className="whatsapp-float"
+        data-floating-contact
         href="/go/whatsapp?src=float"
         aria-label="Conversar com a Rei das Vendas no WhatsApp"
       >

@@ -61,6 +61,12 @@ const nextConfig: NextConfig = {
       { source: '/privacy', destination: '/privacidade', permanent: true },
       { source: '/solucoes', destination: '/servicos', permanent: true },
       { source: '/portfolio', destination: '/casos', permanent: true },
+      { source: '/cases', destination: '/casos', permanent: true },
+      {
+        source: '/servicos/seo-local-franca',
+        destination: '/seo-local-franca',
+        permanent: true,
+      },
       { source: '/projetos', destination: '/casos', permanent: true },
       { source: '/recursos', destination: '/blog', permanent: true },
       { source: '/modelos', destination: '/servicos', permanent: true },
@@ -77,7 +83,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/servicos/google-e-presenca-local',
-        destination: '/servicos/seo-local-franca',
+        destination: '/seo-local-franca',
         permanent: true,
       },
       {
@@ -97,7 +103,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/solucoes/seo-local-google-business',
-        destination: '/servicos/seo-local-franca',
+        destination: '/seo-local-franca',
         permanent: true,
       },
       {

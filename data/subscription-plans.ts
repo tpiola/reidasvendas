@@ -69,7 +69,7 @@ export interface SubscriptionPlan extends AnnualSubscriptionPrice {
   status: SubscriptionOfferStatus;
 }
 
-const sharedFeatures = [
+export const sharedSubscriptionFeatures = [
   'Site responsivo com contato pelo WhatsApp',
   'Revisão técnica de funcionamento e atualizações compatíveis com o projeto',
   'Relatório mensal de entregas e indicadores disponíveis',
@@ -117,7 +117,7 @@ export const subscriptionPlans: readonly SubscriptionPlan[] = [
     articlesPerMonth: 0,
     adjustmentsPerMonth: 2,
     features: [
-      ...sharedFeatures,
+      ...sharedSubscriptionFeatures,
       'Até 5 páginas de conteúdo no escopo inicial',
       '2 unidades de ajuste por mês, de até 20 minutos cada',
       'SEO técnico de base: títulos, descrições, sitemap e indexação elegível',
@@ -144,7 +144,7 @@ export const subscriptionPlans: readonly SubscriptionPlan[] = [
     articlesPerMonth: 1,
     adjustmentsPerMonth: 4,
     features: [
-      ...sharedFeatures,
+      ...sharedSubscriptionFeatures,
       'Até 10 páginas de conteúdo no escopo inicial',
       '1 artigo por mês com pauta e aprovação combinadas',
       '4 unidades de ajuste por mês, de até 20 minutos cada',
@@ -173,7 +173,7 @@ export const subscriptionPlans: readonly SubscriptionPlan[] = [
     articlesPerMonth: 2,
     adjustmentsPerMonth: 8,
     features: [
-      ...sharedFeatures,
+      ...sharedSubscriptionFeatures,
       'Até 15 páginas de conteúdo no escopo inicial',
       '2 artigos por mês com pauta e aprovação combinadas',
       '8 unidades de ajuste por mês, de até 20 minutos cada',

@@ -5,6 +5,7 @@ import {
   annualDiscount,
   calculateAnnualPrice,
   subscriptionOfferStatus,
+  sharedSubscriptionFeatures,
 } from '@/data/subscription-plans';
 
 const money = new Intl.NumberFormat('pt-BR', {
@@ -51,6 +52,14 @@ export default function Pricing({
         </p>
       )}
 
+      <div className="pricing-shared">
+        <h3>Em todos os planos</h3>
+        <ul>
+          {sharedSubscriptionFeatures.map((feature) => (
+            <li key={feature}>{feature}</li>
+          ))}
+        </ul>
+      </div>
       <div className="pricing-grid">
         {subscriptionPlans.map((plan) => {
           const annual = calculateAnnualPrice(plan.monthlyPrice);
@@ -125,22 +134,32 @@ export default function Pricing({
                   data-plan-id={plan.id}
                   data-billing-cycle={cycle}
                 >
-                  Escolher {plan.name} <span aria-hidden="true">↗</span>
+                  Pedir proposta do {plan.name}{' '}
+                  <span aria-hidden="true">↗</span>
                 </Link>
               ))}
-              <h4>O que entra no plano</h4>
+              <h4>O que diferencia este plano</h4>
               <ul className="pricing-features">
-                {plan.features.map((feature) => (
-                  <li key={feature}>
-                    <span aria-hidden="true">✓</span>
-                    {feature}
-                  </li>
-                ))}
+                {plan.features
+                  .filter(
+                    (feature) => !sharedSubscriptionFeatures.includes(feature),
+                  )
+                  .map((feature) => (
+                    <li key={feature}>
+                      <span aria-hidden="true">✓</span>
+                      {feature}
+                    </li>
+                  ))}
               </ul>
               <details className="pricing-limits">
                 <summary>
                   Limites e condições <span aria-hidden="true">+</span>
                 </summary>
+                <p>
+                  Ajuste é uma alteração pequena em texto, imagem ou
+                  configuração existente, dentro de até 20 minutos por unidade.
+                  Novas páginas e funcionalidades exigem avaliação de escopo.
+                </p>
                 <ul>
                   {plan.limits.map((limit) => (
                     <li key={limit}>{limit}</li>
@@ -229,9 +248,14 @@ export default function Pricing({
                   {subscriptionPlans.map((plan) => (
                     <td key={plan.id}>
                       <ul>
-                        {plan.features.map((feature) => (
-                          <li key={feature}>{feature}</li>
-                        ))}
+                        {plan.features
+                          .filter(
+                            (feature) =>
+                              !sharedSubscriptionFeatures.includes(feature),
+                          )
+                          .map((feature) => (
+                            <li key={feature}>{feature}</li>
+                          ))}
                       </ul>
                     </td>
                   ))}

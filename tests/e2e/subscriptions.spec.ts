@@ -195,7 +195,7 @@ test('annual comparison shows full yearly amounts and does not discount setup', 
       planCard.locator('.pricing-year strong [data-cycle="anual"]'),
     ).toContainText(plan.firstYear);
     await expect(
-      planCard.getByRole('link', { name: `Escolher ${plan.name}` }),
+      planCard.getByRole('link', { name: `Pedir proposta do ${plan.name}` }),
     ).toHaveAttribute(
       'href',
       `/diagnostico?plano=${plan.name.toLowerCase()}&ciclo=anual`,
@@ -212,8 +212,9 @@ test('annual comparison shows full yearly amounts and does not discount setup', 
   ).toHaveText('anual');
 });
 
-test('plan selection keeps context through qualification without PII in URLs', async ({
+test('plan interest opens a reviewable proposal directly, preserving cycle and without compulsory intake', async ({
   page,
+  request,
 }) => {
   await page.goto('/planos');
   await rejectOptionalCookies(page);
@@ -222,54 +223,52 @@ test('plan selection keeps context through qualification without PII in URLs', a
     .filter({ hasText: 'Anual' })
     .click();
   await card(page, 'Profissional')
-    .getByRole('link', { name: 'Escolher Profissional' })
+    .getByRole('link', { name: 'Pedir proposta do Profissional' })
     .click();
   await expect(page).toHaveURL(
     /\/diagnostico\?plano=profissional&ciclo=anual$/,
   );
-  await expect(page.locator('.subscription-intake')).toContainText(
-    'Plano Profissional',
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(
+    'Revise a proposta do Profissional.',
   );
-  await expect(page.locator('.subscription-intake input')).toHaveCount(0);
-  await page
-    .getByLabel('Qual é a atividade do negócio?', { exact: true })
-    .selectOption('servicos');
-  await page
-    .getByLabel('Como está sua presença hoje?', { exact: true })
-    .selectOption('site-existente');
-  await page
-    .getByLabel('O que precisa funcionar primeiro?', { exact: true })
-    .selectOption('contato');
-  await page.getByRole('button', { name: 'Revisar plano e condições' }).click();
-  await expect(page).toHaveURL(/\/checkout\?plano=profissional&ciclo=anual$/);
-  const query = new URL(page.url()).searchParams;
-  expect([...query.keys()].sort()).toEqual(['ciclo', 'plano']);
-  await expect(page.locator('.checkout-review')).toContainText('Profissional');
+  await expect(page.getByRole('heading', { level: 1 })).toBeInViewport();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(page.locator('main form, main select')).toHaveCount(0);
   await expect(page.locator('.checkout-totals')).toContainText('11.006,88');
   await expect(page.locator('.checkout-totals')).toContainText('2.497');
   await expect(page.locator('.checkout-totals')).toContainText('13.503,88');
-  await expect(page.locator('.checkout-grid')).toContainText(
-    'A contratação online ainda não está liberada',
+  await expect(page.locator('main')).toContainText(
+    'A contratação é feita por proposta',
   );
   await expect(
     page.getByRole('button', { name: 'Ir ao pagamento seguro' }),
   ).toHaveCount(0);
-  await expect(
-    page.getByRole('link', { name: /Validar plano no WhatsApp/ }),
-  ).toHaveAttribute('href', /plano=profissional.*ciclo=anual/);
-  const raw = await page.evaluate(() =>
-    sessionStorage.getItem('rdv-subscription-intake'),
+  const preview = page.locator('.proposal-message p');
+  await expect(preview).toContainText('plano Profissional, no ciclo anual');
+  const cta = page.getByRole('link', { name: /Pedir proposta no WhatsApp/ });
+  await expect(cta).toHaveAttribute('href', /plano=profissional.*ciclo=anual/);
+  // Resolve only the site's redirect; never submit a real message to WhatsApp.
+  const response = await request.get((await cta.getAttribute('href'))!, {
+    maxRedirects: 0,
+  });
+  expect(response.status()).toBe(302);
+  const destination = new URL(response.headers().location);
+  expect(destination.origin + destination.pathname).toBe(
+    'https://wa.me/5516992333344',
   );
-  expect(raw).not.toBeNull();
-  const intake = JSON.parse(raw!);
-  expect(Object.keys(intake).sort()).toEqual([
-    'cycle',
-    'expires',
-    'planId',
-    'presence',
-    'priority',
-    'segment',
-  ]);
+  expect(destination.searchParams.get('text')).toBe(
+    await preview.textContent(),
+  );
+  expect(
+    await page.evaluate(() =>
+      sessionStorage.getItem('rdv-subscription-intake'),
+    ),
+  ).toBeNull();
+  await expect(page.locator('.whatsapp-float')).toBeHidden();
+  await page.screenshot({
+    path: 'test-results/proposal-desktop.png',
+    fullPage: true,
+  });
 });
 
 test('checkout endpoint unavailable returns 503 and never a fake success or payment URL', async ({
@@ -406,7 +405,7 @@ for (const width of [320, 390]) {
     await page.goto('/checkout?plano=profissional&ciclo=anual');
     await expectNoRootOverflow(page);
     const contact = page.getByRole('link', {
-      name: /Validar plano no WhatsApp/,
+      name: /Pedir proposta no WhatsApp/,
     });
     await expect(contact).toBeVisible();
     expect((await contact.boundingBox())?.height).toBeGreaterThanOrEqual(44);
@@ -607,8 +606,8 @@ test.describe('server-rendered pricing without JavaScript', () => {
     await expect(page).toHaveURL(
       /\/diagnostico\?plano=profissional&ciclo=anual$/,
     );
-    await expect(page.locator('.subscription-intake')).toContainText(
-      'Plano Profissional',
+    await expect(page.locator('.checkout-review')).toContainText(
+      'Profissional',
     );
   });
 });

@@ -17,21 +17,25 @@ export default async function CheckoutPage({
 }) {
   const query = await searchParams;
   const { plan, cycle } = selectedSubscription(query.plano, query.ciclo);
+  const available =
+    !!plan &&
+    isCheckoutConfigured(plan.id, cycle === 'anual' ? 'annual' : 'monthly');
   return (
     <PageShell
-      title="Confira o que você está contratando."
-      description="Preço recorrente, implantação e responsabilidades precisam estar claros antes de cobrar."
+      title={
+        available
+          ? 'Confira o que você está contratando.'
+          : 'Revise sua proposta de site.'
+      }
+      description="Implantação, acompanhamento e condições por escrito antes de qualquer contratação."
       path="/checkout"
     >
       {plan ? (
         <SubscriptionCheckout
-            key={plan.id + cycle}
+          key={plan.id + cycle}
           planId={plan.id}
           cycle={cycle}
-          available={isCheckoutConfigured(
-            plan.id,
-            cycle === 'anual' ? 'annual' : 'monthly',
-          )}
+          available={available}
         />
       ) : (
         <div className="callout">

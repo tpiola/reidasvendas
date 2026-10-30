@@ -31,9 +31,9 @@ export default function HeroOrbit() {
       </div>
       <div className="royal-scene-footer">
         <p>
-          Uma presença conectada.
+          Encontrar. Entender. Entrar em contato.
           <br />
-          <strong>Do seu negócio ao seu cliente.</strong>
+          <strong>Site, busca local e atendimento conectados.</strong>
         </p>
         <button
           type="button"

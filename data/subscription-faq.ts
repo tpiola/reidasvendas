@@ -37,6 +37,6 @@ export const subscriptionFaq = [
   {
     question: 'O que acontece depois que eu escolho um plano?',
     answer:
-      'Você responde três perguntas de contexto, revisa valores e condições e confirma o escopo com a equipe. Quando o checkout estiver habilitado e a contratação aprovada, o pagamento ocorre no provedor. A confirmação real antecede o onboarding e a primeira entrega.',
+      'Você revisa os valores do plano e prepara um pedido de proposta no WhatsApp, sem cadastro ou perguntas obrigatórias. A equipe confirma escopo, prazo e condições por escrito. O início do trabalho depende de proposta e aceite; abrir a conversa não ativa assinatura ou cobrança.',
   },
 ] as const;

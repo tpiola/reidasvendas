@@ -4,7 +4,7 @@ import BrandLockup from '@/components/BrandLockup';
 
 const links = [
   ['/planos', 'Planos'],
-  ['/sites-para-pequenos-negocios', 'O que inclui'],
+  ['/sites-para-pequenos-negocios', 'Sites e presença'],
   ['/metodo', 'Método'],
   ['/casos', 'Trabalhos'],
   ['/blog', 'Conteúdo'],
@@ -67,7 +67,7 @@ export default function Header() {
                 </Link>
               ))}
               <Link href="/diagnostico">Diagnóstico</Link>
-              <Link href="/area-do-cliente">Área do cliente</Link>
+              <Link href="/area-do-cliente">Atendimento ao cliente</Link>
               <a href="/go/whatsapp?src=menu">Falar no WhatsApp ↗</a>
             </nav>
           </details>
