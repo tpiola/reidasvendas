@@ -330,14 +330,14 @@ export default function Home() {
           <div>
             <p className="studio-section-label">Veja a execução</p>
             <h2 id="portfolio-title">
-              Ideias que saíram
+              Sites e plataformas que saíram
               <br />
               <span>do papel para o ar.</span>
             </h2>
           </div>
           <div>
             <p>
-              Projetos próprios com propostas diferentes. Abra, navegue e veja
+              Exemplos publicados, com identidade e funções diferentes. Abra, navegue e veja
               como design, conteúdo e interação se encontram na prática.
             </p>
             <Link className="text-link" href="/cases">
@@ -360,23 +360,8 @@ export default function Home() {
                   Projeto 0{index + 1}
                 </span>
                 <span className="studio-project-wordmark">
-                  {index === 0 ? (
-                    <>
-                      Thiago
-                      <br />
-                      Piola<span>Saúde. Conhecimento. Cuidado.</span>
-                    </>
-                  ) : index === 1 ? (
-                    <>
-                      Escola
-                      <br />
-                      de Saúde<span>Aprender. Praticar. Evoluir.</span>
-                    </>
-                  ) : (
-                    <>
-                      SPES<span>Um espaço para a esperança.</span>
-                    </>
-                  )}
+                  {project.title}
+
                 </span>
                 <span className="studio-project-open">Explorar projeto ↗</span>
               </div>
@@ -393,6 +378,24 @@ export default function Home() {
           Portfólio próprio. As capas identificam os projetos; os links abrem os
           sites reais. Contexto e fontes na página de projetos.
         </p>
+      </section>
+
+      <section className="subscription-section container rdv-ecosystem" aria-labelledby="ecosystem-title">
+        <div className="subscription-heading">
+          <div>
+            <p className="studio-section-label">Um ecossistema para evoluir com a empresa</p>
+            <h2 id="ecosystem-title">Comece pelo site.<br/><span>Avance até sua plataforma.</span></h2>
+          </div>
+          <div>
+            <p>Um negócio local pode precisar de um site para ser encontrado. Outro precisa de catálogo, agendamento, estoque e fluxos de trabalho. Projetamos a estrutura adequada ao estágio da operação, sem vender módulos que ainda não estão implantados.</p>
+            <Link className="text-link" href="/diagnostico">Solicitar Análise Estratégica ↗</Link>
+          </div>
+        </div>
+        <div className="rdv-ecosystem-grid">
+          <article className="rdv-ecosystem-item"><span>01 / ENTRADA</span><h3>Site e presença local</h3><p>Design profissional, páginas de serviços, busca no Google e contato com contexto.</p><Link href="/sites-para-pequenos-negocios">Conhecer a solução ↗</Link></article>
+          <article className="rdv-ecosystem-item"><span>02 / EXPANSÃO</span><h3>Loja, catálogo e fluxos</h3><p>Jornadas de compra, pedidos e automações para reduzir atritos do atendimento.</p><Link href="/servicos">Explorar possibilidades ↗</Link></article>
+          <article className="rdv-ecosystem-item"><span>03 / PLATAFORMA</span><h3>Ferramentas empresariais</h3><p>Visão demonstrativa de estoque, alertas e indicadores. Produto ainda em desenvolvimento, sem assinatura operacional.</p><Link href="/plataforma/demo">Ver demonstração ↗</Link></article>
+        </div>
       </section>
 
       <section className="studio-difference subscription-comparison-section">
