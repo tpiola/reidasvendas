@@ -19,7 +19,7 @@ const modules = [
   {
     href: '/sites-para-pequenos-negocios',
     label: 'Design + desenvolvimento',
-    title: 'Um site à altura do tudo que você.',
+    title: 'Um site à altura do seu negócio.',
     text: 'Mostre por que escolher sua empresa. Páginas rápidas, conteúdo que explica sua oferta e um próximo passo fácil de encontrar.',
     detail: 'Da primeira impressão ao pedido de orçamento.',
     type: 'site',
