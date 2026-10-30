@@ -539,9 +539,9 @@ export default function Home() {
               </p>
               <a
                 className="button studio-primary"
-                href="/go/whatsapp?src=final"
+                href="/diagnostico"
               >
-                Solicitar Análise Estratégica <span aria-hidden="true">↗</span>
+                Preencher análise estratégica <span aria-hidden="true">↗</span>
               </a>
               <Link className="studio-final-secondary" href="/diagnostico">
                 Prefiro preencher o briefing →
