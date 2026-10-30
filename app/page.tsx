@@ -19,7 +19,7 @@ const modules = [
   {
     href: '/sites-para-pequenos-negocios',
     label: 'Design + desenvolvimento',
-    title: 'Um site à altura do seu negócio.',
+    title: 'Um site à altura do tudo que você.',
     text: 'Mostre por que escolher sua empresa. Páginas rápidas, conteúdo que explica sua oferta e um próximo passo fácil de encontrar.',
     detail: 'Da primeira impressão ao pedido de orçamento.',
     type: 'site',
@@ -170,17 +170,17 @@ export default function Home() {
               <span /> Unidade Externa de Tecnologia · Franca / Brasil
             </p>
             <h1 id="home-title">
-              Seu negócio merece
+              Você colocou sua vida
               <br />
               <span>
-                uma operação digital
+                nesse negócio. O digital
                 <br />
-                à altura.
+                precisa acompanhar.
               </span>
             </h1>
             <p className="studio-hero-description">
-              Atraia clientes com presença de autoridade, responda sem perder oportunidades e acompanhe o que importa. Integramos{' '}
-              <strong>site, Google, atendimento e indicadores</strong> com clareza, método e execução técnica.
+              Por trás de cada empresa há alguém que abriu as portas cedo, resolveu problemas difíceis e continuou acreditando. Sua presença digital deve contar essa história e ajudar o próximo cliente a confiar em você. Unimos{' '}
+              <strong>sites, Google, atendimento e tecnologia</strong> para transformar dedicação em uma experiência profissional.
             </p>
             <div className="studio-hero-actions">
               <Link
@@ -195,7 +195,7 @@ export default function Home() {
               </a>
             </div>
             <p className="studio-hero-assurance">
-              Primeiro entendemos a operação. Depois especificamos a solução.
+              Você conhece o seu negócio como ninguém. Nós ouvimos antes de construir.
               <br />
               <span>Escopo e investimento apresentados antes de começar.</span>
             </p>
@@ -215,9 +215,9 @@ export default function Home() {
       <div className="studio-audience">
         <div className="container">
           <p>
-            O seu tamanho pode mudar.
+            Grandes histórias começam de muitos tamanhos.
             <br />
-            <strong>O cuidado com a sua marca, não.</strong>
+            <strong>Toda empresa merece ser levada a sério.</strong>
           </p>
           <div>
             <span>Comércio</span>
@@ -240,16 +240,14 @@ export default function Home() {
           <div>
             <p className="studio-section-label">Presença que trabalha junto</p>
             <h2 id="services-title">
-              Bonito para olhar.
+              Feito para inspirar confiança.
               <br />
-              <span>Claro para decidir.</span>
+              <span>Simples para escolher você.</span>
             </h2>
           </div>
           <div>
             <p>
-              Não basta colocar sua empresa na internet. Cada página precisa
-              explicar o que você faz, transmitir confiança e ajudar o visitante
-              a dar o próximo passo.
+              Quando alguém entra no seu site, precisa sentir o cuidado que você coloca no seu trabalho. Criamos páginas que mostram sua identidade, explicam seu valor e facilitam o primeiro contato.
             </p>
             <Link className="text-link" href="/servicos">
               Explore todos os serviços ↗
@@ -308,9 +306,7 @@ export default function Home() {
             </div>
             <div>
               <p>
-                Um site não atende sozinho. Construímos a estrutura, organizamos
-                o contato e combinamos como acompanhar a evolução. Explore as
-                etapas abaixo.
+                A tecnologia tem um propósito humano: fazer com que menos pessoas esperem por uma resposta, menos oportunidades se percam e você tenha mais tranquilidade para cuidar do negócio. Explore cada etapa.
               </p>
               <Link className="text-link" href="/metodo">
                 Conheça nosso método ↗
@@ -402,9 +398,9 @@ export default function Home() {
         <div className="container">
           <div className="subscription-heading">
             <h2>
-              Seu crescimento não pode
+              O seu esforço merece
               <br />
-              <span>depender do improviso.</span>
+              <span>uma estrutura à altura.</span>
             </h2>
             <p>
               O que você faz. Para quem. Como entrar em contato. Veja como uma
@@ -526,19 +522,18 @@ export default function Home() {
 
       <section className="studio-final">
         <div className="container">
-          <p>Seu próximo capítulo começa com uma decisão.</p>
+          <p>O que você construiu merece continuar crescendo.</p>
           <div className="studio-final-grid">
             <h2>
-              Vamos colocar
+              Vamos valorizar
               <br />
               seu negócio
               <br />
-              <span>em evidência.</span>
+              <span>construiu.</span>
             </h2>
             <div>
               <p>
-                Conte o que você faz e o que precisa melhorar. Vamos transformar
-                isso em um projeto com direção, escopo e próximos passos.
+                Conte como sua empresa começou, onde quer chegar e o que hoje dificulta o caminho. Vamos ouvir, diagnosticar e desenhar a tecnologia certa para essa próxima fase.
               </p>
               <a
                 className="button studio-primary"
