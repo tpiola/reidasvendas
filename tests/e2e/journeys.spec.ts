@@ -289,7 +289,7 @@ test('keyboard and reduced motion keep navigation and reading available', async 
   await expect(second).toBeFocused();
   await expect(second).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('tabpanel')).toContainText(
-    'Antes de trazer mais visitas',
+    'Visita sem próximo passo vira oportunidade perdida.',
   );
   await second.press('ArrowLeft');
   await expect(first).toBeFocused();
