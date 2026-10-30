@@ -81,7 +81,7 @@ body {
   display: block;
   min-height: 0;
   padding: 0;
-  background: var(--studio-paper);
+  background: #fff;
   overflow: clip;
 }
 .studio-hero-grid {
@@ -109,7 +109,7 @@ body {
   flex-shrink: 0;
 }
 .studio-hero h1 {
-  font-size: clamp(3rem, 5vw, 5.4rem);
+  font-size: clamp(2.5rem, 4.4vw, 4.65rem);
   font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.065em;
@@ -276,10 +276,10 @@ body {
 }
 .royal-core {
   position: absolute;
-  width: 53%;
+  width: 40%;
   aspect-ratio: 1;
-  left: 23.5%;
-  top: 23.5%;
+  left: 30%;
+  top: 30%;
   border-radius: 29%;
   background: #07090d;
   box-shadow:

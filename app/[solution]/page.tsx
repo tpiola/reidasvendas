@@ -16,7 +16,13 @@ export async function generateMetadata({
   const { solution } = await params;
   const item = subscriptionSolutions.find((entry) => entry.slug === solution);
   return item
-    ? meta(item.name + ' para PME', item.description, '/' + item.slug)
+    ? meta(
+        item.slug === 'sites-para-pequenos-negocios'
+          ? 'Sites para pequenos negócios'
+          : item.name + ' para PME',
+        item.description,
+        '/' + item.slug,
+      )
     : {};
 }
 export default async function SolutionPage({

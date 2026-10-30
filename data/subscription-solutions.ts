@@ -37,8 +37,8 @@ export const subscriptionSolutions = [
     includes: [
       'Títulos, descrições, canonical, sitemap e dados estruturados coerentes.',
       'Página de serviço e área atendida com informação própria.',
-      'Checklist de coerência do Perfil da Empresa, quando elegível.',
-      'Relatório com consultas e contatos apenas quando houver acesso e dados.',
+      'Auditoria técnica, mapa de intenção e revisão do Perfil da Empresa, quando elegível.',
+      'Acompanhamento no Search Console e relatório com consultas e contatos quando houver acesso e dados.',
     ],
     excludes:
       'Compra de avaliações, endereços fictícios, promessa de topo e criação massiva de páginas por bairro não fazem parte do trabalho. Verificação e publicação no Google dependem da plataforma.',

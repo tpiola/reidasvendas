@@ -1,3 +1,4 @@
+import { servicePath } from '@/lib/service-path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import content from '@/data/content.json';
@@ -16,7 +17,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const s = content.services.find((s) => s.slug === slug);
-  return s ? meta(s.title, s.metaDescription, '/servicos/' + s.slug) : {};
+  return s ? meta(s.title, s.metaDescription, servicePath(s.slug)) : {};
 }
 export default async function Page({
   params,
@@ -30,7 +31,7 @@ export default async function Page({
     <PageShell
       title={s.title}
       description={s.description}
-      path={'/servicos/' + s.slug}
+      path={servicePath(s.slug)}
     >
       <div className="split-content">
         <div className="prose">
@@ -92,7 +93,7 @@ export default async function Page({
           {s.related.map((slug) => {
             const r = content.services.find((x) => x.slug === slug);
             return r ? (
-              <Link key={slug} href={'/servicos/' + slug}>
+              <Link key={slug} href={servicePath(slug)}>
                 {r.title} ↗
               </Link>
             ) : null;
@@ -108,7 +109,7 @@ export default async function Page({
           '@type': 'Service',
           name: s.title,
           description: s.description,
-          url: SITE + '/servicos/' + s.slug,
+          url: SITE + servicePath(s.slug),
           provider: { '@id': SITE + '/#organization' },
           areaServed: { '@type': 'City', name: 'Franca' },
           serviceType: s.category,

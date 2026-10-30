@@ -9,7 +9,6 @@ const mainRoutes = [
   '/diagnostico',
   '/servicos',
   '/resultados',
-  '/cases',
   '/blog',
   '/faq',
   '/sobre',
@@ -23,10 +22,11 @@ const mainRoutes = [
   '/checkout',
   '/onboarding',
   '/area-do-cliente',
+  '/plataforma/demo',
 ];
-const serviceRoutes = content.services.map(
-  (service) => `/servicos/${service.slug}`,
-);
+const serviceRoutes = content.services
+  .filter((service) => service.slug !== 'seo-local-franca')
+  .map((service) => `/servicos/${service.slug}`);
 const articleRoutes = [...content.articles, ...subscriptionArticles].map(
   (article) => article.route,
 );
@@ -95,7 +95,7 @@ test('sitemap, robots, manifest and WhatsApp redirect stay consistent', async ({
   expect(location.pathname).toBe('/5516992333344');
 });
 
-for (const width of [320, 375, 390, 414, 768, 1440])
+for (const width of [320, 360, 375, 390, 414, 768, 1024, 1440])
   test(`responsive ${width}px: navigation, content and controls stay within viewport`, async ({
     page,
   }) => {
@@ -149,6 +149,7 @@ for (const route of [
   '/metodo',
   '/faq',
   '/privacidade',
+  '/plataforma/demo',
 ])
   test(`accessibility AA baseline ${route}`, async ({ page }) => {
     await page.goto(route);
@@ -289,7 +290,7 @@ test('keyboard and reduced motion keep navigation and reading available', async 
   await expect(second).toBeFocused();
   await expect(second).toHaveAttribute('aria-selected', 'true');
   await expect(page.getByRole('tabpanel')).toContainText(
-    'Visita sem próximo passo vira oportunidade perdida.',
+    'Seu visitante sabe como continuar?',
   );
   await second.press('ArrowLeft');
   await expect(first).toBeFocused();
@@ -343,3 +344,39 @@ for (const route of [
     expect(box?.height).toBeGreaterThanOrEqual(44);
   });
 }
+
+test('consolidated URLs redirect once, preserve attribution and stay out of the sitemap', async ({
+  request,
+}) => {
+  for (const [from, to] of [
+    ['/cases', '/casos'],
+    ['/servicos/seo-local-franca', '/seo-local-franca'],
+    ['/servicos/google-e-presenca-local', '/seo-local-franca'],
+    ['/solucoes/seo-local-google-business', '/seo-local-franca'],
+  ]) {
+    const response = await request.get(from + '?utm_source=google', {
+      maxRedirects: 0,
+    });
+    expect([301, 308]).toContain(response.status());
+    const target = new URL(
+      response.headers().location,
+      'https://www.reidasvendas.com.br',
+    );
+    expect(target.pathname).toBe(to);
+    expect(target.searchParams.get('utm_source')).toBe('google');
+    const destination = await request.get(target.pathname, { maxRedirects: 0 });
+    expect(destination.status()).toBe(200);
+  }
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  for (const path of [
+    '/cases',
+    '/servicos/seo-local-franca',
+    '/plataforma/demo',
+  ])
+    expect(sitemap).not.toContain(path);
+  const demo = await (await request.get('/plataforma/demo')).text();
+  expect(demo).toContain('name="robots" content="noindex, follow"');
+  expect(demo).toContain(
+    'rel="canonical" href="https://www.reidasvendas.com.br/plataforma/demo"',
+  );
+});

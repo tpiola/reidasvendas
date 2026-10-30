@@ -3,7 +3,7 @@ import portfolio from '@/data/portfolio.json';
 import PageShell from '@/components/PageShell';
 import { metadata as meta } from '@/lib/site';
 export const metadata = meta(
-  'Trabalhos e evidências de execução',
+  'Projetos publicados e escopos',
   'Projetos públicos para avaliar execução técnica. Casos comerciais só serão publicados com contexto, período, dados e autorização.',
   '/casos',
 );
@@ -20,6 +20,12 @@ export default function CasesPage() {
             <p className="eyebrow">Referência técnica</p>
             <h2>{project.title}</h2>
             <p>{project.description}</p>
+            <h3>O que foi construído</h3>
+            <ul>
+              {project.observedFeatures.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
             <a
               className="text-link"
               href={project.url}
@@ -45,6 +51,8 @@ export default function CasesPage() {
           <li>O que foi executado e em qual período?</li>
           <li>Como o resultado foi registrado e atribuído?</li>
           <li>Que custos e mudanças externas influenciaram?</li>
+          <li>Quanto foi investido em mídia e operação?</li>
+          <li>O resultado representa contato, venda, receita ou margem?</li>
         </ul>
         <Link className="button" href="/metodo">
           Conferir o método

@@ -72,9 +72,10 @@ export function whatsappMessage(context: WhatsAppContext = {}): string {
     cycle = sanitizeBillingCycle(context.cycle);
   const src = sanitizeMachineValue(context.src) || '';
   const page = sanitizePath(context.page);
-  let intent = 'Quero um site que gere leads e vendas para minha empresa.';
+  let intent =
+    'Quero conversar sobre um site para apresentar meu negócio e facilitar o contato dos clientes.';
   if (plan)
-    intent = `Quero conversar sobre o plano ${planNames[plan]}${cycle ? `, com cobrança ${cycle}` : ''}, para ter um site que gere leads e vendas.`;
+    intent = `Quero receber uma proposta do plano ${planNames[plan]}${cycle ? `, no ciclo ${cycle}` : ''}. Gostaria de confirmar o escopo, o prazo e as condições antes de contratar.`;
   else if (src === 'quiz' && /^[0-3]$/.test(context.score || ''))
     intent = `Fiz a autoavaliação: ${context.score}/3 fundamentos presentes. Quero entender o que priorizar para ter um site que gere leads e vendas.`;
   else if (src.includes('diagnostico') || page === '/diagnostico')

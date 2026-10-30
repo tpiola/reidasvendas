@@ -1,25 +1,23 @@
 /* eslint-disable @next/next/no-html-link-for-pages -- Tracked WhatsApp redirects require a full navigation. */
 import Link from 'next/link';
-import content from '@/data/content.json';
 import portfolio from '@/data/portfolio.json';
 import Pricing from '@/components/Pricing';
 import IntentNavigator from '@/components/IntentNavigator';
-import DynamicFeed from '@/components/DynamicFeed';
 import HeroOrbit from '@/components/HeroOrbit';
 import { MaturityQuiz } from '@/components/MaturityQuiz';
 import { CommercialFlow, BeforeAfter } from '@/components/CommercialFlow';
 import { metadata as createMetadata } from '@/lib/site';
 
 export const metadata = createMetadata(
-  'Soberania Digital e Governança de Resultados em Franca',
-  'Digital completo, operação correta e crescimento com controle: sites, busca local, atendimento e tecnologia empresarial em Franca e no Brasil.',
+  'Sites profissionais em Franca',
+  'Sites profissionais, busca local e WhatsApp para apresentar seu negócio e facilitar o contato. Franca e todo o Brasil, com escopo e investimento definidos na proposta.',
   '/',
 );
 const modules = [
   {
     href: '/sites-para-pequenos-negocios',
     label: 'Design + desenvolvimento',
-    title: 'Um site à altura do tudo que você.',
+    title: 'Um site à altura do seu negócio.',
     text: 'Mostre por que escolher sua empresa. Páginas rápidas, conteúdo que explica sua oferta e um próximo passo fácil de encontrar.',
     detail: 'Da primeira impressão ao pedido de orçamento.',
     type: 'site',
@@ -167,20 +165,16 @@ export default function Home() {
         <div className="container studio-hero-grid">
           <div className="studio-hero-copy">
             <p className="studio-kicker">
-              <span /> Unidade Externa de Tecnologia · Franca / Brasil
+              <span /> Sites e presença digital · Franca e todo o Brasil
             </p>
             <h1 id="home-title">
-              Você colocou sua vida
-              <br />
-              <span>
-                nesse negócio. O digital
-                <br />
-                precisa acompanhar.
-              </span>
+              Um site que apresenta seu negócio{' '}
+              <span>e facilita o próximo contato.</span>
             </h1>
             <p className="studio-hero-description">
-              Por trás de cada empresa há alguém que abriu as portas cedo, resolveu problemas difíceis e continuou acreditando. Sua presença digital deve contar essa história e ajudar o próximo cliente a confiar em você. Unimos{' '}
-              <strong>sites, Google, atendimento e tecnologia</strong> para transformar dedicação em uma experiência profissional.
+              Criamos <strong>sites profissionais</strong> e conectamos sua
+              oferta à busca local e ao WhatsApp. Com escopo, investimento e
+              responsabilidades definidos antes de começar.
             </p>
             <div className="studio-hero-actions">
               <Link
@@ -188,16 +182,18 @@ export default function Home() {
                 href="/diagnostico"
                 data-event="click_cta_diagnostico"
               >
-                Solicitar Análise Estratégica <span aria-hidden="true">↗</span>
+                Conversar sobre meu projeto <span aria-hidden="true">↗</span>
               </Link>
               <a className="studio-project-link" href="#trabalhos">
-                Conhecer a estrutura <span aria-hidden="true">↓</span>
+                Ver trabalhos publicados <span aria-hidden="true">↓</span>
               </a>
             </div>
             <p className="studio-hero-assurance">
-              Você conhece o seu negócio como ninguém. Nós ouvimos antes de construir.
+              Seu negócio merece o cuidado que você coloca nele.
               <br />
-              <span>Escopo e investimento apresentados antes de começar.</span>
+              <span>
+                Conversa inicial gratuita. Proposta antes da contratação.
+              </span>
             </p>
           </div>
           <HeroOrbit />
@@ -212,22 +208,62 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="studio-audience">
-        <div className="container">
-          <p>
-            Grandes histórias começam de muitos tamanhos.
-            <br />
-            <strong>Toda empresa merece ser levada a sério.</strong>
-          </p>
+      <section
+        id="trabalhos"
+        className="subscription-section container studio-work"
+        aria-labelledby="portfolio-title"
+      >
+        <div className="subscription-heading">
           <div>
-            <span>Comércio</span>
-            <span>Serviços</span>
-            <span>Clínicas</span>
-            <span>Indústrias</span>
-            <span>Profissionais</span>
+            <p className="studio-section-label">Veja a execução</p>
+            <h2 id="portfolio-title">
+              Sites e plataformas que saíram
+              <br />
+              <span>do papel para o ar.</span>
+            </h2>
+          </div>
+          <div>
+            <p>
+              Exemplos publicados, com identidade e funções diferentes. Abra,
+              navegue e veja como design, conteúdo e interação se encontram na
+              prática.
+            </p>
+            <Link className="text-link" href="/casos">
+              Conheça os projetos e seu contexto ↗
+            </Link>
           </div>
         </div>
-      </div>
+        <div className="studio-projects">
+          {portfolio.map((project, index) => (
+            <a
+              className={`studio-project studio-project-${project.id}`}
+              key={project.id}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Abrir ${project.title}, em nova aba`}
+            >
+              <div className="studio-project-visual" aria-hidden="true">
+                <span className="studio-project-index">
+                  Projeto 0{index + 1}
+                </span>
+                <span className="studio-project-wordmark">{project.title}</span>
+                <span className="studio-project-open">Explorar projeto ↗</span>
+              </div>
+              <div className="studio-project-caption">
+                <span>{project.category}</span>
+                <h3>
+                  {project.title} <span aria-hidden="true">↗</span>
+                </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p className="subscription-evidence-note">
+          Portfólio próprio. As capas identificam os projetos; os links abrem os
+          sites reais. Contexto e fontes na página de projetos.
+        </p>
+      </section>
 
       <IntentNavigator />
 
@@ -247,7 +283,9 @@ export default function Home() {
           </div>
           <div>
             <p>
-              Quando alguém entra no seu site, precisa sentir o cuidado que você coloca no seu trabalho. Criamos páginas que mostram sua identidade, explicam seu valor e facilitam o primeiro contato.
+              Quando alguém entra no seu site, precisa sentir o cuidado que você
+              coloca no seu trabalho. Criamos páginas que mostram sua
+              identidade, explicam seu valor e facilitam o primeiro contato.
             </p>
             <Link className="text-link" href="/servicos">
               Explore todos os serviços ↗
@@ -306,7 +344,10 @@ export default function Home() {
             </div>
             <div>
               <p>
-                A tecnologia tem um propósito humano: fazer com que menos pessoas esperem por uma resposta, menos oportunidades se percam e você tenha mais tranquilidade para cuidar do negócio. Explore cada etapa.
+                A tecnologia tem um propósito humano: fazer com que menos
+                pessoas esperem por uma resposta, menos oportunidades se percam
+                e você tenha mais tranquilidade para cuidar do negócio. Explore
+                cada etapa.
               </p>
               <Link className="text-link" href="/metodo">
                 Conheça nosso método ↗
@@ -318,79 +359,62 @@ export default function Home() {
       </section>
 
       <section
-        id="trabalhos"
-        className="subscription-section container studio-work"
-        aria-labelledby="portfolio-title"
+        className="subscription-section container rdv-ecosystem"
+        aria-labelledby="ecosystem-title"
       >
         <div className="subscription-heading">
           <div>
-            <p className="studio-section-label">Veja a execução</p>
-            <h2 id="portfolio-title">
-              Sites e plataformas que saíram
+            <p className="studio-section-label">
+              Um ecossistema para evoluir com a empresa
+            </p>
+            <h2 id="ecosystem-title">
+              Comece pelo site.
               <br />
-              <span>do papel para o ar.</span>
+              <span>Avance até sua plataforma.</span>
             </h2>
           </div>
           <div>
             <p>
-              Exemplos publicados, com identidade e funções diferentes. Abra, navegue e veja
-              como design, conteúdo e interação se encontram na prática.
+              Um negócio local pode precisar de um site para ser encontrado.
+              Outro precisa de catálogo, agendamento, estoque e fluxos de
+              trabalho. Projetamos a estrutura adequada ao estágio da operação,
+              sem vender módulos que ainda não estão implantados.
             </p>
-            <Link className="text-link" href="/cases">
-              Conheça os projetos e seu contexto ↗
+            <Link className="text-link" href="/diagnostico">
+              Solicitar Análise Estratégica ↗
             </Link>
           </div>
         </div>
-        <div className="studio-projects">
-          {portfolio.map((project, index) => (
-            <a
-              className={`studio-project studio-project-${project.id}`}
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Abrir ${project.title}, em nova aba`}
-            >
-              <div className="studio-project-visual" aria-hidden="true">
-                <span className="studio-project-index">
-                  Projeto 0{index + 1}
-                </span>
-                <span className="studio-project-wordmark">
-                  {project.title}
-
-                </span>
-                <span className="studio-project-open">Explorar projeto ↗</span>
-              </div>
-              <div className="studio-project-caption">
-                <span>{project.category}</span>
-                <h3>
-                  {project.title} <span aria-hidden="true">↗</span>
-                </h3>
-              </div>
-            </a>
-          ))}
-        </div>
-        <p className="subscription-evidence-note">
-          Portfólio próprio. As capas identificam os projetos; os links abrem os
-          sites reais. Contexto e fontes na página de projetos.
-        </p>
-      </section>
-
-      <section className="subscription-section container rdv-ecosystem" aria-labelledby="ecosystem-title">
-        <div className="subscription-heading">
-          <div>
-            <p className="studio-section-label">Um ecossistema para evoluir com a empresa</p>
-            <h2 id="ecosystem-title">Comece pelo site.<br/><span>Avance até sua plataforma.</span></h2>
-          </div>
-          <div>
-            <p>Um negócio local pode precisar de um site para ser encontrado. Outro precisa de catálogo, agendamento, estoque e fluxos de trabalho. Projetamos a estrutura adequada ao estágio da operação, sem vender módulos que ainda não estão implantados.</p>
-            <Link className="text-link" href="/diagnostico">Solicitar Análise Estratégica ↗</Link>
-          </div>
-        </div>
         <div className="rdv-ecosystem-grid">
-          <article className="rdv-ecosystem-item"><span>01 / ENTRADA</span><h3>Site e presença local</h3><p>Design profissional, páginas de serviços, busca no Google e contato com contexto.</p><Link href="/sites-para-pequenos-negocios">Conhecer a solução ↗</Link></article>
-          <article className="rdv-ecosystem-item"><span>02 / EXPANSÃO</span><h3>Loja, catálogo e fluxos</h3><p>Jornadas de compra, pedidos e automações para reduzir atritos do atendimento.</p><Link href="/servicos">Explorar possibilidades ↗</Link></article>
-          <article className="rdv-ecosystem-item"><span>03 / PLATAFORMA</span><h3>Ferramentas empresariais</h3><p>Visão demonstrativa de estoque, alertas e indicadores. Produto ainda em desenvolvimento, sem assinatura operacional.</p><Link href="/plataforma/demo">Ver demonstração ↗</Link></article>
+          <article className="rdv-ecosystem-item">
+            <span>01 / ENTRADA</span>
+            <h3>Site e presença local</h3>
+            <p>
+              Design profissional, páginas de serviços, busca no Google e
+              contato com contexto.
+            </p>
+            <Link href="/sites-para-pequenos-negocios">
+              Conhecer a solução ↗
+            </Link>
+          </article>
+          <article className="rdv-ecosystem-item">
+            <span>02 / EXPANSÃO</span>
+            <h3>Loja, catálogo e fluxos</h3>
+            <p>
+              Jornadas de compra, pedidos e automações para reduzir atritos do
+              atendimento.
+            </p>
+            <Link href="/servicos">Explorar possibilidades ↗</Link>
+          </article>
+          <article className="rdv-ecosystem-item">
+            <span>03 / PLATAFORMA</span>
+            <h3>Ferramentas empresariais</h3>
+            <p>
+              Visão demonstrativa de estoque, alertas e indicadores. Produto
+              ainda em desenvolvimento, sem assinatura operacional.
+            </p>
+            <Link href="/plataforma/demo">Ver demonstração ↗</Link>
+          </article>
         </div>
       </section>
 
@@ -470,23 +494,6 @@ export default function Home() {
       </section>
 
       <section
-        className="subscription-section container studio-content"
-        aria-labelledby="content-title"
-      >
-        <div className="subscription-heading">
-          <h2 id="content-title">
-            Decisões melhores
-            <br />
-            <span>começam com clareza.</span>
-          </h2>
-          <Link className="text-link" href="/blog">
-            Explore os guias práticos ↗
-          </Link>
-        </div>
-        <DynamicFeed items={content.feed} />
-      </section>
-
-      <section
         className="subscription-section container subscription-faq"
         aria-labelledby="faq-title"
       >
@@ -527,22 +534,19 @@ export default function Home() {
             <h2>
               Vamos valorizar
               <br />
-              seu negócio
-              <br />
-              <span>construiu.</span>
+              <span>o que você construiu.</span>
             </h2>
             <div>
               <p>
-                Conte como sua empresa começou, onde quer chegar e o que hoje dificulta o caminho. Vamos ouvir, diagnosticar e desenhar a tecnologia certa para essa próxima fase.
+                Conte como sua empresa começou, onde quer chegar e o que hoje
+                dificulta o caminho. Vamos ouvir, diagnosticar e desenhar a
+                tecnologia certa para essa próxima fase.
               </p>
-              <a
-                className="button studio-primary"
-                href="/diagnostico"
-              >
-                Preencher análise estratégica <span aria-hidden="true">↗</span>
+              <a className="button studio-primary" href="/diagnostico">
+                Preparar meu projeto <span aria-hidden="true">↗</span>
               </a>
-              <Link className="studio-final-secondary" href="/diagnostico">
-                Prefiro preencher o briefing →
+              <Link className="studio-final-secondary" href="/planos">
+                Comparar planos e escopos →
               </Link>
             </div>
           </div>
