@@ -30,6 +30,6 @@ test('brand motion can be paused with the keyboard and respects a changed motion
   );
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expect(
-    page.getByRole('link', { name: 'Solicitar Análise Estratégica' }),
+    page.getByRole('link', { name: 'Solicitar Análise Estratégica' }).first(),
   ).toHaveAttribute('href', '/diagnostico');
 });
