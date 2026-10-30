@@ -55,8 +55,12 @@ async function expectNoRootOverflow(page: Page) {
     .evaluateAll((elements) =>
       elements
         .filter((element) => {
-          // The comparison table is deliberately horizontally scrollable.
-          if (element.closest('.plan-comparison-scroll, .proof-feed'))
+          // The comparison table scrolls by design; the anti-spam honeypot is intentionally offscreen.
+          if (
+            element.closest(
+              '.plan-comparison-scroll, .proof-feed, .honeypot[aria-hidden="true"]',
+            )
+          )
             return false;
           const box = element.getBoundingClientRect();
           return (
@@ -411,8 +415,8 @@ for (const width of [320, 390]) {
     expect((await contact.boundingBox())?.height).toBeGreaterThanOrEqual(44);
     await page.goto('/');
     await expectNoRootOverflow(page);
-    await expect(page.locator('.commercial-flow')).toBeVisible();
-    await expect(page.locator('.before-after')).toBeVisible();
+    await expect(page.locator('#planos .pricing-card')).toHaveCount(3);
+    await expect(page.locator('.home-contact .button')).toBeVisible();
   });
 }
 
@@ -433,84 +437,89 @@ for (const route of ['/planos', '/checkout?plano=profissional&ciclo=anual']) {
   });
 }
 
-test('conceptual flow and comparison work with keyboard and announce the selected content', async ({
+test('focused home keeps investment and proposal context in both billing cycles', async ({
   page,
 }) => {
   await page.goto('/');
   await rejectOptionalCookies(page);
-  const flow = page.locator('.commercial-flow');
-  const steps = flow.getByRole('button');
-  await expect(steps).toHaveCount(4);
-  await expect(flow).toContainText('Não representa leads reais');
-  await steps.nth(0).focus();
-  await steps.nth(0).press('ArrowRight');
-  await expect(steps.nth(1)).toBeFocused();
-  await expect(steps.nth(1)).toHaveAttribute('aria-pressed', 'true');
-  await steps.nth(1).press('End');
-  await expect(steps.nth(3)).toBeFocused();
-  await expect(flow.locator('[aria-live="polite"]')).toContainText(
-    'Etapa 4 de 4',
+  await expect(page.locator('.home-focused > section')).toHaveCount(5);
+  await expect(page.locator('main')).not.toContainText(
+    'Ferramentas empresariais',
   );
-  await steps.nth(3).press('Home');
-  await expect(steps.nth(0)).toHaveAttribute('aria-pressed', 'true');
-  await steps.nth(2).focus();
-  await steps.nth(2).press('Enter');
-  await expect(steps.nth(2)).toHaveAttribute('aria-pressed', 'true');
-  await steps.nth(3).focus();
-  await steps.nth(3).press('Space');
-  await expect(steps.nth(3)).toHaveAttribute('aria-pressed', 'true');
-  const comparison = page.locator('.before-after');
-  const before = comparison.getByRole('button', {
-    name: 'Página sem caminho',
-    exact: true,
-  });
-  const after = comparison.getByRole('button', {
-    name: 'Presença acompanhada',
-    exact: true,
-  });
-  await before.focus();
-  await before.press('Enter');
-  await expect(before).toHaveAttribute('aria-pressed', 'true');
-  await expect(after).toHaveAttribute('aria-pressed', 'false');
-  await after.press('Space');
-  await expect(after).toHaveAttribute('aria-pressed', 'true');
-  await expect(comparison.locator('[aria-live="polite"]')).toContainText(
-    'Cada parte ajuda a continuar a conversa',
-  );
-  await expect(comparison).toContainText('Não é um antes e depois de cliente');
-  for (const svg of await page
-    .locator('.commercial-flow svg, .before-after svg')
-    .all()) {
-    await expect(svg).toHaveAttribute('aria-hidden', 'true');
-    await expect(svg).toHaveAttribute('focusable', 'false');
+  await expect(page.locator('main a[href="/plataforma/demo"]')).toHaveCount(0);
+  const plans = [
+    {
+      id: 'essencial',
+      monthly: '497',
+      setup: '1.497',
+      year: '7.461',
+      annual: '6.983,88',
+    },
+    {
+      id: 'profissional',
+      monthly: '997',
+      setup: '2.497',
+      year: '14.461',
+      annual: '13.503,88',
+    },
+    {
+      id: 'escala',
+      monthly: '1.997',
+      setup: '3.997',
+      year: '27.961',
+      annual: '26.043,88',
+    },
+  ];
+  for (const plan of plans) {
+    const card = page.locator(`.pricing-card[data-plan-id="${plan.id}"]`);
+    await expect(card.locator('.pricing-amount')).toContainText(plan.monthly);
+    await expect(card.locator('.pricing-setup')).toContainText(plan.setup);
+    await expect(
+      card.locator('.pricing-year [data-cycle="mensal"]'),
+    ).toBeVisible();
+    await expect(
+      card.locator('.pricing-year [data-cycle="mensal"]'),
+    ).toContainText(plan.year);
+    await expect(
+      card.getByRole('link', { name: /Pedir proposta do/ }),
+    ).toHaveAttribute('href', `/diagnostico?plano=${plan.id}&ciclo=mensal`);
   }
+  await page.getByRole('radio', { name: /Anual/ }).focus();
+  await page.keyboard.press('Space');
+  for (const plan of plans) {
+    const card = page.locator(`.pricing-card[data-plan-id="${plan.id}"]`);
+    await expect(
+      card.locator('.pricing-year [data-cycle="anual"]'),
+    ).toBeVisible();
+    await expect(
+      card.locator('.pricing-year [data-cycle="anual"]'),
+    ).toContainText(plan.annual);
+    await expect(
+      card.getByRole('link', { name: /Pedir proposta do/ }),
+    ).toHaveAttribute('href', `/diagnostico?plano=${plan.id}&ciclo=anual`);
+  }
+  await page
+    .locator('.pricing-card[data-plan-id="profissional"]')
+    .getByRole('link', { name: /Pedir proposta do/ })
+    .click();
+  await expect(page).toHaveURL(/diagnostico\?plano=profissional&ciclo=anual/);
+  await expect(page.locator('.checkout-review')).toContainText('Profissional');
 });
 
-test('reduced motion keeps the offer readable and pauses decorative spatial transitions', async ({
+test('reduced motion keeps the shorter home and proposal action available', async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 320, height: 900 });
   await page.goto('/');
   await rejectOptionalCookies(page);
-  await page.locator('.commercial-flow').getByRole('button').nth(3).click();
-  await expect(page.locator('.flow-copy')).toContainText(
-    'O site continua sendo acompanhado',
+  await expect(page.locator('.royal-ring-outer')).toHaveCSS(
+    'animation-name',
+    'none',
   );
-  const transitions = await page
-    .locator('.flow-illustration-node, .flow-step-arrow')
-    .evaluateAll((elements) =>
-      elements.map((element) => getComputedStyle(element).transitionDuration),
-    );
-  expect(
-    transitions.every((value) =>
-      value
-        .split(',')
-        .every((duration) => Number.parseFloat(duration) <= 0.001),
-    ),
-  ).toBe(true);
   await expectNoRootOverflow(page);
-  await page.goto('/planos');
+  await page.locator('.home-contact .button').click();
+  await expect(page).toHaveURL(/\/diagnostico$/);
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
   await expectNoRootOverflow(page);
 });

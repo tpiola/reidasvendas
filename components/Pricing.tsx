@@ -17,15 +17,17 @@ const money = new Intl.NumberFormat('pt-BR', {
 
 export default function Pricing({
   comparison = false,
+  compact = false,
 }: {
   comparison?: boolean;
+  compact?: boolean;
 }) {
   const group = comparison ? 'pricing-detailed' : 'pricing-overview';
   const proposal = subscriptionOfferStatus === 'proposal';
 
   return (
     <div
-      className="subscription-pricing"
+      className={`subscription-pricing${compact ? ' pricing-compact' : ''}`}
       data-pricing-view="true"
       data-billing-cycle="mensal"
     >
@@ -46,20 +48,27 @@ export default function Pricing({
 
       {proposal && (
         <p className="pricing-proposal-note">
-          <strong>Oferta em validação.</strong> Os valores abaixo são uma
-          proposta de planos. A escolha solicita uma conversa; não ativa
-          assinatura nem cobrança.
+          <strong>Oferta em validação.</strong>{' '}
+          {compact
+            ? 'Solicite uma proposta. Nenhuma assinatura ou cobrança é ativada.'
+            : 'Os valores abaixo são uma proposta de planos. A escolha solicita uma conversa; não ativa assinatura nem cobrança.'}
         </p>
       )}
 
-      <div className="pricing-shared">
-        <h3>Em todos os planos</h3>
-        <ul>
-          {sharedSubscriptionFeatures.map((feature) => (
-            <li key={feature}>{feature}</li>
-          ))}
-        </ul>
-      </div>
+      {compact ? (
+        <p className="pricing-common-summary">
+          Todos incluem site responsivo, WhatsApp e manutenção técnica.
+        </p>
+      ) : (
+        <div className="pricing-shared">
+          <h3>Em todos os planos</h3>
+          <ul>
+            {sharedSubscriptionFeatures.map((feature) => (
+              <li key={feature}>{feature}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="pricing-grid">
         {subscriptionPlans.map((plan) => {
           const annual = calculateAnnualPrice(plan.monthlyPrice);
@@ -70,16 +79,18 @@ export default function Pricing({
               data-plan-id={plan.id}
               aria-labelledby={`${group}-${plan.id}`}
             >
-              <div className="pricing-card-top">
-                <p>
-                  {plan.recommended
-                    ? 'Para conectar presença e acompanhamento'
-                    : plan.id === 'essencial'
-                      ? 'Para organizar sua base'
-                      : 'Para uma operação mais conectada'}
-                </p>
-                <span aria-hidden="true">{plan.recommended ? '↗' : '—'}</span>
-              </div>
+              {!compact && (
+                <div className="pricing-card-top">
+                  <p>
+                    {plan.recommended
+                      ? 'Para conectar presença e acompanhamento'
+                      : plan.id === 'essencial'
+                        ? 'Para organizar sua base'
+                        : 'Para uma operação mais conectada'}
+                  </p>
+                  <span aria-hidden="true">{plan.recommended ? '↗' : '—'}</span>
+                </div>
+              )}
               <h3 id={`${group}-${plan.id}`}>{plan.name}</h3>
               <p className="pricing-description">{plan.description}</p>
               <div className="pricing-amount">
@@ -120,8 +131,9 @@ export default function Pricing({
                   </span>
                 </strong>
                 <span>
-                  Implantação + 12 meses de recorrência. Serviços extras não
-                  incluídos.
+                  {compact
+                    ? 'Implantação + recorrência. Extras à parte.'
+                    : 'Implantação + 12 meses de recorrência. Serviços extras não incluídos.'}
                 </span>
               </p>
               {(['mensal', 'anual'] as const).map((cycle) => (
@@ -138,34 +150,53 @@ export default function Pricing({
                   <span aria-hidden="true">↗</span>
                 </Link>
               ))}
-              <h4>O que diferencia este plano</h4>
-              <ul className="pricing-features">
-                {plan.features
-                  .filter(
-                    (feature) => !sharedSubscriptionFeatures.includes(feature),
-                  )
-                  .map((feature) => (
-                    <li key={feature}>
-                      <span aria-hidden="true">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-              </ul>
-              <details className="pricing-limits">
-                <summary>
-                  Limites e condições <span aria-hidden="true">+</span>
-                </summary>
-                <p>
-                  Ajuste é uma alteração pequena em texto, imagem ou
-                  configuração existente, dentro de até 20 minutos por unidade.
-                  Novas páginas e funcionalidades exigem avaliação de escopo.
-                </p>
-                <ul>
-                  {plan.limits.map((limit) => (
-                    <li key={limit}>{limit}</li>
-                  ))}
+              {compact ? (
+                <ul className="pricing-features pricing-essentials">
+                  <li>Até {plan.pageLimit} páginas</li>
+                  <li>
+                    {plan.articlesPerMonth === 0
+                      ? 'Sem artigo mensal'
+                      : `${plan.articlesPerMonth} ${plan.articlesPerMonth === 1 ? 'artigo' : 'artigos'}/mês`}
+                  </li>
+                  <li>
+                    {plan.adjustmentsPerMonth} ajustes/mês, de até{' '}
+                    {plan.adjustmentUnitMinutes} min cada
+                  </li>
                 </ul>
-              </details>
+              ) : (
+                <>
+                  <h4>O que diferencia este plano</h4>
+                  <ul className="pricing-features">
+                    {plan.features
+                      .filter(
+                        (feature) =>
+                          !sharedSubscriptionFeatures.includes(feature),
+                      )
+                      .map((feature) => (
+                        <li key={feature}>
+                          <span aria-hidden="true">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                  </ul>
+                  <details className="pricing-limits">
+                    <summary>
+                      Limites e condições <span aria-hidden="true">+</span>
+                    </summary>
+                    <p>
+                      Ajuste é uma alteração pequena em texto, imagem ou
+                      configuração existente, dentro de até 20 minutos por
+                      unidade. Novas páginas e funcionalidades exigem avaliação
+                      de escopo.
+                    </p>
+                    <ul>
+                      {plan.limits.map((limit) => (
+                        <li key={limit}>{limit}</li>
+                      ))}
+                    </ul>
+                  </details>
+                </>
+              )}
             </article>
           );
         })}

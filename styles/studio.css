@@ -1363,16 +1363,349 @@ body {
   opacity: 1;
 }
 
-
 /* Conversion journey: compact editorial cards, light visual system, reduced-motion safe. */
-.rdv-ecosystem { position: relative; }
-.rdv-ecosystem-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px; }
-.rdv-ecosystem-item { display:flex;flex-direction:column;min-height:280px;padding:clamp(24px,3vw,39px);border:1px solid #dcded5;border-radius:20px;background:linear-gradient(145deg,#fff,#f4f5ef);transition:transform .22s ease, box-shadow .22s ease; }
-.rdv-ecosystem-item > span { font-size:.7rem;letter-spacing:.1em;color:#6c643e;font-weight:700; }
-.rdv-ecosystem-item h3 { margin:24px 0 12px;font-family:var(--font-display);font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.17; }
-.rdv-ecosystem-item p { margin:0 0 24px;color:#4d554d;font-size:.94rem; }
-.rdv-ecosystem-item a { margin-top:auto;display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:#253b30; }
-.rdv-ecosystem-item:hover { transform:translateY(-3px);box-shadow:0 16px 35px rgba(29,46,33,.09); }
-.rdv-ecosystem-item a:focus-visible { outline:3px solid #a1782a;outline-offset:3px; }
-@media(max-width:760px){.rdv-ecosystem-grid{grid-template-columns:1fr}.rdv-ecosystem-item{min-height:0}}
-@media(prefers-reduced-motion:reduce){.rdv-ecosystem-item{transition:none}.rdv-ecosystem-item:hover{transform:none}}
+.rdv-ecosystem {
+  position: relative;
+}
+.rdv-ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.rdv-ecosystem-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: clamp(24px, 3vw, 39px);
+  border: 1px solid #dcded5;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #fff, #f4f5ef);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.rdv-ecosystem-item > span {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #6c643e;
+  font-weight: 700;
+}
+.rdv-ecosystem-item h3 {
+  margin: 24px 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  line-height: 1.17;
+}
+.rdv-ecosystem-item p {
+  margin: 0 0 24px;
+  color: #4d554d;
+  font-size: 0.94rem;
+}
+.rdv-ecosystem-item a {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  color: #253b30;
+}
+.rdv-ecosystem-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(29, 46, 33, 0.09);
+}
+.rdv-ecosystem-item a:focus-visible {
+  outline: 3px solid #a1782a;
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .rdv-ecosystem-grid {
+    grid-template-columns: 1fr;
+  }
+  .rdv-ecosystem-item {
+    min-height: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rdv-ecosystem-item {
+    transition: none;
+  }
+  .rdv-ecosystem-item:hover {
+    transform: none;
+  }
+}
+
+/* Focused home: one offer, published work, investment, answers, contact. */
+.home-focused {
+  background: #fff;
+}
+.home-focused .studio-hero-grid {
+  padding-block: 48px;
+  gap: 48px;
+}
+.home-focused .studio-kicker {
+  margin-bottom: 24px;
+}
+.home-focused .studio-hero h1 {
+  font-size: clamp(2.5rem, 4.2vw, 4.25rem);
+}
+.home-focused .studio-hero-description {
+  max-width: 480px;
+}
+.home-focused .royal-scene {
+  max-width: 420px;
+  justify-self: end;
+}
+.home-focused .subscription-section,
+.home-focused .studio-plans {
+  padding-block: 64px;
+}
+.home-focused h2 {
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+}
+.home-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.home-section-heading h2 {
+  margin: 0;
+}
+.home-section-heading p {
+  font-size: 0.9rem;
+  margin: 12px 0 0;
+  max-width: 480px;
+}
+.home-section-heading .text-link {
+  flex-shrink: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.home-focused .studio-project-visual {
+  min-height: 192px;
+  padding: 24px;
+  border-radius: 8px;
+}
+.home-focused .studio-project-wordmark,
+.home-focused .studio-project-spes .studio-project-wordmark {
+  font-size: clamp(1.6rem, 2.5vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+.home-focused .studio-project-caption {
+  padding-top: 12px;
+}
+.home-focused .studio-project-caption h3 {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.home-focused .subscription-evidence-note {
+  font-size: 0.75rem;
+  margin-top: 24px;
+}
+.pricing-compact .pricing-toolbar {
+  margin-bottom: 16px;
+}
+.pricing-compact .pricing-proposal-note {
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+}
+.pricing-common-summary {
+  margin: 0 0 24px;
+  font-size: 0.8rem;
+}
+.pricing-compact .pricing-card {
+  padding: 24px;
+  border-radius: 8px;
+}
+.pricing-compact .pricing-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+}
+.pricing-compact .pricing-description {
+  min-height: 64px;
+  margin-bottom: 16px;
+}
+.pricing-compact .pricing-payment {
+  min-height: 48px;
+  margin-block: 8px 16px;
+}
+.pricing-compact .pricing-setup {
+  padding-block: 12px;
+}
+.pricing-compact .pricing-year {
+  margin-block: 16px;
+  font-size: 0.8rem;
+}
+.pricing-compact .pricing-year > span {
+  font-size: 0.7rem;
+}
+.pricing-compact .pricing-features {
+  margin-bottom: 24px;
+}
+.pricing-compact .pricing-features li {
+  padding-bottom: 8px;
+  color: var(--studio-ink);
+  font-size: 0.8rem;
+}
+.pricing-compact .pricing-select {
+  order: 1;
+  margin-top: auto;
+  margin-bottom: 0;
+  min-height: 48px;
+}
+.pricing-compact .pricing-bottom-note {
+  margin-top: 24px;
+  font-size: 0.75rem;
+}
+.home-focused .subscription-faq {
+  gap: 48px;
+}
+.home-focused .subscription-faq .text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+}
+.home-contact {
+  background: #e7ecdf;
+  padding-block: 48px;
+}
+.home-contact > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+.home-contact h2 {
+  margin: 0;
+}
+.home-contact p {
+  margin: 12px 0 0;
+  font-size: 0.9rem;
+}
+.home-contact .button {
+  flex-shrink: 0;
+}
+.footer-focused {
+  padding-block: 48px 24px;
+}
+.footer-focused .footer-top {
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  padding-bottom: 32px;
+}
+.footer-focused .footer-brand img {
+  margin-bottom: 0;
+}
+.footer-focused .footer-brand > a {
+  margin-bottom: 16px;
+}
+.footer-focused .footer-local {
+  margin-bottom: 0;
+}
+@media (max-width: 800px) {
+  .home-focused .studio-hero-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 24px;
+  }
+  .home-focused .studio-hero h1 {
+    font-size: clamp(2.25rem, 5.2vw, 3rem);
+  }
+  .home-focused .royal-scene-footer p {
+    display: none;
+  }
+  .home-focused .royal-scene-footer {
+    justify-content: center;
+    padding-top: 8px;
+  }
+  .home-section-heading {
+    display: block;
+  }
+  .home-section-heading .text-link {
+    margin-top: 12px;
+  }
+  .home-contact > .container {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .home-focused .studio-hero-grid {
+    grid-template-columns: 1fr;
+    padding-block: 32px;
+    gap: 24px;
+  }
+  .home-focused .studio-hero h1 {
+    font-size: clamp(2.1rem, 8vw, 3rem);
+    margin-bottom: 24px;
+  }
+  .home-focused .studio-kicker {
+    font-size: 0.7rem;
+    margin-bottom: 16px;
+  }
+  .home-focused .studio-hero-actions {
+    margin-top: 24px;
+  }
+  .home-focused .studio-hero-assurance {
+    font-size: 0.75rem;
+    margin-top: 16px;
+  }
+  .home-focused .royal-scene {
+    max-width: 240px;
+    justify-self: center;
+    padding: 12px;
+  }
+  .home-focused .royal-node {
+    padding: 8px;
+    font-size: 0.6rem;
+    gap: 4px;
+  }
+  .home-focused .royal-node b {
+    padding-left: 0;
+  }
+  .home-focused .subscription-section,
+  .home-focused .studio-plans {
+    padding-block: 40px;
+  }
+  .home-focused .studio-projects {
+    gap: 24px;
+  }
+  .home-focused .studio-project-visual {
+    min-height: 120px;
+    padding: 16px;
+  }
+  .home-focused .studio-project-wordmark,
+  .home-focused .studio-project-spes .studio-project-wordmark {
+    font-size: 1.8rem;
+  }
+  .home-focused .studio-project-caption {
+    padding-top: 8px;
+  }
+  .pricing-compact .pricing-description,
+  .pricing-compact .pricing-payment {
+    min-height: 0;
+  }
+  .home-focused .subscription-faq {
+    gap: 24px;
+  }
+  .home-contact {
+    padding-block: 40px;
+  }
+  .footer-focused {
+    padding-block: 32px 24px;
+  }
+  .footer-focused .footer-top {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 24px;
+  }
+  .footer-focused .footer-top h2 {
+    margin-bottom: 8px;
+  }
+}

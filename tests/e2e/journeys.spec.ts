@@ -268,43 +268,25 @@ test('keyboard and reduced motion keep navigation and reading available', async 
   await expect(
     page.getByRole('link', { name: /(?:Ir|Pular) para o conteúdo/i }),
   ).toBeFocused();
-  const intents = page.getByRole('tablist', {
-    name: 'Seu principal desafio',
+  const navigation = page.getByRole('navigation', {
+    name: 'Navegação principal',
     exact: true,
   });
-  await expect(intents.getByRole('tab')).toHaveCount(5);
-  const first = intents.getByRole('tab', {
-    name: 'Não recebo contatos',
+  await expect(navigation.getByRole('link')).toHaveCount(3);
+  const work = page.getByRole('link', {
+    name: 'Ver trabalhos publicados',
     exact: true,
   });
-  const second = intents.getByRole('tab', {
-    name: 'Site não converte',
-    exact: true,
-  });
-  const last = intents.getByRole('tab', {
-    name: 'Quero continuidade',
-    exact: true,
-  });
-  await first.focus();
-  await first.press('ArrowRight');
-  await expect(second).toBeFocused();
-  await expect(second).toHaveAttribute('aria-selected', 'true');
-  await expect(page.getByRole('tabpanel')).toContainText(
-    'Seu visitante sabe como continuar?',
-  );
-  await second.press('ArrowLeft');
-  await expect(first).toBeFocused();
-  await first.press('End');
-  await expect(last).toBeFocused();
-  await expect(last).toHaveAttribute('aria-selected', 'true');
-  await expect(
-    page
-      .getByRole('tabpanel')
-      .getByRole('link', { name: /Comparar os planos/ }),
-  ).toHaveAttribute('href', '/planos');
-  await last.press('Home');
-  await expect(first).toBeFocused();
-  await expect(first).toHaveAttribute('aria-selected', 'true');
+  await work.focus();
+  await work.press('Enter');
+  await expect(page).toHaveURL(/#trabalhos$/);
+  const faq = page.locator('.subscription-faq details').first();
+  await faq.locator('summary').focus();
+  await faq.locator('summary').press('Enter');
+  await expect(faq).toHaveAttribute('open', '');
+  await expect(faq).toContainText('O trabalho começa após o aceite');
+  await faq.locator('summary').press('Space');
+  await expect(faq).not.toHaveAttribute('open', '');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 });
 
