@@ -7,17 +7,12 @@ import BrandLockup from '@/components/BrandLockup';
 export default function Footer() {
   return (
     <>
-      <footer className="site-footer">
+      <footer className="site-footer footer-focused">
         <div className="container footer-top">
           <div className="footer-brand">
             <Link href="/" aria-label="Rei das Vendas — início">
               <BrandLockup />
             </Link>
-            <p>
-              Seu negócio merece ser bem apresentado.
-              <br />
-              Site, busca local e atendimento conectados.
-            </p>
             {process.env.BUSINESS_LEGAL_NAME && (
               <p className="footer-local">
                 {process.env.BUSINESS_LEGAL_NAME}
@@ -31,42 +26,17 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <h2>O que fazemos</h2>
-            <Link href="/planos" data-event="click_cta_planos">
-              Planos de assinatura
-            </Link>
-            <Link href="/seo-local-franca">SEO local em Franca</Link>
-            <Link href="/painel-de-leads">Painel de leads</Link>
-            <Link href="/manutencao-de-site">Manutenção de site</Link>
-            <Link href="/servicos/criacao-de-sites-franca">
-              Sites para negócios
-            </Link>
-            <Link href="/servicos/gestao-de-trafego-franca">
-              Gestão de tráfego
-            </Link>
-            <Link href="/servicos/social-media-franca">Social media</Link>
-            <Link href="/servicos/implantacao-crm-franca">
-              CRM e atendimento
-            </Link>
-          </div>
-          <div>
-            <h2>Explore</h2>
-            <Link href="/metodo">Nosso método</Link>
-            <Link href="/casos">Projetos publicados</Link>
+            <h2>Rei das Vendas</h2>
+            <Link href="/servicos">Serviços</Link>
+            <Link href="/sobre">Sobre a empresa</Link>
             <Link href="/blog">Guias práticos</Link>
-            <Link href="/faq">Perguntas frequentes</Link>
-            <Link href="/contato">Contato</Link>
-            <Link href="/simulador">Simulador</Link>
             <Link href="/area-do-cliente">Atendimento ao cliente</Link>
           </div>
           <div className="footer-contact">
             <h2>Vamos falar do seu negócio</h2>
             <a href="/go/whatsapp?src=footer">WhatsApp ↗</a>
             <a href="tel:+5516992333344">(16) 99233-3344</a>
-            <Link href="/diagnostico">Enviar meu desafio</Link>
-            <p>
-              Conversa humana. Escopo e investimento definidos antes de começar.
-            </p>
+            <Link href="/contato">Outras formas de contato</Link>
           </div>
         </div>
         <div className="container footer-bottom">

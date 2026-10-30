@@ -3,11 +3,9 @@ import Link from 'next/link';
 import BrandLockup from '@/components/BrandLockup';
 
 const links = [
-  ['/planos', 'Planos'],
-  ['/sites-para-pequenos-negocios', 'Sites e presença'],
-  ['/metodo', 'Método'],
   ['/casos', 'Trabalhos'],
-  ['/blog', 'Conteúdo'],
+  ['/planos', 'Planos'],
+  ['/servicos', 'Serviços'],
 ] as const;
 
 export default function Header() {

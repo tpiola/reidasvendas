@@ -1,0 +1,23 @@
+{
+  "method": "Lighthouse mobile local, 390x844, built Next production; three new runs on port 3001, old retained reports excluded. No field INP or conversion claim.",
+  "runs": [
+    {
+      "measuredAt": "2026-10-30T23:24:18.629Z",
+      "performance": 97,
+      "LCPms": 2033,
+      "CLS": 0
+    },
+    {
+      "measuredAt": "2026-10-30T23:24:43.174Z",
+      "performance": 98,
+      "LCPms": 1794,
+      "CLS": 0
+    },
+    {
+      "measuredAt": "2026-10-30T23:25:06.861Z",
+      "performance": 98,
+      "LCPms": 1765,
+      "CLS": 0
+    }
+  ]
+}
