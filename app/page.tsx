@@ -15,11 +15,80 @@ export const metadata = createMetadata(
   'Digital completo, operação correta e crescimento com controle: sites, busca local, atendimento e tecnologia empresarial em Franca e no Brasil.',
   '/',
 );
+const additionalRepositories = [
+  {
+    "id": "sentinela-saude-ambiental",
+    "title": "Sentinela Saúde Ambiental",
+    "category": "Site de serviços",
+    "url": "https://github.com/tpiola/sentinela-saude-ambiental"
+  },
+  {
+    "id": "terapeuta",
+    "title": "Terapeuta",
+    "category": "Projeto web",
+    "url": "https://github.com/tpiola/terapeuta"
+  },
+  {
+    "id": "valdecikeeus",
+    "title": "Valdeci Keeus",
+    "category": "Projeto web",
+    "url": "https://github.com/tpiola/valdecikeeus"
+  },
+  {
+    "id": "tpiolalocal",
+    "title": "TPiola Local",
+    "category": "Projeto local",
+    "url": "https://github.com/tpiola/tpiolalocal"
+  },
+  {
+    "id": "drogalar",
+    "title": "Drogalar",
+    "category": "Projeto comercial",
+    "url": "https://github.com/tpiola/drogalar"
+  },
+  {
+    "id": "thiago-lab",
+    "title": "Thiago Lab",
+    "category": "Experimentos digitais",
+    "url": "https://github.com/tpiola/thiago-lab"
+  },
+  {
+    "id": "hub",
+    "title": "Hub",
+    "category": "Aplicação / hub",
+    "url": "https://github.com/tpiola/hub"
+  },
+  {
+    "id": "saudegpt-core",
+    "title": "SaúdeGPT Core",
+    "category": "Base tecnológica",
+    "url": "https://github.com/tpiola/saudegpt-core"
+  },
+  {
+    "id": "ai-job-search",
+    "title": "AI Job Search",
+    "category": "Ferramenta experimental",
+    "url": "https://github.com/tpiola/ai-job-search"
+  },
+  {
+    "id": "inema-skills",
+    "title": "Inema Skills",
+    "category": "Biblioteca técnica",
+    "url": "https://github.com/tpiola/inema-skills"
+  },
+  {
+    "id": "piola-site-template",
+    "title": "Piola Site Template",
+    "category": "Arquitetura demonstrativa",
+    "url": "https://github.com/tpiola/piola-site-template"
+  }
+] as const;
+
 const modules = [
   {
     href: '/sites-para-pequenos-negocios',
     label: 'Design + desenvolvimento',
-    title: 'Um site à altura do tudo que você.',
+    title: 'Um site à altura do seu negócio.',
     text: 'Mostre por que escolher sua empresa. Páginas rápidas, conteúdo que explica sua oferta e um próximo passo fácil de encontrar.',
     detail: 'Da primeira impressão ao pedido de orçamento.',
     type: 'site',
@@ -392,6 +461,29 @@ export default function Home() {
           <article className="rdv-ecosystem-item"><span>02 / EXPANSÃO</span><h3>Loja, catálogo e fluxos</h3><p>Jornadas de compra, pedidos e automações para reduzir atritos do atendimento.</p><Link href="/servicos">Explorar possibilidades ↗</Link></article>
           <article className="rdv-ecosystem-item"><span>03 / PLATAFORMA</span><h3>Ferramentas empresariais</h3><p>Visão demonstrativa de estoque, alertas e indicadores. Produto ainda em desenvolvimento, sem assinatura operacional.</p><Link href="/plataforma/demo">Ver demonstração ↗</Link></article>
         </div>
+      </section>
+
+      <section className="subscription-section container rdv-repository-proof" aria-labelledby="repository-proof-title">
+        <div className="subscription-heading">
+          <div>
+            <p className="studio-section-label">Código e execução verificáveis</p>
+            <h2 id="repository-proof-title">Mais projetos.<br /><span>Mais possibilidades.</span></h2>
+          </div>
+          <div>
+            <p>Além dos sites publicados acima, explore outros repositórios públicos do mesmo portfólio técnico. São projetos de naturezas diferentes: alguns são experiências web, outros são ferramentas ou bases de desenvolvimento. A presença no GitHub não significa, por si só, que estejam publicados ou que sejam trabalhos contratados por clientes.</p>
+            <Link href="/diagnostico" className="text-link">Quero construir meu projeto ↗</Link>
+          </div>
+        </div>
+        <div className="rdv-repository-grid">
+          {additionalRepositories.map((project) => (
+            <a key={project.id} className="rdv-repository-card" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Consultar repositório de ${project.title} no GitHub (nova aba)`}>
+              <span>{project.category}</span>
+              <h3>{project.title}</h3>
+              <span className="rdv-repository-url">Ver código no GitHub ↗</span>
+            </a>
+          ))}
+        </div>
+        <p className="subscription-evidence-note">A vitrine mostra os repositórios públicos identificados na conta do projeto. Projetos privados, sem autorização de divulgação, não são exibidos. Resultados comerciais não são inferidos a partir do código.</p>
       </section>
 
       <section className="studio-difference subscription-comparison-section">
