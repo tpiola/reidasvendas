@@ -400,6 +400,43 @@ export default function Home() {
         </div>
       </section>
 
+
+      <section className="subscription-section container rdv-github-showcase" aria-labelledby="github-showcase-title">
+        <div className="subscription-heading">
+          <div>
+            <p className="studio-section-label">Transparência e engenharia verificável</p>
+            <h2 id="github-showcase-title">Projetos e código.<br/><span>Veja o que existe.</span></h2>
+          </div>
+          <div>
+            <p>Além dos projetos publicados apresentados acima, o GitHub reúne outros sites, ferramentas e experimentos. Os estados são identificados sem confundir repositório com entrega a cliente.</p>
+            <a className="text-link" href="https://github.com/tpiola?tab=repositories" target="_blank" rel="noopener noreferrer">Ver todos os repositórios públicos ↗</a>
+          </div>
+        </div>
+        <div className="rdv-github-grid">
+          {[
+            {name:'Sentinela Saúde Ambiental',category:'Site de serviços locais',url:'https://github.com/tpiola/sentinela-saude-ambiental',status:'Projeto de site'},
+            {name:'ThiagoLabs',category:'Tecnologia e automação',url:'https://github.com/tpiola/thiago-lab',status:'Aplicação em evolução'},
+            {name:'Elis Regina · Terapias',category:'Site de profissional local',url:'https://github.com/tpiola/terapeuta',status:'Site documentado'},
+            {name:'Valdeci Keeus',category:'E-commerce',url:'https://github.com/tpiola/valdecikeeus',status:'Loja em desenvolvimento'},
+            {name:'Sete Lírios / Drogalar',category:'Vitrine farmacêutica',url:'https://github.com/tpiola/drogalar',status:'Em desenvolvimento'},
+            {name:'TPiolaLocal',category:'Painel comercial',url:'https://github.com/tpiola/tpiolalocal',status:'Protótipo pausado'},
+            {name:'SaúdeGPT Core',category:'Biblioteca experimental',url:'https://github.com/tpiola/saudegpt-core',status:'Biblioteca, não site'},
+            {name:'Piola Site Template',category:'Infraestrutura de desenvolvimento',url:'https://github.com/tpiola/piola-site-template',status:'Base técnica, não case'},
+            {name:'TPiola Hub',category:'Governança de projetos',url:'https://github.com/tpiola/hub',status:'Documentação, não site'},
+            {name:'AI Job Search',category:'Repositório de código externo',url:'https://github.com/tpiola/ai-job-search',status:'Código de terceiros; autoria não atribuída'},
+            {name:'INEMA Skills',category:'Referências de habilidades',url:'https://github.com/tpiola/inema-skills',status:'Referências externas; não é case'}
+          ].map((item) => (
+            <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="rdv-github-card">
+              <span className="rdv-github-category">{item.category}</span>
+              <strong>{item.name}</strong>
+              <span className="rdv-github-status">{item.status}</span>
+              <span className="rdv-github-link">Ver repositório ↗</span>
+            </a>
+          ))}
+        </div>
+        <p className="subscription-evidence-note">Sites publicados com comprovação pública: Thiago Piola, Escola de Saúde e SPES, apresentados na vitrine acima. Os demais registros demonstram escopo técnico e histórico de desenvolvimento, sem alegação de resultados comerciais, autoria de terceiros ou entrega concluída.</p>
+      </section>
+
       <section className="studio-difference subscription-comparison-section">
         <div className="container">
           <div className="subscription-heading">
