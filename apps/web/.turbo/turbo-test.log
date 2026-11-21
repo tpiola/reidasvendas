@@ -1,0 +1,50 @@
+
+> web@0.0.0 test /opt/data/rdv-work/apps/web
+> vitest run --passWithNoTests
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/opt/data/rdv-work/apps/web[39m
+
+(node:29126) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29123) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29128) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/components/Hero.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 238[2mms[22m[39m
+ [32m✓[39m src/components/ConversionJourney.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 368[2mms[22m[39m
+ [32m✓[39m src/pages/Diagnostico.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 844[2mms[22m[39m
+     [33m[2m✓[22m[39m reconcilia e-mail e solução da URL depois da hidratação [33m 304[2mms[22m[39m
+     [33m[2m✓[22m[39m envia apenas os campos essenciais e mantém o handoff explícito [33m 539[2mms[22m[39m
+(node:29162) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:29169) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/lib/analytics.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+(node:29179) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error: Not implemented: navigation (except hash changes)
+    at module.exports (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/browser/not-implemented.js:9:17)
+    at navigateFetch (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/living/window/navigation.js:77:3)
+    at exports.navigate (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/living/window/navigation.js:55:3)
+    at LocationImpl._locationObjectNavigate (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/living/window/Location-impl.js:30:5)
+    at LocationImpl.assign (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/living/window/Location-impl.js:206:10)
+    at Location.assign (/opt/data/rdv-work/node_modules/.pnpm/jsdom@26.1.0/node_modules/jsdom/lib/jsdom/living/generated/Location.js:72:36)
+    at Object.execute (/opt/data/rdv-work/apps/web/src/lib/webmcp.ts:279:29)
+    at /opt/data/rdv-work/apps/web/src/lib/webmcp.test.ts:148:56
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at file:///opt/data/rdv-work/node_modules/.pnpm/@vitest+runner@4.1.11/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20 undefined
+ [32m✓[39m src/lib/webmcp.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 24[2mms[22m[39m
+[90mstderr[2m | src/lib/lead-api.test.ts[2m > [22m[2mAPI de diagnóstico[2m > [22m[2mnão confirma recebimento quando o webhook falha
+[22m[39m{"level":"error","event":"lead_webhook_rejected","status":503}
+
+ [32m✓[39m src/lib/lead-api.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+(node:29187) ExperimentalWarning: localStorage is not available because --localstorage-file was not provided.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ [32m✓[39m src/lib/growth.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m7 passed[39m[22m[90m (7)[39m
+[2m      Tests [22m [1m[32m36 passed[39m[22m[90m (36)[39m
+[2m   Start at [22m 23:41:46
+[2m   Duration [22m 25.15s[2m (transform 16.25s, setup 11.03s, import 31.28s, tests 1.52s, environment 26.87s)[22m
+

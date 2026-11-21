@@ -1,0 +1,4 @@
+
+> @altiq/types@0.0.0 check /opt/data/rdv-work/packages/types
+> tsc -p tsconfig.json --noEmit
+

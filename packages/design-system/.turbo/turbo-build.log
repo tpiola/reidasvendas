@@ -1,0 +1,13 @@
+
+> @altiq/design-system@0.1.0 build /opt/data/rdv-work/packages/design-system
+> style-dictionary build --config ./sd.config.js
+
+
+css
+✔︎ /opt/data/rdv-work/packages/design-system/build/css/tokens.css
+
+scss
+✔︎ /opt/data/rdv-work/packages/design-system/build/scss/_tokens.scss
+
+tailwind-preset
+✔︎ /opt/data/rdv-work/packages/design-system/build/tailwind/tailwind-preset.js

@@ -1,0 +1,4 @@
+
+> docs@0.0.0 check /opt/data/rdv-work/apps/docs
+> tsc -b --noEmit
+

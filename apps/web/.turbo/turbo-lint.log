@@ -1,0 +1,4 @@
+
+> web@0.0.0 lint /opt/data/rdv-work/apps/web
+> eslint .
+

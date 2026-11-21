@@ -1,0 +1,4 @@
+
+> @altiq/config@0.0.0 check /opt/data/rdv-work/packages/config
+> tsc -p tsconfig.json --noEmit
+

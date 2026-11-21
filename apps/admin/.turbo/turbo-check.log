@@ -1,0 +1,4 @@
+
+> admin@0.0.0 check /opt/data/rdv-work/apps/admin
+> tsc -b --noEmit
+

@@ -1,0 +1,4 @@
+
+> web@0.0.0 check /opt/data/rdv-work/apps/web
+> tsc -b --noEmit
+

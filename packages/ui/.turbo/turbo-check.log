@@ -1,0 +1,4 @@
+
+> @altiq/ui@0.0.0 check /opt/data/rdv-work/packages/ui
+> tsc -p tsconfig.json --noEmit
+

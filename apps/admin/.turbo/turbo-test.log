@@ -1,0 +1,14 @@
+
+> admin@0.0.0 test /opt/data/rdv-work/apps/admin
+> vitest run
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/opt/data/rdv-work/apps/admin[39m
+
+ [32m✓[39m src/App.test.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 104[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m   Start at [22m 23:41:45
+[2m   Duration [22m 23.50s[2m (transform 3.59s, setup 6.59s, import 5.08s, tests 104ms, environment 11.18s)[22m
+
